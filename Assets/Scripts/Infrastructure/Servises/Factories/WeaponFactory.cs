@@ -13,7 +13,7 @@ public class WeaponFactory: ICardFactory
 
     public CardType Type => CardType.WeaponSetter;
 
-    public void ActivateCard(IConfig config)
+    public void ActivateCard(ICardConfig config)
     {
        
         if (config is WeaponConfig weaponConfig)

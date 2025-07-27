@@ -4,33 +4,32 @@ using UnityEngine;
 
 public class CardSelector
 {
-    private AllCards _allCards;
+    private AllConfigs _allConfigs;
     private int _cardsCount = 3;
-    private PlayerCardContainer _playerCards;
+    private PlayerConfigContainer _playerCards;
 
-    public CardSelector(AllCards factory, PlayerCardContainer playerCards)
+    public CardSelector(AllConfigs configs, PlayerConfigContainer playerCards, int cardsCount = 3)
     {
-        _allCards = factory;
+        _allConfigs = configs;
         _playerCards = playerCards;
+        _cardsCount = cardsCount;
     }
 
-    public IEnumerable<ICard> GetCards()
-    {
-        List<ICard> selectedCards = new List<ICard>();
-        int attempts = 0;
+    public int CardsCount => GetRemainingCardsCount();
 
-        while (selectedCards.Count < _cardsCount && attempts < 50)
+
+    public IEnumerable<ICardConfig> GetCards()
+    {
+        List<ICardConfig> selectedCards = new List<ICardConfig>();
+        int attempts = 0;
+        int maxAttempts = 100;
+
+        while (selectedCards.Count < GetRemainingCardsCount() && attempts < maxAttempts)
         {
             attempts++;
 
-            CardType selectedType = SelectTypeByChance(_allCards.Cards);
-
-            List<ICard> filteredCards = FilterCards(_allCards.Cards.ToList(), selectedType);
-
-            if (filteredCards.Count == 0)
-                continue;
-
-            ICard chosenCard = filteredCards[Random.Range(0, filteredCards.Count)];
+            List<ICardConfig> filteredCards = FilterCards(_allConfigs.Configs.ToList());
+            ICardConfig chosenCard = SelectCardByChance(filteredCards);
 
             if (selectedCards.Contains(chosenCard) == false)
             {
@@ -41,30 +40,33 @@ public class CardSelector
         return selectedCards;
     }
 
-    private CardType SelectTypeByChance(IEnumerable<ICard> allCards)
+    public int GetRemainingCardsCount()
     {
-        float totalChance = 0f;
+        int selectedCount = _playerCards.SelectedConfigs.Count();
+        int totalCards = _allConfigs.Configs.Count();
+        return Mathf.Min(_cardsCount, totalCards - selectedCount);
+    }
 
-        foreach (var card in allCards)
-        {
-            totalChance += card.ChanseToView;
-        }
+    private ICardConfig SelectCardByChance(IEnumerable<ICardConfig> allCards)
+    {
+        float totalChance = allCards.Sum(card => card.ChanceToView);
 
         float rand = Random.value * totalChance;
         float cumulative = 0f;
 
         foreach (var card in allCards)
         {
-            cumulative += card.ChanseToView;
+            cumulative += card.ChanceToView;
             if (rand <= cumulative)
-                return card.Type;
+                return card;
         }
 
-        return allCards.First().Type;
+        return allCards.First();
     }
 
-    private List<ICard> FilterCards(List<ICard> allCards, CardType selectedType)
+    private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
-        return allCards.FindAll(card => card.Type == selectedType && _playerCards.SelectedCards.Contains(card) == false);
+        return allCards.FindAll(card => _playerCards.SelectedConfigs.Contains(card) == false);
     }
 }
+

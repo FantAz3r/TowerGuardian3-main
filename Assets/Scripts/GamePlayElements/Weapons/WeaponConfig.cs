@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "WeaponConfig", menuName = "Configs/WeaponConfig")]
-public class WeaponConfig : ScriptableObject , IConfig
+public class WeaponConfig : ScriptableObject , ICardConfig
 {
     [SerializeField] private Weapon _prefab;
     [SerializeField] private Image _icon;
@@ -14,6 +14,7 @@ public class WeaponConfig : ScriptableObject , IConfig
     [SerializeField] private float _attackRange = 2f;
     [SerializeField] private float _multiplyToMainTarget = 2;
     [SerializeField] private TargetType _targetType;
+    [SerializeField] private float _chanceToView;
 
     public Weapon Prefab => _prefab;
     public Image Icon => _icon;
@@ -25,6 +26,10 @@ public class WeaponConfig : ScriptableObject , IConfig
     public float Multiply => _multiplyToMainTarget;
     public TargetType TargetType => _targetType;
 
+    public CardType Type => CardType.WeaponSetter;
+
+    public float ChanceToView => _chanceToView;
+
     public Dictionary<string, float> GetStats()
     {
         Dictionary<string, float> stats = new Dictionary<string, float>();
@@ -35,5 +40,4 @@ public class WeaponConfig : ScriptableObject , IConfig
 
         return stats;
     }
-
 }

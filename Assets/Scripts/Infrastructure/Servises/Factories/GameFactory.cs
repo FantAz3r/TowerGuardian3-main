@@ -9,9 +9,10 @@ public class GameFactory
     private Inventory _inventory;
     private AttackZone _attackZone;
     private WeaponFactory _weaponFactory;
-    private PlayerCardContainer _cardHolder;
-    private AllCards _cards;
+    private PlayerConfigContainer _cardHolder;
+    private AllConfigs _cards;
     private CardSelectionMenu _selectionMenu;
+    private CardSelector _cardSelector;
     private IInputService _inputService;
     private ITimeService _timeService;  
     private Vector3 _defaultPosition = new Vector3(0, 0, 0);
@@ -32,7 +33,7 @@ public class GameFactory
         _inventory = _player.GetComponentInChildren<Inventory>();
         _attackZone = _player.GetComponentInChildren<AttackZone>();
         _experience = _player.GetComponentInChildren<PlayerExperience>();
-        _cardHolder = _player.GetComponentInChildren<PlayerCardContainer>();
+        _cardHolder = _player.GetComponentInChildren<PlayerConfigContainer>();
     }
 
     public void CreateWeaponFactory()
@@ -63,8 +64,8 @@ public class GameFactory
 
     public void CreateCards()
     {
-        AllCards prefab = Resources.Load<AllCards>(GameConstants.AllCards);
-        AllCards cards = Object.Instantiate(prefab);
+        AllConfigs prefab = Resources.Load<AllConfigs>(GameConstants.AllCards);
+        AllConfigs cards = Object.Instantiate(prefab);
         cards.Init(_cardHolder);
         _cards = cards;
     }

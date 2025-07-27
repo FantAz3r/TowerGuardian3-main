@@ -13,7 +13,6 @@ public class Weapon : MonoBehaviour, IWeapon
     private float _range;
     private bool _canAttack = true;
 
-
     public void Init(Transform attackPoint, AttackZone attackZone)
     {
         _attackPoint = attackPoint;

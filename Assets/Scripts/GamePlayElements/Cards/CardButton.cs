@@ -6,14 +6,14 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class CardButton : MonoBehaviour
 {
-    private ICard _card;
+    private ICardConfig _card;
     private Button _button;
-    private AllCards _cards;
+    private AllConfigs _cards;
     private Dictionary<CardType, ICardFactory> _factories;
 
     public event Action Selected;
 
-    public void Init(AllCards cards, List<ICardFactory> factories)
+    public void Init(AllConfigs cards, List<ICardFactory> factories)
     {
         _cards = cards;
         _factories = new Dictionary<CardType, ICardFactory>();
@@ -25,37 +25,53 @@ public class CardButton : MonoBehaviour
                 _factories[cardFactory.Type] = cardFactory;
             }
         }
-
-        _button.onClick.AddListener(Select);
     }
 
     private void Awake()
     {
         _button = GetComponent<Button>();
+        Hide();
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        _button.onClick.RemoveListener(Select);
+        _button.onClick.AddListener(OnClick);
     }
 
-    public void SetCard(ICard card)
+    private void OnDisable()
     {
+        _button.onClick.RemoveListener(OnClick);
+    }
+
+    public void SetCard(ICardConfig card)
+    {
+        Show();
         _card = card;
     }
 
-    public void Select()
+    public void OnClick()
     {
-        _cards.Get(_card.Config);
+        _cards.Get(_card);
         Selected?.Invoke();
         ActivateCard(_card);
+        Hide();
     }
 
-    private void ActivateCard(ICard card)
+    private void ActivateCard(ICardConfig card)
     {
         if (_factories != null && _factories.TryGetValue(card.Type, out ICardFactory factory))
         {
-            factory.ActivateCard(card.Config);
+            factory.ActivateCard(card);
         }
+    }
+
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

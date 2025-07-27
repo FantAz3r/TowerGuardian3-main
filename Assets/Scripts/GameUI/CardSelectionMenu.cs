@@ -12,7 +12,7 @@ public class CardSelectionMenu : MonoBehaviour
     private bool _isMenuOpen = false;
     private CardSelector _selector;
 
-    public event Action<int, IConfig> CardLoaded;
+    public event Action<int, ICardConfig> CardLoaded;
 
     public void Init(ITimeService timeService, PlayerExperience playerExperience, CardSelector selector,List<CardButton> cardsButtons)
     {
@@ -48,9 +48,14 @@ public class CardSelectionMenu : MonoBehaviour
 
     public void Open(int level)
     {
-        SetMenuOpen(true);
-        _timeService.Pause();
-        ShowCards(_selector.GetCards().ToList());
+        List<ICardConfig> cards = _selector.GetCards().ToList();
+
+        if (cards.Count > 0)
+        {
+            SetMenuOpen(true);
+            _timeService.Pause();
+            ShowCards(cards);
+        }
     }
 
     public void Close()
@@ -59,11 +64,11 @@ public class CardSelectionMenu : MonoBehaviour
         _timeService.Resume();
     }
 
-    private void ShowCards(List<ICard> cards)
+    private void ShowCards(List<ICardConfig> cards)
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i].Config);
+            _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i]);
             _cardsButtons[i].SetCard(cards[i]);
         }
     }

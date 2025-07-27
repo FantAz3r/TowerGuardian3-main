@@ -9,7 +9,7 @@ public class CardViewer : MonoBehaviour
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private TMP_Text _stats;
 
-    public void Render(IConfig config)
+    public void Render(ICardConfig config)
     {
         _icon = config.Icon;
         _nameText.text = config.Name;
@@ -17,7 +17,7 @@ public class CardViewer : MonoBehaviour
         InitStats(config);
     }
 
-    private void InitStats(IConfig config)
+    private void InitStats(ICardConfig config)
     {
         _stats.text = "";
 
