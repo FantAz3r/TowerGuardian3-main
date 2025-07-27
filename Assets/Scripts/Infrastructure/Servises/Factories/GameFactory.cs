@@ -1,40 +1,50 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameFactory 
 {
     private Transform _player;
     private Transform _uiRoot;
+    private PlayerExperience _experience;
     private Inventory _inventory;
     private AttackZone _attackZone;
-    private WeaponFactory _factory;
+    private WeaponFactory _weaponFactory;
+    private PlayerCardContainer _cardHolder;
+    private AllCards _cards;
+    private CardSelectionMenu _selectionMenu;
     private IInputService _inputService;
+    private ITimeService _timeService;  
     private Vector3 _defaultPosition = new Vector3(0, 0, 0);
+    List<CardButton> _buttons = new List<CardButton>();
 
-    public GameFactory(IInputService inputService)
+    public GameFactory(IInputService inputService, ITimeService timeService)
     {
         _inputService = inputService;
+        _timeService = timeService;
     }
 
     public void CreatePlayer()
     {
-        GameObject prefab = Resources.Load<GameObject>(GameConstants.Player);
+        Player prefab = Resources.Load<Player>(GameConstants.Player);
         _player = Object.Instantiate(prefab, _defaultPosition, Quaternion.identity).transform;
         _player.GetComponentInChildren<PlayerMover>().Init(_inputService);
-        _player.GetComponentInChildren<PlayerAttacker>().Init(_inputService, _factory);
+        _player.GetComponentInChildren<PlayerAttacker>().Init(_inputService);
         _inventory = _player.GetComponentInChildren<Inventory>();
         _attackZone = _player.GetComponentInChildren<AttackZone>();
+        _experience = _player.GetComponentInChildren<PlayerExperience>();
+        _cardHolder = _player.GetComponentInChildren<PlayerCardContainer>();
     }
 
     public void CreateWeaponFactory()
     {
-        _factory = new WeaponFactory(_attackZone, _player);
+        _weaponFactory = new WeaponFactory(_attackZone, _player);
     }
 
     public void CreateCamera()
     {
-        GameObject prefab = Resources.Load<GameObject>(GameConstants.MainCamera);
-        GameObject camera = Object.Instantiate(prefab);
-        camera.GetComponent<CameraFollower>().Init(_player);
+        CameraFollower prefab = Resources.Load<CameraFollower>(GameConstants.MainCamera);
+        CameraFollower camera = Object.Instantiate(prefab);
+        camera.Init(_player);
     }
 
     public void CreateUI()
@@ -49,5 +59,36 @@ public class GameFactory
         Transform container = _uiRoot.GetComponentInChildren<UIDummy>().transform;
         GameObject panel = Object.Instantiate(prefab, container);
         panel.GetComponent<ResourceViewer>().Init(_inventory);
+    }
+
+    public void CreateCards()
+    {
+        AllCards prefab = Resources.Load<AllCards>(GameConstants.AllCards);
+        AllCards cards = Object.Instantiate(prefab);
+        cards.Init(_cardHolder);
+        _cards = cards;
+    }
+
+    public void CreateCardsSelectionMenu()
+    {
+        CardSelectionMenu prefab = Resources.Load<CardSelectionMenu>(GameConstants.CardSelectionMenu);
+        Transform container = _uiRoot.transform;
+        CardSelectionMenu panel = Object.Instantiate(prefab, container);
+        panel.Init(_timeService, _experience, new CardSelector(_cards, _cardHolder), _buttons);
+        _selectionMenu = panel;
+    }
+
+    public void CreateCardButtons()
+    {
+        int cardsCount = 3;
+        CardButton prefab = Resources.Load<CardButton>(GameConstants.CardViewer);
+        Transform container = _uiRoot.transform;
+
+        for (int i = 0; i < cardsCount; i++)
+        {
+            CardButton button = Object.Instantiate(prefab, container);
+            button.Init(_cards, new List<ICardFactory> { _weaponFactory });
+            _buttons.Add(button);
+        }
     }
 }

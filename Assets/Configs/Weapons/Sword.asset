@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9aa76ca4497f9048ad0de75dc7ef601, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  _weaponPrefab: {fileID: 355312524381552382, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
-  _damage: 3
-  _attackDelay: 0.5
-  _attackRange: 3
+  _prefab: {fileID: -934408350477533787, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
+  _icon: {fileID: 0}
+  _name: Sword
+  _description: More Damage to enemy
+  _damage: 4
+  _attackDelay: 1
+  _attackRange: 4
   _multiplyToMainTarget: 2
   _targetType: 0

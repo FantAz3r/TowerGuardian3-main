@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WeaponFactory
+public class WeaponFactory: ICardFactory
 {
     private AttackZone _attackZone;
     private Transform _player;
@@ -11,7 +11,22 @@ public class WeaponFactory
         _player = player;
     }
 
-    public void Create(WeaponConfig config)
+    public CardType Type => CardType.WeaponSetter;
+
+    public void ActivateCard(IConfig config)
+    {
+       
+        if (config is WeaponConfig weaponConfig)
+        {
+            Create(weaponConfig);
+        }
+        else
+        {
+            Debug.LogWarning("Ожидался WeaponCard");
+        }
+    }
+
+    private void Create(WeaponConfig config)
     {
         Transform container = _player.GetComponentInChildren<Fist>().transform;
         PlayerAttacker attacker = container.GetComponentInParent<PlayerAttacker>();

@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "WeaponConfig", menuName = "Configs/WeaponConfig")]
 public class WeaponConfig : ScriptableObject , IConfig
 {
     [SerializeField] private Weapon _prefab;
-    [SerializeField] private Sprite _icon;
+    [SerializeField] private Image _icon;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private float _damage = 10f;
@@ -15,7 +16,7 @@ public class WeaponConfig : ScriptableObject , IConfig
     [SerializeField] private TargetType _targetType;
 
     public Weapon Prefab => _prefab;
-    public Sprite Icon => _icon;
+    public Image Icon => _icon;
     public string Name => _name;
     public string Description => _description;
     public float Damage => _damage;

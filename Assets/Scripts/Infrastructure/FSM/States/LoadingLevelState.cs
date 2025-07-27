@@ -61,7 +61,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     {
         _sceneLoader = new SceneLoader(_coroutineRunner);
         _uiFactory = new UIFactory(_stateSwithService);
-        _gameFactory = new GameFactory(_inputService);
+        _gameFactory = new GameFactory(_inputService, _timeService);
 
     }
 
@@ -86,5 +86,8 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCamera();
         _gameFactory.CreateUI();
         _gameFactory.CreateResourceView();
+        _gameFactory.CreateCards();
+        _gameFactory.CreateCardButtons();
+        _gameFactory.CreateCardsSelectionMenu();
     }
 }

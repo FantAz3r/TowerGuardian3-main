@@ -5,7 +5,7 @@ public class PlayerAttacker : MonoBehaviour
     private IInputService _inputService;
     private IWeapon _currentWeapon;
 
-    public void Init(IInputService inputService, WeaponFactory factory)
+    public void Init(IInputService inputService)
     {
         _inputService = inputService;
         _inputService.AttackPerformed += TryUseWeapon;
@@ -25,6 +25,7 @@ public class PlayerAttacker : MonoBehaviour
 
     public void SetWeapon(IWeapon weapon)
     {
+        _currentWeapon.TakeOff();
         _currentWeapon = weapon;
     }
 

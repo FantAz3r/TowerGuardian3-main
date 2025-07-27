@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardSelectionMenu : MonoBehaviour
 {
-    [SerializeField] private List<CardViewer> _cardPanels;
-    [SerializeField] private List<CardButton> _cardsButtons;
-
+    private List<CardButton> _cardsButtons;
     private PlayerExperience _playerExperience;
     private ITimeService _timeService;
     private bool _isMenuOpen = false;
@@ -14,10 +14,21 @@ public class CardSelectionMenu : MonoBehaviour
 
     public event Action<int, IConfig> CardLoaded;
 
-    public void Init(ITimeService timeService, PlayerExperience playerExperience)
+    public void Init(ITimeService timeService, PlayerExperience playerExperience, CardSelector selector,List<CardButton> cardsButtons)
     {
         _timeService = timeService;
         _playerExperience = playerExperience;
+        _selector = selector;
+        _cardsButtons = cardsButtons;
+
+        _playerExperience.OnLevelUp += Open;
+
+        foreach (var button in _cardsButtons)
+        {
+            button.Selected += Close;
+            GridLayoutGroup panel = GetComponentInChildren<GridLayoutGroup>();
+            button.transform.SetParent(panel.transform);
+        }
     }
 
     private void Start()
@@ -25,19 +36,9 @@ public class CardSelectionMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        _playerExperience.OnLevelUp += CardSelection;
-
-        foreach (var button in _cardsButtons)
-        {
-            button.Selected += Close;
-        }
-    }
-
-    private void OnDisable()
-    {
-        _playerExperience.OnLevelUp -= CardSelection;
+        _playerExperience.OnLevelUp -= Open;
 
         foreach (var button in _cardsButtons)
         {
@@ -45,11 +46,11 @@ public class CardSelectionMenu : MonoBehaviour
         }
     }
 
-    public void CardSelection(int level)
+    public void Open(int level)
     {
         SetMenuOpen(true);
         _timeService.Pause();
-        ShowCards(_selector.GetCards());
+        ShowCards(_selector.GetCards().ToList());
     }
 
     public void Close()
@@ -62,7 +63,8 @@ public class CardSelectionMenu : MonoBehaviour
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            CardLoaded?.Invoke(i, cards[i].Config);
+            _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i].Config);
+            _cardsButtons[i].SetCard(cards[i]);
         }
     }
 
@@ -73,15 +75,5 @@ public class CardSelectionMenu : MonoBehaviour
 
         _isMenuOpen = isOpen;
         gameObject.SetActive(isOpen);
-        Cursor.visible = isOpen;
-
-        if (isOpen)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
     }
 }

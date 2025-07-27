@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,13 +8,24 @@ public class CardButton : MonoBehaviour
 {
     private ICard _card;
     private Button _button;
-    private CardFactory _factory;
+    private AllCards _cards;
+    private Dictionary<CardType, ICardFactory> _factories;
 
     public event Action Selected;
 
-    public void Init(CardFactory factory)
+    public void Init(AllCards cards, List<ICardFactory> factories)
     {
-        _factory = factory;
+        _cards = cards;
+        _factories = new Dictionary<CardType, ICardFactory>();
+
+        foreach (var factory in factories)
+        {
+            if (factory is ICardFactory cardFactory)
+            {
+                _factories[cardFactory.Type] = cardFactory;
+            }
+        }
+
         _button.onClick.AddListener(Select);
     }
 
@@ -27,9 +39,23 @@ public class CardButton : MonoBehaviour
         _button.onClick.RemoveListener(Select);
     }
 
+    public void SetCard(ICard card)
+    {
+        _card = card;
+    }
+
     public void Select()
     {
-        _factory.Create(_card.Config);
+        _cards.Get(_card.Config);
         Selected?.Invoke();
+        ActivateCard(_card);
+    }
+
+    private void ActivateCard(ICard card)
+    {
+        if (_factories != null && _factories.TryGetValue(card.Type, out ICardFactory factory))
+        {
+            factory.ActivateCard(card.Config);
+        }
     }
 }

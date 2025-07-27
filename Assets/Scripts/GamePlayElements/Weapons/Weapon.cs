@@ -53,6 +53,11 @@ public class Weapon : MonoBehaviour, IWeapon
         StartCoroutine(Delay());
     }
 
+    public void TakeOff()
+    {
+        gameObject.SetActive(false);
+    }
+
     private IEnumerator Delay()
     {
         yield return _sleep;

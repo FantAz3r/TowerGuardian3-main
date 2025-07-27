@@ -7,4 +7,7 @@ public static class GameConstants
     public static string ResourceViewPanel = "Prefabs/ResourceViewer";
     public static string GameCanvas = "Prefabs/GameUI";
     public static string WeaponButton = "Weapons/AxeButton";
+    public static string CardSelectionMenu = "Prefabs/CardMenuPanel";
+    public static string CardViewer = "Prefabs/CardPanel";
+    public static string AllCards = "Prefabs/AllCards";
 }

@@ -1,35 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardViewer : MonoBehaviour
 {
-    [SerializeField, Range(1, 3)] private int _cardIndex = 1;
-    [SerializeField] private Sprite _icon;
+    [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private TMP_Text _stats;
-    private CardSelectionMenu _selectionMenu;
-
-    private void Awake()
-    {
-        _selectionMenu = GetComponentInParent<CardSelectionMenu>();
-    }
-
-    private void OnEnable()
-    {
-        _selectionMenu.CardLoaded += OnCardLoaded;
-    }
-
-    private void OnDisable()
-    {
-        _selectionMenu.CardLoaded -= OnCardLoaded;
-    }
-
-    private void OnCardLoaded(int index, IConfig config)
-    {
-        if (index == _cardIndex)
-            Render(config);
-    }
 
     public void Render(IConfig config)
     {
