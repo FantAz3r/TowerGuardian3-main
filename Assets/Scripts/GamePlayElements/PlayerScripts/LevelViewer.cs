@@ -8,11 +8,14 @@ public class LevelViewer : MonoBehaviour
     [SerializeField] private TMP_Text levelText; 
     [SerializeField] private Image experienceFillImage;
 
+    private float _wait = 0.1f;
+    private WaitForSeconds _delay;
     private PlayerExperience _playerExperience;
     private Coroutine _fillCoroutine;
 
     private void Awake()
     {
+        _delay = new WaitForSeconds(_wait);
         _playerExperience = GetComponentInChildren<PlayerExperience>();
     }
 
@@ -25,33 +28,49 @@ public class LevelViewer : MonoBehaviour
     {
         _playerExperience.OnExperienceAdded -= View;
     }
-
     public void View(int currentLevel, float currentExp, float expForNextLevel)
     {
         levelText.text = $"LVL {currentLevel}";
 
-        float targetFill = Mathf.Clamp01(currentExp / expForNextLevel);
+        float normalizedExp = Mathf.Clamp01(currentExp / expForNextLevel);
 
         if (_fillCoroutine != null)
             StopCoroutine(_fillCoroutine);
 
-        _fillCoroutine = StartCoroutine(AnimateFillAmount(targetFill));
+        _fillCoroutine = StartCoroutine(AnimateFillWithOverflow(normalizedExp));
     }
 
-    private IEnumerator AnimateFillAmount(float targetFill)
+    private IEnumerator AnimateFillWithOverflow(float targetFill)
     {
-        float startFill = experienceFillImage.fillAmount;
         float duration = 0.5f;
-        float elapsed = 0f;
 
-        while (elapsed < duration)
+        IEnumerator AnimateFillSegment(float from, float to)
         {
-            elapsed += Time.deltaTime;
-            experienceFillImage.fillAmount = Mathf.Lerp(startFill, targetFill, elapsed / duration);
-            yield return null;
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                experienceFillImage.fillAmount = Mathf.Lerp(from, to, elapsed / duration);
+                yield return null;
+            }
+            experienceFillImage.fillAmount = to;
         }
 
-        experienceFillImage.fillAmount = targetFill;
+        float startFill = experienceFillImage.fillAmount;
+
+        if (targetFill < startFill)
+        {
+            yield return AnimateFillSegment(startFill, 1f);
+            yield return _delay;
+            experienceFillImage.fillAmount = 0f;
+            yield return AnimateFillSegment(0f, targetFill);
+        }
+        else
+        {
+            yield return AnimateFillSegment(startFill, targetFill);
+        }
+
         _fillCoroutine = null;
     }
+
 }

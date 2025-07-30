@@ -1,13 +1,17 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/Player")]
-
-public class PlayerConfig : ScriptableObject
+public class PlayerConfig : ScriptableObject, IMoveConfig, IDemageableConfig
 {
-    public float MoveSpeed = 5f;
-    public float RotationSpeed = 5f;
-    public float MaxHealth = 1;
-    public float HealthRegeneration = 1;
-    public int InventoryCapacity = 1000;
-}          
-    
+    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _rotationSpeed = 5f;
+    [SerializeField] private float _maxHealth = 100f;
+    [SerializeField] private float _healthRegeneration = 1f;
+    [SerializeField] private int _inventoryCapacity = 1000;
+
+    public float MoveSpeed => _moveSpeed;
+    public float RotationSpeed => _rotationSpeed;
+    public float MaxHealth => _maxHealth;
+    public float HealthRegeneration => _healthRegeneration;
+    public int InventoryCapacity => _inventoryCapacity;
+}

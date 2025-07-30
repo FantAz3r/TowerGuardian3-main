@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   _prefab: {fileID: -8004765440893161140, guid: 6cd1ac9652a50da4485a86492f47c63d, type: 3}
-  _icon: {fileID: 21300000, guid: 7d0610b5012d987408b0807d17af3ed2, type: 3}
+  _icon: {fileID: 0}
   _name: Axe
   _description: More damage to wood
   _damage: 2
@@ -21,3 +21,4 @@ MonoBehaviour:
   _attackRange: 2
   _multiplyToMainTarget: 2
   _targetType: 2
+  _chanceToView: 50

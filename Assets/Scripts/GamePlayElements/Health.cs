@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDemageable
 {
-    [SerializeField] private PlayerConfig _playerConfig;
+    [SerializeField] private IDemageableConfig _config;
     [SerializeField] private float _maxHealth = 1;
     [SerializeField] private float _minValue = 3f;
     [SerializeField] private float _maxValue = 15f;
@@ -26,13 +26,13 @@ public class Health : MonoBehaviour, IDemageable
 
     private void Awake()
     {
-        if (_playerConfig == null)
+        if (_config == null)
         {
             _maxHealth = (int)UnityEngine.Random.Range(_minValue, _maxValue);
         }
         else
         {
-            _maxHealth = _playerConfig.MaxHealth;
+            _maxHealth = _config.MaxHealth;
         }
 
         _currentValue = _maxHealth;

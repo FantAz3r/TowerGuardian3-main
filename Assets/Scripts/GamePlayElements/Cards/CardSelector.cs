@@ -5,7 +5,7 @@ using UnityEngine;
 public class CardSelector
 {
     private AllConfigs _allConfigs;
-    private int _cardsCount = 3;
+    private int _cardsCount;
     private PlayerConfigContainer _playerCards;
 
     public CardSelector(AllConfigs configs, PlayerConfigContainer playerCards, int cardsCount = 3)
@@ -44,7 +44,8 @@ public class CardSelector
     {
         int selectedCount = _playerCards.SelectedConfigs.Count();
         int totalCards = _allConfigs.Configs.Count();
-        return Mathf.Min(_cardsCount, totalCards - selectedCount);
+        int cardsToView = Mathf.Min(_cardsCount, totalCards - selectedCount);
+        return cardsToView;
     }
 
     private ICardConfig SelectCardByChance(IEnumerable<ICardConfig> allCards)
@@ -61,7 +62,7 @@ public class CardSelector
                 return card;
         }
 
-        return allCards.First();
+        return null;
     }
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)

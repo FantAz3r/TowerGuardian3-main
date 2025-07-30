@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9aa76ca4497f9048ad0de75dc7ef601, type: 3}
   m_Name: Hummer
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 0}
+  _prefab: {fileID: -8340058777579418164, guid: 82f1e40c0cf7c5048a41bfa78b10c9d9, type: 3}
   _icon: {fileID: 0}
-  _name: 
-  _description: 
+  _name: Hummer
+  _description: "\u0414\u043E\u043B\u0431\u0438\u0442 \u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
   _damage: 10
-  _attackDelay: 1
+  _attackDelay: 5
   _attackRange: 2
-  _multiplyToMainTarget: 2
-  _targetType: 0
-  _chanceToView: 0
+  _multiplyToMainTarget: 1
+  _targetType: 3
+  _chanceToView: 50
