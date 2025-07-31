@@ -2,5 +2,4 @@
 {
     CardType Type { get; }
     void ActivateCard(ICardConfig config);
-
 }

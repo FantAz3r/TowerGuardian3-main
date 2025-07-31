@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CardSelector
 {
-    private AllConfigs _allConfigs;
+    private AllCardConfigs _allConfigs;
     private int _cardsCount;
     private PlayerConfigContainer _playerCards;
 
-    public CardSelector(AllConfigs configs, PlayerConfigContainer playerCards, int cardsCount = 3)
+    public CardSelector(AllCardConfigs configs, PlayerConfigContainer playerCards, int cardsCount = 3)
     {
         _allConfigs = configs;
         _playerCards = playerCards;

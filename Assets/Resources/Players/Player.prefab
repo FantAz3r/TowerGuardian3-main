@@ -123,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerConfig: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
   _maxHealth: 1
   _minValue: 3
   _maxValue: 15
@@ -205,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f92171977cb6eb4197fc7d508abcb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
+  _configObject: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
 --- !u!114 &336110378464193548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d414dbdc31c1646ad23cdb64714c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
+  _configObject: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
 --- !u!114 &339678717613201051
 MonoBehaviour:
   m_ObjectHideFlags: 0

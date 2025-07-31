@@ -4,18 +4,24 @@ using UnityEngine;
 public class AttackZone : MonoBehaviour
 {
     [SerializeField] private Color gizmoColor = new Color(1f, 0f, 0f, 0.25f);
-    private Transform _attackPoint;
+    private Vector3 _attackPoint;
     private float _range;
+    private IDemageable _selfHealth;
 
-    public IEnumerable<IDemageable> GetTargets(Transform attackPoint, float range)
+    private void Awake()
+    {
+        _selfHealth = GetComponentInParent<IDemageable>();
+    }
+
+    public IEnumerable<IDemageable> GetTargets(Vector3 attackPoint, float range)
     {
         List<IDemageable> targets = new List<IDemageable>();
 
-        Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, range);
+        Collider[] hitColliders = Physics.OverlapSphere(attackPoint, range);
 
         foreach (Collider collider in hitColliders)
         {
-            if (collider.gameObject.GetComponent<Player>() != null)
+            if (collider.gameObject.GetComponent<IDemageable>() == _selfHealth)
                 continue;
 
             IDemageable damageable = collider.gameObject.GetComponent<IDemageable>();
@@ -26,7 +32,7 @@ public class AttackZone : MonoBehaviour
         return targets;
     }
 
-    public void SetAttackData(Transform attackPoint, float range)
+    public void SetAttackData(Vector3 attackPoint, float range)
     {
         _attackPoint = attackPoint;
         _range = range;
@@ -38,6 +44,6 @@ public class AttackZone : MonoBehaviour
             return;
 
         Gizmos.color = gizmoColor;
-        Gizmos.DrawSphere(_attackPoint.position, _range);
+        Gizmos.DrawSphere(_attackPoint, _range);
     }
 }

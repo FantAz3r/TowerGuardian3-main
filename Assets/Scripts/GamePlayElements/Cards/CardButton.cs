@@ -8,12 +8,12 @@ public class CardButton : MonoBehaviour
 {
     private ICardConfig _card;
     private Button _button;
-    private AllConfigs _cards;
+    private AllCardConfigs _cards;
     private Dictionary<CardType, ICardFactory> _factories;
 
     public event Action Selected;
 
-    public void Init(AllConfigs cards, List<ICardFactory> factories)
+    public void Init(AllCardConfigs cards, List<ICardFactory> factories)
     {
         _cards = cards;
         _factories = new Dictionary<CardType, ICardFactory>();

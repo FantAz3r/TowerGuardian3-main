@@ -10,4 +10,5 @@ public static class GameConstants
     public static string CardSelectionMenu = "Prefabs/CardMenuPanel";
     public static string CardViewer = "Prefabs/CardPanel";
     public static string AllCards = "Prefabs/AllCards";
+    public static string DirectionLight = "Prefabs/Light/Directional Light";
 }

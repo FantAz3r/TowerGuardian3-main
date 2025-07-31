@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AllConfigs : MonoBehaviour
+public class AllCardConfigs : MonoBehaviour
 {
     [SerializeField] private List<WeaponConfig> _weaponConfigs;
     [SerializeField] private List<AbilityConfig> _abilityConfigs;

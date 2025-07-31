@@ -1,11 +1,21 @@
+using System;
 using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
-    [SerializeField] private PlayerConfig _config;
+    [SerializeField] private ScriptableObject _configObject;
+    private IMoveConfig _config;
+
     public Vector2 MoveDirection { get; private set; }
 
     public void SetDirection(Vector2 direction) => MoveDirection = direction;
+
+    private void Awake()
+    {
+        _config = _configObject as IMoveConfig;
+        if (_config == null)
+            throw new ArgumentNullException();
+    }
 
     private void Update()
     {

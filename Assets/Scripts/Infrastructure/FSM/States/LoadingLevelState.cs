@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class LoadingLevelState : IPayloadedState<LevelID>
 {
@@ -12,6 +11,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private IStateSwitchService _stateSwithService;
     private IInputService _inputService;
     private ITimeService _timeService;
+    private int _currentLevel;
 
     public LoadingLevelState( AllServices services, ICoroutineRunner coroutineRunner)
     {
@@ -33,6 +33,8 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitCurrentLevel(LevelID level)
     {
+        _currentLevel = (int)level;
+
         switch (level)
         {
             case LevelID.MainMenu:
@@ -89,5 +91,6 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCards();
         _gameFactory.CreateCardButtons();
         _gameFactory.CreateCardsSelectionMenu();
+        _gameFactory.CreateLight(_currentLevel);
     }
 }

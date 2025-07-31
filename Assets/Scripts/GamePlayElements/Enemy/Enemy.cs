@@ -6,19 +6,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyConfig _config;
+
     private TargetDetector _targetDetector;
     private Mover _mover;
     private Rotator _rotator;
     private AttackZone _attackZone;
     private IEnemyState _currentState;
 
-    private Coroutine _stateCoroutine;
     private WaitForSeconds _wait;
     private float _waitTime = 0.2f;
     public Transform Target { get; private set; }
     public Mover Mover => _mover;
     public Rotator Rotator => _rotator;
     public AttackZone AttackZone => _attackZone;
+    public EnemyConfig Config => _config;
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         SetState(new PatrolState());
-        _stateCoroutine = StartCoroutine(StateRoutine());
+        StartCoroutine(StateRoutine());
     }
 
     private IEnumerator StateRoutine()
@@ -41,10 +42,9 @@ public class Enemy : MonoBehaviour
         {
             if (_targetDetector.GetTarget() != null)
             {
-
                 if ((_currentState is ChaseState) == false)
                 {
-                    SetState(new ChaseState(_targetDetector.GetTarget()));
+                    SetState(new ChaseState(_targetDetector.GetTarget(), this));
                 }
             }
             else
@@ -58,7 +58,6 @@ public class Enemy : MonoBehaviour
             }
 
             _currentState?.Update();
-
             yield return _wait;
         }
     }

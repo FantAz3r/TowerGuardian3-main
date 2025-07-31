@@ -10,13 +10,10 @@ public class GameFactory
     private AttackZone _attackZone;
     private WeaponFactory _weaponFactory;
     private PlayerConfigContainer _cardHolder;
-    private AllConfigs _cards;
-    private CardSelectionMenu _selectionMenu;
-    private CardSelector _cardSelector;
+    private AllCardConfigs _cards;
     private IInputService _inputService;
     private ITimeService _timeService;  
-    private Vector3 _defaultPosition = new Vector3(0, 0, 0);
-    List<CardButton> _buttons = new List<CardButton>();
+    private List<CardButton> _buttons = new List<CardButton>();
 
     public GameFactory(IInputService inputService, ITimeService timeService)
     {
@@ -27,7 +24,7 @@ public class GameFactory
     public void CreatePlayer()
     {
         Player prefab = Resources.Load<Player>(GameConstants.Player);
-        _player = Object.Instantiate(prefab, _defaultPosition, Quaternion.identity).transform;
+        _player = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity).transform;
         _player.GetComponentInChildren<PlayerMover>().Init(_inputService);
         _player.GetComponentInChildren<PlayerAttacker>().Init(_inputService);
         _inventory = _player.GetComponentInChildren<Inventory>();
@@ -64,8 +61,8 @@ public class GameFactory
 
     public void CreateCards()
     {
-        AllConfigs prefab = Resources.Load<AllConfigs>(GameConstants.AllCards);
-        AllConfigs cards = Object.Instantiate(prefab);
+        AllCardConfigs prefab = Resources.Load<AllCardConfigs>(GameConstants.AllCards);
+        AllCardConfigs cards = Object.Instantiate(prefab);
         cards.Init(_cardHolder);
         _cards = cards;
     }
@@ -76,7 +73,6 @@ public class GameFactory
         Transform container = _uiRoot.transform;
         CardSelectionMenu panel = Object.Instantiate(prefab, container);
         panel.Init(_timeService, _experience, new CardSelector(_cards, _cardHolder), _buttons);
-        _selectionMenu = panel;
     }
 
     public void CreateCardButtons()
@@ -91,5 +87,12 @@ public class GameFactory
             button.Init(_cards, new List<ICardFactory> { _weaponFactory });
             _buttons.Add(button);
         }
+    }
+
+    public void CreateLight(int levelNumber)
+    {
+        DayCycle prefab = Resources.Load<DayCycle>(GameConstants.DirectionLight);
+        DayCycle cycle = Object.Instantiate(prefab);
+        cycle.Init(levelNumber);
     }
 }
