@@ -11,7 +11,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private IStateSwitchService _stateSwithService;
     private IInputService _inputService;
     private ITimeService _timeService;
-    private int _currentLevel;
+    private LevelID _currentLevel;
 
     public LoadingLevelState( AllServices services, ICoroutineRunner coroutineRunner)
     {
@@ -33,7 +33,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitCurrentLevel(LevelID level)
     {
-        _currentLevel = (int)level;
+        _currentLevel = level;
 
         switch (level)
         {
@@ -92,5 +92,6 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCardButtons();
         _gameFactory.CreateCardsSelectionMenu();
         _gameFactory.CreateLight(_currentLevel);
+        _gameFactory.CreateEnemies(_currentLevel);
     }
 }

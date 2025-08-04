@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerExperience : MonoBehaviour
 {
     [SerializeField] private float _baseExpToLevelUp = 50f; 
-    [SerializeField] private float _expMultiplier = 1.2f;
+    [SerializeField] private float _levelMultiplier = 1.2f;
 
     private int _currentLevel = 1;
     private float _currentExp = 0f;
@@ -32,12 +32,12 @@ public class PlayerExperience : MonoBehaviour
 
     private float CalculateExpToLevel(int level)
     {
-        return _baseExpToLevelUp * Mathf.Pow(_expMultiplier, level - 1);
+        return _baseExpToLevelUp * Mathf.Pow(_levelMultiplier, level - 1);
     }
 
-    public void Add(IDemageable enemy)
+    public void Add(float amount)
     {
-        _currentExp += enemy.MaxHealth;
+        _currentExp += amount;
 
         if (_currentExp >= ExpToNextLevel)
         {

@@ -11,4 +11,5 @@ public static class GameConstants
     public static string CardViewer = "Prefabs/CardPanel";
     public static string AllCards = "Prefabs/AllCards";
     public static string DirectionLight = "Prefabs/Light/Directional Light";
+    public static string EnemySpawner = "Enemy/EnenyFactory";
 }

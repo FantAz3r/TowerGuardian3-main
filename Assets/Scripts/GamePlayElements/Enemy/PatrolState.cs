@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PatrolState : IEnemyState
 {
-    private Enemy _enemy;
+    private EnemyStateMachine _enemy;
     private Vector3[] _patrolPoints;
-    private int _currentPointIndex = 0;
+    private int _currentPointIndex;
 
-    public void Enter(Enemy enemy)
+    public void Enter(EnemyStateMachine enemy)
     {
         _enemy = enemy;
 
@@ -27,18 +27,24 @@ public class PatrolState : IEnemyState
 
     public void Update()
     {
-        float treshold = 0.2f;
+        float threshold = 0.2f;
         Vector3 targetPos = _patrolPoints[_currentPointIndex];
+
         float distance = Vector3.SqrMagnitude(_enemy.transform.position - targetPos);
 
-        if (distance < treshold)
+        if (distance < threshold * threshold) 
         {
             _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
         }
         else
         {
-            _enemy.Mover.SetDirection(targetPos);
-            _enemy.Rotator.SetDirection(targetPos);
+            Vector3 direction3D = targetPos - _enemy.transform.position;
+            direction3D.y = 0f; 
+            Vector2 direction = new Vector2(direction3D.x, direction3D.z).normalized;
+
+            _enemy.Mover.SetDirection(direction);
+            _enemy.Rotator.SetDirection(direction);
         }
     }
+
 }

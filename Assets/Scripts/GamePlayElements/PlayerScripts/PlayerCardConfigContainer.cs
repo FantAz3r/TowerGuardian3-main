@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerConfigContainer : MonoBehaviour
+public class PlayerCardConfigContainer : MonoBehaviour
 {
     private List<ICardConfig> _selectedConfigs = new List<ICardConfig>();
 

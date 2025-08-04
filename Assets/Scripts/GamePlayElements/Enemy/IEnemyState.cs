@@ -1,6 +1,6 @@
 public interface IEnemyState
 {
-    void Enter(Enemy enemy);
+    void Enter(EnemyStateMachine enemy);
     void Exit();
     void Update();
 }

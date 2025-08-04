@@ -7,12 +7,12 @@ public class AllCardConfigs : MonoBehaviour
     [SerializeField] private List<AbilityConfig> _abilityConfigs;
     [SerializeField] private List<BuffConfig> _buffConfigs;
 
-    private PlayerConfigContainer _container;
+    private PlayerCardConfigContainer _container;
     private List<ICardConfig> _configs = new List<ICardConfig>();
 
     public IEnumerable<ICardConfig> Configs => _configs;
 
-    public void Init(PlayerConfigContainer container)
+    public void Init(PlayerCardConfigContainer container)
     {
         _container = container;
     }

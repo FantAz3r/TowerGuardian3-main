@@ -6,9 +6,9 @@ public class CardSelector
 {
     private AllCardConfigs _allConfigs;
     private int _cardsCount;
-    private PlayerConfigContainer _playerCards;
+    private PlayerCardConfigContainer _playerCards;
 
-    public CardSelector(AllCardConfigs configs, PlayerConfigContainer playerCards, int cardsCount = 3)
+    public CardSelector(AllCardConfigs configs, PlayerCardConfigContainer playerCards, int cardsCount = 3)
     {
         _allConfigs = configs;
         _playerCards = playerCards;
@@ -51,7 +51,6 @@ public class CardSelector
     private ICardConfig SelectCardByChance(IEnumerable<ICardConfig> allCards)
     {
         float totalChance = allCards.Sum(card => card.ChanceToView);
-
         float rand = Random.value * totalChance;
         float cumulative = 0f;
 

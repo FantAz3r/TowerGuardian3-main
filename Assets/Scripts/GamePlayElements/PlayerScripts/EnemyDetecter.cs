@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyDetecter : MonoBehaviour
 {
-    public event Action<IDemageable> OnKilled;
+    public event Action<float> OnKilled;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +23,6 @@ public class EnemyDetecter : MonoBehaviour
 
     private void OnEnemyDied(IDemageable enemy)
     {
-        OnKilled?.Invoke(enemy);
+        OnKilled?.Invoke(enemy.MaxHealth);
     }
 }

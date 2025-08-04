@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChaseState : IEnemyState
 {
-    private Enemy _enemy;
+    private EnemyStateMachine _enemy;
     private Player _player;
     private Coroutine _attackCoroutine;
     private MonoBehaviour _coroutineRunner;
@@ -14,13 +14,13 @@ public class ChaseState : IEnemyState
     {
         _player = player;
         _coroutineRunner = coroutineRunner;
-        _wait = new WaitForSeconds(_enemy.Config.AttackCooldown);
     }
 
-    public void Enter(Enemy enemy)
+    public void Enter(EnemyStateMachine enemy)
     {
         _enemy = enemy;
         _attackCoroutine = _coroutineRunner.StartCoroutine(AttackRoutine());
+        _wait = new WaitForSeconds(_enemy.Config.AttackCooldown);
     }
 
     public void Exit()
@@ -50,19 +50,16 @@ public class ChaseState : IEnemyState
     {
         IDemageable playerHealth = _player.GetComponent<IDemageable>();
 
-        while (true)
+        while (_enemy.Target != null)
         {
-            if (_enemy.Target != null)
-            {
-                IEnumerable<IDemageable> targets = _enemy.AttackZone.GetTargets(_enemy.Config.AttackAriaCenter, _enemy.Config.AttackRange);
+            IEnumerable<IDemageable> targets = _enemy.AttackZone.GetTargets(_enemy.Config.AttackAriaCenter, _enemy.Config.AttackRange);
 
-                foreach (IDemageable target in targets)
+            foreach (IDemageable target in targets)
+            {
+                if (target == playerHealth)
                 {
-                    if (target == playerHealth)
-                    {
-                        target.TakeDamage(_enemy.Config.Damage);
-                        break;
-                    }
+                    target.TakeDamage(_enemy.Config.Damage);
+                    break;
                 }
             }
 

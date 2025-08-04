@@ -9,8 +9,9 @@ public class GameFactory
     private Inventory _inventory;
     private AttackZone _attackZone;
     private WeaponFactory _weaponFactory;
-    private PlayerConfigContainer _cardHolder;
+    private PlayerCardConfigContainer _cardHolder;
     private AllCardConfigs _cards;
+    private DayCycle _cycle;
     private IInputService _inputService;
     private ITimeService _timeService;  
     private List<CardButton> _buttons = new List<CardButton>();
@@ -30,7 +31,7 @@ public class GameFactory
         _inventory = _player.GetComponentInChildren<Inventory>();
         _attackZone = _player.GetComponentInChildren<AttackZone>();
         _experience = _player.GetComponentInChildren<PlayerExperience>();
-        _cardHolder = _player.GetComponentInChildren<PlayerConfigContainer>();
+        _cardHolder = _player.GetComponentInChildren<PlayerCardConfigContainer>();
     }
 
     public void CreateWeaponFactory()
@@ -89,10 +90,17 @@ public class GameFactory
         }
     }
 
-    public void CreateLight(int levelNumber)
+    public void CreateLight(LevelID level)
     {
         DayCycle prefab = Resources.Load<DayCycle>(GameConstants.DirectionLight);
-        DayCycle cycle = Object.Instantiate(prefab);
-        cycle.Init(levelNumber);
+        _cycle = Object.Instantiate(prefab);
+        _cycle.Init(level);
+    }
+
+    public void CreateEnemies(LevelID level)
+    {
+        EnemySpawner prefab = Resources.Load<EnemySpawner>(GameConstants.EnemySpawner);
+        EnemySpawner spawner = Object.Instantiate(prefab);
+        spawner.Init(_player.transform, _cycle, level);
     }
 }

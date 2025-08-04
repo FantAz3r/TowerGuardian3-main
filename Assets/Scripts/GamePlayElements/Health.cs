@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDemageable
 {
-    [SerializeField] private IDemageableConfig _config;
+    [SerializeField] private ScriptableObject _configObject;
     [SerializeField] private float _maxHealth = 1;
     [SerializeField] private float _minValue = 3f;
     [SerializeField] private float _maxValue = 15f;
     [SerializeField] private TargetType _targetType;
 
+    private IDemageableConfig _config;
     private float _incomingDamage;
     private float _currentValue;
 
@@ -26,12 +27,13 @@ public class Health : MonoBehaviour, IDemageable
 
     private void Awake()
     {
-        if (_config == null)
+        if (_configObject == null)
         {
             _maxHealth = (int)UnityEngine.Random.Range(_minValue, _maxValue);
         }
         else
         {
+            _config = _configObject as IDemageableConfig;
             _maxHealth = _config.MaxHealth;
         }
 

@@ -9,23 +9,24 @@ public class DayCycle : MonoBehaviour
 
     private float _dayDuration;
     private float _nightDuration;
-    private Light _directionalLight;
-    private Color _dayLightColor ;
-    private Color _nightLightColor;
     private float _dayLightIntensity;
     private float _nightLightIntensity;
     private float _transitionDuration;
-
-    private DayPhase _currentPhase;
     private float _timeRemaining;
 
-    private event Action<DayPhase> OnPhaseChanged;
+    private Light _directionalLight;
+    private Color _dayLightColor ;
+    private Color _nightLightColor;
+    private DayPhase _currentPhase;
 
-    public void Init(int configNumber)
+    public event Action<DayPhase> OnPhaseChanged;
+    public DayPhase CurrentPhase => _currentPhase;
+
+    public void Init(LevelID level)
     {
         foreach (var levelConfig in _levelConfigs)
         {
-            if (levelConfig.Level == configNumber)
+            if (levelConfig.Level == level)
             {
                 _dayDuration = levelConfig.DayDuration;
                 _nightDuration = levelConfig.NightDuration;
@@ -34,9 +35,8 @@ public class DayCycle : MonoBehaviour
                 _dayLightIntensity = levelConfig.DayLightIntensity;
                 _nightLightIntensity = levelConfig.NightLightIntensity;
                 _transitionDuration = levelConfig.TransitionDuration;
-                _directionalLight = GetComponent<Light>();
                 _timeRemaining = levelConfig.DayDuration;
-
+                _directionalLight = GetComponent<Light>();
             }
         }
     }
