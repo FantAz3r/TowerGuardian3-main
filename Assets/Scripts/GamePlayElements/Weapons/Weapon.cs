@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour, IWeapon
             return;
 
         _canAttack = false;
-        IEnumerable<IDemageable> targets = _attackZone.GetTargets(_attackPoint.position, _range);
+        IEnumerable<IDemageable> targets = _attackZone.GetTargets(_range);
 
         foreach (var target in targets)
         {
