@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class DamageText : MonoBehaviour
+public class DamageViewer : MonoBehaviour
 {
     [SerializeField] private GameObject damageTextPrefab;
     private Vector3 _offset= new Vector3(0, 1.5f, -1.5f);

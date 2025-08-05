@@ -14,7 +14,7 @@ public class WeaponConfig : ScriptableObject , ICardConfig
     [SerializeField] private float _attackRange = 2f;
     [SerializeField] private float _multiplyToMainTarget = 2;
     [SerializeField] private TargetType _targetType;
-    [SerializeField] private float _chanceToView;
+    [SerializeField, Range(0f, 1f)] private float _chanceToView;
 
     public Weapon Prefab => _prefab;
     public Image Icon => _icon;

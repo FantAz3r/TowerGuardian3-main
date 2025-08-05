@@ -10,11 +10,15 @@ public class PatrolState : IEnemyState
     {
         _enemy = enemy;
 
+        Vector3 origin = enemy.transform.position;
+        float edgeSize = 5f;  
+
         _patrolPoints = new Vector3[]
         {
-            enemy.transform.position,
-            enemy.transform.position + enemy.transform.right * 5f,
-            enemy.transform.position + enemy.transform.right * -5f
+            origin,
+            origin + enemy.transform.right * edgeSize,
+            origin + enemy.transform.right * edgeSize + enemy.transform.forward * edgeSize,
+            origin + enemy.transform.forward * edgeSize
         };
 
         _currentPointIndex = 0;
@@ -22,7 +26,7 @@ public class PatrolState : IEnemyState
 
     public void Exit()
     {
-        _enemy.Mover.Move(Vector2.zero);
+        _enemy.Mover.SetDirection(Vector2.zero);
     }
 
     public void Update()
@@ -32,19 +36,18 @@ public class PatrolState : IEnemyState
 
         float distance = Vector3.SqrMagnitude(_enemy.transform.position - targetPos);
 
-        if (distance < threshold * threshold) 
+        if (distance < threshold * threshold)
         {
             _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
         }
         else
         {
             Vector3 direction3D = targetPos - _enemy.transform.position;
-            direction3D.y = 0f; 
+            direction3D.y = 0f;
             Vector2 direction = new Vector2(direction3D.x, direction3D.z).normalized;
 
             _enemy.Mover.SetDirection(direction);
             _enemy.Rotator.SetDirection(direction);
         }
     }
-
 }

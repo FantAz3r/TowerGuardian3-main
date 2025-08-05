@@ -22,7 +22,7 @@ public class CameraFollower : MonoBehaviour
         _currentPosition = _target.position;
     }
 
-    public void StopFollow()
+    public void StopFollow(IDemageable demageable)
     {
         _target.position = _currentPosition;
         _playerHealth.Died -= StopFollow;

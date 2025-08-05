@@ -7,7 +7,7 @@ public interface IDemageable
 
     event Action<float> IsValueChange;
     event Action<float> HealthLost;
-    event Action Died;
+    event Action<IDemageable> Died;
 
     TargetType GetTargetType();
 

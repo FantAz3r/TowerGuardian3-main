@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(DamageText))]
+[RequireComponent(typeof(DamageViewer))]
 
-public class Health : MonoBehaviour, IDemageable
+public class Health : MonoBehaviour, IDemageable, IStat
 {
     [SerializeField] private ScriptableObject _configObject;
     [SerializeField] private float _maxHealth = 1;
@@ -70,6 +70,16 @@ public class Health : MonoBehaviour, IDemageable
         if (_currentValue <= 0)
         {
             Die();
+        }
+    }
+
+    public void ApplyBuff(BuffType type, float value) 
+    {
+        if(type == BuffType.MaxHp)
+        {
+            _maxHealth = _maxHealth + _maxHealth * value;
+            _currentValue = _currentValue + (_currentValue * value);
+            IsValueChange?.Invoke(_currentValue);
         }
     }
 
