@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MaxHP
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _name: 
-  _description: 
-  _chanceToView: 0
-  _buffType: 0
-  _increaceValue: 0
+  _name: MaxHP
+  _description: "\u0428ncreases maximum health by a percentage"
+  _chanceToView: 0.4
+  _buffType: 2
+  _increaceValue: 10
