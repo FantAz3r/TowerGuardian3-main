@@ -8,23 +8,35 @@ public class CameraFollower : MonoBehaviour
     private Transform _target;
     private Vector3 _currentPosition;
     private IDemageable _playerHealth;
+
     public void Init(Transform target)
     {
         _target = target;
         transform.rotation = Quaternion.Euler(_rotation);
         _playerHealth = target.GetComponent<IDemageable>();
-        _playerHealth.Died += StopFollow;
+
+        if (_playerHealth != null)
+        {
+            _playerHealth.Died += StopFollow;
+        }
     }
 
     private void LateUpdate()
     {
+        if (_target == null)
+            return; 
+
         transform.position = _target.position + _offsetPosition;
         _currentPosition = _target.position;
     }
 
     public void StopFollow(IDemageable demageable)
     {
-        _target.position = _currentPosition;
-        _playerHealth.Died -= StopFollow;
+        if (_playerHealth != null)
+        {
+            _playerHealth.Died -= StopFollow; 
+        }
+
+        _target = null;
     }
 }

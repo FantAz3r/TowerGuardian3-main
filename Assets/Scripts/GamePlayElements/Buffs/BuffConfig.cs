@@ -15,8 +15,8 @@ public class BuffConfig : ScriptableObject, ICardConfig
     public string Name => _name;
     public string Description => _description;
     public Image Icon => _icon;
-    public CardType Type => CardType.Buff;
-    public BuffType BuffType => _buffType;
+    public CardType CardType => CardType.Buff;
+    public BuffType Type => _buffType;
     public float IncreaceValue => _increaceValue;
     public float ChanceToView => _chanceToView;
 

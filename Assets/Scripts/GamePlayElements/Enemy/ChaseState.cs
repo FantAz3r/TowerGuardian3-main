@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ChaseState : IEnemyState
@@ -55,7 +54,6 @@ public class ChaseState : IEnemyState
         {
             IEnumerable<IDemageable> targets = _enemy.AttackZone.GetTargets(_enemy.Config.AttackRange);
 
-            Debug.Log(targets.Count());
             foreach (IDemageable target in targets)
             {
                 if (target == playerHealth)

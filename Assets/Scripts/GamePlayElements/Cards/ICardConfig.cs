@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 public interface ICardConfig
 {
-    CardType Type { get; }
+    CardType CardType { get; }
     float ChanceToView { get; }
     string Name { get; }
     string Description { get; }

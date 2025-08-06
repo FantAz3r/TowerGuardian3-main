@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(DamageViewer))]
 
-public class Health : MonoBehaviour, IDemageable, IStat
+public class Health : MonoBehaviour, IDemageable
 {
     [SerializeField] private ScriptableObject _configObject;
     [SerializeField] private float _maxHealth = 1;
@@ -73,14 +73,11 @@ public class Health : MonoBehaviour, IDemageable, IStat
         }
     }
 
-    public void ApplyBuff(BuffType type, float value) 
+    public void ApplyBuff(float value)
     {
-        if(type == BuffType.MaxHp)
-        {
-            _maxHealth = _maxHealth + _maxHealth * value;
-            _currentValue = _currentValue + (_currentValue * value);
-            IsValueChange?.Invoke(_currentValue);
-        }
+        _maxHealth = _maxHealth + _maxHealth * value;
+        _currentValue = _currentValue + (_currentValue * value);
+        IsValueChange?.Invoke(_currentValue);
     }
 
     private void Die()

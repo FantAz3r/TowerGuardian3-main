@@ -26,7 +26,7 @@ public class WeaponConfig : ScriptableObject , ICardConfig
     public float Multiply => _multiplyToMainTarget;
     public TargetType TargetType => _targetType;
 
-    public CardType Type => CardType.WeaponSetter;
+    public CardType CardType => CardType.WeaponSetter;
 
     public float ChanceToView => _chanceToView;
 
