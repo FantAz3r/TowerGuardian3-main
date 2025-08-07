@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Weapon : MonoBehaviour, IWeapon
 {
@@ -33,8 +32,7 @@ public class Weapon : MonoBehaviour, IWeapon
             return;
 
         _canAttack = false;
-        IEnumerable<IDemageable> targets = _attackZone.GetTargets(_range);
-        ApplyDamage(targets);
+        ApplyDamage();
         StartCoroutine(Delay());
     }
 
@@ -49,8 +47,10 @@ public class Weapon : MonoBehaviour, IWeapon
         _canAttack = true;
     }
 
-    public void ApplyDamage(IEnumerable<IDemageable> targets)
+    public void ApplyDamage()
     {
+        IEnumerable<IDemageable> targets = _attackZone.GetTargets(_range);
+
         foreach (var target in targets)
         {
             if (target == null)

@@ -4,8 +4,8 @@ using UnityEngine;
 public class AllBuffs : MonoBehaviour
 {
     private List<IBuff> _buffs = new List<IBuff>();
-    private List<BuffConfig> configs = new List<BuffConfig>();
     private PlayerCardConfigContainer _container;
+
     private Health _health;
     private Mover _mover;
     private Inventory _inventory;
