@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9aa76ca4497f9048ad0de75dc7ef601, type: 3}
-  m_Name: Hand
+  m_Script: {fileID: 11500000, guid: 44744d01fec7ec648a88c2fb89067b1c, type: 3}
+  m_Name: MoveSpeed
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 0}
   _icon: {fileID: 0}
-  _name: 
-  _description: 
-  _damage: 1
-  _attackDelay: 1
-  _attackRange: 1
-  _multiplyToMainTarget: 1
-  _targetType: 3
-  _chanceToView: 0
+  _name: Move Speed
+  _description: Increace Move Speed
+  _chanceToView: 0.5
+  _buffType: 5
+  _increaceValue: 0.2

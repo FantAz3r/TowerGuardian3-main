@@ -32,6 +32,23 @@ public class Weapon : MonoBehaviour, IWeapon
             return;
 
         _canAttack = false;
+        ApplyDamage();
+        StartCoroutine(Delay());
+    }
+
+    public void TakeOff()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return _sleep;
+        _canAttack = true;
+    }
+
+    public void ApplyDamage()
+    {
         IEnumerable<IDemageable> targets = _attackZone.GetTargets(_range);
 
         foreach (var target in targets)
@@ -48,18 +65,5 @@ public class Weapon : MonoBehaviour, IWeapon
 
             target.TakeDamage(damageToDeal);
         }
-
-        StartCoroutine(Delay());
-    }
-
-    public void TakeOff()
-    {
-        gameObject.SetActive(false);
-    }
-
-    private IEnumerator Delay()
-    {
-        yield return _sleep;
-        _canAttack = true;
     }
 }

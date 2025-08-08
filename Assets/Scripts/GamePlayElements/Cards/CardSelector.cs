@@ -42,7 +42,7 @@ public class CardSelector
 
     public int GetRemainingCardsCount()
     {
-        int selectedCount = _playerCards.SelectedConfigs.Count();
+        int selectedCount = _playerCards.SelectedCardConfigs.Count();
         int totalCards = _allConfigs.Configs.Count();
         int cardsToView = Mathf.Min(_cardsCount, totalCards - selectedCount);
         return cardsToView;
@@ -66,7 +66,7 @@ public class CardSelector
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
-        return allCards.FindAll(card => _playerCards.SelectedConfigs.Contains(card) == false);
+        return allCards.FindAll(card => _playerCards.SelectedCardConfigs.Contains(card) == false);
     }
 }
 

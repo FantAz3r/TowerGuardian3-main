@@ -59,7 +59,7 @@ public class CardButton : MonoBehaviour
 
     private void ActivateCard(ICardConfig card)
     {
-        if (_factories != null && _factories.TryGetValue(card.Type, out ICardFactory factory))
+        if (_factories != null && _factories.TryGetValue(card.CardType, out ICardFactory factory))
         {
             factory.ActivateCard(card);
         }

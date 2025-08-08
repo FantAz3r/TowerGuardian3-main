@@ -1,27 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCardConfigContainer : MonoBehaviour
 {
     private List<ICardConfig> _selectedConfigs = new List<ICardConfig>();
-    private List<IStat> _buffedStats;
-    public IEnumerable<ICardConfig> SelectedConfigs => _selectedConfigs;
+    public IEnumerable<ICardConfig> SelectedCardConfigs => _selectedConfigs;
 
-    private void Awake()
-    {
-        _buffedStats = new List<IStat>(GetComponents<IStat>());
-    }
+    public event Action<BuffConfig> BuffAdded;
+    public event Action<AbilityConfig> AbilityAdded;
 
     public void Add(ICardConfig config)
     {
         _selectedConfigs.Add(config);
 
-        if(config is BuffConfig buffConfig)
+        Define(config);
+    }
+
+    public void Define(ICardConfig config)
+    {
+        if (config is BuffConfig buff)
         {
-            foreach (var stat in _buffedStats)
-            {
-                stat.ApplyBuff(buffConfig.BuffType, buffConfig.IncreaceValue);
-            }
+            BuffAdded?.Invoke(buff);
+        }
+
+        if (config is AbilityConfig ability)
+        {
+            AbilityAdded?.Invoke(ability);
         }
     }
 }

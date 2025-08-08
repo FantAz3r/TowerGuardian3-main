@@ -1,9 +1,14 @@
+using System;
 using UnityEngine;
 
 public class PlayerAttacker : MonoBehaviour
 {
     private IInputService _inputService;
     private IWeapon _currentWeapon;
+
+    public event Action<IWeapon> WeaponSeted;
+
+    public IWeapon Weapon => _currentWeapon;
 
     public void Init(IInputService inputService)
     {
@@ -27,6 +32,7 @@ public class PlayerAttacker : MonoBehaviour
     {
         _currentWeapon.TakeOff();
         _currentWeapon = weapon;
+        WeaponSeted?.Invoke(weapon);
     }
 
     public void TryUseWeapon()

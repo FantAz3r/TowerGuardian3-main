@@ -7,7 +7,7 @@ public class Mover : MonoBehaviour
 {
     [SerializeField] private ScriptableObject _configObject;
     private IMoveConfig _config;
-
+    private float _moveSpeed;
     public Vector2 MoveDirection { get; private set; }
 
     public void SetDirection(Vector2 direction) => MoveDirection = direction;
@@ -15,15 +15,18 @@ public class Mover : MonoBehaviour
     private void Awake()
     {
         _config = _configObject as IMoveConfig;
+
         if (_config == null)
             throw new ArgumentNullException();
+
+        _moveSpeed = _config.MoveSpeed;
     }
 
     private void Update()
     {
         Move(MoveDirection);
     }
-    
+
     public void Move(Vector2 direction)
     {
         if (direction.sqrMagnitude < 0.001f)
@@ -32,8 +35,13 @@ public class Mover : MonoBehaviour
             return;
         }
 
-        float scaledMoveSpeed = _config.MoveSpeed * Time.deltaTime;
+        float scaledMoveSpeed = _moveSpeed * Time.deltaTime;
         Vector3 offset = new Vector3(direction.x, 0, direction.y) * scaledMoveSpeed;
         transform.Translate(offset, Space.World);
+    }
+
+    public void ApplyBuff(float value)
+    {
+        _moveSpeed = _moveSpeed + _moveSpeed * value;
     }
 }
