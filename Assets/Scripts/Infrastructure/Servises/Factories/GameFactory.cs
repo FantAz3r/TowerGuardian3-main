@@ -11,6 +11,7 @@ public class GameFactory
     private WeaponFactory _weaponFactory;
     private PlayerCardConfigContainer _cardHolder;
     private AllCardConfigs _cards;
+    private AllAbilities _allAbilities;
     private DayCycle _cycle;
     private IInputService _inputService;
     private ITimeService _timeService;  
@@ -32,6 +33,7 @@ public class GameFactory
         _attackZone = _player.GetComponentInChildren<AttackZone>();
         _experience = _player.GetComponentInChildren<PlayerExperience>();
         _cardHolder = _player.GetComponentInChildren<PlayerCardConfigContainer>();
+        _allAbilities = _player.GetComponentInChildren<AllAbilities>();
     }
 
     public void CreateWeaponFactory()
@@ -102,5 +104,12 @@ public class GameFactory
         EnemySpawner prefab = Resources.Load<EnemySpawner>(GameConstants.EnemySpawner);
         EnemySpawner spawner = Object.Instantiate(prefab);
         spawner.Init(_player.transform, _cycle, level);
+    }
+
+    public void CreateAbilityPanel()
+    {
+        AbilityPanel prefab = Resources.Load<AbilityPanel>(GameConstants.AbilityPanel);
+        AbilityPanel panel = Object.Instantiate(prefab, _uiRoot.transform);
+        panel.Init(_allAbilities);
     }
 }

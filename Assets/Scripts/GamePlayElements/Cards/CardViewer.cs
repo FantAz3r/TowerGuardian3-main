@@ -11,7 +11,7 @@ public class CardViewer : MonoBehaviour
 
     public void Render(ICardConfig config)
     {
-        _icon = config.Icon;
+        _icon.sprite = config.Icon;
         _nameText.text = config.Name;
         _descriptionText.text = config.Description;
         InitStats(config);

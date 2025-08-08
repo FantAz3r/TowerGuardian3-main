@@ -12,4 +12,6 @@ public static class GameConstants
     public static string AllCards = "Prefabs/AllCards";
     public static string DirectionLight = "Prefabs/Light/Directional Light";
     public static string EnemySpawner = "Enemy/EnenyFactory";
+    public static string AbilityPanel = "Ui/AbilityPanel";
+
 }

@@ -93,5 +93,6 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCardsSelectionMenu();
         _gameFactory.CreateLight(_currentLevel);
         _gameFactory.CreateEnemies(_currentLevel);
+        _gameFactory.CreateAbilityPanel();
     }
 }

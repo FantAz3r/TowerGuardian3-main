@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WeaponConfig : ScriptableObject , ICardConfig
 {
     [SerializeField] private Weapon _prefab;
-    [SerializeField] private Image _icon;
+    [SerializeField] private Sprite _icon;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private float _damage = 10f;
@@ -17,7 +17,7 @@ public class WeaponConfig : ScriptableObject , ICardConfig
     [SerializeField, Range(0f, 1f)] private float _chanceToView;
 
     public Weapon Prefab => _prefab;
-    public Image Icon => _icon;
+    public Sprite Icon => _icon;
     public string Name => _name;
     public string Description => _description;
     public float Damage => _damage;

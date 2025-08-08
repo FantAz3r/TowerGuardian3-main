@@ -66,7 +66,11 @@ public class CardSelector
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
+        if(_playerCards.FullAbilities)
+        {
+            allCards.RemoveAll(card => card.CardType == CardType.Ability);
+        }
+
         return allCards.FindAll(card => _playerCards.SelectedCardConfigs.Contains(card) == false);
     }
 }
-

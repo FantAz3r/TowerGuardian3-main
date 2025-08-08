@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public abstract class AbilityConfig : ScriptableObject, ICardConfig
 {
-    [SerializeField] private Image _icon;
+    [SerializeField] private Sprite _icon;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private float _chanceToView;
@@ -12,7 +12,7 @@ public abstract class AbilityConfig : ScriptableObject, ICardConfig
 
     public string Name => _name;
     public string Description => _description;
-    public Image Icon => _icon;
+    public Sprite Icon => _icon;
     public CardType CardType => CardType.Ability;
     public AbilityType Type => _abilityType;
     public float ChanceToView => _chanceToView;

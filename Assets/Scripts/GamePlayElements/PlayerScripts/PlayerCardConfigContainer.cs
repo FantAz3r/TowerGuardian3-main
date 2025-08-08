@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerCardConfigContainer : MonoBehaviour
 {
+    [SerializeField] private int _maxAbilitiesCount = 4;
     private List<ICardConfig> _selectedConfigs = new List<ICardConfig>();
     public IEnumerable<ICardConfig> SelectedCardConfigs => _selectedConfigs;
+    public bool FullAbilities => _maxAbilitiesCount <= 0;
 
     public event Action<BuffConfig> BuffAdded;
     public event Action<AbilityConfig> AbilityAdded;
@@ -27,6 +29,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
         if (config is AbilityConfig ability)
         {
             AbilityAdded?.Invoke(ability);
+            _maxAbilitiesCount--;
         }
     }
 }

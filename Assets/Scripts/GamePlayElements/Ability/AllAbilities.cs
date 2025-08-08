@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class AllAbilities : MonoBehaviour
 {
     private List<Ability> _abilities;
     private PlayerCardConfigContainer _container;
+
+    public event Action<AbilityConfig, IAbility> AbilityActivated;
 
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class AllAbilities : MonoBehaviour
             if (ability.Type == item.AbilityType)
             {
                 item.Enable();
+                AbilityActivated?.Invoke(ability, item);
             }
         }
     }

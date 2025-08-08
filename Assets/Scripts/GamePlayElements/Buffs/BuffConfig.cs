@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "BuffConfig", menuName = "Configs/BuffConfig")]
 public class BuffConfig : ScriptableObject, ICardConfig
 {
-    [SerializeField] private Image _icon;
+    [SerializeField] private Sprite _icon;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField, Range(0f, 1f)] private float _chanceToView;
@@ -14,7 +14,7 @@ public class BuffConfig : ScriptableObject, ICardConfig
 
     public string Name => _name;
     public string Description => _description;
-    public Image Icon => _icon;
+    public Sprite Icon => _icon;
     public CardType CardType => CardType.Buff;
     public BuffType Type => _buffType;
     public float IncreaceValue => _increaceValue;
