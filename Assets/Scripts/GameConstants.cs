@@ -13,5 +13,5 @@ public static class GameConstants
     public static string DirectionLight = "Prefabs/Light/Directional Light";
     public static string EnemySpawner = "Enemy/EnenyFactory";
     public static string AbilityPanel = "Ui/AbilityPanel";
-
+    public static string WeaponPanel = "Ui/WeaponPanel";
 }

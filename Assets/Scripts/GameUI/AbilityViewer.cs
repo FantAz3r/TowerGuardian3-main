@@ -52,10 +52,7 @@ public class AbilityViewer : MonoBehaviour
 
     private void OnClick()
     {
-        if (_ability != null)
-        {
-            _ability.Use();
-        }
+        _ability.Use();
     }
 
     private void SubscribeCooldownEvents()
@@ -63,7 +60,6 @@ public class AbilityViewer : MonoBehaviour
         if (_ability is ICooldownAbility ability)
         {
             _cooldownText.enabled = true;
-            _cooldownText.text = ability.Cooldown.ToString();
             ability.CooldownStarted += CooldownView;
         }
     }
@@ -79,7 +75,7 @@ public class AbilityViewer : MonoBehaviour
 
     private void CooldownView(float cooldown, float passTime)
     {
+        _cooldownText.text = (cooldown - passTime).ToString();
         _cooldownFillImage.fillAmount = passTime / cooldown;
-        _cooldownFillImage.fillAmount = 0f;
     }
 }

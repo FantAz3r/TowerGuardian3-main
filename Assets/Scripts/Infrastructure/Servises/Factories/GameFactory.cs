@@ -10,6 +10,7 @@ public class GameFactory
     private AttackZone _attackZone;
     private WeaponFactory _weaponFactory;
     private PlayerCardConfigContainer _cardHolder;
+    private PlayerAttacker _attacker;
     private AllCardConfigs _cards;
     private AllAbilities _allAbilities;
     private DayCycle _cycle;
@@ -29,6 +30,7 @@ public class GameFactory
         _player = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity).transform;
         _player.GetComponentInChildren<PlayerMover>().Init(_inputService);
         _player.GetComponentInChildren<PlayerAttacker>().Init(_inputService);
+        _attacker = _player.GetComponentInChildren<PlayerAttacker>();
         _inventory = _player.GetComponentInChildren<Inventory>();
         _attackZone = _player.GetComponentInChildren<AttackZone>();
         _experience = _player.GetComponentInChildren<PlayerExperience>();
@@ -111,5 +113,12 @@ public class GameFactory
         AbilityPanel prefab = Resources.Load<AbilityPanel>(GameConstants.AbilityPanel);
         AbilityPanel panel = Object.Instantiate(prefab, _uiRoot.transform);
         panel.Init(_allAbilities);
+    }
+
+    public void CreateWeaponPanel()
+    {
+        WeaponPanel prefab = Resources.Load<WeaponPanel>(GameConstants.WeaponPanel);
+        WeaponPanel panel = Object.Instantiate(prefab, _uiRoot.transform);
+        panel.Init(_cardHolder, _weaponFactory);
     }
 }

@@ -15,14 +15,9 @@ public class WeaponFactory: ICardFactory
 
     public void ActivateCard(ICardConfig config)
     {
-       
         if (config is WeaponConfig weaponConfig)
         {
             Create(weaponConfig);
-        }
-        else
-        {
-            Debug.LogWarning("Ожидался WeaponCard");
         }
     }
 

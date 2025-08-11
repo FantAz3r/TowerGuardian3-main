@@ -4,6 +4,7 @@ using UnityEngine;
 public class AbilityPanel : MonoBehaviour
 {
     [SerializeField] private List<AbilityViewer> _viewers;
+
     private AllAbilities _container;
     private int _count =0;
 

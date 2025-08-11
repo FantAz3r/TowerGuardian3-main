@@ -45,8 +45,8 @@ public class CardButton : MonoBehaviour
 
     public void SetCard(ICardConfig card)
     {
-        Show();
         _card = card;
+        Show();
     }
 
     public void OnClick()

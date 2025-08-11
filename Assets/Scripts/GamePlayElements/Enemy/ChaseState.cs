@@ -59,7 +59,6 @@ public class ChaseState : IEnemyState
                 if (target == playerHealth)
                 {
                     target.TakeDamage(_enemy.Config.Damage);
-                    Debug.Log(_enemy.Config.Damage);
                     break;
                 }
             }

@@ -12,6 +12,8 @@ public class InputService : IInputService
     public event Action AttackPerformed;
     public event Action AttackCanceled;
 
+    public event Action OnAbillityUsed;
+
     public InputService()
     {
         _inputActions = new PlayerInputActions();
@@ -22,12 +24,19 @@ public class InputService : IInputService
 
         _inputActions.Player.Attack.performed += OnAttackPerformed;
         _inputActions.Player.Attack.canceled += OnAttackCanceled;
+
+        _inputActions.UI.ActivateAbility.performed += OnAbilityUsed;
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
         Vector2 direction = context.ReadValue<Vector2>();
         MovePerformed?.Invoke(direction);
+    }
+
+    private void OnAbilityUsed(InputAction.CallbackContext context)
+    {
+        OnAbillityUsed?.Invoke();
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext context)

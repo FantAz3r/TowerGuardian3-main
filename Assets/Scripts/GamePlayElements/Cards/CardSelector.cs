@@ -13,10 +13,11 @@ public class CardSelector
         _allConfigs = configs;
         _playerCards = playerCards;
         _cardsCount = cardsCount;
+        //foreach (var card in _allConfigs.Configs.ToList())
+        //{
+        //    Debug.Log(card.CardType);
+        //}
     }
-
-    public int CardsCount => GetRemainingCardsCount();
-
 
     public IEnumerable<ICardConfig> GetCards()
     {
@@ -24,14 +25,20 @@ public class CardSelector
         int attempts = 0;
         int maxAttempts = 100;
 
+        List<ICardConfig> baseFiltered = FilterCards(_allConfigs.Configs.ToList());
+
         while (selectedCards.Count < GetRemainingCardsCount() && attempts < maxAttempts)
         {
             attempts++;
 
-            List<ICardConfig> filteredCards = FilterCards(_allConfigs.Configs.ToList());
-            ICardConfig chosenCard = SelectCardByChance(filteredCards);
+            List<ICardConfig> available = baseFiltered.Where(card => selectedCards.Contains(card) == false).ToList();
 
-            if (selectedCards.Contains(chosenCard) == false)
+            if (available.Count == 0)
+                break;
+
+            ICardConfig chosenCard = SelectCardByChance(available);
+
+            if (chosenCard != null && selectedCards.Contains(chosenCard) == false)
             {
                 selectedCards.Add(chosenCard);
             }
@@ -50,11 +57,19 @@ public class CardSelector
 
     private ICardConfig SelectCardByChance(IEnumerable<ICardConfig> allCards)
     {
-        float totalChance = allCards.Sum(card => card.ChanceToView);
+        var list = allCards.ToList();
+        if (list.Count == 0)
+            return null;
+
+        float totalChance = list.Sum(card => card.ChanceToView);
+
+        if (totalChance <= 0f)
+            return list[Random.Range(0, list.Count)];
+
         float rand = Random.value * totalChance;
         float cumulative = 0f;
 
-        foreach (var card in allCards)
+        foreach (var card in list)
         {
             cumulative += card.ChanceToView;
             if (rand <= cumulative)
@@ -66,10 +81,10 @@ public class CardSelector
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
-        if(_playerCards.FullAbilities)
-        {
-            allCards.RemoveAll(card => card.CardType == CardType.Ability);
-        }
+        //if (_playerCards.FullAbilities)
+        //{
+        //    allCards.RemoveAll(card => card.CardType == CardType.Ability);
+        //}
 
         return allCards.FindAll(card => _playerCards.SelectedCardConfigs.Contains(card) == false);
     }

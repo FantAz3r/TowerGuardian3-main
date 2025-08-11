@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "BuffConfig", menuName = "Configs/BuffConfig")]
 public class BuffConfig : ScriptableObject, ICardConfig

@@ -98,7 +98,7 @@
             "id": "79577c33-247e-485e-8f53-642b72ce3993",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "ActivateAbility",
                     "type": "Button",
                     "id": "a445800b-0fc7-4522-87be-8b536b084f2a",
                     "expectedControlType": "Button",
@@ -111,11 +111,11 @@
                 {
                     "name": "",
                     "id": "1c70fc9f-1503-482c-a68b-4b981c21de0e",
-                    "path": "",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": "KeyboardAndMouse",
+                    "action": "ActivateAbility",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

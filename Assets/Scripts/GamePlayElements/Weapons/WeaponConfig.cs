@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "WeaponConfig", menuName = "Configs/WeaponConfig")]
 public class WeaponConfig : ScriptableObject , ICardConfig

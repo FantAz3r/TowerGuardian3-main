@@ -8,12 +8,13 @@ public class BurstAbility : Ability, ICooldownAbility
 
     private PlayerAttacker _attacker;
     private WaitForSeconds _sleep;
+    private WaitForSeconds _oneSecond = new WaitForSeconds(1);
     private bool _active = true;
 
     public override AbilityType AbilityType => AbilityType.Burst;
     public float Cooldown => _config.Cooldown;
 
-    public event Action<float,float> CooldownStarted;  
+    public event Action<float, float> CooldownStarted;
 
     private void Awake()
     {
@@ -24,24 +25,15 @@ public class BurstAbility : Ability, ICooldownAbility
 
     public override void Use()
     {
-        if (_attacker.Weapon != null)
+        if (_active)
         {
-            if (_active)
-            {
-                StartCoroutine(AttackRoutine());
-                StartCoroutine(CooldownRoutine());
-            }
-        }
-        else
-        {
-            Debug.Log("Need Weapon");
+            StartCoroutine(CooldownRoutine());
+            StartCoroutine(AttackRoutine());
         }
     }
 
     private IEnumerator AttackRoutine()
     {
-        _active = false;
-
         for (int i = 0; i < _config.HitCount; i++)
         {
             _attacker.Weapon.ApplyDamage();
@@ -51,15 +43,17 @@ public class BurstAbility : Ability, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        float timer = _config.Cooldown;
+        _active = false;
+        float timer = 0;
 
-        while (_config.Cooldown > 0f)
+        while (_config.Cooldown >= timer)
         {
             CooldownStarted?.Invoke(_config.Cooldown, timer);
-            timer -= Time.deltaTime;
-            yield return null;
+            timer += 1;
+            yield return _oneSecond;
         }
 
+        CooldownStarted?.Invoke(_config.Cooldown, 0);
         _active = true;
     }
 }
