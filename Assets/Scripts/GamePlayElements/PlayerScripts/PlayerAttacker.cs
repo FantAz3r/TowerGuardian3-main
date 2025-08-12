@@ -8,7 +8,7 @@ public class PlayerAttacker : MonoBehaviour
 
     public event Action<IWeapon> WeaponSeted;
 
-    public IWeapon Weapon => _currentWeapon;
+    public Weapon Weapon => _currentWeapon as Weapon;
 
     public void Init(IInputService inputService)
     {
@@ -20,7 +20,7 @@ public class PlayerAttacker : MonoBehaviour
     {
         AttackZone attackZone = GetComponentInChildren<AttackZone>();
         _currentWeapon = GetComponentInChildren<Weapon>();
-        _currentWeapon.Init(attackZone.transform, attackZone);
+        _currentWeapon.Init(attackZone);
     }
 
     private void OnDestroy()
@@ -33,6 +33,11 @@ public class PlayerAttacker : MonoBehaviour
         _currentWeapon.TakeOff();
         _currentWeapon = weapon;
         WeaponSeted?.Invoke(weapon);
+    }
+
+    public void RemoveWeapon()
+    {
+        _currentWeapon.TakeOff();
     }
 
     public void TryUseWeapon()

@@ -7,15 +7,16 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] private WeaponConfig _config;
 
     private AttackZone _attackZone;
-    private Transform _attackPoint;
     private WaitForSeconds _sleep;
     private float _damage;
     private float _range;
     private bool _canAttack = true;
 
-    public void Init(Transform attackPoint, AttackZone attackZone)
+    public WeaponType WeaponType => _config.WeaponType;
+    public WeaponConfig Config => _config;
+
+    public void Init(AttackZone attackZone)
     {
-        _attackPoint = attackPoint;
         _attackZone = attackZone;
     }
 

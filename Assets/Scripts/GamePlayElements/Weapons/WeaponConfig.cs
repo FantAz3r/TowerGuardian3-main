@@ -6,6 +6,7 @@ public class WeaponConfig : ScriptableObject , ICardConfig
 {
     [SerializeField] private Weapon _prefab;
     [SerializeField] private Sprite _icon;
+    [SerializeField] private WeaponType _type;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private float _damage = 10f;
@@ -24,6 +25,8 @@ public class WeaponConfig : ScriptableObject , ICardConfig
     public float AttackRange => _attackRange;
     public float Multiply => _multiplyToMainTarget;
     public TargetType TargetType => _targetType;
+
+    public WeaponType WeaponType => _type;
 
     public CardType CardType => CardType.WeaponSetter;
 

@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-
-public interface IWeapon
+﻿public interface IWeapon
 {
-    void Init(Transform attackPoint, AttackZone attackZone);
+    WeaponType WeaponType { get; }
+    void Init(AttackZone attackZone);
     void Attack();
     void TakeOff();
     void ApplyDamage();

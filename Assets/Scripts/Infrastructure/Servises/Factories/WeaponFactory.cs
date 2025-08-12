@@ -29,7 +29,7 @@ public class WeaponFactory: ICardFactory
 
         weaponObject.transform.localPosition = Vector3.zero;
         Weapon weapon = weaponObject.GetComponent<Weapon>();
-        weapon.Init(_attackZone.transform, _attackZone);
+        weapon.Init(_attackZone);
         attacker.SetWeapon(weapon);
     }
 }
