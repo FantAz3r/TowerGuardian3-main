@@ -8,6 +8,8 @@ public class AxeThrowingAbility : Ability, ICooldownAbility
 
     private PlayerAttacker _attacker;
     private Weapon _axe;
+    private ThrownAxe _thrownAxe;
+
     private bool _active = true;
     private WaitForSeconds _oneSecond = new WaitForSeconds(1);
 
@@ -19,17 +21,16 @@ public class AxeThrowingAbility : Ability, ICooldownAbility
     private void Awake()
     {
         _attacker = GetComponentInParent<PlayerAttacker>();
-        enabled = false;
     }
 
     public override void Use()
     {
         if (_active)
         {
-            if (_attacker.Weapon.WeaponType == WeaponType.Axe)
+            if (_attacker.GetWeapon.WeaponType == WeaponType.Axe)
             {
-                _axe = _attacker.Weapon;
-                _attacker.RemoveWeapon();
+                _axe = _attacker.GetWeapon;
+                _attacker.BanWeapon();
                 StartCoroutine(CooldownRoutine());
                 ThrowAxe(_axe);
             }
@@ -44,7 +45,7 @@ public class AxeThrowingAbility : Ability, ICooldownAbility
         while (_config.Cooldown >= timer)
         {
             CooldownStarted?.Invoke(_config.Cooldown, timer);
-            timer += 1f;
+            timer++;
             yield return _oneSecond;
         }
 
@@ -54,17 +55,21 @@ public class AxeThrowingAbility : Ability, ICooldownAbility
 
     private void ThrowAxe(Weapon currentWeapon)
     {
-        _attacker.SetWeapon(null);
-
         Transform weaponTransform = currentWeapon.transform;
         Vector3 start = weaponTransform.position;
-        Vector3 forward = weaponTransform.forward;
+        Vector3 forward = -weaponTransform.right;
         Vector3 end = start + forward * _config.FlightDistance;
 
-        GameObject prefab = currentWeapon.Config.Prefab.gameObject;
-        GameObject thrownGO = Instantiate(prefab, start, Quaternion.identity);
-        ThrownAxe thrown = thrownGO.GetComponent<ThrownAxe>();
+        ThrownAxe axe = currentWeapon.GetComponent<ThrownAxe>();
+        _thrownAxe = axe;
+        _thrownAxe.Returned += SetWeapon;
+        _thrownAxe.Init(weaponTransform, start, end, _config.FlightDuration, _config.Damage);
+    }
 
-        thrown.Init(_attacker.transform, start, end, _config.FlightDuration, _config.EllipseHeight, _config.Damage);
+    private void SetWeapon()
+    {
+        _attacker.SetWeapon(_axe);
+        Debug.Log("axe seted");
+        _thrownAxe.Returned -= SetWeapon;
     }
 }

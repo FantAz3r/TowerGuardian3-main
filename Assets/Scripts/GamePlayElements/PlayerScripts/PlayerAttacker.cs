@@ -5,10 +5,11 @@ public class PlayerAttacker : MonoBehaviour
 {
     private IInputService _inputService;
     private IWeapon _currentWeapon;
-
+    private bool _canAttack = true;
     public event Action<IWeapon> WeaponSeted;
 
-    public Weapon Weapon => _currentWeapon as Weapon;
+    public Weapon GetWeapon => _currentWeapon as Weapon;
+    public bool CanAttack => _canAttack;
 
     public void Init(IInputService inputService)
     {
@@ -30,7 +31,11 @@ public class PlayerAttacker : MonoBehaviour
 
     public void SetWeapon(IWeapon weapon)
     {
-        _currentWeapon.TakeOff();
+        if(_currentWeapon != null)
+        {
+            RemoveWeapon();
+        }
+
         _currentWeapon = weapon;
         WeaponSeted?.Invoke(weapon);
     }
@@ -40,8 +45,16 @@ public class PlayerAttacker : MonoBehaviour
         _currentWeapon.TakeOff();
     }
 
+    public void BanWeapon()
+    {
+        _currentWeapon = null;
+    }
+
     public void TryUseWeapon()
     {
-        _currentWeapon.Attack();
+        if (_currentWeapon != null)
+        {
+            _currentWeapon.Attack();
+        }
     }
 }

@@ -335,6 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01cb9dc04673954eb547db8d304146d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxAbilitiesCount: 4
+  _maxWeaponsCount: 3
 --- !u!114 &8079752438915498104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,6 +995,7 @@ GameObject:
   - component: {fileID: 5580505387814555499}
   - component: {fileID: 6410369119527503014}
   - component: {fileID: 8003217668114438110}
+  - component: {fileID: 4267973903631605062}
   m_Layer: 3
   m_Name: AbilityContainer
   m_TagString: Untagged
@@ -1027,8 +1030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3ca74bb8733ec40b3b011ce33768f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilities:
-  - {fileID: 8003217668114438110}
 --- !u!114 &8003217668114438110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,6 +1043,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 39054eaff696627499ce53ae68b7a827, type: 2}
+--- !u!114 &4267973903631605062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463969757422294097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c906704cb37e588459ac99fbc4a428d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _config: {fileID: 11400000, guid: fe92c75a894b83a418c039c5f6720000, type: 2}
 --- !u!1 &6486376198985578566
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,75 +1,78 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using UnityEngine;
 
 public class ThrownAxe : MonoBehaviour
 {
+    private Fist _hand;
     private float _damage;
-    private Transform _owner; 
+    private Transform _owner;
     private float _duration;
     private Vector3 _start;
     private Vector3 _end;
-    private float _a;
-    private float _b;
-    private Vector3 _forward;
-    private bool _isActive;
+    private float _returnSpeed = 10f;
+
+    public event Action Returned;
 
     private void Awake()
     {
+        _hand = GetComponentInParent<Fist>();   
         enabled = false;
     }
 
-    public void Init(Transform owner, Vector3 start, Vector3 end, float duration, float height, float damage)
+    public void Init(Transform owner, Vector3 start, Vector3 end, float duration, float damage)
     {
         enabled = true;
         _owner = owner;
         _start = start;
         _end = end;
         _duration = Mathf.Max(0.01f, duration);
-        _a = Vector3.Distance(start, end) / 2f;
-        _b = Mathf.Max(0f, height);
-        _forward = (end - start).normalized;
         _damage = damage;
 
-        transform.position = _start;
+        transform.position = _end;
         StartCoroutine(MoveRoutine());
     }
 
     private IEnumerator MoveRoutine()
     {
-        _isActive = true;
+        float treshold = 0.5f;
         float elapsed = 0f;
-        Vector3 center = (_start + _end) / 2f;
+
         while (elapsed < _duration)
         {
-            float t = elapsed / _duration; 
-            float theta = Mathf.Lerp(0f, Mathf.PI, t); 
-            Vector3 pos = center + _forward * (_a * Mathf.Cos(theta)) + Vector3.up * (_b * Mathf.Sin(theta));
-            transform.position = pos;
-
+            float time = elapsed / _duration; 
+            transform.position = Vector3.Lerp(_start, _end, time);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.position = _end;
-        _isActive = false;
+        Debug.Log("Reached target");
 
-        Destroy(gameObject);
+        while (Vector3.SqrMagnitude(transform.position - _hand.transform.position) >= treshold * treshold)
+        {
+            transform.position = Vector3.Lerp(transform.position, _hand.transform.position, _returnSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        transform.position = _hand.transform.position;
+        Debug.Log("Returned");
+
+        Returned?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_isActive == false) return;
 
         if (_owner != null)
         {
             var root = other.transform.root;
             if (root == _owner.root) return;
         }
-          
+
         if (other.TryGetComponent<IDemageable>(out IDemageable health))
         {
             health.TakeDamage(_damage);
-            Destroy(gameObject);
             return;
         }
     }

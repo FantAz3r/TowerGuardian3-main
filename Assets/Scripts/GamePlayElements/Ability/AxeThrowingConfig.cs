@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AxeThrowingConfig", menuName = "Configs/AxeThrowingConfig")]
+[CreateAssetMenu(fileName = "AxeThrowingConfig", menuName = "Abikities/AxeThrowingConfig")]
 public class AxeThrowingConfig : AbilityConfig
 {
     [SerializeField] private float _cooldown = 10f;

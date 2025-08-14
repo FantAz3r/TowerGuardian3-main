@@ -13,10 +13,6 @@ public class CardSelector
         _allConfigs = configs;
         _playerCards = playerCards;
         _cardsCount = cardsCount;
-        //foreach (var card in _allConfigs.Configs.ToList())
-        //{
-        //    Debug.Log(card.CardType);
-        //}
     }
 
     public IEnumerable<ICardConfig> GetCards()
@@ -81,10 +77,10 @@ public class CardSelector
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
-        //if (_playerCards.FullAbilities)
-        //{
-        //    allCards.RemoveAll(card => card.CardType == CardType.Ability);
-        //}
+       if (_playerCards.FullAbilities)
+       {
+           allCards.RemoveAll(card => card.CardType == CardType.Ability);
+       }
 
         return allCards.FindAll(card => _playerCards.SelectedCardConfigs.Contains(card) == false);
     }
