@@ -6,10 +6,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<LevelConfig> _levelConfigs;  
-    [SerializeField] private List<Enemy> _enemies;
+    [SerializeField] private Enemy _enemy;
 
     private Transform _player;
-    private EnemyFactory _factory;
+    private ObjectPool<Enemy> _pool;
     private DayCycle _dayCycle;
 
     private float _minSpawnDistance;
@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
 
         _nightDelayWait = new WaitForSeconds(_nightSpawnDelay);
         _dayDelayWait = new WaitForSeconds(_daySpawnDelay);
-        _factory = new EnemyFactory();
+        _pool = new ObjectPool<Enemy>(_enemy);
 
         StartCoroutine(SpawnRoutine());
     }
@@ -54,14 +54,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn()
     {
-        if (_player == null || _enemies == null || _enemies.Count == 0)
-            throw new ArgumentNullException(nameof(_enemies), "EnemySpawner: Ќе заполнен список врагов или игрока отсутствует.");
-
-        int randomIndex = UnityEngine.Random.Range(0, _enemies.Count);
-        Enemy enemyPrefab = _enemies[randomIndex];
+        if (_player == null || _enemy == null)
+            throw new ArgumentNullException(nameof(_enemy), "EnemySpawner: Ќе заполнен список врагов или игрока отсутствует.");
 
         Vector3 spawnPos = GetPosition();
-        _factory.Create(spawnPos, enemyPrefab);
+        _enemy = _pool.Get();
+        _enemy.transform.position = spawnPos;
+        IDemageable health = _enemy.GetComponent<IDemageable>();
+        health.Died += OnDied;
+    }
+
+    private void OnDied(Health health)
+    {
+        Enemy enemy = health.GetComponent<Enemy>();
+        _pool.Release(enemy);
     }
 
     private Vector3 GetPosition()
@@ -91,4 +97,3 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 }
-

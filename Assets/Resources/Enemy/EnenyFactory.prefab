@@ -46,5 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelConfigs:
   - {fileID: 11400000, guid: 0df8dff75f8a2e942b94959ccc726f17, type: 2}
-  _enemies:
-  - {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+  _enemy: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}

@@ -21,7 +21,7 @@ public class Health : MonoBehaviour, IDemageable
 
     public event Action<float> IsValueChange;
     public event Action<float> HealthLost;
-    public event Action<IDemageable> Died;
+    public event Action<Health> Died;
 
     public TargetType GetTargetType() => _targetType;
 
@@ -84,6 +84,5 @@ public class Health : MonoBehaviour, IDemageable
     {
         Died?.Invoke(this);
         Died = null;
-        Destroy(gameObject);
     }
 }

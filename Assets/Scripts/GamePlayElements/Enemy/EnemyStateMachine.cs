@@ -29,7 +29,7 @@ public class EnemyStateMachine : MonoBehaviour
         _attackZone = GetComponentInChildren<AttackZone>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         SetState(new PatrolState());
         StartCoroutine(StateRoutine());

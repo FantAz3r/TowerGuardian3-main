@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyDetecter : MonoBehaviour
 {
+
     public event Action<float> OnKilled;
 
     private void OnTriggerEnter(Collider other)

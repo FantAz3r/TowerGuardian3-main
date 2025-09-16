@@ -27,6 +27,6 @@ public class ResourceItem : MonoBehaviour
 
     private void Extract(float damage)
     {
-        _droper.SpawnItem(transform.position, damage);
+        _droper.SpawnItem(damage);
     }
 }
