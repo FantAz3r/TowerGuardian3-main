@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44744d01fec7ec648a88c2fb89067b1c, type: 3}
   m_Name: MoveSpeed
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 43f6e8b0b0d8e4344baafad16e020839, type: 3}
   _name: Move Speed
   _description: Increace Move Speed
   _chanceToView: 0.5
   _buffType: 5
-  _increaceValue: 0.2
+  _baseIncreaseValue: 0.2
+  _upgradeValuePerLevel: 0.1

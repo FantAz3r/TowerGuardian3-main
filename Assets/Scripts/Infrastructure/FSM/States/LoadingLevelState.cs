@@ -11,12 +11,15 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private IStateSwitchService _stateSwithService;
     private IInputService _inputService;
     private ITimeService _timeService;
+    private ISpawnerService _spawnerService;
     private LevelID _currentLevel;
+    private GameStateMachine _gameStateMachine;
 
-    public LoadingLevelState( AllServices services, ICoroutineRunner coroutineRunner)
+    public LoadingLevelState(AllServices services, ICoroutineRunner coroutineRunner, GameStateMachine stateMachine)
     {
         _services = services;
         _coroutineRunner = coroutineRunner;
+        _gameStateMachine = stateMachine;
     }
 
     public void Enter(LevelID level)
@@ -28,7 +31,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     public void Exit()
     {
-        
+        _gameFactory.ClearSpawners();
     }
 
     private void InitCurrentLevel(LevelID level)
@@ -38,20 +41,24 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         switch (level)
         {
             case LevelID.MainMenu:
-                _sceneLoader.Load(level.ToString(), InitMainMenu); 
+                _sceneLoader.Load(level.ToString(), InitMainMenu);
                 break;
 
             case LevelID.Level1:
-                _sceneLoader.Load(level.ToString(), InitGameLevel); 
+                _sceneLoader.Load(level.ToString(), InitGameLevel);
                 break;
 
             case LevelID.Level2:
+                _sceneLoader.Load(level.ToString(), InitGameLevel);
                 break;
 
             case LevelID.Level3:
                 break;
 
             case LevelID.Level4:
+                break;
+
+            case LevelID.Tower:
                 break;
 
             default:
@@ -63,8 +70,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     {
         _sceneLoader = new SceneLoader(_coroutineRunner);
         _uiFactory = new UIFactory(_stateSwithService);
-        _gameFactory = new GameFactory(_inputService, _timeService);
-
+        _gameFactory = new GameFactory(_inputService, _timeService, _spawnerService, _gameStateMachine);
     }
 
     private void InitServices()
@@ -73,6 +79,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _timeService = _services.GetService<ITimeService>();
         _stateSwithService = _services.GetService<IStateSwitchService>();
         _inputService = _services.GetService<IInputService>();
+        _spawnerService = _services.GetService<ISpawnerService>();
     }
 
     private void InitMainMenu()
@@ -84,16 +91,22 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private void InitGameLevel()
     {
         _gameFactory.CreatePlayer();
+        _gameFactory.CreateSpawners(_spawnerService);
         _gameFactory.CreateWeaponFactory();
         _gameFactory.CreateCamera();
+        _gameFactory.CreateEventSystem();
         _gameFactory.CreateUI();
         _gameFactory.CreateResourceView();
         _gameFactory.CreateCards();
+        _gameFactory.CreateShop();
         _gameFactory.CreateCardButtons();
         _gameFactory.CreateCardsSelectionMenu();
         _gameFactory.CreateLight(_currentLevel);
         _gameFactory.CreateEnemies(_currentLevel);
         _gameFactory.CreateAbilityPanel();
         _gameFactory.CreateWeaponPanel();
+        _gameFactory.CreatePortalsFactory();
+        _gameFactory.CreateActions();
+        _gameFactory.CreatePlatform();
     }
 }

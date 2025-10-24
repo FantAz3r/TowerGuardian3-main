@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2111114708384254929}
   - component: {fileID: 5277114965978749983}
   - component: {fileID: -6408653815218859589}
-  - component: {fileID: -2915700361581979390}
   - component: {fileID: -7521355811843331321}
   m_Layer: 0
   m_Name: Tree_03_Spring
@@ -63,8 +62,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -124,27 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 0}
+  _configObject: {fileID: 0}
   _maxHealth: 3
-  _currentHealth: 0
-  _targetType: 2
-  _regeneration: 0
---- !u!114 &-2915700361581979390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453970571419920900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01daeb7e39ab7634b95961377b29afd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _resoursePrefab: {fileID: -3205822927271763078, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
-  ejectForceMin: 2
-  ejectForceMax: 5
-  ejectRadius: 0.5
+  _minValue: 3
+  _maxValue: 15
+  _type: 0
 --- !u!114 &-7521355811843331321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71924de8a2000ba4f901ad5488fd2a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceAmount: 2
 --- !u!1 &4291722214108863390
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,8 +197,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

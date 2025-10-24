@@ -27,9 +27,9 @@ public class AxeThrowingAbility : Ability, ICooldownAbility
     {
         if (_active)
         {
-            if (_attacker.GetWeapon.WeaponType == WeaponType.Axe)
+            if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
             {
-                _axe = _attacker.GetWeapon;
+                _axe = _attacker.CurrentWeapon;
                 _attacker.BanWeapon();
                 StartCoroutine(CooldownRoutine());
                 ThrowAxe(_axe);
@@ -68,7 +68,7 @@ public class AxeThrowingAbility : Ability, ICooldownAbility
 
     private void SetWeapon()
     {
-        _attacker.SetWeapon(_axe);
+        _attacker.AddWeapon(_axe);
         Debug.Log("axe seted");
         _thrownAxe.Returned -= SetWeapon;
     }

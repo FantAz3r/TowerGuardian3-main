@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private List<LevelConfig> _levelConfigs;  
+    [SerializeField] private LevelData _levelData;  
     [SerializeField] private Enemy _enemy;
 
     private Transform _player;
@@ -26,11 +25,11 @@ public class EnemySpawner : MonoBehaviour
         _player = player;
         _dayCycle = dayCycle;
 
-        foreach (var levelConfig in _levelConfigs)
+        foreach (var levelInfo in _levelData.LevelInfos)
         {
-            if (levelConfig.Level == level)  
+            if (levelInfo.LevelID == level)  
             {
-                _currentConfig = levelConfig;
+                _currentConfig = levelInfo.LevelConfig;
                 break;
             }
         }
@@ -42,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
 
         _nightDelayWait = new WaitForSeconds(_nightSpawnDelay);
         _dayDelayWait = new WaitForSeconds(_daySpawnDelay);
-        _pool = new ObjectPool<Enemy>(_enemy);
+        _pool = new ObjectPool<Enemy>(_enemy, 5, true);
 
         StartCoroutine(SpawnRoutine());
     }
@@ -60,14 +59,6 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPos = GetPosition();
         _enemy = _pool.Get();
         _enemy.transform.position = spawnPos;
-        IDemageable health = _enemy.GetComponent<IDemageable>();
-        health.Died += OnDied;
-    }
-
-    private void OnDied(Health health)
-    {
-        Enemy enemy = health.GetComponent<Enemy>();
-        _pool.Release(enemy);
     }
 
     private Vector3 GetPosition()

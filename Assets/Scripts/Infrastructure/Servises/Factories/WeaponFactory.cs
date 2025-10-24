@@ -5,10 +5,10 @@ public class WeaponFactory: ICardFactory
     private AttackZone _attackZone;
     private Transform _player;
 
-    public WeaponFactory(AttackZone attackZone, Transform player)
+    public WeaponFactory(Transform player, AttackZone attackZone)
     {
-        _attackZone = attackZone;
         _player = player;
+        _attackZone = attackZone;
     }
 
     public CardType Type => CardType.WeaponSetter;
@@ -25,11 +25,20 @@ public class WeaponFactory: ICardFactory
     {
         Transform container = _player.GetComponentInChildren<Fist>().transform;
         PlayerAttacker attacker = container.GetComponentInParent<PlayerAttacker>();
-        GameObject weaponObject = Object.Instantiate(config.Prefab.gameObject, container);
 
+        foreach (var item in attacker.WeaponsInInventory)
+        {
+            if (item.Config == config)
+            {
+                attacker.AddWeapon(item);
+                return;
+            }
+        }
+
+        GameObject weaponObject = Object.Instantiate(config.Prefab.gameObject, container);
         weaponObject.transform.localPosition = Vector3.zero;
         Weapon weapon = weaponObject.GetComponent<Weapon>();
         weapon.Init(_attackZone);
-        attacker.SetWeapon(weapon);
+        attacker.AddWeapon(weapon);
     }
 }

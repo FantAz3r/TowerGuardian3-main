@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using UnityEngine;
-[RequireComponent(typeof(Rotator))]
 
 public class EnemyStateMachine : MonoBehaviour
 {
@@ -14,6 +14,8 @@ public class EnemyStateMachine : MonoBehaviour
 
     private WaitForSeconds _wait;
     private float _waitTime = 0.2f;
+
+    public event Action<IEnemyState> StateChanged;
     public Transform Target { get; private set; }
     public Mover Mover => _mover;
     public Rotator Rotator => _rotator;
@@ -24,23 +26,28 @@ public class EnemyStateMachine : MonoBehaviour
     {
         _wait = new WaitForSeconds(_waitTime);
         _targetDetector = GetComponentInChildren<TargetDetector>();
-        _mover = GetComponentInParent<Mover>();
-        _rotator = GetComponent<Rotator>();
+        _mover = GetComponent<Mover>();
+        _rotator = GetComponentInChildren<Rotator>();
         _attackZone = GetComponentInChildren<AttackZone>();
     }
 
     private void OnEnable()
     {
-        SetState(new PatrolState());
         StartCoroutine(StateRoutine());
+    }
+
+    private void OnDisable()
+    {
+        _currentState?.Exit();
+        StopCoroutine(StateRoutine());
     }
 
     private IEnumerator StateRoutine()
     {
+        yield return _wait;
+
         while (enabled)
         {
-            Debug.Log(_currentState);
-
             Player player = _targetDetector.GetTarget();
             Target = player != null ? player.transform : null;
 
@@ -69,6 +76,7 @@ public class EnemyStateMachine : MonoBehaviour
     {
         _currentState?.Exit();
         _currentState = newState;
+        StateChanged?.Invoke(_currentState);
         _currentState.Enter(this);
     }
 }

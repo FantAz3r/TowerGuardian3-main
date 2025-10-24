@@ -9,9 +9,6 @@ public interface IDemageable
     event Action<float> HealthLost;
     event Action<Health> Died;
 
-    TargetType GetTargetType();
-
     void TakeDamage(float damage);
-    void Heal(float healAmount);
 }
 

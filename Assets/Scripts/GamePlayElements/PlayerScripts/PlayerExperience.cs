@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class PlayerExperience : MonoBehaviour
 {
-    [SerializeField] private float _baseExpToLevelUp = 50f; 
-    [SerializeField] private float _levelMultiplier = 1.2f;
+    [SerializeField] private ScriptableObject _configObject;
 
+    private ILevelConfig _config;
+    private float _baseLvlCost;
+    private float _levelCostMultiplier;
     private int _currentLevel = 1;
     private float _currentExp = 0f;
     private EnemyDetecter _enemyDetecter;
@@ -17,6 +19,10 @@ public class PlayerExperience : MonoBehaviour
 
     private void Awake()
     {
+        _config = _configObject as ILevelConfig;
+        _baseLvlCost = _config.BaseLvlCost;
+        _levelCostMultiplier = _config.LevelCostMultiplier;
+
         _enemyDetecter = GetComponentInChildren<EnemyDetecter>();
     }
 
@@ -32,10 +38,10 @@ public class PlayerExperience : MonoBehaviour
 
     private float CalculateExpToLevel(int level)
     {
-        return _baseExpToLevelUp * Mathf.Pow(_levelMultiplier, level - 1);
+        return _baseLvlCost * Mathf.Pow(_levelCostMultiplier, level - 1);
     }
 
-    public void Add(float amount)
+    public void Add(float amount) 
     {
         _currentExp += amount;
 

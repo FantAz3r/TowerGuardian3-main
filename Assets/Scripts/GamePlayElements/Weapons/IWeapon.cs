@@ -1,8 +1,7 @@
 ﻿public interface IWeapon
 {
-    WeaponType WeaponType { get; }
+    WeaponConfig Config { get; }
     void Init(AttackZone attackZone);
     void Attack();
     void TakeOff();
-    void ApplyDamage();
 }

@@ -14,6 +14,13 @@ public class InputService : IInputService
 
     public event Action OnAbillityUsed;
 
+    public event Action<Vector2> RotatePerformed;
+    public event Action<Vector2> RotateCanceled;
+
+    public event Action<Vector2> DirectionFromCursor;
+
+    public Vector2 CursorOrigin { get; set; }
+
     public InputService()
     {
         _inputActions = new PlayerInputActions();
@@ -26,6 +33,9 @@ public class InputService : IInputService
         _inputActions.Player.Attack.canceled += OnAttackCanceled;
 
         _inputActions.UI.ActivateAbility.performed += OnAbilityUsed;
+
+        _inputActions.Player.Rotate.performed += OnRotatePerformed;
+        _inputActions.Player.Rotate.canceled += OnRotateCanceled;
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)
@@ -54,6 +64,29 @@ public class InputService : IInputService
         AttackCanceled?.Invoke();
     }
 
+    private void OnRotatePerformed(InputAction.CallbackContext context)
+    {
+        CursorOrigin = new Vector2(Screen.width / 2f, Screen.height / 2f);
+
+        Vector2 cursorPos = context.ReadValue<Vector2>();
+        RotatePerformed?.Invoke(cursorPos);
+
+        Vector2 direction = cursorPos - CursorOrigin;
+        if (direction.sqrMagnitude > 0f)
+            direction.Normalize();
+        else
+            direction = Vector2.zero;
+
+        DirectionFromCursor?.Invoke(direction);
+    }
+
+    private void OnRotateCanceled(InputAction.CallbackContext context)
+    {
+        RotateCanceled?.Invoke(context.ReadValue<Vector2>());
+        DirectionFromCursor?.Invoke(Vector2.zero);
+    }
+
+
     public void EnableInput()
     {
         _inputActions.Player.Enable();
@@ -74,6 +107,11 @@ public class InputService : IInputService
 
         _inputActions.Player.Attack.performed -= OnAttackPerformed;
         _inputActions.Player.Attack.canceled -= OnAttackCanceled;
+
+        _inputActions.UI.ActivateAbility.performed -= OnAbilityUsed;
+
+        _inputActions.Player.Rotate.performed -= OnRotatePerformed;
+        _inputActions.Player.Rotate.canceled -= OnRotateCanceled;
 
         _inputActions.Dispose();
         _inputActions = null;

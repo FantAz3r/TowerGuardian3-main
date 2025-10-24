@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864116a1b449ef545916bc24a1bcfff1, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  _level: 1
+  _level: 2
   _dayDuration: 20
   _nightDuration: 15
-  _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
-  _nightLightColor: {r: 0, g: 0, b: 0, a: 1}
   _dayLightIntensity: 1
   _nightLightIntensity: 0.3
   _transitionDuration: 2
+  _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
+  _nightLightColor: {r: 0, g: 0, b: 0, a: 1}
+  _minSpawnDistance: 10
+  _maxSpawnDistance: 40
+  _nightSpawnDelay: 10
+  _daySpawnDelay: 20

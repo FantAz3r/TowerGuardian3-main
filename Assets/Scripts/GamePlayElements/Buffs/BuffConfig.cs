@@ -1,30 +1,35 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BuffConfig", menuName = "Configs/BuffConfig")]
-public class BuffConfig : ScriptableObject, ICardConfig
+public class BuffConfig : CardConfig
 {
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private string _name;
-    [SerializeField] private string _description;
-    [SerializeField, Range(0f, 1f)] private float _chanceToView;
     [SerializeField] private BuffType _buffType;
-    [SerializeField] private float _increaceValue;
 
-    public string Name => _name;
-    public string Description => _description;
-    public Sprite Icon => _icon;
-    public CardType CardType => CardType.Buff;
-    public BuffType Type => _buffType;
-    public float IncreaceValue => _increaceValue;
-    public float ChanceToView => _chanceToView;
+    [SerializeField] private float _baseIncreaseValue = 0.2f;
+    [SerializeField] private float _upgradeValuePerLevel = 0.1f;
 
-    public Dictionary<string, float> GetStats()
+    public BuffType BuffType => _buffType;
+    public float IncreaseValue => GetIncreaseValue(Level);
+
+    public float GetIncreaseValue(int level)
     {
-        Dictionary<string, float> stats = new Dictionary<string, float>();
-
-        stats.Add(_buffType.ToString(), _increaceValue);
-
-        return stats;
+        return _baseIncreaseValue + _upgradeValuePerLevel * (level - 1);
     }
+
+    public override List<CardStats> GetStats()
+    {
+        int level = Level;
+        int nextLevel = level + 1;
+
+        return new List<CardStats>
+        {
+            new CardStats("Increase Value", GetIncreaseValue(level), GetIncreaseValue(nextLevel))
+        };
+        
+    }
+
+    public override CardType GetCardType() => CardType.Buff;
 }
+

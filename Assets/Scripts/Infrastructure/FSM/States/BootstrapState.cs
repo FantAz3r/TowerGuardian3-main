@@ -30,5 +30,6 @@ public class BootstrapState : IState
         _services.Register<ILevelLoadingService>(new LevelLoadingService(_stateMachine));
         _services.Register<IInputService>(new InputService());
         _services.Register<ITimeService>(new TimeService(_coroutineRunner));
+        _services.Register<ISpawnerService>(new SpawnerService());
     }
 }

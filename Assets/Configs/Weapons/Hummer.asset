@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9aa76ca4497f9048ad0de75dc7ef601, type: 3}
   m_Name: Hummer
   m_EditorClassIdentifier: 
-  _prefab: {fileID: -8340058777579418164, guid: 82f1e40c0cf7c5048a41bfa78b10c9d9, type: 3}
-  _icon: {fileID: 21300000, guid: 591dea1556b90604e9bda91b1eef5c2e, type: 3}
-  _type: 4
+  _icon: {fileID: 21300000, guid: 319814a6df7965e4ba364c2b5ac02eeb, type: 3}
   _name: Hummer
-  _description: "\u0414\u043E\u043B\u0431\u0438\u0442 \u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
-  _damage: 10
-  _attackDelay: 5
-  _attackRange: 3
-  _multiplyToMainTarget: 1
-  _targetType: 3
+  _description: BadaBOOM
   _chanceToView: 0.5
+  _prefab: {fileID: -8340058777579418164, guid: 82f1e40c0cf7c5048a41bfa78b10c9d9, type: 3}
+  _type: 4
+  _targetType: 3
+  _controller: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
+  _baseDamage: 10
+  _baseAttackDelay: 5
+  _baseAttackRange: 2
+  _baseMultiply: 1
+  _damageUpgradePercent: 0.25
+  _attackDelayUpgradeFactor: -0.2
+  _attackRangeUpgradeValue: 0.2
+  _multiplyUpgradeValue: 0.1

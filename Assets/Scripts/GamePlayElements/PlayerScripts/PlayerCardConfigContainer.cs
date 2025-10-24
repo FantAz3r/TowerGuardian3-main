@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PlayerCardConfigContainer : MonoBehaviour
 {
-    [SerializeField] private int _maxAbilitiesCount = 4;
-    [SerializeField] private int _maxWeaponsCount = 3;
-    private List<ICardConfig> _selectedConfigs = new List<ICardConfig>();
+    private List<ICardConfig> _selectedConfigs = new();
     public IEnumerable<ICardConfig> SelectedCardConfigs => _selectedConfigs;
-    public bool FullAbilities => _maxAbilitiesCount <= 0;
 
     public event Action<BuffConfig> BuffAdded;
     public event Action<AbilityConfig> AbilityAdded;
     public event Action<WeaponConfig> WeaponAdded;
 
     public void Add(ICardConfig config)
-    {
-        _selectedConfigs.Add(config);
+    { 
+        if (_selectedConfigs.Contains(config))
+           return;
 
+        _selectedConfigs.Add(config);
+        SavePlayerCard(config);
         Define(config);
     }
 
@@ -30,14 +31,28 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
         if (config is AbilityConfig ability)
         {
-            _maxAbilitiesCount--;
             AbilityAdded?.Invoke(ability);
         }
 
         if(config is WeaponConfig weapon)
         {
-            _maxWeaponsCount--;
             WeaponAdded?.Invoke(weapon);
         }
+    }
+
+    public void SavePlayerCard(ICardConfig card)
+    {
+        if (YG2.saves.PlayerCards == null)
+        {
+            YG2.saves.PlayerCards = new List<string>();
+        }
+
+        YG2.saves.PlayerCards.Add(card.Name);
+        YG2.SaveProgress();
+    }
+
+    public void Remove(ICardConfig card)
+    {
+        YG2.saves.PlayerCards.Remove(card.Name);
     }
 }

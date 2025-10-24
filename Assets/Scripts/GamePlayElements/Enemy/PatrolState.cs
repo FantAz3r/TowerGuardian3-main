@@ -10,15 +10,15 @@ public class PatrolState : IEnemyState
     {
         _enemy = enemy;
 
-        Vector3 origin = enemy.transform.position;
+        Transform origin = enemy.transform;
         float edgeSize = 5f;  
 
         _patrolPoints = new Vector3[]
         {
-            origin,
-            origin + enemy.transform.right * edgeSize,
-            origin + enemy.transform.right * edgeSize + enemy.transform.forward * edgeSize,
-            origin + enemy.transform.forward * edgeSize
+            origin.position,
+            origin.position + enemy.transform.right * edgeSize,
+            origin.position + enemy.transform.right * edgeSize + enemy.transform.forward * edgeSize,
+            origin.position + enemy.transform.forward * edgeSize
         };
 
         _currentPointIndex = 0;
@@ -31,10 +31,10 @@ public class PatrolState : IEnemyState
 
     public void Update()
     {
-        float threshold = 0.2f;
+        float threshold = 1f;
         Vector3 targetPos = _patrolPoints[_currentPointIndex];
 
-        float distance = Vector3.SqrMagnitude(_enemy.transform.position - targetPos);
+        float distance = (_enemy.transform.position - targetPos).sqrMagnitude;
 
         if (distance < threshold * threshold)
         {

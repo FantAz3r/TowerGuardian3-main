@@ -1,19 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChaseState : IEnemyState
 {
+    private float _updateTime = 0.1f; 
     private EnemyStateMachine _enemy;
     private Player _player;
     private Coroutine _attackCoroutine;
     private MonoBehaviour _coroutineRunner;
     private WaitForSeconds _wait;
+    private WaitForSeconds _sleep;
+    private IDemageable _playerHealth;
 
+
+    public event Action Attacked;
     public ChaseState(Player player, MonoBehaviour coroutineRunner)
     {
         _player = player;
         _coroutineRunner = coroutineRunner;
+        _playerHealth = _player.GetComponent<IDemageable>();
     }
 
     public void Enter(EnemyStateMachine enemy)
@@ -21,6 +29,7 @@ public class ChaseState : IEnemyState
         _enemy = enemy;
         _attackCoroutine = _coroutineRunner.StartCoroutine(AttackRoutine());
         _wait = new WaitForSeconds(_enemy.Config.AttackCooldown);
+        _sleep = new WaitForSeconds(_updateTime);
     }
 
     public void Exit()
@@ -46,24 +55,40 @@ public class ChaseState : IEnemyState
         _enemy.Rotator.SetDirection(directionFlat);
     }
 
+    public void AttackAction()
+    {
+        Attacked?.Invoke();
+    }
+
+    public void ApplyDamage()
+    {
+        IEnumerable<IDemageable> targets = _enemy.AttackZone.GetTargets(_enemy.Config.AttackRange);
+
+        foreach (IDemageable target in targets)
+        {
+            if (target == _playerHealth)
+            {
+                target.TakeDamage(_enemy.Config.Damage);
+                break;
+            }
+        }
+    }
+
     private IEnumerator AttackRoutine()
     {
-        IDemageable playerHealth = _player.GetComponent<IDemageable>();
-
         while (_enemy.Target != null)
         {
             IEnumerable<IDemageable> targets = _enemy.AttackZone.GetTargets(_enemy.Config.AttackRange);
 
-            foreach (IDemageable target in targets)
+            if(targets.Contains(_playerHealth))
             {
-                if (target == playerHealth)
-                {
-                    target.TakeDamage(_enemy.Config.Damage);
-                    break;
-                }
+                AttackAction();
+                yield return _wait;
             }
-
-            yield return _wait;
+            else
+            {
+                yield return _sleep;
+            }
         }
     }
 }

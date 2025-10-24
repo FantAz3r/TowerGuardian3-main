@@ -1,27 +1,36 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class CardSelectionMenu : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _text;
+    [SerializeField] private Button _showButton;
+    [SerializeField] private RectTransform _panel;
+
     private List<CardButton> _cardsButtons;
     private PlayerExperience _playerExperience;
     private ITimeService _timeService;
     private bool _isMenuOpen = false;
     private CardSelector _selector;
+    private int _selectCount;
 
-    public event Action<int, ICardConfig> CardLoaded;
+    private void Start()
+    {
+        _panel.gameObject.SetActive(false);
+    }
 
-    public void Init(ITimeService timeService, PlayerExperience playerExperience, CardSelector selector,List<CardButton> cardsButtons)
+    public void Init(ITimeService timeService, PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons)
     {
         _timeService = timeService;
         _playerExperience = playerExperience;
         _selector = selector;
         _cardsButtons = cardsButtons;
 
-        _playerExperience.OnLevelUp += Open;
+        _playerExperience.OnLevelUp += AddSelect;
 
         foreach (var button in _cardsButtons)
         {
@@ -31,14 +40,9 @@ public class CardSelectionMenu : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void OnDestroy()
     {
-        _playerExperience.OnLevelUp -= Open;
+        _playerExperience.OnLevelUp -= AddSelect;
 
         foreach (var button in _cardsButtons)
         {
@@ -52,24 +56,49 @@ public class CardSelectionMenu : MonoBehaviour
 
         if (cards.Count > 0)
         {
+            if (_selectCount < 0)
+                return;
+
             SetMenuOpen(true);
-            _timeService.Pause();
+            YG2.PauseGameNoEditEventSystem(true);
             ShowCards(cards);
         }
     }
 
     public void Close()
     {
+        _selectCount--;
+        _text.text = _selectCount.ToString();
+        ShowButton();
+
         SetMenuOpen(false);
-        _timeService.Resume();
+        YG2.PauseGameNoEditEventSystem(false);
+    }
+
+    private void AddSelect(int level)
+    {
+        _selectCount++;
+        _showButton.gameObject.SetActive(true);
+        _text.text = _selectCount.ToString();
     }
 
     private void ShowCards(List<ICardConfig> cards)
     {
-        for (int i = 0; i < cards.Count; i++)
+        int maxShowedCards = 3;
+
+        for (int i = 0; i < maxShowedCards; i++)
         {
-            _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i]);
-            _cardsButtons[i].SetCard(cards[i]);
+            _cardsButtons[i].gameObject.SetActive(true);
+
+            if (i < cards.Count)
+            {
+                _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i]);
+                _cardsButtons[i].SetCard(cards[i]);
+            }
+            else
+            {
+                _cardsButtons[i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -79,6 +108,11 @@ public class CardSelectionMenu : MonoBehaviour
             return;
 
         _isMenuOpen = isOpen;
-        gameObject.SetActive(isOpen);
+        _panel.gameObject.SetActive(isOpen);
+    }
+
+    private void ShowButton()
+    {
+        _showButton.gameObject.SetActive(_selectCount > 0);
     }
 }

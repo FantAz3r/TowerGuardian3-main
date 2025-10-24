@@ -3,7 +3,7 @@ using System;
 
 public class AllServices
 {
-    private Dictionary<Type, IService> _services = new Dictionary<Type, IService>();
+    private Dictionary<System.Type, IService> _services = new Dictionary<System.Type, IService>();
 
     public void Register<TService>(TService service) where TService : IService
     {

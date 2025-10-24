@@ -44,13 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1e16b8fb6d5554580a318417086f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponConfigs:
-  - {fileID: 11400000, guid: 285d7d35fe467ee418dfb3ae30c1a646, type: 2}
-  - {fileID: 11400000, guid: fd9282ad09f502e4fa0d45a264de29f3, type: 2}
-  - {fileID: 11400000, guid: 7fcec575bdfc7a547a1a2eacc87dc40f, type: 2}
-  _abilityConfigs:
-  - {fileID: 11400000, guid: 39054eaff696627499ce53ae68b7a827, type: 2}
-  - {fileID: 11400000, guid: fe92c75a894b83a418c039c5f6720000, type: 2}
-  _buffConfigs:
-  - {fileID: 11400000, guid: 79626536a13a074459b2792d22839084, type: 2}
-  - {fileID: 11400000, guid: 82a9466367c820c4790290d3f5d8579b, type: 2}
+  _weaponConfigs: []
+  _abilityConfigs: []
+  _buffConfigs: []

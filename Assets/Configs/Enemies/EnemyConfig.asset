@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _rotationSpeed: 5
-  _maxHealth: 5
+  _maxHealth: 100
   _detectionRadius: 10
-  _damage: 0
+  _damage: 1
   _attackRange: 1.5
   _attackAriaCenter: {x: 0, y: 0, z: 1.26}
   _attackCooldown: 2

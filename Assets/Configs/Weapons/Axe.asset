@@ -12,14 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9aa76ca4497f9048ad0de75dc7ef601, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  _prefab: {fileID: -8004765440893161140, guid: 6cd1ac9652a50da4485a86492f47c63d, type: 3}
-  _icon: {fileID: 21300000, guid: 7d0610b5012d987408b0807d17af3ed2, type: 3}
-  _type: 2
+  _icon: {fileID: 21300000, guid: 14f1f8f134fac2247abc4ae6a752125b, type: 3}
   _name: Axe
   _description: More damage to wood
-  _damage: 2
-  _attackDelay: 1
-  _attackRange: 2
-  _multiplyToMainTarget: 2
-  _targetType: 2
   _chanceToView: 0.5
+  _costs:
+  - ResourceType: 1
+    Value: 5
+    Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
+  - ResourceType: 0
+    Value: 3
+    Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  _prefab: {fileID: -8004765440893161140, guid: 6cd1ac9652a50da4485a86492f47c63d, type: 3}
+  _type: 2
+  _targetType: 2
+  _controller: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
+  _baseDamage: 2
+  _baseAttackDelay: 2
+  _baseAttackRange: 2
+  _baseMultiply: 3
+  _damageUpgradePercent: 0.25
+  _attackDelayUpgradeFactor: -0.05
+  _attackRangeUpgradeValue: 0.2
+  _multiplyUpgradeValue: 0.1

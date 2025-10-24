@@ -46,6 +46,6 @@ public class ResourceCollector : MonoBehaviour
 
         Collected?.Invoke(resource, resource.Amount);
         _activeResources.Remove(resource);
-        Destroy(resource.gameObject);
+        resource.gameObject.SetActive(false);
     }
 }

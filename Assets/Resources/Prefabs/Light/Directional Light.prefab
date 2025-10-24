@@ -41,8 +41,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8621345136641223069}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -106,5 +107,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7901d2fc4c4fde842a77f854e1635363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelConfigs:
-  - {fileID: 11400000, guid: 0df8dff75f8a2e942b94959ccc726f17, type: 2}
+  _levelData: {fileID: 11400000, guid: 6a968657bc6218645994d461857b4e8f, type: 2}

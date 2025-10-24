@@ -1,15 +1,13 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(DamageViewer))]
-
-public class Health : MonoBehaviour, IDemageable
+public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuffble
 {
     [SerializeField] private ScriptableObject _configObject;
-    [SerializeField] private float _maxHealth = 1;
+    [SerializeField] private float _maxHealth;
     [SerializeField] private float _minValue = 3f;
     [SerializeField] private float _maxValue = 15f;
-    [SerializeField] private TargetType _targetType;
+    [SerializeField] private EntityType _type;
 
     private IDemageableConfig _config;
     private float _incomingDamage;
@@ -23,7 +21,8 @@ public class Health : MonoBehaviour, IDemageable
     public event Action<float> HealthLost;
     public event Action<Health> Died;
 
-    public TargetType GetTargetType() => _targetType;
+    public Transform GetTransform() => transform;
+    public EntityType GetHealthType() => _type;
 
     private void Awake()
     {
@@ -37,6 +36,11 @@ public class Health : MonoBehaviour, IDemageable
             _maxHealth = _config.MaxHealth;
         }
 
+        _currentValue = _maxHealth;
+    }
+
+    public void OnEnable()
+    {
         _currentValue = _maxHealth;
     }
 

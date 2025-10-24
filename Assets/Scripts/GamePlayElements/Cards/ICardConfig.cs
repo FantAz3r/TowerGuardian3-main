@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-public interface ICardConfig
+public interface ICardConfig 
 {
-    CardType CardType { get; }
     float ChanceToView { get; }
     string Name { get; }
     string Description { get; }
     Sprite Icon { get; }
+    int Level { get; }
 
-    Dictionary<string, float> GetStats();
+    CardType GetCardType();
+    List<CardStats> GetStats();
+    CardSaveData CreateSaveData();
+    void Upgrade();
+    void InitFromData(CardSaveData data);
 }

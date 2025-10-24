@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private PlayerConfig _config;
 
     private ResourceCollector _collector;
-    private Dictionary<ResourceType, int> _resources = new Dictionary<ResourceType, int>();
+    private Dictionary<ResourceType, int> _resources = new();
     private int _currentAmount = 0;
     private int _startAmount = 0;
 
@@ -18,9 +19,17 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         _collector = GetComponentInChildren<ResourceCollector>();
+
         _resources.Add(ResourceType.Coin, _startAmount);
         _resources.Add(ResourceType.Wood, _startAmount);
         _resources.Add(ResourceType.Stone, _startAmount);
+
+        LoadResources();
+    }
+
+    private void Start()
+    {
+        ViewActions();
     }
 
     private void OnEnable()
@@ -49,13 +58,14 @@ public class Inventory : MonoBehaviour
 
         _currentAmount += amountToAdd;
         ViewActions();
+        SaveResources();
     }
 
-    public bool IsEnoughResource(Dictionary<ResourceType, int> cost)
+    public bool IsEnoughResource(List<CostInfo> costs)
     {
-        foreach (var pair in cost)
+        foreach (var cost in costs)
         {
-            if (_resources.ContainsKey(pair.Key) == false || _resources[pair.Key] < pair.Value)
+            if (_resources.ContainsKey(cost.ResourceType) == false || _resources[cost.ResourceType] < cost.Value)
             {
                 return false;
             }
@@ -64,15 +74,16 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public void SpendResource(Dictionary<ResourceType, int> cost)
+    public void SpendResource(List<CostInfo> costs)
     {
-        foreach (var pair in cost)
+        foreach (var cost in costs)
         {
-            _resources[pair.Key] -= pair.Value;
-            _currentAmount -= pair.Value;
+            _resources[cost.ResourceType] -= cost.Value;
+            _currentAmount -= cost.Value;
         }
 
         ViewActions();
+        SaveResources();
     }
 
     public bool IsOverflow()
@@ -85,5 +96,32 @@ public class Inventory : MonoBehaviour
         ResourceAdded?.Invoke();
         ResourceChanged?.Invoke(_resources);
         TotalAmountChanged?.Invoke(_currentAmount);
+    }
+
+
+    private void SaveResources()
+    {
+        _resources.TryGetValue(ResourceType.Coin, out int coins);
+        _resources.TryGetValue(ResourceType.Wood, out int wood);
+        _resources.TryGetValue(ResourceType.Stone, out int stones);
+
+        YG2.saves.Coins = Mathf.Max(0, coins);
+        YG2.saves.Wood = Mathf.Max(0, wood);
+        YG2.saves.Stones = Mathf.Max(0, stones);
+        YG2.SaveProgress();
+    }
+
+    private void LoadResources()
+    {
+        if (YG2.saves == null)
+            return;
+
+        _resources[ResourceType.Coin] = Mathf.Max(0, YG2.saves.Coins);
+        _resources[ResourceType.Wood] = Mathf.Max(0, YG2.saves.Wood);
+        _resources[ResourceType.Stone] = Mathf.Max(0, YG2.saves.Stones);
+
+        _currentAmount = 0;
+        foreach (var value in _resources.Values)
+            _currentAmount += Mathf.Max(0, value);
     }
 }

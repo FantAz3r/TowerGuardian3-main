@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0caf5318ea84a594dbb68e81243f64f5, type: 3}
   m_Name: AxeThow
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 21c98a54944d0304e8fc831ff3d76b17, type: 3}
+  _icon: {fileID: 21300000, guid: ba7b693614539e0458a9e829b8af37ef, type: 3}
   _name: Axe Throw
   _description: 
   _chanceToView: 0.5
   _abilityType: 0
-  _cooldown: 10
-  _flightDistance: 15
+  _baseCooldown: 10
   _flightDuration: 1
-  _ellipseHeight: 2
-  _damage: 7
+  _baseFlightDistance: 10
+  _baseDamage: 7
+  _cooldownPerLevel: -1
+  _flightDistancePerLevel: 0.5
+  _damagePerLevel: 1

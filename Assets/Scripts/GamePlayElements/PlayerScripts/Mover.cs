@@ -8,9 +8,9 @@ public class Mover : MonoBehaviour
     [SerializeField] private ScriptableObject _configObject;
     private IMoveConfig _config;
     private float _moveSpeed;
-    public Vector2 MoveDirection { get; private set; }
+    public Vector2 Direction { get; private set; }
 
-    public void SetDirection(Vector2 direction) => MoveDirection = direction;
+    public void SetDirection(Vector2 direction) => Direction = direction;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class Mover : MonoBehaviour
 
     private void Update()
     {
-        Move(MoveDirection);
+        Move(Direction);
     }
 
     public void Move(Vector2 direction)

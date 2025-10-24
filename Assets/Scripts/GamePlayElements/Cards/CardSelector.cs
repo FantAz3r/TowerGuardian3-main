@@ -5,83 +5,82 @@ using UnityEngine;
 public class CardSelector
 {
     private AllCardConfigs _allConfigs;
-    private int _cardsCount;
+    private int _cardsPerSelect;
     private PlayerCardConfigContainer _playerCards;
+    private int _maxLevel = 5;
+
 
     public CardSelector(AllCardConfigs configs, PlayerCardConfigContainer playerCards, int cardsCount = 3)
     {
         _allConfigs = configs;
         _playerCards = playerCards;
-        _cardsCount = cardsCount;
+        _cardsPerSelect = cardsCount;
     }
 
-    public IEnumerable<ICardConfig> GetCards()
+    public IEnumerable<ICardConfig>GetCards()
     {
-        List<ICardConfig> selectedCards = new List<ICardConfig>();
-        int attempts = 0;
-        int maxAttempts = 100;
+        var baseFiltered = FilterCards(_allConfigs.Configs.ToList());
 
-        List<ICardConfig> baseFiltered = FilterCards(_allConfigs.Configs.ToList());
+        if (baseFiltered.Count == 0)
+            return new List<ICardConfig>();
 
-        while (selectedCards.Count < GetRemainingCardsCount() && attempts < maxAttempts)
+        int remainingCards = Mathf.Min(_cardsPerSelect, baseFiltered.Count);
+
+        List<ICardConfig> selectedCards = new List<ICardConfig>(remainingCards);
+        List<ICardConfig> available = new List<ICardConfig>(baseFiltered);
+
+        while (selectedCards.Count < remainingCards && available.Count > 0)
         {
-            attempts++;
-
-            List<ICardConfig> available = baseFiltered.Where(card => selectedCards.Contains(card) == false).ToList();
-
-            if (available.Count == 0)
+            var chosen = SelectCardByChance(available);
+            if (chosen == null)
                 break;
 
-            ICardConfig chosenCard = SelectCardByChance(available);
-
-            if (chosenCard != null && selectedCards.Contains(chosenCard) == false)
+            if(selectedCards.Contains(chosen) == false)
             {
-                selectedCards.Add(chosenCard);
+                selectedCards.Add(chosen);
+                available.Remove(chosen);
             }
         }
 
         return selectedCards;
     }
 
-    public int GetRemainingCardsCount()
+    private ICardConfig SelectCardByChance(IList<ICardConfig> list)
     {
-        int selectedCount = _playerCards.SelectedCardConfigs.Count();
-        int totalCards = _allConfigs.Configs.Count();
-        int cardsToView = Mathf.Min(_cardsCount, totalCards - selectedCount);
-        return cardsToView;
-    }
-
-    private ICardConfig SelectCardByChance(IEnumerable<ICardConfig> allCards)
-    {
-        var list = allCards.ToList();
-        if (list.Count == 0)
+        if (list == null || list.Count == 0)
             return null;
 
-        float totalChance = list.Sum(card => card.ChanceToView);
+        float totalChance = 0f;
 
-        if (totalChance <= 0f)
-            return list[Random.Range(0, list.Count)];
-
-        float rand = Random.value * totalChance;
-        float cumulative = 0f;
-
-        foreach (var card in list)
+        for (int i = 0; i < list.Count; i++)
         {
-            cumulative += card.ChanceToView;
-            if (rand <= cumulative)
-                return card;
+            var c = list[i];
+            float w = c.ChanceToView;
+            if (w < 0f) w = 0f;
+            totalChance += w;
         }
 
-        return null;
+        if (totalChance <= 0f)
+        {
+            int idx = Random.Range(0, list.Count);
+            return list[idx];
+        }
+
+        float rand = Random.Range(0f, totalChance);
+        float cumulative = 0f;
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            cumulative += Mathf.Max(0f, list[i].ChanceToView);
+            if (rand < cumulative)
+                return list[i];
+        }
+
+        return list[list.Count - 1];
     }
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
-       if (_playerCards.FullAbilities)
-       {
-           allCards.RemoveAll(card => card.CardType == CardType.Ability);
-       }
-
-        return allCards.FindAll(card => _playerCards.SelectedCardConfigs.Contains(card) == false);
+        return allCards.FindAll(card => card.Level < _maxLevel);
     }
 }

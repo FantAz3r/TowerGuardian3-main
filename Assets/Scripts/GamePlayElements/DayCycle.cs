@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DayCycle : MonoBehaviour
 {
-    [SerializeField] private List<LevelConfig> _levelConfigs;
+    [SerializeField] private LevelData _levelData;
 
     private float _dayDuration;
     private float _nightDuration;
@@ -24,18 +23,18 @@ public class DayCycle : MonoBehaviour
 
     public void Init(LevelID level)
     {
-        foreach (var levelConfig in _levelConfigs)
+        foreach (var levelInfo in _levelData.LevelInfos)
         {
-            if (levelConfig.Level == level)
+            if (levelInfo.LevelID == level)
             {
-                _dayDuration = levelConfig.DayDuration;
-                _nightDuration = levelConfig.NightDuration;
-                _dayLightColor = levelConfig.DayLightColor;
-                _nightLightColor = levelConfig.NightLightColor;
-                _dayLightIntensity = levelConfig.DayLightIntensity;
-                _nightLightIntensity = levelConfig.NightLightIntensity;
-                _transitionDuration = levelConfig.TransitionDuration;
-                _timeRemaining = levelConfig.DayDuration;
+                _dayDuration = levelInfo.LevelConfig.DayDuration;
+                _nightDuration = levelInfo.LevelConfig.NightDuration;
+                _dayLightColor = levelInfo.LevelConfig.DayLightColor;
+                _nightLightColor = levelInfo.LevelConfig.NightLightColor;
+                _dayLightIntensity = levelInfo.LevelConfig.DayLightIntensity;
+                _nightLightIntensity = levelInfo.LevelConfig.NightLightIntensity;
+                _transitionDuration = levelInfo.LevelConfig.TransitionDuration;
+                _timeRemaining = levelInfo.LevelConfig.DayDuration;
                 _directionalLight = GetComponent<Light>();
             }
         }

@@ -51,15 +51,17 @@ public class CardButton : MonoBehaviour
 
     public void OnClick()
     {
+        _card.Upgrade();
         _cards.Get(_card);
         Selected?.Invoke();
         ActivateCard(_card);
+        _cards.SaveCards();
         Hide();
     }
 
     private void ActivateCard(ICardConfig card)
     {
-        if (_factories != null && _factories.TryGetValue(card.CardType, out ICardFactory factory))
+        if (_factories != null && _factories.TryGetValue(card.GetCardType(), out ICardFactory factory))
         {
             factory.ActivateCard(card);
         }

@@ -36,7 +36,7 @@ public class BurstAbility : Ability, ICooldownAbility
     {
         for (int i = 0; i < _config.HitCount; i++)
         {
-            _attacker.GetWeapon.ApplyDamage();
+            _attacker.AttackAction(_config.AttackDelay);
             yield return _sleep;
         }
     }

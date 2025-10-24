@@ -6,56 +6,89 @@ public class ObjectPool<T> where T : MonoBehaviour
 {
     private T _prefab;
     private List<T> _objects;
-    private Stack<T> _availableObjects;
+    private Transform _container;
+    private bool _autoExpand = true;
 
-    public event Action ObjectInstatiated;
-    public event Action ObjectActivated;
-    public event Action ObjectDeactivated;
-
-    public ObjectPool(T prefab)
+    public ObjectPool(T prefab, int count, bool autoExpand)
     {
         _prefab = prefab;
+        _container = null;
+        _autoExpand = autoExpand;
+
+        CreatePool(count);
+    }
+
+    public ObjectPool(T prefab, int count, bool autoExpand, Transform container)
+    {
+        _prefab = prefab;
+        _container = container;
+        _autoExpand = autoExpand;
+
+        CreatePool(count);
+    }
+
+    private void CreatePool(int count)
+    {
         _objects = new List<T>();
-        _availableObjects = new Stack<T>();
+
+        for (int i = 0; i < count; i++)
+        {
+            CreateObject();
+        }
+    }
+
+    private T CreateObject(bool isActiveByDefault = false)
+    {
+        T createdObject = UnityEngine.Object.Instantiate(_prefab, _container);
+        createdObject.gameObject.SetActive(isActiveByDefault);
+        _objects.Add(createdObject);
+
+        return createdObject;
+    }
+
+    public bool HasFreeElement(out T element)
+    {
+        foreach (var mono in _objects)
+        {
+            if (mono.gameObject.activeInHierarchy == false)
+            {
+                element = mono;
+                return true;
+            }
+        }
+
+        element = null;
+        return false;
     }
 
     public T Get()
     {
-        if (_availableObjects.Count > 0)
+        if (HasFreeElement(out T element))
         {
-            T obj = _availableObjects.Pop();
-            obj.gameObject.SetActive(true);
-            ObjectActivated?.Invoke();
-            return obj;
+            element.gameObject.SetActive(true);
+            return element;
         }
-        else
+
+        if (_autoExpand)
+            return CreateObject(true);
+
+        throw new Exception($"No free elenent of type {typeof(T)}");
+    }
+
+    public void Clear()
+    {
+        foreach (var mono in _objects)
         {
-            T @object = Create();
-            return @object;
+            if (mono.gameObject.activeInHierarchy)
+            {
+                mono.gameObject.SetActive(false);
+            }
         }
     }
 
-    public void Release(T obj)
+    public void DestroyPool()
     {
-        obj.transform.position = Vector3.zero;
-        obj.transform.rotation = Quaternion.identity;
+        _objects.Clear();
 
-        if (obj.TryGetComponent(out Rigidbody rigidbody))
-        {
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
-        }
-
-        obj.gameObject.SetActive(false);
-        ObjectDeactivated?.Invoke();
-        _availableObjects.Push(obj);
-    }
-
-    private T Create()
-    {
-        ObjectInstatiated?.Invoke();
-        T obj = GameObject.Instantiate(_prefab);
-        _objects.Add(obj);
-        return obj;
     }
 }

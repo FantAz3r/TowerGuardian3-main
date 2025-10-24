@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1057524388699261426}
   - component: {fileID: 6891242096241687740}
   - component: {fileID: -8160601295579446120}
-  - component: {fileID: -8752735695303232736}
   - component: {fileID: -8017044481535669230}
   m_Layer: 0
   m_Name: HardRock_15
@@ -62,8 +61,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -123,27 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 0}
+  _configObject: {fileID: 0}
   _maxHealth: 2
-  _currentHealth: 0
-  _targetType: 1
-  _regeneration: 0
---- !u!114 &-8752735695303232736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562160437629610023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01daeb7e39ab7634b95961377b29afd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _resoursePrefab: {fileID: 1607613675825731053, guid: dee0601b8b1bac346ab72f3479d757b4, type: 3}
-  ejectForceMin: 2
-  ejectForceMax: 5
-  ejectRadius: 0.5
+  _minValue: 3
+  _maxValue: 15
+  _type: 1
 --- !u!114 &-8017044481535669230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,4 +137,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71924de8a2000ba4f901ad5488fd2a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceAmount: 2

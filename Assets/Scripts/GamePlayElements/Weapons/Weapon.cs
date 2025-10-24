@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour, IWeapon
@@ -7,12 +8,11 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] private WeaponConfig _config;
 
     private AttackZone _attackZone;
-    private WaitForSeconds _sleep;
     private float _damage;
     private float _range;
-    private bool _canAttack = true;
+    private float _multiply;
 
-    public WeaponType WeaponType => _config.WeaponType;
+    public event Action<int, Vector3, EntityType> HitedTarget;
     public WeaponConfig Config => _config;
 
     public void Init(AttackZone attackZone)
@@ -20,21 +20,20 @@ public class Weapon : MonoBehaviour, IWeapon
         _attackZone = attackZone;
     }
 
-    private void Awake()
+    private void OnEnable()
     {
-        _sleep = new WaitForSeconds(_config.AttackDelay);
-        _damage = _config.Damage;
-        _range = _config.AttackRange;
+        UpdateLevel();
     }
 
-    public void Attack()
+    public void SetStats(float damage, float range)
     {
-        if (_canAttack == false)
-            return;
+        _damage = damage;
+        _range = range;
+    }
 
-        _canAttack = false;
-        ApplyDamage();
-        StartCoroutine(Delay());
+    public void Equip()
+    {
+        gameObject.SetActive(true);
     }
 
     public void TakeOff()
@@ -42,15 +41,9 @@ public class Weapon : MonoBehaviour, IWeapon
         gameObject.SetActive(false);
     }
 
-    private IEnumerator Delay()
+    public void Attack()
     {
-        yield return _sleep;
-        _canAttack = true;
-    }
-
-    public void ApplyDamage()
-    {
-        IEnumerable<IDemageable> targets = _attackZone.GetTargets(_range);
+        IEnumerable<Health> targets = _attackZone.GetTargets(_range);
 
         foreach (var target in targets)
         {
@@ -59,12 +52,30 @@ public class Weapon : MonoBehaviour, IWeapon
 
             float damageToDeal = _damage;
 
-            if (target.GetTargetType() == _config.TargetType)
+            if (target.GetHealthType() == _config.TargetType)
             {
-                damageToDeal *= _config.Multiply;
+                damageToDeal *= _multiply;
             }
 
+            HitedTarget?.Invoke(Mathf.RoundToInt(Mathf.Min(damageToDeal, target.CurrentHealth)), target.transform.position, target.GetHealthType());
             target.TakeDamage(damageToDeal);
         }
+    }
+
+    public bool HasTargets()
+    {
+        IEnumerable<Health> targets = _attackZone.GetTargets(_range);
+
+        if (targets.Count() == 0)
+            return false;
+
+        return targets.Count() > 0;
+    }
+
+    public void UpdateLevel()
+    {
+        _damage = _config.GetDamage(_config.Level);
+        _range = _config.GetAttackRange(_config.Level);
+        _multiply = _config.GetMultiply(_config.Level);
     }
 }

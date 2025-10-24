@@ -1,45 +1,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponConfig", menuName = "Configs/WeaponConfig")]
-public class WeaponConfig : ScriptableObject , ICardConfig
+public class WeaponConfig : CardConfig
 {
     [SerializeField] private Weapon _prefab;
-    [SerializeField] private Sprite _icon;
     [SerializeField] private WeaponType _type;
-    [SerializeField] private string _name;
-    [SerializeField] private string _description;
-    [SerializeField] private float _damage = 10f;
-    [SerializeField] private float _attackDelay = 1f;
-    [SerializeField] private float _attackRange = 2f;
-    [SerializeField] private float _multiplyToMainTarget = 2;
-    [SerializeField] private TargetType _targetType;
-    [SerializeField, Range(0f, 1f)] private float _chanceToView;
+    [SerializeField] private EntityType _targetType;
+    [SerializeField] private RuntimeAnimatorController _controller;
+
+    [SerializeField] private float _baseDamage = 10f;
+    [SerializeField] private float _baseAttackDelay = 1f;
+    [SerializeField] private float _baseAttackRange = 2f;
+    [SerializeField] private float _baseMultiply = 2f;
+
+    [SerializeField] private float _damageUpgradePercent = 0.25f;        
+    [SerializeField] private float _attackDelayUpgradeFactor = -0.05f;   
+    [SerializeField] private float _attackRangeUpgradeValue = 0.2f;      
+    [SerializeField] private float _multiplyUpgradeValue = 0.1f;         
 
     public Weapon Prefab => _prefab;
-    public Sprite Icon => _icon;
-    public string Name => _name;
-    public string Description => _description;
-    public float Damage => _damage;
-    public float AttackDelay => _attackDelay;
-    public float AttackRange => _attackRange;
-    public float Multiply => _multiplyToMainTarget;
-    public TargetType TargetType => _targetType;
-
+    public EntityType TargetType => _targetType;
     public WeaponType WeaponType => _type;
+    public RuntimeAnimatorController Controller => _controller;
+    public float Damage => GetDamage(Level);
+    public float AttackDelay => GetAttackDelay(Level);
+    public float AttackRange => GetAttackRange(Level);
+    public float Multiply => GetMultiply(Level);
 
-    public CardType CardType => CardType.WeaponSetter;
+    public override CardType GetCardType() => CardType.WeaponSetter;
 
-    public float ChanceToView => _chanceToView;
-
-    public Dictionary<string, float> GetStats()
+    public float GetDamage(int level)
     {
-        Dictionary<string, float> stats = new Dictionary<string, float>();
+        return _baseDamage * Mathf.Pow(1 + _damageUpgradePercent, level - 1);
+    }
 
-        stats.Add("Damage", _damage);
-        stats.Add("Attack Delay", _attackDelay);
-        stats.Add("Attack Range", _attackRange);
+    public float GetAttackDelay(int level)
+    {
+        return Mathf.Max(0.1f, _baseAttackDelay * Mathf.Pow(1 + _attackDelayUpgradeFactor, level - 1));
+    }
 
-        return stats;
+    public float GetAttackRange(int level)
+    {
+        return _baseAttackRange + _attackRangeUpgradeValue * (level - 1);
+    }
+
+    public float GetMultiply(int level)
+    {
+        return _baseMultiply + _multiplyUpgradeValue * (level - 1);
+    }
+
+    public override List<CardStats> GetStats()
+    {
+        int level = Level;
+        int nextLevel = level + 1;
+
+        return new List<CardStats>
+        {
+            new CardStats("Damage", GetDamage(level), GetDamage(nextLevel)),
+            new CardStats("Attack Delay", GetAttackDelay(level), GetAttackDelay(nextLevel)),
+            new CardStats("Attack Range", GetAttackRange(level), GetAttackRange(nextLevel)),
+        };
     }
 }

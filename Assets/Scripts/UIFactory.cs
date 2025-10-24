@@ -5,7 +5,9 @@ public class UIFactory
     private Transform _uiRoot;
     private Transform _menuPanel;
     private Transform _settingsPanel;
+
     private IStateSwitchService _stateSwitchService;
+
     public UIFactory(IStateSwitchService stateSwitchService)
     {
         _stateSwitchService = stateSwitchService;

@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d9cb61f0face94db68886632ccdacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelToLoad: 1
+  _levelToLoad: 2
 --- !u!1 &1456915644866523090
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,15 +202,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5430189cb8e7fbb45b7a19212382da9b, type: 2}
+  m_sharedMaterial: {fileID: -2622483566834651110, guid: 5430189cb8e7fbb45b7a19212382da9b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4280558628
+  m_fontColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

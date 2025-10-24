@@ -6,33 +6,37 @@ public class Rotator : MonoBehaviour
     [SerializeField] private ScriptableObject _configObject;
     private IMoveConfig _config;
 
-    public Vector2 MoveDirection { get; private set; }
+    public Vector2 CurrentDirection { get; private set; }
 
-    public void SetDirection(Vector2 direction) => MoveDirection = direction;
+    public void SetDirection(Vector2 direction) => CurrentDirection = direction;
+
 
     private void Awake()
     {
         _config = _configObject as IMoveConfig;
+
         if (_config == null)
-            throw new ArgumentNullException();
+            throw new ArgumentNullException(nameof(_config));
     }
 
     private void Update()
     {
-        Rotate(MoveDirection);
+        Rotate();
     }
 
-    public void Rotate(Vector2 direction)
+    private void Rotate()
     {
+        Vector3 direction = new Vector3(CurrentDirection.x, 0f, CurrentDirection.y);
 
-        if (direction.sqrMagnitude < 0.001f)
-        {
-            direction = Vector2.zero;
+        if (direction.sqrMagnitude < 0.0001f)
             return;
-        }
 
-        Vector3 targetDirection3D = new Vector3(direction.x, 0f, direction.y).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection3D);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _config.RotationSpeed * Time.deltaTime);
+        direction.Normalize();
+
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float currentAngle = transform.eulerAngles.y;
+        float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, _config.RotationSpeed);
+
+        transform.rotation = Quaternion.Euler(0f, newAngle, 0f);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     private Mover _mover;
-    private Rotator _rotator; 
+    private Rotator _rotator;
     private IInputService _inputService;
 
     public void Init(IInputService inputService)
@@ -12,7 +12,8 @@ public class PlayerMover : MonoBehaviour
         _inputService = inputService;
 
         _inputService.MovePerformed += OnMove;
-        _inputService.MoveCanceled += OnMoveCanseled;
+        _inputService.MoveCanceled += OnMoveCanceled;
+        _inputService.DirectionFromCursor += OnRotate;
     }
 
     private void Awake()
@@ -23,19 +24,27 @@ public class PlayerMover : MonoBehaviour
 
     private void OnDestroy()
     {
-        _inputService.MovePerformed -= OnMove;
-        _inputService.MoveCanceled -= OnMoveCanseled;
+        if (_inputService != null)
+        {
+            _inputService.MovePerformed -= OnMove;
+            _inputService.MoveCanceled -= OnMoveCanceled;
+
+            _inputService.DirectionFromCursor -= OnRotate;
+        }
     }
 
     private void OnMove(Vector2 direction)
     {
         _mover.SetDirection(direction);
-        _rotator.SetDirection(direction);
     }
 
-    private void OnMoveCanseled()
+    private void OnMoveCanceled()
     {
         _mover.SetDirection(Vector2.zero);
-        _rotator.SetDirection(Vector2.zero);
+    }
+
+    private void OnRotate(Vector2 direction)
+    {
+        _rotator.SetDirection(direction);
     }
 }

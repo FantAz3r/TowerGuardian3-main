@@ -43,9 +43,9 @@ public class AllBuffs : MonoBehaviour
     {
         foreach (IBuff item in _buffs)
         {
-            if (buff.Type == item.Type)
+            if (buff.BuffType == item.Type)
             {
-                item.ApplyBuff(buff.IncreaceValue);
+                item.ApplyBuff(buff.IncreaseValue);
             }
         }
     }

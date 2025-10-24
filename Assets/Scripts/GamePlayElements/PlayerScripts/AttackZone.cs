@@ -12,9 +12,10 @@ public class AttackZone : MonoBehaviour
         _selfHealth = GetComponentInParent<IDemageable>();
     }
 
-    public IEnumerable<IDemageable> GetTargets(float range)
+    public IEnumerable<Health> GetTargets(float range)
     {
-        List<IDemageable> targets = new List<IDemageable>();
+        SetAttackData(range);
+        List<Health> targets = new List<Health>();
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
 
@@ -23,11 +24,13 @@ public class AttackZone : MonoBehaviour
             if (collider.gameObject.GetComponent<IDemageable>() == _selfHealth)
                 continue;
 
-            IDemageable damageable = collider.gameObject.GetComponent<IDemageable>();
+            Health damageable = collider.gameObject.GetComponent<Health>();
+
+            if(damageable == null)
+                continue;
+
             targets.Add(damageable);
         }
-
-        SetAttackData(range);
 
         return targets;
     }

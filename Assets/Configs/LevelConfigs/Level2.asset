@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864116a1b449ef545916bc24a1bcfff1, type: 3}
+  m_Name: Level2
+  m_EditorClassIdentifier: 
+  _level: 3
+  _dayDuration: 15
+  _nightDuration: 15
+  _dayLightIntensity: 1
+  _nightLightIntensity: 0.2
+  _transitionDuration: 2
+  _dayLightColor: {r: 1, g: 0.97886616, b: 0.61698115, a: 1}
+  _nightLightColor: {r: 0.40557137, g: 0.47083426, b: 0.990566, a: 1}
+  _minSpawnDistance: 10
+  _maxSpawnDistance: 40
+  _nightSpawnDelay: 3
+  _daySpawnDelay: 8

@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d56bf986791564baf84628894a33c2, type: 3}
   m_Name: Burst
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 662ba48cc27c1314fba879bfbd1bef0b, type: 3}
   _name: Burst
   _description: Many Atacks
   _chanceToView: 0.5
+  _costs: []
   _abilityType: 2
-  _hitCount: 5
-  _attackDelay: 0.3
-  _cooldown: 7
+  _baseHitCount: 4
+  _baseAttackDelay: 0.3
+  _baseCooldown: 15
+  _hitCountPerLevel: 1
+  _attackDelayReductionPerLevel: 0.02
+  _cooldownReductionPerLevel: 1
+  _minCooldown: 3
+  _minAttackDelay: 0.1

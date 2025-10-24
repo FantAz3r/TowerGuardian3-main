@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class GameFactory 
+public class GameFactory
 {
     private Transform _player;
     private Transform _uiRoot;
@@ -14,14 +15,20 @@ public class GameFactory
     private AllCardConfigs _cards;
     private AllAbilities _allAbilities;
     private DayCycle _cycle;
-    private IInputService _inputService;
-    private ITimeService _timeService;  
+    private GameStateMachine _stateMachine;
     private List<CardButton> _buttons = new List<CardButton>();
+    private OpenShopAction _shop;
 
-    public GameFactory(IInputService inputService, ITimeService timeService)
+    private IInputService _inputService;
+    private ITimeService _timeService;
+    private ISpawnerService _spawnerService;
+
+    public GameFactory(IInputService inputService, ITimeService timeService, ISpawnerService spawnerService, GameStateMachine stateMachine)
     {
         _inputService = inputService;
         _timeService = timeService;
+        _spawnerService = spawnerService;
+        _stateMachine = stateMachine;
     }
 
     public void CreatePlayer()
@@ -29,8 +36,8 @@ public class GameFactory
         Player prefab = Resources.Load<Player>(GameConstants.Player);
         _player = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity).transform;
         _player.GetComponentInChildren<PlayerMover>().Init(_inputService);
-        _player.GetComponentInChildren<PlayerAttacker>().Init(_inputService);
         _attacker = _player.GetComponentInChildren<PlayerAttacker>();
+        _attacker.Init(_spawnerService);
         _inventory = _player.GetComponentInChildren<Inventory>();
         _attackZone = _player.GetComponentInChildren<AttackZone>();
         _experience = _player.GetComponentInChildren<PlayerExperience>();
@@ -38,9 +45,18 @@ public class GameFactory
         _allAbilities = _player.GetComponentInChildren<AllAbilities>();
     }
 
+    public void CreateSpawners(ISpawnerService spawnerService)
+    {
+        DamageText prefab = Resources.Load<DamageText>(GameConstants.DamageText);
+        ResourceData resourceData = Resources.Load<ResourceData>(GameConstants.ResourceData);
+        PieceSpawner pieceSpawner = new PieceSpawner(resourceData);
+        spawnerService.RegisterSpawner(pieceSpawner);
+        spawnerService.RegisterSpawner(new DamageNumberSpawner(prefab));
+    }
+
     public void CreateWeaponFactory()
     {
-        _weaponFactory = new WeaponFactory(_attackZone, _player);
+        _weaponFactory = new WeaponFactory(_player, _attackZone);
     }
 
     public void CreateCamera()
@@ -50,10 +66,18 @@ public class GameFactory
         camera.Init(_player);
     }
 
+    public void CreateEventSystem()
+    {
+        GameObject eventSystem = new GameObject("EventSystem");
+        eventSystem.AddComponent<EventSystem>();
+        eventSystem.AddComponent<StandaloneInputModule>();
+    }
+
     public void CreateUI()
     {
         GameObject prefab = Resources.Load<GameObject>(GameConstants.GameCanvas);
         _uiRoot = Object.Instantiate(prefab).transform;
+
     }
 
     public void CreateResourceView()
@@ -119,6 +143,42 @@ public class GameFactory
     {
         WeaponPanel prefab = Resources.Load<WeaponPanel>(GameConstants.WeaponPanel);
         WeaponPanel panel = Object.Instantiate(prefab, _uiRoot.transform);
-        panel.Init(_cardHolder, _weaponFactory);
+        panel.Init(_cardHolder, _weaponFactory, _attacker);
+    }
+
+    public void CreateActions()
+    {
+        List<IAction> actions = new List<IAction>();
+
+        actions.Add(_shop);
+        actions.Add(_uiRoot.GetComponentInChildren<OpenBuildMenuAction>());
+
+        InteractionObjectFactory interactionObjectFactory = new InteractionObjectFactory(actions);
+    }
+
+    public void CreatePortalsFactory()
+    {
+        PortalFactory portalFactory = new PortalFactory(_stateMachine);
+        portalFactory.Create(new Vector3(0,0,20));
+    }
+
+    public void CreatePlatform()
+    {
+        Platform prefab = Resources.Load<Platform>(GameConstants.Platform);
+        Platform platform = Object.Instantiate(prefab, new Vector3(0,0,18), Quaternion.identity);
+        platform.Init(_shop);
+    }
+
+    public void CreateShop()
+    {
+        Shop prefab = Resources.Load<Shop>(GameConstants.Shop);
+        Shop shop = Object.Instantiate(prefab, _uiRoot.transform);
+        _shop = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
+        shop.Init(_inventory, _cards);
+    }
+
+    public void ClearSpawners()
+    {
+        _spawnerService.DestroySpawners();
     }
 }
