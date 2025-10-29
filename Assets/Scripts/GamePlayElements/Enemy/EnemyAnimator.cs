@@ -24,9 +24,8 @@ public class EnemyAnimator : MonoBehaviour
         _rotator = GetComponent<Rotator>();
         _enemy = GetComponentInParent<EnemyStateMachine>();
         _animator = GetComponent<Animator>();
-        _hashX = Animator.StringToHash("X");
+        _hashX = Animator.StringToHash("Speed");
         _hashY = Animator.StringToHash("Y");
-
     }
 
     private void OnEnable()
@@ -46,29 +45,13 @@ public class EnemyAnimator : MonoBehaviour
 
     private void UpdateMovementParameters()
     {
-        float x = 0f;
-        float y = 0f;
         float dampTime = 0.05f;
-        float trashhold = 0.001f;
-
-        Vector2 lookDirection = _rotator.CurrentDirection.normalized;
-        Vector2 moveDirection = _mover.Direction.normalized;
-
         float moveSpeed = _mover.Direction.SqrMagnitude();
-
-        if (moveSpeed > trashhold)
-        {
-            float angleDifference = Vector2.SignedAngle(lookDirection, moveDirection) * Mathf.Deg2Rad;
-            x = Mathf.Sin(angleDifference);
-            y = Mathf.Cos(angleDifference);
-        }
-
 
         float targetSpeed = moveSpeed * _speedMultiplier;
         _currentSpeed = Mathf.SmoothDamp(_currentSpeed, targetSpeed, ref _velSpeed, _smoothTime);
 
-        _animator.SetFloat(_hashX, x, dampTime, Time.deltaTime);
-        _animator.SetFloat(_hashY, y, dampTime, Time.deltaTime);
+        _animator.SetFloat(_hashX, moveSpeed, dampTime, Time.deltaTime);
     }
 
     private void TryAttackAnimation(IEnemyState state)

@@ -18,6 +18,7 @@ public class GameFactory
     private GameStateMachine _stateMachine;
     private List<CardButton> _buttons = new List<CardButton>();
     private OpenShopAction _shop;
+    private FinishLevelMenu _finishMenu;
 
     private IInputService _inputService;
     private ITimeService _timeService;
@@ -158,7 +159,7 @@ public class GameFactory
 
     public void CreatePortalsFactory()
     {
-        PortalFactory portalFactory = new PortalFactory(_stateMachine);
+        PortalFactory portalFactory = new PortalFactory(_stateMachine, _finishMenu);
         portalFactory.Create(new Vector3(0,0,20));
     }
 
@@ -175,6 +176,14 @@ public class GameFactory
         Shop shop = Object.Instantiate(prefab, _uiRoot.transform);
         _shop = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
         shop.Init(_inventory, _cards);
+    }
+
+    public void CreateEndLevelMenu(LevelID level)
+    {
+        FinishLevelMenu prefab = Resources.Load<FinishLevelMenu>(GameConstants.FinishMenu);
+        FinishLevelMenu menu = Object.Instantiate(prefab, _uiRoot.transform);
+        _finishMenu = menu;
+        _finishMenu.Init(_stateMachine, level);
     }
 
     public void ClearSpawners()

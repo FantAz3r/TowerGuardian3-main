@@ -6,7 +6,7 @@ public class Portal : BuildingObject
     private GameStateMachine _gameStateMachine;
     private FinishLevelMenu _finishMenu;
 
-    public void Init(GameStateMachine gameStateMachine)
+    public void Init(GameStateMachine gameStateMachine, FinishLevelMenu finishLMenu)
     {
         _gameStateMachine = gameStateMachine;
     }
