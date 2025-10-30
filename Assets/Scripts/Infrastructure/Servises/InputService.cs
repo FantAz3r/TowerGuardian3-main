@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using YG;
 
 public class InputService : IInputService
 {
@@ -8,9 +9,6 @@ public class InputService : IInputService
 
     public event Action<Vector2> MovePerformed;
     public event Action MoveCanceled;
-
-    public event Action AttackPerformed;
-    public event Action AttackCanceled;
 
     public event Action OnAbillityUsed;
 
@@ -28,9 +26,6 @@ public class InputService : IInputService
 
         _inputActions.Player.Move.performed += OnMovePerformed;
         _inputActions.Player.Move.canceled += OnMoveCanceled;
-
-        _inputActions.Player.Attack.performed += OnAttackPerformed;
-        _inputActions.Player.Attack.canceled += OnAttackCanceled;
 
         _inputActions.UI.ActivateAbility.performed += OnAbilityUsed;
 
@@ -54,24 +49,22 @@ public class InputService : IInputService
         MoveCanceled?.Invoke();
     }
 
-    private void OnAttackPerformed(InputAction.CallbackContext context)
-    {
-        AttackPerformed?.Invoke();
-    }
-
-    private void OnAttackCanceled(InputAction.CallbackContext context)
-    {
-        AttackCanceled?.Invoke();
-    }
-
     private void OnRotatePerformed(InputAction.CallbackContext context)
     {
-        CursorOrigin = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Vector2 direction = Vector2.zero;
 
-        Vector2 cursorPos = context.ReadValue<Vector2>();
-        RotatePerformed?.Invoke(cursorPos);
+        if (YG2.envir.isDesktop)
+        {
+            CursorOrigin = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            Vector2 cursorPos = context.ReadValue<Vector2>();
+            RotatePerformed?.Invoke(cursorPos);
+            direction = cursorPos - CursorOrigin;
+        }
+        else
+        {
+            direction = context.ReadValue<Vector2>();
+        }
 
-        Vector2 direction = cursorPos - CursorOrigin;
         if (direction.sqrMagnitude > 0f)
             direction.Normalize();
         else
@@ -104,9 +97,6 @@ public class InputService : IInputService
 
         _inputActions.Player.Move.performed -= OnMovePerformed;
         _inputActions.Player.Move.canceled -= OnMoveCanceled;
-
-        _inputActions.Player.Attack.performed -= OnAttackPerformed;
-        _inputActions.Player.Attack.canceled -= OnAttackCanceled;
 
         _inputActions.UI.ActivateAbility.performed -= OnAbilityUsed;
 

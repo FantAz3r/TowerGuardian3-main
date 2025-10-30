@@ -4,9 +4,9 @@ public class Portal : BuildingObject
 {
     [SerializeField] private LevelID _levelID;
     private GameStateMachine _gameStateMachine;
-    private FinishLevelMenu _finishMenu;
+    private WinLevelMenu _finishMenu;
 
-    public void Init(GameStateMachine gameStateMachine, FinishLevelMenu finishLMenu)
+    public void Init(GameStateMachine gameStateMachine, WinLevelMenu finishLMenu)
     {
         _gameStateMachine = gameStateMachine;
     }
@@ -15,7 +15,7 @@ public class Portal : BuildingObject
     {
         if (other.TryGetComponent<Player>(out Player player))
         {
-            _gameStateMachine.EnterIn<LoadingLevelState, LevelID>(_levelID);
+            _finishMenu.LevelEnd();
         }
     }
 }

@@ -17,6 +17,9 @@ public static class GameConstants
     public static string WeaponPanel = "Ui/WeaponPanel";
     public static string DamageText = "Ui/TextHolder";
     public static string Shop = "Ui/Shop";
+    public static string FinishMenu = "Ui/WinPanel";
+    public static string RotateJoyStick = "Ui/RotateJoystick ";
+    public static string MoveJoyStick = "Ui/MoveJoystick";
 
     public static string ResourceData = "ScriptableObjects/ResourceConfig";
 

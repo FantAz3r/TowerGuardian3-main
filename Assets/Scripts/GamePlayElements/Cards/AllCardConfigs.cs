@@ -46,7 +46,6 @@ public class AllCardConfigs : MonoBehaviour
 
     public void Add(ICardConfig config)
     {
-        Debug.Log(config.Name + " Added");
         _configs.Add(config);
     }
 

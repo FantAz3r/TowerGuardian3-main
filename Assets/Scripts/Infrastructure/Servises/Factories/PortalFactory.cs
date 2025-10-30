@@ -3,9 +3,9 @@ using UnityEngine;
 public class PortalFactory 
 {
     private GameStateMachine _gameStateMachine;
-    private FinishLevelMenu _finishMenu;
+    private WinLevelMenu _finishMenu;
 
-    public PortalFactory(GameStateMachine gameStateMachine, FinishLevelMenu finishMenu)
+    public PortalFactory(GameStateMachine gameStateMachine, WinLevelMenu finishMenu)
     {
         _gameStateMachine = gameStateMachine;
         _finishMenu = finishMenu;

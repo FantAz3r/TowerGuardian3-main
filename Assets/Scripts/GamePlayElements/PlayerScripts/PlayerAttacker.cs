@@ -46,14 +46,17 @@ public class PlayerAttacker : MonoBehaviour
     public void AddWeapon(Weapon weapon)
     {
         _weaponsInInventory.Add(weapon);
-        weapon.gameObject.SetActive(false);
+        if(_currentWeapon != weapon)
+        {
+            weapon.gameObject.SetActive(false);
+        }
     }
 
     public void SetWeapon(WeaponConfig config)
     {
         foreach (var weapon in _weaponsInInventory)
         {
-            if (weapon.Config == config)
+            if (weapon.Config.Name == config.Name)
             {
                 RemoveWeapon();
                 _previousWeapon = _currentWeapon;

@@ -18,7 +18,7 @@ public class GameFactory
     private GameStateMachine _stateMachine;
     private List<CardButton> _buttons = new List<CardButton>();
     private OpenShopAction _shop;
-    private FinishLevelMenu _finishMenu;
+    private WinLevelMenu _finishMenu;
 
     private IInputService _inputService;
     private ITimeService _timeService;
@@ -78,8 +78,9 @@ public class GameFactory
     {
         GameObject prefab = Resources.Load<GameObject>(GameConstants.GameCanvas);
         _uiRoot = Object.Instantiate(prefab).transform;
-
     }
+
+   
 
     public void CreateResourceView()
     {
@@ -160,13 +161,13 @@ public class GameFactory
     public void CreatePortalsFactory()
     {
         PortalFactory portalFactory = new PortalFactory(_stateMachine, _finishMenu);
-        portalFactory.Create(new Vector3(0,0,20));
+        portalFactory.Create(new Vector3(0, 0, 20));
     }
 
     public void CreatePlatform()
     {
         Platform prefab = Resources.Load<Platform>(GameConstants.Platform);
-        Platform platform = Object.Instantiate(prefab, new Vector3(0,0,18), Quaternion.identity);
+        Platform platform = Object.Instantiate(prefab, new Vector3(0, 0, 18), Quaternion.identity);
         platform.Init(_shop);
     }
 
@@ -180,8 +181,8 @@ public class GameFactory
 
     public void CreateEndLevelMenu(LevelID level)
     {
-        FinishLevelMenu prefab = Resources.Load<FinishLevelMenu>(GameConstants.FinishMenu);
-        FinishLevelMenu menu = Object.Instantiate(prefab, _uiRoot.transform);
+        WinLevelMenu prefab = Resources.Load<WinLevelMenu>(GameConstants.FinishMenu);
+        WinLevelMenu menu = Object.Instantiate(prefab, _uiRoot.transform);
         _finishMenu = menu;
         _finishMenu.Init(_stateMachine, level);
     }
