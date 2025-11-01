@@ -17,6 +17,7 @@ public class GameFactory
 
     private WeaponFactory _weaponFactory;
     private AllCardConfigs _cards;
+    private Tutorial _tutorial;
     private AllAbilities _allAbilities;
     private List<CardButton> _buttons = new List<CardButton>();
 
@@ -202,8 +203,18 @@ public class GameFactory
 
     public void CreateTutorial()
     {
-        QuestViewer prefab = Resources.Load<QuestViewer>(GameConstants.QuestViever);
-        QuestViewer questViewer = Object.Instantiate(prefab, _uiRoot);
+        Tutorial tutorialPrefab = Resources.Load<Tutorial>(GameConstants.Tutorial);
+        _tutorial = Object.Instantiate(tutorialPrefab);
+        _tutorial.Init(_questBuilder);
+       
+    }
+
+    public void CreateQuestViewer()
+    {
+        QuestViewer viewerPrefab = Resources.Load<QuestViewer>(GameConstants.QuestViever);
+        QuestViewer questViewer = Object.Instantiate(viewerPrefab, _uiRoot);
+        questViewer.Init(_tutorial);
+        _tutorial.RunNextQuest();
     }
 
     public void ClearSpawners()

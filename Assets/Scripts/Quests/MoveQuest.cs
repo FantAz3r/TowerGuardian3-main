@@ -3,8 +3,7 @@ using UnityEngine;
 public class MoveQuest : Quest
 {
     private PlayerMover _mover;
-
-    public void Init(PlayerMover mover)
+    public MoveQuest(PlayerMover mover)
     {
         _mover = mover;
     }
@@ -20,5 +19,10 @@ public class MoveQuest : Quest
     {
         base.Complete();
         _mover.Moved -= Complete;
+    }
+
+    public override QuestType GetQuestType()
+    {
+        return QuestType.Move;
     }
 }

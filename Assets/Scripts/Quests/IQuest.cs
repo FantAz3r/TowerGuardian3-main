@@ -3,8 +3,7 @@ using UnityEngine;
 
 public interface IQuest  
 {
-    Sprite Sprite { get; }
-    string Description { get; }
+    QuestConfig Config { get; }
 
     event Action OnCompleted;
     void Run();

@@ -14,6 +14,8 @@ public class QuestViewer : MonoBehaviour
         _tutorial = tutorial;
         _tutorial.QuestSeted += Render;
         _tutorial.QuestUpdated += UpdateProgress;
+        _tutorial.Complited += Complite;
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -24,6 +26,8 @@ public class QuestViewer : MonoBehaviour
 
     private void Render(Sprite sprite, string description)
     {
+        gameObject.SetActive(true);
+        Debug.Log("2");
         _image.sprite = sprite;
         _description.text = description;
     }
@@ -31,5 +35,10 @@ public class QuestViewer : MonoBehaviour
     private void UpdateProgress(string description)
     {
         _description.text = description;
+    }
+
+    private void Complite()
+    {
+        gameObject.SetActive(false);
     }
 }

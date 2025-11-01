@@ -1,6 +1,6 @@
 using System;
 
-public class UpdatableQuest : Quest, IUpdatebleQuest
+public abstract class UpdatableQuest : Quest, IUpdatebleQuest
 {
     private int _value;
     public int Goal { get; private set; }
@@ -11,4 +11,10 @@ public class UpdatableQuest : Quest, IUpdatebleQuest
     {
         Updated?.Invoke(_value);
     }
+
+    public override QuestType GetQuestType()
+    {
+        return QuestType.None;
+    }
+   
 }

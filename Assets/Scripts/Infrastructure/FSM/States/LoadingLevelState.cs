@@ -112,5 +112,6 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreatePlatform();
         _gameFactory.CreateQuests();
         _gameFactory.CreateTutorial();
+        _gameFactory.CreateQuestViewer();
     }
 }

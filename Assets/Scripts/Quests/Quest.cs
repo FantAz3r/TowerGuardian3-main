@@ -4,15 +4,20 @@ using UnityEngine;
 
 public abstract class Quest : IQuest
 {
-    [SerializeField] private QuestConfig _config;
+    private QuestConfig _questConfig;
 
-    public Sprite Sprite => _config.Image;
-    public string Description => _config.Description;
-    public QuestType QuestType => _config.QuestType;
+    public QuestConfig Config => _questConfig;
 
     public event Action OnCompleted;
     public virtual void SubscribeEvents(Action<int> onUpdated) { }
     public virtual void UnsubscribeEvents(Action<int> onUpdated) { }
+
+    public void SetConfig(QuestConfig config)
+    {
+        _questConfig = config;
+    }
+
+    public abstract QuestType GetQuestType();
 
     public virtual void Run()
     {

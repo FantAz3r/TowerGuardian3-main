@@ -5,7 +5,6 @@ using UnityEngine;
 public class QuestBuilder 
 {
     private List<Quest> _quests = new();
-    private AllQuests _allQuests;
     private PlayerMover _mover;
     private PlayerAttacker _playerAttacker;
 
@@ -17,8 +16,7 @@ public class QuestBuilder
         CreateQuests();
     }
 
-
-    public void CreateQuests()
+    private void CreateQuests()
     {
         CreateMoveQuest();
     }
@@ -27,8 +25,11 @@ public class QuestBuilder
     {
         foreach (Quest quest in _quests)
         {
-            if (quest.QuestType == config.QuestType)
+            if (quest.GetQuestType() == config.QuestType)
+            {
+                quest.SetConfig(config);
                 return quest;
+            }
         }
 
         return null;
@@ -36,8 +37,7 @@ public class QuestBuilder
 
     private void CreateMoveQuest()
     {
-        var quest = new MoveQuest();
-        quest.Init(_mover);
+        var quest = new MoveQuest(_mover);
         _quests.Add( quest);
     }
 }

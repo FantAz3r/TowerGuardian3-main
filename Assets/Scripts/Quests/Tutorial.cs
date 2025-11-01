@@ -6,15 +6,16 @@ using UnityEngine;
 public class Tutorial : MonoBehaviour 
 {
     [SerializeField] private List<QuestConfig> _configs;
-    private List<IQuest> _quests;
+    private List<IQuest> _quests = new();
 
     private QuestBuilder _builder;
-    private int _currentQuestIndex = 0;
+    private int _currentQuestIndex = -1;
     private IQuest _currentQuest;
     private bool _isTutorialComplete = false;
 
     public event Action<Sprite, string> QuestSeted;
     public event Action<string> QuestUpdated;
+    public event Action Complited;
 
     public void Init(QuestBuilder builder)
     {
@@ -29,20 +30,10 @@ public class Tutorial : MonoBehaviour
                 _quests.Add(quest);
             }
         }
-
-        if (_quests.Count == 0)
-        {
-            Debug.LogWarning("Список квестов пуст!");
-            _isTutorialComplete = true;
-            return;
-        }
-
-        RunNextQuest();
     }
 
-    private void RunNextQuest()
+    public void RunNextQuest()
     {
-
         if (_currentQuestIndex > 0)
         {
             _quests[_currentQuestIndex].Stop();
@@ -54,6 +45,7 @@ public class Tutorial : MonoBehaviour
         if (_currentQuestIndex >= _quests.Count)
         {
             _isTutorialComplete = true;
+            Complited?.Invoke();
             Debug.Log("Туториал завершён!");
             return;
         }
@@ -61,7 +53,7 @@ public class Tutorial : MonoBehaviour
         _currentQuest = _quests[_currentQuestIndex];
         _currentQuest.OnCompleted += OnQuestCompleted;
         _currentQuest.Run();
-        QuestSeted?.Invoke(_currentQuest.Sprite, _currentQuest.Description);
+        QuestSeted?.Invoke(_currentQuest.Config.Image, _currentQuest.Config.Description);
 
         if (_currentQuest is IUpdatebleQuest)
         {
@@ -71,7 +63,7 @@ public class Tutorial : MonoBehaviour
 
     private void OnQuestUpdated(int value)
     {
-        string updatebleDescription = $"{_currentQuest.Description} {value}/ {(_currentQuest as IUpdatebleQuest).Goal}";
+        string updatebleDescription = $"{_currentQuest.Config.Description} {value}/ {(_currentQuest as IUpdatebleQuest).Goal}";
         QuestUpdated?.Invoke(updatebleDescription);
     }
 
