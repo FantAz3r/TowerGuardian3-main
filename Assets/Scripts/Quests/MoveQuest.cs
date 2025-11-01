@@ -1,28 +1,24 @@
-using System;
 using UnityEngine;
 
-public class MoveQuest : MonoBehaviour, IQuest
+public class MoveQuest : Quest
 {
-    public Sprite Sprite => throw new NotImplementedException();
+    private PlayerMover _mover;
 
-    public string Description => throw new NotImplementedException();
-
-    public event Action OnComplited;
-
-    public void Complite()
+    public void Init(PlayerMover mover)
     {
+        _mover = mover;
     }
 
-    public void Run()
+    public override void Run()
     {
+        base.Run();
+        Debug.Log("MoveQuest started");
+        _mover.Moved += Complete;
     }
 
-    public void Stop()
+    public override void Complete()
     {
-    }
-
-    public void Update()
-    {
-
+        base.Complete();
+        _mover.Moved -= Complete;
     }
 }

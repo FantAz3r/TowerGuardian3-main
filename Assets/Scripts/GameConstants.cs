@@ -20,6 +20,7 @@ public static class GameConstants
     public static string FinishMenu = "Ui/WinPanel";
     public static string RotateJoyStick = "Ui/RotateJoystick ";
     public static string MoveJoyStick = "Ui/MoveJoystick";
+    public static string QuestViever = "Ui/QuestViever";
 
     public static string ResourceData = "ScriptableObjects/ResourceConfig";
 

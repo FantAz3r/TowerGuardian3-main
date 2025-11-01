@@ -1,30 +1,88 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Tutorial : MonoBehaviour
+public class Tutorial : MonoBehaviour 
 {
-    [SerializeField] private List<MonoBehaviour> _configs;
+    [SerializeField] private List<QuestConfig> _configs;
+    private List<IQuest> _quests;
 
-    private List<IQuest> _quests = new List<IQuest>();
-    private int _currentQuestIndex = -1;
-    private bool _isTutoeialComplite = false;
+    private QuestBuilder _builder;
+    private int _currentQuestIndex = 0;
+    private IQuest _currentQuest;
+    private bool _isTutorialComplete = false;
 
+    public event Action<Sprite, string> QuestSeted;
+    public event Action<string> QuestUpdated;
 
-    private void Awake()
+    public void Init(QuestBuilder builder)
     {
+        _builder = builder;
+
         foreach (var config in _configs)
         {
-            if (config is IQuest)
+            IQuest quest = _builder.GetQuest(config);
+
+            if (quest != null)
             {
-                _quests.Add(config as IQuest);
+                _quests.Add(quest);
             }
+        }
+
+        if (_quests.Count == 0)
+        {
+            Debug.LogWarning("Список квестов пуст!");
+            _isTutorialComplete = true;
+            return;
+        }
+
+        RunNextQuest();
+    }
+
+    private void RunNextQuest()
+    {
+
+        if (_currentQuestIndex > 0)
+        {
+            _quests[_currentQuestIndex].Stop();
+            _quests[_currentQuestIndex].OnCompleted -= OnQuestCompleted;
+        }
+
+        _currentQuestIndex++;
+
+        if (_currentQuestIndex >= _quests.Count)
+        {
+            _isTutorialComplete = true;
+            Debug.Log("Туториал завершён!");
+            return;
+        }
+
+        _currentQuest = _quests[_currentQuestIndex];
+        _currentQuest.OnCompleted += OnQuestCompleted;
+        _currentQuest.Run();
+        QuestSeted?.Invoke(_currentQuest.Sprite, _currentQuest.Description);
+
+        if (_currentQuest is IUpdatebleQuest)
+        {
+            (_currentQuest as IUpdatebleQuest).Updated += OnQuestUpdated;
         }
     }
 
-    private void RunTutorial()
+    private void OnQuestUpdated(int value)
     {
-        _quests[_currentQuestIndex].Run();
+        string updatebleDescription = $"{_currentQuest.Description} {value}/ {(_currentQuest as IUpdatebleQuest).Goal}";
+        QuestUpdated?.Invoke(updatebleDescription);
+    }
+
+    private void OnQuestCompleted()
+    {
+        if (_currentQuest is IUpdatebleQuest)
+        {
+            (_currentQuest as IUpdatebleQuest).Updated -= OnQuestUpdated;
+        }
+
+        RunNextQuest();
     }
 }
     

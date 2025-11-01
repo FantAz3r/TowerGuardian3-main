@@ -1,22 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using YG;
 
 public class GameFactory
 {
-    private Transform _player;
     private Transform _uiRoot;
+
+    private Transform _player;
     private PlayerExperience _experience;
     private Inventory _inventory;
-    private AttackZone _attackZone;
-    private WeaponFactory _weaponFactory;
-    private PlayerCardConfigContainer _cardHolder;
     private PlayerAttacker _attacker;
+    private AttackZone _attackZone;
+    private PlayerMover _mover;
+    private PlayerCardConfigContainer _cardHolder;
+
+    private WeaponFactory _weaponFactory;
     private AllCardConfigs _cards;
     private AllAbilities _allAbilities;
+    private List<CardButton> _buttons = new List<CardButton>();
+
+    private QuestBuilder _questBuilder;
+
     private DayCycle _cycle;
     private GameStateMachine _stateMachine;
-    private List<CardButton> _buttons = new List<CardButton>();
     private OpenShopAction _shop;
     private WinLevelMenu _finishMenu;
 
@@ -44,6 +51,7 @@ public class GameFactory
         _experience = _player.GetComponentInChildren<PlayerExperience>();
         _cardHolder = _player.GetComponentInChildren<PlayerCardConfigContainer>();
         _allAbilities = _player.GetComponentInChildren<AllAbilities>();
+        _mover = _player.GetComponentInChildren<PlayerMover>();
     }
 
     public void CreateSpawners(ISpawnerService spawnerService)
@@ -160,7 +168,7 @@ public class GameFactory
 
     public void CreatePortalsFactory()
     {
-        PortalFactory portalFactory = new PortalFactory(_stateMachine, _finishMenu);
+        PortalFactory portalFactory = new PortalFactory(_finishMenu);
         portalFactory.Create(new Vector3(0, 0, 20));
     }
 
@@ -185,6 +193,17 @@ public class GameFactory
         WinLevelMenu menu = Object.Instantiate(prefab, _uiRoot.transform);
         _finishMenu = menu;
         _finishMenu.Init(_stateMachine, level);
+    }
+
+    public void CreateQuests()
+    {
+        _questBuilder =  new QuestBuilder(_mover, _attacker);
+    }
+
+    public void CreateTutorial()
+    {
+        QuestViewer prefab = Resources.Load<QuestViewer>(GameConstants.QuestViever);
+        QuestViewer questViewer = Object.Instantiate(prefab, _uiRoot);
     }
 
     public void ClearSpawners()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rotator))]
@@ -6,6 +7,8 @@ public class PlayerMover : MonoBehaviour
     private Mover _mover;
     private Rotator _rotator;
     private IInputService _inputService;
+
+    public event Action Moved;
 
     public void Init(IInputService inputService)
     {
@@ -36,6 +39,9 @@ public class PlayerMover : MonoBehaviour
     private void OnMove(Vector2 direction)
     {
         _mover.SetDirection(direction);
+
+        if (direction != Vector2.zero)
+            Moved?.Invoke();
     }
 
     private void OnMoveCanceled()

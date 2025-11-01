@@ -6,9 +6,8 @@ public interface IQuest
     Sprite Sprite { get; }
     string Description { get; }
 
-    event Action OnComplited;
+    event Action OnCompleted;
     void Run();
-    void Update();
     void Stop();
-    void Complite();
+    void Complete();
 }

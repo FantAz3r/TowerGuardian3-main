@@ -106,8 +106,11 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateEnemies(_currentLevel);
         _gameFactory.CreateAbilityPanel();
         _gameFactory.CreateWeaponPanel();
+        _gameFactory.CreateEndLevelMenu(_currentLevel);
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateActions();
         _gameFactory.CreatePlatform();
+        _gameFactory.CreateQuests();
+        _gameFactory.CreateTutorial();
     }
 }
