@@ -1,10 +1,9 @@
 ﻿using System;
 
-public interface IUpdatebleQuest : IQuest
+public interface IUpdatableQuest : IQuest
 {
     int Goal { get; }
-
     event Action<int> Updated;
-
     void UpdateProgress();
+    void Set(int goal);
 }

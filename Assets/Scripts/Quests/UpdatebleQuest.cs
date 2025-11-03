@@ -1,20 +1,25 @@
 using System;
 
-public abstract class UpdatableQuest : Quest, IUpdatebleQuest
+public abstract class UpdatableQuest : Quest, IUpdatableQuest
 {
-    private int _value;
+    private int _currentValue = 0;
     public int Goal { get; private set; }
     public event Action<int> Updated;
 
-    protected int Value => _value;
-    public void UpdateProgress()
+    public void Set(int goal)
     {
-        Updated?.Invoke(_value);
+        Goal = goal;
+        _currentValue = 0;
     }
 
-    public override QuestType GetQuestType()
+    public virtual void UpdateProgress()
     {
-        return QuestType.None;
+        _currentValue++;
+        Updated?.Invoke(_currentValue);
+
+        if (_currentValue >= Goal)
+        {
+            Complete();
+        }
     }
-   
 }

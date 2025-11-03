@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c29de2edc7538946b52d5b14693ec67, type: 3}
-  m_Name: MoveQuest
+  m_Name: AttackQuest
   m_EditorClassIdentifier: 
-  _image: {fileID: 21300000, guid: 1ceb2e8457eb1dc4ba947e3ae71bb076, type: 3}
-  _description: Push W,A,S or D for Move
-  _questType: 1
-  _targetValue: 1
+  _image: {fileID: 21300000, guid: 8f10f7c8d4ad1934f88e65c4a8a148f3, type: 3}
+  _description: Hit any enemy, stone or tree
+  _questType: 2
+  _targetValue: 0

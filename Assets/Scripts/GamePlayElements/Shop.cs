@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class Shop : MonoBehaviour
     private List<ProductViewer> _productButtons = new();
     private Inventory _playerInventory;
     private AllCardConfigs _allCardConfigs;
+
+    public event Action WeaponAdded;
 
     private void Awake()
     {
@@ -36,7 +39,8 @@ public class Shop : MonoBehaviour
         _allCardConfigs = cardConfigs;
         _playerInventory.ResourceAdded += RenderAll;
 
-        RenderAll();  
+        RenderAll();
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -70,7 +74,7 @@ public class Shop : MonoBehaviour
 
     private void OnBuyRequested(ProductViewer button, IShopConfig config)
     {
-        if (!CanAfford(config))
+        if (CanAfford(config) == false)
         {
             Debug.Log("Не хватает ресурсов");
             return;
@@ -86,6 +90,11 @@ public class Shop : MonoBehaviour
         if (config is ICardConfig)
         {
             _allCardConfigs.Add(config as ICardConfig);
+        }
+
+        if(config is WeaponConfig)
+        {
+            WeaponAdded?.Invoke();
         }
     }
 }

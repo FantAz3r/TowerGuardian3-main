@@ -49,29 +49,29 @@ public class Tutorial : MonoBehaviour
             Debug.Log("Туториал завершён!");
             return;
         }
-
+        
         _currentQuest = _quests[_currentQuestIndex];
         _currentQuest.OnCompleted += OnQuestCompleted;
         _currentQuest.Run();
         QuestSeted?.Invoke(_currentQuest.Config.Image, _currentQuest.Config.Description);
 
-        if (_currentQuest is IUpdatebleQuest)
+        if (_currentQuest is IUpdatableQuest)
         {
-            (_currentQuest as IUpdatebleQuest).Updated += OnQuestUpdated;
+            (_currentQuest as IUpdatableQuest).Updated += OnQuestUpdated;
         }
     }
 
     private void OnQuestUpdated(int value)
     {
-        string updatebleDescription = $"{_currentQuest.Config.Description} {value}/ {(_currentQuest as IUpdatebleQuest).Goal}";
+        string updatebleDescription = $"{_currentQuest.Config.Description} {value}/ {(_currentQuest as IUpdatableQuest).Goal}";
         QuestUpdated?.Invoke(updatebleDescription);
     }
 
     private void OnQuestCompleted()
     {
-        if (_currentQuest is IUpdatebleQuest)
+        if (_currentQuest is IUpdatableQuest)
         {
-            (_currentQuest as IUpdatebleQuest).Updated -= OnQuestUpdated;
+            (_currentQuest as IUpdatableQuest).Updated -= OnQuestUpdated;
         }
 
         RunNextQuest();

@@ -1,34 +1,32 @@
 using System;
-using TMPro;
-using UnityEngine;
 
 public abstract class Quest : IQuest
 {
-    private QuestConfig _questConfig;
-
-    public QuestConfig Config => _questConfig;
+    public QuestConfig Config { get; private set; }
+    private bool _isCompleted;
 
     public event Action OnCompleted;
-    public virtual void SubscribeEvents(Action<int> onUpdated) { }
-    public virtual void UnsubscribeEvents(Action<int> onUpdated) { }
 
     public void SetConfig(QuestConfig config)
     {
-        _questConfig = config;
+        Config = config;
     }
 
     public abstract QuestType GetQuestType();
 
-    public virtual void Run()
-    {
-    }
+    public virtual void Run() { }
 
-    public virtual void Stop()
-    {
-    }
+    public virtual void Stop() { }
 
     public virtual void Complete()
     {
+        CompleteQuest();
+    }
+
+    protected void CompleteQuest()
+    {
+        if (_isCompleted) return;
+        _isCompleted = true;
         OnCompleted?.Invoke();
     }
 }

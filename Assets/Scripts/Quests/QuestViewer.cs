@@ -27,7 +27,6 @@ public class QuestViewer : MonoBehaviour
     private void Render(Sprite sprite, string description)
     {
         gameObject.SetActive(true);
-        Debug.Log("2");
         _image.sprite = sprite;
         _description.text = description;
     }

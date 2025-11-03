@@ -15,6 +15,9 @@ public class Inventory : MonoBehaviour
     public event Action<Dictionary<ResourceType, int>> ResourceChanged;
     public event Action ResourceAdded;
     public event Action<int> TotalAmountChanged;
+    public event Action WoodCollected;
+    public event Action StoneCollected;
+    public event Action CoinCollected;
 
     private void Awake()
     {
@@ -46,6 +49,13 @@ public class Inventory : MonoBehaviour
     {
         int spaceLeft = _config.InventoryCapacity - _currentAmount;
         int amountToAdd = Mathf.Min(amount, spaceLeft);
+
+        if (resource.PeiceType == ResourceType.Stone)
+            StoneCollected?.Invoke();
+        else if (resource.PeiceType == ResourceType.Wood)
+            WoodCollected?.Invoke();
+        else if (resource.PeiceType == ResourceType.Coin)
+            CoinCollected?.Invoke();
 
         if (_resources.ContainsKey(resource.PeiceType))
         {

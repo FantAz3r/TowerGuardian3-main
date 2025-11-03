@@ -18,6 +18,7 @@ public class PlayerAttacker : MonoBehaviour
     public event Action<IWeapon> WeaponSeted;
     public event Action<IWeapon> WeaponRemoved;
     public event Action<IWeapon, float> Attacked;
+    public event Action Hited;
 
     public IReadOnlyList<Weapon> WeaponsInInventory => _weaponsInInventory;
     public Weapon CurrentWeapon => _currentWeapon;
@@ -102,6 +103,7 @@ public class PlayerAttacker : MonoBehaviour
     public void OnAnimationAttack()
     {
         _currentWeapon.Attack();
+        Hited?.Invoke();
     }
 
     private void UpdateWeapon(Weapon weapon)

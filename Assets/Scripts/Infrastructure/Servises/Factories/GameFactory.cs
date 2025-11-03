@@ -25,7 +25,8 @@ public class GameFactory
 
     private DayCycle _cycle;
     private GameStateMachine _stateMachine;
-    private OpenShopAction _shop;
+    private OpenShopAction _shopAction;
+    private Shop _shop;
     private WinLevelMenu _finishMenu;
 
     private IInputService _inputService;
@@ -161,7 +162,7 @@ public class GameFactory
     {
         List<IAction> actions = new List<IAction>();
 
-        actions.Add(_shop);
+        actions.Add(_shopAction);
         actions.Add(_uiRoot.GetComponentInChildren<OpenBuildMenuAction>());
 
         InteractionObjectFactory interactionObjectFactory = new InteractionObjectFactory(actions);
@@ -177,15 +178,15 @@ public class GameFactory
     {
         Platform prefab = Resources.Load<Platform>(GameConstants.Platform);
         Platform platform = Object.Instantiate(prefab, new Vector3(0, 0, 18), Quaternion.identity);
-        platform.Init(_shop);
+        platform.Init(_shopAction);
     }
 
     public void CreateShop()
     {
         Shop prefab = Resources.Load<Shop>(GameConstants.Shop);
-        Shop shop = Object.Instantiate(prefab, _uiRoot.transform);
-        _shop = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
-        shop.Init(_inventory, _cards);
+        _shop = Object.Instantiate(prefab, _uiRoot.transform);
+        _shopAction = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
+        _shop.Init(_inventory, _cards);
     }
 
     public void CreateEndLevelMenu(LevelID level)
@@ -198,7 +199,7 @@ public class GameFactory
 
     public void CreateQuests()
     {
-        _questBuilder =  new QuestBuilder(_mover, _attacker);
+        _questBuilder =  new QuestBuilder(_mover, _attacker, _inventory, _cardHolder, _shop);
     }
 
     public void CreateTutorial()
