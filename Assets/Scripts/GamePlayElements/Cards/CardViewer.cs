@@ -53,7 +53,7 @@ public class CardViewer : MonoBehaviour
         if (config is WeaponConfig weaponConfig && weaponConfig.TargetType != EntityType.Generic)
         {
             string targetTypeName = weaponConfig.TargetType.ToString();
-            _stats.text += $"Damage Multiplier to {targetTypeName}: {weaponConfig.GetMultiply(config.Level):0.#} \n";
+            _stats.text += $"Multiplier to {targetTypeName}: {weaponConfig.GetMultiply(config.Level):0.#} \n";
         }
     }
 

@@ -97,6 +97,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCamera();
         _gameFactory.CreateEventSystem();
         _gameFactory.CreateUI();
+        _gameFactory.CreatePauseUI();
         _gameFactory.CreateResourceView();
         _gameFactory.CreateCards();
         _gameFactory.CreateShop();
@@ -104,14 +105,18 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCardsSelectionMenu();
         _gameFactory.CreateLight(_currentLevel);
         _gameFactory.CreateEnemies(_currentLevel);
-        _gameFactory.CreateAbilityPanel();
+        _gameFactory.CreatePlayerPanel();
         _gameFactory.CreateWeaponPanel();
         _gameFactory.CreateEndLevelMenu(_currentLevel);
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateActions();
         _gameFactory.CreatePlatform();
-        _gameFactory.CreateQuests();
-        _gameFactory.CreateTutorial();
-        _gameFactory.CreateQuestViewer();
+
+        if(YG2.isFirstGameSession && _currentLevel == LevelID.Level1)
+        {
+            _gameFactory.CreateQuests();
+            _gameFactory.CreateTutorial();
+            _gameFactory.CreateQuestViewer();
+        }
     }
 }

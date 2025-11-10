@@ -1,4 +1,4 @@
-public static class GameConstants 
+public static class GameConstants
 {
     public static string Player = "Players/Player";
     public static string StartButton = "Prefabs/StartButton";
@@ -18,10 +18,13 @@ public static class GameConstants
     public static string WeaponPanel = "Ui/WeaponPanel";
     public static string DamageText = "Ui/TextHolder";
     public static string Shop = "Ui/Shop";
-    public static string FinishMenu = "Ui/WinPanel";
+    public static string WinMenu = "Ui/Popup_Complete";
+    public static string LouseMenu = "Ui/Popup_Complete";
+    public static string PauseUI = "Ui/PauseUI";
     public static string RotateJoyStick = "Ui/RotateJoystick ";
     public static string MoveJoyStick = "Ui/MoveJoystick";
     public static string QuestViever = "Ui/QuestViever";
+    public static string PlayerPanel = "Ui/Stats";
 
     public static string ResourceData = "ScriptableObjects/ResourceConfig";
 

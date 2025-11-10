@@ -5,72 +5,80 @@ using UnityEngine.UI;
 
 public class LevelViewer : MonoBehaviour
 {
-    [SerializeField] private TMP_Text levelText; 
-    [SerializeField] private Image experienceFillImage;
+    [SerializeField] private TMP_Text levelText;
+    [SerializeField] private Slider experienceFillImage;
+    [SerializeField] private TMP_Text experienceText;
 
-    private float _wait = 0.1f;
-    private WaitForSeconds _delay;
     private PlayerExperience _playerExperience;
     private Coroutine _fillCoroutine;
 
-    private void Awake()
+    public void Init(PlayerExperience playerExperience)
     {
-        _delay = new WaitForSeconds(_wait);
-        _playerExperience = GetComponentInChildren<PlayerExperience>();
-    }
-
-    private void OnEnable()
-    {
+        _playerExperience = playerExperience;
         _playerExperience.OnExperienceAdded += View;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        _playerExperience.OnExperienceAdded -= View;
+        if (_playerExperience != null)
+            _playerExperience.OnExperienceAdded -= View;
     }
+
     public void View(int currentLevel, float currentExp, float expForNextLevel)
     {
-        levelText.text = $"LVL {currentLevel}";
+        levelText.text = currentLevel.ToString();
+        experienceText.text = $"{Mathf.Floor(currentExp)} / {Mathf.Floor(expForNextLevel)}";
 
         float normalizedExp = Mathf.Clamp01(currentExp / expForNextLevel);
 
         if (_fillCoroutine != null)
             StopCoroutine(_fillCoroutine);
 
-        _fillCoroutine = StartCoroutine(AnimateFillWithOverflow(normalizedExp));
+        _fillCoroutine = StartCoroutine(AnimateFill(normalizedExp));
     }
 
-    private IEnumerator AnimateFillWithOverflow(float targetFill)
+    private IEnumerator AnimateFill(float targetFill)
     {
         float duration = 0.5f;
-
-        IEnumerator AnimateFillSegment(float from, float to)
-        {
-            float elapsed = 0f;
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                experienceFillImage.fillAmount = Mathf.Lerp(from, to, elapsed / duration);
-                yield return null;
-            }
-            experienceFillImage.fillAmount = to;
-        }
-
-        float startFill = experienceFillImage.fillAmount;
+        float startFill = experienceFillImage.value;
+        float elapsed = 0f;
 
         if (targetFill < startFill)
         {
-            yield return AnimateFillSegment(startFill, 1f);
-            yield return _delay;
-            experienceFillImage.fillAmount = 0f;
-            yield return AnimateFillSegment(0f, targetFill);
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                experienceFillImage.value = Mathf.Lerp(startFill, 1f, elapsed / duration);
+                yield return null;
+            }
+
+            experienceFillImage.value = 1f;
+
+            yield return new WaitForSeconds(0.1f);
+
+            experienceFillImage.value = 0f;
+            experienceText.text = $"0 / {_playerExperience.ExpToNextLevel}";
+
+            elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                experienceFillImage.value = Mathf.Lerp(0f, targetFill, elapsed / duration);
+                yield return null;
+            }
         }
         else
         {
-            yield return AnimateFillSegment(startFill, targetFill);
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                experienceFillImage.value = Mathf.Lerp(startFill, targetFill, elapsed / duration);
+                yield return null;
+            }
         }
 
+        experienceFillImage.value = targetFill;
         _fillCoroutine = null;
     }
-
 }

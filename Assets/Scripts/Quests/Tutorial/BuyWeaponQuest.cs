@@ -18,9 +18,9 @@ public class BuyWeaponQuest : Quest
         return QuestType.BuyWeapon;
     }
 
-    public void Complete(ICardConfig config)
+    public override void Complete()
     {
+        base.Complete();
         _shop.WeaponAdded -= Complete;
-        CompleteQuest();
     }
 }

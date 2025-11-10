@@ -11,6 +11,7 @@ public class GameFactory
     private PlayerExperience _experience;
     private Inventory _inventory;
     private PlayerAttacker _attacker;
+    private Health _health;
     private AttackZone _attackZone;
     private PlayerMover _mover;
     private PlayerCardConfigContainer _cardHolder;
@@ -53,6 +54,7 @@ public class GameFactory
         _experience = _player.GetComponentInChildren<PlayerExperience>();
         _cardHolder = _player.GetComponentInChildren<PlayerCardConfigContainer>();
         _allAbilities = _player.GetComponentInChildren<AllAbilities>();
+        _health = _player.GetComponent<Health>();
         _mover = _player.GetComponentInChildren<PlayerMover>();
     }
 
@@ -90,7 +92,13 @@ public class GameFactory
         _uiRoot = Object.Instantiate(prefab).transform;
     }
 
-   
+    public void CreatePauseUI()
+    {
+        GameObject prefab = Resources.Load<GameObject>(GameConstants.PauseUI);
+        GameObject panel = Object.Instantiate(prefab, _uiRoot);
+        PauseUI pauseUI = panel.GetComponentInChildren<PauseUI>();
+        pauseUI.Init(_stateMachine);
+    }
 
     public void CreateResourceView()
     {
@@ -144,11 +152,18 @@ public class GameFactory
         spawner.Init(_player.transform, _cycle, level);
     }
 
-    public void CreateAbilityPanel()
+    public void CreatePlayerPanel()
     {
-        AbilityPanel prefab = Resources.Load<AbilityPanel>(GameConstants.AbilityPanel);
-        AbilityPanel panel = Object.Instantiate(prefab, _uiRoot.transform);
-        panel.Init(_allAbilities);
+        GameObject prefab = Resources.Load<GameObject>(GameConstants.PlayerPanel);
+        GameObject playerPanel = Object.Instantiate(prefab, _uiRoot.transform);
+
+        AbilityPanel abilityPanel = playerPanel.GetComponentInChildren<AbilityPanel>();
+        PlayerHealthViewer healthViewer = playerPanel.GetComponentInChildren<PlayerHealthViewer>();
+        LevelViewer levelViewer = playerPanel.GetComponentInChildren<LevelViewer>();
+
+        levelViewer.Init(_experience);
+        healthViewer.Init(_health);
+        abilityPanel.Init(_allAbilities);
     }
 
     public void CreateWeaponPanel()
@@ -191,7 +206,7 @@ public class GameFactory
 
     public void CreateEndLevelMenu(LevelID level)
     {
-        WinLevelMenu prefab = Resources.Load<WinLevelMenu>(GameConstants.FinishMenu);
+        WinLevelMenu prefab = Resources.Load<WinLevelMenu>(GameConstants.WinMenu);
         WinLevelMenu menu = Object.Instantiate(prefab, _uiRoot.transform);
         _finishMenu = menu;
         _finishMenu.Init(_stateMachine, level);
