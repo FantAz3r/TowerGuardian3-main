@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TargetDetector : MonoBehaviour
+public class AttackDetector : MonoBehaviour
 {
     private EnemyStateMachine _stateMachine;
 
@@ -11,10 +11,9 @@ public class TargetDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent<Player>(out _))
         {
-            _stateMachine.SetTarget(player.transform);
-            _stateMachine.SetChaseState();
+            _stateMachine.SetAttackState();
         }
     }
 
@@ -22,7 +21,7 @@ public class TargetDetector : MonoBehaviour
     {
         if (other.TryGetComponent<Player>(out _))
         {
-            _stateMachine.SetPatrolState();
+            _stateMachine.SetChaseState();
         }
     }
 }
