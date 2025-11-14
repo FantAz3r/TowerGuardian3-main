@@ -1,10 +1,21 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class PatrolState : IEnemyState
 {
     private EnemyStateMachine _enemy;
+    private MonoBehaviour _coroutineRunner;
     private Vector3[] _patrolPoints;
     private int _currentPointIndex;
+    private Coroutine _moveCoroutine;
+
+    public event Action Attacked;
+
+    public PatrolState(MonoBehaviour coroutineRunner)
+    {
+        _coroutineRunner = coroutineRunner;
+    }
 
     public void Enter(EnemyStateMachine enemy)
     {
@@ -22,32 +33,43 @@ public class PatrolState : IEnemyState
         };
 
         _currentPointIndex = 0;
+        _moveCoroutine = _coroutineRunner.StartCoroutine(MoveRoutine());
     }
 
     public void Exit()
     {
+        if (_moveCoroutine != null)
+            _coroutineRunner.StopCoroutine(_moveCoroutine);
+
         _enemy.Mover.SetDirection(Vector2.zero);
+        _moveCoroutine = null;
     }
 
-    public void Update()
+    public IEnumerator MoveRoutine()
     {
-        float threshold = 1f;
-        Vector3 targetPos = _patrolPoints[_currentPointIndex];
-
-        float distance = (_enemy.transform.position - targetPos).sqrMagnitude;
-
-        if (distance < threshold * threshold)
+        while(true)
         {
-            _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
-        }
-        else
-        {
-            Vector3 direction3D = targetPos - _enemy.transform.position;
-            direction3D.y = 0f;
-            Vector2 direction = new Vector2(direction3D.x, direction3D.z).normalized;
+            float threshold = 1f;
+            Vector3 targetPos = _patrolPoints[_currentPointIndex];
 
-            _enemy.Mover.SetDirection(direction);
-            _enemy.Rotator.SetDirection(direction);
+            float distance = (_enemy.transform.position - targetPos).sqrMagnitude;
+
+            if (distance < threshold * threshold)
+            {
+                _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
+            }
+            else
+            {
+                Vector3 direction3D = targetPos - _enemy.transform.position;
+                direction3D.y = 0f;
+                Vector2 direction = new Vector2(direction3D.x, direction3D.z).normalized;
+
+                Debug.Log(direction);
+                _enemy.Mover.SetDirection(direction);
+                _enemy.Rotator.SetDirection(direction);
+            }
+
+            yield return null;
         }
     }
 }

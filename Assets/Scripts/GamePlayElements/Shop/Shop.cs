@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private Transform _contentParent;
+    [SerializeField] private RectTransform _cardContentParent;
+    [SerializeField] private RectTransform _buildingsContentParent;
     [SerializeField] private ProductViewer _productButtonPrefab;
-    [SerializeField] private List<ScriptableObject> _allConfigs;
+
+    [SerializeField] private RectTransform _cards;
+    [SerializeField] private RectTransform _buildings;
+
+    [SerializeField] private List<ShopConfig> _allConfigs;
 
     private List<IShopConfig> _shopConfigs = new();
     private List<ProductViewer> _productButtons = new();
@@ -17,17 +22,25 @@ public class Shop : MonoBehaviour
 
     private void Awake()
     {
+        RectTransform parent;
+
         foreach (var config in _allConfigs)
         {
-            if (config is IShopConfig)
-            {
-                _shopConfigs.Add(config as IShopConfig);
-            }
+            _shopConfigs.Add(config);
         }
 
         foreach (var config in _shopConfigs)
         {
-            var button = Instantiate(_productButtonPrefab, _contentParent);
+            if (config is CardConfig)
+            {
+                parent = _cardContentParent;
+            }
+            else
+            {
+                parent = _buildingsContentParent;
+            }
+
+            var button = Instantiate(_productButtonPrefab, parent);
             button.BuyRequested += OnBuyRequested;
             _productButtons.Add(button);
         }
@@ -40,6 +53,8 @@ public class Shop : MonoBehaviour
         _playerInventory.ResourceAdded += RenderAll;
 
         RenderAll();
+        _cards.gameObject.SetActive(false);
+        _buildings.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
 
@@ -82,7 +97,7 @@ public class Shop : MonoBehaviour
 
         _playerInventory?.SpendResource(config.GetCosts());
         Define(config);
-        RenderAll();  
+        RenderAll();
     }
 
     private void Define(IShopConfig config)
@@ -92,9 +107,10 @@ public class Shop : MonoBehaviour
             _allCardConfigs.Add(config as ICardConfig);
         }
 
-        if(config is WeaponConfig)
+        if (config is WeaponConfig)
         {
             WeaponAdded?.Invoke();
         }
     }
 }
+

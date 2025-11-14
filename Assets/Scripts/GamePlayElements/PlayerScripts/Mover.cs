@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    [SerializeField] private ScriptableObject _configObject;
-    private IMoveConfig _config;
+    [SerializeField] private MoveConfig _configObject;
     private float _moveSpeed;
     public Vector2 Direction { get; private set; }
 
@@ -14,12 +13,10 @@ public class Mover : MonoBehaviour
 
     private void Awake()
     {
-        _config = _configObject as IMoveConfig;
-
-        if (_config == null)
+        if (_configObject == null)
             throw new ArgumentNullException();
 
-        _moveSpeed = _config.MoveSpeed;
+        _moveSpeed = _configObject.MoveSpeed;
     }
 
     private void Update()

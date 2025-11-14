@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896487cc993eb9e42ab3018d45dc8184, type: 3}
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
+  _maxHealth: 100
   _moveSpeed: 3
   _rotationSpeed: 5
-  _maxHealth: 100
   _detectionRadius: 10
-  _damage: 1
+  _damage: 20
   _attackRange: 1.5
   _attackAriaCenter: {x: 0, y: 0, z: 1.26}
   _attackCooldown: 2

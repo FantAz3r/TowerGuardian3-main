@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class TargetDetector : MonoBehaviour
 {
-    private Player _target;
-    private int _playerColliderCount = 0;
+    private EnemyStateMachine _stateMachine;
 
-    public Player GetTarget() => _target;
+    private void Awake()
+    {
+        _stateMachine = GetComponentInParent<EnemyStateMachine>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Player player))
         {
-            _playerColliderCount++;
-            _target = player;
+            _stateMachine.SetChaseState(player);
         }
     }
 
@@ -20,13 +21,7 @@ public class TargetDetector : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            _playerColliderCount--;
-
-            if (_playerColliderCount <= 0)
-            {
-                _playerColliderCount = 0;
-                _target = null;  
-            }
+            _stateMachine.SetPatrolState(player);
         }
     }
 }

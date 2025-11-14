@@ -8,19 +8,19 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material 3
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: c8110ef7c96474f73b2ee5f90e026b10, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ALPHABLEND_ON
-  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-  m_InvalidKeywords: []
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - FANCY_SHADOWS
+  - SAMPLE_SHADOWS
+  - SHADOWS
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -28,6 +28,10 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CausticsTexture:
+        m_Texture: {fileID: 2800000, guid: f100fa7196708e14b9ad43a562e6634e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -42,8 +46,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EdgeFoamTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlintNormalMap:
+        m_Texture: {fileID: 2800000, guid: 381a107aeb4767a488e3b62263b0382f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -62,12 +74,25 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WaveNormalMap:
+        m_Texture: {fileID: 2800000, guid: 1606d47e27863494ba0c833e7bde6324, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
+    - _CausticsNoiseScale: 0.01
+    - _CausticsPower: 1
+    - _CausticsScale: 12
+    - _CausticsSpeed: 0.1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistanceCutoff: 0.06
     - _DstBlend: 10
+    - _EdgeFoamSize: 0.1
+    - _GlintPower: 50
+    - _GlintScale: 20
+    - _GlintSpeed: 0.01
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
@@ -75,12 +100,32 @@ Material:
     - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _ReflectionPower: 0.4
     - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 5
+    - _SunSpecularPower: 30
     - _UVSec: 0
+    - _WaterDepth: 0.278
+    - _Wave1Amps: 0.1
+    - _Wave1Dir: 0.65
+    - _Wave1Length: 1.5
+    - _Wave1Speed: 0.1
+    - _Wave2Amps: 0.15
+    - _Wave2Dir: 0.7
+    - _Wave2Length: 5
+    - _Wave2Speed: 0.75
+    - _WaveNormalScale: 50
+    - _WaveNormalSpeed: 0.02
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0.9372549}
+    - _DeepColor: {r: 0, g: 0.72, b: 0.71, a: 1}
+    - _DistanceColor: {r: 0.04, g: 0.24, b: 0.67, a: 1}
+    - _EdgeFoamColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GlintColor: {r: 0.47, g: 0.47, b: 0.47, a: 1}
+    - _ShallowColor: {r: 0.8469206, g: 0.9519557, b: 0.9811321, a: 1}
+    - _SpecColor: {r: 0.35355338, g: 0.12339707, b: 0.05268639, a: 1}
+    - _SubSurfColor: {r: 0.9528302, g: 0.69135123, b: 0.6067551, a: 1}
   m_BuildTextureStacks: []

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d148b4e32118a9742b66d3cb68d6d4e1, type: 3}
   m_Name: Portal
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 4269905472749670510, guid: dfd44c42333742d4284dba5dc32f8170, type: 3}
   _icon: {fileID: 21300000, guid: 37dfc42e9fbd733499f079acc91f5f87, type: 3}
   _name: Portal
   _description: Finish Level
-  _woodCost: 1
-  _stoneCost: 1
-  _coinCost: 0
+  _costs:
+  - ResourceType: 0
+    Value: 10
+    Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  _prefab: {fileID: 4269905472749670510, guid: dfd44c42333742d4284dba5dc32f8170, type: 3}

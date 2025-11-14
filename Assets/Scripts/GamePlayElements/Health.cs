@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuffble
 {
-    [SerializeField] private ScriptableObject _configObject;
+    [SerializeField] private DemageableConfig _configObject;
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _minValue = 3f;
     [SerializeField] private float _maxValue = 15f;
     [SerializeField] private EntityType _type;
 
-    private IDemageableConfig _config;
     private float _incomingDamage;
     private float _currentValue;
 
@@ -32,8 +31,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         }
         else
         {
-            _config = _configObject as IDemageableConfig;
-            _maxHealth = _config.MaxHealth;
+            _maxHealth = _configObject.MaxHealth;
         }
 
         _currentValue = _maxHealth;
@@ -87,6 +85,6 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     private void Die()
     {
         Died?.Invoke(this);
-        Died = null;
+        gameObject.SetActive(false);
     }
 }

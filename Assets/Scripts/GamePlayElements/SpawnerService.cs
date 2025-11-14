@@ -13,7 +13,7 @@ public class SpawnerService : ISpawnerService
             _spawners[type] = spawner;
     }
 
-    public void SendReqest(SpawnerType spawnerType, EntityType type, Vector3 position, int damage = 1)
+    public void SendReqest(SpawnerType spawnerType, Vector3 position, int damage = 1, EntityType type = EntityType.Generic)
     {
         if (_spawners.TryGetValue(spawnerType, out var spawner))
         {

@@ -8,75 +8,57 @@ public class EnemyAnimator : MonoBehaviour
 
     private Animator _animator;
     private Mover _mover;
-    private Rotator _rotator;
-    private EnemyStateMachine _enemy;
+    private EnemyStateMachine _stateMashine;
+
     private float _currentSpeed;
     private float _velSpeed;
-    private int _hashX;
-    private int _hashY;
-    private ChaseState _attackState;
+    private int _hashSpeed;
+    private int _hashAttack;
 
-    private static readonly int Attack = Animator.StringToHash("Attack");
+    private IEnemyState _state;
 
     private void Awake()
     {
         _mover = GetComponentInParent<Mover>();
-        _rotator = GetComponent<Rotator>();
-        _enemy = GetComponentInParent<EnemyStateMachine>();
+        _stateMashine = GetComponentInParent<EnemyStateMachine>();
         _animator = GetComponent<Animator>();
-        _hashX = Animator.StringToHash("Speed");
-        _hashY = Animator.StringToHash("Y");
+
+        _hashSpeed = Animator.StringToHash("Speed");
+        _hashAttack = Animator.StringToHash("Attack");
     }
 
     private void OnEnable()
     {
-        _enemy.StateChanged += TryAttackAnimation;
+        _stateMashine.StateChanged += OnStateChanged;
     }
 
     private void OnDisable()
     {
-        _enemy.StateChanged -= TryAttackAnimation;
+        _stateMashine.StateChanged -= OnStateChanged;
     }
 
     private void Update()
     {
-        UpdateMovementParameters();
+        UpdateMovementAnimation();
     }
 
-    private void UpdateMovementParameters()
+    private void UpdateMovementAnimation()
     {
-        float dampTime = 0.05f;
-        float moveSpeed = _mover.Direction.SqrMagnitude();
-
+        float moveSpeed = _mover.Direction.sqrMagnitude;
         float targetSpeed = moveSpeed * _speedMultiplier;
         _currentSpeed = Mathf.SmoothDamp(_currentSpeed, targetSpeed, ref _velSpeed, _smoothTime);
 
-        _animator.SetFloat(_hashX, moveSpeed, dampTime, Time.deltaTime);
+        _animator.SetFloat(_hashSpeed, _currentSpeed);
     }
 
-    private void TryAttackAnimation(IEnemyState state)
+    private void OnStateChanged(IEnemyState state)
     {
-        if(state is ChaseState)
-        {
-            _attackState = state as ChaseState;
-            _attackState.Attacked += TriggerAttack;
-        }
-        else
-        {
-            if(_attackState == null)
-                return;
+        _state = state;
 
-            _attackState.Attacked -= TriggerAttack;
-        }
     }
 
-    public void ApplyDamage()
+    public void AnimationAttack()
     {
-        _attackState.ApplyDamage();
-    }
-
-    public void TriggerAttack()
-    {
-        _animator.SetTrigger(Attack);
+        _animator.SetTrigger(_hashAttack);
     }
 }

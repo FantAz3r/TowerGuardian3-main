@@ -176,7 +176,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private IEnumerator ResetAnimatorSpeedAfter(float waitTime)
     {
-        Debug.Log(_animator.speed);
         yield return new WaitForSeconds(waitTime);
         _animator.speed = _defaultAnimatorSpeed;
         _resetSpeedCoroutine = null;

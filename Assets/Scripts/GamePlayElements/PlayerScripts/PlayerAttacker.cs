@@ -149,8 +149,8 @@ public class PlayerAttacker : MonoBehaviour
 
     private void SendReqest(int damage, Vector3 position, EntityType type)
     {
-        _spawnerService.SendReqest(SpawnerType.Resources, type, position, damage);
-        _spawnerService.SendReqest(SpawnerType.Text, type, position, damage);
+        _spawnerService.SendReqest(SpawnerType.Resources, position, damage, type);
+        _spawnerService.SendReqest(SpawnerType.Text, position, damage);
     }
 
     private void OnDestroy()

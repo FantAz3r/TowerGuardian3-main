@@ -26,7 +26,7 @@ public class GameFactory
 
     private DayCycle _cycle;
     private GameStateMachine _stateMachine;
-    private OpenShopAction _shopAction;
+    private OpenShopAction _opebShopAction;
     private Shop _shop;
     private WinLevelMenu _finishMenu;
 
@@ -149,7 +149,7 @@ public class GameFactory
     {
         EnemySpawner prefab = Resources.Load<EnemySpawner>(GameConstants.EnemySpawner);
         EnemySpawner spawner = Object.Instantiate(prefab);
-        spawner.Init(_player.transform, _cycle, level);
+        spawner.Init(_player.transform, _cycle, level, _spawnerService);
     }
 
     public void CreatePlayerPanel()
@@ -177,7 +177,7 @@ public class GameFactory
     {
         List<IAction> actions = new List<IAction>();
 
-        actions.Add(_shopAction);
+        actions.Add(_opebShopAction);
         actions.Add(_uiRoot.GetComponentInChildren<OpenBuildMenuAction>());
 
         InteractionObjectFactory interactionObjectFactory = new InteractionObjectFactory(actions);
@@ -193,14 +193,14 @@ public class GameFactory
     {
         Platform prefab = Resources.Load<Platform>(GameConstants.Platform);
         Platform platform = Object.Instantiate(prefab, new Vector3(0, 0, 18), Quaternion.identity);
-        platform.Init(_shopAction);
+        platform.Init(_opebShopAction);
     }
 
     public void CreateShop()
     {
         Shop prefab = Resources.Load<Shop>(GameConstants.Shop);
         _shop = Object.Instantiate(prefab, _uiRoot.transform);
-        _shopAction = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
+        _opebShopAction = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
         _shop.Init(_inventory, _cards);
     }
 

@@ -8,7 +8,7 @@ public class EnemyDetecter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IDemageable>(out IDemageable enemy) && enemy != null)
+        if (other.TryGetComponent(out IDemageable enemy) && enemy != null)
         {
             enemy.Died += OnEnemyDied;
         }
@@ -16,7 +16,7 @@ public class EnemyDetecter : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<IDemageable>(out IDemageable enemy) && enemy != null)
+        if (other.TryGetComponent(out IDemageable enemy) && enemy != null)
         {
             enemy.Died -= OnEnemyDied;
         }

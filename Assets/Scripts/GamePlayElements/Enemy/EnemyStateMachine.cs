@@ -1,19 +1,15 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private EnemyConfig _config;
 
-    private TargetDetector _targetDetector;
     private Mover _mover;
     private Rotator _rotator;
     private AttackZone _attackZone;
     private IEnemyState _currentState;
-
-    private WaitForSeconds _wait;
-    private float _waitTime = 0.2f;
+    private ISpawnerService _spawnerService;
 
     public event Action<IEnemyState> StateChanged;
     public Transform Target { get; private set; }
@@ -24,56 +20,30 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Awake()
     {
-        _wait = new WaitForSeconds(_waitTime);
-        _targetDetector = GetComponentInChildren<TargetDetector>();
         _mover = GetComponent<Mover>();
         _rotator = GetComponentInChildren<Rotator>();
         _attackZone = GetComponentInChildren<AttackZone>();
     }
 
-    private void OnEnable()
+    public void Init(ISpawnerService spawnerService)
     {
-        StartCoroutine(StateRoutine());
+        _spawnerService = spawnerService;
+        SetState(new PatrolState(this));
     }
 
-    private void OnDisable()
+    public void SetChaseState(Player player)
     {
-        _currentState?.Exit();
-        StopCoroutine(StateRoutine());
+        SetState(new ChaseState(player, this, _spawnerService));
     }
 
-    private IEnumerator StateRoutine()
+    public void SetPatrolState(Player player)
     {
-        yield return _wait;
-
-        while (enabled)
-        {
-            Player player = _targetDetector.GetTarget();
-            Target = player != null ? player.transform : null;
-
-            if (player != null)
-            {
-                if ((_currentState is ChaseState) == false)
-                {
-                    SetState(new ChaseState(player, this));
-                }
-            }
-            else
-            {
-                if ((_currentState is PatrolState) == false)
-                {
-                    SetState(new PatrolState());
-                }
-            }
-
-            _currentState?.Update();
-            yield return _wait;
-        }
+        SetState(new PatrolState(this));
     }
-
 
     private void SetState(IEnemyState newState)
     {
+        Debug.Log(newState);
         _currentState?.Exit();
         _currentState = newState;
         StateChanged?.Invoke(_currentState);

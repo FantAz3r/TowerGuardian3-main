@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     private Transform _player;
     private ObjectPool<Enemy> _pool;
     private DayCycle _dayCycle;
+    private ISpawnerService _spawnerService;
 
     private float _minSpawnDistance;
     private float _maxSpawnDistance;
@@ -20,8 +21,9 @@ public class EnemySpawner : MonoBehaviour
     private WaitForSeconds _dayDelayWait;
     private LevelConfig _currentConfig;
 
-    public void Init(Transform player, DayCycle dayCycle, LevelID level)
+    public void Init(Transform player, DayCycle dayCycle, LevelID level, ISpawnerService spawnerService)
     {
+        _spawnerService = spawnerService;
         _player = player;
         _dayCycle = dayCycle;
 
@@ -58,6 +60,8 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 spawnPos = GetPosition();
         _enemy = _pool.Get();
+        EnemyStateMachine stateMashine = _enemy.GetComponent<EnemyStateMachine>();
+        stateMashine.Init(_spawnerService);
         _enemy.transform.position = spawnPos;
     }
 
@@ -75,6 +79,8 @@ public class EnemySpawner : MonoBehaviour
     {
         while (enabled)
         {
+            Spawn();
+
             if (_dayCycle.CurrentPhase == DayPhase.Day)
             {
                 yield return _dayDelayWait;
@@ -84,7 +90,6 @@ public class EnemySpawner : MonoBehaviour
                 yield return _nightDelayWait;
             }
 
-            Spawn();
         }
     }
 }

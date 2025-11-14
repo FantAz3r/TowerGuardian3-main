@@ -16,6 +16,7 @@ public class LevelViewer : MonoBehaviour
     {
         _playerExperience = playerExperience;
         _playerExperience.OnExperienceAdded += View;
+        experienceText.text = $"0 / {_playerExperience.ExpToNextLevel}";
     }
 
     private void OnDestroy()
