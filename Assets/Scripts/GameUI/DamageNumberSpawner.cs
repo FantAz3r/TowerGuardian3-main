@@ -27,7 +27,7 @@ public class DamageNumberSpawner : ISpawner
         _spawning = true;
     }
 
-    public void Spawn(EntityType type, Vector3 position, int damage)
+    public void Spawn(HealthConfig useles, Vector3 position, int damage)
     {
         if (_spawning == false)
             return;

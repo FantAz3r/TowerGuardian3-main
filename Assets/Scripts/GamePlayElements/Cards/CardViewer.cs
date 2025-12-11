@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,25 +8,15 @@ public class CardViewer : MonoBehaviour
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private TMP_Text _stats;
-    [SerializeField] private List<Image> _stars;
-
+    [SerializeField] private TMP_Text _level;
 
     public void Render(ICardConfig config)
     {
-        Clear();
         _icon.sprite = config.Icon;
         _nameText.text = config.Name;
         _descriptionText.text = config.Description;
-        ViewLevel(config);
+        _level.text = $"LVL {config.Level}";
         InitStats(config);
-    }
-
-    private void ViewLevel(ICardConfig config)
-    {
-        for (int i = 0; i < config.Level; i++)
-        {
-            _stars[i].color = Color.yellow;
-        }
     }
 
     private void InitStats(ICardConfig config)
@@ -67,13 +56,5 @@ public class CardViewer : MonoBehaviour
             return $"<color=red>{difference:0.#}</color>";
 
         return "";
-    }
-
-    private void Clear()
-    {
-        foreach (var item in _stars)
-        {
-            item.color = Color.black;
-        }
     }
 }

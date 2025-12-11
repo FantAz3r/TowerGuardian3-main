@@ -15,13 +15,12 @@ public class MoveQuest : Quest
 
     public override void Run()
     {
-        Debug.Log("MoveQuest started");
         _mover.Moved += Complete;
     }
 
     public override void Complete()
     {
         _mover.Moved -= Complete;
-        CompleteQuest();
+        base.Complete();
     }
 }

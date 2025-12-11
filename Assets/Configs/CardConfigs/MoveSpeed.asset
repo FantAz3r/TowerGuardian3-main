@@ -15,7 +15,9 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 43f6e8b0b0d8e4344baafad16e020839, type: 3}
   _name: Move Speed
   _description: Increace Move Speed
+  _costs: []
   _chanceToView: 0.5
+  _level: 0
   _buffType: 5
   _baseIncreaseValue: 0.2
   _upgradeValuePerLevel: 0.1

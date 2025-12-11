@@ -15,14 +15,15 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: cd30661a87252bd48aab19156cb1e811, type: 3}
   _name: Hand
   _description: 
-  _chanceToView: 0
   _costs: []
+  _chanceToView: 0
+  _level: 0
   _prefab: {fileID: 0}
   _type: 0
-  _targetType: 3
+  _targetType: 4
   _controller: {fileID: 9100000, guid: cedb260312911b4488266dfcd5693a2a, type: 2}
   _baseDamage: 10
-  _baseAttackDelay: 1
+  _baseAttackDelay: 0.7
   _baseAttackRange: 2
   _baseMultiply: 2
   _damageUpgradePercent: 0.25

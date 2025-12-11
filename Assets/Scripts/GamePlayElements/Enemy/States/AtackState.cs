@@ -1,64 +1,70 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackState : State
+public class AttackState : State, IEnemyState
 {
+    private float _updateTime = 0.05f;
+    private WaitForSeconds _delay;
+
     private EnemyStateMachine _stateMachine;
     private EnemyAnimator _animator;
     private Transform _player;
-    private ISpawnerService _spawnerService;
-    private WaitForSeconds _wait;
-    
-    public AttackState(EnemyStateMachine stateMachine, EnemyAnimator animator, ISpawnerService spawnerService, Transform player) : base(stateMachine)
+    private IDemageable _playerHealth;
+
+    public AttackState(EnemyStateMachine stateMachine, EnemyAnimator animator, Transform target) : base(stateMachine, true)
     {
-        _spawnerService = spawnerService;
         _stateMachine = stateMachine;
         _animator = animator;
-        _player = player;
+        _player = target;
 
-        _wait = new WaitForSeconds(_stateMachine.Config.AttackCooldown);
+        _delay = new WaitForSeconds(_updateTime);
+        _playerHealth = _player.GetComponent<IDemageable>();
     }
 
     public override void Enter()
     {
         _stateMachine.Mover.SetDirection(Vector3.zero);
         _animator.Attacked += OnAnimAttackHit;
-        base.Enter();
     }
 
     public override void Exit()
     {
         _animator.Attacked -= OnAnimAttackHit;
-        base.Exit();
+        _animator.SuspendAttack();
     }
 
     public override IEnumerator UpdateRoutine()
     {
+        if (_player == null)
+            yield break;
+
+        float speedForAnimator = 0f;
+        float attackCooldown = _stateMachine.Config.AttackCooldown;
+        float timeSinceLastAttack = 0f;
+        _animator.PlayAttack();
+
         while (true)
         {
-            if (_player == null)
-                yield break;
+            RotateTo(_player.position);
+            _animator.UpdateSpeed(speedForAnimator);
 
-            Vector3 toPlayer = _player.position - _stateMachine.transform.position;
-            toPlayer.y = 0f;
-            Vector2 dirFlat = new Vector2(toPlayer.normalized.x, toPlayer.normalized.z);
+            if (timeSinceLastAttack >= attackCooldown)
+            {
+                _animator.PlayAttack();
+                timeSinceLastAttack = 0f;
+            }
+            else
+            {
+                timeSinceLastAttack += Time.deltaTime;
+            }
 
-            _stateMachine.Rotator.SetDirection(dirFlat);
-            _animator.PlayAttack();
-
-            yield return _wait;
+            yield return _delay;
         }
     }
 
     private void OnAnimAttackHit()
     {
-        var playerHealth = _player.GetComponent<IDemageable>();
         int damage = _stateMachine.Config.Damage;
-
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(damage);
-            _spawnerService.SendReqest(SpawnerType.Text, _player.transform.position, damage);
-        }
+        _playerHealth.TakeDamage(damage);
     }
 }

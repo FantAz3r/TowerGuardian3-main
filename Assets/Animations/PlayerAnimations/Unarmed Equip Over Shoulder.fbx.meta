@@ -58,7 +58,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.53173774
-        functionName: EquipWeapon
+        functionName: OnEquipWeapon
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a3368b3665d86d443a049f3ea4fab770, type: 3}
         floatParameter: 0

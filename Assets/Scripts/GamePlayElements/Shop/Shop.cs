@@ -1,62 +1,21 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private RectTransform _cardContentParent;
-    [SerializeField] private RectTransform _buildingsContentParent;
+    [SerializeField] private RectTransform _weaponContentParent;
+    [SerializeField] private RectTransform _abilitiesContentParent;
+    [SerializeField] private RectTransform _buffContentParent;
     [SerializeField] private ProductViewer _productButtonPrefab;
+    [SerializeField] private CardData _cardData;
 
-    [SerializeField] private RectTransform _cards;
-    [SerializeField] private RectTransform _buildings;
-
-    [SerializeField] private List<ShopConfig> _allConfigs;
-
-    private List<IShopConfig> _shopConfigs = new();
+    private List<ICardConfig> _shopConfigs = new();
     private List<ProductViewer> _productButtons = new();
     private Inventory _playerInventory;
-    private AllCardConfigs _allCardConfigs;
 
     public event Action WeaponAdded;
-
-    private void Awake()
-    {
-        RectTransform parent;
-
-        foreach (var config in _allConfigs)
-        {
-            _shopConfigs.Add(config);
-        }
-
-        foreach (var config in _shopConfigs)
-        {
-            if (config is CardConfig)
-            {
-                parent = _cardContentParent;
-            }
-            else
-            {
-                parent = _buildingsContentParent;
-            }
-
-            var button = Instantiate(_productButtonPrefab, parent);
-            button.BuyRequested += OnBuyRequested;
-            _productButtons.Add(button);
-        }
-    }
-
-    public void Init(Inventory playerInventory, AllCardConfigs cardConfigs)
-    {
-        _playerInventory = playerInventory;
-        _allCardConfigs = cardConfigs;
-        _playerInventory.ResourceAdded += RenderAll;
-
-        RenderAll();
-        _cards.gameObject.SetActive(false);
-        _buildings.gameObject.SetActive(false);
-        gameObject.SetActive(false);
-    }
 
     private void OnDestroy()
     {
@@ -69,14 +28,79 @@ public class Shop : MonoBehaviour
         }
     }
 
+    public void Init(Inventory playerInventory)
+    {
+        _playerInventory = playerInventory;
+        _playerInventory.ResourceAdded += RenderAll;
+
+        gameObject.SetActive(false);
+    }
+
+    public void OnActivate()
+    {
+        gameObject.SetActive(true);
+        LoadContent();
+        RenderAll();
+    }
+
+    private void LoadContent()
+    {
+        ClearOldButtons();
+
+        RectTransform parent;
+
+        foreach (var config in _cardData.GetConfigs())
+        {
+            _shopConfigs.Add(config);
+        }
+
+        LoadCards();
+
+        foreach (var config in _shopConfigs)
+        {
+            if (config is WeaponConfig)
+            {
+                parent = _weaponContentParent;
+            }
+            else if (config is AbilityConfig)
+            {
+                parent = _abilitiesContentParent;
+            }
+            else if(config is BuffConfig)
+            {
+                parent = _buffContentParent;
+            }
+            else
+            {
+                parent = null;
+                Debug.Log("конфиг " + config + " не подходит в магазин");
+            }
+
+            var button = Instantiate(_productButtonPrefab, parent);
+            button.BuyRequested += OnBuyRequested;
+            _productButtons.Add(button);
+        }
+    }
+
     private void RenderAll()
     {
         for (int i = 0; i < _shopConfigs.Count; i++)
         {
             bool canBuy = CanAfford(_shopConfigs[i]);
-            _productButtons[i].Render(_shopConfigs[i], canBuy);
             _productButtons[i].gameObject.SetActive(true);
+            _productButtons[i].Render(_shopConfigs[i], true, canBuy);
         }
+    }
+
+    private void ClearOldButtons()
+    {
+        foreach (ProductViewer button in _productButtons)
+        {
+            button.BuyRequested -= OnBuyRequested;
+            Destroy(button.gameObject);
+        }
+
+        _productButtons.Clear();
     }
 
     private bool CanAfford(IShopConfig config)
@@ -87,7 +111,7 @@ public class Shop : MonoBehaviour
         return _playerInventory.IsEnoughResource(config.GetCosts());
     }
 
-    private void OnBuyRequested(ProductViewer button, IShopConfig config)
+    private void OnBuyRequested(ProductViewer button, ICardConfig config)
     {
         if (CanAfford(config) == false)
         {
@@ -96,21 +120,40 @@ public class Shop : MonoBehaviour
         }
 
         _playerInventory?.SpendResource(config.GetCosts());
-        Define(config);
+
+        config.Upgrade();
+        UpdateCardSave(config);
         RenderAll();
     }
 
-    private void Define(IShopConfig config)
+    private void LoadCards()
     {
-        if (config is ICardConfig)
+        if (YG2.saves.AllCards == null)
         {
-            _allCardConfigs.Add(config as ICardConfig);
+            foreach( var card in _cardData.GetConfigs())
+            {
+                CardSaveData cardData = new CardSaveData(0, card.Name, false, false);
+                card.InitFromData(cardData);
+            }
+
+            return;
         }
 
-        if (config is WeaponConfig)
+        foreach (var card in _shopConfigs)
         {
-            WeaponAdded?.Invoke();
+            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.Name == card.Name);
+            card.InitFromData(cardData);
         }
+    }
+
+    private void UpdateCardSave(ICardConfig card)
+    {
+        if (YG2.saves.AllCards == null)
+            YG2.saves.AllCards = new();
+
+        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.Name == card.Name);
+        YG2.saves.AllCards.Add(card.CreateSaveData(true));
+        YG2.SaveProgress();
     }
 }
 

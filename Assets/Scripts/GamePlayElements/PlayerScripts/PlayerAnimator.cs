@@ -11,7 +11,7 @@ public class PlayerAnimator : MonoBehaviour
     [Tooltip("»м€ клипа атаки внутри AnimatorController. ≈сли пусто, будет попытка вз€ть первый попавшийс€ клип.")]
     [SerializeField] private string attackClipName = "Attack";
 
-    private Animator _animator;
+    private UnityEngine.Animator _animator;
     private Mover _mover;
     private Rotator _rotator;
     private PlayerAttacker _attacker;
@@ -31,18 +31,18 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<UnityEngine.Animator>();
         _mover = GetComponentInParent<Mover>();
         _rotator = GetComponentInParent<Rotator>();
         _attacker = GetComponentInParent<PlayerAttacker>();
 
-        _hashX = Animator.StringToHash("X");
-        _hashY = Animator.StringToHash("Y");
-        _hashWeaponSeted = Animator.StringToHash("WeaponSeted");
-        _hashWeaponRemoved = Animator.StringToHash("WeaponRemoved");
-        _hashAttack = Animator.StringToHash("Attack");
-        _hashRandom = Animator.StringToHash("Random");
-        _hasWeapon = Animator.StringToHash("HasWeapon");
+        _hashX = UnityEngine.Animator.StringToHash("X");
+        _hashY = UnityEngine.Animator.StringToHash("Y");
+        _hashWeaponSeted = UnityEngine.Animator.StringToHash("WeaponSeted");
+        _hashWeaponRemoved = UnityEngine.Animator.StringToHash("WeaponRemoved");
+        _hashAttack = UnityEngine.Animator.StringToHash("Attack");
+        _hashRandom = UnityEngine.Animator.StringToHash("Random");
+        _hasWeapon = UnityEngine.Animator.StringToHash("HasWeapon");
 
         if (_animator != null)
             _defaultAnimatorSpeed = _animator.speed;
@@ -56,6 +56,7 @@ public class PlayerAnimator : MonoBehaviour
         _attacker.WeaponSeted += OnWeaponSeted;
         _attacker.WeaponRemoved += OnWeaponRemoved;
         _attacker.Attacked += PlayAttack;
+        _attacker.Suspended += OnSuspendAttack;
     }
 
     private void OnDisable()
@@ -165,8 +166,13 @@ public class PlayerAnimator : MonoBehaviour
             StopCoroutine(_resetSpeedCoroutine);
 
         _animator.speed = requiredSpeed;
-        _animator.SetTrigger(_hashAttack);
+        _animator.SetBool(_hashAttack, true);
         _resetSpeedCoroutine = StartCoroutine(ResetAnimatorSpeedAfter(desiredDuration));
+    }
+
+    private void OnSuspendAttack()
+    {
+        _animator.SetBool(_hashAttack, false);
     }
 
     private void SetParametrs()

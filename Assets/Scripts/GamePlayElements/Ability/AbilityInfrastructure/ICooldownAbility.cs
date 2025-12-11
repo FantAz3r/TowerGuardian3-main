@@ -5,6 +5,6 @@ public interface ICooldownAbility : IAbility
 {
     float Cooldown { get; }
 
-    event Action<float, float> CooldownStarted;
+    event Action<float, float> Cooldowning;
     IEnumerator CooldownRoutine();
 }

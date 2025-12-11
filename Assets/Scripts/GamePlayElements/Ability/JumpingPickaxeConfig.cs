@@ -1,0 +1,35 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Abilities/JumpingPickaxeConfig")]
+public class JumpingPickaxeConfig : AbilityConfig
+{
+    [SerializeField] private int _damage = 1;
+    [SerializeField] private int _bouncesCount = 3;
+    [SerializeField] private float _bounceRange = 8f;
+    [SerializeField] private float _cooldownPerHit = 3f;
+    [SerializeField] private float _flySpeed = 20;
+
+    [SerializeField] private int _damagePerLevel = 1;
+    [SerializeField] private int _bouncePerLevel = 1;
+    [SerializeField] private float _rangePerLevel = 1f;
+    [SerializeField] private float _cooldownPerLevel = 0.2f;
+
+    public float FlySpeed => _flySpeed;
+    public int Damage => Mathf.Max(_damage, _damage + _damagePerLevel * (Level - 1));
+    public int BouncesCount => Mathf.Max(_bouncesCount, _bouncesCount + _bouncePerLevel * (Level - 1));
+    public float BounceRange => Mathf.Max(_bounceRange, _bounceRange + _rangePerLevel * (Level - 1));
+    public float CooldownPerHit => Mathf.Max(_cooldownPerHit, _cooldownPerHit - _cooldownPerLevel * (Level - 1));
+
+    public override List<CardStats> GetStats()
+    {
+        return new List<CardStats>
+        {
+            new CardStats("Damage", Damage, Mathf.Max(_damage, _damage + _damagePerLevel * Level)),
+            new CardStats("Bounces Count", BouncesCount, Mathf.Max(_bouncesCount, _bouncesCount + _bouncePerLevel * Level)),
+            new CardStats("Bounce Range", BounceRange, Mathf.Max(_bounceRange, _bounceRange + _rangePerLevel * Level)), 
+            new CardStats("Cooldown per Hit (s)", CooldownPerHit, Mathf.Max(_cooldownPerHit, _cooldownPerHit - _cooldownPerLevel * Level)) 
+        };
+    }
+}
+

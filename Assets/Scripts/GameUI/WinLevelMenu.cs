@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using YG;
 
-public class WinLevelMenu : FinishMenu
+public class WinLevelMenu : LevelMenu
 {
     [SerializeField] private Button _nextLevelButton;
 
@@ -14,9 +13,14 @@ public class WinLevelMenu : FinishMenu
 
     private void OnNextLevelClicked()
     {
-        YG2.PauseGameNoEditEventSystem(false);
-        GameStateMachine.EnterIn<LoadingLevelState, LevelID>(CurrentLevel + 1);
+        GameStateMachine.EnterIn<LoadingLevelState, LevelID>(CurrentLevel);
         CloseMenu();
+    }
+
+    protected override void OpenMenu()
+    {
+        base.OpenMenu();
+        ScoreCounter.OnEndLevel();
     }
 
     protected override void OnDestroy()

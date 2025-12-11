@@ -7,17 +7,17 @@ public class CameraFollower : MonoBehaviour
 
     private Transform _target;
     private Vector3 _currentPosition;
-    private IDemageable _playerHealth;
+    private Health _playerHealth;
 
     public void Init(Transform target)
     {
         _target = target;
         transform.rotation = Quaternion.Euler(_rotation);
-        _playerHealth = target.GetComponent<IDemageable>();
+        _playerHealth = target.GetComponent<Health>();
 
         if (_playerHealth != null)
         {
-            _playerHealth.Died += StopFollow;
+            _playerHealth.Destroyed += StopFollow;
         }
     }
 
@@ -30,11 +30,11 @@ public class CameraFollower : MonoBehaviour
         _currentPosition = _target.position;
     }
 
-    public void StopFollow(IDemageable demageable)
+    public void StopFollow()
     {
         if (_playerHealth != null)
         {
-            _playerHealth.Died -= StopFollow; 
+            _playerHealth.Destroyed -= StopFollow; 
         }
 
         _target = null;

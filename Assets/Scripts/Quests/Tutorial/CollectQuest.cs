@@ -1,6 +1,10 @@
-public class CollectQuest : UpdatableQuest
+public class CollectQuest : Quest
 {
     private readonly Inventory _inventory;
+    public override QuestType GetQuestType()
+    {
+        return QuestType.Collect;
+    }
 
     public CollectQuest(Inventory inventory)
     {
@@ -21,10 +25,5 @@ public class CollectQuest : UpdatableQuest
     {
         Stop();  
         base.Complete();
-    }
-
-    public override QuestType GetQuestType()
-    {
-        return QuestType.Collect;
     }
 }

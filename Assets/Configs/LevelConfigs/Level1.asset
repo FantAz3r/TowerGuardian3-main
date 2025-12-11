@@ -13,14 +13,19 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   _level: 2
+  _quests: 010000000200000003000000040000000500000006000000
+  _playerSpawnPoint: {x: 0, y: 0, z: 4}
+  _portalData: {fileID: 11400000, guid: d0916e15afa7dcb40ac97a40782559cd, type: 2}
   _dayDuration: 20
   _nightDuration: 15
   _dayLightIntensity: 1
   _nightLightIntensity: 0.3
   _transitionDuration: 2
-  _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
-  _nightLightColor: {r: 0, g: 0, b: 0, a: 1}
-  _minSpawnDistance: 10
-  _maxSpawnDistance: 40
-  _nightSpawnDelay: 100
-  _daySpawnDelay: 100
+  _dayLightColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
+  _nightLightColor: {r: 0.24528301, g: 0, b: 0, a: 1}
+  _container: {fileID: 4123103567900668795, guid: 7fd5f2745c3e24640a66b37e74bcae6c, type: 3}
+  _nightSpawnDelay: 3
+  _daySpawnDelay: 10
+  _scorePerTimeOneStar: 1
+  _scorePerTimeTwoStar: 2
+  _scorePerTimeThreeStar: 3

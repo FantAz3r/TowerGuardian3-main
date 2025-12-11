@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "WeaponConfig", menuName = "Configs/WeaponConfig")]
+
 public class WeaponConfig : CardConfig
 {
     [SerializeField] private Weapon _prefab;

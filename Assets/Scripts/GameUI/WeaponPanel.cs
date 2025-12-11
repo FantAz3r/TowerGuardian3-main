@@ -18,6 +18,7 @@ public class WeaponPanel : MonoBehaviour
         _attacker = attacker;
 
         _container.WeaponAdded += OnWeaponAdded;
+        _container.WeaponRemoved += OnWeaponRemoved;
 
         if (_attacker.CurrentWeapon != null)
         {
@@ -34,6 +35,8 @@ public class WeaponPanel : MonoBehaviour
     private void OnDestroy()
     {
         _container.WeaponAdded -= OnWeaponAdded;
+        _container.WeaponRemoved -= OnWeaponRemoved;
+
         _dropdown.onValueChanged.RemoveListener(OnDropdownSelected);
     }
 
@@ -47,6 +50,18 @@ public class WeaponPanel : MonoBehaviour
 
         _dropdown.options.Add(option);
         _dropdown.RefreshShownValue();
+    }
+
+    private void OnWeaponRemoved(WeaponConfig config)
+    {
+        int index = _configs.IndexOf(config);
+
+        if (index >= 0)
+        {
+            _configs.RemoveAt(index);
+            _dropdown.options.RemoveAt(index);
+            _dropdown.RefreshShownValue();
+        }
     }
 
     private void OnDropdownSelected(int index)

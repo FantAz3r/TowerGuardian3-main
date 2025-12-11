@@ -5,7 +5,6 @@ using UnityEngine;
 public class Platform : InteractionMethod
 {
     [SerializeField] private float _interactionTime = 3f;
-    [SerializeField] private BuildingConfig _buildingConfig;
 
     private float _currentTime = 0f;
     private float _delta = 0.1f;
@@ -19,12 +18,10 @@ public class Platform : InteractionMethod
     public event Action<float, float> TimerUpdated;
     public event Action Disabled;
 
-    public BuildingConfig BuildingConfig => _buildingConfig;
 
     private void Awake()
     {
         _wait = new WaitForSeconds(_delta);
-
     }
 
     private void OnTriggerEnter(Collider other)

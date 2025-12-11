@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ProductViewer : MonoBehaviour
+{
+    [SerializeField] private Image _image;
+    [SerializeField] private TMP_Text _name;
+    [SerializeField] private TMP_Text _description;
+    [SerializeField] private TMP_Text _level;
+    [SerializeField] private List<CostView> _costs;
+
+    Button _button;
+    private ICardConfig _config;
+
+    public event Action<ProductViewer, ICardConfig> BuyRequested;
+
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnClick);
+    }
+
+    public void Render(ICardConfig config, bool isBuy,  bool interactable = true)
+    {
+        _image.sprite = config.Icon;
+        _config = config;
+        _name.text = config.Name ?? string.Empty;
+        _description.text = config.Description ?? string.Empty;
+
+        if(_config is CardConfig card)
+        {
+            _level.text = $"LVL {card.Level.ToString()}";
+        }
+
+        for (int i = 0; i < _costs.Count; i++)
+        {
+            if(isBuy)
+            {
+                if (i < _config.GetCosts().Count)
+                {
+                    _costs[i].gameObject.SetActive(true);
+                    _costs[i].Render(_config.GetCosts()[i]);
+                }
+                else
+                {
+                    _costs[i].gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                if (i < _config.GetSellCost().Count)
+                {
+                    _costs[i].gameObject.SetActive(true);
+                    _costs[i].Render(_config.GetSellCost()[i]);
+                }
+                else
+                {
+                    _costs[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
+        _button.interactable = interactable;
+    }
+
+    private void OnClick()
+    {
+        if (_config == null) return;
+        BuyRequested?.Invoke(this, _config);
+    }
+
+    private void OnDestroy()
+    {
+        _button.onClick.RemoveListener(OnClick);
+    }
+}

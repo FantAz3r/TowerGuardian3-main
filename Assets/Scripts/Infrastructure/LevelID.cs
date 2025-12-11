@@ -6,4 +6,5 @@ public enum LevelID
     Level2,
     Level3,
     Level4,
+    None
 }

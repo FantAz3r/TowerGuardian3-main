@@ -1,24 +1,31 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PatrolState : State
 {
+    private float _updateTime = 0.05f;
+    private WaitForSeconds _delay;
     private EnemyStateMachine _stateMashine;
     private EnemyAnimator _animator;
     private Vector3[] _patrolPoints;
     private int _currentPointIndex;
+    private NavMeshAgent _agent;
 
-    public PatrolState(EnemyStateMachine stateMachine, EnemyAnimator animator) : base(stateMachine )
+    public PatrolState(EnemyStateMachine stateMachine, NavMeshAgent agent, EnemyAnimator animator) : base(stateMachine, true)
     {
         _stateMashine = stateMachine;
+        _agent = agent;
+        _animator = animator;
 
+        _delay = new WaitForSeconds(_updateTime);
     }
 
     public override void Enter()
     {
+        _agent.isStopped = false;
         Transform origin = _stateMashine.transform;
-        float edgeSize = 5f;  
+        float edgeSize = 15f;
 
         _patrolPoints = new Vector3[]
         {
@@ -29,38 +36,33 @@ public class PatrolState : State
         };
 
         _currentPointIndex = 0;
-        base.Enter();
     }
 
     public override void Exit()
     {
-        base.Exit();
+        _agent.isStopped = true;
     }
 
     public override IEnumerator UpdateRoutine()
     {
-        while(true)
+        while (true)
         {
-            float threshold = 1f;
-            Vector3 targetPos = _patrolPoints[_currentPointIndex];
+            float threshold = 0.05f;
+            Vector3 targetPosition = _patrolPoints[_currentPointIndex];
+            _agent.destination = targetPosition;
+            RotateTo(targetPosition);
 
-            float distance = (_stateMashine.transform.position - targetPos).sqrMagnitude;
 
-            if (distance < threshold * threshold)
+            if (_agent.remainingDistance < threshold)
             {
                 _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
             }
             else
             {
-                Vector3 direction3D = targetPos - _stateMashine.transform.position;
-                direction3D.y = 0f;
-                Vector2 direction = new Vector2(direction3D.x, direction3D.z).normalized;
-
-                _stateMashine.Mover.SetDirection(direction);
-                _stateMashine.Rotator.SetDirection(direction);
+                _animator.UpdateSpeed(_stateMashine.Config.MoveSpeed);
             }
 
-            yield return null;
+            yield return _delay;
         }
     }
 }

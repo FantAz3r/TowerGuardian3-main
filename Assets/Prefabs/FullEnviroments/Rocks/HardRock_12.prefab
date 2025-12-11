@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 5055789330189037720}
   - component: {fileID: 8180258821515493181}
   - component: {fileID: 6224794127226063863}
-  - component: {fileID: 5856214331437557428}
   - component: {fileID: 8621264921345767394}
   - component: {fileID: -1710512444220901283}
-  m_Layer: 0
+  - component: {fileID: 8929118195836825398}
+  - component: {fileID: 9185350270722378368}
+  m_Layer: 7
   m_Name: HardRock_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,28 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5856214331437557428
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5576042616611465762}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7163008459117477625, guid: 49bb6499f133e874fa5332bc2e0310f5, type: 3}
 --- !u!114 &8621264921345767394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,3 +116,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71924de8a2000ba4f901ad5488fd2a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8929118195836825398
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5576042616611465762}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6359153, y: 0.42552567, z: 1.7509251}
+  m_Center: {x: 0.10273844, y: 0.19436345, z: 0.3158835}
+--- !u!54 &9185350270722378368
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5576042616611465762}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

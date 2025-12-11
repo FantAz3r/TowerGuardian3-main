@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
@@ -10,12 +12,21 @@ public class EnemyStateMachine : MonoBehaviour
     private Rotator _rotator;
     private AttackZone _attackZone;
     private IEnemyState _currentState;
-    private ISpawnerService _spawnerService;
     private EnemyAnimator _animator;
+    private NavMeshAgent _agent;
+    private Transform _player;
+    private PickUper _picker;
+
+    private Coroutine _currentCoroutine;
+
+    private ThrownObjectDetector _objectDetector;
+    private TargetDetector _targetDetector;
+    private AttackDetector _attackDetector;
 
     private Dictionary<StateType, State> _states = new Dictionary<StateType, State>();
 
     public event Action<IEnemyState> StateChanged;
+
     public Transform Target { get; private set; }
     public Mover Mover => _mover;
     public Rotator Rotator => _rotator;
@@ -28,43 +39,133 @@ public class EnemyStateMachine : MonoBehaviour
         _rotator = GetComponentInChildren<Rotator>();
         _attackZone = GetComponentInChildren<AttackZone>();
         _animator = GetComponentInChildren<EnemyAnimator>();
-
-        _states.Add(StateType.Patrol, new PatrolState(this, _animator));
-        _states.Add(StateType.Chase, new ChaseState(this, _animator, Target));
-        _states.Add(StateType.Attack, new AttackState(this, _animator, _spawnerService, Target));
+        _agent = GetComponent<NavMeshAgent>();
+        _targetDetector = GetComponentInChildren<TargetDetector>();
+        _attackDetector = GetComponentInChildren<AttackDetector>();
+        _objectDetector = GetComponentInChildren<ThrownObjectDetector>();
+        _picker = GetComponentInChildren<PickUper>();
     }
 
-    public void Init(ISpawnerService spawnerService)
+    public void Init(Transform player)
     {
-        _spawnerService = spawnerService;
+        _player = player;
+
+        ActivateStates();
+
+        if (_states.ContainsKey(StateType.Patrol))
+        {
+            SetState(_states[StateType.Patrol]);
+        }
+    }
+
+    private void OnEnable()
+    {
+        _targetDetector.PlayerDetected += OnSeePlayer;
+        _targetDetector.PlayerLost += OnLostPlayer;
+        _attackDetector.PlayerDetected += OnPlayerInMeleeRange;
+        _attackDetector.PlayerLost += OnChasePlayer;
+    }
+
+    private void OnDisable()
+    {
+        _currentState?.Exit();
+
+        _targetDetector.PlayerDetected -= OnSeePlayer;
+        _targetDetector.PlayerLost -= OnLostPlayer;
+        _attackDetector.PlayerDetected -= OnPlayerInMeleeRange;
+        _attackDetector.PlayerLost -= OnChasePlayer;
+    }
+
+    private void OnSeePlayer()
+    {
+        int random = UnityEngine.Random.Range(0, 2);
+
+        if (random == 0 || _states.ContainsKey(StateType.FindObject) == false)
+        {
+            SetState(_states[StateType.Chase]);
+        }
+        else
+        {
+            SetState(_states[StateType.FindObject]);
+        }
+    }
+
+    public void OnLostPlayer()
+    {
         SetState(_states[StateType.Patrol]);
     }
 
-    public void SetTarget(Transform target)
-    {
-        Target = target;
-    }
-
-    public void SetChaseState()
-    {
-        SetState(_states[StateType.Chase]);
-    }
-
-    public void SetPatrolState()
-    {
-        SetState(_states[StateType.Patrol]);
-    }
-
-    public void SetAttackState()
+    private void OnPlayerInMeleeRange()
     {
         SetState(_states[StateType.Attack]);
     }
 
+    public void OnChasePlayer()
+    {
+        SetState(_states[StateType.Chase]);
+    }
+
+    public void OnReadyToThrow(Transform throwObject)
+    {
+        ThrowState throwState = _states[StateType.Thrown] as ThrowState;
+        throwState.SetThrownObject(throwObject);
+        SetState(_states[StateType.Thrown]);
+    }
+
     private void SetState(IEnemyState newState)
     {
+        if (_currentState == newState)
+            return;
+
+        StartCoroutine(SwitchState(newState));
+    }
+
+    private IEnumerator SwitchState(IEnemyState newState)
+    {
+        if (_currentCoroutine != null)
+        {
+            while (_currentState.CanExit == false)
+            {
+                yield return _currentCoroutine;
+            }
+
+            StopCoroutine(_currentCoroutine);
+            _currentCoroutine = null;
+
+        }
+
         _currentState?.Exit();
         _currentState = newState;
         StateChanged?.Invoke(_currentState);
         _currentState.Enter();
+
+        _currentCoroutine = StartCoroutine(_currentState.UpdateRoutine());
+    }
+
+    private void ActivateStates()
+    {
+        _states.Clear();
+
+        foreach (var stateType in _config.AllowedStates)
+        {
+            switch (stateType)
+            {
+                case StateType.Patrol:
+                    _states.Add(StateType.Patrol, new PatrolState(this, _agent, _animator));
+                    break;
+                case StateType.Chase:
+                    _states.Add(StateType.Chase, new ChaseState(this, _agent, _animator, _player));
+                    break;
+                case StateType.Attack:
+                    _states.Add(StateType.Attack, new AttackState(this, _animator, _player));
+                    break;
+                case StateType.Thrown:
+                    _states.Add(StateType.Thrown, new ThrowState(this, _animator, _player));
+                    break;
+                case StateType.FindObject:
+                    _states.Add(StateType.FindObject, new PickupState(this, _animator, _objectDetector, _agent, _picker));
+                    break;
+            }
+        }
     }
 }

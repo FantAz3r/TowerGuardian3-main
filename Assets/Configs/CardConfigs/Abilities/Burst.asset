@@ -15,9 +15,10 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 662ba48cc27c1314fba879bfbd1bef0b, type: 3}
   _name: Burst
   _description: Many Atacks
-  _chanceToView: 0.5
   _costs: []
-  _abilityType: 2
+  _chanceToView: 0.5
+  _level: 0
+  _abilityType: 3
   _baseHitCount: 4
   _baseAttackDelay: 0.3
   _baseCooldown: 15

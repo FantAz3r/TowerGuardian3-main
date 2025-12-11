@@ -3,37 +3,29 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuffble
 {
-    [SerializeField] private DemageableConfig _configObject;
+    [SerializeField] private HealthConfig _config;
     [SerializeField] private float _maxHealth;
-    [SerializeField] private float _minValue = 3f;
-    [SerializeField] private float _maxValue = 15f;
     [SerializeField] private EntityType _type;
 
-    private float _incomingDamage;
     private float _currentValue;
-
-    public float IncomingDamage => _incomingDamage;
-    public float MaxHealth => _maxHealth;
+    private float _startMaxHealth;
+    public HealthConfig Config => _config;
     public float CurrentHealth => _currentValue;
 
     public event Action<float> IsValueChange;
-    public event Action<float> HealthLost;
+    public event Action<float> DamageTaken;
+    public event Action<float> Healed;
+
     public event Action<Health> Died;
+    public event Action Destroyed;
 
     public Transform GetTransform() => transform;
     public EntityType GetHealthType() => _type;
 
     private void Awake()
     {
-        if (_configObject == null)
-        {
-            _maxHealth = (int)UnityEngine.Random.Range(_minValue, _maxValue);
-        }
-        else
-        {
-            _maxHealth = _configObject.MaxHealth;
-        }
-
+        _maxHealth = _config.MaxHealth;
+        _startMaxHealth = _config.MaxHealth;
         _currentValue = _maxHealth;
     }
 
@@ -48,6 +40,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         {
             if (_currentValue + healAmount > _maxHealth)
             {
+                healAmount = _maxHealth - _currentValue;
                 _currentValue = _maxHealth;
             }
             else
@@ -55,6 +48,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
                 _currentValue += healAmount;
             }
 
+            Healed?.Invoke(healAmount);
             IsValueChange?.Invoke(_currentValue);
         }
     }
@@ -65,26 +59,35 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
         float damageTaken = Mathf.Min(damage, _currentValue);
         _currentValue -= damageTaken;
-
-        HealthLost?.Invoke(damageTaken);
+        DamageTaken?.Invoke(damageTaken);
         IsValueChange?.Invoke(_currentValue);
 
-        if (_currentValue <= 0)
+        if (_currentValue < 1)
         {
-            Die();
+            DieAction();
         }
     }
 
     public void ApplyBuff(float value)
     {
-        _maxHealth = _maxHealth + _maxHealth * value;
-        _currentValue = _currentValue + (_currentValue * value);
+        float scaleRatio = _currentValue / _maxHealth;
+        _maxHealth = _startMaxHealth * (value + 1);
+        _currentValue = _maxHealth * scaleRatio;
         IsValueChange?.Invoke(_currentValue);
     }
 
-    private void Die()
+    public void DieAction()
     {
         Died?.Invoke(this);
+    }
+
+    public void Die()
+    {
         gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        Destroyed?.Invoke();
     }
 }

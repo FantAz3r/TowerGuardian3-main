@@ -1,0 +1,21 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "PieceConfig", menuName = "Configs/PieceConfig")]
+
+public class PieceConfig : ShopConfig
+{
+    public override List<CostInfo> GetSellCost()
+    {
+        List<CostInfo> sellCosts = new List<CostInfo>();
+        float sellCoefficient = 0.5f;
+
+        foreach (var info in GetCosts())
+        {
+            float newAmount = info.Value * sellCoefficient;
+            sellCosts.Add(new CostInfo(info.ResourceType, Mathf.CeilToInt(newAmount)));
+        }
+
+        return sellCosts;
+    }
+}

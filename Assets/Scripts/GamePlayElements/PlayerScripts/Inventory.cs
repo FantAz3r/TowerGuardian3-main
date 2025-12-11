@@ -28,6 +28,7 @@ public class Inventory : MonoBehaviour
         _resources.Add(ResourceType.Stone, _startAmount);
 
         LoadResources();
+        _collector.Collected += Collect;
     }
 
     private void Start()
@@ -35,12 +36,7 @@ public class Inventory : MonoBehaviour
         ViewActions();
     }
 
-    private void OnEnable()
-    {
-        _collector.Collected += Collect;
-    }
-
-    private void OnDisable()
+    private void OnDestroy()
     {
         _collector.Collected -= Collect;
     }
@@ -82,6 +78,18 @@ public class Inventory : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void AddResousres(List<CostInfo> costs)
+    {
+        foreach (var cost in costs)
+        {
+            _resources[cost.ResourceType] += cost.Value;
+            _currentAmount += cost.Value;
+        }
+
+        ViewActions();
+        SaveResources();
     }
 
     public void SpendResource(List<CostInfo> costs)

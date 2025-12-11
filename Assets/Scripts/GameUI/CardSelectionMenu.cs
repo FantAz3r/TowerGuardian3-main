@@ -13,7 +13,6 @@ public class CardSelectionMenu : MonoBehaviour
 
     private List<CardButton> _cardsButtons;
     private PlayerExperience _playerExperience;
-    private ITimeService _timeService;
     private bool _isMenuOpen = false;
     private CardSelector _selector;
     private int _selectCount;
@@ -23,9 +22,8 @@ public class CardSelectionMenu : MonoBehaviour
         _panel.gameObject.SetActive(false);
     }
 
-    public void Init(ITimeService timeService, PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons)
+    public void Init( PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons)
     {
-        _timeService = timeService;
         _playerExperience = playerExperience;
         _selector = selector;
         _cardsButtons = cardsButtons;

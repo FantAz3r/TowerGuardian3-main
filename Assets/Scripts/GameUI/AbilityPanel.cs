@@ -6,12 +6,13 @@ public class AbilityPanel : MonoBehaviour
     [SerializeField] private List<AbilityViewer> _viewers;
 
     private AllAbilities _container;
-    private int _count =0;
+    private int _count = 0;
 
     public void Init(AllAbilities container)
     {
         _container = container;
         _container.AbilityActivated += View;
+        _container.AbilityRemoved += RemoveView;
     }
 
     private void OnDestroy()
@@ -23,5 +24,16 @@ public class AbilityPanel : MonoBehaviour
     {
         _viewers[_count].ActivateViewer(ability, config);
         _count++;
+    }
+
+    private void RemoveView(AbilityConfig config, IAbility ability)
+    {
+        foreach(var viewer in _viewers)
+        {
+            if(viewer.Ability == ability);
+            viewer.DeactivateViewer();
+        }
+
+        _count--;
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackQuest : Quest
@@ -9,7 +7,6 @@ public class AttackQuest : Quest
     public AttackQuest(PlayerAttacker attacker)
     {
         _attacker = attacker;
-        
     }
 
     public override void Run()
@@ -26,7 +23,7 @@ public class AttackQuest : Quest
 
     public override void Complete()
     {
-        base.Complete();
         _attacker.Hited -= Complete;
+        base.Complete();
     }
 }

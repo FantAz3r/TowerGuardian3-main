@@ -1,10 +1,10 @@
 using System;
-using YG;
 
 public class LoadingLevelState : IPayloadedState<LevelID>
 {
     private readonly ICoroutineRunner _coroutineRunner;
     private readonly AllServices _services;
+
     private SceneLoader _sceneLoader;
     private UIFactory _uiFactory;
     private GameFactory _gameFactory;
@@ -54,12 +54,15 @@ public class LoadingLevelState : IPayloadedState<LevelID>
                 break;
 
             case LevelID.Level3:
+                _sceneLoader.Load(level.ToString(), InitGameLevel);
                 break;
 
             case LevelID.Level4:
+                _sceneLoader.Load(level.ToString(), InitGameLevel);
                 break;
 
             case LevelID.Tower:
+                _sceneLoader.Load(level.ToString(), InitTowerLevel);
                 break;
 
             default:
@@ -91,6 +94,8 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitGameLevel()
     {
+        _gameFactory.InitLevelObjects();
+        _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreatePlayer();
         _gameFactory.CreateSpawners(_spawnerService);
         _gameFactory.CreateWeaponFactory();
@@ -100,23 +105,51 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreatePauseUI();
         _gameFactory.CreateResourceView();
         _gameFactory.CreateCards();
-        _gameFactory.CreateShop();
         _gameFactory.CreateCardButtons();
         _gameFactory.CreateCardsSelectionMenu();
-        _gameFactory.CreateLight(_currentLevel);
-        _gameFactory.CreateEnemies(_currentLevel);
+        _gameFactory.CreateLight();
+        _gameFactory.CreateEnemies();
         _gameFactory.CreatePlayerPanel();
         _gameFactory.CreateWeaponPanel();
-        _gameFactory.CreateEndLevelMenu(_currentLevel);
+        _gameFactory.CreateScoreCounter();
+        _gameFactory.CreateEndLevelMenu();
         _gameFactory.CreatePortalsFactory();
+
+        _gameFactory.CreateQuests();
+        _gameFactory.CreateTutorial();
+        _gameFactory.CreateQuestViewer();
+
+        _gameFactory.CreateActions();
+    }
+
+    private void InitTowerLevel()
+    {
+        _gameFactory.SetLevelConfig(_currentLevel);
+        _gameFactory.CreateLight();
+        _gameFactory.CreateUI();
+        _gameFactory.CreatePlayer();
+        _gameFactory.CreateEventSystem();
+        _gameFactory.CreateSpawners(_spawnerService);
+
+
+        _gameFactory.CreatePauseUI();
+        _gameFactory.CreateTower();
+        _gameFactory.CreateScoreCounter();
+        _gameFactory.CreateStartLevelMenu();
+        _gameFactory.CreatePortalsFactory();
+        _gameFactory.CreateWeaponFactory();
+        _gameFactory.CreateCamera();
+        _gameFactory.CreateResourceView();
+        _gameFactory.CreateCards();
+        _gameFactory.CreateShop();
+        _gameFactory.CreateSellStation();
+        _gameFactory.CreatePlayerPanel();
+        _gameFactory.CreateWeaponPanel();
         _gameFactory.CreateActions();
         _gameFactory.CreatePlatform();
 
-        if(YG2.isFirstGameSession && _currentLevel == LevelID.Level1)
-        {
-            _gameFactory.CreateQuests();
-            _gameFactory.CreateTutorial();
-            _gameFactory.CreateQuestViewer();
-        }
+        _gameFactory.CreateQuests();
+        _gameFactory.CreateTutorial();
+        _gameFactory.CreateQuestViewer();
     }
 }

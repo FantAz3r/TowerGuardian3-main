@@ -1,12 +1,11 @@
 using System;
 public interface IDemageable
 {
-    float IncomingDamage { get; }
-    float MaxHealth { get; }
+    HealthConfig Config { get; }
     float CurrentHealth { get; }
 
     event Action<float> IsValueChange;
-    event Action<float> HealthLost;
+    event Action<float> DamageTaken;
     event Action<Health> Died;
 
     void TakeDamage(float damage);

@@ -11,5 +11,8 @@ public abstract class ShopConfig : ScriptableObject, IShopConfig
     public Sprite Icon => _icon;
     public string Name => _name;
     public string Description => _description;
+
+    public IReadOnlyList<CostInfo> Costs => _costs;
     public virtual List<CostInfo> GetCosts() => _costs;
+    public virtual List<CostInfo> GetSellCost() { return null; }
 }

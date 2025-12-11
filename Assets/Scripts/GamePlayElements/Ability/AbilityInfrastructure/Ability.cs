@@ -7,11 +7,16 @@ public abstract class Ability : MonoBehaviour, IAbility
 
     public event Action AbilityEnabled;
 
-    public abstract void Use();
+    public abstract void Upgrade();
 
     public virtual void Enable()
     {
         enabled = true;
         AbilityEnabled?.Invoke();
+    }
+
+    public virtual void Remove()
+    {
+        enabled = false;
     }
 }

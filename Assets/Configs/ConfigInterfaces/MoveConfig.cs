@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MoveConfig : DemageableConfig, IMoveConfig
+public abstract class MoveConfig : HealthConfig, IMoveConfig
 {
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _rotationSpeed = 1f;

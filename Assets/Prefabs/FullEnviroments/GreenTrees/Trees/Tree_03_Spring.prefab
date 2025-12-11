@@ -11,10 +11,13 @@ GameObject:
   - component: {fileID: 938722864705007806}
   - component: {fileID: 4226866765042843419}
   - component: {fileID: 2111114708384254929}
-  - component: {fileID: 5277114965978749983}
   - component: {fileID: -6408653815218859589}
   - component: {fileID: -7521355811843331321}
-  m_Layer: 0
+  - component: {fileID: 8762069475363075787}
+  - component: {fileID: 4171259061167054011}
+  - component: {fileID: 8153941765421728836}
+  - component: {fileID: -4210695091767802682}
+  m_Layer: 7
   m_Name: Tree_03_Spring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,28 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5277114965978749983
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453970571419920900}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7927234275871650637, guid: 011459f99deb1134da915c8c7da80e8e, type: 3}
 --- !u!114 &-6408653815218859589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +119,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71924de8a2000ba4f901ad5488fd2a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &8762069475363075787
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453970571419920900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7023321
+  m_Height: 2.5708086
+  m_Direction: 1
+  m_Center: {x: -0.021764338, y: 1.2755581, z: -0.029344976}
+--- !u!54 &4171259061167054011
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453970571419920900}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &8153941765421728836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453970571419920900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e52d697b4404f84c9cd639a20f89138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &-4210695091767802682
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453970571419920900}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28cbf674dded83e44ab556d1dc1e1b6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4291722214108863390
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,8 +213,7 @@ GameObject:
   - component: {fileID: 6806788579061784403}
   - component: {fileID: 1329276470529288871}
   - component: {fileID: 723229068477902072}
-  - component: {fileID: 1878143471089538633}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree_03_p2_Spring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,25 +285,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1878143471089538633
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4291722214108863390}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6976812181046738278, guid: 011459f99deb1134da915c8c7da80e8e, type: 3}

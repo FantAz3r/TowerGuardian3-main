@@ -1,13 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using YG;
+using UnityEngine.SceneManagement;
 
 public class GameFactory
 {
     private Transform _uiRoot;
+    private LevelConfig _levelConfig;
 
-    private Transform _player;
+    private Player _player;
     private PlayerExperience _experience;
     private Inventory _inventory;
     private PlayerAttacker _attacker;
@@ -15,20 +18,32 @@ public class GameFactory
     private AttackZone _attackZone;
     private PlayerMover _mover;
     private PlayerCardConfigContainer _cardHolder;
+    private EnemyDetector _detector;
 
     private WeaponFactory _weaponFactory;
-    private AllCardConfigs _cards;
-    private Tutorial _tutorial;
+    private CardData _cardData;
     private AllAbilities _allAbilities;
-    private List<CardButton> _buttons = new List<CardButton>();
 
+    private Tutorial _tutorial;
     private QuestBuilder _questBuilder;
 
-    private DayCycle _cycle;
-    private GameStateMachine _stateMachine;
-    private OpenShopAction _opebShopAction;
+    private List<CardButton> _buttons = new ();
     private Shop _shop;
-    private WinLevelMenu _finishMenu;
+    private Sell _sell;
+    private WinLevelMenu _winMenu;
+    private LouseLevelMenu _loseMenu;
+    private StartLevelMenu _startMenu;
+    private ScoreCounter _scoreCounter;
+
+    private PortalFactory _portalFactory;
+    private List<Portal> _levelExits = new();
+    private GameStateMachine _stateMachine;
+    private DayCycle _cycle;
+    private TowerRenderer _tower;
+    private List<Floor> _floors = new();
+
+    private OpenShopAction _openShopAction;
+    private OpenSellAction _openSellAction;
 
     private IInputService _inputService;
     private ITimeService _timeService;
@@ -42,18 +57,47 @@ public class GameFactory
         _stateMachine = stateMachine;
     }
 
+    public void InitLevelObjects()
+    {
+        var scene = SceneManager.GetActiveScene();
+        List<GameObject> parentObjects = scene.GetRootGameObjects().ToList();
+
+        foreach(var parent in parentObjects)
+        {
+            List<SpawnbleEntity> resourceItems = parent.GetComponentsInChildren<SpawnbleEntity>().ToList();
+
+            foreach(var item in resourceItems)
+            {
+                item.Init(_spawnerService);
+            }
+        }
+    }
+
+    public void SetLevelConfig(LevelID level)
+    {
+        LevelData levelData = Resources.Load<LevelData>(GameConstants.LevelData);
+
+        foreach (var levelInfo in levelData.LevelInfos)
+        {
+            if (levelInfo.LevelID == level)
+            {
+                _levelConfig = levelInfo.Config;
+            }
+        }
+    }
+
     public void CreatePlayer()
     {
         Player prefab = Resources.Load<Player>(GameConstants.Player);
-        _player = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity).transform;
+        _player = Object.Instantiate(prefab, _levelConfig.PlayerSpawnPoint, Quaternion.identity);
         _player.GetComponentInChildren<PlayerMover>().Init(_inputService);
         _attacker = _player.GetComponentInChildren<PlayerAttacker>();
-        _attacker.Init(_spawnerService);
         _inventory = _player.GetComponentInChildren<Inventory>();
         _attackZone = _player.GetComponentInChildren<AttackZone>();
         _experience = _player.GetComponentInChildren<PlayerExperience>();
         _cardHolder = _player.GetComponentInChildren<PlayerCardConfigContainer>();
         _allAbilities = _player.GetComponentInChildren<AllAbilities>();
+        _detector = _player.GetComponentInChildren<EnemyDetector>();
         _health = _player.GetComponent<Health>();
         _mover = _player.GetComponentInChildren<PlayerMover>();
     }
@@ -61,22 +105,28 @@ public class GameFactory
     public void CreateSpawners(ISpawnerService spawnerService)
     {
         DamageText prefab = Resources.Load<DamageText>(GameConstants.DamageText);
+
         ResourceData resourceData = Resources.Load<ResourceData>(GameConstants.ResourceData);
+        EffectData effectData = Resources.Load<EffectData>(GameConstants.EffectData);
+
         PieceSpawner pieceSpawner = new PieceSpawner(resourceData);
+        EffectSpawner effectSpawner = new EffectSpawner(effectData);
+
         spawnerService.RegisterSpawner(pieceSpawner);
         spawnerService.RegisterSpawner(new DamageNumberSpawner(prefab));
+        spawnerService.RegisterSpawner(effectSpawner);
     }
 
     public void CreateWeaponFactory()
     {
-        _weaponFactory = new WeaponFactory(_player, _attackZone);
+        _weaponFactory = new WeaponFactory(_player.transform, _attackZone);
     }
 
     public void CreateCamera()
     {
         CameraFollower prefab = Resources.Load<CameraFollower>(GameConstants.MainCamera);
         CameraFollower camera = Object.Instantiate(prefab);
-        camera.Init(_player);
+        camera.Init(_player.transform);
     }
 
     public void CreateEventSystem()
@@ -90,6 +140,11 @@ public class GameFactory
     {
         GameObject prefab = Resources.Load<GameObject>(GameConstants.GameCanvas);
         _uiRoot = Object.Instantiate(prefab).transform;
+    }
+
+    public void CreateScoreCounter()
+    {
+        _scoreCounter = new ScoreCounter(_player, _levelConfig, _cycle);
     }
 
     public void CreatePauseUI()
@@ -110,18 +165,16 @@ public class GameFactory
 
     public void CreateCards()
     {
-        AllCardConfigs prefab = Resources.Load<AllCardConfigs>(GameConstants.AllCards);
-        AllCardConfigs cards = Object.Instantiate(prefab);
-        cards.Init(_cardHolder);
-        _cards = cards;
+        _cardData = Resources.Load<CardData>(GameConstants.CardData);
     }
 
     public void CreateCardsSelectionMenu()
     {
         CardSelectionMenu prefab = Resources.Load<CardSelectionMenu>(GameConstants.CardSelectionMenu);
+        CardData cardData = Resources.Load<CardData>(GameConstants.CardData);
         Transform container = _uiRoot.transform;
         CardSelectionMenu panel = Object.Instantiate(prefab, container);
-        panel.Init(_timeService, _experience, new CardSelector(_cards, _cardHolder), _buttons);
+        panel.Init( _experience, new CardSelector(cardData), _buttons);
     }
 
     public void CreateCardButtons()
@@ -133,23 +186,23 @@ public class GameFactory
         for (int i = 0; i < cardsCount; i++)
         {
             CardButton button = Object.Instantiate(prefab, container);
-            button.Init(_cards, new List<ICardFactory> { _weaponFactory });
+            button.Init(_cardHolder, new List<ICardFactory> { _weaponFactory });
             _buttons.Add(button);
         }
     }
 
-    public void CreateLight(LevelID level)
+    public void CreateLight()
     {
         DayCycle prefab = Resources.Load<DayCycle>(GameConstants.DirectionLight);
         _cycle = Object.Instantiate(prefab);
-        _cycle.Init(level);
+        _cycle.Init(_levelConfig);
     }
 
-    public void CreateEnemies(LevelID level)
+    public void CreateEnemies()
     {
         EnemySpawner prefab = Resources.Load<EnemySpawner>(GameConstants.EnemySpawner);
         EnemySpawner spawner = Object.Instantiate(prefab);
-        spawner.Init(_player.transform, _cycle, level, _spawnerService);
+        spawner.Init(_player.transform, _cycle, _levelConfig, _spawnerService);
     }
 
     public void CreatePlayerPanel()
@@ -177,7 +230,8 @@ public class GameFactory
     {
         List<IAction> actions = new List<IAction>();
 
-        actions.Add(_opebShopAction);
+        actions.Add(_openShopAction);
+        actions.Add(_openSellAction);
         actions.Add(_uiRoot.GetComponentInChildren<OpenBuildMenuAction>());
 
         InteractionObjectFactory interactionObjectFactory = new InteractionObjectFactory(actions);
@@ -185,44 +239,75 @@ public class GameFactory
 
     public void CreatePortalsFactory()
     {
-        PortalFactory portalFactory = new PortalFactory(_finishMenu);
-        portalFactory.Create(new Vector3(0, 0, 20));
+        _portalFactory = new PortalFactory(_winMenu, _loseMenu, _startMenu);
+        _levelExits = _portalFactory.Create(_levelConfig.PortalData, _floors);
     }
 
     public void CreatePlatform()
     {
         Platform prefab = Resources.Load<Platform>(GameConstants.Platform);
-        Platform platform = Object.Instantiate(prefab, new Vector3(0, 0, 18), Quaternion.identity);
-        platform.Init(_opebShopAction);
+
+        Platform shopPlatform = Object.Instantiate(prefab, new Vector3(3.755f, -11.38f, -28.4f), Quaternion.identity);
+        shopPlatform.Init(_openShopAction);
+
+        Platform sellPlatform = Object.Instantiate(prefab, new Vector3(14.465f, -11.38f, -22.11f), Quaternion.identity);
+        sellPlatform.Init(_openSellAction);
     }
 
     public void CreateShop()
     {
         Shop prefab = Resources.Load<Shop>(GameConstants.Shop);
         _shop = Object.Instantiate(prefab, _uiRoot.transform);
-        _opebShopAction = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
-        _shop.Init(_inventory, _cards);
+        _openShopAction = _uiRoot.GetComponentInChildren<OpenShopAction>(true);
+        _shop.Init(_inventory);
     }
 
-    public void CreateEndLevelMenu(LevelID level)
+    public void CreateSellStation()
     {
-        WinLevelMenu prefab = Resources.Load<WinLevelMenu>(GameConstants.WinMenu);
-        WinLevelMenu menu = Object.Instantiate(prefab, _uiRoot.transform);
-        _finishMenu = menu;
-        _finishMenu.Init(_stateMachine, level);
+        Sell prefab = Resources.Load<Sell>(GameConstants.Sell);
+        _sell = Object.Instantiate(prefab, _uiRoot.transform);
+        _openSellAction = _uiRoot.GetComponentInChildren<OpenSellAction>(true);
+        _sell.Init(_inventory, _cardData, _cardHolder);
+    }
+
+    public void CreateEndLevelMenu()
+    {
+        WinLevelMenu winMenuPrefab = Resources.Load<WinLevelMenu>(GameConstants.WinMenu);
+        _winMenu = Object.Instantiate(winMenuPrefab, _uiRoot.transform);
+
+        ScoreViewer viewer = _winMenu.GetComponent<ScoreViewer>();
+        viewer.Init(_scoreCounter);
+        _winMenu.Init(_stateMachine, _scoreCounter, _levelConfig.Level);
+
+        LouseLevelMenu louseMenuPrefab = Resources.Load<LouseLevelMenu>(GameConstants.LouseMenu);
+        _loseMenu = Object.Instantiate(louseMenuPrefab, _uiRoot.transform);
+        _loseMenu.Init(_stateMachine, _scoreCounter, _levelConfig.Level);
+        _loseMenu.SetPlayerHealth(_health);
+    }
+
+    public void CreateStartLevelMenu()
+    {
+        StartLevelMenu prefab = Resources.Load<StartLevelMenu>(GameConstants.StartMenu);
+        _startMenu = Object.Instantiate(prefab, _uiRoot.transform);
+
+        ScoreViewer viewer = _startMenu.GetComponent<ScoreViewer>();
+        _startMenu.Init(_stateMachine, _scoreCounter, _levelConfig.Level);
+        viewer.Init(_scoreCounter);
     }
 
     public void CreateQuests()
     {
-        _questBuilder =  new QuestBuilder(_mover, _attacker, _inventory, _cardHolder, _shop);
+        _questBuilder = new QuestBuilder(_mover, _attacker, _inventory, _cardHolder, _detector, _levelExits);
     }
 
     public void CreateTutorial()
     {
+        QuestData questData = Resources.Load<QuestData>(GameConstants.QuestData);
         Tutorial tutorialPrefab = Resources.Load<Tutorial>(GameConstants.Tutorial);
+
         _tutorial = Object.Instantiate(tutorialPrefab);
-        _tutorial.Init(_questBuilder);
-       
+        _tutorial.Init(_questBuilder, questData, _levelConfig.Quests);
+        _portalFactory.SetQuests(_tutorial);
     }
 
     public void CreateQuestViewer()
@@ -231,6 +316,13 @@ public class GameFactory
         QuestViewer questViewer = Object.Instantiate(viewerPrefab, _uiRoot);
         questViewer.Init(_tutorial);
         _tutorial.RunNextQuest();
+    }
+
+    public void CreateTower()
+    {
+        TowerRenderer prefab = Resources.Load<TowerRenderer>(GameConstants.Tower);
+        _tower = Object.Instantiate(prefab);
+        _floors = _tower.Floors.ToList();
     }
 
     public void ClearSpawners()

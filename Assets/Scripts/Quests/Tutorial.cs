@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour 
 {
-    [SerializeField] private List<QuestConfig> _configs;
+    private List<QuestConfig> _questConfigs = new();
     private List<IQuest> _quests = new();
 
     private QuestBuilder _builder;
@@ -16,11 +17,19 @@ public class Tutorial : MonoBehaviour
     public event Action<string> QuestUpdated;
     public event Action Complited;
 
-    public void Init(QuestBuilder builder)
+    public void Init(QuestBuilder builder, QuestData questData, IReadOnlyList<QuestType> questsForThisLevel)
     {
+        foreach(var questInfo in questData.QuestInfos)
+        {
+            if(questsForThisLevel.Contains(questInfo.Type))
+            {
+                _questConfigs.Add(questInfo.Config);
+            }
+        }
+
         _builder = builder;
 
-        foreach (var config in _configs)
+        foreach (var config in _questConfigs)
         {
             IQuest quest = _builder.GetQuest(config);
 
@@ -41,7 +50,7 @@ public class Tutorial : MonoBehaviour
 
         _currentQuestIndex++;
 
-        if (_currentQuestIndex >= _quests.Count)
+        if (_currentQuestIndex >= _quests.Count-1 )
         {
             _isTutorialComplete = true;
             Complited?.Invoke();
@@ -54,25 +63,18 @@ public class Tutorial : MonoBehaviour
         _currentQuest.Run();
         QuestSeted?.Invoke(_currentQuest.Config.Image, _currentQuest.Config.Description);
 
-        if (_currentQuest is IUpdatableQuest)
-        {
-            (_currentQuest as IUpdatableQuest).Updated += OnQuestUpdated;
-        }
+        _currentQuest.Updated += OnQuestUpdated;
     }
 
     private void OnQuestUpdated(int value)
     {
-        string updatebleDescription = $"{_currentQuest.Config.Description} {value}/ {(_currentQuest as IUpdatableQuest).Goal}";
+        string updatebleDescription = $"{_currentQuest.Config.Description} {value}/ {_currentQuest.Goal}";
         QuestUpdated?.Invoke(updatebleDescription);
     }
 
     private void OnQuestCompleted()
     {
-        if (_currentQuest is IUpdatableQuest)
-        {
-            (_currentQuest as IUpdatableQuest).Updated -= OnQuestUpdated;
-        }
-
+        _currentQuest.Updated -= OnQuestUpdated;
         RunNextQuest();
     }
 }

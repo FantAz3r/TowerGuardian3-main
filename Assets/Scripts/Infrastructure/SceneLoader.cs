@@ -25,6 +25,8 @@ public class SceneLoader
             yield return null;
         }
 
+        var scene = SceneManager.GetActiveScene();
+        scene.GetRootGameObjects();
         onLoaded?.Invoke();
     }
 }

@@ -29,10 +29,10 @@ MonoBehaviour:
   _targetType: 2
   _controller: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
   _baseDamage: 2
-  _baseAttackDelay: 2
+  _baseAttackDelay: 1.5
   _baseAttackRange: 2
   _baseMultiply: 3
   _damageUpgradePercent: 0.25
   _attackDelayUpgradeFactor: -0.05
   _attackRangeUpgradeValue: 0.2
-  _multiplyUpgradeValue: 0.1
+  _multiplyUpgradeValue: 0

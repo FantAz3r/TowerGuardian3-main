@@ -7,6 +7,7 @@ public interface IShopConfig
     string Name { get; }
     string Description { get; }
     List<CostInfo> GetCosts();
+    List<CostInfo> GetSellCost();
 }
 
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PlayerAttacker : MonoBehaviour
 {
@@ -9,45 +10,46 @@ public class PlayerAttacker : MonoBehaviour
     private Weapon _currentWeapon;
     private Weapon _previousWeapon = null;
     private Coroutine _attackCoroutine;
-    private WaitForSeconds _attackDelay; 
+    private WaitForSeconds _attackDelay;
     private WaitForSeconds _delay;
     private float _defoultAttackTime = 1f;
     private float _emptyTargetAttackDelay = 0.1f;
-    private ISpawnerService _spawnerService;
+    private EnemyDetector _enemyDetector;
 
     public event Action<IWeapon> WeaponSeted;
     public event Action<IWeapon> WeaponRemoved;
+
+    public event Action<float> DialedDamage;
     public event Action<IWeapon, float> Attacked;
+
     public event Action Hited;
+    public event Action Suspended;
 
     public IReadOnlyList<Weapon> WeaponsInInventory => _weaponsInInventory;
     public Weapon CurrentWeapon => _currentWeapon;
     public Weapon PreviousWeapon => _previousWeapon;
 
-    public void Init(ISpawnerService spawnerService)
-    {
-        _spawnerService = spawnerService;
-
-        SetWeapon(_currentWeapon.Config);
-        StartAttacking();
-    }
 
     private void Awake()
     {
         _attackDelay = new WaitForSeconds(_defoultAttackTime);
         _delay = new WaitForSeconds(_emptyTargetAttackDelay);
 
+        _enemyDetector = GetComponentInChildren<EnemyDetector>();
         AttackZone attackZone = GetComponentInChildren<AttackZone>();
         _currentWeapon = GetComponentInChildren<Weapon>();
         _currentWeapon.Init(attackZone);
         _weaponsInInventory.Add(_currentWeapon);
-        _currentWeapon.HitedTarget += SendReqest;
+
+        SetWeapon(_currentWeapon.Config);
+        StartAttacking();
     }
 
     public void AddWeapon(Weapon weapon)
     {
         _weaponsInInventory.Add(weapon);
-        if(_currentWeapon != weapon)
+
+        if (_currentWeapon != weapon)
         {
             weapon.gameObject.SetActive(false);
         }
@@ -62,11 +64,10 @@ public class PlayerAttacker : MonoBehaviour
                 RemoveWeapon();
                 _previousWeapon = _currentWeapon;
                 _currentWeapon = weapon;
-                UpdateWeapon(_currentWeapon);
+                UpdateWeapon();
                 WeaponSeted?.Invoke(_currentWeapon);
 
                 StartAttacking();
-                _currentWeapon.HitedTarget += SendReqest;
                 return;
             }
         }
@@ -74,25 +75,24 @@ public class PlayerAttacker : MonoBehaviour
 
     public void RemoveWeapon()
     {
-        StopAttacking();
-        _currentWeapon.HitedTarget -= SendReqest;
-        WeaponRemoved?.Invoke(_currentWeapon);
+        if (_currentWeapon != null)
+        {
+            StopAttacking();
+            WeaponRemoved?.Invoke(_currentWeapon);
+        }
     }
 
-    public void EquipWeapon()
-    {
-        _currentWeapon?.Equip();
-    }
-
-    public void TakeOff()
-    {
-        _previousWeapon.TakeOff();
-    }
-
-    public void BanWeapon()
+    public void DeactivateWeapon()
     {
         StopAttacking();
         _currentWeapon = null;
+    }
+
+    public void ActivateWeapon(Weapon weapon)
+    {
+        _currentWeapon = weapon;
+        UpdateWeapon();
+        StartAttacking();
     }
 
     public void AttackAction(float attackDelay)
@@ -100,16 +100,30 @@ public class PlayerAttacker : MonoBehaviour
         Attacked?.Invoke(_currentWeapon, attackDelay);
     }
 
-    public void OnAnimationAttack()
+    public void OnEquipWeapon()
     {
-        _currentWeapon.Attack();
-        Hited?.Invoke();
+        _currentWeapon?.Equip();
     }
 
-    private void UpdateWeapon(Weapon weapon)
+    public void OnTakeOffWeapon()
+    {
+        _previousWeapon.TakeOff();
+    }
+
+
+    public void OnAnimationAttack()
+    {
+        if (_currentWeapon != null)
+        {
+            _currentWeapon.Attack();
+            Hited?.Invoke();
+        }
+    }
+
+    private void UpdateWeapon()
     {
         _currentWeapon.SetStats(_currentWeapon.Config.Damage, _currentWeapon.Config.AttackRange);
-        _attackDelay = new WaitForSeconds(weapon.Config.AttackDelay);
+        _attackDelay = new WaitForSeconds(_currentWeapon.Config.AttackDelay);
     }
 
     private void StartAttacking()
@@ -135,11 +149,13 @@ public class PlayerAttacker : MonoBehaviour
         {
             if (_currentWeapon.HasTargets())
             {
+                UpdateWeapon();
                 AttackAction(_currentWeapon.Config.AttackDelay);
                 yield return _attackDelay;
             }
             else
             {
+                Suspended?.Invoke();
                 yield return _delay;
             }
         }
@@ -147,14 +163,13 @@ public class PlayerAttacker : MonoBehaviour
         _attackCoroutine = null;
     }
 
-    private void SendReqest(int damage, Vector3 position, EntityType type)
-    {
-        _spawnerService.SendReqest(SpawnerType.Resources, position, damage, type);
-        _spawnerService.SendReqest(SpawnerType.Text, position, damage);
-    }
-
     private void OnDestroy()
     {
         StopAttacking();
+    }
+
+    private void SaveCurrentWeapon(WeaponConfig config)
+    {
+        YG2.saves.CurrentWeapon = config.CreateSaveData(true);
     }
 }

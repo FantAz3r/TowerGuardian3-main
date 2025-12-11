@@ -15,13 +15,24 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 319814a6df7965e4ba364c2b5ac02eeb, type: 3}
   _name: Hummer
   _description: BadaBOOM
+  _costs:
+  - ResourceType: 2
+    Value: 20
+    Image: {fileID: 454922556, guid: c80cfba900504e246bc955fcc768d713, type: 3}
+  - ResourceType: 1
+    Value: 10
+    Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
+  - ResourceType: 0
+    Value: 15
+    Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
   _chanceToView: 0.5
+  _level: 0
   _prefab: {fileID: -8340058777579418164, guid: 82f1e40c0cf7c5048a41bfa78b10c9d9, type: 3}
   _type: 4
-  _targetType: 3
+  _targetType: 4
   _controller: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
-  _baseDamage: 10
-  _baseAttackDelay: 5
+  _baseDamage: 5
+  _baseAttackDelay: 3
   _baseAttackRange: 2
   _baseMultiply: 1
   _damageUpgradePercent: 0.25

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public class PieceSpawner : ISpawner
 {
     private SpawnerType _type = SpawnerType.Resources;
-    private Dictionary<EntityType, ObjectPool<ResourcePiece>> _pools = new Dictionary<EntityType, ObjectPool<ResourcePiece>>();
+    private Dictionary<ResourceType, ObjectPool<ResourcePiece>> _pools = new Dictionary<ResourceType, ObjectPool<ResourcePiece>>();
     private bool _spawning = true;
 
     private readonly float _ejectForceMin = 5f;
@@ -16,9 +16,12 @@ public class PieceSpawner : ISpawner
 
     public PieceSpawner(ResourceData data)
     {
-        foreach(var resource in data.ResourceInfos)
+        foreach (var resource in data.ResourceInfos)
         {
-            _pools.Add(resource.ObjectType, new ObjectPool<ResourcePiece>(resource.Prefab, 0, true));
+            if (_pools.ContainsKey(resource.Type) == false)
+            {
+                _pools.Add(resource.Type, new ObjectPool<ResourcePiece>(resource.Prefab, 0, true));
+            }
         }
     }
 
@@ -32,16 +35,13 @@ public class PieceSpawner : ISpawner
         _spawning = false;
     }
 
-    public void Spawn(EntityType type, Vector3 position, int count)
+    public void Spawn(HealthConfig config, Vector3 position, int count = 0)
     {
         if (_spawning == false)
             return;
 
-        if (_pools.TryGetValue(type, out var pool) == false)
-        {
-            Debug.LogWarning($"Pool for type {type} not found");
+        if (_pools.TryGetValue(config.SpawnResource, out var pool) == false)
             return;
-        }
 
         for (int i = 0; i < count; i++)
         {

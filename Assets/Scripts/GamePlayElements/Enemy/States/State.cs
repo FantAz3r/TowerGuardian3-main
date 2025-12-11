@@ -4,27 +4,31 @@ using UnityEngine;
 public abstract class State : IEnemyState
 {
     private EnemyStateMachine _stateMachine;
-    private Coroutine _updateCoroutine;
+    private bool _canExit;
+    public bool CanExit => _canExit;
 
-    public State(EnemyStateMachine stateMachine)
+    public State(EnemyStateMachine stateMachine, bool canExit)
     {
         _stateMachine = stateMachine;
+        _canExit = canExit;
+    }
+   
+    public abstract void Enter();
+
+    public abstract void Exit();
+
+    public abstract IEnumerator UpdateRoutine();
+
+    public void RotateTo(Vector3 target)
+    {
+        Vector3 direction3D = target - _stateMachine.transform.position;
+        direction3D.y = 0f;
+        Vector2 direction = new Vector2(direction3D.x, direction3D.z).normalized;
+        _stateMachine.Rotator.SetDirection(direction);
     }
 
-    public virtual void Enter()
+    public void SetCanExit(bool canExit)
     {
-        _updateCoroutine = _stateMachine.StartCoroutine(UpdateRoutine());
-    }
-
-    public virtual void Exit()
-    {
-        _stateMachine.StopCoroutine(UpdateRoutine());
-        _updateCoroutine = null;
-        _stateMachine.Mover.SetDirection(Vector2.zero);
-    }
-
-    public virtual IEnumerator UpdateRoutine()
-    {
-        yield break;
+        _canExit = canExit;
     }
 }

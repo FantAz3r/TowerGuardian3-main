@@ -14,30 +14,27 @@ public class DayCycle : MonoBehaviour
     private float _timeRemaining;
 
     private Light _directionalLight;
-    private Color _dayLightColor ;
+    private Color _dayLightColor;
     private Color _nightLightColor;
     private DayPhase _currentPhase;
 
     public event Action<DayPhase> OnPhaseChanged;
+    public event Action<float> TimePassedFromTransition;
+    public event Action<float> TimePassedFromStart;
+    
     public DayPhase CurrentPhase => _currentPhase;
 
-    public void Init(LevelID level)
+    public void Init(LevelConfig config)
     {
-        foreach (var levelInfo in _levelData.LevelInfos)
-        {
-            if (levelInfo.LevelID == level)
-            {
-                _dayDuration = levelInfo.LevelConfig.DayDuration;
-                _nightDuration = levelInfo.LevelConfig.NightDuration;
-                _dayLightColor = levelInfo.LevelConfig.DayLightColor;
-                _nightLightColor = levelInfo.LevelConfig.NightLightColor;
-                _dayLightIntensity = levelInfo.LevelConfig.DayLightIntensity;
-                _nightLightIntensity = levelInfo.LevelConfig.NightLightIntensity;
-                _transitionDuration = levelInfo.LevelConfig.TransitionDuration;
-                _timeRemaining = levelInfo.LevelConfig.DayDuration;
-                _directionalLight = GetComponent<Light>();
-            }
-        }
+        _dayDuration = config.DayDuration;
+        _nightDuration = config.NightDuration;
+        _dayLightColor = config.DayLightColor;
+        _nightLightColor = config.NightLightColor;
+        _dayLightIntensity = config.DayLightIntensity;
+        _nightLightIntensity = config.NightLightIntensity;
+        _transitionDuration = config.TransitionDuration;
+        _timeRemaining = config.DayDuration;
+        _directionalLight = GetComponent<Light>();
     }
 
     private void Start()
@@ -49,14 +46,30 @@ public class DayCycle : MonoBehaviour
 
     private IEnumerator CycleCoroutine()
     {
+        float timeSincePhaseChange = 0f;
+        float totalTimeOnLevel = 0f;
+
         while (enabled)
         {
             OnPhaseChanged?.Invoke(_currentPhase);
             _timeRemaining = (_currentPhase == DayPhase.Day) ? _dayDuration : _nightDuration;
 
+            timeSincePhaseChange = 0f; 
+
             while (_timeRemaining > 0f)
             {
-                _timeRemaining -= Time.deltaTime;
+                float deltaTime = Time.deltaTime;
+                _timeRemaining -= deltaTime;
+                timeSincePhaseChange += deltaTime;
+                totalTimeOnLevel += deltaTime;
+
+                if (timeSincePhaseChange >= 1f)
+                {
+                    TimePassedFromTransition?.Invoke(timeSincePhaseChange);
+                    TimePassedFromStart?.Invoke(totalTimeOnLevel);
+                    timeSincePhaseChange = 0f;
+                }
+
                 yield return null;
             }
 

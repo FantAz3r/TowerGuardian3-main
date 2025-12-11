@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-public class HealthRegeneration : MonoBehaviour
+public class HealthRegeneration : MonoBehaviour, IBuffble
 {
     [SerializeField] private PlayerConfig _config;
 
@@ -11,11 +11,17 @@ public class HealthRegeneration : MonoBehaviour
     private WaitForSeconds _wait;
 
     private Coroutine _regenCoroutine;
+    private float _regenValue;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
         _wait = new WaitForSeconds(_delay);
+        _regenValue = _config.HealthRegeneration;
+    }
+
+    private void OnEnable()
+    {
         StartRegeneration();
     }
 
@@ -43,7 +49,15 @@ public class HealthRegeneration : MonoBehaviour
 
     private IEnumerator HealPerTime()
     {
-        _health.Heal(_config.HealthRegeneration * _delay);
-        yield return _wait;
+        while(enabled)
+        {
+            _health.Heal(_regenValue * _delay);
+            yield return _wait;
+        }
+    }
+
+    public void ApplyBuff(float value)
+    {
+        _regenValue += value;
     }
 }

@@ -16,7 +16,7 @@ public class AxeThrowingConfig : AbilityConfig
     public float Cooldown => GetCooldown(Level);
     public float FlightDistance => GetFlightDistance(Level);
     public float FlightDuration => _flightDuration;
-    public float Damage => GetDamage(Level);
+    public int Damage => (int)GetDamage(Level);
 
     public float GetCooldown(int level)
     {
@@ -36,7 +36,7 @@ public class AxeThrowingConfig : AbilityConfig
     public override List<CardStats> GetStats()
     {
         int level = Level;
-        int nextLevel = level + 1;
+        int nextLevel = Level + 1;
 
         return new List<CardStats>
         {

@@ -1,10 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelConfig", menuName = "Configs/LevelConfig")]
 public class LevelConfig : ScriptableObject
 {
-    [Header("Day Phase Settings")]
+    [Header("Main Level Settings")]
     [SerializeField] private LevelID _level = LevelID.Level1;
+    [SerializeField] private List<QuestType> _quests;
+    [SerializeField] private Vector3 _playerSpawnPoint;
+    [SerializeField] private PortalData _portalData;
+
+    [Header("Day Phase Settings")]
     [SerializeField] private float _dayDuration = 15f;
     [SerializeField] private float _nightDuration = 15f;
     [SerializeField] private float _dayLightIntensity = 1f;
@@ -14,22 +20,34 @@ public class LevelConfig : ScriptableObject
     [SerializeField] private Color _nightLightColor = Color.black;
 
     [Header("Enemy Spawn Settings")]
-    [SerializeField] private float _minSpawnDistance = 10f;
-    [SerializeField] private float _maxSpawnDistance = 40f;
+    [SerializeField] private SpawnPointContainer _container;
     [SerializeField] private float _nightSpawnDelay = 3f;
     [SerializeField] private float _daySpawnDelay = 8f;
 
+    [Header("Level Score Settings")]
+    [SerializeField] private float _scorePerTimeOneStar;
+    [SerializeField] private float _scorePerTimeTwoStar;
+    [SerializeField] private float _scorePerTimeThreeStar;
+
     public LevelID Level => _level;
+    public Vector3 PlayerSpawnPoint => _playerSpawnPoint;
+
     public float DayDuration => _dayDuration;
     public float NightDuration => _nightDuration;
-    public Color DayLightColor => _dayLightColor;
-    public Color NightLightColor => _nightLightColor;
     public float DayLightIntensity => _dayLightIntensity;
     public float NightLightIntensity => _nightLightIntensity;
     public float TransitionDuration => _transitionDuration;
-
-    public float MinSpawnDistance => _minSpawnDistance;
-    public float MaxSpawnDistance => _maxSpawnDistance;
     public float NightSpawnDelay => _nightSpawnDelay;
     public float DaySpawnDelay => _daySpawnDelay;
+
+    public float OneStarScore => _scorePerTimeOneStar;
+    public float TwoStarScore => _scorePerTimeTwoStar;
+    public float ThreeStarScore => _scorePerTimeThreeStar;
+
+    public Color DayLightColor => _dayLightColor;
+    public Color NightLightColor => _nightLightColor;
+
+    public PortalData PortalData => _portalData;
+    public SpawnPointContainer SpawnPointContainer => _container;
+    public IReadOnlyList<QuestType> Quests => _quests;
 }

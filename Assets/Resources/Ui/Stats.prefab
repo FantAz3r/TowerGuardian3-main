@@ -579,9 +579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e873a31ce13fa044aa223fe8ceb9031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelText: {fileID: 2508954869187030253}
-  experienceFillImage: {fileID: 5896184127436652416}
-  experienceText: {fileID: 3935587652002879577}
+  _levelText: {fileID: 2508954869187030253}
+  _experienceFillImage: {fileID: 5896184127436652416}
+  _experienceText: {fileID: 3935587652002879577}
 --- !u!1 &3965986177122904957
 GameObject:
   m_ObjectHideFlags: 0

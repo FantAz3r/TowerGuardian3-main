@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9955272f623cb5748bb96b65685aac50, type: 3}
+  m_Name: TowerPortalData
+  m_EditorClassIdentifier: 
+  Infos:
+  - Transform: {fileID: 4849884891582082334, guid: 6d71b3e799ccc9f47bf583e9dd749a94, type: 3}
+    LevelID: 2
+    Material: {fileID: 2100000, guid: e871a89e79289f74284d1e9e84b04160, type: 2}
+    Floor: 1
+  - Transform: {fileID: 3959764773926474279, guid: d88f683a05b838d478ba7786143b8bda, type: 3}
+    LevelID: 3
+    Material: {fileID: 2100000, guid: 8d8363b36c2241547bf4e5003530c917, type: 2}
+    Floor: 1

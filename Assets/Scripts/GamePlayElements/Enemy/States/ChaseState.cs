@@ -1,45 +1,44 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChaseState : State 
 {
     private float _updateTime = 0.05f;
-    private EnemyStateMachine _stateMachine;
-    private Transform _player;
     private WaitForSeconds _sleep;
 
-    public ChaseState(EnemyStateMachine stateMachine, Transform player) : base(stateMachine)
+    private EnemyAnimator _animator;
+    private EnemyStateMachine _stateMachine;
+    private Transform _player;
+    private NavMeshAgent _agent;
+
+    public ChaseState(EnemyStateMachine stateMachine, NavMeshAgent agent, EnemyAnimator animator, Transform target) : base(stateMachine, true)
     {
         _stateMachine = stateMachine;
-        _player = player;
+        _agent = agent ?? throw new ArgumentNullException(nameof(agent));
+        _animator = animator ?? throw new ArgumentNullException(nameof(animator));
+        _player = target ?? throw new ArgumentNullException(nameof(target));
     }
 
     public override void Enter()
     {
         _sleep = new WaitForSeconds(_updateTime);
-        base.Enter();
+        _agent.isStopped = false;
     }
 
     public override void Exit()
     {
-        base.Exit();
+        _agent.isStopped = true;
     }
 
     public override IEnumerator UpdateRoutine()
     {
         while (true)
         {
-            float sqrDistance = Vector3.SqrMagnitude(_stateMachine.transform.position - _player.position);
-            float attackRangeSqr = _stateMachine.Config.AttackRange * _stateMachine.Config.AttackRange;
-
-            Vector3 toPlayer = _player.position - _stateMachine.transform.position;
-            toPlayer.y = 0f;
-            Vector3 direction = toPlayer.normalized;
-            Vector2 dirFlat = new Vector2(direction.x, direction.z);
-            _stateMachine.Rotator.SetDirection(dirFlat);
-            _stateMachine.Mover.SetDirection(direction);
-
+            RotateTo(_player.position);
+            _agent.destination = _player.position;
+            _animator.UpdateSpeed(_stateMachine.Config.MoveSpeed);
             yield return _sleep;
         }
     }

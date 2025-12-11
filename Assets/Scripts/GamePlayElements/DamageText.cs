@@ -7,7 +7,7 @@ public class DamageText : MonoBehaviour
 
     private void Awake()
     {
-        Animator animator = GetComponentInChildren<Animator>();
+        UnityEngine.Animator animator = GetComponentInChildren<UnityEngine.Animator>();
         _sleep = new WaitForSeconds(GetAnimationDuration(animator));
     }
 
@@ -34,7 +34,7 @@ public class DamageText : MonoBehaviour
         }
     }
 
-    private float GetAnimationDuration(Animator animator)
+    private float GetAnimationDuration(UnityEngine.Animator animator)
     {
         AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
 

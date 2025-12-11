@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum StateType 
+public enum StateType
 {
-   Patrol,
-   Chase,
-   Attack
+    Patrol,
+    Chase,
+    Attack,
+    JumpAttack,
+    Thrown,
+    FindObject
 }

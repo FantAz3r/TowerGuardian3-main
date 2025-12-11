@@ -15,8 +15,10 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: ba7b693614539e0458a9e829b8af37ef, type: 3}
   _name: Axe Throw
   _description: 
+  _costs: []
   _chanceToView: 0.5
-  _abilityType: 0
+  _level: 0
+  _abilityType: 1
   _baseCooldown: 10
   _flightDuration: 1
   _baseFlightDistance: 10

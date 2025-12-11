@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class StartButton : MonoBehaviour
 {
-    [SerializeField] private LevelID _levelToLoad;
-
+    private LevelID _levelToLoad;
     private Button _button;
     private IStateSwitchService _switchService;
 
@@ -21,6 +22,7 @@ public class StartButton : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(OnClicked);
+        LoadLevel();
     }
 
     private void OnDisable()
@@ -31,5 +33,22 @@ public class StartButton : MonoBehaviour
     public void OnClicked()
     {
         _switchService.Switch(_levelToLoad);
+    }
+
+    private void LoadLevel()
+    {
+        if (YG2.saves.CurrentLevel == null || string.IsNullOrEmpty(YG2.saves.CurrentLevel))
+        {
+            _levelToLoad = LevelID.Tower;
+            return;
+        }
+
+        string levelName = YG2.saves.CurrentLevel; 
+        LevelID levelToLoad;
+
+        if (Enum.TryParse(levelName, out levelToLoad))
+        {
+            _levelToLoad = levelToLoad;
+        }
     }
 }

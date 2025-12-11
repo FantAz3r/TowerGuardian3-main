@@ -2,35 +2,37 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class AxeThrowingAbility : Ability, ICooldownAbility
+public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 {
     [SerializeField] private AxeThrowingConfig _config;
 
     private PlayerAttacker _attacker;
+    private Player _player; 
     private Weapon _axe;
     private ThrownAxe _thrownAxe;
 
-    private bool _active = true;
+    private bool _isActive = true;
     private WaitForSeconds _oneSecond = new WaitForSeconds(1);
 
-    public event Action<float, float> CooldownStarted;
+    public event Action<float, float> Cooldowning;
 
     public float Cooldown => _config.Cooldown;
     public override AbilityType AbilityType => AbilityType.ThrowingAxes;
 
     private void Awake()
     {
-        _attacker = GetComponentInParent<PlayerAttacker>();
+        _player = GetComponentInParent<Player>();
+        _attacker = _player.GetComponentInChildren<PlayerAttacker>();
     }
 
     public override void Use()
     {
-        if (_active)
+        if (_isActive)
         {
             if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
             {
                 _axe = _attacker.CurrentWeapon;
-                _attacker.BanWeapon();
+                _attacker.DeactivateWeapon();
                 StartCoroutine(CooldownRoutine());
                 ThrowAxe(_axe);
             }
@@ -39,37 +41,35 @@ public class AxeThrowingAbility : Ability, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        _active = false;
+        _isActive = false;
         float timer = 0f;
 
         while (_config.Cooldown >= timer)
         {
-            CooldownStarted?.Invoke(_config.Cooldown, timer);
+            Cooldowning?.Invoke(_config.Cooldown, timer);
             timer++;
             yield return _oneSecond;
         }
 
-        CooldownStarted?.Invoke(_config.Cooldown, 0f);
-        _active = true;
+        Cooldowning?.Invoke(_config.Cooldown, 0f);
+        _isActive = true;
     }
 
     private void ThrowAxe(Weapon currentWeapon)
     {
-        Transform weaponTransform = currentWeapon.transform;
-        Vector3 start = weaponTransform.position;
-        Vector3 forward = -weaponTransform.right;
+        Vector3 start = transform.position;
+        Vector3 forward = _attacker.transform.forward;
         Vector3 end = start + forward * _config.FlightDistance;
 
-        ThrownAxe axe = currentWeapon.GetComponent<ThrownAxe>();
-        _thrownAxe = axe;
-        _thrownAxe.Returned += SetWeapon;
-        _thrownAxe.Init(weaponTransform, start, end, _config.FlightDuration, _config.Damage);
+        _thrownAxe = currentWeapon.GetComponent<ThrownAxe>();
+        _thrownAxe.Returned += Return;
+        _thrownAxe.Throw(start, end, _config.FlightDuration, _config.Damage );
     }
 
-    private void SetWeapon()
+    private void Return()
     {
-        _attacker.AddWeapon(_axe);
+        _attacker.ActivateWeapon(_axe);
         Debug.Log("axe seted");
-        _thrownAxe.Returned -= SetWeapon;
+        _thrownAxe.Returned -= Return;
     }
 }

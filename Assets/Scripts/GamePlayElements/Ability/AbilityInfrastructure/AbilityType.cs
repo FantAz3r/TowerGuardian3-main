@@ -1,6 +1,8 @@
 public enum AbilityType 
 {
+    None,
     ThrowingAxes,
     BouncingPickaxe,
-    Burst
+    Burst,
+    RotatingShuriken
 }

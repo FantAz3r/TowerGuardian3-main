@@ -7,6 +7,7 @@ public class Mover : MonoBehaviour
 {
     [SerializeField] private MoveConfig _configObject;
     private float _moveSpeed;
+    private float _startSpeed;
     public Vector2 Direction { get; private set; }
 
     public void SetDirection(Vector2 direction) => Direction = direction;
@@ -17,6 +18,7 @@ public class Mover : MonoBehaviour
             throw new ArgumentNullException();
 
         _moveSpeed = _configObject.MoveSpeed;
+        _startSpeed = _moveSpeed;
     }
 
     private void Update()
@@ -39,6 +41,6 @@ public class Mover : MonoBehaviour
 
     public void ApplyBuff(float value)
     {
-        _moveSpeed = _moveSpeed + _moveSpeed * value;
+        _moveSpeed = _startSpeed * (1 + value);
     }
 }

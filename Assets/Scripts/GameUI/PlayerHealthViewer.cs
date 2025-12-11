@@ -15,7 +15,7 @@ public class PlayerHealthViewer : MonoBehaviour
     {
         _health = health;
         _healthImage.value = 1f;
-        _healthText.text = $"{_health.CurrentHealth} / {_health.MaxHealth}";
+        _healthText.text = $"{_health.CurrentHealth} / {_health.Config.MaxHealth}";
         _health.IsValueChange += View;
     }
 
@@ -29,12 +29,12 @@ public class PlayerHealthViewer : MonoBehaviour
 
     private void View(float damage)
     {
-        _healthText.text = $"{_health.CurrentHealth} / {_health.MaxHealth}";
+        _healthText.text = $"{_health.CurrentHealth:F0} / {_health.Config.MaxHealth:F0}";
 
         if (_lerpCoroutine != null)
             StopCoroutine(_lerpCoroutine);
 
-        _lerpCoroutine = StartCoroutine(LerpHealthBar(_healthImage.value, (float)_health.CurrentHealth / _health.MaxHealth, 0.5f));
+        _lerpCoroutine = StartCoroutine(LerpHealthBar(_healthImage.value, (float)_health.CurrentHealth / _health.Config.MaxHealth, 0.5f));
     }
 
     private IEnumerator LerpHealthBar(float startValue, float targetValue, float duration)

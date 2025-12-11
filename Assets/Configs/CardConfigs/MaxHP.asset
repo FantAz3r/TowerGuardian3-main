@@ -15,11 +15,12 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 2ff9aefe07f96e745802755b2ba4b487, type: 3}
   _name: MaxHP
   _description: Increace MAX HP
-  _chanceToView: 0.5
   _costs:
   - ResourceType: 2
     Value: 0
     Image: {fileID: 454922556, guid: c80cfba900504e246bc955fcc768d713, type: 3}
+  _chanceToView: 0.5
+  _level: 0
   _buffType: 2
   _baseIncreaseValue: 0.2
   _upgradeValuePerLevel: 0.1

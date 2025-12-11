@@ -8,14 +8,14 @@ public class CardButton : MonoBehaviour
 {
     private ICardConfig _card;
     private Button _button;
-    private AllCardConfigs _cards;
+    private PlayerCardConfigContainer _playerCards;
     private Dictionary<CardType, ICardFactory> _factories;
 
     public event Action Selected;
 
-    public void Init(AllCardConfigs cards, List<ICardFactory> factories)
+    public void Init(PlayerCardConfigContainer playerCards, List<ICardFactory> factories)
     {
-        _cards = cards;
+        _playerCards = playerCards;
         _factories = new Dictionary<CardType, ICardFactory>();
 
         foreach (var factory in factories)
@@ -51,11 +51,9 @@ public class CardButton : MonoBehaviour
 
     public void OnClick()
     {
-        _card.Upgrade();
-        _cards.Get(_card);
+        _playerCards.Add(_card);
         Selected?.Invoke();
         ActivateCard(_card);
-        _cards.SaveCards();
         Hide();
     }
 

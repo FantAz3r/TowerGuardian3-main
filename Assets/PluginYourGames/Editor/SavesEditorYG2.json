@@ -1,43 +1,74 @@
 {
-    "intExample": 5,
-    "strExample": "Hello!",
-    "boolExample": [
-        false,
-        false,
-        false,
-        false
-    ],
-    "idSave": 1223,
-    "Cards": [
+    "idSave": 1578,
+    "AllCards": [
         {
-            "Level": 0
+            "Name": "Axe Throw",
+            "Level": 1,
+            "IsBought": true,
+            "HasPlayer": false
         },
         {
-            "Level": 1
+            "Name": "Burst",
+            "Level": 1,
+            "IsBought": true,
+            "HasPlayer": false
         },
         {
-            "Level": 0
+            "Name": "Collect Range",
+            "Level": 1,
+            "IsBought": true,
+            "HasPlayer": false
         },
         {
-            "Level": 0
+            "Name": "MaxHP",
+            "Level": 1,
+            "IsBought": true,
+            "HasPlayer": false
         },
         {
-            "Level": 0
+            "Name": "Sword",
+            "Level": 25,
+            "IsBought": true,
+            "HasPlayer": true
         },
         {
-            "Level": 0
+            "Name": "Jumping Pickaxe",
+            "Level": 23,
+            "IsBought": true,
+            "HasPlayer": true
         },
         {
-            "Level": 0
+            "Name": "Shurikens",
+            "Level": 23,
+            "IsBought": true,
+            "HasPlayer": true
+        },
+        {
+            "Name": "Health Regeneration",
+            "Level": 24,
+            "IsBought": true,
+            "HasPlayer": true
+        },
+        {
+            "Name": "Move Speed",
+            "Level": 17,
+            "IsBought": true,
+            "HasPlayer": true
         }
     ],
-    "PlayerCards": [
-        "Hummer",
-        "Axe",
-        "Axe"
-    ],
+    "CurrentWeapon": {
+        "Name": "",
+        "Level": 0,
+        "IsBought": false,
+        "HasPlayer": false
+    },
     "PlayerWeapons": [],
-    "Coins": 0,
-    "Wood": 704,
-    "Stones": 296
+    "Coins": 492,
+    "Wood": 340,
+    "Stones": 168,
+    "Level": 22,
+    "UpgradePoints": 0,
+    "CurrentEXP": 440.4092712402344,
+    "CurrentLevel": "",
+    "LevelsProgress": []
 }

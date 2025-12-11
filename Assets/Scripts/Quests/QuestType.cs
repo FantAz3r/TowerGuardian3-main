@@ -4,7 +4,7 @@ public enum QuestType
    Move,
    Attack,
    Collect,
-   BuyWeapon,
+   Upgrade,
    KillEnemy,
    GetOut
 }

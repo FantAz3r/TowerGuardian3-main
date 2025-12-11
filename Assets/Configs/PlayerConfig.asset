@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1b3fdbc6bf0674bb94e1062f23adba, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _rotationSpeed: 5
-  _maxHealth: 100
+  _maxHealth: 50
+  _damageToErn: 0
+  _rewardCount: 0
+  _spawnResource: 2
+  _spawnEffect: 0
+  _moveSpeed: 4
+  _rotationSpeed: 10
   _healthRegeneration: 1
   _inventoryCapacity: 1000
   _baseLvlCost: 10
-  _levelCostMultiplier: 1
+  _levelCostMultiplier: 1.2

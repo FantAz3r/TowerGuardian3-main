@@ -11,6 +11,7 @@ public class AbilityViewer : MonoBehaviour
 
     private Button _button;
     private IAbility _ability;
+    public IAbility Ability => _ability;
 
     private void Awake()
     {
@@ -52,7 +53,10 @@ public class AbilityViewer : MonoBehaviour
 
     private void OnClick()
     {
-        _ability.Use();
+        if (_ability is UsebleAbility usebleAbility)
+        {
+            usebleAbility.Use();
+        }
     }
 
     private void SubscribeCooldownEvents()
@@ -60,7 +64,7 @@ public class AbilityViewer : MonoBehaviour
         if (_ability is ICooldownAbility ability)
         {
             _cooldownText.enabled = true;
-            ability.CooldownStarted += CooldownView;
+            ability.Cooldowning += CooldownView;
         }
     }
 
@@ -69,7 +73,7 @@ public class AbilityViewer : MonoBehaviour
         if (_ability is ICooldownAbility ability)
         {
             _cooldownText.enabled = false;
-            ability.CooldownStarted -= CooldownView;
+            ability.Cooldowning -= CooldownView;
         }
     }
 

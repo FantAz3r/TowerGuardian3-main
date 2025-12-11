@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class CardSelector
 {
-    private AllCardConfigs _allConfigs;
+    private CardData _cardData;
     private int _cardsPerSelect;
-    private PlayerCardConfigContainer _playerCards;
-    private int _maxLevel = 5;
+    private int _maxLevel = 100;
 
-
-    public CardSelector(AllCardConfigs configs, PlayerCardConfigContainer playerCards, int cardsCount = 3)
+    public CardSelector(CardData cardData, int cardsCount = 3)
     {
-        _allConfigs = configs;
-        _playerCards = playerCards;
+        _cardData = cardData;
         _cardsPerSelect = cardsCount;
     }
 
     public IEnumerable<ICardConfig>GetCards()
     {
-        var baseFiltered = FilterCards(_allConfigs.Configs.ToList());
+        var baseFiltered = FilterCards(_cardData.GetConfigs());
 
         if (baseFiltered.Count == 0)
             return new List<ICardConfig>();
@@ -81,6 +78,6 @@ public class CardSelector
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
-        return allCards.FindAll(card => card.Level < _maxLevel);
+        return allCards.FindAll(card => card.Level < _maxLevel && card.IsBought);
     }
 }

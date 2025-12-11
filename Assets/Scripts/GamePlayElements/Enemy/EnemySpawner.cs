@@ -1,78 +1,35 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private LevelData _levelData;  
-    [SerializeField] private Enemy _enemy;
+    [SerializeField] private Enemy _enemyPrefab;
 
-    private Transform _player;
+    private IReadOnlyList<SpawnerActivator> _spawnPoints;
+    private ISpawnerService _spawnerService;
     private ObjectPool<Enemy> _pool;
     private DayCycle _dayCycle;
-    private ISpawnerService _spawnerService;
-
-    private float _minSpawnDistance;
-    private float _maxSpawnDistance;
-    private float _nightSpawnDelay;
-    private float _daySpawnDelay;
-
-    private WaitForSeconds _nightDelayWait;
-    private WaitForSeconds _dayDelayWait;
+    private Transform _player;
     private LevelConfig _currentConfig;
 
-    public void Init(Transform player, DayCycle dayCycle, LevelID level, ISpawnerService spawnerService)
+    private WaitForSeconds _nightSpawnDelay;
+    private WaitForSeconds _daySpawnDelay;
+
+    public void Init(Transform player, DayCycle dayCycle, LevelConfig config, ISpawnerService spawnerService)
     {
-        _spawnerService = spawnerService;
         _player = player;
+        _spawnerService = spawnerService;
         _dayCycle = dayCycle;
+        _currentConfig = config;
 
-        foreach (var levelInfo in _levelData.LevelInfos)
-        {
-            if (levelInfo.LevelID == level)  
-            {
-                _currentConfig = levelInfo.LevelConfig;
-                break;
-            }
-        }
+        _spawnPoints = _currentConfig.SpawnPointContainer.SpawnPoints;
+        _nightSpawnDelay = new WaitForSeconds(_currentConfig.NightSpawnDelay);
+        _daySpawnDelay = new WaitForSeconds(_currentConfig.DaySpawnDelay);
 
-        _minSpawnDistance = _currentConfig.MinSpawnDistance;
-        _maxSpawnDistance = _currentConfig.MaxSpawnDistance;
-        _nightSpawnDelay = _currentConfig.NightSpawnDelay;
-        _daySpawnDelay = _currentConfig.DaySpawnDelay;
-
-        _nightDelayWait = new WaitForSeconds(_nightSpawnDelay);
-        _dayDelayWait = new WaitForSeconds(_daySpawnDelay);
-        _pool = new ObjectPool<Enemy>(_enemy, 5, true);
+        _pool = new ObjectPool<Enemy>(_enemyPrefab, 0, true);
 
         StartCoroutine(SpawnRoutine());
-    }
-
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
-    }
-
-    private void Spawn()
-    {
-        if (_player == null || _enemy == null)
-            throw new ArgumentNullException(nameof(_enemy), "EnemySpawner: Ќе заполнен список врагов или игрока отсутствует.");
-
-        Vector3 spawnPos = GetPosition();
-        _enemy = _pool.Get();
-        EnemyStateMachine stateMashine = _enemy.GetComponent<EnemyStateMachine>();
-        stateMashine.Init(_spawnerService);
-        _enemy.transform.position = spawnPos;
-    }
-
-    private Vector3 GetPosition()
-    {
-        float angle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-        float distance = UnityEngine.Random.Range(_minSpawnDistance, _maxSpawnDistance);
-        Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * distance;
-        Vector3 spawnPosition = _player.position + offset;
-
-        return spawnPosition;
     }
 
     private IEnumerator SpawnRoutine()
@@ -82,14 +39,28 @@ public class EnemySpawner : MonoBehaviour
             Spawn();
 
             if (_dayCycle.CurrentPhase == DayPhase.Day)
-            {
-                yield return _dayDelayWait;
-            }
+                yield return _daySpawnDelay;
             else
-            {
-                yield return _nightDelayWait;
-            }
-
+                yield return _nightSpawnDelay;
         }
+    }
+
+    private void Spawn()
+    {
+        if (_spawnPoints == null || _spawnPoints.Count == 0)
+        {
+            return;
+        }
+
+        var spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+        Enemy enemyInstance = _pool.Get();
+
+        EnemyStateMachine stateMachine = enemyInstance.GetComponent<EnemyStateMachine>();
+        enemyInstance.transform.position = spawnPoint.transform.position;
+        enemyInstance.transform.LookAt(_player.transform);
+        stateMachine.Init(_player.transform);
+
+        SpawnbleEntity spawnbleEntity = GetComponent<SpawnbleEntity>();
+        spawnbleEntity.Init(_spawnerService);
     }
 }

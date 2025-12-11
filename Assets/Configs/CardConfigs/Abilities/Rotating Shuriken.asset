@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f7431266d7c3d498175fa6a6aeceef, type: 3}
+  m_Name: Rotating Shuriken
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 06bc443b2401cd041badddb684de936f, type: 3}
+  _name: Shurikens
+  _description: Some Rotating Shurikens
+  _costs:
+  - ResourceType: 2
+    Value: 0
+    Image: {fileID: 21300000, guid: d5d816a6099484f9fb74c7c1f1b8b35a, type: 3}
+  - ResourceType: 0
+    Value: 0
+    Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  _chanceToView: 0.5
+  _level: 0
+  _abilityType: 4
+  _prefab: {fileID: 9053661150003304121, guid: 42a96855bb557ab4298a5d3538a94ccb, type: 3}
+  _baseCount: 1
+  _baseRadius: 3
+  _baseRotationSpeed: 90
+  _spinSpeed: 360
+  _baseDamage: 1
+  _countPerLevel: 1
+  _radiusPerLevel: 0.1
+  _rotationSpeedPerLevel: 5
+  _damagePerLevel: 1
+  _maxCount: 6
+  _minRadius: 1
+  _minRotationSpeed: 30
+  _minDamage: 1

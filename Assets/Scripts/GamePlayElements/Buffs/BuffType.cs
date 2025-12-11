@@ -5,5 +5,6 @@ public enum BuffType
     MaxHp,
     ArmorPercent,
     ArmorFlat,
-    MoveSpeed
+    MoveSpeed,
+    CollectRange
 }
