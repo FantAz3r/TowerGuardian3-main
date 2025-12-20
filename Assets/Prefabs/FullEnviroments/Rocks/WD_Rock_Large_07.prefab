@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -3824496608709732564}
   - component: {fileID: -3527267562447602580}
   - component: {fileID: -3002473995596912610}
+  - component: {fileID: 2277443187684401699}
   m_Layer: 7
   m_Name: WD_Rock_Large_07
   m_TagString: Untagged
@@ -100,10 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 0}
-  _maxHealth: 0
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 0}
   _type: 1
 --- !u!54 &-3858082366607234961
 Rigidbody:
@@ -175,5 +173,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71924de8a2000ba4f901ad5488fd2a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2277443187684401699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3970228589903352599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00a45b39230dfd46864580395c405b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

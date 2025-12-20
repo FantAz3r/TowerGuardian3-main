@@ -12,11 +12,13 @@ GameObject:
   - component: {fileID: 7845630260713952501}
   - component: {fileID: 7987849491214751494}
   - component: {fileID: 1353662701429353198}
+  - component: {fileID: 5081398009426885774}
   - component: {fileID: 5455729604310408274}
   - component: {fileID: 1780471275890372835}
   - component: {fileID: 3820031484318594102}
   - component: {fileID: 3072303267542088898}
   - component: {fileID: 8079752438915498104}
+  - component: {fileID: -2597494668989160889}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -105,6 +107,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &5081398009426885774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472323202367812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d550dce60a5f947a2d18a45ce08c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDetector: {fileID: 3918306888492116849}
+  comboResetTime: 4
 --- !u!114 &5455729604310408274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,8 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
-  _maxHealth: 1
-  _type: 3
+  _type: 4
 --- !u!114 &3820031484318594102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +183,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fee66011e62a2644bd4f596ead07df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2597494668989160889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472323202367812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401588010eefbde4baf86a1eec71c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &497643833354922766

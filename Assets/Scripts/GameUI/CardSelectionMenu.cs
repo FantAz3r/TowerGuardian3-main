@@ -19,15 +19,17 @@ public class CardSelectionMenu : MonoBehaviour
 
     private void Start()
     {
+        _showButton.gameObject.SetActive(false);
         _panel.gameObject.SetActive(false);
     }
 
-    public void Init( PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons)
+    public void Init(PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons)
     {
         _playerExperience = playerExperience;
         _selector = selector;
         _cardsButtons = cardsButtons;
 
+        LoadUpgradeScore();
         _playerExperience.OnLevelUp += AddSelect;
 
         foreach (var button in _cardsButtons)
@@ -71,6 +73,7 @@ public class CardSelectionMenu : MonoBehaviour
 
         SetMenuOpen(false);
         YG2.PauseGameNoEditEventSystem(false);
+        SaveUpgradeScore();
     }
 
     private void AddSelect(int level)
@@ -78,6 +81,7 @@ public class CardSelectionMenu : MonoBehaviour
         _selectCount++;
         _showButton.gameObject.SetActive(true);
         _text.text = _selectCount.ToString();
+        SaveUpgradeScore();
     }
 
     private void ShowCards(List<ICardConfig> cards)
@@ -112,5 +116,15 @@ public class CardSelectionMenu : MonoBehaviour
     private void ShowButton()
     {
         _showButton.gameObject.SetActive(_selectCount > 0);
+    }
+
+    private void SaveUpgradeScore()
+    {
+        YG2.saves.UpgradePoints = _selectCount;
+    }
+
+    private void LoadUpgradeScore()
+    {
+        _selectCount = YG2.saves.UpgradePoints;
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7302214868277887380}
   - component: {fileID: 4280975212749799055}
   - component: {fileID: 7230642930495883850}
+  - component: {fileID: -6372049529261048957}
   m_Layer: 7
   m_Name: HardRock_03
   m_TagString: Untagged
@@ -99,10 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 0}
-  _maxHealth: 0
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 0}
   _type: 1
 --- !u!54 &7302214868277887380
 Rigidbody:
@@ -164,3 +162,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.84751654, y: 0.72495896, z: 1.1636614}
   m_Center: {x: 0.0517333, y: 0.32801953, z: 0.04624313}
+--- !u!114 &-6372049529261048957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4016154500641946441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00a45b39230dfd46864580395c405b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

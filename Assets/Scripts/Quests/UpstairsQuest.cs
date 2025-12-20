@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public class UpstairsQuest : Quest
+{
+    private StairsTrigger _collider;
+    public override QuestType GetQuestType() => QuestType.UpStairs;
+
+    public UpstairsQuest(StairsTrigger collider)
+    {
+        _collider = collider;
+    }
+
+    public override void Run()
+    {
+        base.Run();
+        _collider.Entered += Complete;
+    }
+
+    public override void Complete()
+    {
+        _collider.Entered -= Complete;
+        base.Complete();
+    }
+}

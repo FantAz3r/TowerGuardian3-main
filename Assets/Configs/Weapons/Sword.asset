@@ -15,9 +15,20 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 409a59225a7eff3478812a6229decc01, type: 3}
   _name: Sword
   _description: More Damage to enemy
-  _costs: []
+  _costs:
+  - ResourceType: 0
+    Value: 2
+    Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  - ResourceType: 2
+    Value: 2
+    Image: {fileID: 21300000, guid: 20d21a867b3174de9aa1b81823b2b7ef, type: 3}
+  - ResourceType: 1
+    Value: 15
+    Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
   _chanceToView: 0.5
   _level: 0
+  _hasPlayer: 0
+  _isBought: 0
   _prefab: {fileID: -934408350477533787, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
   _type: 1
   _targetType: 0

@@ -13,19 +13,9 @@ MonoBehaviour:
   m_Name: ResourceData
   m_EditorClassIdentifier: 
   ResourceInfos:
-  - ObjectType: 1
+  - Type: 0
     Prefab: {fileID: 9189083670549185388, guid: ce6e1c5a16e65084a948bed1b62f1e00, type: 3}
-    DamageToErn: 2
-    Reward: 1
-  - ObjectType: 2
+  - Type: 1
     Prefab: {fileID: 3923790784784915496, guid: 160857f86d5ff7749b191e395e5baf5c, type: 3}
-    DamageToErn: 1
-    Reward: 1
-  - ObjectType: 0
+  - Type: 2
     Prefab: {fileID: 3343013322987301385, guid: d608a03d523da68419f4b8d6c67e81c7, type: 3}
-    DamageToErn: -1
-    Reward: 1
-  - ObjectType: 3
-    Prefab: {fileID: 3343013322987301385, guid: d608a03d523da68419f4b8d6c67e81c7, type: 3}
-    DamageToErn: -1
-    Reward: 10

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6705232351747522699}
   - component: {fileID: -9023934102135875079}
   - component: {fileID: 8112175957930020845}
+  - component: {fileID: -8323588553474255346}
   m_Layer: 7
   m_Name: Rock_Medium_Stone_03_Atlased
   m_TagString: Untagged
@@ -99,10 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 0}
-  _maxHealth: 0
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 0}
   _type: 1
 --- !u!54 &-6705232351747522699
 Rigidbody:
@@ -164,3 +162,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.716332, y: 4.489787, z: 3.448116}
   m_Center: {x: 0, y: 2.2448936, z: 0}
+--- !u!114 &-8323588553474255346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511232281708204104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00a45b39230dfd46864580395c405b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

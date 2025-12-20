@@ -5,8 +5,8 @@ public abstract class CardConfig : ShopConfig, ICardConfig
 {
     [SerializeField, Range(0f, 1f)] private float _chanceToView;
     [SerializeField] private int _level = 0;
-    private bool _hasPlayer;
-    private bool _isBought;
+    [SerializeField] private bool _hasPlayer;
+    [SerializeField] private bool _isBought;
 
     public float ChanceToView => _chanceToView;
     public int Level => _level;

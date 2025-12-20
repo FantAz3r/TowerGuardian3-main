@@ -1,10 +1,13 @@
-public enum QuestType 
+public enum QuestType
 {
-   None,
-   Move,
-   Attack,
-   Collect,
-   Upgrade,
-   KillEnemy,
-   GetOut
+    None,
+    Move,
+    Attack,
+    Collect,
+    Upgrade,
+    KillEnemy,
+    GetOut,
+    EnterTower,
+    UpStairs,
+    EnterFirstLevel
 }

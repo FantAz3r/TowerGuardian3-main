@@ -19,6 +19,8 @@ MonoBehaviour:
     uniqueID: 000
     playerPhoto: demo image
     payingStatus: 0
+  Localization:
+    setLanguageMod: 1
   Storage:
     saveLocal: 0
     saveCloud: 1
@@ -34,10 +36,11 @@ MonoBehaviour:
     syncInitSDK: 0
     loadSceneIfSDKLate: 0
     loadSceneIndex: 0
-    simulationLoadScene: 0
+    initDelaySimulation: 0
+    buildNumber: 0
   Simulation:
     device: 0
-    language: ru
+    language: en
     advIntervalSimulation: 60
     durationAdv: 0.5
     loadAdv: 0
@@ -75,6 +78,7 @@ MonoBehaviour:
   platformInfo:
     ownHost: 0
   platformToggles:
+    setLanguageMod: 0
     saveLocal: 0
     saveCloud: 0
     autoPauseGame: 0

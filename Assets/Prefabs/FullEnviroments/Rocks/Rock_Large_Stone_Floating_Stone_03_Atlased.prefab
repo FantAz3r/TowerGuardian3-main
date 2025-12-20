@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -5459990010367353411}
   - component: {fileID: -2651614844720841724}
   - component: {fileID: -1931252657559734024}
+  - component: {fileID: -3481704677266606624}
   m_Layer: 7
   m_Name: Rock_Large_Stone_Floating_Stone_03_Atlased
   m_TagString: Untagged
@@ -99,10 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 0}
-  _maxHealth: 0
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 0}
   _type: 1
 --- !u!54 &-5459990010367353411
 Rigidbody:
@@ -164,3 +162,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.3870196, y: 7.7049437, z: 4.9140234}
   m_Center: {x: 0, y: 3.8524718, z: 0}
+--- !u!114 &-3481704677266606624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495261696352055466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00a45b39230dfd46864580395c405b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

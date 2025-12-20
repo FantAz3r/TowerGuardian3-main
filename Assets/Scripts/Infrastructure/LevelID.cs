@@ -1,10 +1,10 @@
 public enum LevelID
 {
+    None,
     MainMenu,
     Tower,
     Level1,
     Level2,
     Level3,
-    Level4,
-    None
+    Level4
 }

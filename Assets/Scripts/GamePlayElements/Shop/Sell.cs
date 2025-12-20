@@ -8,8 +8,9 @@ public class Sell : MonoBehaviour
     [SerializeField] private RectTransform _weaponParent;
     [SerializeField] private RectTransform _abilityParent;
     [SerializeField] private RectTransform _buffParent;
-    [SerializeField] private RectTransform _resourcesParent;
+    [SerializeField] private SellResources _resourcesPanel;
     [SerializeField] private ProductViewer _productButtonPrefab;
+    
 
     private List<ICardConfig> _availableToSellItems = new();
     private List<ProductViewer> _productButtons = new();
@@ -26,6 +27,7 @@ public class Sell : MonoBehaviour
         _cardData = cardData;
         _cardHolder = cardHolder;
 
+        _resourcesPanel.Init(_inventory);
         gameObject.SetActive(false);
     }
 
@@ -42,6 +44,7 @@ public class Sell : MonoBehaviour
     {
         gameObject.SetActive(true);
         RenderSellItems();
+        _resourcesPanel.RenderSellItems();
     }
 
     private void RenderSellItems()
@@ -58,13 +61,9 @@ public class Sell : MonoBehaviour
             else if (config is AbilityConfig)
                 parent = _abilityParent;
             else if (config is BuffConfig)
-            {
-                Debug.Log(config.Name);
                 parent = _buffParent;
-
-            }
             else
-                parent = _resourcesParent;
+                return;
 
             ProductViewer button = Instantiate(_productButtonPrefab, parent);
             button.Render(config, true);
@@ -106,7 +105,7 @@ public class Sell : MonoBehaviour
             YG2.saves.AllCards = new();
 
         YG2.saves.AllCards.RemoveAll(savedCard => savedCard.Name == card.Name);
-        YG2.saves.AllCards.Add(new CardSaveData(0, card.Name, false ,false ));
+        YG2.saves.AllCards.Add(new CardSaveData(0, card.Name, false, false));
         YG2.SaveProgress();
     }
 

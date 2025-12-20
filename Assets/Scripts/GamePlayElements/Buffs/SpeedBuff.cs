@@ -9,8 +9,12 @@ public class SpeedBuff : IBuff
 
     public BuffType Type => BuffType.MoveSpeed;
 
-    public void ApplyBuff(float value)
+    public void UpdateBuff(float value)
     {
         _mover.ApplyBuff(value);
+    }
+
+    public void EnableBuff()
+    {
     }
 }

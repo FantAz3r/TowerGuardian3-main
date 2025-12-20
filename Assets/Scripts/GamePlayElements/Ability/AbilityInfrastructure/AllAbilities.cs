@@ -57,8 +57,6 @@ public class AllAbilities : MonoBehaviour
 
     private void OnUpgrade(ICardConfig card)
     {
-        Debug.Log("Shurikers Upgraded 2");
-
         if (card is AbilityConfig ability)
         {
             foreach (IAbility item in _abilities)

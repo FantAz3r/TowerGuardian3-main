@@ -8,7 +8,12 @@ public class RegenerationBuff : IBuff
         _healthRegeneration = healthRegeneration;
     }
 
-    public void ApplyBuff(float value)
+    public void EnableBuff()
+    {
+        _healthRegeneration.EnableBuff();
+    }
+
+    public void UpdateBuff(float value)
     {
         _healthRegeneration.ApplyBuff(value);
     }

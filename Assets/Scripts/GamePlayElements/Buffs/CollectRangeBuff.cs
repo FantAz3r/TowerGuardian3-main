@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class CollectRangeBuff : IBuff
 {
     private ResourceCollector _collector;
@@ -11,8 +9,14 @@ public class CollectRangeBuff : IBuff
 
     public BuffType Type => BuffType.CollectRange;
 
-    public void ApplyBuff(float value)
+    
+    public void UpdateBuff(float value)
     {
         _collector.ApplyBuff(value);
+    }
+
+    public void EnableBuff()
+    {
+        throw new System.NotImplementedException();
     }
 }

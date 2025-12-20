@@ -9,8 +9,14 @@ public class MaxHealthBuff : IBuff
 
     public BuffType Type => BuffType.MaxHp;
 
-    public void ApplyBuff(float value)
+
+    public void UpdateBuff(float value)
     {
         _health.ApplyBuff(value);
+    }
+
+    public void EnableBuff()
+    {
+        throw new System.NotImplementedException();
     }
 }

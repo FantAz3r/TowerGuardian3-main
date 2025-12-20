@@ -9,12 +9,14 @@ public class AbilityViewer : MonoBehaviour
     [SerializeField] private Image _cooldownFillImage;
     [SerializeField] private TMP_Text _cooldownText;
 
+    public bool HasAbility {get; private set;}
     private Button _button;
     private IAbility _ability;
     public IAbility Ability => _ability;
 
     private void Awake()
     {
+        HasAbility = false;
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnClick);
         _cooldownText.enabled = false;
@@ -32,6 +34,7 @@ public class AbilityViewer : MonoBehaviour
         if (_iconImage == null && config == null)
             throw new ArgumentNullException();
 
+        HasAbility = true;
         _ability = ability;
         gameObject.SetActive(true);
         _button.interactable = true;
@@ -45,6 +48,7 @@ public class AbilityViewer : MonoBehaviour
     {
         UnsubscribeCooldownEvents();
 
+        HasAbility = false;
         _ability = null;
         gameObject.SetActive(false);
         _button.interactable = false;

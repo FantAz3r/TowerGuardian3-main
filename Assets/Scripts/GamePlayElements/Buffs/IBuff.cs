@@ -1,5 +1,6 @@
 public interface IBuff
 {
     BuffType Type { get; }
-    void ApplyBuff(float value);
+    void EnableBuff();
+    void UpdateBuff(float value);
 }

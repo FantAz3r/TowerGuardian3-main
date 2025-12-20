@@ -3,6 +3,7 @@ using UnityEngine;
 public class AttackQuest : Quest
 {
     PlayerAttacker _attacker;
+    public override QuestType GetQuestType() => QuestType.Attack;
 
     public AttackQuest(PlayerAttacker attacker)
     {
@@ -14,11 +15,6 @@ public class AttackQuest : Quest
         base.Run();
         Debug.Log("Attack Quest started");
         _attacker.Hited += Complete;
-    }
-
-    public override QuestType GetQuestType()
-    {
-        return QuestType.Attack;
     }
 
     public override void Complete()

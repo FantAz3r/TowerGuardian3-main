@@ -19,9 +19,11 @@ public class LouseLevelMenu : LevelMenu
             _playerHealth.Died += OnLouse;
 
         _resurrectionButton.onClick.AddListener(Resurrection);
+
+        gameObject.SetActive(false);
     }
 
-    private void OnLouse(Health health)
+    private void OnLouse()
     {
         if(_canResurrection == false)
         {

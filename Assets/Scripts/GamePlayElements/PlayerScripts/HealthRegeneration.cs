@@ -20,7 +20,7 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
         _regenValue = _config.HealthRegeneration;
     }
 
-    private void OnEnable()
+    public void EnableBuff()
     {
         StartRegeneration();
     }
@@ -32,9 +32,9 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
 
     private void StartRegeneration()
     {
-        if (_regenCoroutine == null)
+        if (_regenCoroutine == null && enabled && _health != null)
         {
-            _regenCoroutine = StartCoroutine(HealPerTime());
+            _regenCoroutine = StartCoroutine(RegenerationRoutine());
         }
     }
 
@@ -47,9 +47,9 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
         }
     }
 
-    private IEnumerator HealPerTime()
+    private IEnumerator RegenerationRoutine()
     {
-        while(enabled)
+        while (enabled)
         {
             _health.Heal(_regenValue * _delay);
             yield return _wait;

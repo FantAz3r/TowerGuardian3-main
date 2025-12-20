@@ -16,6 +16,7 @@ public class Tutorial : MonoBehaviour
     public event Action<Sprite, string> QuestSeted;
     public event Action<string> QuestUpdated;
     public event Action Complited;
+    public event Action CompliteWithoutLust;
 
     public void Init(QuestBuilder builder, QuestData questData, IReadOnlyList<QuestType> questsForThisLevel)
     {
@@ -50,7 +51,12 @@ public class Tutorial : MonoBehaviour
 
         _currentQuestIndex++;
 
-        if (_currentQuestIndex >= _quests.Count-1 )
+        if(_currentQuestIndex >= _quests.Count-1)
+        {
+            CompliteWithoutLust?.Invoke();
+        }
+
+        if (_currentQuestIndex >= _quests.Count)
         {
             _isTutorialComplete = true;
             Complited?.Invoke();

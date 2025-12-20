@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864116a1b449ef545916bc24a1bcfff1, type: 3}
   m_Name: Tower
   m_EditorClassIdentifier: 
-  _level: 1
-  _quests: 
-  _playerSpawnPoint: {x: 15.06, y: -12.108, z: -36.5}
+  _level: 2
+  _quests: 0100000007000000080000000900000000000000
+  _playerSpawnPoint: {x: 28.13, y: -12.1, z: -104.81}
   _portalData: {fileID: 11400000, guid: da6cbfbc1a9b5ee468b8897094e875d6, type: 2}
   _dayDuration: 0
   _nightDuration: 99999
@@ -26,3 +26,6 @@ MonoBehaviour:
   _container: {fileID: 0}
   _nightSpawnDelay: 999999
   _daySpawnDelay: 999999
+  _scorePerTimeOneStar: 0
+  _scorePerTimeTwoStar: 0
+  _scorePerTimeThreeStar: 0

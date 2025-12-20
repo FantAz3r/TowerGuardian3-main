@@ -67,6 +67,11 @@ public class Inventory : MonoBehaviour
         SaveResources();
     }
 
+    public int ShowCount(ResourceType type)
+    {
+        return _resources[type];
+    }
+
     public bool IsEnoughResource(List<CostInfo> costs)
     {
         foreach (var cost in costs)

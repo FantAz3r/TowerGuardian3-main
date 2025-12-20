@@ -5,7 +5,7 @@ using YG;
 
 public class StartButton : MonoBehaviour
 {
-    private LevelID _levelToLoad;
+    [SerializeField] private LevelID _levelToLoad;
     private Button _button;
     private IStateSwitchService _switchService;
 
@@ -22,7 +22,6 @@ public class StartButton : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(OnClicked);
-        LoadLevel();
     }
 
     private void OnDisable()

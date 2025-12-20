@@ -17,10 +17,12 @@ MonoBehaviour:
   _description: Increace MAX HP
   _costs:
   - ResourceType: 2
-    Value: 0
-    Image: {fileID: 454922556, guid: c80cfba900504e246bc955fcc768d713, type: 3}
+    Value: 5
+    Image: {fileID: 21300000, guid: 20d21a867b3174de9aa1b81823b2b7ef, type: 3}
   _chanceToView: 0.5
   _level: 0
+  _hasPlayer: 1
+  _isBought: 1
   _buffType: 2
   _baseIncreaseValue: 0.2
   _upgradeValuePerLevel: 0.1

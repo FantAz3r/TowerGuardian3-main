@@ -11,10 +11,11 @@ public class PlayerAnimator : MonoBehaviour
     [Tooltip("»м€ клипа атаки внутри AnimatorController. ≈сли пусто, будет попытка вз€ть первый попавшийс€ клип.")]
     [SerializeField] private string attackClipName = "Attack";
 
-    private UnityEngine.Animator _animator;
+    private Animator _animator;
     private Mover _mover;
     private Rotator _rotator;
     private PlayerAttacker _attacker;
+    private Health _health;
     private int _hashX;
     private int _hashY;
     private int _hashWeaponSeted;
@@ -22,6 +23,7 @@ public class PlayerAnimator : MonoBehaviour
     private int _hashAttack;
     private int _hashRandom;
     private int _hasWeapon;
+    private int _hashDie;
 
     private float _currentSpeed;
     private float _velSpeed;
@@ -31,18 +33,20 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<UnityEngine.Animator>();
+        _animator = GetComponent<Animator>();
         _mover = GetComponentInParent<Mover>();
         _rotator = GetComponentInParent<Rotator>();
         _attacker = GetComponentInParent<PlayerAttacker>();
+        _health = GetComponentInParent<Health>();
 
-        _hashX = UnityEngine.Animator.StringToHash("X");
-        _hashY = UnityEngine.Animator.StringToHash("Y");
-        _hashWeaponSeted = UnityEngine.Animator.StringToHash("WeaponSeted");
-        _hashWeaponRemoved = UnityEngine.Animator.StringToHash("WeaponRemoved");
-        _hashAttack = UnityEngine.Animator.StringToHash("Attack");
-        _hashRandom = UnityEngine.Animator.StringToHash("Random");
-        _hasWeapon = UnityEngine.Animator.StringToHash("HasWeapon");
+        _hashX = Animator.StringToHash("X");
+        _hashY = Animator.StringToHash("Y");
+        _hashWeaponSeted = Animator.StringToHash("WeaponSeted");
+        _hashWeaponRemoved = Animator.StringToHash("WeaponRemoved");
+        _hashAttack = Animator.StringToHash("Attack");
+        _hashRandom = Animator.StringToHash("Random");
+        _hasWeapon = Animator.StringToHash("HasWeapon");
+        _hashDie = Animator.StringToHash("Die");
 
         if (_animator != null)
             _defaultAnimatorSpeed = _animator.speed;
@@ -57,6 +61,7 @@ public class PlayerAnimator : MonoBehaviour
         _attacker.WeaponRemoved += OnWeaponRemoved;
         _attacker.Attacked += PlayAttack;
         _attacker.Suspended += OnSuspendAttack;
+        _health.Died += OnDie;
     }
 
     private void OnDisable()
@@ -67,6 +72,7 @@ public class PlayerAnimator : MonoBehaviour
         _attacker.WeaponSeted -= OnWeaponSeted;
         _attacker.WeaponRemoved -= OnWeaponRemoved;
         _attacker.Attacked -= PlayAttack;
+        _health.Died -= OnDie;
     }
 
     private void Update()
@@ -217,5 +223,15 @@ public class PlayerAnimator : MonoBehaviour
         }
 
         return _defaultAnimatorSpeed;
+    }
+
+    public void OnDie()
+    {
+        _animator.SetTrigger(_hashDie);
+    }
+
+    public void OnAnimationDie()
+    {
+        _health.Die();
     }
 }

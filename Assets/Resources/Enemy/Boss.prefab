@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2766612530285442000}
   - component: {fileID: 4670138031984402843}
   - component: {fileID: 5783215606937221182}
+  - component: {fileID: -8055900634837290136}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
@@ -128,10 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 11400000, guid: 0902e635c28fed746b096f9a71deab86, type: 2}
-  _maxHealth: 1
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 11400000, guid: 0902e635c28fed746b096f9a71deab86, type: 2}
   _type: 0
 --- !u!114 &2766612530285442000
 MonoBehaviour:
@@ -182,6 +180,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 4790754491381200615}
   _smoothSpeed: 1.5
+--- !u!114 &-8055900634837290136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383739352584277569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401588010eefbde4baf86a1eec71c5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5407645571033090753
 PrefabInstance:
   m_ObjectHideFlags: 0

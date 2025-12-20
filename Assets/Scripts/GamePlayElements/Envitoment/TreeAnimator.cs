@@ -32,7 +32,7 @@ public class TreeAnimator : MonoBehaviour
         _animator.SetTrigger(_hashHited);
     }
 
-    private void OnDied(Health useles)
+    private void OnDied()
     {
         _animator.SetTrigger(_hashDied);
     }

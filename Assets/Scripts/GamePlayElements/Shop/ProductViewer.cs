@@ -23,7 +23,7 @@ public class ProductViewer : MonoBehaviour
         _button.onClick.AddListener(OnClick);
     }
 
-    public void Render(ICardConfig config, bool isBuy,  bool interactable = true)
+    public void Render(ICardConfig config, bool isBuy, bool interactable = true)
     {
         _image.sprite = config.Icon;
         _config = config;

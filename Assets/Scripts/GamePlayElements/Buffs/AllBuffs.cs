@@ -17,11 +17,13 @@ public class AllBuffs : MonoBehaviour
     private void Awake()
     {
         _container = GetComponent<PlayerCardConfigContainer>();
-        _inventory = GetComponentInChildren<Inventory>();
-        _resourceCollector = GetComponentInChildren<ResourceCollector>();
         _health = GetComponent<Health>();
         _mover = GetComponent<Mover>();
         _healthRegen = GetComponent<HealthRegeneration>();
+
+        _inventory = GetComponentInChildren<Inventory>();
+        _resourceCollector = GetComponentInChildren<ResourceCollector>();
+
         CreateBuffs();
     }
 
@@ -29,7 +31,6 @@ public class AllBuffs : MonoBehaviour
     {
         _container.BuffAdded += Activate;
         _container.BuffRemoved += Deactivate;
-        
     }
 
     private void OnDisable()
@@ -52,7 +53,8 @@ public class AllBuffs : MonoBehaviour
         {
             if (buff.BuffType == item.Type)
             {
-                item.ApplyBuff(buff.IncreaseValue);
+                item.EnableBuff();
+                item.UpdateBuff(buff.IncreaseValue);
             }
         }
     }
@@ -63,7 +65,7 @@ public class AllBuffs : MonoBehaviour
         {
             if (buff.BuffType == item.Type)
             {
-                item.ApplyBuff(0);
+                item.UpdateBuff(0);
             }
         }
     }

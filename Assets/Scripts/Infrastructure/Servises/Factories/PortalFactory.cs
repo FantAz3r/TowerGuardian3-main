@@ -16,15 +16,24 @@ public class PortalFactory
         _startMenu = startMenu;
     }
 
-    public void SetQuests(Tutorial tutorial)
+    public void SetQuests(Tutorial tutorial, LevelID level)
     {
         _tutorial = tutorial;
-        DisablePortals();
-        _tutorial.Complited += EnablePortals;
+
+        if (level != LevelID.Tower)
+        {
+            DisablePortals(level);
+            _tutorial.CompliteWithoutLust += EnablePortals;
+        }
     }
 
     public List<Portal> Create(PortalData portalData, List<Floor> floors)
     {
+        foreach(var item in floors)
+        {
+            Debug.Log(item);
+        }
+
         if (floors.Count > 1)
         {
             foreach (var portalInfo in portalData.Infos)
@@ -36,6 +45,7 @@ public class PortalFactory
                     Portal prefab = Resources.Load<Portal>(GameConstants.Portal);
                     Portal portal = Object.Instantiate(prefab, portalInfo.Transform.position, portalInfo.Transform.rotation, floor.transform);
                     portal.Init(_finishMenu, _loseMenu, portalInfo.LevelID, portalInfo.Material, LevelID.Tower, _startMenu);
+                    portal.transform.localScale = portalInfo.Transform.localScale;
                     _portals.Add(portal);
                 }
                 else
@@ -53,7 +63,6 @@ public class PortalFactory
                 portal.Init(_finishMenu, _loseMenu, portalInfo.LevelID, portalInfo.Material);
                 _portals.Add(portal);
             }
-
         }
 
         return _portals;
@@ -61,15 +70,16 @@ public class PortalFactory
 
     private void EnablePortals()
     {
-        foreach(var portal in _portals)
+        foreach (var portal in _portals)
         {
             portal.gameObject.SetActive(true);
         }
 
-        _tutorial.Complited -= EnablePortals;
+        _tutorial.CompliteWithoutLust -= EnablePortals;
     }
 
-    private void DisablePortals()
+
+    private void DisablePortals(LevelID currentLevel)
     {
         foreach (var portal in _portals)
         {

@@ -1,31 +1,42 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIFactory 
 {
-    private Transform _uiRoot;
-    private Transform _menuPanel;
-    private Transform _settingsPanel;
+    private MenuCanvas _uiRoot;
 
+    private ISpawnerService _spawnerService;
     private IStateSwitchService _stateSwitchService;
 
-    public UIFactory(IStateSwitchService stateSwitchService)
+    public UIFactory(IStateSwitchService stateSwitchService, ISpawnerService spawnerService)
     {
         _stateSwitchService = stateSwitchService;
+        _spawnerService = spawnerService;
     }
 
     public void CreateUIRoot()
     {
-        GameObject prefab = Resources.Load<GameObject>(GameConstants.MenuCanvas);
-        _uiRoot = Object.Instantiate(prefab).transform;
+        var scene = SceneManager.GetActiveScene();
+        List<GameObject> parentObjects = scene.GetRootGameObjects().ToList();
+
+        foreach (var parent in parentObjects)
+        {
+            if(parent.TryGetComponent(out MenuCanvas menuCanvas))
+            {
+                _uiRoot = menuCanvas;
+            }
+        }
     }
 
     public void CreateStartButton()
     {
-        GameObject prefab = Resources.Load<GameObject>(GameConstants.StartButton);
-        Transform container = _uiRoot.GetComponentInChildren<UIDummy>().transform;
-        GameObject button = Object.Instantiate(prefab, container);
+        _uiRoot.StartButton.Init(_stateSwitchService);
+    }
 
-        button.GetComponent<StartButton>().Init(_stateSwitchService);
-        button.transform.SetSiblingIndex(0);
+    public void CreateSettings()
+    {
+        _uiRoot.SwichDamageNumbers.Init(_spawnerService);
     }
 }

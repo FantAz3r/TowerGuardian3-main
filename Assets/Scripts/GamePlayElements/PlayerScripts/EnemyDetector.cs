@@ -11,7 +11,7 @@ public class EnemyDetector : MonoBehaviour
     {
         if (other.TryGetComponent(out IDemageable enemy) && enemy != null)
         {
-            enemy.Died += OnEnemyDied;
+            enemy.Killed += OnEnemyDied;
         }
     }
 
@@ -19,7 +19,7 @@ public class EnemyDetector : MonoBehaviour
     {
         if (other.TryGetComponent(out IDemageable enemy) && enemy != null)
         {
-            enemy.Died -= OnEnemyDied;
+            enemy.Killed -= OnEnemyDied;
         }
     }
 

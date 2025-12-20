@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PieceConfig : ShopConfig
 {
+    [SerializeField] private ResourceType _type;
+
+    public ResourceType Type => _type;
+
     public override List<CostInfo> GetSellCost()
     {
         List<CostInfo> sellCosts = new List<CostInfo>();

@@ -7,6 +7,7 @@ public struct LevelSaveData
     public int Score;
     public int Stars;
     public int Time;
+    public bool IsComplite;
 
     public LevelSaveData(LevelID level, int score, int stars, int time)
     {
@@ -14,5 +15,7 @@ public struct LevelSaveData
         Score = score;
         Stars = stars;
         Time = time;
+
+        IsComplite = stars >= 1;
     }
 }

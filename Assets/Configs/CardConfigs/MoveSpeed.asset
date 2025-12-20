@@ -15,9 +15,14 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 43f6e8b0b0d8e4344baafad16e020839, type: 3}
   _name: Move Speed
   _description: Increace Move Speed
-  _costs: []
+  _costs:
+  - ResourceType: 2
+    Value: 5
+    Image: {fileID: 21300000, guid: 20d21a867b3174de9aa1b81823b2b7ef, type: 3}
   _chanceToView: 0.5
   _level: 0
+  _hasPlayer: 1
+  _isBought: 1
   _buffType: 5
   _baseIncreaseValue: 0.2
   _upgradeValuePerLevel: 0.1
