@@ -67,6 +67,20 @@ public class GameFactory
         }
     }
 
+    public void InitUI()
+    {
+        var scene = SceneManager.GetActiveScene();
+        List<GameObject> parentObjects = scene.GetRootGameObjects().ToList();
+
+        foreach (var parent in parentObjects)
+        {
+            if (parent.TryGetComponent(out GameUI uiRoot))
+            {
+                _uiRoot = uiRoot;
+            }
+        }
+    }
+
     public void SetLevelConfig(LevelID level)
     {
         LevelData levelData = Resources.Load<LevelData>(GameConstants.LevelData);
@@ -117,6 +131,9 @@ public class GameFactory
     {
         CameraFollower prefab = Resources.Load<CameraFollower>(GameConstants.MainCamera);
         CameraFollower camera = Object.Instantiate(prefab);
+        TransparencyTrigger transparencyTrigger = camera.GetComponent<TransparencyTrigger>();
+
+        transparencyTrigger.Init(_player.transform);
         camera.Init(_player.transform);
     }
 
@@ -134,13 +151,10 @@ public class GameFactory
 
     public void CreateHUD()
     {
-        GameUI prefab = Resources.Load<GameUI>(GameConstants.GameUI);
-        _uiRoot = Object.Instantiate(prefab);
-
         _uiRoot.PauseUI.Init(_stateMachine);
         _uiRoot.SwichDamageNumbers.Init(_spawnerService);
-        _uiRoot.ResourceViewer.Init(_inventory);
 
+        _uiRoot.ResourceViewer.Init(_inventory);
         _uiRoot.PlayerHealthViewer.Init(_health);
         _uiRoot.LevelViewer.Init(_experience);
         _uiRoot.AbilityPanel.Init(_allAbilities);
@@ -151,7 +165,6 @@ public class GameFactory
     {
         _uiRoot.Shop.Init(_inventory);
         _uiRoot.Sell.Init(_inventory, _cardData, _cardHolder);
-
 
         _uiRoot.WinLevelMenu.Init(_stateMachine, _scoreCounter, _levelConfig.Level);
         _uiRoot.WinScoreViewer.Init(_scoreCounter);
@@ -171,7 +184,7 @@ public class GameFactory
     public void CreateCardsSelectionMenu()
     {
         CardData cardData = Resources.Load<CardData>(GameConstants.CardData);
-        _uiRoot.CardSelectionMenu.Init(_experience, new CardSelector(cardData), _buttons);
+        _uiRoot.CardSelectionMenu.Init(_experience, new CardSelector(cardData), _buttons, _uiRoot);
     }
 
     public void CreateCardButtons()
@@ -205,7 +218,6 @@ public class GameFactory
     public void CreateActions()
     {
         List<IAction> actions = new List<IAction>();
-
         actions.Add(_openShopAction);
         actions.Add(_openSellAction);
         actions.Add(_uiRoot.transform.GetComponentInChildren<OpenBuildMenuAction>());
@@ -219,15 +231,17 @@ public class GameFactory
         _levelExits = _portalFactory.Create(_levelConfig.PortalData, _floors);
     }
 
-    public void CreatePlatform()
+    public void CreatePlatforms()
     {
         Platform prefab = Resources.Load<Platform>(GameConstants.Platform);
+        _openShopAction = _uiRoot.Shop.GetComponent<OpenShopAction>();
+        _openSellAction = _uiRoot.Sell.GetComponent<OpenSellAction>();
 
         Platform shopPlatform = Object.Instantiate(prefab, new Vector3(20, -12.262f, -87), Quaternion.identity);
-        shopPlatform.Init(_openShopAction);
+        shopPlatform.Init(_openShopAction, _uiRoot);
 
         Platform sellPlatform = Object.Instantiate(prefab, new Vector3(32.5f, -12.262f, -87), Quaternion.identity);
-        sellPlatform.Init(_openSellAction);
+        sellPlatform.Init(_openSellAction, _uiRoot);
     }
 
     public void CreateQuests()

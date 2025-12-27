@@ -59,7 +59,7 @@ public class PlayerAttacker : MonoBehaviour
     {
         foreach (var weapon in _weaponsInInventory)
         {
-            if (weapon.Config.Name == config.Name)
+            if (weapon.Config.ID == config.ID)
             {
                 RemoveWeapon();
                 _previousWeapon = _currentWeapon;

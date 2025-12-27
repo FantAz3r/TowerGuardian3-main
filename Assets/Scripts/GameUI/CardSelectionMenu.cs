@@ -9,35 +9,37 @@ public class CardSelectionMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Text _text;
     [SerializeField] private Button _showButton;
-    [SerializeField] private RectTransform _panel;
+    [SerializeField] private UIDummy _panel;
 
+    private GameUI _uiRoot;
     private List<CardButton> _cardsButtons;
     private PlayerExperience _playerExperience;
     private bool _isMenuOpen = false;
     private CardSelector _selector;
     private int _selectCount;
 
-    private void Start()
+    public void Init(PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons, GameUI uiRoot)
     {
-        _showButton.gameObject.SetActive(false);
-        _panel.gameObject.SetActive(false);
-    }
-
-    public void Init(PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons)
-    {
+        _uiRoot = uiRoot;
         _playerExperience = playerExperience;
         _selector = selector;
         _cardsButtons = cardsButtons;
 
         LoadUpgradeScore();
+        _showButton.gameObject.SetActive(_selectCount > 0);
+        _text.text = _selectCount.ToString();
+
         _playerExperience.OnLevelUp += AddSelect;
+
+        GridLayoutGroup panel = GetComponentInChildren<GridLayoutGroup>();
 
         foreach (var button in _cardsButtons)
         {
             button.Selected += Close;
-            GridLayoutGroup panel = GetComponentInChildren<GridLayoutGroup>();
             button.transform.SetParent(panel.transform);
         }
+
+        _panel.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -50,7 +52,7 @@ public class CardSelectionMenu : MonoBehaviour
         }
     }
 
-    public void Open(int level)
+    public void Open()
     {
         List<ICardConfig> cards = _selector.GetCards().ToList();
 
@@ -60,6 +62,7 @@ public class CardSelectionMenu : MonoBehaviour
                 return;
 
             SetMenuOpen(true);
+            _uiRoot.HUD.Disable();
             YG2.PauseGameNoEditEventSystem(true);
             ShowCards(cards);
         }
@@ -72,6 +75,7 @@ public class CardSelectionMenu : MonoBehaviour
         ShowButton();
 
         SetMenuOpen(false);
+        _uiRoot.HUD.Enable();
         YG2.PauseGameNoEditEventSystem(false);
         SaveUpgradeScore();
     }
@@ -106,10 +110,6 @@ public class CardSelectionMenu : MonoBehaviour
 
     private void SetMenuOpen(bool isOpen)
     {
-        if (_isMenuOpen == isOpen)
-            return;
-
-        _isMenuOpen = isOpen;
         _panel.gameObject.SetActive(isOpen);
     }
 

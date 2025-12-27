@@ -20,7 +20,7 @@ public class GameUI : MonoBehaviour
     [field: SerializeField] public SwichDamageNumbers SwichDamageNumbers { get; private set; }
     [field: SerializeField] public CardSelectionMenu CardSelectionMenu { get; private set; }
     [field: SerializeField] public WeaponPanel WeaponPanel { get; private set; }
-
+    [field: SerializeField] public UIDummy HUD { get; private set; }
 
     private void Awake()
     {

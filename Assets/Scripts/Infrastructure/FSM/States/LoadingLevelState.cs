@@ -96,6 +96,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private void InitGameLevel()
     {
         _gameFactory.InitLevelObjects();
+        _gameFactory.InitUI();
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreatePlayer();
         _gameFactory.CreateSpawners(_spawnerService);
@@ -120,6 +121,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitTowerLevel()
     {
+        _gameFactory.InitUI();
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreateLight();
         _gameFactory.CreatePlayer();
@@ -131,14 +133,18 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCamera();
         _gameFactory.CreateCards();
 
-        _gameFactory.CreatePlatform();
-
         _gameFactory.CreateHUD();
         _gameFactory.InitUIWindows();
+
+        _gameFactory.CreateCardButtons();
+        _gameFactory.CreateCardsSelectionMenu();
+
         _gameFactory.CreateActions();
         _gameFactory.CreateTower();
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
         _gameFactory.CreateTutorial();
+
+        _gameFactory.CreatePlatforms();
     }
 }

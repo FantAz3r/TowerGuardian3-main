@@ -42,9 +42,9 @@ public class BurstConfig : AbilityConfig
 
         return new List<CardStats>
         {
-            new CardStats("Hit Count", GetHitCount(level), GetHitCount(nextLevel)),
-            new CardStats("Attack Delay", GetAttackDelay(level),  GetAttackDelay(nextLevel)),
-            new CardStats("Cooldown", GetCooldown(level), GetCooldown(nextLevel)),
+            new CardStats(UIText.HitCount, GetHitCount(level), GetHitCount(nextLevel)),
+            new CardStats(UIText.AttackDelay, GetAttackDelay(level),  GetAttackDelay(nextLevel)),
+            new CardStats(UIText.Cooldown, GetCooldown(level), GetCooldown(nextLevel)),
         };
     }
 }

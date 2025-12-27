@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: MaxHP
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 2ff9aefe07f96e745802755b2ba4b487, type: 3}
-  _name: MaxHP
-  _description: Increace MAX HP
+  _nameRu: "\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0435
+    \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+  _nameEn: Max HP
+  _nameTr: "maksimum sa\u011Fl\u0131k"
+  _descriptionRU: 
+  _descriptionEN: 
+  _descriptionTR: 
   _costs:
   - ResourceType: 2
     Value: 5
     Image: {fileID: 21300000, guid: 20d21a867b3174de9aa1b81823b2b7ef, type: 3}
+  _id: f16b46a5-a46e-42d8-afc5-54d237d09e9e
   _chanceToView: 0.5
   _level: 0
-  _hasPlayer: 1
+  _hasPlayer: 0
   _isBought: 1
   _buffType: 2
   _baseIncreaseValue: 0.2

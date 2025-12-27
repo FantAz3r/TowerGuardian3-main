@@ -10,6 +10,7 @@ public class OpenShopAction : MonoBehaviour, IAction
     {
         _shop = GetComponent<Shop>();
     }
+
     public void Execute()
     {
         YG2.PauseGameNoEditEventSystem(true);

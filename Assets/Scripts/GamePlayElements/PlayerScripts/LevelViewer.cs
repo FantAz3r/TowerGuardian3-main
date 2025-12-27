@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 
 public class LevelViewer : MonoBehaviour
@@ -16,6 +17,7 @@ public class LevelViewer : MonoBehaviour
         _playerExperience = playerExperience;
         _playerExperience.OnExperienceAdded += View;
         _playerExperience.OnLevelUp += OnLevelUp;
+
 
         View(_playerExperience.CurrentExp, _playerExperience.ExpToNextLevel);
         OnLevelUp(_playerExperience.CurrentLevel);

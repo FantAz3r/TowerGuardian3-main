@@ -40,9 +40,9 @@ public class AxeThrowingConfig : AbilityConfig
 
         return new List<CardStats>
         {
-            new CardStats("Flight Distance", GetFlightDistance(level), GetFlightDistance(nextLevel)),
-            new CardStats("Damage", GetDamage(level), GetDamage(nextLevel)),
-            new CardStats("Cooldown", GetCooldown(level), GetCooldown(nextLevel))
+            new CardStats(UIText.FlightDistance, GetFlightDistance(level), GetFlightDistance(nextLevel)),
+            new CardStats(UIText.Damage, GetDamage(level), GetDamage(nextLevel)),
+            new CardStats(UIText.Cooldown, GetCooldown(level), GetCooldown(nextLevel))
         };
     }
 }

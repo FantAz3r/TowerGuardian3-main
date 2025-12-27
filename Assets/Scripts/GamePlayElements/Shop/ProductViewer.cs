@@ -11,24 +11,23 @@ public class ProductViewer : MonoBehaviour
     [SerializeField] private TMP_Text _description;
     [SerializeField] private TMP_Text _level;
     [SerializeField] private List<CostView> _costs;
+    [SerializeField] private Button _button;
 
-    Button _button;
     private ICardConfig _config;
 
     public event Action<ProductViewer, ICardConfig> BuyRequested;
 
     private void Awake()
     {
-        _button = GetComponent<Button>();
         _button.onClick.AddListener(OnClick);
     }
 
     public void Render(ICardConfig config, bool isBuy, bool interactable = true)
     {
-        _image.sprite = config.Icon;
         _config = config;
-        _name.text = config.Name ?? string.Empty;
-        _description.text = config.Description ?? string.Empty;
+        _image.sprite = _config.Icon;
+        _name.text = _config.Name ?? string.Empty;
+        _description.text = _config.Description ?? string.Empty;
 
         if(_config is CardConfig card)
         {
@@ -51,10 +50,10 @@ public class ProductViewer : MonoBehaviour
             }
             else
             {
-                if (i < _config.GetSellCost().Count)
+                if (i < _config.GetSellCosts().Count)
                 {
                     _costs[i].gameObject.SetActive(true);
-                    _costs[i].Render(_config.GetSellCost()[i]);
+                    _costs[i].Render(_config.GetSellCosts()[i]);
                 }
                 else
                 {
@@ -70,6 +69,7 @@ public class ProductViewer : MonoBehaviour
     {
         if (_config == null) return;
         BuyRequested?.Invoke(this, _config);
+        Debug.Log(_config);
     }
 
     private void OnDestroy()

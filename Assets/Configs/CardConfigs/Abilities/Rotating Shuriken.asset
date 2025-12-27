@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Rotating Shuriken
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 06bc443b2401cd041badddb684de936f, type: 3}
-  _name: Shurikens
-  _description: Some Rotating Shurikens
+  _nameRu: "\u0412\u0440\u0430\u0449\u0430\u044E\u0449\u0438\u0435\u0441\u044F \u0441\u044E\u0440\u0438\u043A\u0435\u043D\u044B"
+  _nameEn: Spinning shurikens
+  _nameTr: "D\xF6nen \u015Furikenler"
+  _descriptionRU: "\u041E\u0441\u0442\u0440\u044B\u0435 \u0438 \u0431\u044B\u0441\u0442\u0440\u044B\u0435"
+  _descriptionEN: Sharp and fast
+  _descriptionTR: "Keskin ve h\u0131zl\u0131"
   _costs:
   - ResourceType: 2
     Value: 0
@@ -22,8 +26,11 @@ MonoBehaviour:
   - ResourceType: 0
     Value: 0
     Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  _id: 033888aa-cee4-442f-b7fd-38a4e0e8f850
   _chanceToView: 0.5
   _level: 0
+  _hasPlayer: 0
+  _isBought: 1
   _abilityType: 4
   _prefab: {fileID: 9053661150003304121, guid: 42a96855bb557ab4298a5d3538a94ccb, type: 3}
   _baseCount: 1

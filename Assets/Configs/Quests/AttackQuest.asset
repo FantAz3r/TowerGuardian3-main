@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: AttackQuest
   m_EditorClassIdentifier: 
   _image: {fileID: 21300000, guid: 8f10f7c8d4ad1934f88e65c4a8a148f3, type: 3}
-  _description: Hit any enemy, stone or tree
+  _descriptionRU: "\u041F\u043E\u0431\u0435\u0439 \u0447\u0442\u043E \u043D\u0438\u0431\u0443\u0434\u044C"
+  _descriptionEN: Beat something
+  _descriptionTR: "Bir \u015Feyi yen"
   _questType: 2
   _targetValue: 0

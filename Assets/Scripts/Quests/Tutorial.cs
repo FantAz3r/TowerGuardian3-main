@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using YG;
 
 public class Tutorial : MonoBehaviour 
 {
@@ -12,6 +13,7 @@ public class Tutorial : MonoBehaviour
     private int _currentQuestIndex = -1;
     private IQuest _currentQuest;
     private bool _isTutorialComplete = false;
+    private int _valueProgress;
 
     public event Action<Sprite, string> QuestSeted;
     public event Action<string> QuestUpdated;
@@ -39,6 +41,8 @@ public class Tutorial : MonoBehaviour
                 _quests.Add(quest);
             }
         }
+
+        YG2.onCorrectLang += On—hangeLang;
     }
 
     public void RunNextQuest()
@@ -60,7 +64,6 @@ public class Tutorial : MonoBehaviour
         {
             _isTutorialComplete = true;
             Complited?.Invoke();
-            Debug.Log("“ÛÚÓË‡Î Á‡‚Â¯∏Ì!");
             return;
         }
         
@@ -74,7 +77,8 @@ public class Tutorial : MonoBehaviour
 
     private void OnQuestUpdated(int value)
     {
-        string updatebleDescription = $"{_currentQuest.Config.Description} {value}/ {_currentQuest.Goal}";
+        _valueProgress = value;
+        string updatebleDescription = $"{_currentQuest.Config.Description} {_valueProgress}/ {_currentQuest.Goal}";
         QuestUpdated?.Invoke(updatebleDescription);
     }
 
@@ -82,6 +86,14 @@ public class Tutorial : MonoBehaviour
     {
         _currentQuest.Updated -= OnQuestUpdated;
         RunNextQuest();
+    }
+
+    private void On—hangeLang(string useles)
+    {
+        QuestSeted?.Invoke(_currentQuest.Config.Image, _currentQuest.Config.Description);
+
+        string updatebleDescription = $"{_currentQuest.Config.Description} {_valueProgress}/ {_currentQuest.Goal}";
+        QuestUpdated?.Invoke(updatebleDescription);
     }
 }
     

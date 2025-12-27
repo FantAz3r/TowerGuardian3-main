@@ -15,7 +15,7 @@ public class CardViewer : MonoBehaviour
         _icon.sprite = config.Icon;
         _nameText.text = config.Name;
         _descriptionText.text = config.Description;
-        _level.text = $"LVL {config.Level}";
+        _level.text = config.Level.ToString();
         InitStats(config);
     }
 
@@ -41,8 +41,8 @@ public class CardViewer : MonoBehaviour
 
         if (config is WeaponConfig weaponConfig && weaponConfig.TargetType != EntityType.Generic)
         {
-            string targetTypeName = weaponConfig.TargetType.ToString();
-            _stats.text += $"Multiplier to {targetTypeName}: {weaponConfig.GetMultiply(config.Level):0.#} \n";
+            string targetTypeName = UIText.GetEntityTypeText(weaponConfig.TargetType);
+            _stats.text += $"{UIText.Multiplier} {targetTypeName}: {weaponConfig.GetMultiply(config.Level):0.#} \n";
         }
     }
 

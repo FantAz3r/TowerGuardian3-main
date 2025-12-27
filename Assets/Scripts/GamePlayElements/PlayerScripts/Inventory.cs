@@ -12,6 +12,8 @@ public class Inventory : MonoBehaviour
     private int _currentAmount = 0;
     private int _startAmount = 0;
 
+    public Dictionary<ResourceType, int> Resources => _resources;
+
     public event Action<Dictionary<ResourceType, int>> ResourceChanged;
     public event Action ResourceAdded;
     public event Action<int> TotalAmountChanged;
@@ -29,11 +31,6 @@ public class Inventory : MonoBehaviour
 
         LoadResources();
         _collector.Collected += Collect;
-    }
-
-    private void Start()
-    {
-        ViewActions();
     }
 
     private void OnDestroy()

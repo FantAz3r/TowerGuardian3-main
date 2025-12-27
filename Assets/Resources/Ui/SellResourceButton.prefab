@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6707735, g: 0.9811321, b: 0.6516198, a: 1}
     m_PressedColor: {r: 0.05385971, g: 1, b: 0, a: 1}
     m_SelectedColor: {r: 0.6707735, g: 0.9811321, b: 0.6516198, a: 1}
     m_DisabledColor: {r: 0.990566, g: 0.2840868, b: 0.2840868, a: 0.5019608}
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adfaa7e3eb16e384199e66a73640908c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 5104811219248496132}
+  _sellImage: {fileID: 5104811219248496132}
   _name: {fileID: 1069675180593368077}
   _description: {fileID: 8704436591742633343}
   _count: {fileID: 5053795331579780926}
@@ -221,6 +221,7 @@ MonoBehaviour:
   - {fileID: 7332003231675993857}
   - {fileID: 440606153441813252}
   - {fileID: 7221866670265699755}
+  _button: {fileID: -5889254289792521061}
 --- !u!1 &3880666878339912726
 GameObject:
   m_ObjectHideFlags: 0

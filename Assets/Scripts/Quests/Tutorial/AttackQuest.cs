@@ -13,7 +13,6 @@ public class AttackQuest : Quest
     public override void Run()
     {
         base.Run();
-        Debug.Log("Attack Quest started");
         _attacker.Hited += Complete;
     }
 

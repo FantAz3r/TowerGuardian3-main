@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: CollectRange
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: dffe77fd8f9bd194c80cc407d15955cc, type: 3}
-  _name: Collect Range
-  _description: 
+  _nameRu: "\u0420\u0430\u0434\u0438\u0443\u0441 \u0441\u0431\u043E\u0440\u0430"
+  _nameEn: Collect Range
+  _nameTr: Koleksiyon Serisi
+  _descriptionRU: 
+  _descriptionEN: 
+  _descriptionTR: 
   _costs:
   - ResourceType: 2
     Value: 5
@@ -22,10 +26,11 @@ MonoBehaviour:
   - ResourceType: 0
     Value: 2
     Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  _id: a604511b-5dc5-43e9-a047-aa9f378a5a7a
   _chanceToView: 0.5
   _level: 0
   _hasPlayer: 0
-  _isBought: 0
+  _isBought: 1
   _buffType: 6
   _baseIncreaseValue: 0.2
   _upgradeValuePerLevel: 0.1

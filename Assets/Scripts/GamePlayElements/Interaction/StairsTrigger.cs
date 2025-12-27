@@ -9,7 +9,17 @@ public class StairsTrigger : MonoBehaviour
     {
         if (other.TryGetComponent<Player>(out _))
         {
+            Debug.Log(gameObject.name);
             Entered?.Invoke();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent<Player>(out _))
+        {
+            Debug.Log(gameObject.GetHashCode());
+
         }
     }
 }

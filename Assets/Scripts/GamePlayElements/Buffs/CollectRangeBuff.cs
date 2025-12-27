@@ -17,6 +17,5 @@ public class CollectRangeBuff : IBuff
 
     public void EnableBuff()
     {
-        throw new System.NotImplementedException();
     }
 }

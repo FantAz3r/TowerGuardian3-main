@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5853275329041656628}
   - component: {fileID: 4269905472749670510}
   - component: {fileID: 4403356820932259114}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,6 +78,18 @@ PrefabInstance:
     - target: {fileID: 1516371583817312, guid: dde2cd27d00bf574da21adcc64afa07e, type: 3}
       propertyPath: m_Name
       value: FX_Runes
+      objectReference: {fileID: 0}
+    - target: {fileID: 1516371583817312, guid: dde2cd27d00bf574da21adcc64afa07e, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531797626707668, guid: dde2cd27d00bf574da21adcc64afa07e, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1533018172824294, guid: dde2cd27d00bf574da21adcc64afa07e, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4919944421052920, guid: dde2cd27d00bf574da21adcc64afa07e, type: 3}
       propertyPath: m_LocalScale.x

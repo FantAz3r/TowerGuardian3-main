@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: UpstairsQuest
   m_EditorClassIdentifier: 
   _image: {fileID: 21300000, guid: 87e13ba025bfe44a48b9dafc2c739e81, type: 3}
-  _description: Upstairs
+  _descriptionRU: "\u041F\u043E\u0434\u043D\u0438\u043C\u0430\u0439\u0441\u044F \u043F\u043E
+    \u043B\u0435\u0441\u0442\u043D\u0438\u0446\u0435"
+  _descriptionEN: Climb the stairs
+  _descriptionTR: "Merdivenlerden yukar\u0131 \xE7\u0131k\u0131n"
   _questType: 8
   _targetValue: 1

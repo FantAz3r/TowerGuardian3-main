@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private RectTransform _weaponContentParent;
     [SerializeField] private RectTransform _abilitiesContentParent;
     [SerializeField] private RectTransform _buffContentParent;
+
     [SerializeField] private ProductViewer _productButtonPrefab;
     [SerializeField] private CardData _cardData;
 
@@ -19,9 +20,6 @@ public class Shop : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_playerInventory != null)
-            _playerInventory.ResourceAdded -= RenderAll;
-
         foreach (var button in _productButtons)
         {
             button.BuyRequested -= OnBuyRequested;
@@ -31,16 +29,19 @@ public class Shop : MonoBehaviour
     public void Init(Inventory playerInventory)
     {
         _playerInventory = playerInventory;
-        _playerInventory.ResourceAdded += RenderAll;
-
         gameObject.SetActive(false);
     }
 
     public void OnActivate()
     {
         gameObject.SetActive(true);
+
         LoadContent();
         RenderAll();
+
+        _weaponContentParent.gameObject.SetActive(true);
+        _abilitiesContentParent.gameObject.SetActive(false);
+        _buffContentParent.gameObject.SetActive(false);
     }
 
     private void LoadContent()
@@ -100,6 +101,7 @@ public class Shop : MonoBehaviour
             Destroy(button.gameObject);
         }
 
+        _shopConfigs.Clear();
         _productButtons.Clear();
     }
 
@@ -123,6 +125,8 @@ public class Shop : MonoBehaviour
 
         config.Upgrade();
         UpdateCardSave(config);
+
+        LoadContent();
         RenderAll();
     }
 
@@ -132,7 +136,7 @@ public class Shop : MonoBehaviour
         {
             foreach( var card in _cardData.GetConfigs())
             {
-                CardSaveData cardData = new CardSaveData(0, card.Name, false, false);
+                CardSaveData cardData = new CardSaveData(0, card.ID, false, false);
                 card.InitFromData(cardData);
             }
 
@@ -141,7 +145,7 @@ public class Shop : MonoBehaviour
 
         foreach (var card in _shopConfigs)
         {
-            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.Name == card.Name);
+            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
             card.InitFromData(cardData);
         }
     }
@@ -151,7 +155,7 @@ public class Shop : MonoBehaviour
         if (YG2.saves.AllCards == null)
             YG2.saves.AllCards = new();
 
-        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.Name == card.Name);
+        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
         YG2.saves.AllCards.Add(card.CreateSaveData(true));
         YG2.SaveProgress();
     }

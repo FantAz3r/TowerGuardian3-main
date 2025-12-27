@@ -29,11 +29,6 @@ public class PortalFactory
 
     public List<Portal> Create(PortalData portalData, List<Floor> floors)
     {
-        foreach(var item in floors)
-        {
-            Debug.Log(item);
-        }
-
         if (floors.Count > 1)
         {
             foreach (var portalInfo in portalData.Infos)

@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: AxeThow
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: ba7b693614539e0458a9e829b8af37ef, type: 3}
-  _name: Axe Throw
-  _description: 
+  _nameRu: "\u041B\u0435\u0442\u044F\u0449\u0438\u0439 \u0442\u043E\u043F\u043E\u0440"
+  _nameEn: Flying Axe
+  _nameTr: "U\xE7an Balta"
+  _descriptionRU: "\u0412\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442\u0441\u044F
+    \u043A\u0430\u043A \u0431\u0443\u043C\u0435\u0440\u0430\u043D\u0433"
+  _descriptionEN: Comes back like a boomerang
+  _descriptionTR: "Bir bumerang gibi geri d\xF6ner."
   _costs:
   - ResourceType: 0
     Value: 7
@@ -25,6 +30,7 @@ MonoBehaviour:
   - ResourceType: 1
     Value: 5
     Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
+  _id: 13f3c7d5-8723-43a2-8739-bb50875891dd
   _chanceToView: 0.5
   _level: 0
   _hasPlayer: 0

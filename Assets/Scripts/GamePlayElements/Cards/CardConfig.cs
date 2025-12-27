@@ -16,7 +16,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
     public abstract CardType GetCardType();
     public abstract List<CardStats> GetStats();
 
-    public CardSaveData CreateSaveData(bool isBought = false) => new CardSaveData(_level, Name, isBought, _hasPlayer);
+    public CardSaveData CreateSaveData(bool isBought = false) => new CardSaveData(_level, ID, isBought, _hasPlayer);
 
     public void InitFromData(CardSaveData data)
     {
@@ -41,7 +41,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
         return increasedCosts;
     }
 
-    public override List<CostInfo> GetSellCost()
+    public override List<CostInfo> GetSellCosts()
     {
         List<CostInfo> sellCosts = new List<CostInfo>();
         float sellCoefficient = 0.5f;
@@ -53,5 +53,10 @@ public abstract class CardConfig : ShopConfig, ICardConfig
         }
 
         return sellCosts;
+    }
+
+    public void SetBought(bool isBought)
+    {
+        _isBought = isBought;
     }
 }

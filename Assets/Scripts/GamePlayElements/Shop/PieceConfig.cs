@@ -9,7 +9,7 @@ public class PieceConfig : ShopConfig
 
     public ResourceType Type => _type;
 
-    public override List<CostInfo> GetSellCost()
+    public override List<CostInfo> GetSellCosts()
     {
         List<CostInfo> sellCosts = new List<CostInfo>();
         float sellCoefficient = 0.5f;

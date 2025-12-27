@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 7934966a0ac15f64a86a07109394ba7f, type: 3}
-  _name: Pickaxe
-  _description: For Stones
+  _nameRu: "\u041A\u0438\u0440\u043A\u0430"
+  _nameEn: Pickaxe
+  _nameTr: Kazma
+  _descriptionRU: "\u0414\u043E\u043B\u044C\u0438\u0442 \u043A\u0430\u043C\u043D\u0438
+    \u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
+  _descriptionEN: Breaks stones normally
+  _descriptionTR: "Ta\u015Flar\u0131 normal \u015Fekilde k\u0131rar"
   _costs:
   - ResourceType: 2
     Value: 5
@@ -22,8 +27,11 @@ MonoBehaviour:
   - ResourceType: 0
     Value: 5
     Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  _id: f9a44341-423b-4381-8132-27f01b90fcca
   _chanceToView: 0.5
   _level: 0
+  _hasPlayer: 0
+  _isBought: 0
   _prefab: {fileID: -2661663546807748910, guid: 431dbce9d7d62814ba63a540408200f7, type: 3}
   _type: 3
   _targetType: 1

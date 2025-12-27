@@ -32,10 +32,10 @@ public class RotatingShurikenConfig : AbilityConfig
     {
         return new List<CardStats>
         {
-            new CardStats("Count", Count, Mathf.Min(_maxCount, _baseCount + _countPerLevel * Level)),
-            new CardStats("Radius", Radius, Mathf.Max(_minRadius, _baseRadius + _radiusPerLevel * Level)),
-            new CardStats("Rotation Speed", RotationSpeed, Mathf.Max(_minRotationSpeed, _baseRotationSpeed + _rotationSpeedPerLevel * Level)),
-            new CardStats("Damage", Damage, Mathf.Max(_minDamage, _baseDamage + _damagePerLevel * Level)),
+            new CardStats(UIText.Count, Count, Mathf.Min(_maxCount, _baseCount + _countPerLevel * Level)),
+            new CardStats(UIText.Radius, Radius, Mathf.Max(_minRadius, _baseRadius + _radiusPerLevel * Level)),
+            new CardStats(UIText.RotationSpeed, RotationSpeed, Mathf.Max(_minRotationSpeed, _baseRotationSpeed + _rotationSpeedPerLevel * Level)),
+            new CardStats(UIText.Damage, Damage, Mathf.Max(_minDamage, _baseDamage + _damagePerLevel * Level)),
         };
     }
 }

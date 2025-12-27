@@ -13,17 +13,26 @@ MonoBehaviour:
   m_Name: Jumping Pickaxe
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 6af7e6aa805413941aae7539ad5af8e1, type: 3}
-  _name: Jumping Pickaxe
-  _description: Jump between enemies and stones
+  _nameRu: "\u041A\u0438\u0440\u043A\u0430-\u043F\u0440\u044B\u0433\u0443\u043D"
+  _nameEn: Bounce Pickaxe
+  _nameTr: "S\u0131\xE7rama Kazmas\u0131"
+  _descriptionRU: "\u0421\u043A\u0430\u0447\u0435\u0442 \u043C\u0435\u0436\u0434\u0443
+    \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u0438\u043A\u0430\u043C\u0438 \u0438
+    \u043A\u0430\u043C\u043D\u044F\u043C\u0438"
+  _descriptionEN: Jumps between enemies and rocks
+  _descriptionTR: "Rakipler ve kayalar aras\u0131nda atlay\u0131\u015Flar"
   _costs: []
+  _id: 483f228c-2275-4fa0-9fde-0d5bce00e0f7
   _chanceToView: 0.5
   _level: 0
+  _hasPlayer: 0
+  _isBought: 0
   _abilityType: 2
   _damage: 3
-  _bouncesCount: 5
+  _bouncesCount: 20
   _bounceRange: 10
   _cooldownPerHit: 3
-  _flySpeed: 1
+  _flySpeed: 10
   _damagePerLevel: 1
   _bouncePerLevel: 1
   _rangePerLevel: 1

@@ -17,6 +17,7 @@ public class EnemyStateMachine : MonoBehaviour
     private Transform _player;
     private PickUper _picker;
     private Health _health;
+    private Collider _collider;
 
     private Coroutine _currentCoroutine;
 
@@ -46,13 +47,15 @@ public class EnemyStateMachine : MonoBehaviour
         _attackDetector = GetComponentInChildren<AttackDetector>();
         _objectDetector = GetComponentInChildren<ThrownObjectDetector>();
         _picker = GetComponentInChildren<PickUper>();
+        _collider = GetComponent<Collider>();
     }
 
     public void Init(Transform player)
     {
         _player = player;
-        ActivateStates();
+        _collider.enabled = true;
 
+        ActivateStates();
         _targetDetector.PlayerDetected += OnSeePlayer;
         _targetDetector.PlayerLost += OnLostPlayer;
         _attackDetector.PlayerDetected += OnPlayerInMeleeRange;
@@ -63,6 +66,7 @@ public class EnemyStateMachine : MonoBehaviour
         {
             SetState(_states[StateType.Patrol]);
         }
+
     }
 
     private void OnSeePlayer()
@@ -81,6 +85,8 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void OnDie()
     {
+        _collider.enabled = false;
+
         StopCoroutine(_currentCoroutine);
         _currentCoroutine = null;
         _currentState?.Exit();
@@ -134,8 +140,6 @@ public class EnemyStateMachine : MonoBehaviour
             StopCoroutine(_currentCoroutine);
             _currentCoroutine = null;
         }
-
-        Debug.Log(_currentState + " -> " + newState );
 
         _currentState?.Exit();
         _currentState = newState;

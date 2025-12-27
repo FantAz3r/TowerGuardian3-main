@@ -11,25 +11,19 @@ public class SellResources : MonoBehaviour
     private List<SellResourceView> _productButtons = new();
     private Inventory _inventory;
 
-    private void Start()
-    {
-        _slider.gameObject.SetActive(false);
-    }
-
     public void Init(Inventory inventory)
     {
         _inventory = inventory;
+        _slider.gameObject.SetActive(false);
     }
 
     public void RenderSellItems()
     {
         ClearOldButtons();
-        Debug.Log("rgjaiugehgu1");
 
         foreach (var config in _costResourceData.PieceConfigs)
         {
             bool interactble = (_inventory.ShowCount(config.Type) > 0);
-            Debug.Log("rgjaiugehgu");
             SellResourceView button = Instantiate(_buttonPrefab, parentPanel);
             button.Init(_slider);
             button.Render(config, interactble, _inventory.ShowCount(config.Type));
@@ -54,7 +48,7 @@ public class SellResources : MonoBehaviour
 
     private void OnSellRequested(SellResourceView button, PieceConfig config, int count)
     {
-        List<CostInfo> sellPrice = config.GetSellCost();
+        List<CostInfo> sellPrice = config.GetSellCosts();
 
         List<CostInfo> addedResources = new List<CostInfo>
         {

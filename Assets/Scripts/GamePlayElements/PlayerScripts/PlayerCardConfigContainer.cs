@@ -6,6 +6,8 @@ using YG;
 public class PlayerCardConfigContainer : MonoBehaviour
 {
     [SerializeField] private CardData _cardData;
+    [SerializeField] private List<CardConfig> _startCards;
+
     private List<ICardConfig> _selectedConfigs = new();
     public IReadOnlyList<ICardConfig> SelectedCardConfigs => _selectedConfigs;
 
@@ -20,6 +22,11 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
     private void Start()
     {
+        foreach (var card in _startCards)
+        {
+            card.SetBought(true);
+        }
+
         LoadPlayerCards();
     }
 
@@ -81,8 +88,8 @@ public class PlayerCardConfigContainer : MonoBehaviour
         if (YG2.saves.AllCards == null)
             YG2.saves.AllCards = new();
 
-        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.Name == card.Name);
-        YG2.saves.AllCards.Add(new CardSaveData(card.Level, card.Name, card.IsBought, true));
+        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
+        YG2.saves.AllCards.Add(new CardSaveData(card.Level, card.ID, card.IsBought, true));
         YG2.SaveProgress();
     }
 
@@ -93,12 +100,14 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
         foreach (var card in _cardData.GetConfigs())
         {
-            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.Name == card.Name);
+            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
             card.InitFromData(cardData);
 
             if (card.HasPlayer)
             {
-                Add(card);
+                LoadCard(card);
+                _selectedConfigs.Add(card);
+                Define(card);
             }
         }
     }
@@ -108,9 +117,9 @@ public class PlayerCardConfigContainer : MonoBehaviour
         if (YG2.saves.AllCards == null)
             return;
 
-        CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.Name == card.Name);
+        CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
 
-        if( string.IsNullOrEmpty(cardData.Name) == false)
+        if( string.IsNullOrEmpty(cardData.ID) == false)
         {
             card.InitFromData(cardData);
         }

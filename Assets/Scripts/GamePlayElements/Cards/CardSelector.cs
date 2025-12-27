@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class CardSelector
@@ -17,6 +16,9 @@ public class CardSelector
     public IEnumerable<ICardConfig>GetCards()
     {
         var baseFiltered = FilterCards(_cardData.GetConfigs());
+
+        Debug.Log(_cardData.GetConfigs().Count);
+        Debug.Log(baseFiltered.Count);
 
         if (baseFiltered.Count == 0)
             return new List<ICardConfig>();

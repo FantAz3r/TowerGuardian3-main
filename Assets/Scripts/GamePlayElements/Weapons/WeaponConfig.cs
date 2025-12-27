@@ -18,8 +18,8 @@ public class WeaponConfig : CardConfig
     [SerializeField] private float _damageUpgradePercent = 0.25f;        
     [SerializeField] private float _attackDelayUpgradeFactor = -0.05f;   
     [SerializeField] private float _attackRangeUpgradeValue = 0.2f;      
-    [SerializeField] private float _multiplyUpgradeValue = 0.1f;         
-
+    [SerializeField] private float _multiplyUpgradeValue = 0.1f;
+    
     public Weapon Prefab => _prefab;
     public EntityType TargetType => _targetType;
     public WeaponType WeaponType => _type;
@@ -58,9 +58,9 @@ public class WeaponConfig : CardConfig
 
         return new List<CardStats>
         {
-            new CardStats("Damage", GetDamage(level), GetDamage(nextLevel)),
-            new CardStats("Attack Delay", GetAttackDelay(level), GetAttackDelay(nextLevel)),
-            new CardStats("Attack Range", GetAttackRange(level), GetAttackRange(nextLevel)),
+            new CardStats(UIText.Damage, GetDamage(level), GetDamage(nextLevel)),
+            new CardStats(UIText.AttackDelay, GetAttackDelay(level), GetAttackDelay(nextLevel)),
+            new CardStats(UIText.AttackRange, GetAttackRange(level), GetAttackRange(nextLevel)),
         };
     }
 }

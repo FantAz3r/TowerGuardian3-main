@@ -4,7 +4,6 @@ using UnityEngine;
 public class AbilityPanel : MonoBehaviour
 {
     [SerializeField] private List<AbilityViewer> _viewers;
-    [SerializeField] private UIDummy _parentPanel;
 
     private AllAbilities _container;
     private int _count = 0;
@@ -13,14 +12,8 @@ public class AbilityPanel : MonoBehaviour
     {
         _container = container;
 
-        if(_count == 0)
-        {
-            _parentPanel.gameObject.SetActive(false);
-        }
-
         _container.AbilityActivated += View;
         _container.AbilityRemoved += RemoveView;
-
     }
 
     private void OnDestroy()
@@ -31,12 +24,6 @@ public class AbilityPanel : MonoBehaviour
     private void View(AbilityConfig config, IAbility ability)
     {
         _count++;
-
-        if (_count > 0)
-        {
-            _parentPanel.gameObject.SetActive(true);
-        }
-
         _viewers[_count].ActivateViewer(ability, config);
     }
 
@@ -44,19 +31,10 @@ public class AbilityPanel : MonoBehaviour
     {
         foreach(var viewer in _viewers)
         {
-            if(viewer.Ability == ability);
-            viewer.DeactivateViewer();
+            if(viewer.Ability == ability)
+                viewer.DeactivateViewer();
         }
 
         _count--;
-
-        if (_count > 0)
-        {
-            _parentPanel.gameObject.SetActive(true);
-        }
-        else
-        {
-            _parentPanel.gameObject.SetActive(false);
-        }
     }
 }

@@ -34,10 +34,10 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _mover = GetComponentInParent<Mover>();
-        _rotator = GetComponentInParent<Rotator>();
-        _attacker = GetComponentInParent<PlayerAttacker>();
-        _health = GetComponentInParent<Health>();
+        _mover = GetComponent<Mover>();
+        _rotator = GetComponentInChildren<Rotator>();
+        _attacker = GetComponentInChildren<PlayerAttacker>();
+        _health = GetComponent<Health>();
 
         _hashX = Animator.StringToHash("X");
         _hashY = Animator.StringToHash("Y");
@@ -143,12 +143,12 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    public void OnEquipWeapon()
+    public void OnAnimationEquipWeapon()
     {
         _animator.SetBool(_hasWeapon, true);
     }
 
-    public void OnUnequipWeapon()
+    public void OnAnimationUnequipWeapon()
     {
         _animator.SetBool(_hasWeapon, false);
     }
@@ -233,5 +233,20 @@ public class PlayerAnimator : MonoBehaviour
     public void OnAnimationDie()
     {
         _health.Die();
+    }
+
+    public void OnAnimationAttack()
+    {
+        _attacker.OnAnimationAttack();
+    }
+
+    public void OnEquipWeapon()
+    {
+        _attacker.OnEquipWeapon();
+    }
+
+    public void OnTakeOffWeapon()
+    {
+        _attacker.OnTakeOffWeapon();
     }
 }

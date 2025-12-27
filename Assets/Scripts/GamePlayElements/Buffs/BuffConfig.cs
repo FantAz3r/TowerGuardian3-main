@@ -25,7 +25,7 @@ public class BuffConfig : CardConfig
 
         return new List<CardStats>
         {
-            new CardStats("Increase Value", GetIncreaseValue(level), GetIncreaseValue(nextLevel))
+            new CardStats(UIText.IncreaseValue, GetIncreaseValue(level), GetIncreaseValue(nextLevel))
         };
         
     }

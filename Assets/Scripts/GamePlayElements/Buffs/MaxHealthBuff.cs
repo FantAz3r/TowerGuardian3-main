@@ -17,6 +17,5 @@ public class MaxHealthBuff : IBuff
 
     public void EnableBuff()
     {
-        throw new System.NotImplementedException();
     }
 }

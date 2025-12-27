@@ -128,4 +128,15 @@ public class RotateShurikens : Ability, IDamageAbility
         shuriken.SetParametrs(_config.Damage, _config.SpinSpeed);
         shuriken.DialedDamage += OnHit;
     }
+
+    public override void Remove()
+    {
+        foreach(var item in _shurikens)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        _activeCount = 0;
+        base.Remove();
+    }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +8,10 @@ public class CounterSlider : MonoBehaviour
 {
     [SerializeField] private Slider _slider;      
     [SerializeField] private TMP_Text _quantityText;
+    [SerializeField] private TMP_Text _resourceRemoved;
     [SerializeField] private TMP_Text _resourceAdded;
-    [SerializeField] private Image _resourceSprite;
+    [SerializeField] private Image _resourceSellSprite;
+    [SerializeField] private Image _resourceGetSprite;
     [SerializeField] private Button _confirmButton;
 
     private PieceConfig _config;
@@ -32,7 +33,6 @@ public class CounterSlider : MonoBehaviour
         _confirmButton.onClick.AddListener(OnClick);
         UpdateQuantityText();
         gameObject.SetActive(false);
-
     }
 
     public void Open()
@@ -45,6 +45,11 @@ public class CounterSlider : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnDisable()
+    {
+        _count = 0;
+    }
+
     private void OnSliderChanged(float value)
     {
         _count = (int)value;
@@ -53,7 +58,9 @@ public class CounterSlider : MonoBehaviour
 
     private void UpdateQuantityText()
     {
-        _resourceSprite.sprite = _config.Costs.First().Image;
+        _resourceSellSprite.sprite = _config.Icon;
+        _resourceGetSprite.sprite = _config.Costs.First().Image;
+        _resourceRemoved.text = _count.ToString();
         _resourceAdded.text = (_count * _config.Costs.First().Value).ToString(); 
         _quantityText.text = _count.ToString();
     }

@@ -30,8 +30,6 @@ public class Sell : MonoBehaviour
         _resourcesPanel.Init(_inventory);
         gameObject.SetActive(false);
     }
-
-
     private void OnDestroy()
     {
         foreach (var button in _productButtons)
@@ -45,6 +43,10 @@ public class Sell : MonoBehaviour
         gameObject.SetActive(true);
         RenderSellItems();
         _resourcesPanel.RenderSellItems();
+
+        _weaponParent.gameObject.SetActive(true);
+        _abilityParent.gameObject.SetActive(false);
+        _buffParent.gameObject.SetActive(false);
     }
 
     private void RenderSellItems()
@@ -80,12 +82,13 @@ public class Sell : MonoBehaviour
             Destroy(button.gameObject);
         }
 
+        _availableToSellItems.Clear();
         _productButtons.Clear();
     }
 
     private void OnSellRequested(ProductViewer button, IShopConfig config)
     {
-        List<CostInfo> sellPrice = config.GetSellCost();
+        List<CostInfo> sellPrice = config.GetSellCosts();
         _inventory.AddResousres(sellPrice);
 
         if (config is ICardConfig card)
@@ -104,8 +107,8 @@ public class Sell : MonoBehaviour
         if (YG2.saves.AllCards == null)
             YG2.saves.AllCards = new();
 
-        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.Name == card.Name);
-        YG2.saves.AllCards.Add(new CardSaveData(0, card.Name, false, false));
+        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
+        YG2.saves.AllCards.Add(new CardSaveData(0, card.ID, false, false));
         YG2.SaveProgress();
     }
 
@@ -116,7 +119,7 @@ public class Sell : MonoBehaviour
 
         foreach (var card in _cardData.GetConfigs())
         {
-            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.Name == card.Name);
+            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
             card.InitFromData(cardData);
 
             if (card.HasPlayer)

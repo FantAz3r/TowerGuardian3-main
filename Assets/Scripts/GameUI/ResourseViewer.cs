@@ -10,6 +10,8 @@ public class ResourceViewer : MonoBehaviour
     {
         _inventory = inventory;
         _inventory.ResourceChanged += OnResourceChanged;
+
+        OnResourceChanged(_inventory.Resources);
     }
 
     private void OnDestroy()

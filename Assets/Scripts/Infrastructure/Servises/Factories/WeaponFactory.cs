@@ -31,7 +31,7 @@ public class WeaponFactory: ICardFactory
     {
         foreach (var item in _attacker.WeaponsInInventory)
         {
-            if (item.Config.Name == config.Name)
+            if (item.Config.ID == config.ID)
             {
                 _attacker.AddWeapon(item);
                 return;

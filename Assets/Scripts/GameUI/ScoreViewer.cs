@@ -23,7 +23,10 @@ public class ScoreViewer : MonoBehaviour
 
     private void OnDestroy()
     {
-        _scoreCounter.LevelEnded -= View;
+        if(_scoreCounter != null)
+        {
+            _scoreCounter.LevelEnded -= View;
+        }
     }
 
     public void View(float score, int time, int stars)

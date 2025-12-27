@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a68462376afb8c4db208a9e28cb2775, type: 3}
   m_Name: CardData
   m_EditorClassIdentifier: 
-  Weapons:
+  _weapons:
   - {fileID: 11400000, guid: 285d7d35fe467ee418dfb3ae30c1a646, type: 2}
   - {fileID: 11400000, guid: 7fcec575bdfc7a547a1a2eacc87dc40f, type: 2}
   - {fileID: 11400000, guid: 2c6853af9915926408b0ba5d0e3e7e81, type: 2}
   - {fileID: 11400000, guid: fd9282ad09f502e4fa0d45a264de29f3, type: 2}
-  Abilities:
+  _abilities:
   - {fileID: 11400000, guid: fe92c75a894b83a418c039c5f6720000, type: 2}
   - {fileID: 11400000, guid: 39054eaff696627499ce53ae68b7a827, type: 2}
   - {fileID: 11400000, guid: 5e55fed614da8e84eb7d7ad3c77b8471, type: 2}
   - {fileID: 11400000, guid: 4b12ff8e62b0bb74b8a7e64315f7bc28, type: 2}
-  BuffConfigs:
+  _buffConfigs:
   - {fileID: 11400000, guid: 0a680ca9d91926b4db95887e4ca21940, type: 2}
   - {fileID: 11400000, guid: 3c8556b20de34aa4e8affcde32cbd720, type: 2}
   - {fileID: 11400000, guid: 79626536a13a074459b2792d22839084, type: 2}

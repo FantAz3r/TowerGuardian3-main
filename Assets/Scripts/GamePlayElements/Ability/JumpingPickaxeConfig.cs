@@ -25,10 +25,10 @@ public class JumpingPickaxeConfig : AbilityConfig
     {
         return new List<CardStats>
         {
-            new CardStats("Damage", Damage, Mathf.Max(_damage, _damage + _damagePerLevel * Level)),
-            new CardStats("Bounces Count", BouncesCount, Mathf.Max(_bouncesCount, _bouncesCount + _bouncePerLevel * Level)),
-            new CardStats("Bounce Range", BounceRange, Mathf.Max(_bounceRange, _bounceRange + _rangePerLevel * Level)), 
-            new CardStats("Cooldown per Hit (s)", CooldownPerHit, Mathf.Max(_cooldownPerHit, _cooldownPerHit - _cooldownPerLevel * Level)) 
+            new CardStats(UIText.Damage, Damage, Mathf.Max(_damage, _damage + _damagePerLevel * Level)),
+            new CardStats(UIText.BouncesCount, BouncesCount, Mathf.Max(_bouncesCount, _bouncesCount + _bouncePerLevel * Level)),
+            new CardStats(UIText.BounceRange, BounceRange, Mathf.Max(_bounceRange, _bounceRange + _rangePerLevel * Level)), 
+            new CardStats(UIText.CooldownPerHit, CooldownPerHit, Mathf.Max(_cooldownPerHit, _cooldownPerHit - _cooldownPerLevel * Level)) 
         };
     }
 }

@@ -5,13 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/PluginYourGames/Example/Scenes/ExampleYG2.unity
+    guid: e49bf7e58fdb4db4c9df51f0ddb8f327
+  - enabled: 0
+    path: Assets/PluginYourGames/Modules/Authorization/Example/Scenes/Authorization.unity
+    guid: de4e0a077d630a140a5e79e3d752d10b
+  - enabled: 0
+    path: Assets/PluginYourGames/Modules/EnvirData/Example/Scenes/Envir.unity
+    guid: b3fec4fa919d3444e803a6c7a94d28eb
+  - enabled: 0
+    path: Assets/PluginYourGames/Modules/Localization/Example/Scenes/Localization.unity
+    guid: 058cfa478132af54f8ee895e24ea5a2a
+  - enabled: 0
+    path: Assets/PluginYourGames/Modules/Storage/Example/Scenes/Storage.unity
+    guid: abb058d977e9e3241a3ae83e420d91ac
   - enabled: 1
     path: Assets/Scenes/Init.unity
     guid: 6eb3cde3a3d439e4aa86407d52923872
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 1b4a429101e8785459cf43cf47cbb263
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LoadScene.unity
     guid: 9a68e8c6d040fb64d8a436459cd92480
   - enabled: 1

@@ -40,32 +40,39 @@ public class JumpingPickaxe : MonoBehaviour
     {
         _currentHitCount++;
 
-        var health = target.GetComponent<Health>();
-
-        if (health != null)
+        if (target != null)
         {
-            health.TakeDamage(_damage);
+            target.TakeDamage(_damage);
+            _hitedTargets.Add(target);
+            Debug.Log("3");
         }
 
+        _currentTarget = null;
         NextMove();
     }
 
     private IEnumerator FlyRoutine(Transform target)
     {
-        float treshold = 0.05f;
+        float threshold = 0.1f;
+        Vector3 offset = new Vector3(0, 1, 0);
+        Vector3 targetPos = target.position + offset;
 
-        while (Vector3.SqrMagnitude(transform.position - target.position) > treshold * treshold)
+        while (Vector3.SqrMagnitude(transform.position - targetPos) > threshold * threshold)
         {
-            transform.position = Vector3.Lerp(transform.position, target.position, _flySpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, _flySpeed * Time.deltaTime);
             yield return null;
         }
 
-        transform.position = target.position;
+
+
+        transform.position = target.position + offset;
+        Debug.Log("1");
 
         if (_currentTarget != null)
         {
             OnHit(_currentTarget);
-            _currentTarget = null;
+            Debug.Log("2");
+
         }
         else
         {
@@ -76,18 +83,19 @@ public class JumpingPickaxe : MonoBehaviour
     private void NextMove()
     {
         _currentTarget = TryFindTarget();
-        _hitedTargets.Add(_currentTarget);
 
-        if (_currentHitCount >= _maxHitCount && _currentTarget == null)
+        if (_currentHitCount >= _maxHitCount || _currentTarget == null)
         {
             StartCoroutine(FlyRoutine(_hand.transform));
+            Debug.Log("hand");
         }
         else
         {
             StartCoroutine(FlyRoutine(_currentTarget.transform));
-        }
             Debug.Log(_currentTarget);
-            Debug.Log(_currentHitCount);
+        }
+
+        Debug.Log(_currentHitCount);
     }
 
     private Health TryFindTarget()
@@ -105,7 +113,7 @@ public class JumpingPickaxe : MonoBehaviour
 
         List<Health> healthObjects = Utils.GetObjectsSortedByDistance(candidates, transform.position);
 
-        foreach(var target in _hitedTargets)
+        foreach (var target in _hitedTargets)
         {
             if (healthObjects.Contains(target))
             {
@@ -134,6 +142,7 @@ public class JumpingPickaxe : MonoBehaviour
         transform.localPosition = _positionInHand;
         transform.localRotation = Quaternion.Euler(_rotationInHand);
         Returned?.Invoke(_currentHitCount);
+        _hitedTargets.Clear();
         _currentHitCount = 0;
     }
 }

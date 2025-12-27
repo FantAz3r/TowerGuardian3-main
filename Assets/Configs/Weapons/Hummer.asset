@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Hummer
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 319814a6df7965e4ba364c2b5ac02eeb, type: 3}
-  _name: Hummer
-  _description: BadaBOOM
+  _nameRu: "\u041C\u043E\u043B\u043E\u0442"
+  _nameEn: Hammer
+  _nameTr: "\xC7eki\xE7"
+  _descriptionRU: "\u0423\u0440\u043E\u043D \u043F\u043E \u043E\u0431\u043B\u0430\u0441\u0442\u0438"
+  _descriptionEN: Area Damage
+  _descriptionTR: "B\xF6lge Hasar\u0131"
   _costs:
   - ResourceType: 2
     Value: 20
@@ -25,6 +29,7 @@ MonoBehaviour:
   - ResourceType: 0
     Value: 15
     Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
+  _id: 384975e8-60ec-4593-b39d-4869f835bc58
   _chanceToView: 0.5
   _level: 0
   _hasPlayer: 0
