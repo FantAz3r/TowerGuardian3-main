@@ -38,5 +38,6 @@ public class UIFactory
     public void CreateSettings()
     {
         _uiRoot.SwichDamageNumbers.Init(_spawnerService);
+        _uiRoot.Settings.gameObject.SetActive(false);
     }
 }

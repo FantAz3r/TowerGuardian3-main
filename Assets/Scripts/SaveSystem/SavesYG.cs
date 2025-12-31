@@ -12,16 +12,16 @@ namespace YG
         public int Coins;
         public int Wood;
         public int Stones;
+
         public int Level;
         public int UpgradePoints;
         public float CurrentEXP;
-
         public string CurrentLevel;
 
         public List<PlayerSaveData> PlayerPositions;
-
         public List<LevelSaveData> LevelsProgress;
 
+        public string Language;
         public bool ShowDamageNumber;
         public bool Mute;
         public float Volume;

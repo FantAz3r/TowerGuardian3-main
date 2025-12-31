@@ -22,12 +22,12 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
     private void Start()
     {
+        LoadPlayerCards();
+
         foreach (var card in _startCards)
         {
             card.SetBought(true);
         }
-
-        LoadPlayerCards();
     }
 
     public void Add(ICardConfig config)

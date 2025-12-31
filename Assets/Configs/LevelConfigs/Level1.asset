@@ -18,11 +18,11 @@ MonoBehaviour:
   _portalData: {fileID: 11400000, guid: d0916e15afa7dcb40ac97a40782559cd, type: 2}
   _dayDuration: 20
   _nightDuration: 15
-  _dayLightIntensity: 1
-  _nightLightIntensity: 0.3
+  _dayLightIntensity: 1.5
+  _nightLightIntensity: 0.8
   _transitionDuration: 2
-  _dayLightColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  _nightLightColor: {r: 0.24528301, g: 0, b: 0, a: 1}
+  _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
+  _nightLightColor: {r: 1, g: 0.5415317, b: 0, a: 1}
   _container: {fileID: 4123103567900668795, guid: 7fd5f2745c3e24640a66b37e74bcae6c, type: 3}
   _nightSpawnDelay: 3
   _daySpawnDelay: 10

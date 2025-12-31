@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2888404773920894816}
   - component: {fileID: -2877155151721078640}
   - component: {fileID: -6443004642924553212}
+  - component: {fileID: 795007743703445669}
   m_Layer: 7
   m_Name: Tree_01_Spring
   m_TagString: Untagged
@@ -102,10 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 0}
-  _maxHealth: 3
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 0}
   _type: 2
 --- !u!114 &-8326102638726965295
 MonoBehaviour:
@@ -202,6 +200,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &795007743703445669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358019653819837964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a15d927a500c20428640261cb7bc65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7011669845341515277
 GameObject:
   m_ObjectHideFlags: 0

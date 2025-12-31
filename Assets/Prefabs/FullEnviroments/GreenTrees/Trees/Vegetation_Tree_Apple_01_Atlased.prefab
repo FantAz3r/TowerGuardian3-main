@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8491154781563910174}
   - component: {fileID: 8385107668423555636}
   - component: {fileID: 6965175943861563043}
+  - component: {fileID: 8541899927977867245}
   m_Layer: 7
   m_Name: Vegetation_Tree_Apple_01_Atlased
   m_TagString: Untagged
@@ -123,10 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 0}
-  _maxHealth: 0
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 0}
   _type: 2
 --- !u!95 &1110686011786463574
 Animator:
@@ -209,5 +207,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71924de8a2000ba4f901ad5488fd2a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8541899927977867245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407647400707177147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a15d927a500c20428640261cb7bc65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

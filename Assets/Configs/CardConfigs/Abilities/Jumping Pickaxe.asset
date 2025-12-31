@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4795fb8c3e9f710498d57a69a446e222, type: 3}
   m_Name: Jumping Pickaxe
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 6af7e6aa805413941aae7539ad5af8e1, type: 3}
+  _icon: {fileID: 21300000, guid: 3945f3032fc176540b3ff7abf9391377, type: 3}
   _nameRu: "\u041A\u0438\u0440\u043A\u0430-\u043F\u0440\u044B\u0433\u0443\u043D"
   _nameEn: Bounce Pickaxe
   _nameTr: "S\u0131\xE7rama Kazmas\u0131"
@@ -21,7 +21,10 @@ MonoBehaviour:
     \u043A\u0430\u043C\u043D\u044F\u043C\u0438"
   _descriptionEN: Jumps between enemies and rocks
   _descriptionTR: "Rakipler ve kayalar aras\u0131nda atlay\u0131\u015Flar"
-  _costs: []
+  _costs:
+  - ResourceType: 2
+    Value: 20
+    Image: {fileID: 454922556, guid: c80cfba900504e246bc955fcc768d713, type: 3}
   _id: 483f228c-2275-4fa0-9fde-0d5bce00e0f7
   _chanceToView: 0.5
   _level: 0

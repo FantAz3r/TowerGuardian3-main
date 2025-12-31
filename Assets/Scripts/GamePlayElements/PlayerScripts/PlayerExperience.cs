@@ -107,8 +107,9 @@ public class PlayerExperience : MonoBehaviour
 
     private void LevelUp()
     {
+        int upggradePointPerLevel = 1;
         _currentLevel++;
-        OnLevelUp?.Invoke(_currentLevel);
+        OnLevelUp?.Invoke(upggradePointPerLevel);
     }
 
     private void SaveLevel()

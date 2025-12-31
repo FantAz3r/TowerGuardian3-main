@@ -13,7 +13,7 @@ public class WinLevelMenu : LevelMenu
 
     private void OnNextLevelClicked()
     {
-        GameStateMachine.EnterIn<LoadingLevelState, LevelID>(CurrentLevel);
+        GameStateMachine.EnterIn<LoadingLevelState, LevelID>(LevelID.Tower);
         CloseMenu();
     }
 

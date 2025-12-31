@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class GameFactory
 {
@@ -164,15 +165,15 @@ public class GameFactory
     public void InitUIWindows()
     {
         _uiRoot.Shop.Init(_inventory);
-        _uiRoot.Sell.Init(_inventory, _cardData, _cardHolder);
+        _uiRoot.Sell.Init(_inventory, _cardData, _cardHolder, _uiRoot.CardSelectionMenu);
 
-        _uiRoot.WinLevelMenu.Init(_stateMachine, _scoreCounter, _levelConfig.Level);
+        _uiRoot.WinLevelMenu.Init(_stateMachine, _scoreCounter,_uiRoot, _levelConfig.Level);
         _uiRoot.WinScoreViewer.Init(_scoreCounter);
 
-        _uiRoot.LouseLevelMenu.Init(_stateMachine, _scoreCounter, _levelConfig.Level);
+        _uiRoot.LouseLevelMenu.Init(_stateMachine, _scoreCounter, _uiRoot, _levelConfig.Level);
         _uiRoot.LouseLevelMenu.SetPlayerHealth(_health);
 
-        _uiRoot.StartLevelMenu.Init(_stateMachine, _scoreCounter, _levelConfig.Level);
+        _uiRoot.StartLevelMenu.Init(_stateMachine, _scoreCounter, _uiRoot, _levelConfig.Level);
         _uiRoot.StartScoreViewer.Init(_scoreCounter);
     }
 
@@ -238,10 +239,10 @@ public class GameFactory
         _openSellAction = _uiRoot.Sell.GetComponent<OpenSellAction>();
 
         Platform shopPlatform = Object.Instantiate(prefab, new Vector3(20, -12.262f, -87), Quaternion.identity);
-        shopPlatform.Init(_openShopAction, _uiRoot);
+        shopPlatform.Init(_openShopAction, _uiRoot, "SHOP");
 
         Platform sellPlatform = Object.Instantiate(prefab, new Vector3(32.5f, -12.262f, -87), Quaternion.identity);
-        sellPlatform.Init(_openSellAction, _uiRoot);
+        sellPlatform.Init(_openSellAction, _uiRoot, "SELL");
     }
 
     public void CreateQuests()

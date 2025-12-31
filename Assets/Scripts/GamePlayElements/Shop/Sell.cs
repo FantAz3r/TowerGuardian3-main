@@ -1,31 +1,42 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using YG;
 
 public class Sell : MonoBehaviour
 {
     [SerializeField] private RectTransform _weaponParent;
+    [SerializeField] private Button _weaponButton;
     [SerializeField] private RectTransform _abilityParent;
+    [SerializeField] private Button _abilityButton;
     [SerializeField] private RectTransform _buffParent;
+    [SerializeField] private Button _buffButton;
+
     [SerializeField] private SellResources _resourcesPanel;
     [SerializeField] private ProductViewer _productButtonPrefab;
-    
+
 
     private List<ICardConfig> _availableToSellItems = new();
     private List<ProductViewer> _productButtons = new();
 
+    private int _weaponCardCount = 0;
+    private int _abilityCardCount = 0;
+    private int _buffCardCount = 0;
+
     private Inventory _inventory;
     private CardData _cardData;
     private PlayerCardConfigContainer _cardHolder;
+    private CardSelectionMenu _cardMenu;
 
     public event Action WeaponSold;
 
-    public void Init(Inventory inventory, CardData cardData, PlayerCardConfigContainer cardHolder)
+    public void Init(Inventory inventory, CardData cardData, PlayerCardConfigContainer cardHolder, CardSelectionMenu cardMenu)
     {
         _inventory = inventory;
         _cardData = cardData;
         _cardHolder = cardHolder;
+        _cardMenu = cardMenu;
 
         _resourcesPanel.Init(_inventory);
         gameObject.SetActive(false);
@@ -51,6 +62,10 @@ public class Sell : MonoBehaviour
 
     private void RenderSellItems()
     {
+        _weaponButton.gameObject.SetActive(true);
+        _buffButton.gameObject.SetActive(true);
+        _abilityButton.gameObject.SetActive(true);
+
         ClearOldButtons();
         LoadSellebleCards();
 
@@ -59,11 +74,21 @@ public class Sell : MonoBehaviour
             RectTransform parent = null;
 
             if (config is WeaponConfig)
+            {
                 parent = _weaponParent;
+                _weaponCardCount++;
+
+            }
             else if (config is AbilityConfig)
+            {
                 parent = _abilityParent;
+                _abilityCardCount++;
+            }
             else if (config is BuffConfig)
+            {
                 parent = _buffParent;
+                _buffCardCount++;
+            }
             else
                 return;
 
@@ -72,6 +97,15 @@ public class Sell : MonoBehaviour
             button.BuyRequested += OnSellRequested;
             _productButtons.Add(button);
         }
+
+        if (_weaponCardCount == 0)
+            _weaponButton.gameObject.SetActive(false);
+
+        if(_buffCardCount == 0)
+            _buffButton.gameObject.SetActive(false);
+
+        if(_abilityCardCount == 0)
+            _abilityButton.gameObject.SetActive(false);
     }
 
     private void ClearOldButtons()
@@ -97,6 +131,7 @@ public class Sell : MonoBehaviour
             _cardHolder.Remove(card);
 
             UpdateCardSave(card);
+            _cardMenu.AddPoints(card.Level / 2);
         }
 
         RenderSellItems();

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class PlatformViewer : MonoBehaviour
     [SerializeField] private Transform _button;
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private Image _timerViewer;
+    [SerializeField] private TMP_Text _text;
 
     private Vector3 _downPosition;
     private Vector3 _upPosition;
@@ -34,6 +36,11 @@ public class PlatformViewer : MonoBehaviour
         _platform.PlayerEnteredZone -= OnPlayerEnteredZone;
         _platform.PlayerExitedZone -= OnPlayerExitedZone;
         _platform.TimerUpdated -= OnTimerUpdated;
+    }
+
+    public void SetText(string text)
+    {
+        _text.text = text;
     }
 
     private void OnPlayerEnteredZone()

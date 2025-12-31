@@ -15,7 +15,7 @@ public class Tutorial : MonoBehaviour
     private bool _isTutorialComplete = false;
     private int _valueProgress;
 
-    public event Action<Sprite, string> QuestSeted;
+    public event Action<QuestConfig> QuestSeted;
     public event Action<string> QuestUpdated;
     public event Action Complited;
     public event Action CompliteWithoutLust;
@@ -42,7 +42,7 @@ public class Tutorial : MonoBehaviour
             }
         }
 
-        YG2.onCorrectLang += OnÑhangeLang;
+        YG2.onSwitchLang += OnÑhangeLang;
     }
 
     public void RunNextQuest()
@@ -70,7 +70,7 @@ public class Tutorial : MonoBehaviour
         _currentQuest = _quests[_currentQuestIndex];
         _currentQuest.OnCompleted += OnQuestCompleted;
         _currentQuest.Run();
-        QuestSeted?.Invoke(_currentQuest.Config.Image, _currentQuest.Config.Description);
+        QuestSeted?.Invoke(_currentQuest.Config);
 
         _currentQuest.Updated += OnQuestUpdated;
     }
@@ -90,10 +90,14 @@ public class Tutorial : MonoBehaviour
 
     private void OnÑhangeLang(string useles)
     {
-        QuestSeted?.Invoke(_currentQuest.Config.Image, _currentQuest.Config.Description);
+        int minGoalForView = 2;
+        QuestSeted?.Invoke(_currentQuest.Config);
 
-        string updatebleDescription = $"{_currentQuest.Config.Description} {_valueProgress}/ {_currentQuest.Goal}";
-        QuestUpdated?.Invoke(updatebleDescription);
+        if(_currentQuest.Goal >= minGoalForView)
+        {
+            string updatebleDescription = $"{_currentQuest.Config.Description} {_valueProgress}/ {_currentQuest.Goal}";
+            QuestUpdated?.Invoke(updatebleDescription);
+        }
     }
 }
     

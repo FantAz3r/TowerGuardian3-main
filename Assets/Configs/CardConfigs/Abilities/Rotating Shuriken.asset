@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f7431266d7c3d498175fa6a6aeceef, type: 3}
   m_Name: Rotating Shuriken
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 06bc443b2401cd041badddb684de936f, type: 3}
+  _icon: {fileID: 21300000, guid: 19faa4abc0dca5e4698e4d77ffa140bc, type: 3}
   _nameRu: "\u0412\u0440\u0430\u0449\u0430\u044E\u0449\u0438\u0435\u0441\u044F \u0441\u044E\u0440\u0438\u043A\u0435\u043D\u044B"
   _nameEn: Spinning shurikens
   _nameTr: "D\xF6nen \u015Furikenler"
@@ -21,15 +21,15 @@ MonoBehaviour:
   _descriptionTR: "Keskin ve h\u0131zl\u0131"
   _costs:
   - ResourceType: 2
-    Value: 0
+    Value: 10
     Image: {fileID: 21300000, guid: d5d816a6099484f9fb74c7c1f1b8b35a, type: 3}
   - ResourceType: 0
-    Value: 0
+    Value: 15
     Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
   _id: 033888aa-cee4-442f-b7fd-38a4e0e8f850
   _chanceToView: 0.5
-  _level: 0
-  _hasPlayer: 0
+  _level: 1
+  _hasPlayer: 1
   _isBought: 1
   _abilityType: 4
   _prefab: {fileID: 9053661150003304121, guid: 42a96855bb557ab4298a5d3538a94ccb, type: 3}

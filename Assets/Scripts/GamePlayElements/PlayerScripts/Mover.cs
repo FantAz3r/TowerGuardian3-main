@@ -30,7 +30,6 @@ public class Mover : MonoBehaviour
         Move(Direction);
     }
 
-
     public void Move(Vector2 direction)
     {
         if (direction.sqrMagnitude < 0.001f)

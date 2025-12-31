@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3708405410646301811}
   - component: {fileID: 5359438316417508023}
   - component: {fileID: 1106233919994540328}
+  - component: {fileID: -2733992084650332639}
   m_Layer: 7
   m_Name: Vegetation_Tree_Asian_01_Atlased
   m_TagString: Untagged
@@ -100,10 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 0}
-  _maxHealth: 0
-  _minValue: 3
-  _maxValue: 15
+  _config: {fileID: 0}
   _type: 2
 --- !u!95 &-856795333826384106
 Animator:
@@ -186,5 +184,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71924de8a2000ba4f901ad5488fd2a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2733992084650332639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5148391297602714217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a15d927a500c20428640261cb7bc65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

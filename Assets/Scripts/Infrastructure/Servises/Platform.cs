@@ -12,16 +12,17 @@ public class Platform : InteractionMethod
 
     private WaitForSeconds _wait;
     private Coroutine _timerCoroutine = null;
+    private PlatformViewer _viewer;
 
     public event Action PlayerEnteredZone;
     public event Action PlayerExitedZone;
     public event Action<float, float> TimerUpdated;
     public event Action Disabled;
 
-
     private void Awake()
     {
         _wait = new WaitForSeconds(_delta);
+        _viewer = GetComponent<PlatformViewer>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,6 +43,12 @@ public class Platform : InteractionMethod
             PlayerExitedZone?.Invoke();
             StartTimerCoroutine();
         }
+    }
+
+    public override void Init(IAction action, GameUI gameUI, string name = "")
+    {
+        base.Init(action, gameUI, name);
+        _viewer.SetText(name);
     }
 
     private void StartTimerCoroutine()

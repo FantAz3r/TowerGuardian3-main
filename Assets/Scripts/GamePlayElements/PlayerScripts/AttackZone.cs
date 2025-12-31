@@ -12,7 +12,7 @@ public class AttackZone : MonoBehaviour
         _selfHealth = GetComponentInParent<IDemageable>();
     }
 
-    public IEnumerable<Health> GetTargets(float range)
+    public List<Health> GetTargets(float range)
     {
         SetAttackData(range);
         List<Health> targets = new List<Health>();

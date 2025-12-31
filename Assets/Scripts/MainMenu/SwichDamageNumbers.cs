@@ -7,11 +7,12 @@ public class SwichDamageNumbers : MonoBehaviour
     [SerializeField] private Toggle _toggle;
     private ISpawnerService _spawnerService;
 
-    public void Init(ISpawnerService spawnerService)
+    public void Init(ISpawnerService spawnerService) 
     {
         _spawnerService = spawnerService;
 
         _toggle.isOn = true;
+
         if (YG2.saves != null)
         {
             _toggle.isOn = YG2.saves.ShowDamageNumber;

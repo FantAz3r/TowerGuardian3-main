@@ -29,7 +29,7 @@ public class CardSelectionMenu : MonoBehaviour
         _showButton.gameObject.SetActive(_selectCount > 0);
         _text.text = _selectCount.ToString();
 
-        _playerExperience.OnLevelUp += AddSelect;
+        _playerExperience.OnLevelUp += AddPoints;
 
         GridLayoutGroup panel = GetComponentInChildren<GridLayoutGroup>();
 
@@ -44,7 +44,7 @@ public class CardSelectionMenu : MonoBehaviour
 
     private void OnDestroy()
     {
-        _playerExperience.OnLevelUp -= AddSelect;
+        _playerExperience.OnLevelUp -= AddPoints;
 
         foreach (var button in _cardsButtons)
         {
@@ -80,9 +80,9 @@ public class CardSelectionMenu : MonoBehaviour
         SaveUpgradeScore();
     }
 
-    private void AddSelect(int level)
+    public void AddPoints(int points)
     {
-        _selectCount++;
+        _selectCount += points;
         _showButton.gameObject.SetActive(true);
         _text.text = _selectCount.ToString();
         SaveUpgradeScore();

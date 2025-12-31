@@ -51,7 +51,7 @@ public abstract class ShopConfig : ScriptableObject, IShopConfig
                 return ru ;
             case "en":
                 return en ;
-            case "de":
+            case "tr":
                 return tr ;
             default:
                 return "" ;

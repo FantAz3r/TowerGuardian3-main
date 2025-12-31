@@ -1172,8 +1172,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponParent: {fileID: 5030871725689537780}
+  _weaponButton: {fileID: 1606947224891977188}
   _abilityParent: {fileID: 1726808703116104052}
+  _abilityButton: {fileID: 3231568909009699898}
   _buffParent: {fileID: 2737334315648290598}
+  _buffButton: {fileID: 6190364138875726788}
   _resourcesPanel: {fileID: 8807641729538629519}
   _productButtonPrefab: {fileID: 7587889323222580540, guid: 9658abc7b4e18854dadc7f71105786c2, type: 3}
 --- !u!114 &-6857475680096673501

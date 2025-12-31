@@ -25,11 +25,11 @@ public class QuestViewer : MonoBehaviour
         _tutorial.QuestUpdated -= UpdateProgress;
     }
 
-    private void Render(Sprite sprite, string description)
+    private void Render(QuestConfig config)
     {
         gameObject.SetActive(true);
-        _image.sprite = sprite;
-        _description.text = description;
+        _image.sprite = config.Image;
+        _description.text = config.Description;
     }
 
     private void UpdateProgress(string description)

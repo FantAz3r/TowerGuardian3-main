@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9aa76ca4497f9048ad0de75dc7ef601, type: 3}
   m_Name: Hand
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: cd30661a87252bd48aab19156cb1e811, type: 3}
+  _icon: {fileID: 21300000, guid: cb496db447832d544bd92a1673a9eaed, type: 3}
   _nameRu: 
   _nameEn: 
   _nameTr: 
@@ -29,6 +29,7 @@ MonoBehaviour:
   _type: 0
   _targetType: 4
   _controller: {fileID: 9100000, guid: cedb260312911b4488266dfcd5693a2a, type: 2}
+  _isAreaDamage: 0
   _baseDamage: 10
   _baseAttackDelay: 0.7
   _baseAttackRange: 2

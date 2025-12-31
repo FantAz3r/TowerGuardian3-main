@@ -44,9 +44,10 @@ public class Weapon : MonoBehaviour, IWeapon
 
     public void Attack()
     {
-        IEnumerable<Health> targets = _attackZone.GetTargets(_range);
+        List<Health> targets = _attackZone.GetTargets(_range);
+        IEnumerable<Health> orderedByDistanceTargets = Utils.GetObjectsSortedByDistance(targets, transform.position);
 
-        foreach (var target in targets)
+        foreach (var target in orderedByDistanceTargets)
         {
             if (target == null)
                 continue;
@@ -60,6 +61,11 @@ public class Weapon : MonoBehaviour, IWeapon
 
             HitedTarget?.Invoke(Mathf.RoundToInt(Mathf.Min(damageToDeal, target.CurrentHealth)), target.transform.position, target.GetHealthType());
             target.TakeDamage(damageToDeal);
+
+            if(_config.IsAreaDamage ==false)
+            {
+                return;
+            }
         }
     }
 

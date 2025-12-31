@@ -10,11 +10,13 @@ public class QuestConfig : ScriptableObject
     [SerializeField] private string _descriptionTR;
     [SerializeField] private QuestType _questType;
     [SerializeField] private int _targetValue;
+    [SerializeField] private Transform _targetTransform;
 
     public string Description => OnCorrectLanguage(_descriptionRU, _descriptionEN, _descriptionTR);
     public Sprite Image => _image;
     public QuestType QuestType => _questType;
     public int TargetValue => _targetValue;
+    public Transform Transform => _targetTransform;
 
     private string OnCorrectLanguage(string ru, string en, string tr)
     {
@@ -26,7 +28,7 @@ public class QuestConfig : ScriptableObject
                 return ru;
             case "en":
                 return en;
-            case "de":
+            case "tr":
                 return tr;
             default:
                 return "";

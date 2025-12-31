@@ -10,6 +10,7 @@ public class WeaponConfig : CardConfig
     [SerializeField] private EntityType _targetType;
     [SerializeField] private RuntimeAnimatorController _controller;
 
+    [SerializeField] private bool _isAreaDamage = false;  
     [SerializeField] private float _baseDamage = 10f;
     [SerializeField] private float _baseAttackDelay = 1f;
     [SerializeField] private float _baseAttackRange = 2f;
@@ -28,6 +29,7 @@ public class WeaponConfig : CardConfig
     public float AttackDelay => GetAttackDelay(Level);
     public float AttackRange => GetAttackRange(Level);
     public float Multiply => GetMultiply(Level);
+    public bool IsAreaDamage => _isAreaDamage;
 
     public override CardType GetCardType() => CardType.WeaponSetter;
 

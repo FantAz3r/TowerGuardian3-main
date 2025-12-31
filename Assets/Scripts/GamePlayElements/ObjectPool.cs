@@ -48,11 +48,14 @@ public class ObjectPool<T> where T : MonoBehaviour
 
     public bool HasFreeElement(out T element)
     {
-        foreach (var mono in _objects)
+        foreach (var item in _objects)
         {
-            if (mono.gameObject.activeInHierarchy == false)
+            if (item == null)
+                continue;
+
+            if (item.gameObject.activeInHierarchy == false)
             {
-                element = mono;
+                element = item;
                 return true;
             }
         }
