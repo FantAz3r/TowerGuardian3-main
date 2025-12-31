@@ -53,11 +53,12 @@ public class Sell : MonoBehaviour
     {
         gameObject.SetActive(true);
         RenderSellItems();
-        _resourcesPanel.RenderSellItems();
 
-        _weaponParent.gameObject.SetActive(true);
+        _resourcesPanel.gameObject.SetActive(true);
+        _weaponParent.gameObject.SetActive(false);
         _abilityParent.gameObject.SetActive(false);
         _buffParent.gameObject.SetActive(false);
+        _resourcesPanel.RenderSellItems();
     }
 
     private void RenderSellItems()
@@ -76,17 +77,23 @@ public class Sell : MonoBehaviour
             if (config is WeaponConfig)
             {
                 parent = _weaponParent;
+                Debug.Log(config.Name + "weapon");
+
                 _weaponCardCount++;
 
             }
             else if (config is AbilityConfig)
             {
                 parent = _abilityParent;
+                Debug.Log(config.Name + "abil");
+
                 _abilityCardCount++;
             }
             else if (config is BuffConfig)
             {
                 parent = _buffParent;
+                Debug.Log(config.Name + "buff");
+
                 _buffCardCount++;
             }
             else
@@ -101,10 +108,10 @@ public class Sell : MonoBehaviour
         if (_weaponCardCount == 0)
             _weaponButton.gameObject.SetActive(false);
 
-        if(_buffCardCount == 0)
+        if (_buffCardCount == 0)
             _buffButton.gameObject.SetActive(false);
 
-        if(_abilityCardCount == 0)
+        if (_abilityCardCount == 0)
             _abilityButton.gameObject.SetActive(false);
     }
 
@@ -131,7 +138,7 @@ public class Sell : MonoBehaviour
             _cardHolder.Remove(card);
 
             UpdateCardSave(card);
-            _cardMenu.AddPoints(card.Level / 2);
+            _cardMenu.AddPoints(card.Level);
         }
 
         RenderSellItems();
