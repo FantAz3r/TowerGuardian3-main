@@ -29,7 +29,6 @@ public class PlayerAttacker : MonoBehaviour
     public Weapon CurrentWeapon => _currentWeapon;
     public Weapon PreviousWeapon => _previousWeapon;
 
-
     private void Awake()
     {
         _attackDelay = new WaitForSeconds(_defoultAttackTime);

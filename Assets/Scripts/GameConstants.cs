@@ -12,6 +12,7 @@ public static class GameConstants
     public static string Tutorial = "Prefabs/Tutorial";
     public static string DirectionLight = "Prefabs/Light/Directional Light";
     public static string Tower = "Prefabs/Tower";
+    public static string QuestPointer = "Prefabs/Tower";
 
     public static string EnemySpawner = "Enemy/EnemyFactory";
 

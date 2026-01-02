@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using YG;
 
 public class GameFactory
 {
@@ -19,6 +18,7 @@ public class GameFactory
     private PlayerMover _mover;
     private PlayerCardConfigContainer _cardHolder;
     private EnemyDetector _detector;
+    private QuestPointer _questPointer;
 
     private WeaponFactory _weaponFactory;
     private CardData _cardData;
@@ -109,6 +109,7 @@ public class GameFactory
         _detector = _player.GetComponentInChildren<EnemyDetector>();
         _health = _player.GetComponent<Health>();
         _mover = _player.GetComponentInChildren<PlayerMover>();
+        _questPointer = _player.GetComponentInChildren<QuestPointer>();
     }
 
     public void CreateSpawners(ISpawnerService spawnerService)
@@ -257,8 +258,10 @@ public class GameFactory
 
         Tutorial tutorial = Object.Instantiate(tutorialPrefab);
         tutorial.Init(_questBuilder, questData, _levelConfig.Quests);
-        _portalFactory.SetQuests(tutorial, _levelConfig.Level);
 
+
+        _questPointer.Init(_player.transform, tutorial);
+        _portalFactory.SetQuests(tutorial, _levelConfig.Level);
         _uiRoot.QuestViewer.Init(tutorial);
         tutorial.RunNextQuest();
     }

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public abstract class Quest : IQuest
 {
@@ -22,6 +23,11 @@ public abstract class Quest : IQuest
     public abstract QuestType GetQuestType();
 
     public virtual void Run() { }
+
+    public virtual Vector3 TryGetTarget()
+    {
+        return Vector3.zero;
+    }
 
     public virtual void UpdateProgress()
     {
