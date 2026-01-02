@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public interface IQuest  
 {
@@ -13,4 +14,5 @@ public interface IQuest
     void Run();
     void Stop();
     void Complete();
+    Vector3 TryGetTarget();
 }

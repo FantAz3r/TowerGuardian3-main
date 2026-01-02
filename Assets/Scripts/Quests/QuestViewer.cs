@@ -1,7 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using YG;
+using TMPro;
 
 public class QuestViewer : MonoBehaviour
 {
@@ -25,11 +24,11 @@ public class QuestViewer : MonoBehaviour
         _tutorial.QuestUpdated -= UpdateProgress;
     }
 
-    private void Render(QuestConfig config)
+    private void Render(IQuest quest)
     {
         gameObject.SetActive(true);
-        _image.sprite = config.Image;
-        _description.text = config.Description;
+        _image.sprite = quest.Config.Image;
+        _description.text = quest.Config.Description;
     }
 
     private void UpdateProgress(string description)

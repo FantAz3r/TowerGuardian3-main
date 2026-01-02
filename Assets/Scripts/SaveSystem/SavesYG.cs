@@ -21,6 +21,8 @@ namespace YG
         public List<PlayerSaveData> PlayerPositions;
         public List<LevelSaveData> LevelsProgress;
 
+        public int CurrentFloor;
+
         public string Language;
         public bool ShowDamageNumber;
         public bool Mute;

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class LoadingLevelState : IPayloadedState<LevelID>
 {
@@ -14,6 +15,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private ITimeService _timeService;
     private ISpawnerService _spawnerService;
     private LevelID _currentLevel;
+    private LevelID _previousLevel;
     private GameStateMachine _gameStateMachine;
 
     public LoadingLevelState(AllServices services, ICoroutineRunner coroutineRunner, GameStateMachine stateMachine)
@@ -37,6 +39,8 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitCurrentLevel(LevelID level)
     {
+        _previousLevel = _currentLevel;
+        Debug.Log(_previousLevel);
         _currentLevel = level;
 
         switch (level)
@@ -121,6 +125,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitTowerLevel()
     {
+
         _gameFactory.InitUI();
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreateLight();
