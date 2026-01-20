@@ -5,8 +5,7 @@ using YG;
 public class TowerRenderer : MonoBehaviour
 {
     [SerializeField] private List<Floor> _floors;
-    private int _currentFloor = -1;
-
+    private int _currentFloor = 0;
     public IReadOnlyList<Floor> Floors => _floors;
 
     private void Start()
@@ -17,7 +16,7 @@ public class TowerRenderer : MonoBehaviour
         {
             if(floor.FloorNumber > _currentFloor)
             {
-                HandleGoingDown(floor.FloorNumber);
+                _floors[floor.FloorNumber].gameObject.SetActive(false);
             }
         }
     }
@@ -44,7 +43,8 @@ public class TowerRenderer : MonoBehaviour
 
     private void HandleGoingUp(int floorNumber)
     {
-        ActivateFloor(floorNumber);
+        _currentFloor = floorNumber + 1;
+        _floors[_currentFloor].gameObject.SetActive(true);
     }
 
     private void HandleGoingDown(int floorNumber)
@@ -53,15 +53,10 @@ public class TowerRenderer : MonoBehaviour
         _currentFloor -= 1;
     }
 
-    private void ActivateFloor(int floorNumber)
-    {
-        _currentFloor = floorNumber + 1;
-        _floors[_currentFloor].gameObject.SetActive(true);
-    }
-
     private void SaveTower()
     {
         YG2.saves.CurrentFloor = _currentFloor;
+        YG2.SaveProgress();
     }
 
     private void LoadTower()

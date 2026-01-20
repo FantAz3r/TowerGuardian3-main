@@ -1,35 +1,31 @@
 using System;
-using UnityEngine;
+using YG;
 
 public class LoadingLevelState : IPayloadedState<LevelID>
 {
     private readonly ICoroutineRunner _coroutineRunner;
-    private readonly AllServices _services;
 
     private SceneLoader _sceneLoader;
     private UIFactory _uiFactory;
     private GameFactory _gameFactory;
-    private ILevelLoadingService _levelLoadingService;
-    private IStateSwitchService _stateSwithService;
-    private IInputService _inputService;
-    private ITimeService _timeService;
-    private ISpawnerService _spawnerService;
     private LevelID _currentLevel;
     private LevelID _previousLevel;
-    private GameStateMachine _gameStateMachine;
 
-    public LoadingLevelState(AllServices services, ICoroutineRunner coroutineRunner, GameStateMachine stateMachine)
+    public LoadingLevelState( ICoroutineRunner coroutineRunner)
     {
-        _services = services;
         _coroutineRunner = coroutineRunner;
-        _gameStateMachine = stateMachine;
     }
 
     public void Enter(LevelID level)
     {
-        InitServices();
         CteateFactories();
         InitCurrentLevel(level);
+
+        if(level != LevelID.MainMenu)
+        {
+            YG2.saves.CurrentLevel = level;
+            YG2.SaveProgress();
+        }
     }
 
     public void Exit()
@@ -40,7 +36,6 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private void InitCurrentLevel(LevelID level)
     {
         _previousLevel = _currentLevel;
-        Debug.Log(_previousLevel);
         _currentLevel = level;
 
         switch (level)
@@ -77,33 +72,25 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private void CteateFactories()
     {
         _sceneLoader = new SceneLoader(_coroutineRunner);
-        _uiFactory = new UIFactory(_stateSwithService, _spawnerService);
-        _gameFactory = new GameFactory(_inputService, _timeService, _spawnerService, _gameStateMachine);
-    }
-
-    private void InitServices()
-    {
-        _levelLoadingService = _services.GetService<ILevelLoadingService>();
-        _timeService = _services.GetService<ITimeService>();
-        _stateSwithService = _services.GetService<IStateSwitchService>();
-        _inputService = _services.GetService<IInputService>();
-        _spawnerService = _services.GetService<ISpawnerService>();
+        _uiFactory = new UIFactory();
+        _gameFactory = new GameFactory();
     }
 
     private void InitMainMenu()
     {
+        _uiFactory.CreateFocusController();
         _uiFactory.CreateUIRoot();
-        _uiFactory.CreateStartButton();
+        _uiFactory.CreateSounds();
         _uiFactory.CreateSettings();
+        _uiFactory.CreateBackgroundSounds();
     }
 
     private void InitGameLevel()
     {
-        _gameFactory.InitLevelObjects();
-        _gameFactory.InitUI();
+        _gameFactory.CreateFocusController();
         _gameFactory.SetLevelConfig(_currentLevel);
-        _gameFactory.CreatePlayer();
-        _gameFactory.CreateSpawners(_spawnerService);
+        _gameFactory.CreatePlayer(_previousLevel);
+        _gameFactory.CreateSpawners();
         _gameFactory.CreateWeaponFactory();
         _gameFactory.CreateCamera();
         _gameFactory.CreateEventSystem();
@@ -112,6 +99,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateEnemies();
         _gameFactory.CreateScoreCounter();
 
+        _gameFactory.CreateUI();
         _gameFactory.CreateHUD();
         _gameFactory.InitUIWindows();
 
@@ -121,23 +109,26 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
         _gameFactory.CreateTutorial();
+
+        _gameFactory.CreateBackgroundSounds();
     }
 
     private void InitTowerLevel()
     {
-
-        _gameFactory.InitUI();
+        _gameFactory.CreateFocusController();
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreateLight();
-        _gameFactory.CreatePlayer();
+        _gameFactory.CreatePlayer(_previousLevel);
         _gameFactory.CreateEventSystem();
-        _gameFactory.CreateSpawners(_spawnerService);
+        _gameFactory.CreateSpawners();
+        _gameFactory.CreateTower();
 
         _gameFactory.CreateScoreCounter();
         _gameFactory.CreateWeaponFactory();
         _gameFactory.CreateCamera();
         _gameFactory.CreateCards();
 
+        _gameFactory.CreateUI();
         _gameFactory.CreateHUD();
         _gameFactory.InitUIWindows();
 
@@ -145,11 +136,11 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateCardsSelectionMenu();
 
         _gameFactory.CreateActions();
-        _gameFactory.CreateTower();
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
         _gameFactory.CreateTutorial();
 
-        _gameFactory.CreatePlatforms();
+        _gameFactory.InitPlatforms();
+        _gameFactory.CreateBackgroundSounds();
     }
 }

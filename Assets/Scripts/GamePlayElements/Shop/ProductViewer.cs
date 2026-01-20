@@ -31,7 +31,7 @@ public class ProductViewer : MonoBehaviour
 
         if(_config is CardConfig card)
         {
-            _level.text = $"LVL {card.Level.ToString()}";
+            _level.text = $"{UIText.LVL} {card.Level.ToString()}";
         }
 
         for (int i = 0; i < _costs.Count; i++)
@@ -68,8 +68,8 @@ public class ProductViewer : MonoBehaviour
     private void OnClick()
     {
         if (_config == null) return;
+
         BuyRequested?.Invoke(this, _config);
-        Debug.Log(_config);
     }
 
     private void OnDestroy()

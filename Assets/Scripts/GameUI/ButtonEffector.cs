@@ -9,17 +9,21 @@ public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     [SerializeField] private Sprite _highlightedSprite;
     [SerializeField] private Sprite _normalSprite;
+    [SerializeField] private AudioClip _pressedSound;
+    [SerializeField] private AudioClip _highlightedSound;
 
     private Image _buttonImage;
     private Animator _animator;
+    private ISpawnerService _spawnerService;
 
     private void Awake()
     {
         _buttonImage = GetComponent<Image>();
         _animator = GetComponent<Animator>();
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
     }
 
-    private void OnDisable()
+    private void OnDisable() 
     {
         _buttonImage.sprite = _normalSprite;
         _animator.SetTrigger("Normal");
@@ -29,6 +33,7 @@ public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         _buttonImage.sprite = _highlightedSprite;
         _animator.SetTrigger("Highlighted");
+        _spawnerService.SendSoundReqest(_highlightedSound);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -40,5 +45,6 @@ public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerClick(PointerEventData eventData)
     {
         _animator.SetTrigger("Pressed");
+        _spawnerService.SendSoundReqest(_pressedSound);
     }
 }

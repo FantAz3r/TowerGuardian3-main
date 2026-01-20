@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class GameStateMachine : IGameStateMachine
 {
-    private Dictionary<System.Type, IExitableState> _states;
+    private Dictionary<Type, IExitableState> _states;
     private IExitableState _currentState;  
 
-    public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen, AllServices services, ICoroutineRunner coroutineRunner)
+    public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen, ICoroutineRunner coroutineRunner)
     {
-        _states = new Dictionary<System.Type, IExitableState>();
-        _states[typeof(BootstrapState)] = new BootstrapState(this, services, sceneLoader, coroutineRunner);
-        _states[typeof(LoadingLevelState)] = new LoadingLevelState(services, coroutineRunner, this);
+        _states = new Dictionary<Type, IExitableState>();
+        _states[typeof(BootstrapState)] = new BootstrapState(this,  sceneLoader, coroutineRunner);
+        _states[typeof(LoadingLevelState)] = new LoadingLevelState(coroutineRunner);
         _states[typeof(PersistentProgressState)] = new PersistentProgressState();
     }
 
@@ -31,11 +30,11 @@ public class GameStateMachine : IGameStateMachine
     {
         if (_currentState is IExitableState exitableState)
             exitableState.Exit();
+
         TState state = GetState<TState>();
         _currentState = state;
         return state;
     }
 
-    private TState GetState<TState>() where TState : class, IExitableState =>
-        _states[typeof(TState)] as TState;
+    private TState GetState<TState>() where TState : class, IExitableState => _states[typeof(TState)] as TState;
 }

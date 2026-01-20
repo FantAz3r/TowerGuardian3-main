@@ -11,8 +11,9 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     private float _maxHealth;
     public HealthConfig Config => _config;
     public float CurrentHealth => _currentValue;
+    public float MaxHealth => _maxHealth;
 
-    public event Action<float> IsValueChange;
+    public event Action<float,float> IsValueChange;
     public event Action<float> DamageTaken;
     public event Action<float> Healed;
     public event Action<Health> Killed;
@@ -27,7 +28,6 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     {
         _maxHealth = _config.MaxHealth;
         _startMaxHealth = _config.MaxHealth;
-        _currentValue = _maxHealth;
     }
 
     public void OnEnable()
@@ -55,7 +55,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
             }
 
             Healed?.Invoke(healAmount);
-            IsValueChange?.Invoke(_currentValue);
+            IsValueChange?.Invoke(_currentValue, _maxHealth);
         }
     }
 
@@ -66,7 +66,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         float damageTaken = Mathf.Min(damage, _currentValue);
         _currentValue -= damageTaken;
         DamageTaken?.Invoke(damageTaken);
-        IsValueChange?.Invoke(_currentValue);
+        IsValueChange?.Invoke(_currentValue, _maxHealth);
 
         if (_currentValue < 1)
         {
@@ -79,7 +79,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         float scaleRatio = _currentValue / _maxHealth;
         _maxHealth = _startMaxHealth * (value + 1);
         _currentValue = _maxHealth * scaleRatio;
-        IsValueChange?.Invoke(_currentValue);
+        IsValueChange?.Invoke(_currentValue, _maxHealth);
     }
 
     public void DieAction()

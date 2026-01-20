@@ -7,9 +7,9 @@ public class SwichDamageNumbers : MonoBehaviour
     [SerializeField] private Toggle _toggle;
     private ISpawnerService _spawnerService;
 
-    public void Init(ISpawnerService spawnerService) 
+    private void Awake() 
     {
-        _spawnerService = spawnerService;
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
 
         _toggle.isOn = true;
 
@@ -48,6 +48,7 @@ public class SwichDamageNumbers : MonoBehaviour
     private void SaveSetting(bool isActive)
     {
         YG2.saves.ShowDamageNumber = isActive;
+        YG2.SaveProgress();
     }
 }
 

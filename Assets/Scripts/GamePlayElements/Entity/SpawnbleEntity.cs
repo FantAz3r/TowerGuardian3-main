@@ -11,26 +11,29 @@ public class SpawnbleEntity : MonoBehaviour
     private void Awake()
     {
         _health = GetComponent<Health>();
-    }
-
-    public void Init(ISpawnerService spawnerService)
-    {
-        _spawnerService = spawnerService;
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
 
         _health.Healed += OnHeal;
         _health.DamageTaken += OnTakeDamage;
         _health.Died += OnDie;
     }
 
+    private void OnDestroy()
+    {
+        _health.Healed -= OnHeal;
+        _health.DamageTaken -= OnTakeDamage;
+        _health.Died -= OnDie;
+    }
+
     private void OnHeal(float value)
     {
-        _spawnerService.SendReqest(SpawnerType.Text, _health.Config, transform.position, (int)value);
+        _spawnerService.SendTextReqest(transform.position, (int)value, Color.green);
     }
 
     private void OnTakeDamage(float value)
     {
-        _spawnerService.SendReqest(SpawnerType.Text, _health.Config, transform.position, (int)value);
-        _spawnerService.SendReqest(SpawnerType.Effects, _health.Config, transform.position);
+        _spawnerService.SendTextReqest(transform.position, (int)value);
+        _spawnerService.SendEffectReqest(_health.Config, transform.position);
 
         if (_health.Config.DamageToErn <= 0)
             return;
@@ -42,7 +45,7 @@ public class SpawnbleEntity : MonoBehaviour
         {
             int rewardsCount = (int)(_damageAccumulator / _health.Config.DamageToErn);
             spawnCount = rewardsCount * _health.Config.RewardCount;
-            _spawnerService.SendReqest(SpawnerType.Resources, _health.Config, transform.position, spawnCount);
+            _spawnerService.SendItemReqest(_health.Config, transform.position, spawnCount);
             _damageAccumulator -= rewardsCount * _health.Config.DamageToErn;
         }
     }
@@ -52,6 +55,6 @@ public class SpawnbleEntity : MonoBehaviour
         if (_health.Config.DamageToErn > 0)
             return;
 
-        _spawnerService.SendReqest(SpawnerType.Resources, _health.Config, transform.position, _health.Config.RewardCount);
+        _spawnerService.SendItemReqest(_health.Config, transform.position, _health.Config.RewardCount);
     }
 }

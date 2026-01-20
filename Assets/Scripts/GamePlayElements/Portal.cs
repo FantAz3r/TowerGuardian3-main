@@ -3,33 +3,33 @@ using UnityEngine;
 
 public class Portal : BuildingObject
 {
+    [SerializeField] private MeshRenderer _materialInner;
+    [SerializeField] private MeshRenderer _materialOuter; 
+
     private LevelID _levelID;
     private LevelID _currentLevel;
-    private WinLevelMenu _finishMenu;
+    private WinLevelMenu _winMenu;
     private LouseLevelMenu _louseMenu;
-    private Material _material;
     private StartLevelMenu _startLevelMenu;
 
-    public event Action Exited;
+    public event Action EnemyEntered;
+    public event Action Entered;
     public LevelID NextLevel => _levelID;
-
-    private void Awake()
-    {
-        _material = GetComponent<Material>();
-    }
 
     public void Init(WinLevelMenu finishLMenu, LouseLevelMenu louseMenu, LevelID portalLevelID, Material material, LevelID currentLevel = LevelID.None, StartLevelMenu startLevelMenu = null)
     {
-        _finishMenu = finishLMenu;
+        _winMenu = finishLMenu;
         _louseMenu = louseMenu;
-        _material = material;
         _currentLevel = currentLevel;
         _levelID = portalLevelID;
         _startLevelMenu = startLevelMenu;
+
+        _materialInner.material = material;
+        _materialInner.material = material;
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {    
         if (other.TryGetComponent<Player>(out _))
         {
             if (_currentLevel == LevelID.Tower)
@@ -38,10 +38,16 @@ public class Portal : BuildingObject
             }
             else
             {
-                _finishMenu.LevelEnd(_levelID);
+                _winMenu.LevelEnd(_levelID);
             }
 
-            Exited?.Invoke();
+            Entered?.Invoke();
+        }
+
+        if(other.TryGetComponent(out Enemy enemy))
+        {
+            EnemyEntered?.Invoke();
+            enemy.gameObject.SetActive(false);
         }
     }
 }

@@ -132,7 +132,7 @@ public class PlayerAnimator : MonoBehaviour
     public void SwapController()
     {
         _animator.runtimeAnimatorController = _attacker.CurrentWeapon.Config.Controller;
-        _defaultAnimatorSpeed = _animator.speed;
+        _animator.speed = _defaultAnimatorSpeed;
     }
 
     public void OnWeaponRemoved(IWeapon weapon)

@@ -13,11 +13,35 @@ public class SpawnerService : ISpawnerService
             _spawners[type] = spawner;
     }
 
-    public void SendReqest(SpawnerType spawnerType, HealthConfig config, Vector3 position, int count = 1 )
+    public void SendItemReqest(HealthConfig config, Vector3 position, int count = 1 )
     {
-        if (_spawners.TryGetValue(spawnerType, out var spawner))
+        if (_spawners.TryGetValue(SpawnerType.Resources, out var spawner))
         {
             spawner.Spawn(config, position, count);
+        }
+    }
+
+    public void SendSoundReqest(AudioClip clip, Vector3 position = default)
+    {
+        if (_spawners.TryGetValue(SpawnerType.Sounds, out var spawner))
+        {
+            spawner.Spawn(clip, position);
+        }
+    }
+
+    public void SendTextReqest(Vector3 position, int count = 1, Color? color = null)
+    {
+        if (_spawners.TryGetValue(SpawnerType.Text, out var spawner))
+        {
+            spawner.Spawn(position, count, color);
+        }
+    }
+
+    public void SendEffectReqest(HealthConfig config, Vector3 position)
+    {
+        if (_spawners.TryGetValue(SpawnerType.Effects, out var spawner))
+        {
+            spawner.Spawn(config, position);
         }
     }
 
@@ -44,6 +68,4 @@ public class SpawnerService : ISpawnerService
             pair.Value.DestroyPool();
         }
     }
-
-   
 }

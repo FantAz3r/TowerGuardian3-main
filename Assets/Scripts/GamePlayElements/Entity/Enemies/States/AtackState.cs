@@ -8,10 +8,10 @@ public class AttackState : State, IEnemyState
 
     private EnemyStateMachine _stateMachine;
     private EnemyAnimator _animator;
-    private Transform _player;
+    private Player _player;
     private IDemageable _playerHealth;
 
-    public AttackState(EnemyStateMachine stateMachine, EnemyAnimator animator, Transform target) : base(stateMachine, true)
+    public AttackState(EnemyStateMachine stateMachine, EnemyAnimator animator, Player target) : base(stateMachine, true)
     {
         _stateMachine = stateMachine;
         _animator = animator;
@@ -43,9 +43,9 @@ public class AttackState : State, IEnemyState
         float timeSinceLastAttack = 0f;
         _animator.PlayAttack();
 
-        while (true)
+        while (_player.IsAlive)
         {
-            RotateTo(_player.position);
+            RotateTo(_player.transform.position);
             _animator.UpdateSpeed(speedForAnimator);
 
             if (timeSinceLastAttack >= attackCooldown)

@@ -44,7 +44,6 @@ public class JumpingPickaxe : MonoBehaviour
         {
             target.TakeDamage(_damage);
             _hitedTargets.Add(target);
-            Debug.Log("3");
         }
 
         _currentTarget = null;
@@ -55,23 +54,19 @@ public class JumpingPickaxe : MonoBehaviour
     {
         float threshold = 0.1f;
         Vector3 offset = new Vector3(0, 1, 0);
-        Vector3 targetPos = target.position + offset;
 
-        while (Vector3.SqrMagnitude(transform.position - targetPos) > threshold * threshold)
+        while (Vector3.SqrMagnitude(transform.position - (target.position + offset)) > threshold * threshold)
         {
+            Vector3 targetPos = target.position + offset;
             transform.position = Vector3.MoveTowards(transform.position, targetPos, _flySpeed * Time.deltaTime);
             yield return null;
         }
 
-
-
         transform.position = target.position + offset;
-        Debug.Log("1");
 
         if (_currentTarget != null)
         {
             OnHit(_currentTarget);
-            Debug.Log("2");
 
         }
         else
@@ -87,15 +82,11 @@ public class JumpingPickaxe : MonoBehaviour
         if (_currentHitCount >= _maxHitCount || _currentTarget == null)
         {
             StartCoroutine(FlyRoutine(_hand.transform));
-            Debug.Log("hand");
         }
         else
         {
             StartCoroutine(FlyRoutine(_currentTarget.transform));
-            Debug.Log(_currentTarget);
         }
-
-        Debug.Log(_currentHitCount);
     }
 
     private Health TryFindTarget()

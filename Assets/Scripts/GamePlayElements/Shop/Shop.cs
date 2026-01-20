@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
@@ -15,8 +14,7 @@ public class Shop : MonoBehaviour
     private List<ICardConfig> _shopConfigs = new();
     private List<ProductViewer> _productButtons = new();
     private Inventory _playerInventory;
-
-    public event Action WeaponAdded;
+    private ITimeService _timeService;
 
     private void OnDestroy()
     {
@@ -26,8 +24,14 @@ public class Shop : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        _timeService.Resume();
+    }
+
     public void Init(Inventory playerInventory)
     {
+        _timeService = ServicesLocator.GetService<ITimeService>();
         _playerInventory = playerInventory;
         gameObject.SetActive(false);
     }

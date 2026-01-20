@@ -9,5 +9,9 @@ public enum QuestType
     GetOut,
     EnterTower,
     UpStairs,
-    EnterFirstLevel
+    EnterLevel1,
+    EnterLevel2,
+    EnterLevel3,
+    DefendPortal,
+    CollectStones
 }

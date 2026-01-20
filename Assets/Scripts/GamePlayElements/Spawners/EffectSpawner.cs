@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectSpawner : ISpawner
+public class EffectSpawner : BaseSpawner
 {
     private Vector3 _offset = new Vector3(0, 1, 0);
     private Dictionary<EffectType, ObjectPool<Effect>> _pools = new Dictionary<EffectType, ObjectPool<Effect>>();
-    private bool _spawning = true;
 
-    public SpawnerType GetSpawnerType() => SpawnerType.Effects;
+    public override SpawnerType GetSpawnerType() => SpawnerType.Effects;
 
     public EffectSpawner(EffectData data)
     {
@@ -18,19 +17,9 @@ public class EffectSpawner : ISpawner
         }
     }
 
-    public void EnableSpawn()
+    public override void Spawn(HealthConfig config, Vector3 position)
     {
-        _spawning = true;
-    }
-
-    public void DisableSpawn()
-    {
-        _spawning = false;
-    }
-
-    public void Spawn(HealthConfig config, Vector3 position, int count = 1)
-    {
-        if (_spawning == false)
+        if (CanSpawn == false)
             return;
 
         if (_pools.TryGetValue(config.SpawnEffect, out var pool) == false)
@@ -50,13 +39,8 @@ public class EffectSpawner : ISpawner
         }
     }
 
-    private IEnumerator ReturnToPoolAfterDuration(Effect effect, ObjectPool<Effect> pool, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        effect.gameObject.SetActive(false);
-    }
 
-    public void DestroyPool()
+    public override void DestroyPool()
     {
         foreach (var pair in _pools)
         {
@@ -64,8 +48,9 @@ public class EffectSpawner : ISpawner
         }
     }
 
-    public void Spawn(EntityType type, Vector3 position, int count)
+    private IEnumerator ReturnToPoolAfterDuration(Effect effect, ObjectPool<Effect> pool, float delay)
     {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(delay);
+        effect.gameObject.SetActive(false);
     }
 }

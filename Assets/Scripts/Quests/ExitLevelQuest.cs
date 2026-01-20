@@ -17,12 +17,12 @@ public class ExitLevelQuest : Quest
 
     public override void Run()
     {
-        _portal.Exited += Complete;
+        _portal.Entered += Complete;
     }
 
     public override void Complete()
     {
-        _portal.Exited -= Complete;
+        _portal.Entered -= Complete;
         base.Complete();
     }
 

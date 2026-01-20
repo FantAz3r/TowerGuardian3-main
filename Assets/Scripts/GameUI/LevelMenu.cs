@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using YG;
 
 public abstract class LevelMenu : MonoBehaviour
 {
@@ -9,18 +8,20 @@ public abstract class LevelMenu : MonoBehaviour
 
     private GameUI _gameUI;
     private ScoreCounter _scoreCounter;
-    private GameStateMachine _gameStateMachine;
+    private IStateSwitchService _stateSwitchService;
+    private ITimeService _timeService;
     private LevelID _currentLevel;
 
     public ScoreCounter ScoreCounter => _scoreCounter;
     public GameUI GameUI => _gameUI;
-    public GameStateMachine GameStateMachine => _gameStateMachine;
+    public IStateSwitchService StateSwitchService => _stateSwitchService;
     public LevelID CurrentLevel => _currentLevel;
 
-    public virtual void Init(GameStateMachine gameStateMachine, ScoreCounter scoreCounter, GameUI gameUI, LevelID currentLevel)
+    public virtual void Init(ScoreCounter scoreCounter, GameUI gameUI, LevelID currentLevel)
     {
         _gameUI = gameUI;
-        _gameStateMachine = gameStateMachine;
+        _stateSwitchService = ServicesLocator.GetService<IStateSwitchService>();
+        _timeService = ServicesLocator.GetService<ITimeService>();
         _scoreCounter = scoreCounter;
         _currentLevel = currentLevel;
     }
@@ -48,13 +49,13 @@ public abstract class LevelMenu : MonoBehaviour
 
     private void OnRestartClicked()
     {
-        _gameStateMachine.EnterIn<LoadingLevelState, LevelID>(_currentLevel);
+        _stateSwitchService.Switch(_currentLevel);
         CloseMenu();
     }
 
     protected virtual void OnHomeClicked()
     {
-        _gameStateMachine.EnterIn<LoadingLevelState, LevelID>(LevelID.Tower);
+        _stateSwitchService.Switch(LevelID.Tower);
         CloseMenu();
     }
 
@@ -62,12 +63,12 @@ public abstract class LevelMenu : MonoBehaviour
     {
         gameObject.SetActive(true);
         _gameUI.HUD.gameObject.SetActive(false);
-        YG2.PauseGameNoEditEventSystem(true);
+        _timeService.PauseGame();
     }
 
     protected void CloseMenu()
     {
-        YG2.PauseGameNoEditEventSystem(false);
+        _timeService.Resume();
         _gameUI.HUD.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }

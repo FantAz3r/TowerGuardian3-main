@@ -7,6 +7,7 @@ public class PlayerHealthViewer : MonoBehaviour
 {
     [SerializeField] private Slider _healthImage;
     [SerializeField] private TMP_Text _healthText;
+    [SerializeField] private float _smoothSpeed = 2f;
 
     private Health _health;
     private Coroutine _lerpCoroutine;
@@ -15,7 +16,7 @@ public class PlayerHealthViewer : MonoBehaviour
     {
         _health = health;
         _healthImage.value = 1f;
-        _healthText.text = $"{_health.CurrentHealth} / {_health.Config.MaxHealth}";
+        _healthText.text = $"{_health.CurrentHealth} / {_health.MaxHealth}";
         _health.IsValueChange += View;
     }
 
@@ -27,28 +28,29 @@ public class PlayerHealthViewer : MonoBehaviour
             StopCoroutine(_lerpCoroutine);
     }
 
-    private void View(float damage)
+    private void View(float currentHealth, float maxHealth)
     {
-        _healthText.text = $"{_health.CurrentHealth:F0} / {_health.Config.MaxHealth:F0}";
+        _healthText.text = $"{currentHealth:F0} / {maxHealth:F0}";
 
         if (_lerpCoroutine != null)
             StopCoroutine(_lerpCoroutine);
 
-        _lerpCoroutine = StartCoroutine(LerpHealthBar(_healthImage.value, (float)_health.CurrentHealth / _health.Config.MaxHealth, 0.5f));
+        _lerpCoroutine = StartCoroutine(LerpHealthBar(_healthImage.value, (float) currentHealth / maxHealth, _smoothSpeed));
     }
 
-    private IEnumerator LerpHealthBar(float startValue, float targetValue, float duration)
+    private IEnumerator LerpHealthBar(float startValue, float targetValue, float speed)
     {
-        float time = 0f;
+        float currentValue = startValue;
 
-        while (time < duration)
+        while (Mathf.Approximately(currentValue, targetValue) == false)
         {
-            time += Time.deltaTime;
-            _healthImage.value = Mathf.Lerp(startValue, targetValue, time / duration);
+            currentValue = Mathf.MoveTowards(currentValue, targetValue, speed * Time.deltaTime);
+            _healthImage.value = currentValue;
             yield return null;
         }
 
         _healthImage.value = targetValue;
+        _lerpCoroutine = null;
     }
 }
 

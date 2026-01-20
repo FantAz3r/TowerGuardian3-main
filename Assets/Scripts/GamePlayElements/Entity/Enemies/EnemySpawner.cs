@@ -10,16 +10,16 @@ public class EnemySpawner : MonoBehaviour
     private ISpawnerService _spawnerService;
     private ObjectPool<Enemy> _pool;
     private DayCycle _dayCycle;
-    private Transform _player;
+    private Player _player;
     private LevelConfig _currentConfig;
 
     private WaitForSeconds _nightSpawnDelay;
     private WaitForSeconds _daySpawnDelay;
 
-    public void Init(Transform player, DayCycle dayCycle, LevelConfig config, ISpawnerService spawnerService)
+    public void Init(Player player, DayCycle dayCycle, LevelConfig config)
     {
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
         _player = player;
-        _spawnerService = spawnerService;
         _dayCycle = dayCycle;
         _currentConfig = config;
 
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn()
     {
-        if (_spawnPoints == null || _spawnPoints.Count == 0 || _spawnerService == null)
+        if (_spawnPoints == null || _spawnPoints.Count == 0)
         {
             return;
         }
@@ -58,9 +58,6 @@ public class EnemySpawner : MonoBehaviour
         EnemyStateMachine stateMachine = enemyInstance.GetComponent<EnemyStateMachine>();
         enemyInstance.transform.position = spawnPoint.transform.position;
         enemyInstance.transform.LookAt(_player.transform);
-        stateMachine.Init(_player.transform);
-
-        SpawnbleEntity spawnbleEntity = enemyInstance.GetComponent<SpawnbleEntity>();
-        spawnbleEntity.Init(_spawnerService);
+        stateMachine.Init(_player);
     }
 }

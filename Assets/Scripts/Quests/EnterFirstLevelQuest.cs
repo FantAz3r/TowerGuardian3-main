@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnterFirstLevelQuest : Quest
 {
     private Portal _portalLevel1;
-    public override QuestType GetQuestType() => QuestType.EnterFirstLevel;
+    public override QuestType GetQuestType() => QuestType.EnterLevel1;
 
     public EnterFirstLevelQuest(Portal portal)
     {
@@ -18,12 +18,12 @@ public class EnterFirstLevelQuest : Quest
     public override void Run()
     {
         base.Run();
-        _portalLevel1.Exited += Complete;
+        _portalLevel1.Entered += Complete;
     }
 
     public override void Complete()
     {
-        _portalLevel1.Exited -= Complete;
+        _portalLevel1.Entered -= Complete;
         base.Complete();
     }
 }

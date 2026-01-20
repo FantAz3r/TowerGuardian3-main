@@ -7,8 +7,6 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     [SerializeField] private JumpingPickaxeConfig _config;
 
     private float _cooldown = 0f;
-    private bool _isActive = true;
-
     private Weapon _pickaxe;
     private JumpingPickaxe _jumpingPickaxe;
     private Player _player;
@@ -25,11 +23,17 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     {
         _player = GetComponentInParent<Player>();
         _attacker = _player.GetComponentInChildren<PlayerAttacker>();
+        _attacker.WeaponSeted += CheckWeapon;
+    }
+
+    private void OnDestroy()
+    {
+        _attacker.WeaponSeted -= CheckWeapon;
     }
 
     public override void Use()
     {
-        if (_isActive)
+        if (IsLock == false)
         {
             if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Pickaxe)
             {
@@ -50,7 +54,7 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        _isActive = false;
+        base.LockAbility();
         float timer = 0f;
 
         while (_cooldown >= timer)
@@ -61,7 +65,19 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_cooldown, 0f);
-        _isActive = true;
+        base.UnlockAbility();
+    }
+
+    private void CheckWeapon(IWeapon weapon)
+    {
+        if (weapon.Config.WeaponType == WeaponType.Pickaxe)
+        {
+            base.UnlockAbility();
+        }
+        else
+        {
+            base.LockAbility();
+        }
     }
 
     private void Return(int hitCount)

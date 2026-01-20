@@ -10,11 +10,14 @@ public class QuestConfig : ScriptableObject
     [SerializeField] private string _descriptionTR;
     [SerializeField] private QuestType _questType;
     [SerializeField] private int _targetValue;
+    [SerializeField] private float _timeLimit;
+    
 
     public string Description => OnCorrectLanguage(_descriptionRU, _descriptionEN, _descriptionTR);
     public Sprite Image => _image;
     public QuestType QuestType => _questType;
     public int TargetValue => _targetValue;
+    public float TimeLimit => _timeLimit;
 
     private string OnCorrectLanguage(string ru, string en, string tr)
     {
@@ -33,3 +36,7 @@ public class QuestConfig : ScriptableObject
         }
     }
 }
+
+
+
+

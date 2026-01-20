@@ -26,6 +26,6 @@ MonoBehaviour:
   _container: {fileID: 4123103567900668795, guid: 7fd5f2745c3e24640a66b37e74bcae6c, type: 3}
   _nightSpawnDelay: 3
   _daySpawnDelay: 10
-  _scorePerTimeOneStar: 1
-  _scorePerTimeTwoStar: 2
-  _scorePerTimeThreeStar: 3
+  _scorePerTimeOneStar: 0.3
+  _scorePerTimeTwoStar: 0.5
+  _scorePerTimeThreeStar: 0.6

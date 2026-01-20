@@ -1,7 +1,9 @@
 public enum SpawnerType 
 {
+    None,
     Enemy,
     Resources,
     Text,
-    Effects
+    Effects,
+    Sounds
 }

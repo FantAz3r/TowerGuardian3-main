@@ -10,7 +10,10 @@ public class InputService : IInputService
     public event Action<Vector2> MovePerformed;
     public event Action MoveCanceled;
 
-    public event Action OnAbillityUsed;
+    public event Action OnAbillity1Used;
+    public event Action OnAbillity2Used;
+    public event Action OnAbillity3Used;
+    public event Action OnAbillity4Used;
 
     public event Action<Vector2> RotatePerformed;
     public event Action<Vector2> RotateCanceled;
@@ -27,7 +30,10 @@ public class InputService : IInputService
         _inputActions.Player.Move.performed += OnMovePerformed;
         _inputActions.Player.Move.canceled += OnMoveCanceled;
 
-        _inputActions.UI.ActivateAbility.performed += OnAbilityUsed;
+        _inputActions.UI.ActivateAbility1.performed += OnAbility1Used;
+        _inputActions.UI.ActivateAbility2.performed += OnAbility2Used;
+        _inputActions.UI.ActivateAbility3.performed += OnAbility3Used;
+        _inputActions.UI.ActivateAbility4.performed += OnAbility4Used;
 
         _inputActions.Player.Rotate.performed += OnRotatePerformed;
         _inputActions.Player.Rotate.canceled += OnRotateCanceled;
@@ -39,9 +45,24 @@ public class InputService : IInputService
         MovePerformed?.Invoke(direction);
     }
 
-    private void OnAbilityUsed(InputAction.CallbackContext context)
+    private void OnAbility1Used(InputAction.CallbackContext context)
     {
-        OnAbillityUsed?.Invoke();
+        OnAbillity1Used?.Invoke();
+    }
+
+    private void OnAbility2Used(InputAction.CallbackContext context)
+    {
+        OnAbillity2Used?.Invoke();
+    }
+
+    private void OnAbility3Used(InputAction.CallbackContext context)
+    {
+        OnAbillity3Used?.Invoke();
+    }
+
+    private void OnAbility4Used(InputAction.CallbackContext context)
+    {
+        OnAbillity4Used?.Invoke();
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext context)
@@ -98,7 +119,10 @@ public class InputService : IInputService
         _inputActions.Player.Move.performed -= OnMovePerformed;
         _inputActions.Player.Move.canceled -= OnMoveCanceled;
 
-        _inputActions.UI.ActivateAbility.performed -= OnAbilityUsed;
+        _inputActions.UI.ActivateAbility1.performed -= OnAbility1Used;
+        _inputActions.UI.ActivateAbility2.performed -= OnAbility2Used;
+        _inputActions.UI.ActivateAbility3.performed -= OnAbility3Used;
+        _inputActions.UI.ActivateAbility4.performed -= OnAbility4Used;
 
         _inputActions.Player.Rotate.performed -= OnRotatePerformed;
         _inputActions.Player.Rotate.canceled -= OnRotateCanceled;

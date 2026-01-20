@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform : InteractionMethod
 {
-    [SerializeField] private float _interactionTime = 3f;
+    [SerializeField] private float _interactionTime = 1.5f;
 
     private float _currentTime = 0f;
     private float _delta = 0.1f;
@@ -94,10 +94,5 @@ public class Platform : InteractionMethod
     {
         base.Interact();
     }
-
-    public override void DisableInteraction()
-    {
-        base.DisableInteraction();
-        Disabled?.Invoke();
-    }
 }
+

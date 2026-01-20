@@ -129,9 +129,36 @@
             "id": "79577c33-247e-485e-8f53-642b72ce3993",
             "actions": [
                 {
-                    "name": "ActivateAbility",
+                    "name": "ActivateAbility1",
                     "type": "Button",
                     "id": "a445800b-0fc7-4522-87be-8b536b084f2a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateAbility2",
+                    "type": "Button",
+                    "id": "8ac32a05-ad93-42ce-8484-39b8ac99ddb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateAbility3",
+                    "type": "Button",
+                    "id": "efae024a-d599-4f32-8b6e-d8fbff4b22de",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateAbility4",
+                    "type": "Button",
+                    "id": "d86d0f0e-d435-43c1-9c06-471d0df0ace5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -142,11 +169,44 @@
                 {
                     "name": "",
                     "id": "1c70fc9f-1503-482c-a68b-4b981c21de0e",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
-                    "action": "ActivateAbility",
+                    "action": "ActivateAbility1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0fff59c6-47f3-46d7-929f-8f167f5413ea",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "ActivateAbility2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3aeba029-51bc-4fa8-bc3e-6b3b5a839be5",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateAbility3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c028225f-2ba2-4382-88bf-078038a10b37",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateAbility4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

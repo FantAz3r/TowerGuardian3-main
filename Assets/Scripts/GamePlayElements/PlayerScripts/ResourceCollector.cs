@@ -13,15 +13,17 @@ public class ResourceCollector : MonoBehaviour, IBuffble
     private HashSet<ResourcePiece> _activeResources = new HashSet<ResourcePiece>();
     private SphereCollider _collectionCollider;
     private float _startRange;
+    private ISpawnerService _spawnerService;
 
     public event Action<float> RangeSeted;
-    public event Action<ResourcePiece, int> Collected;
+    public event Action<ResourcePiece> Collected;
 
     private void Awake()
     {
         _wait = new WaitForSeconds(_flyDelay);
         _collectionCollider = GetComponent<SphereCollider>();
         _startRange = _collectionCollider.radius;
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
     }
 
     private void Start()
@@ -53,9 +55,10 @@ public class ResourceCollector : MonoBehaviour, IBuffble
             yield return null;
         }
 
-        Collected?.Invoke(resource, resource.Amount);
+        Collected?.Invoke(resource);
         _activeResources.Remove(resource);
         resource.gameObject.SetActive(false);
+        _spawnerService.SendSoundReqest(resource.CollectSound, transform.position);
     }
 
     public void ApplyBuff(float value)

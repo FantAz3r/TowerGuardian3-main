@@ -31,12 +31,14 @@ public class AllBuffs : MonoBehaviour
     {
         _container.BuffAdded += Activate;
         _container.BuffRemoved += Deactivate;
+        _container.Upgraded += Upgrade;
     }
 
     private void OnDisable()
     {
         _container.BuffAdded -= Activate;
         _container.BuffRemoved -= Deactivate;
+        _container.Upgraded -= Upgrade;
     }
 
     private void CreateBuffs()
@@ -55,6 +57,20 @@ public class AllBuffs : MonoBehaviour
             {
                 item.EnableBuff();
                 item.UpdateBuff(buff.IncreaseValue);
+            }
+        }
+    }
+
+    private void Upgrade(ICardConfig card)
+    {
+        if(card is BuffConfig buff)
+        {
+            foreach (IBuff item in _buffs)
+            {
+                if (buff.BuffType == item.Type)
+                {
+                    item.UpdateBuff(buff.IncreaseValue);
+                }
             }
         }
     }

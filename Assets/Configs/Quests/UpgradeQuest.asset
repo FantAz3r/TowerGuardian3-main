@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c29de2edc7538946b52d5b14693ec67, type: 3}
   m_Name: UpgradeQuest
   m_EditorClassIdentifier: 
-  _image: {fileID: 21300000, guid: 89af9aab45a26c9458828d0444124893, type: 3}
+  _image: {fileID: 21300000, guid: 43b7ce92960a26746a29d01ee5d10218, type: 3}
   _descriptionRU: "\u041F\u0440\u043E\u043A\u0430\u0447\u0430\u0439 \u043B\u044E\u0431\u0443\u044E
     \u043A\u0430\u0440\u0442\u0443 (\u043D\u0443\u0436\u0435\u043D \u0443\u0440\u043E\u0432\u0435\u043D\u044C)"
   _descriptionEN: Upgrade any card (requires level)
   _descriptionTR: "Herhangi bir kart\u0131 y\xFCkseltin (seviye gerektirir)"
   _questType: 4
   _targetValue: 1
-  _targetTransform: {fileID: 0}

@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pieceType: 1
+  _pickSound: {fileID: 0}
+  _collectSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _amount: 1
 --- !u!136 &561757668577521926
 CapsuleCollider:

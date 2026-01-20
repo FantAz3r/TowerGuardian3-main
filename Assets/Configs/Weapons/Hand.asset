@@ -30,7 +30,7 @@ MonoBehaviour:
   _targetType: 4
   _controller: {fileID: 9100000, guid: cedb260312911b4488266dfcd5693a2a, type: 2}
   _isAreaDamage: 0
-  _baseDamage: 10
+  _baseDamage: 4
   _baseAttackDelay: 0.7
   _baseAttackRange: 2
   _baseMultiply: 2
@@ -38,3 +38,4 @@ MonoBehaviour:
   _attackDelayUpgradeFactor: -0.05
   _attackRangeUpgradeValue: 0.2
   _multiplyUpgradeValue: 0.1
+  _audioClip: {fileID: 8300000, guid: e3942259f5ed10b43822f319ac7e261a, type: 3}

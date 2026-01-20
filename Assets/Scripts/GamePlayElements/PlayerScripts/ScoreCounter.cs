@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using YG;
 
 public class ScoreCounter
@@ -34,10 +33,8 @@ public class ScoreCounter
 
     public void OnEndLevel(LevelID level = LevelID.None)
     {
-
         if(level == LevelID.None)
         {
-            Debug.Log(level + "Save");
             _attacker.DialedDamage -= Add;
             _allAbilities.DialedDamage -= Add;
             LevelEnded?.Invoke(_currentScore, _time, CalculateStars());
@@ -56,7 +53,7 @@ public class ScoreCounter
 
     private void AddTime(float value)
     {
-        _time += (int)value;
+        _time = (int)value;
     }
 
     private int CalculateStars()
@@ -105,6 +102,8 @@ public class ScoreCounter
         {
             YG2.saves.LevelsProgress.Add(new LevelSaveData(_currentLevel, (int)_currentScore, CalculateStars(), _time));
         }
+
+        YG2.SaveProgress();
     }
 
     private void ShowBestScore(LevelID level)

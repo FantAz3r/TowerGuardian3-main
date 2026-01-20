@@ -40,7 +40,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
             Define(config);
         }
 
-        if (config.HasPlayer)
+        if (config.HasPlayer || _startCards.Contains(config as CardConfig))
         {
             config.Upgrade();
             Upgraded.Invoke(config);

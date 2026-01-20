@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aacac5e7ae2aceb42bb728b00df0a971, type: 3}
+  m_Name: TimeQuestConfig
+  m_EditorClassIdentifier: 
+  _image: {fileID: 21300000, guid: fdd9801d034594e26acba81cf753a72f, type: 3}
+  _descriptionRU: "\u0417\u0430\u0449\u0438\u0449\u0430\u0439 \u043F\u043E\u0440\u0442\u0430\u043B
+    \u043E\u0442 \u0432\u0440\u0430\u0433\u043E\u0432"
+  _descriptionEN: 
+  _descriptionTR: 
+  _questType: 12
+  _targetValue: 5
+  _timeLimit: 30

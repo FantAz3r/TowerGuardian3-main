@@ -16,7 +16,7 @@ MonoBehaviour:
   _nameRu: "\u041A\u0438\u0440\u043A\u0430"
   _nameEn: Pickaxe
   _nameTr: Kazma
-  _descriptionRU: "\u0414\u043E\u043B\u044C\u0438\u0442 \u043A\u0430\u043C\u043D\u0438
+  _descriptionRU: "\u0414\u043E\u043B\u0431\u0438\u0442 \u043A\u0430\u043C\u043D\u0438
     \u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
   _descriptionEN: Breaks stones normally
   _descriptionTR: "Ta\u015Flar\u0131 normal \u015Fekilde k\u0131rar"
@@ -45,3 +45,4 @@ MonoBehaviour:
   _attackDelayUpgradeFactor: -0.05
   _attackRangeUpgradeValue: 0.2
   _multiplyUpgradeValue: 0
+  _audioClip: {fileID: 8300000, guid: 82620ada7ef04c84095b45d4fbd392ac, type: 3}

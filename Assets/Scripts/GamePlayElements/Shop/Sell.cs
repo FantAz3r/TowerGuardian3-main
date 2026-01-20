@@ -28,11 +28,11 @@ public class Sell : MonoBehaviour
     private CardData _cardData;
     private PlayerCardConfigContainer _cardHolder;
     private CardSelectionMenu _cardMenu;
-
-    public event Action WeaponSold;
+    private ITimeService _timeService;
 
     public void Init(Inventory inventory, CardData cardData, PlayerCardConfigContainer cardHolder, CardSelectionMenu cardMenu)
     {
+        _timeService = ServicesLocator.GetService<ITimeService>();
         _inventory = inventory;
         _cardData = cardData;
         _cardHolder = cardHolder;
@@ -41,6 +41,12 @@ public class Sell : MonoBehaviour
         _resourcesPanel.Init(_inventory);
         gameObject.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        _timeService.Resume();
+    }
+
     private void OnDestroy()
     {
         foreach (var button in _productButtons)
@@ -77,7 +83,6 @@ public class Sell : MonoBehaviour
             if (config is WeaponConfig)
             {
                 parent = _weaponParent;
-                Debug.Log(config.Name + "weapon");
 
                 _weaponCardCount++;
 
@@ -85,14 +90,12 @@ public class Sell : MonoBehaviour
             else if (config is AbilityConfig)
             {
                 parent = _abilityParent;
-                Debug.Log(config.Name + "abil");
 
                 _abilityCardCount++;
             }
             else if (config is BuffConfig)
             {
                 parent = _buffParent;
-                Debug.Log(config.Name + "buff");
 
                 _buffCardCount++;
             }

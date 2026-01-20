@@ -14,7 +14,6 @@ public class ObjectPool<T> where T : MonoBehaviour
         _prefab = prefab;
         _container = null;
         _autoExpand = autoExpand;
-
         CreatePool(count);
     }
 
@@ -92,6 +91,5 @@ public class ObjectPool<T> where T : MonoBehaviour
     public void DestroyPool()
     {
         _objects.Clear();
-
     }
 }

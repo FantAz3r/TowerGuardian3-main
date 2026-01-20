@@ -7,32 +7,35 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
     [SerializeField] private PlayerConfig _config;
 
     private Health _health;
-    private float _delay = 0.1f;
     private WaitForSeconds _wait;
-
     private Coroutine _regenCoroutine;
+    private float _delay = 2f;
+    private float _regenAccumulated = 0f;
     private float _regenValue;
+    private bool _canRegen = false;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
         _wait = new WaitForSeconds(_delay);
         _regenValue = _config.HealthRegeneration;
+        _health.DamageTaken += StartRegeneration;
     }
 
     public void EnableBuff()
     {
-        StartRegeneration();
+        _canRegen = true;
     }
 
     private void OnDestroy()
     {
+        _health.DamageTaken -= StartRegeneration;
         StopRegeneration();
     }
 
-    private void StartRegeneration()
+    private void StartRegeneration(float useles = 0)
     {
-        if (_regenCoroutine == null && enabled && _health != null)
+        if (_canRegen && _regenCoroutine == null)
         {
             _regenCoroutine = StartCoroutine(RegenerationRoutine());
         }
@@ -49,15 +52,25 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
 
     private IEnumerator RegenerationRoutine()
     {
-        while (enabled)
+        while (_health.CurrentHealth < _health.MaxHealth)
         {
-            _health.Heal(_regenValue * _delay);
             yield return _wait;
+            _regenAccumulated += _regenValue * _delay;
+
+            if (_regenAccumulated >= 1f)
+            {
+                int healAmount = (int)_regenAccumulated;
+                _health.Heal(healAmount);
+                _regenAccumulated -= healAmount;
+            }
         }
+
+        _regenCoroutine = null;
+        _regenAccumulated = 0;
     }
 
     public void ApplyBuff(float value)
     {
-        _regenValue += value;
+        _regenValue = _regenValue * (1+ value);
     }
 }

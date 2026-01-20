@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Shuriken : MonoBehaviour
 {
@@ -12,7 +11,6 @@ public class Shuriken : MonoBehaviour
     private Coroutine _rotateRoutine;
 
     public event Action<int> DialedDamage;
-
 
     private void Awake()
     {
@@ -29,6 +27,11 @@ public class Shuriken : MonoBehaviour
 
     public void SetParametrs(int damage, float speenSpeed)
     {
+        if(_rotateRoutine != null)
+        {
+            StopCoroutine(_rotateRoutine);
+        }
+
         _damage = damage;
         _speenSpeed = speenSpeed;
         _rotateRoutine = StartCoroutine(SpeenRoutine());

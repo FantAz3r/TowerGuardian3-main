@@ -14,10 +14,11 @@ public class PlayerAttacker : MonoBehaviour
     private WaitForSeconds _delay;
     private float _defoultAttackTime = 1f;
     private float _emptyTargetAttackDelay = 0.1f;
-    private EnemyDetector _enemyDetector;
 
     public event Action<IWeapon> WeaponSeted;
     public event Action<IWeapon> WeaponRemoved;
+    public event Action WeaponDeactivated;
+    public event Action WeaponActivated;
 
     public event Action<float> DialedDamage;
     public event Action<IWeapon, float> Attacked;
@@ -34,14 +35,12 @@ public class PlayerAttacker : MonoBehaviour
         _attackDelay = new WaitForSeconds(_defoultAttackTime);
         _delay = new WaitForSeconds(_emptyTargetAttackDelay);
 
-        _enemyDetector = GetComponentInChildren<EnemyDetector>();
         AttackZone attackZone = GetComponentInChildren<AttackZone>();
         _currentWeapon = GetComponentInChildren<Weapon>();
         _currentWeapon.Init(attackZone);
         _weaponsInInventory.Add(_currentWeapon);
 
         SetWeapon(_currentWeapon.Config);
-        StartAttacking();
     }
 
     public void AddWeapon(Weapon weapon)
@@ -84,6 +83,7 @@ public class PlayerAttacker : MonoBehaviour
     public void DeactivateWeapon()
     {
         StopAttacking();
+        WeaponDeactivated?.Invoke();
         _currentWeapon = null;
     }
 
@@ -91,6 +91,7 @@ public class PlayerAttacker : MonoBehaviour
     {
         _currentWeapon = weapon;
         UpdateWeapon();
+        WeaponActivated?.Invoke();
         StartAttacking();
     }
 
@@ -144,6 +145,8 @@ public class PlayerAttacker : MonoBehaviour
 
     private IEnumerator AttackRoutine()
     {
+        yield return _delay;
+
         while (_currentWeapon != null)
         {
             if (_currentWeapon.HasTargets())

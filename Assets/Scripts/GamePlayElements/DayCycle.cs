@@ -12,17 +12,37 @@ public class DayCycle : MonoBehaviour
     private float _nightLightIntensity;
     private float _transitionDuration;
     private float _timeRemaining;
+    private float _timeSincePhaseChange = 0;
+    private float _totalTimeOnLevel = 0;
 
+    private Coroutine _phaseCoroutine;
     private Light _directionalLight;
     private Color _dayLightColor;
     private Color _nightLightColor;
     private DayPhase _currentPhase;
 
+    public float DayDuration => _dayDuration;
+    public float NightDuration => _nightDuration;
+    public float TransitionDuration => _transitionDuration;
+
+    public event Action<DayPhase> OnPhaseInfinited;
     public event Action<DayPhase> OnPhaseChanged;
     public event Action<float> TimePassedFromTransition;
     public event Action<float> TimePassedFromStart;
-    
+
     public DayPhase CurrentPhase => _currentPhase;
+
+    private DayPhase GetNextPhase(DayPhase current)
+        => current == DayPhase.Day ? DayPhase.Night : DayPhase.Day;
+
+    private float GetPhaseDuration(DayPhase phase)
+        => phase == DayPhase.Day ? _dayDuration : _nightDuration;
+
+    private Color GetColor(DayPhase phase)
+        => phase == DayPhase.Day ? _dayLightColor : _nightLightColor;
+
+    private float GetIntensity(DayPhase phase)
+        => phase == DayPhase.Day ? _dayLightIntensity : _nightLightIntensity;
 
     public void Init(LevelConfig config)
     {
@@ -35,93 +55,99 @@ public class DayCycle : MonoBehaviour
         _transitionDuration = config.TransitionDuration;
         _timeRemaining = config.DayDuration;
         _directionalLight = GetComponent<Light>();
+        StartCoroutine(CheckForInfinite());
     }
 
-    private void Start()
+    private void Awake()
     {
         _currentPhase = DayPhase.Day;
-        UpdateLighting();
-        StartCoroutine(CycleCoroutine());
     }
 
     private IEnumerator CycleCoroutine()
     {
-        float timeSincePhaseChange = 0f;
-        float totalTimeOnLevel = 0f;
+        _totalTimeOnLevel = 0f;
 
         while (enabled)
         {
             OnPhaseChanged?.Invoke(_currentPhase);
-            _timeRemaining = (_currentPhase == DayPhase.Day) ? _dayDuration : _nightDuration;
+            _timeRemaining = GetPhaseDuration(_currentPhase) + _transitionDuration;
+            _timeSincePhaseChange = 0f;
 
-            timeSincePhaseChange = 0f; 
-
-            while (_timeRemaining > 0f)
+            while (_timeRemaining > _transitionDuration)
             {
                 float deltaTime = Time.deltaTime;
-                _timeRemaining -= deltaTime;
-                timeSincePhaseChange += deltaTime;
-                totalTimeOnLevel += deltaTime;
-
-                if (timeSincePhaseChange >= 1f)
-                {
-                    TimePassedFromTransition?.Invoke(timeSincePhaseChange);
-                    TimePassedFromStart?.Invoke(totalTimeOnLevel);
-                    timeSincePhaseChange = 0f;
-                }
-
+                UpdateTimes(deltaTime);
                 yield return null;
             }
 
-            DayPhase nextPhase = _currentPhase == DayPhase.Day ? DayPhase.Night : DayPhase.Day;
-            yield return StartCoroutine(TransitionLighting(nextPhase));
-
+            var nextPhase = GetNextPhase(_currentPhase);
+            yield return StartCoroutine(TransitionLighting(_currentPhase, nextPhase));
             _currentPhase = nextPhase;
         }
     }
 
-    private IEnumerator TransitionLighting(DayPhase nextPhase)
+    private IEnumerator TransitionLighting(DayPhase fromPhase, DayPhase toPhase)
     {
-        Color startColor = _currentPhase == DayPhase.Day ? _dayLightColor : _nightLightColor;
-        Color endColor = nextPhase == DayPhase.Day ? _dayLightColor : _nightLightColor;
-        float startIntensity = _currentPhase == DayPhase.Day ? _dayLightIntensity : _nightLightIntensity;
-        float endIntensity = nextPhase == DayPhase.Day ? _dayLightIntensity : _nightLightIntensity;
+        Color startColor = GetColor(fromPhase);
+        Color endColor = GetColor(toPhase);
+        float startIntensity = GetIntensity(fromPhase);
+        float endIntensity = GetIntensity(toPhase);
 
         float time = 0f;
 
         while (time < _transitionDuration)
         {
-            time += Time.deltaTime;
-            float transitionTime = time / _transitionDuration;
+            float deltaTime = Time.deltaTime;
+            UpdateTimes(deltaTime);
+            time += deltaTime;
+            float t = time / _transitionDuration;
 
-            _directionalLight.color = Color.Lerp(startColor, endColor, transitionTime);
-            _directionalLight.intensity = Mathf.Lerp(startIntensity, endIntensity, transitionTime);
+            TimePassedFromStart?.Invoke(_totalTimeOnLevel);
+            TimePassedFromTransition?.Invoke(_timeSincePhaseChange);
+
+            _directionalLight.color = Color.Lerp(startColor, endColor, t);
+            _directionalLight.intensity = Mathf.Lerp(startIntensity, endIntensity, t);
             yield return null;
         }
 
-        _directionalLight.color = endColor;
-        _directionalLight.intensity = endIntensity;
+        ApplyLighting(endColor, endIntensity);
     }
 
-    private void UpdateLighting()
+    private void ApplyLighting(Color color, float intensity)
     {
-        if (_directionalLight != null)
+        _directionalLight.color = color;
+        _directionalLight.intensity = intensity;
+    }
+
+    private void UpdateTimes(float deltaTime)
+    {
+        _timeRemaining -= deltaTime;
+        _timeSincePhaseChange += deltaTime;
+        _totalTimeOnLevel += deltaTime;
+
+        TimePassedFromStart?.Invoke(_totalTimeOnLevel);
+        TimePassedFromTransition?.Invoke(_timeSincePhaseChange);
+    }
+
+    private IEnumerator CheckForInfinite()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if (_dayDuration == -1)
         {
-            if (_currentPhase == DayPhase.Day)
-            {
-                _directionalLight.color = _dayLightColor;
-                _directionalLight.intensity = _dayLightIntensity;
-            }
-            else
-            {
-                _directionalLight.color = _nightLightColor;
-                _directionalLight.intensity = _nightLightIntensity;
-            }
+            ApplyLighting(_dayLightColor, _dayLightIntensity);
+            OnPhaseInfinited?.Invoke(DayPhase.Day);
+            yield break;
         }
-    }
 
-    public float GetTimeRemaining()
-    {
-        return Mathf.Max(0f, _timeRemaining);
+        if (_nightDuration == -1)
+        {
+            ApplyLighting(_nightLightColor, _nightLightIntensity);
+            OnPhaseInfinited?.Invoke(DayPhase.Night);
+            yield break;
+        }
+
+        ApplyLighting(_dayLightColor, _dayLightIntensity);
+        _phaseCoroutine = StartCoroutine(CycleCoroutine());
     }
 }

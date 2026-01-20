@@ -2,8 +2,6 @@ using UnityEngine;
 
 public abstract class InteractionMethod : MonoBehaviour
 {
-    [SerializeField] private bool _canInteract = true;
-
     private IAction _action;
     private GameUI _gameUI;
     private string _name;
@@ -13,16 +11,6 @@ public abstract class InteractionMethod : MonoBehaviour
         _action = action;
         _gameUI = gameUI;
         _name = name;
-    }
-
-    public virtual void EnableInteraction()
-    {
-        _canInteract = true;
-    }
-
-    public virtual void DisableInteraction()
-    {
-        _canInteract = false;
     }
 
     public virtual void Interact()

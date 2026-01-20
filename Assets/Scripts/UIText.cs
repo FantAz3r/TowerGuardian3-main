@@ -154,6 +154,13 @@ public static class UIText
         { Turkish, "Mağaza" }
     };
 
+    private static readonly Dictionary<string, string> LVLDict = new Dictionary<string, string>
+    {
+        { Russian, "Ур" },
+        { English, "LVL" },
+        { Turkish, "LVL" }
+    };
+
     public static string Damage => GetText(DamageDict);
     public static string AttackDelay => GetText(AttackDelayDict);
     public static string AttackRange => GetText(AttackRangeDict);
@@ -169,6 +176,7 @@ public static class UIText
     public static string Count => GetText(CountDict);
     public static string Multiplier => GetText(MultiplierDict);
     public static string Shop => GetText(ShopDict);
+    public static string LVL => GetText(LVLDict);
 
     private static string GetText(Dictionary<string, string> dict)
     {

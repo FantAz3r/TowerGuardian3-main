@@ -1,7 +1,5 @@
-using LayerLab;
 using UnityEngine;
 using UnityEngine.UI;
-using YG;
 
 public class PauseUI : MonoBehaviour
 {
@@ -10,38 +8,49 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Button _continueButton;
     [SerializeField] private RectTransform _pausePanel;
 
-    private GameStateMachine _stateMachine;
+    private IStateSwitchService _stateMachine;
+    private ITimeService _timeService;
+    private LevelID _currentLevel;
 
-    public void Init(GameStateMachine stateMachine)
+    private void Awake()
     {
-        _stateMachine = stateMachine;
-
+        _stateMachine = ServicesLocator.GetService<IStateSwitchService>();
+        _timeService = ServicesLocator.GetService<ITimeService>();
         _homeButton.onClick.AddListener(OnHomeClicked);
         _continueButton.onClick.AddListener(OnContinue);
         _pauseButton.onClick.AddListener(OnPause);
         _pausePanel.gameObject.SetActive(false);
     }
 
-    private void OnHomeClicked()
+    public void Init(LevelID currentLevel)
     {
-        OnContinue();
-        _stateMachine.EnterIn<LoadingLevelState, LevelID>(LevelID.Tower);
-    }
-
-    private void OnPause()
-    {
-        YG2.PauseGameNoEditEventSystem(true);
-    }
-
-    private void OnContinue()
-    {
-        YG2.PauseGameNoEditEventSystem(false);
-        _pausePanel.gameObject.SetActive(false);
+        _currentLevel = currentLevel;
     }
 
     private void OnDestroy()
     {
         _homeButton.onClick.RemoveListener(OnHomeClicked);
         _continueButton.onClick.RemoveListener(OnContinue);
+    }
+
+    private void OnHomeClicked()
+    {
+        OnContinue();
+
+        if (_currentLevel != LevelID.Tower)
+        {
+            _stateMachine.Switch(LevelID.Tower);
+        }
+    }
+
+    public void OnPause()
+    {
+        _timeService.PauseGame();
+    }
+
+    private void OnContinue()
+    {
+        _timeService.Resume();
+        _pausePanel.gameObject.SetActive(false);
     }
 }

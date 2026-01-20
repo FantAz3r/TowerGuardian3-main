@@ -15,13 +15,12 @@ public class CardSelector
 
     public IEnumerable<ICardConfig>GetCards()
     {
-        var baseFiltered = FilterCards(_cardData.GetConfigs());
+        List<ICardConfig> startFiltered = FilterCards(_cardData.GetConfigs());
 
-        Debug.Log(_cardData.GetConfigs().Count);
-        Debug.Log(baseFiltered.Count);
-
-        if (baseFiltered.Count == 0)
+        if (startFiltered.Count == 0)
             return new List<ICardConfig>();
+
+        List<ICardConfig> baseFiltered = Utils.Shuffle(startFiltered);
 
         int remainingCards = Mathf.Min(_cardsPerSelect, baseFiltered.Count);
 

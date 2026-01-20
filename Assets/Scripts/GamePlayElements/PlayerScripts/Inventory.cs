@@ -38,10 +38,10 @@ public class Inventory : MonoBehaviour
         _collector.Collected -= Collect;
     }
 
-    public void Collect(ResourcePiece resource, int amount)
+    public void Collect(ResourcePiece resource)
     {
         int spaceLeft = _config.InventoryCapacity - _currentAmount;
-        int amountToAdd = Mathf.Min(amount, spaceLeft);
+        int amountToAdd = Mathf.Min(resource.Amount, spaceLeft);
 
         if (resource.PeiceType == ResourceType.Stone)
             StoneCollected?.Invoke();

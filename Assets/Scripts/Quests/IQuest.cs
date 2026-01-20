@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public interface IQuest  
+public interface IQuest
 {
     QuestConfig Config { get; }
     int Goal { get; }

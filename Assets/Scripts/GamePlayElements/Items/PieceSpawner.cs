@@ -2,21 +2,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PieceSpawner : ISpawner
+public class PieceSpawner : BaseSpawner
 {
-    private SpawnerType _type = SpawnerType.Resources;
     private Dictionary<ResourceType, ObjectPool<ResourcePiece>> _pools = new Dictionary<ResourceType, ObjectPool<ResourcePiece>>();
-    private bool _spawning = true;
+    private ResourceData _data;
 
     private readonly float _ejectForceMin = 5f;
     private readonly float _ejectForceMax = 10f;
     private readonly float _ejectRadius = 2f;
-
-    public SpawnerType GetSpawnerType() { return _type; }
+    public override SpawnerType GetSpawnerType() => SpawnerType.Resources;
 
     public PieceSpawner(ResourceData data)
     {
-        foreach (var resource in data.ResourceInfos)
+        _data = data;
+
+        foreach (var resource in _data.ResourceInfos)
         {
             if (_pools.ContainsKey(resource.Type) == false)
             {
@@ -25,19 +25,9 @@ public class PieceSpawner : ISpawner
         }
     }
 
-    public void EnableSpawn()
+    public override void Spawn(HealthConfig config, Vector3 position, int count = 0)
     {
-        _spawning = true;
-    }
-
-    public void DisableSpawn()
-    {
-        _spawning = false;
-    }
-
-    public void Spawn(HealthConfig config, Vector3 position, int count = 0)
-    {
-        if (_spawning == false)
+        if (CanSpawn == false)
             return;
 
         if (_pools.TryGetValue(config.SpawnResource, out var pool) == false)
@@ -48,17 +38,17 @@ public class PieceSpawner : ISpawner
             ResourcePiece piece = pool.Get();
             piece.transform.position = CreateSpawnPoint(position);
 
-            Rigidbody rb = piece.GetComponent<Rigidbody>();
+            piece.TryGetComponent(out Rigidbody rigidbody);
             Vector3 ejectDirection = Random.onUnitSphere;
             ejectDirection.y = Mathf.Abs(ejectDirection.y);
             ejectDirection.Normalize();
 
             float force = Random.Range(_ejectForceMin, _ejectForceMax);
-            rb.AddForce(ejectDirection * force, ForceMode.Impulse);
+            rigidbody.AddForce(ejectDirection * force, ForceMode.Impulse);
         }
     }
 
-    public void DestroyPool()
+    public override void DestroyPool()
     {
         foreach(var pair in _pools)
         {

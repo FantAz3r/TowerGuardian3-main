@@ -8,7 +8,6 @@ public class CollectRangeBuff : IBuff
     }
 
     public BuffType Type => BuffType.CollectRange;
-
     
     public void UpdateBuff(float value)
     {

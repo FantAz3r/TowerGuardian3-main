@@ -1,0 +1,3853 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2361325898641960404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3448262847460341234}
+  - component: {fileID: 5452432853721394982}
+  - component: {fileID: 3863256130941278943}
+  - component: {fileID: 962268972018497178}
+  - component: {fileID: 4764224848645196796}
+  m_Layer: 12
+  m_Name: Walls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3448262847460341234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361325898641960404}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.7255058, y: 54.083916, z: -42.15364}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7773026816099173046}
+  - {fileID: 8920515148855166992}
+  - {fileID: 6819181689931553831}
+  - {fileID: 1041349661112926272}
+  - {fileID: 6914262443247084887}
+  - {fileID: 7401942172101574850}
+  - {fileID: 4793959129656944250}
+  - {fileID: 7570325924062292271}
+  - {fileID: 7632846217111920717}
+  - {fileID: 3645818505987568637}
+  - {fileID: 7005019600205494616}
+  - {fileID: 2472895398049811106}
+  - {fileID: 7389186118586084317}
+  - {fileID: 4521228609092342933}
+  - {fileID: 1480391301601869065}
+  - {fileID: 5858712836464739973}
+  - {fileID: 8879477029573781830}
+  - {fileID: 4579532978451255724}
+  - {fileID: 3243201719538292981}
+  - {fileID: 811179186867798036}
+  - {fileID: 586618255407496445}
+  - {fileID: 9092818664702950297}
+  - {fileID: 8802967293924432508}
+  - {fileID: 7114934028743737469}
+  - {fileID: 6395558601406387194}
+  - {fileID: 4582626560164063864}
+  - {fileID: 8270722909082328518}
+  - {fileID: 1784007373185808903}
+  - {fileID: 3695401045846763299}
+  - {fileID: 2212299606042876251}
+  - {fileID: 5364155248840627352}
+  - {fileID: 4245032457492781773}
+  - {fileID: 3325187977516989596}
+  - {fileID: 7277341557403394939}
+  - {fileID: 7291312824921936522}
+  - {fileID: 834003942947710165}
+  - {fileID: 8906916549892342054}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5452432853721394982
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361325898641960404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 200.9496, y: 12.003815, z: 7.0490265}
+  m_Center: {x: 51.8052, y: 19.68066, z: -75.13854}
+--- !u!65 &3863256130941278943
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361325898641960404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.6395874, y: 11.282112, z: 200.42368}
+  m_Center: {x: 151.19608, y: 18.141058, z: 23.846298}
+--- !u!65 &962268972018497178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361325898641960404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 200.9496, y: 12.772743, z: 5.5718994}
+  m_Center: {x: 51.8052, y: 19.296196, z: 125.56296}
+--- !u!65 &4764224848645196796
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361325898641960404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.0814247, y: 11.282112, z: 200.42368}
+  m_Center: {x: -50.12092, y: 18.141058, z: 23.846298}
+--- !u!1 &4249620135942210591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8906916549892342054}
+  m_Layer: 12
+  m_Name: Doors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8906916549892342054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4249620135942210591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 460323181198239177}
+  - {fileID: 5312759312121841455}
+  - {fileID: 1950168925367106387}
+  - {fileID: 214388929070442828}
+  - {fileID: 7999449973759660327}
+  - {fileID: 1508832696842862949}
+  - {fileID: 1437124905625531621}
+  - {fileID: 4938578660431263124}
+  - {fileID: 4245080390156356498}
+  - {fileID: 1024785255197932653}
+  - {fileID: 9193911774341641694}
+  - {fileID: 5721026291629777061}
+  m_Father: {fileID: 3448262847460341234}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &20653752843141764
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 86.7544
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &4521228609092342933 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 20653752843141764}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &103305294010891369
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.645603
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &4582626560164063864 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 103305294010891369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &106404098436286397
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 67.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &4579532978451255724 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 106404098436286397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &243667396667006543
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 58.0288
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 125.39421
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &7999449973759660327 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 243667396667006543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &296854442058878172
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.380932
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &4245032457492781773 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 296854442058878172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &557665555363974622
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3010496793337545069, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &7773026816099173046 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 557665555363974622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &896020135445915116
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 111.014404
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &3645818505987568637 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 896020135445915116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &990636481686761778
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.4244
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &3695401045846763299 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 990636481686761778}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1212226776684194445
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -37.285603
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &3325187977516989596 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 1212226776684194445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1438118768750869174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 58.71187
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.125786
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &9193911774341641694 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 1438118768750869174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1438314910511714020
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 41.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &3243201719538292981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 1438314910511714020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1706413636657694584
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3010496793337545069, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &8920515148855166992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 1706413636657694584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2064544524793011379
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 87.20711
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &2472895398049811106 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 2064544524793011379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2325101816563027786
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.4244
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &2212299606042876251 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 2325101816563027786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2524061378463854541
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -49.371193
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.611153
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &5721026291629777061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 2524061378463854541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2753335777468099606
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -36.45049
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &1784007373185808903 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 2753335777468099606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2948507876555619068
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -49.371193
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 30.621544
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &4938578660431263124 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 2948507876555619068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3061507690556058392
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 62.948147
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &1480391301601869065 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 3061507690556058392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3657194427520799567
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3010496793337545069, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &6819181689931553831 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 3657194427520799567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3826482979306466570
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Opening_Large_04_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150.6288
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 26.63421
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+--- !u!4 &5312759312121841455 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+  m_PrefabInstance: {fileID: 3826482979306466570}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3847546496968471236
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -61.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &834003942947710165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 3847546496968471236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3870318457220552197
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 42.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &811179186867798036 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 3870318457220552197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3950737951979498220
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 36.0644
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &586618255407496445 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 3950737951979498220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4667962785603251592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &9092818664702950297 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 4667962785603251592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4962312651406937197
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &8802967293924432508 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 4962312651406937197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5029953837936066391
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &8879477029573781830 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 5029953837936066391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5489962334057090007
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -36.449924
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &8270722909082328518 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 5489962334057090007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6236326001985619194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 44.9888
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 125.39421
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &4245080390156356498 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 6236326001985619194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6276487618537797212
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 111.014404
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7632846217111920717 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6276487618537797212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6339082953173188414
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 111.20654
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7570325924062292271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6339082953173188414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6363368834315835091
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 135.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7401942172101574850 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6363368834315835091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6376086267534573004
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 86.7544
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7389186118586084317 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6376086267534573004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6487873536152139114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -37.285603
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7277341557403394939 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6487873536152139114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6618096206999323803
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -61.089436
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7291312824921936522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6618096206999323803}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6650290256093042284
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7114934028743737469 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6650290256093042284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6899819451195289417
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 87.20767
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &7005019600205494616 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6899819451195289417}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6990611378153714502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 135.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &6914262443247084887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 6990611378153714502}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7066696013498650408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.3929
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3010496793337545069, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &1041349661112926272 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 7066696013498650408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7087165702116537093
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150.6288
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.239147
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &1024785255197932653 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 7087165702116537093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7365170602651633131
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.645603
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.6071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &6395558601406387194 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 7365170602651633131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7471673830357520758
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Opening_Large_04_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 52.108803
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.125786
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+--- !u!4 &1950168925367106387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+  m_PrefabInstance: {fileID: 7471673830357520758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8050629932666474644
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.0144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 62.947582
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &5858712836464739973 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 8050629932666474644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8396556655290450569
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.380367
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &5364155248840627352 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 8396556655290450569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8688037681366421005
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150.6288
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.224983
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &1508832696842862949 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 8688037681366421005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8846115250726686700
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Opening_Large_04_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 51.523617
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 124.07421
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+--- !u!4 &460323181198239177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+  m_PrefabInstance: {fileID: 8846115250726686700}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8966756332846166123
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3448262847460341234}
+    m_Modifications:
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Straight_Medium_01_Atlased (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608851279190002211, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.9856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.9363365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 111.20711
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 16414565974846157, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+--- !u!4 &4793959129656944250 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4537307414268401169, guid: cdaf9473a0559af42b7e3b81cc7f8f6d, type: 3}
+  m_PrefabInstance: {fileID: 8966756332846166123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9104442353955701609
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Wall_Opening_Large_04_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133402200989456095, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -49.371193
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.21421
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+--- !u!4 &214388929070442828 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8980410260469066277, guid: a6fedc441c8e3a04a87df4d7c486229b, type: 3}
+  m_PrefabInstance: {fileID: 9104442353955701609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9192935451545090957
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8906916549892342054}
+    m_Modifications:
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Name
+      value: Building_Fortress_Castle_Tower_Large_02_Atlased (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760811191263899671, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 45.701435
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.200002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.125786
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+--- !u!4 &1437124905625531621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7809927207184076648, guid: 616cac70bd5fd4b4aa51853922b448f8, type: 3}
+  m_PrefabInstance: {fileID: 9192935451545090957}
+  m_PrefabAsset: {fileID: 0}

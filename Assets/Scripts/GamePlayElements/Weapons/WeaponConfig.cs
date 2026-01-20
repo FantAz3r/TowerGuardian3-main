@@ -20,6 +20,7 @@ public class WeaponConfig : CardConfig
     [SerializeField] private float _attackDelayUpgradeFactor = -0.05f;   
     [SerializeField] private float _attackRangeUpgradeValue = 0.2f;      
     [SerializeField] private float _multiplyUpgradeValue = 0.1f;
+    [SerializeField] private AudioClip _audioClip;
     
     public Weapon Prefab => _prefab;
     public EntityType TargetType => _targetType;
@@ -30,6 +31,7 @@ public class WeaponConfig : CardConfig
     public float AttackRange => GetAttackRange(Level);
     public float Multiply => GetMultiply(Level);
     public bool IsAreaDamage => _isAreaDamage;
+    public AudioClip HitSound => _audioClip;
 
     public override CardType GetCardType() => CardType.WeaponSetter;
 

@@ -22,13 +22,15 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         _sleep = new WaitForSeconds(_config.AttackDelay);
         _player = GetComponentInParent<Player>();
         _attacker = _player.GetComponentInChildren<PlayerAttacker>();
+        _attacker.WeaponDeactivated += LockAbility;
+        _attacker.WeaponActivated += UnlockAbility;
         LoadAbility();
         enabled = false;
     }
 
     public override void Use()
     {
-        if (_active)
+        if (IsLock == false)
         {
             StartCoroutine(CooldownRoutine());
             StartCoroutine(AttackRoutine());
@@ -42,7 +44,7 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        _active = false;
+        base.LockAbility();
         float timer = 0;
 
         while (_config.Cooldown >= timer)
@@ -53,7 +55,17 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0);
-        _active = true;
+        base.UnlockAbility();
+    }
+
+    public override void LockAbility()
+    {
+        base.LockAbility();
+    }
+
+    public override void UnlockAbility()
+    {
+        base.UnlockAbility();
     }
 
     private IEnumerator AttackRoutine()

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HealthViewer : MonoBehaviour
 {
     [SerializeField] private Slider _healthSlider;
-    [SerializeField] private float _smoothSpeed = 1.5f; 
+    [SerializeField] private float _smoothSpeed = 5; 
 
     private Health _health;
     private Coroutine _smoothChangeCoroutine;
@@ -31,7 +31,7 @@ public class HealthViewer : MonoBehaviour
         _health.IsValueChange -= OnHealthChanged;
     }
 
-    private void OnHealthChanged(float newHealthValue)
+    private void OnHealthChanged(float currentHealth, float maxHealth)
     {
         if(_iaActive == false)
             _healthSlider.gameObject.SetActive(true);
@@ -39,7 +39,7 @@ public class HealthViewer : MonoBehaviour
         if (_smoothChangeCoroutine != null)
             StopCoroutine(_smoothChangeCoroutine);
 
-        _smoothChangeCoroutine = StartCoroutine(SmoothHealthChange(newHealthValue));
+        _smoothChangeCoroutine = StartCoroutine(SmoothHealthChange(currentHealth));
     }
 
     private IEnumerator SmoothHealthChange(float targetValue)

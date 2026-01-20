@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace YG
 {
@@ -16,9 +17,11 @@ namespace YG
         public int Level;
         public int UpgradePoints;
         public float CurrentEXP;
-        public string CurrentLevel;
 
-        public List<PlayerSaveData> PlayerPositions;
+        public LevelID CurrentLevel;
+        public Vector3 PlayerPosition;
+
+        public List<QuestSaveData> QuestProgress;
         public List<LevelSaveData> LevelsProgress;
 
         public int CurrentFloor;
@@ -26,6 +29,6 @@ namespace YG
         public string Language;
         public bool ShowDamageNumber;
         public bool Mute;
-        public float Volume;
+        public List<SoundSaveData> Volumes;
     }
 }

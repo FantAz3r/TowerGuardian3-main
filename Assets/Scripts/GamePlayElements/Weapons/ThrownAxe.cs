@@ -43,12 +43,12 @@ public class ThrownAxe : MonoBehaviour
 
     private IEnumerator MoveRoutine()
     {
-        float treshold = 0.5f;
+        float treshold = 1f;
         float elapsed = 0f;
 
         while (elapsed < _duration)
         {
-            float time = elapsed / _duration; 
+            float time = elapsed / _duration;
             transform.position = Vector3.Lerp(_start, _end, time);
             elapsed += Time.deltaTime;
             yield return null;
@@ -96,6 +96,5 @@ public class ThrownAxe : MonoBehaviour
         transform.SetParent(_hand.transform);
         transform.localPosition = _positionInHand;
         transform.localRotation = Quaternion.Euler(_rotationInHand);
-
     }
 }

@@ -34,9 +34,8 @@ public class ProgressReseter : MonoBehaviour
         YG2.saves.Level = 0;
         YG2.saves.UpgradePoints = 0;
         YG2.saves.CurrentEXP = 0f;
-        YG2.saves.CurrentLevel = null;
+        YG2.saves.CurrentLevel = LevelID.None;
 
-        if (YG2.saves.PlayerPositions != null) YG2.saves.PlayerPositions.Clear();
         if (YG2.saves.LevelsProgress != null) YG2.saves.LevelsProgress.Clear();
 
         YG2.SaveProgress();

@@ -28,7 +28,7 @@ public class PlayerExperience : MonoBehaviour
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
 
         if (_enemyDetector != null)
-            _enemyDetector.OnKilled += Add;
+            _enemyDetector.OnGetExperience += Add;
 
         LoadLevel();
     }
@@ -36,7 +36,7 @@ public class PlayerExperience : MonoBehaviour
     private void OnDestroy()
     {
         if (_enemyDetector != null)
-            _enemyDetector.OnKilled -= Add;
+            _enemyDetector.OnGetExperience -= Add;
 
         SaveLevel();
     }

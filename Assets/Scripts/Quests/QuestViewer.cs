@@ -24,7 +24,7 @@ public class QuestViewer : MonoBehaviour
         _tutorial.QuestUpdated -= UpdateProgress;
     }
 
-    private void Render(IQuest quest)
+    private void Render(Quest quest)
     {
         gameObject.SetActive(true);
         _image.sprite = quest.Config.Image;

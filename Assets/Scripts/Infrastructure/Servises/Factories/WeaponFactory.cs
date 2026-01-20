@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using UnityEngine;
 
 public class WeaponFactory: ICardFactory
@@ -45,3 +44,4 @@ public class WeaponFactory: ICardFactory
         _attacker.AddWeapon(weapon);
     }
 }
+

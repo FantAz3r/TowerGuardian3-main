@@ -5,16 +5,22 @@ using UnityEngine.EventSystems;
 
 public class ToggleEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    [SerializeField] private AudioClip _pressedSound;
+    [SerializeField] private AudioClip _highlightedSound;
+
     private Animator _animator;
+    private ISpawnerService _spawnerService;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         _animator.SetTrigger("Highlighted");
+        _spawnerService.SendSoundReqest(_highlightedSound);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -25,5 +31,6 @@ public class ToggleEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerClick(PointerEventData eventData)
     {
         _animator.SetTrigger("Pressed");
+        _spawnerService.SendSoundReqest(_pressedSound);
     }
 }

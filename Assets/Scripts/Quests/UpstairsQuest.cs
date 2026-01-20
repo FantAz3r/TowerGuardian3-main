@@ -3,7 +3,9 @@ using UnityEngine;
 public class UpstairsQuest : Quest
 {
     private StairsTrigger _collider;
+
     public override QuestType GetQuestType() => QuestType.UpStairs;
+
     public override Vector3 TryGetTarget() => _collider.Center;
 
     public UpstairsQuest(StairsTrigger collider)

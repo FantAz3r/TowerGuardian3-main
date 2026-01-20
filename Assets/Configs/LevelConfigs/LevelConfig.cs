@@ -6,7 +6,7 @@ public class LevelConfig : ScriptableObject
 {
     [Header("Main Level Settings")]
     [SerializeField] private LevelID _level = LevelID.Level1;
-    [SerializeField] private List<QuestType> _quests;
+    [SerializeField] private List<QuestConfig> _quests;
     [SerializeField] private Vector3 _playerSpawnPoint;
     [SerializeField] private PortalData _portalData;
 
@@ -49,5 +49,5 @@ public class LevelConfig : ScriptableObject
 
     public PortalData PortalData => _portalData;
     public SpawnPointContainer SpawnPointContainer => _container;
-    public IReadOnlyList<QuestType> Quests => _quests;
+    public IReadOnlyList<QuestConfig> Quests => _quests;
 }

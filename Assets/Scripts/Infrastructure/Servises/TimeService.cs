@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using YG;
 
 public class TimeService : IService, ITimeService
 {
@@ -18,19 +19,18 @@ public class TimeService : IService, ITimeService
 
     public void Pause()
     {
-        if (IsPaused)
-            return;
+        YG2.PauseGame(true, true, true, true, true);
+    }
 
-        Time.timeScale = 0f;
+    public void PauseGame()
+    {
+        YG2.PauseGame(true, true, false, false, false);
         IsPaused = true;
     }
 
     public void Resume()
     {
-        if (IsPaused == false)
-            return;
-
-        Time.timeScale = 1f;
+        YG2.PauseGame(false, false, false, false, false);
         IsPaused = false;
 
         if (_pauseCoroutine != null)

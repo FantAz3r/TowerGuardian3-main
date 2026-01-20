@@ -151,9 +151,36 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""79577c33-247e-485e-8f53-642b72ce3993"",
             ""actions"": [
                 {
-                    ""name"": ""ActivateAbility"",
+                    ""name"": ""ActivateAbility1"",
                     ""type"": ""Button"",
                     ""id"": ""a445800b-0fc7-4522-87be-8b536b084f2a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateAbility2"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ac32a05-ad93-42ce-8484-39b8ac99ddb2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateAbility3"",
+                    ""type"": ""Button"",
+                    ""id"": ""efae024a-d599-4f32-8b6e-d8fbff4b22de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateAbility4"",
+                    ""type"": ""Button"",
+                    ""id"": ""d86d0f0e-d435-43c1-9c06-471d0df0ace5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -164,11 +191,44 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1c70fc9f-1503-482c-a68b-4b981c21de0e"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""ActivateAbility"",
+                    ""action"": ""ActivateAbility1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fff59c6-47f3-46d7-929f-8f167f5413ea"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""ActivateAbility2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3aeba029-51bc-4fa8-bc3e-6b3b5a839be5"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateAbility3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c028225f-2ba2-4382-88bf-078038a10b37"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateAbility4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -212,7 +272,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_ActivateAbility = m_UI.FindAction("ActivateAbility", throwIfNotFound: true);
+        m_UI_ActivateAbility1 = m_UI.FindAction("ActivateAbility1", throwIfNotFound: true);
+        m_UI_ActivateAbility2 = m_UI.FindAction("ActivateAbility2", throwIfNotFound: true);
+        m_UI_ActivateAbility3 = m_UI.FindAction("ActivateAbility3", throwIfNotFound: true);
+        m_UI_ActivateAbility4 = m_UI.FindAction("ActivateAbility4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -336,12 +399,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_ActivateAbility;
+    private readonly InputAction m_UI_ActivateAbility1;
+    private readonly InputAction m_UI_ActivateAbility2;
+    private readonly InputAction m_UI_ActivateAbility3;
+    private readonly InputAction m_UI_ActivateAbility4;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
         public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ActivateAbility => m_Wrapper.m_UI_ActivateAbility;
+        public InputAction @ActivateAbility1 => m_Wrapper.m_UI_ActivateAbility1;
+        public InputAction @ActivateAbility2 => m_Wrapper.m_UI_ActivateAbility2;
+        public InputAction @ActivateAbility3 => m_Wrapper.m_UI_ActivateAbility3;
+        public InputAction @ActivateAbility4 => m_Wrapper.m_UI_ActivateAbility4;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -351,16 +420,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @ActivateAbility.started += instance.OnActivateAbility;
-            @ActivateAbility.performed += instance.OnActivateAbility;
-            @ActivateAbility.canceled += instance.OnActivateAbility;
+            @ActivateAbility1.started += instance.OnActivateAbility1;
+            @ActivateAbility1.performed += instance.OnActivateAbility1;
+            @ActivateAbility1.canceled += instance.OnActivateAbility1;
+            @ActivateAbility2.started += instance.OnActivateAbility2;
+            @ActivateAbility2.performed += instance.OnActivateAbility2;
+            @ActivateAbility2.canceled += instance.OnActivateAbility2;
+            @ActivateAbility3.started += instance.OnActivateAbility3;
+            @ActivateAbility3.performed += instance.OnActivateAbility3;
+            @ActivateAbility3.canceled += instance.OnActivateAbility3;
+            @ActivateAbility4.started += instance.OnActivateAbility4;
+            @ActivateAbility4.performed += instance.OnActivateAbility4;
+            @ActivateAbility4.canceled += instance.OnActivateAbility4;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @ActivateAbility.started -= instance.OnActivateAbility;
-            @ActivateAbility.performed -= instance.OnActivateAbility;
-            @ActivateAbility.canceled -= instance.OnActivateAbility;
+            @ActivateAbility1.started -= instance.OnActivateAbility1;
+            @ActivateAbility1.performed -= instance.OnActivateAbility1;
+            @ActivateAbility1.canceled -= instance.OnActivateAbility1;
+            @ActivateAbility2.started -= instance.OnActivateAbility2;
+            @ActivateAbility2.performed -= instance.OnActivateAbility2;
+            @ActivateAbility2.canceled -= instance.OnActivateAbility2;
+            @ActivateAbility3.started -= instance.OnActivateAbility3;
+            @ActivateAbility3.performed -= instance.OnActivateAbility3;
+            @ActivateAbility3.canceled -= instance.OnActivateAbility3;
+            @ActivateAbility4.started -= instance.OnActivateAbility4;
+            @ActivateAbility4.performed -= instance.OnActivateAbility4;
+            @ActivateAbility4.canceled -= instance.OnActivateAbility4;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -404,6 +491,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     }
     public interface IUIActions
     {
-        void OnActivateAbility(InputAction.CallbackContext context);
+        void OnActivateAbility1(InputAction.CallbackContext context);
+        void OnActivateAbility2(InputAction.CallbackContext context);
+        void OnActivateAbility3(InputAction.CallbackContext context);
+        void OnActivateAbility4(InputAction.CallbackContext context);
     }
 }

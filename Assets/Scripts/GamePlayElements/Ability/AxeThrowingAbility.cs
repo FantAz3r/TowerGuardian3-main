@@ -7,11 +7,10 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     [SerializeField] private AxeThrowingConfig _config;
 
     private PlayerAttacker _attacker;
-    private Player _player; 
+    private Player _player;
     private Weapon _axe;
     private ThrownAxe _thrownAxe;
 
-    private bool _isActive = true;
     private WaitForSeconds _oneSecond = new WaitForSeconds(1);
 
     public event Action<float, float> Cooldowning;
@@ -23,11 +22,18 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     {
         _player = GetComponentInParent<Player>();
         _attacker = _player.GetComponentInChildren<PlayerAttacker>();
+        _attacker.WeaponSeted += CheckWeapon;
+        CheckWeapon(_attacker.CurrentWeapon);
+    }
+
+    private void OnDestroy()
+    {
+        _attacker.WeaponSeted -= CheckWeapon;
     }
 
     public override void Use()
     {
-        if (_isActive)
+        if (IsLock == false)
         {
             if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
             {
@@ -41,7 +47,7 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        _isActive = false;
+        base.LockAbility();
         float timer = 0f;
 
         while (_config.Cooldown >= timer)
@@ -52,7 +58,19 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0f);
-        _isActive = true;
+        base.UnlockAbility();
+    }
+
+    private void CheckWeapon(IWeapon weapon)
+    {
+        if (weapon.Config.WeaponType == WeaponType.Axe)
+        {
+            base.UnlockAbility();
+        }
+        else
+        {
+            base.LockAbility();
+        }
     }
 
     private void ThrowAxe(Weapon currentWeapon)
@@ -63,7 +81,7 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
         _thrownAxe = currentWeapon.GetComponent<ThrownAxe>();
         _thrownAxe.Returned += Return;
-        _thrownAxe.Throw(start, end, _config.FlightDuration, _config.Damage );
+        _thrownAxe.Throw(start, end, _config.FlightDuration, _config.Damage);
     }
 
     private void Return()

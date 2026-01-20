@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-public class QuestBuilder 
+public class QuestBuilder
 {
     private List<Quest> _quests = new();
     private PlayerMover _mover;
@@ -13,7 +13,7 @@ public class QuestBuilder
 
     public QuestBuilder(PlayerMover mover,
         PlayerAttacker playerAttacker,
-        Inventory inventory, 
+        Inventory inventory,
         PlayerCardConfigContainer cardHolder,
         EnemyDetector detector,
         List<Portal> portals,
@@ -43,13 +43,14 @@ public class QuestBuilder
         _quests.Add(new EnterTowerQuest(_door));
         _quests.Add(new UpstairsQuest(_stairsTrigger));
         _quests.Add(new EnterFirstLevelQuest(GetPortalByLevel(LevelID.Level1)));
+        _quests.Add(new EnterFirstLevelQuest(GetPortalByLevel(LevelID.Level2)));
     }
 
     private Portal GetPortalByLevel(LevelID level)
     {
-        foreach(var portal in _portals)
+        foreach (var portal in _portals)
         {
-            if(portal.NextLevel == level)
+            if (portal.NextLevel == level)
             {
                 return portal;
             }

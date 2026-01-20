@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using YG;
 
 public class LouseLevelMenu : LevelMenu
 {
     [SerializeField] private Button _resurrectionButton;
+
     private Health _playerHealth;
     private bool _canResurrection = true;
 
@@ -23,7 +23,7 @@ public class LouseLevelMenu : LevelMenu
         gameObject.SetActive(false);
     }
 
-    private void OnLouse()
+    public void OnLouse()
     {
         if(_canResurrection == false)
         {
@@ -45,8 +45,10 @@ public class LouseLevelMenu : LevelMenu
 
     private void Resurrection()
     {
+        Debug.Log("Resurrection");
         _canResurrection = false;
         _playerHealth.gameObject.SetActive(true);
+        _playerHealth.Heal(_playerHealth.MaxHealth);
         CloseMenu();
     }
 }

@@ -7,11 +7,17 @@ public class AbilityViewer : MonoBehaviour
 {
     [SerializeField] private Image _iconImage;
     [SerializeField] private Image _cooldownFillImage;
+    [SerializeField] private Image _lockImage;
     [SerializeField] private TMP_Text _cooldownText;
+    [SerializeField] private TMP_Text _keyCode;
 
-    public bool HasAbility {get; private set;}
     private Button _button;
     private IAbility _ability;
+    private PlayerAttacker _attacker;
+
+    public AbilityKeyCode AbilityKey { get; private set; }
+    public bool HasAbility { get; private set; }
+
     public IAbility Ability => _ability;
 
     private void Awake()
@@ -19,6 +25,7 @@ public class AbilityViewer : MonoBehaviour
         HasAbility = false;
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnClick);
+        _lockImage.gameObject.SetActive(false);
         _cooldownText.enabled = false;
         DeactivateViewer();
     }
@@ -29,18 +36,37 @@ public class AbilityViewer : MonoBehaviour
         UnsubscribeCooldownEvents();
     }
 
-    public void ActivateViewer(IAbility ability, AbilityConfig config)
+    public void ActivateViewer(IAbility ability, AbilityConfig config, AbilityKeyCode keyCode, PlayerAttacker attacker)
     {
         if (_iconImage == null && config == null)
             throw new ArgumentNullException();
 
         HasAbility = true;
+        _attacker = attacker;
         _ability = ability;
+
         gameObject.SetActive(true);
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
+
         _button.interactable = true;
         _iconImage.sprite = config.Icon;
         _cooldownFillImage.fillAmount = 0f;
 
+        if (keyCode != AbilityKeyCode.None)
+        {
+            AbilityKey = keyCode;
+            _keyCode.text = ((int)AbilityKey).ToString();
+        }
+        else
+        {
+            _keyCode.gameObject.SetActive(false);
+        }
+
+        _attacker.WeaponSeted += UpdateLock;
+        _attacker.WeaponActivated += UpdateLock;
+        _attacker.WeaponDeactivated += UpdateLock;
+        UpdateLock();
         SubscribeCooldownEvents();
     }
 
@@ -55,12 +81,30 @@ public class AbilityViewer : MonoBehaviour
         _cooldownFillImage.fillAmount = 0f;
     }
 
-    private void OnClick()
+    public void ActivateAbility()
     {
         if (_ability is UsebleAbility usebleAbility)
         {
             usebleAbility.Use();
         }
+    }
+
+    private void UpdateLock(IWeapon useles = null)
+    {
+        UpdateLock();
+    }
+
+    private void UpdateLock()
+    {
+        if(_ability is UsebleAbility usebleAbility)
+        {
+            _lockImage.gameObject.SetActive(usebleAbility.IsLock);
+        }
+    }
+
+    private void OnClick()
+    {
+        ActivateAbility();
     }
 
     private void SubscribeCooldownEvents()

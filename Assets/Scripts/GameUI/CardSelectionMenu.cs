@@ -14,8 +14,8 @@ public class CardSelectionMenu : MonoBehaviour
     private GameUI _uiRoot;
     private List<CardButton> _cardsButtons;
     private PlayerExperience _playerExperience;
-    private bool _isMenuOpen = false;
     private CardSelector _selector;
+    private ITimeService _timeService;
     private int _selectCount;
 
     public void Init(PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons, GameUI uiRoot)
@@ -24,6 +24,7 @@ public class CardSelectionMenu : MonoBehaviour
         _playerExperience = playerExperience;
         _selector = selector;
         _cardsButtons = cardsButtons;
+        _timeService = ServicesLocator.GetService<ITimeService>();
 
         LoadUpgradeScore();
         _showButton.gameObject.SetActive(_selectCount > 0);
@@ -61,9 +62,8 @@ public class CardSelectionMenu : MonoBehaviour
             if (_selectCount < 0)
                 return;
 
-            SetMenuOpen(true);
+            MenuOpen();
             _uiRoot.HUD.Disable();
-            YG2.PauseGameNoEditEventSystem(true);
             ShowCards(cards);
         }
     }
@@ -72,12 +72,18 @@ public class CardSelectionMenu : MonoBehaviour
     {
         _selectCount--;
         _text.text = _selectCount.ToString();
-        ShowButton();
 
-        SetMenuOpen(false);
-        _uiRoot.HUD.Enable();
-        YG2.PauseGameNoEditEventSystem(false);
-        SaveUpgradeScore();
+        if (_selectCount > 0)
+        {
+            Open();
+        }
+        else
+        {
+            ShowButton();
+            CloseMenu();
+            _uiRoot.HUD.Enable();
+            SaveUpgradeScore();
+        }
     }
 
     public void AddPoints(int points)
@@ -90,27 +96,24 @@ public class CardSelectionMenu : MonoBehaviour
 
     private void ShowCards(List<ICardConfig> cards)
     {
-        int maxShowedCards = 3;
-
-        for (int i = 0; i < maxShowedCards; i++)
+        for (int i = 0; i < cards.Count; i++)
         {
             _cardsButtons[i].gameObject.SetActive(true);
-
-            if (i < cards.Count)
-            {
-                _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i]);
-                _cardsButtons[i].SetCard(cards[i]);
-            }
-            else
-            {
-                _cardsButtons[i].gameObject.SetActive(false);
-            }
+            _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i]);
+            _cardsButtons[i].SetCard(cards[i]);
         }
     }
 
-    private void SetMenuOpen(bool isOpen)
+    private void MenuOpen()
     {
-        _panel.gameObject.SetActive(isOpen);
+        _panel.gameObject.SetActive(true);
+        _timeService.PauseGame();
+    }
+
+    public void CloseMenu()
+    {
+        _panel.gameObject.SetActive(false);
+        _timeService.Resume();
     }
 
     private void ShowButton()

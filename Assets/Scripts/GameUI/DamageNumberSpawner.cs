@@ -1,35 +1,24 @@
 using TMPro;
 using UnityEngine;
 
-public class DamageNumberSpawner : ISpawner
+public class DamageNumberSpawner : BaseSpawner
 {
     private SpawnerType _type = SpawnerType.Text;
 
     private ObjectPool<DamageText> _pool;
     private int _startPoolSize = 0;
     private Vector3 _offset = new Vector3(0, 1.5f, -1.5f);
-    private bool _spawning = true;
 
-    public SpawnerType GetSpawnerType() { return _type; }
+    public override SpawnerType GetSpawnerType() { return _type; }
 
     public DamageNumberSpawner(DamageText prefab)
     {
         _pool = new ObjectPool<DamageText>(prefab, _startPoolSize, true);
     }
 
-    public void DisableSpawn()
+    public override void Spawn(Vector3 position, int damage, Color? textColor = null)
     {
-        _spawning = false;
-    }
-
-    public void EnableSpawn()
-    {
-        _spawning = true;
-    }
-
-    public void Spawn(HealthConfig useles, Vector3 position, int damage)
-    {
-        if (_spawning == false)
+        if (CanSpawn == false)
             return;
 
         DamageText damageText = _pool.Get();
@@ -38,9 +27,10 @@ public class DamageNumberSpawner : ISpawner
 
         tmpText.text = damage.ToString();
         tmpText.fontSharedMaterial.renderQueue = 4000;
+        tmpText.color = textColor ?? Color.white;
     }
 
-    public void DestroyPool()
+    public override void DestroyPool()
     {
         _pool.DestroyPool();
     }

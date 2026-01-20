@@ -1,10 +1,7 @@
 public class CollectQuest : Quest
 {
     private readonly Inventory _inventory;
-    public override QuestType GetQuestType()
-    {
-        return QuestType.Collect;
-    }
+    public override QuestType GetQuestType() => QuestType.Collect;
 
     public CollectQuest(Inventory inventory)
     {
@@ -23,7 +20,7 @@ public class CollectQuest : Quest
 
     public override void Complete()
     {
-        Stop();  
+        Stop();
         base.Complete();
     }
 }

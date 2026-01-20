@@ -6,14 +6,19 @@ using UnityEngine.SceneManagement;
 public class UIFactory 
 {
     private MenuCanvas _uiRoot;
-
-    private ISpawnerService _spawnerService;
+    private ISpawnerService _spawnerService; 
     private IStateSwitchService _stateSwitchService;
 
-    public UIFactory(IStateSwitchService stateSwitchService, ISpawnerService spawnerService)
+    public UIFactory()
     {
-        _stateSwitchService = stateSwitchService;
-        _spawnerService = spawnerService;
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _stateSwitchService = ServicesLocator.GetService<IStateSwitchService>();
+    }
+
+    public void CreateFocusController()
+    {
+        ApplicationFocusController prefab = Resources.Load<ApplicationFocusController>(GameConstants.FocusController);
+        ApplicationFocusController focusController = Object.Instantiate(prefab);
     }
 
     public void CreateUIRoot()
@@ -23,21 +28,28 @@ public class UIFactory
 
         foreach (var parent in parentObjects)
         {
-            if(parent.TryGetComponent(out MenuCanvas menuCanvas))
+            if (parent.TryGetComponent(out MenuCanvas menuCanvas))
             {
                 _uiRoot = menuCanvas;
             }
         }
     }
 
-    public void CreateStartButton()
-    {
-        _uiRoot.StartButton.Init(_stateSwitchService);
-    }
-
     public void CreateSettings()
     {
-        _uiRoot.SwichDamageNumbers.Init(_spawnerService);
         _uiRoot.Settings.gameObject.SetActive(false);
+    }
+
+    public void CreateSounds()
+    {
+        SoundData soundData = Resources.Load<SoundData>(GameConstants.SoundData);
+        SoundObject soundObject = Resources.Load<SoundObject>(GameConstants.SoundObject);
+        _spawnerService.RegisterSpawner(new SoundSpawner(soundData, soundObject));
+    }
+
+    public void CreateBackgroundSounds()
+    {
+        BackGroundMusic prefab = Resources.Load<BackGroundMusic>(GameConstants.BackGroundMusic);
+        BackGroundMusic backGroundMusic = Object.Instantiate(prefab);
     }
 }

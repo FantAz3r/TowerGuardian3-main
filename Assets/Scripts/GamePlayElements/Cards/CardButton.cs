@@ -54,7 +54,6 @@ public class CardButton : MonoBehaviour
         _playerCards.Add(_card);
         Selected?.Invoke();
         ActivateCard(_card);
-        Hide();
     }
 
     private void ActivateCard(ICardConfig card)

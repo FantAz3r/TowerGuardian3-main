@@ -13,22 +13,13 @@ public static class GameConstants
     public static string DirectionLight = "Prefabs/Light/Directional Light";
     public static string Tower = "Prefabs/Tower";
     public static string QuestPointer = "Prefabs/Tower";
+    public static string SoundObject = "Prefabs/SoundItem";
+    public static string BackGroundMusic = "Prefabs/BackgroundSounds";
+    public static string FocusController = "Prefabs/FocusController";
 
     public static string EnemySpawner = "Enemy/EnemyFactory";
 
-    public static string CardSelectionMenu = "Ui/CardMenuPanel";
-    public static string AbilityPanel = "Ui/AbilityPanel";
-    public static string WeaponPanel = "Ui/WeaponPanel";
     public static string DamageText = "Ui/TextHolder";
-    public static string Shop = "Ui/Shop";
-    public static string Sell = "Ui/SellPanel";
-    public static string PauseUI = "Ui/PauseUI";
-    public static string RotateJoyStick = "Ui/RotateJoystick ";
-    public static string MoveJoyStick = "Ui/MoveJoystick";
-    public static string QuestViever = "Ui/QuestViever";
-    public static string PlayerPanel = "Ui/Stats";
-    public static string SettingsPanel = "Ui/Settings";
-
     public static string WinMenu = "Ui/WinLevelMenu";
     public static string LouseMenu = "Ui/LouseLevelMenu";
     public static string StartMenu = "Ui/StartLevelMenu";
@@ -38,6 +29,8 @@ public static class GameConstants
     public static string QuestData = "ScriptableObjects/QuestData";
     public static string LevelData = "ScriptableObjects/LevelData";
     public static string CardData = "ScriptableObjects/CardData";
+    public static string PlayerSpawnPoints = "ScriptableObjects/PlayerSpawnPoints";
+    public static string SoundData = "ScriptableObjects/SoundData";
 
     public static string Portal = "buidingObjects/Portals/portal";
     public static string Platform = "buidingObjects/Interaction Platform";

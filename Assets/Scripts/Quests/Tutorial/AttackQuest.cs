@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class AttackQuest : Quest
 {
     PlayerAttacker _attacker;

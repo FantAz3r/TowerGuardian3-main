@@ -27,7 +27,7 @@ public class TreeAnimator : MonoBehaviour
         _health.IsValueChange -= OnHited;
     }
 
-    private void OnHited(float value)
+    private void OnHited(float useles1, float useles2)
     {
         _animator.SetTrigger(_hashHited);
     }

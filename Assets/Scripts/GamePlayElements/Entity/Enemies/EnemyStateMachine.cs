@@ -14,7 +14,7 @@ public class EnemyStateMachine : MonoBehaviour
     private IEnemyState _currentState;
     private EnemyAnimator _animator;
     private NavMeshAgent _agent;
-    private Transform _player;
+    private Player _player;
     private PickUper _picker;
     private Health _health;
     private Collider _collider;
@@ -50,7 +50,7 @@ public class EnemyStateMachine : MonoBehaviour
         _collider = GetComponent<Collider>();
     }
 
-    public void Init(Transform player)
+    public void Init(Player player)
     {
         _player = player;
         _collider.enabled = true;
@@ -66,7 +66,6 @@ public class EnemyStateMachine : MonoBehaviour
         {
             SetState(_states[StateType.Patrol]);
         }
-
     }
 
     private void OnSeePlayer()
@@ -161,13 +160,13 @@ public class EnemyStateMachine : MonoBehaviour
                     _states.Add(StateType.Patrol, new PatrolState(this, _agent, _animator));
                     break;
                 case StateType.Chase:
-                    _states.Add(StateType.Chase, new ChaseState(this, _agent, _animator, _player));
+                    _states.Add(StateType.Chase, new ChaseState(this, _agent, _animator, _player.transform));
                     break;
                 case StateType.Attack:
                     _states.Add(StateType.Attack, new AttackState(this, _animator, _player));
                     break;
                 case StateType.Thrown:
-                    _states.Add(StateType.Thrown, new ThrowState(this, _animator, _player));
+                    _states.Add(StateType.Thrown, new ThrowState(this, _animator, _player.transform));
                     break;
                 case StateType.FindObject:
                     _states.Add(StateType.FindObject, new PickupState(this, _animator, _objectDetector, _agent, _picker));

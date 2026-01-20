@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] private WeaponConfig _config;
 
     private AttackZone _attackZone;
+    private ISpawnerService _spawnerService;
+
     private float _damage;
     private float _range;
     private float _multiply;
@@ -16,9 +18,11 @@ public class Weapon : MonoBehaviour, IWeapon
 
     public WeaponConfig Config => _config;
 
+
     public void Init(AttackZone attackZone)
     {
         _attackZone = attackZone;
+        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
     }
 
     private void OnEnable()
@@ -46,6 +50,7 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         List<Health> targets = _attackZone.GetTargets(_range);
         IEnumerable<Health> orderedByDistanceTargets = Utils.GetObjectsSortedByDistance(targets, transform.position);
+        _spawnerService.SendSoundReqest(_config.HitSound, transform.position);
 
         foreach (var target in orderedByDistanceTargets)
         {
@@ -62,7 +67,7 @@ public class Weapon : MonoBehaviour, IWeapon
             HitedTarget?.Invoke(Mathf.RoundToInt(Mathf.Min(damageToDeal, target.CurrentHealth)), target.transform.position, target.GetHealthType());
             target.TakeDamage(damageToDeal);
 
-            if(_config.IsAreaDamage ==false)
+            if (_config.IsAreaDamage == false)
             {
                 return;
             }

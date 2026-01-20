@@ -10,19 +10,15 @@ public class PlayerMover : MonoBehaviour
 
     public event Action Moved;
 
-    public void Init(IInputService inputService)
-    {
-        _inputService = inputService;
-
-        _inputService.MovePerformed += OnMove;
-        _inputService.MoveCanceled += OnMoveCanceled;
-        _inputService.DirectionFromCursor += OnRotate;
-    }
-
     private void Awake()
     {
         _mover = GetComponentInParent<Mover>();
         _rotator = GetComponent<Rotator>();
+        _inputService = ServicesLocator.GetService<IInputService>();
+
+        _inputService.MovePerformed += OnMove;
+        _inputService.MoveCanceled += OnMoveCanceled;
+        _inputService.DirectionFromCursor += OnRotate;
     }
 
     private void OnDestroy()
@@ -31,7 +27,6 @@ public class PlayerMover : MonoBehaviour
         {
             _inputService.MovePerformed -= OnMove;
             _inputService.MoveCanceled -= OnMoveCanceled;
-
             _inputService.DirectionFromCursor -= OnRotate;
         }
     }

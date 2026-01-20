@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PortalFactory
 {
@@ -22,8 +23,12 @@ public class PortalFactory
 
         if (level != LevelID.Tower)
         {
-            DisablePortals(level);
+            DisablePortals();
             _tutorial.CompliteWithoutLust += EnablePortals;
+        }
+        else
+        {
+            EnableTowerPortal();
         }
     }
 
@@ -65,8 +70,9 @@ public class PortalFactory
 
     private void EnablePortals()
     {
-        foreach (var portal in _portals)
+        foreach (Portal portal in _portals)
         {
+
             portal.gameObject.SetActive(true);
         }
 
@@ -74,11 +80,40 @@ public class PortalFactory
     }
 
 
-    private void DisablePortals(LevelID currentLevel)
+    private void DisablePortals()
     {
         foreach (var portal in _portals)
         {
             portal.gameObject.SetActive(false);
+        }
+    }
+
+    private void EnableTowerPortal()
+    {
+        foreach (var portal in _portals)
+            portal.gameObject.SetActive(false);
+
+        var firstPortal = _portals.Find(portal => portal.NextLevel == LevelID.Level1);
+        firstPortal.gameObject.SetActive(true);
+
+        if (YG2.saves.LevelsProgress == null || YG2.saves.LevelsProgress.Count == 0)
+            return;
+
+        for (int i = 1; i < _portals.Count; i++)
+        {
+            var prevLevelData = YG2.saves.LevelsProgress[i - 1];
+
+            if (prevLevelData.IsComplite)
+            {
+                var portal = _portals.Find(portal => portal.NextLevel == YG2.saves.LevelsProgress[i - 1].Level +1);
+
+                if (portal != null)
+                    portal.gameObject.SetActive(true);
+            }
+            else
+            {
+                break;
+            }
         }
     }
 }

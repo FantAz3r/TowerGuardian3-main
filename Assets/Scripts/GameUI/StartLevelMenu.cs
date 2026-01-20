@@ -31,7 +31,7 @@ public class StartLevelMenu : LevelMenu
 
     private void OnStartClicked()
     {
-        GameStateMachine.EnterIn<LoadingLevelState, LevelID>(_portalLevel);
+        StateSwitchService.Switch(_portalLevel);
         CloseMenu();
     }
 
