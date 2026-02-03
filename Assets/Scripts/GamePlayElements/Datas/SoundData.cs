@@ -5,4 +5,5 @@ using UnityEngine;
 public class SoundData : ScriptableObject
 {
     public List<SoundInfo> SoundInfos = new List<SoundInfo>();
+    
 }

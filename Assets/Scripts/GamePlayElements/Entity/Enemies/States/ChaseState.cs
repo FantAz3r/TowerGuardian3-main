@@ -38,7 +38,7 @@ public class ChaseState : State
         {
             RotateTo(_player.position);
             _agent.destination = _player.position;
-            _animator.UpdateSpeed(_stateMachine.Config.MoveSpeed);
+            _animator.UpdateSpeed(_stateMachine.Config.MoveConfig.MoveSpeed);
             yield return _sleep;
         }
     }

@@ -1,167 +1,80 @@
-using System.Collections.Generic;
 using UnityEngine;
-using YG;
 
-public class Shop : MonoBehaviour
+public class Shop : BaseShop
 {
-    [SerializeField] private RectTransform _weaponContentParent;
-    [SerializeField] private RectTransform _abilitiesContentParent;
-    [SerializeField] private RectTransform _buffContentParent;
-
-    [SerializeField] private ProductViewer _productButtonPrefab;
-    [SerializeField] private CardData _cardData;
-
-    private List<ICardConfig> _shopConfigs = new();
-    private List<ProductViewer> _productButtons = new();
-    private Inventory _playerInventory;
-    private ITimeService _timeService;
-
-    private void OnDestroy()
+    public override void Open()
     {
-        foreach (var button in _productButtons)
-        {
-            button.BuyRequested -= OnBuyRequested;
-        }
-    }
-
-    private void OnDisable()
-    {
-        _timeService.Resume();
-    }
-
-    public void Init(Inventory playerInventory)
-    {
-        _timeService = ServicesLocator.GetService<ITimeService>();
-        _playerInventory = playerInventory;
-        gameObject.SetActive(false);
-    }
-
-    public void OnActivate()
-    {
-        gameObject.SetActive(true);
-
+        base.Open();
         LoadContent();
         RenderAll();
-
-        _weaponContentParent.gameObject.SetActive(true);
-        _abilitiesContentParent.gameObject.SetActive(false);
-        _buffContentParent.gameObject.SetActive(false);
+        WeaponContentParent.gameObject.SetActive(true);
     }
 
     private void LoadContent()
     {
-        ClearOldButtons();
-
-        RectTransform parent;
-
-        foreach (var config in _cardData.GetConfigs())
+        foreach (var config in CardData.GetConfigs())
         {
-            _shopConfigs.Add(config);
+            Configs.Add(config);
         }
 
         LoadCards();
-
-        foreach (var config in _shopConfigs)
-        {
-            if (config is WeaponConfig)
-            {
-                parent = _weaponContentParent;
-            }
-            else if (config is AbilityConfig)
-            {
-                parent = _abilitiesContentParent;
-            }
-            else if(config is BuffConfig)
-            {
-                parent = _buffContentParent;
-            }
-            else
-            {
-                parent = null;
-                Debug.Log("конфиг " + config + " не подходит в магазин");
-            }
-
-            var button = Instantiate(_productButtonPrefab, parent);
-            button.BuyRequested += OnBuyRequested;
-            _productButtons.Add(button);
-        }
+        SetParents();
     }
 
     private void RenderAll()
     {
-        for (int i = 0; i < _shopConfigs.Count; i++)
+        for (int i = 0; i < Configs.Count; i++)
         {
-            bool canBuy = CanAfford(_shopConfigs[i]);
-            _productButtons[i].gameObject.SetActive(true);
-            _productButtons[i].Render(_shopConfigs[i], true, canBuy);
+            bool canBuy = CanAfford(Configs[i]);
+            ProductButtons[i].gameObject.SetActive(true);
+            ProductButtons[i].Render(Configs[i], true, canBuy);
         }
-    }
-
-    private void ClearOldButtons()
-    {
-        foreach (ProductViewer button in _productButtons)
-        {
-            button.BuyRequested -= OnBuyRequested;
-            Destroy(button.gameObject);
-        }
-
-        _shopConfigs.Clear();
-        _productButtons.Clear();
     }
 
     private bool CanAfford(IShopConfig config)
     {
-        if (_playerInventory == null)
+        if (Player.Inventory == null)
             return true;
 
-        return _playerInventory.IsEnoughResource(config.GetCosts());
+        return Player.Inventory.IsEnoughResource(config.GetCosts());
     }
 
-    private void OnBuyRequested(ProductViewer button, ICardConfig config)
+    protected override void OnTradeRequested(ProductViewer button, ICardConfig config)
     {
+
         if (CanAfford(config) == false)
         {
             Debug.Log("Не хватает ресурсов");
             return;
         }
 
-        _playerInventory?.SpendResource(config.GetCosts());
+        Player.Inventory?.SpendResource(config.GetCosts());
 
         config.Upgrade();
         UpdateCardSave(config);
 
+        ClearOldButtons();
         LoadContent();
         RenderAll();
+    } 
+
+    protected override CardSaveData CreateSaveData(ICardConfig card)
+    {
+        return card.CreateSaveData(true);
     }
 
-    private void LoadCards()
+    protected override void OnNoSaveData()
     {
-        if (YG2.saves.AllCards == null)
+        foreach (var card in CardData.GetConfigs())
         {
-            foreach( var card in _cardData.GetConfigs())
-            {
-                CardSaveData cardData = new CardSaveData(0, card.ID, false, false);
-                card.InitFromData(cardData);
-            }
-
-            return;
-        }
-
-        foreach (var card in _shopConfigs)
-        {
-            CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
+            CardSaveData cardData = new CardSaveData(0, card.ID, false, false);
             card.InitFromData(cardData);
         }
     }
 
-    private void UpdateCardSave(ICardConfig card)
+    protected override void OnParentFounded(RectTransform parent, ICardConfig config)
     {
-        if (YG2.saves.AllCards == null)
-            YG2.saves.AllCards = new();
-
-        YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
-        YG2.saves.AllCards.Add(card.CreateSaveData(true));
-        YG2.SaveProgress();
+        CreateButton(parent);
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public interface IShopConfig
+public interface IShopConfig 
 {
     string ID { get; }
     Sprite Icon { get; }

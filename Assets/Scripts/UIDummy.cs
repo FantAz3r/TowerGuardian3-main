@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class UIDummy : MonoBehaviour
+public class UIDummy : MonoBehaviour, IUIWindow
 {
-    public void Disable()
-    {
-        gameObject.SetActive(false);
-    }
+    public bool IsActive => gameObject.activeSelf;
 
-    public void Enable()
+    public void Open()
     {
         gameObject.SetActive(true);
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
     }
 }

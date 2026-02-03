@@ -33,7 +33,7 @@ public class WeaponConfig : CardConfig
     public bool IsAreaDamage => _isAreaDamage;
     public AudioClip HitSound => _audioClip;
 
-    public override CardType GetCardType() => CardType.WeaponSetter;
+    public override CardType GetCardType() => CardType.Weapon;
 
     public float GetDamage(int level)
     {

@@ -82,6 +82,14 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         IsValueChange?.Invoke(_currentValue, _maxHealth);
     }
 
+    public void RemoveBuff()
+    {
+        float scaleRatio = _currentValue / _maxHealth;
+        _maxHealth = _startMaxHealth;
+        _currentValue = _maxHealth * scaleRatio;
+       IsValueChange?.Invoke(_currentValue, _maxHealth);
+    }
+
     public void DieAction()
     {
         Died?.Invoke();
@@ -91,5 +99,9 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     public void Die()
     {
         gameObject.SetActive(false);
+    }
+
+    public void EnableBuff()
+    {
     }
 }

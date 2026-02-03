@@ -14,7 +14,7 @@ public class PlayerMover : MonoBehaviour
     {
         _mover = GetComponentInParent<Mover>();
         _rotator = GetComponent<Rotator>();
-        _inputService = ServicesLocator.GetService<IInputService>();
+        _inputService = ServiceLocator.Get<IInputService>();
 
         _inputService.MovePerformed += OnMove;
         _inputService.MoveCanceled += OnMoveCanceled;

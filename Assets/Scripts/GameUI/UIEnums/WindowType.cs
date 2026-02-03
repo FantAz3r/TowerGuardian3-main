@@ -1,0 +1,18 @@
+public enum WindowType
+{
+    None,
+    QuestViewer,
+    Shop,
+    Sell,
+    WinLevelMenu,
+    StartLevelMenu,
+    LouseLevelMenu,
+    Settings,
+    MainSettings,
+    Pause,
+    CardMenu,
+    HUD,
+    MainMenu,
+    ShowCardsButton,
+    Background
+}

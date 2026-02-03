@@ -17,12 +17,14 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     public event Action<float, float> Cooldowning;
 
     public float Cooldown => _cooldown;
-    public override AbilityType AbilityType => AbilityType.BouncingPickaxe;
+    public override AbilityType Type => AbilityType.BouncingPickaxe;
+
+    public override AbilityConfig Config => _config;
 
     private void Awake()
     {
         _player = GetComponentInParent<Player>();
-        _attacker = _player.GetComponentInChildren<PlayerAttacker>();
+        _attacker = _player.Attacker;
         _attacker.WeaponSeted += CheckWeapon;
     }
 

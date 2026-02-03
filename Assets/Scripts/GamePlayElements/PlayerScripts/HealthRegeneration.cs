@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
@@ -7,54 +6,44 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
     [SerializeField] private PlayerConfig _config;
 
     private Health _health;
-    private WaitForSeconds _wait;
-    private Coroutine _regenCoroutine;
     private float _delay = 2f;
     private float _regenAccumulated = 0f;
     private float _regenValue;
-    private bool _canRegen = false;
+    private bool _isRegeneration = false;
+    private float _timer = 0f;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _wait = new WaitForSeconds(_delay);
         _regenValue = _config.HealthRegeneration;
-        _health.DamageTaken += StartRegeneration;
     }
 
     public void EnableBuff()
     {
-        _canRegen = true;
+        _isRegeneration = true;
     }
 
     private void OnDestroy()
     {
-        _health.DamageTaken -= StartRegeneration;
-        StopRegeneration();
+        _isRegeneration = false;
     }
 
-    private void StartRegeneration(float useles = 0)
+    private void Update()
     {
-        if (_canRegen && _regenCoroutine == null)
+        if (_isRegeneration == false)
+            return;
+
+        if (_health.CurrentHealth >= _health.MaxHealth)
         {
-            _regenCoroutine = StartCoroutine(RegenerationRoutine());
+            _timer = 0f;
+            _regenAccumulated = 0f;
+            return;
         }
-    }
 
-    private void StopRegeneration()
-    {
-        if (_regenCoroutine != null)
-        {
-            StopCoroutine(_regenCoroutine);
-            _regenCoroutine = null;
-        }
-    }
+        _timer += Time.deltaTime;
 
-    private IEnumerator RegenerationRoutine()
-    {
-        while (_health.CurrentHealth < _health.MaxHealth)
+        if (_timer >= _delay)
         {
-            yield return _wait;
             _regenAccumulated += _regenValue * _delay;
 
             if (_regenAccumulated >= 1f)
@@ -63,14 +52,18 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
                 _health.Heal(healAmount);
                 _regenAccumulated -= healAmount;
             }
-        }
 
-        _regenCoroutine = null;
-        _regenAccumulated = 0;
+            _timer = 0f;
+        }
     }
 
     public void ApplyBuff(float value)
     {
-        _regenValue = _regenValue * (1+ value);
+        _regenValue = _regenValue * (1 + value);
+    }
+
+    public void RemoveBuff()
+    {
+        _regenValue = 0;
     }
 }

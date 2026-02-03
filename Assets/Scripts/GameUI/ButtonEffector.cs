@@ -20,7 +20,7 @@ public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         _buttonImage = GetComponent<Image>();
         _animator = GetComponent<Animator>();
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
     }
 
     private void OnDisable() 

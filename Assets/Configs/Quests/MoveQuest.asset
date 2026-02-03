@@ -18,5 +18,7 @@ MonoBehaviour:
   _descriptionEN: Press W, A, S, D for move
   _descriptionTR: "Hareket etmek i\xE7in W, A, S, D tu\u015Flar\u0131na bas\u0131n."
   _questType: 1
-  _targetValue: 1
-  _targetTransform: {fileID: 0}
+  _isProgressQuest: 0
+  _targetValue: 0
+  _isTimeQuest: 0
+  _timeLimit: 0

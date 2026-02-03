@@ -3,56 +3,60 @@ using UnityEngine;
 
 public abstract class Quest : IQuest
 {
-    private int _goal;
-    private int _currentValue = 0;
+    private bool _isProgressQuest;
+    private bool _isTimeQuest;
+    private QuestViewer _questViewer;
+    private IGameConditionService _conditionService;
+    private IWindowService _windowService;
     public QuestConfig Config { get; private set; }
-
-    public int Goal => _goal;
-
-    private bool _isCompleted;
+    public float CurrentTime { get; protected set; } = 0;
+    public int CurrentValue { get; protected set; } = 0;
 
     public event Action OnCompleted;
-    public event Action<int> Updated;
-
     public void SetConfig(QuestConfig config)
     {
         Config = config;
-        _goal = config.TargetValue;
+        _isProgressQuest = Config.IsProgressQuest;
+        _isTimeQuest = Config.IsTimeQuest;
+
+        _windowService = ServiceLocator.Get<IWindowService>();
+        _conditionService = ServiceLocator.Get<IGameConditionService>();
     }
 
     public abstract QuestType GetQuestType();
 
-    public virtual void Run() { }
-
-    public virtual Vector3 TryGetTarget()
+    public virtual void Run() 
     {
-        return Vector3.zero;
+        _questViewer = _windowService.Open(WindowType.QuestViewer) as QuestViewer;
+        _questViewer.Render(this);
+        UpdateProgress();
+        UpdateTime();
     }
 
-    public virtual void UpdateProgress()
-    {
-        _currentValue++;
-        Updated?.Invoke(_currentValue);
+    public virtual Vector3 TryGetTarget() => Vector3.zero;
 
-        if (_currentValue >= _goal)
-        {
-            CompleteQuest();
-            return;
-        }
+    public virtual void UpdateProgress() 
+    {
+        if (_isProgressQuest)
+            _questViewer.UpdateProgress(CurrentValue, Config.TargetValue);
+    }
+
+    public virtual void UpdateTime()
+    {
+        if (_isTimeQuest)
+            _questViewer.UpdateTime(CurrentTime);
     }
 
     public virtual void Stop() { }
 
     public virtual void Complete()
     {
-        CompleteQuest();
+        OnCompleted?.Invoke();
+        _questViewer.Close();
     }
 
-    protected void CompleteQuest()
+    public virtual void Fail()
     {
-        if (_isCompleted) return;
-
-        _isCompleted = true;
-        OnCompleted?.Invoke();
+        _conditionService.OnLouse();
     }
 }

@@ -10,9 +10,9 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
     private PlayerAttacker _attacker;
     private WaitForSeconds _sleep;
     private WaitForSeconds _oneSecond = new WaitForSeconds(1);
-    private bool _active = true;
 
-    public override AbilityType AbilityType => AbilityType.Burst;
+    public override AbilityConfig Config => _config;
+    public override AbilityType Type => AbilityType.Burst;
     public float Cooldown => _config.Cooldown;
 
     public event Action<float, float> Cooldowning;
@@ -22,10 +22,20 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         _sleep = new WaitForSeconds(_config.AttackDelay);
         _player = GetComponentInParent<Player>();
         _attacker = _player.GetComponentInChildren<PlayerAttacker>();
+
         _attacker.WeaponDeactivated += LockAbility;
         _attacker.WeaponActivated += UnlockAbility;
+        _config.Upgraded += Upgrade;
+
         LoadAbility();
         enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        _attacker.WeaponDeactivated -= LockAbility;
+        _attacker.WeaponActivated -= UnlockAbility;
+        _config.Upgraded -= Upgrade;
     }
 
     public override void Use()
@@ -37,7 +47,7 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         }
     }
 
-    public override void Upgrade()
+    public void Upgrade()
     {
         _sleep = new WaitForSeconds(_config.AttackDelay);
     }

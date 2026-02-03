@@ -4,9 +4,9 @@ public class ApplicationFocusController : MonoBehaviour
 {
     private ITimeService _timeService;
 
-    private void Awake()
+    private void Start()
     {
-        _timeService = ServicesLocator.GetService<ITimeService>();
+        _timeService = ServiceLocator.Get<ITimeService>();
     }
 
     public void OnApplicationFocus(bool hasFocus)
@@ -23,14 +23,14 @@ public class ApplicationFocusController : MonoBehaviour
 
     private void OnFocusLost()
     {
-        _timeService.Pause();
+        _timeService.PauseAll();
     }
 
     private void OnFocusReturn()
     {
         if (_timeService.IsPaused)
         {
-            _timeService.PauseGame();
+            _timeService.Pause();
         }
         else
         {

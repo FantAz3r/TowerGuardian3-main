@@ -1,20 +1,25 @@
-public class RegenerationBuff : IBuff
+public class RegenerationBuff : Buff
 {
-    private HealthRegeneration _healthRegeneration;
-    public BuffType Type => BuffType.HpRegen;
+    private IBuffble _healthRegeneration;
+    public override BuffType Type => BuffType.HpRegen;
 
     public RegenerationBuff(HealthRegeneration healthRegeneration)
     {
         _healthRegeneration = healthRegeneration;
     }
 
-    public void EnableBuff()
+    public override void Enable()
     {
         _healthRegeneration.EnableBuff();
     }
 
-    public void UpdateBuff(float value)
+    public override void Upgrade()
     {
-        _healthRegeneration.ApplyBuff(value);
+        _healthRegeneration.ApplyBuff(Config.IncreaseValue);
+    }
+
+    public override void Remove()
+    {
+        _healthRegeneration.RemoveBuff();
     }
 }

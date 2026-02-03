@@ -15,6 +15,7 @@ public class MoveQuest : Quest
 
     public override void Run()
     {
+        base.Run();
         _mover.Moved += Complete;
     }
 

@@ -8,17 +8,22 @@ public class PlayerCardConfigContainer : MonoBehaviour
     [SerializeField] private CardData _cardData;
     [SerializeField] private List<CardConfig> _startCards;
 
+    private Dictionary<CardType, ICardFactory> _factories;
     private List<ICardConfig> _selectedConfigs = new();
     public IReadOnlyList<ICardConfig> SelectedCardConfigs => _selectedConfigs;
 
-    public event Action<BuffConfig> BuffAdded;
-    public event Action<AbilityConfig> AbilityAdded;
-    public event Action<WeaponConfig> WeaponAdded;
-    public event Action<AbilityConfig> AbilityRemoved;
-    public event Action<WeaponConfig> WeaponRemoved;
-    public event Action<BuffConfig> BuffRemoved;
-    public event Action<ICardConfig> Upgraded;
-    public event Action Added;
+    public event Action<ICardConfig> CardAdded, CardRemoved;
+    public event Action Upgraded;
+
+    private void Awake()
+    {
+        Player player = GetComponentInParent<Player>();
+
+        _factories = new Dictionary<CardType, ICardFactory>()
+        {
+            { CardType.Weapon, new WeaponFactory(player) }
+        };
+    }
 
     private void Start()
     {
@@ -36,14 +41,14 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
         if (_selectedConfigs.Contains(config) == false)
         {
-            _selectedConfigs.Add(config);
-            Define(config);
+            AddCard(config);
+            Debug.Log(config.Name);
         }
 
         if (config.HasPlayer || _startCards.Contains(config as CardConfig))
         {
             config.Upgrade();
-            Upgraded.Invoke(config);
+            Upgraded?.Invoke();
         }
 
         UpdateCardSave(config);
@@ -52,34 +57,14 @@ public class PlayerCardConfigContainer : MonoBehaviour
     public void Remove(ICardConfig config)
     {
         _selectedConfigs.Remove(config);
-
-        if (config is AbilityConfig ability)
-            AbilityRemoved?.Invoke(ability);
-
-        if (config is WeaponConfig weapon)
-            WeaponRemoved?.Invoke(weapon);
-
-        if (config is BuffConfig buff)
-            BuffRemoved?.Invoke(buff);
+        CardRemoved?.Invoke(config);
     }
 
-    private void Define(ICardConfig config)
+    private void Create(ICardConfig card)
     {
-        Added?.Invoke();
-
-        if (config is BuffConfig buff)
+        if (_factories != null && _factories.TryGetValue(card.GetCardType(), out ICardFactory factory))
         {
-            BuffAdded?.Invoke(buff);
-        }
-
-        if (config is AbilityConfig ability)
-        {
-            AbilityAdded?.Invoke(ability);
-        }
-
-        if (config is WeaponConfig weapon)
-        {
-            WeaponAdded?.Invoke(weapon);
+            factory.Create(card);
         }
     }
 
@@ -106,8 +91,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
             if (card.HasPlayer)
             {
                 LoadCard(card);
-                _selectedConfigs.Add(card);
-                Define(card);
+                AddCard(card);
             }
         }
     }
@@ -123,5 +107,12 @@ public class PlayerCardConfigContainer : MonoBehaviour
         {
             card.InitFromData(cardData);
         }
+    }
+
+    private void AddCard(ICardConfig card)
+    {
+        _selectedConfigs.Add(card);
+        CardAdded?.Invoke(card);
+        Create(card);
     }
 }

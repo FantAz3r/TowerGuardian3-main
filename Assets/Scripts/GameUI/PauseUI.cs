@@ -1,56 +1,42 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseUI : MonoBehaviour
+public class PauseUI : PauseWindow
 {
-    [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _homeButton;
     [SerializeField] private Button _continueButton;
-    [SerializeField] private RectTransform _pausePanel;
 
     private IStateSwitchService _stateMachine;
-    private ITimeService _timeService;
-    private LevelID _currentLevel;
+    private IWindowService _windowService;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _stateMachine = ServicesLocator.GetService<IStateSwitchService>();
-        _timeService = ServicesLocator.GetService<ITimeService>();
+        base.Awake();
+        _windowService = ServiceLocator.Get<IWindowService>();
+    }
+
+    private void OnEnable()
+    {
         _homeButton.onClick.AddListener(OnHomeClicked);
-        _continueButton.onClick.AddListener(OnContinue);
-        _pauseButton.onClick.AddListener(OnPause);
-        _pausePanel.gameObject.SetActive(false);
+        _continueButton.onClick.AddListener(Close);
     }
 
-    public void Init(LevelID currentLevel)
-    {
-        _currentLevel = currentLevel;
-    }
-
-    private void OnDestroy()
+    private void OnDisable()
     {
         _homeButton.onClick.RemoveListener(OnHomeClicked);
-        _continueButton.onClick.RemoveListener(OnContinue);
+        _continueButton.onClick.RemoveListener(Close);
     }
 
     private void OnHomeClicked()
     {
-        OnContinue();
 
-        if (_currentLevel != LevelID.Tower)
+        base.Close();
+        _windowService.Open(WindowType.HUD);
+
+        if (SceneManager.GetActiveScene().name != LevelID.Tower.ToString())
         {
             _stateMachine.Switch(LevelID.Tower);
         }
-    }
-
-    public void OnPause()
-    {
-        _timeService.PauseGame();
-    }
-
-    private void OnContinue()
-    {
-        _timeService.Resume();
-        _pausePanel.gameObject.SetActive(false);
     }
 }

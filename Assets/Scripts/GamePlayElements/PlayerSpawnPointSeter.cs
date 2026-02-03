@@ -5,7 +5,6 @@ using YG;
 public class PlayerSpawnPointSeter
 {
     private PlayerSpawnPoints _spawnPointsData;
-    private Player _player;
 
     public PlayerSpawnPointSeter(PlayerSpawnPoints spawnPointsData)
     {

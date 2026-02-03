@@ -9,7 +9,7 @@ public class SwichDamageNumbers : MonoBehaviour
 
     private void Awake() 
     {
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
 
         _toggle.isOn = true;
 

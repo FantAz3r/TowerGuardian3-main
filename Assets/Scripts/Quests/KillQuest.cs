@@ -1,19 +1,14 @@
-public class KillQuest : Quest, IQuest
+public class KillQuest : Quest
 {
     private EnemyDetector _enemyDetector;
 
-    public KillQuest(EnemyDetector enemyDetector)
-    {
-        _enemyDetector = enemyDetector;
-    }
+    public KillQuest(EnemyDetector enemyDetector) => _enemyDetector = enemyDetector;
 
-    public override QuestType GetQuestType()
-    {
-        return QuestType.KillEnemy;
-    }
+    public override QuestType GetQuestType() => QuestType.KillEnemy;
 
     public override void Run()
     {
+        base.Run();
         _enemyDetector.OnEnemyKilled += UpdateProgress;
     }
 
@@ -21,5 +16,16 @@ public class KillQuest : Quest, IQuest
     {
         _enemyDetector.OnEnemyKilled -= UpdateProgress;
         base.Complete();
+    }
+
+    public override void UpdateProgress()
+    {
+        CurrentValue++;
+        base.UpdateProgress();
+
+        if(CurrentValue >= Config.TargetValue)
+        {
+            Complete();
+        }
     }
 }

@@ -14,7 +14,7 @@ public class ToggleEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

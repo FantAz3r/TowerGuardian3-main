@@ -13,38 +13,42 @@ public class AbilityPanel : MonoBehaviour
         { AbilityKeyCode.Fourth, false}
     };
 
-    private AllAbilities _container;
-    private PlayerAttacker _playerAttacker;
+    private Player _player;
     private IInputService _inputService;
     private int _count = 0;
+    private void OnAbility1Used() => ActivateAbilityByKey(AbilityKeyCode.First);
+    private void OnAbility2Used() => ActivateAbilityByKey(AbilityKeyCode.Second);
+    private void OnAbility3Used() => ActivateAbilityByKey(AbilityKeyCode.Third);
+    private void OnAbility4Used() => ActivateAbilityByKey(AbilityKeyCode.Fourth);
 
-    public void Init(AllAbilities container, PlayerAttacker playerAttacker)
+    private void Awake()
     {
-        _container = container;
-        _playerAttacker = playerAttacker;
-        _inputService = ServicesLocator.GetService<IInputService>();
-        _container.AbilityActivated += View;
-        _container.AbilityRemoved += RemoveView;
+        _inputService = ServiceLocator.Get<IInputService>();
+        _inputService.OnAbillity1Used += OnAbility1Used;
+        _inputService.OnAbillity2Used += OnAbility2Used;
+        _inputService.OnAbillity3Used += OnAbility3Used;
+        _inputService.OnAbillity4Used += OnAbility4Used;
+    }
 
-        SubscribeInput();
+    public void Init(Player player)
+    {
+        _player = player;
+        gameObject.SetActive(true);
+
+        _player.AllAbilities.Enabled += View;
+        _player.AllAbilities.Removed += RemoveView;
+
         TryHidePanel();
     }
 
     private void OnDestroy()
     {
-        _inputService.OnAbillity1Used -= () => ActivateAbilityByKey(AbilityKeyCode.First);
-        _inputService.OnAbillity2Used -= () => ActivateAbilityByKey(AbilityKeyCode.Second);
-        _inputService.OnAbillity3Used -= () => ActivateAbilityByKey(AbilityKeyCode.Third);
-        _inputService.OnAbillity4Used -= () => ActivateAbilityByKey(AbilityKeyCode.Fourth);
-        _container.AbilityActivated -= View;
-    }
-
-    private void SubscribeInput()
-    {
-        _inputService.OnAbillity1Used += () => ActivateAbilityByKey(AbilityKeyCode.First);
-        _inputService.OnAbillity2Used += () => ActivateAbilityByKey(AbilityKeyCode.Second);
-        _inputService.OnAbillity3Used += () => ActivateAbilityByKey(AbilityKeyCode.Third);
-        _inputService.OnAbillity4Used += () => ActivateAbilityByKey(AbilityKeyCode.Fourth);
+        _player.AllAbilities.Enabled -= RemoveView;
+        _player.AllAbilities.Removed -= View;
+        _inputService.OnAbillity1Used -= OnAbility1Used;
+        _inputService.OnAbillity2Used -= OnAbility2Used;
+        _inputService.OnAbillity3Used -= OnAbility3Used;
+        _inputService.OnAbillity4Used -= OnAbility4Used;
     }
 
     private void ActivateAbilityByKey(AbilityKeyCode key)
@@ -59,19 +63,21 @@ public class AbilityPanel : MonoBehaviour
         }
     }
 
-    private void View(AbilityConfig config, IAbility ability)
+    private void View(IAbility ability)
     {
         gameObject.SetActive(true);
-        _viewers[_count].ActivateViewer(ability, config, GetFreeKey(ability), _playerAttacker);
+        _viewers[_count].ActivateViewer(ability, GetFreeKey(ability), _player.Attacker);
         _count++;
     }
 
-    private void RemoveView(AbilityConfig config, IAbility ability)
+    private void RemoveView(IAbility ability)
     {
         foreach (var viewer in _viewers)
         {
             if (viewer.Ability == ability)
+            {
                 viewer.DeactivateViewer();
+            }
         }
 
         _count--;

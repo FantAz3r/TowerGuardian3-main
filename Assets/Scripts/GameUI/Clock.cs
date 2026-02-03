@@ -15,19 +15,15 @@ public class Clock : MonoBehaviour
     public void Init(DayCycle dayCycle)
     {
         _dayCycle = dayCycle;
-        _infiniteImage.gameObject.SetActive(false);
         _dayCycle.OnPhaseChanged += OnPhaseChanged;
         _dayCycle.TimePassedFromTransition += OnTimePassedFromTransition;
-        _dayCycle.OnPhaseInfinited += SetInfiniteTime;
+        TrySetInfiniteTime();
     }
 
     private void OnDestroy()
     {
-        if (_dayCycle == null) return;
-
         _dayCycle.OnPhaseChanged -= OnPhaseChanged;
         _dayCycle.TimePassedFromTransition -= OnTimePassedFromTransition;
-        _dayCycle.OnPhaseInfinited -= SetInfiniteTime;
     }
 
     private void OnPhaseChanged(DayPhase phase)
@@ -58,15 +54,30 @@ public class Clock : MonoBehaviour
         _remainingTime.text = $"{minutes:00}:{seconds:00}";
     }
 
-    private void SetInfiniteTime(DayPhase phase)
+    private void TrySetInfiniteTime()
     {
-        _dayCycle.OnPhaseChanged -= OnPhaseChanged;
-        _dayCycle.TimePassedFromTransition -= OnTimePassedFromTransition;
         float quarter = 90f;
-        _infiniteImage.gameObject.SetActive(true);
-        _remainingTime.gameObject.SetActive(false);
-        SetClockRotation(quarter, phase);
+        DayPhase phase = DayPhase.None;
+
+        if (_dayCycle.NightDuration == -1)
+        {
+            phase = DayPhase.Night;
+        }
+        else if (_dayCycle.DayDuration == -1)
+        {
+            phase = DayPhase.Day;
+        }
+
+        if (phase != DayPhase.None)
+        {
+            SetClockRotation(quarter, phase);
+            _infiniteImage.gameObject.SetActive(true);
+            _remainingTime.gameObject.SetActive(false);
+            _dayCycle.OnPhaseChanged -= OnPhaseChanged;
+            _dayCycle.TimePassedFromTransition -= OnTimePassedFromTransition;
+        }
     }
+
 
     private void SetClockRotation(float angle, DayPhase phase)
     {

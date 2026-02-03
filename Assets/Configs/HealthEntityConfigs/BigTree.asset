@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d2bc353e114fb94ab0b326efeaf3707, type: 3}
+  m_Script: {fileID: 11500000, guid: d8f80a2a199372247a3200e9b7de36be, type: 3}
   m_Name: BigTree
   m_EditorClassIdentifier: 
-  _maxHealth: 30
-  _damageToErn: 3
-  _rewardCount: 1
-  _spawnResource: 1
-  _spawnEffect: 1
+  <MaxHealth>k__BackingField: 25
+  <DamageToErn>k__BackingField: 5
+  <RewardCount>k__BackingField: 4
+  <SpawnResource>k__BackingField: 1
+  <SpawnEffect>k__BackingField: 1

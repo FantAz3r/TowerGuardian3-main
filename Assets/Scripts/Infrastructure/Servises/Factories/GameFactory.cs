@@ -2,49 +2,32 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
-public class GameFactory
+public class GameFactory : IGameFactory
 {
-    private GameUI _uiRoot;
-    private LevelConfig _levelConfig;
-
-    private Player _player;
-    private PlayerExperience _experience;
-    private Inventory _inventory;
-    private PlayerAttacker _attacker;
-    private Health _health;
-    private AttackZone _attackZone;
-    private PlayerMover _mover;
-    private PlayerCardConfigContainer _cardHolder;
-    private EnemyDetector _detector;
-    private QuestPointer _questPointer;
-
-    private WeaponFactory _weaponFactory;
-    private CardData _cardData;
-    private AllAbilities _allAbilities;
-
-    private QuestBuilder _questBuilder;
-    private List<CardButton> _buttons = new();
-    private ScoreCounter _scoreCounter;
-
-    private PortalFactory _portalFactory;
-    private List<Portal> _levelExits = new();
-    private DayCycle _cycle;
-
     private Tower _tower;
-    private TowerRenderer _towerRenderer;
-    private List<Floor> _floors = new();
-    private TowerDoor _towerDoor;
-    private StairsTrigger _stairsTrigger;
-
-    private OpenShopAction _openShopAction;
-    private OpenSellAction _openSellAction;
-
+    private EnemySpawner _enemySpawner;
+    private Tutorial _tutorial;
+    private QuestBuilder _questBuilder;
+    private PortalSwitcher _portalSwitcher;
+    private ISceneContainer _sceneContainer;
     private ISpawnerService _spawnerService;
+
+    public LevelID CurrentLevel { get; private set; }
+    public LevelConfig LevelConfig { get; private set; }
+    public DayCycle Cycle { get; private set; }
+    public Player Player { get; private set; }
+    public ScoreCounter ScoreCounter { get; private set; }
 
     public GameFactory()
     {
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
+    }
+
+    public void SetCurrentLevel(LevelID level)
+    {
+        CurrentLevel = level;
     }
 
     public void SetLevelConfig(LevelID level)
@@ -55,7 +38,21 @@ public class GameFactory
         {
             if (levelInfo.LevelID == level)
             {
-                _levelConfig = levelInfo.Config;
+                LevelConfig = levelInfo.Config;
+            }
+        }
+    }
+
+    public void SetSceneContainer()
+    {
+        var scene = SceneManager.GetActiveScene();
+        List<GameObject> parentObjects = scene.GetRootGameObjects().ToList();
+
+        foreach (var parent in parentObjects)
+        {
+            if (parent.TryGetComponent(out SceneContainer sceneContainer))
+            {
+                _sceneContainer = sceneContainer;
             }
         }
     }
@@ -63,19 +60,7 @@ public class GameFactory
     public void CreatePlayer(LevelID previousLevel)
     {
         PlayerSpawnPointSeter spawner = new PlayerSpawnPointSeter(Resources.Load<PlayerSpawnPoints>(GameConstants.PlayerSpawnPoints));
-        Player prefab = Resources.Load<Player>(GameConstants.Player);
-        _player = Object.Instantiate(prefab, spawner.GetSpawnPoint(_levelConfig, previousLevel), Quaternion.identity);
-
-        _attacker = _player.GetComponentInChildren<PlayerAttacker>();
-        _inventory = _player.GetComponentInChildren<Inventory>();
-        _attackZone = _player.GetComponentInChildren<AttackZone>();
-        _experience = _player.GetComponentInChildren<PlayerExperience>();
-        _cardHolder = _player.GetComponentInChildren<PlayerCardConfigContainer>();
-        _allAbilities = _player.GetComponentInChildren<AllAbilities>();
-        _detector = _player.GetComponentInChildren<EnemyDetector>();
-        _health = _player.GetComponent<Health>();
-        _mover = _player.GetComponentInChildren<PlayerMover>();
-        _questPointer = _player.GetComponentInChildren<QuestPointer>();
+        Player = Object.Instantiate(Resources.Load<Player>(GameConstants.Player), spawner.GetSpawnPoint(LevelConfig, previousLevel), Quaternion.identity);
     }
 
     public void CreateSpawners()
@@ -86,31 +71,24 @@ public class GameFactory
         SoundData soundData = Resources.Load<SoundData>(GameConstants.SoundData);
         SoundObject soundObject = Resources.Load<SoundObject>(GameConstants.SoundObject);
 
+        _spawnerService.RegisterSpawner(new SoundSpawner(soundData, soundObject));
         _spawnerService.RegisterSpawner(new PieceSpawner(resourceData));
         _spawnerService.RegisterSpawner(new DamageNumberSpawner(textObject));
         _spawnerService.RegisterSpawner(new EffectSpawner(effectData));
-        _spawnerService.RegisterSpawner(new SoundSpawner(soundData, soundObject));
     }
 
     public void CreateFocusController()
     {
-        ApplicationFocusController prefab = Resources.Load<ApplicationFocusController>(GameConstants.FocusController);
-        ApplicationFocusController focusController = Object.Instantiate(prefab);
-    }
-
-    public void CreateWeaponFactory()
-    {
-        _weaponFactory = new WeaponFactory(_player.transform, _attackZone);
+        ApplicationFocusController focusController = Object.Instantiate(Resources.Load<ApplicationFocusController>(GameConstants.FocusController));
     }
 
     public void CreateCamera()
     {
-        CameraFollower prefab = Resources.Load<CameraFollower>(GameConstants.MainCamera);
-        CameraFollower camera = Object.Instantiate(prefab);
+        CameraFollower camera = Object.Instantiate(Resources.Load<CameraFollower>(GameConstants.MainCamera));
         TransparencyTrigger transparencyTrigger = camera.GetComponent<TransparencyTrigger>();
 
-        transparencyTrigger.Init(_player.transform);
-        camera.Init(_player.transform);
+        transparencyTrigger.Init(Player.transform);
+        camera.Init(Player.transform);
     }
 
     public void CreateEventSystem()
@@ -122,144 +100,89 @@ public class GameFactory
 
     public void CreateScoreCounter()
     {
-        _scoreCounter = new ScoreCounter(_player, _levelConfig, _cycle);
-    }
-
-    public void CreateUI()
-    {
-        GameUI prefab = Resources.Load<GameUI>(GameConstants.GameUI);
-        _uiRoot = Object.Instantiate(prefab);
-    }
-
-    public void CreateHUD()
-    {
-        _uiRoot.ResourceViewer.Init(_inventory);
-        _uiRoot.PlayerHealthViewer.Init(_health);
-        _uiRoot.LevelViewer.Init(_experience);
-        _uiRoot.AbilityPanel.Init(_allAbilities, _attacker);
-        _uiRoot.WeaponPanel.Init(_cardHolder, _weaponFactory, _attacker);
-        _uiRoot.Clock.Init(_cycle);
-    }
-
-    public void InitUIWindows()
-    {
-        _uiRoot.Shop.Init(_inventory);
-        _uiRoot.Sell.Init(_inventory, _cardData, _cardHolder, _uiRoot.CardSelectionMenu);
-        _uiRoot.PauseUI.Init(_levelConfig.Level);
-        _uiRoot.WinLevelMenu.Init(_scoreCounter, _uiRoot, _levelConfig.Level);
-        _uiRoot.WinScoreViewer.Init(_scoreCounter);
-
-        _uiRoot.LouseLevelMenu.Init(_scoreCounter, _uiRoot, _levelConfig.Level);
-        _uiRoot.LouseLevelMenu.SetPlayerHealth(_health);
-
-        _uiRoot.StartLevelMenu.Init(_scoreCounter, _uiRoot, _levelConfig.Level);
-        _uiRoot.StartScoreViewer.Init(_scoreCounter);
-    }
-
-    public void CreateCards()
-    {
-        _cardData = Resources.Load<CardData>(GameConstants.CardData);
-    }
-
-    public void CreateCardsSelectionMenu()
-    {
-        CardData cardData = Resources.Load<CardData>(GameConstants.CardData);
-        _uiRoot.CardSelectionMenu.Init(_experience, new CardSelector(cardData), _buttons, _uiRoot);
-    }
-
-    public void CreateCardButtons()
-    {
-        int cardsCount = 3;
-        CardButton prefab = Resources.Load<CardButton>(GameConstants.CardViewer);
-        Transform container = _uiRoot.transform;
-
-        for (int i = 0; i < cardsCount; i++)
-        {
-            CardButton button = Object.Instantiate(prefab, container);
-            button.Init(_cardHolder, new List<ICardFactory> { _weaponFactory });
-            _buttons.Add(button);
-        }
+        ScoreCounter = new ScoreCounter(Player, LevelConfig);
     }
 
     public void CreateLight()
     {
-        DayCycle prefab = Resources.Load<DayCycle>(GameConstants.DirectionLight);
-        _cycle = Object.Instantiate(prefab);
-        _cycle.Init(_levelConfig);
+        Cycle = Object.Instantiate(Resources.Load<DayCycle>(GameConstants.DirectionLight));
+        Cycle.Init(LevelConfig);
     }
+
 
     public void CreateEnemies()
     {
-        EnemySpawner prefab = Resources.Load<EnemySpawner>(GameConstants.EnemySpawner);
-        EnemySpawner spawner = Object.Instantiate(prefab);
-        spawner.Init(_player, _cycle, _levelConfig);
-    }
-
-    public void CreateActions()
-    {
-        List<IAction> actions = new List<IAction>();
-        actions.Add(_openShopAction);
-        actions.Add(_openSellAction);
-        actions.Add(_uiRoot.transform.GetComponentInChildren<OpenBuildMenuAction>());
-
-        InteractionObjectFactory interactionObjectFactory = new InteractionObjectFactory(actions);
+        _enemySpawner = Object.Instantiate(Resources.Load<EnemySpawner>(GameConstants.EnemySpawner));
+        _enemySpawner.Init(Player, Cycle, LevelConfig);
     }
 
     public void CreatePortalsFactory()
     {
-        _portalFactory = new PortalFactory(_uiRoot.WinLevelMenu, _uiRoot.LouseLevelMenu, _uiRoot.StartLevelMenu);
-        _levelExits = _portalFactory.Create(_levelConfig.PortalData, _floors);
-    }
-
-    public void InitPlatforms()
-    {
-        _openShopAction = _uiRoot.Shop.GetComponent<OpenShopAction>();
-        _tower.ShopPlatform.Init(_openShopAction, _uiRoot, UIText.Shop);
+        _portalSwitcher = new PortalSwitcher();
+        _portalSwitcher.Init(_sceneContainer.Portals);
     }
 
     public void CreateQuests()
     {
-        if (_levelConfig.Level == LevelID.Tower)
+        if (LevelConfig.Level == LevelID.Tower)
         {
-            _questBuilder = new QuestBuilder(_mover, _attacker, _inventory, _cardHolder, _detector, _levelExits, _tower.Door, _tower.StairsFirstFloor);
+            _questBuilder = new QuestBuilder(Player, _sceneContainer.Portals, _tower.Door, _tower.StairsFirstFloor);
         }
         else
         {
-            _questBuilder = new QuestBuilder(_mover, _attacker, _inventory, _cardHolder, _detector, _levelExits);
+            _questBuilder = new QuestBuilder(Player, _sceneContainer.Portals);
         }
     }
 
     public void CreateTutorial()
     {
-        QuestData questData = Resources.Load<QuestData>(GameConstants.QuestData);
-        Tutorial tutorialPrefab = Resources.Load<Tutorial>(GameConstants.Tutorial);
-
-        Tutorial tutorial = Object.Instantiate(tutorialPrefab);
-        tutorial.Init(_levelConfig.Level, _questBuilder, questData, _levelConfig.Quests);
-
-        _questPointer.Init(_player.transform, tutorial);
-        _portalFactory.SetQuests(tutorial, _levelConfig.Level);
-        _uiRoot.QuestViewer.Init(tutorial);
-        tutorial.RunNextQuest();
+        _tutorial = Object.Instantiate(Resources.Load<Tutorial>(GameConstants.Tutorial));
+        _tutorial.Init(_questBuilder, LevelConfig.Level, LevelConfig.Quests);
+        Player.QuestPointer.Init(Player.transform, _tutorial);
     }
 
     public void CreateTower()
     {
-        TowerRenderer prefab = Resources.Load<TowerRenderer>(GameConstants.Tower);
-        _towerRenderer = Object.Instantiate(prefab);
-        _floors = _towerRenderer.Floors.ToList();
-        _towerRenderer.TryGetComponent(out Tower tower);
-        _tower = tower;
+        _tower = Object.Instantiate(Resources.Load<Tower>(GameConstants.Tower));
+        _sceneContainer = _tower;
     }
 
     public void CreateBackgroundSounds()
     {
-        BackGroundMusic prefab = Resources.Load<BackGroundMusic>(GameConstants.BackGroundMusic);
-        BackGroundMusic backGroundMusic = Object.Instantiate(prefab);
+        BackGroundMusic backGroundMusic = Object.Instantiate(Resources.Load<BackGroundMusic>(GameConstants.BackGroundMusic));
     }
 
-    public void ClearSpawners()
+    public void RunLevel()
     {
-        _spawnerService.DestroySpawners();
+        _tutorial?.RunQuests();
+        _enemySpawner?.StartSpawn();
+        Cycle?.StartDayCycle();
     }
+}
+
+public interface IGameFactory : IService
+{
+    LevelID CurrentLevel { get; }
+    LevelConfig LevelConfig { get; }
+    DayCycle Cycle { get; }
+    Player Player { get; }
+    ScoreCounter ScoreCounter { get; }
+
+    void SetCurrentLevel(LevelID level);
+    void SetLevelConfig(LevelID level);
+    void SetSceneContainer();
+    void CreatePlayer(LevelID previousLevel);
+    void CreateSpawners();
+    void CreateFocusController();
+    void CreateCamera();
+    void CreateEventSystem();
+    void CreateScoreCounter();
+    void CreateLight();
+    void CreateEnemies();
+    void CreatePortalsFactory();
+    void CreateQuests();
+    void CreateTutorial();
+    void CreateTower();
+    void CreateBackgroundSounds();
+    void RunLevel();
 }

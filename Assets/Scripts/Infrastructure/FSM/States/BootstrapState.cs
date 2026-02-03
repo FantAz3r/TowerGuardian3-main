@@ -24,11 +24,16 @@ public class BootstrapState : IState
 
     private void RegisterServices()
     {
-        ServicesLocator.Register<IStateSwitchService>(new StateSwitchService(_stateMachine));
-        ServicesLocator.Register<ILevelLoadingService>(new LevelLoadingService(_stateMachine));
-        ServicesLocator.Register<IInputService>(new InputService());
-        ServicesLocator.Register<ITimeService>(new TimeService(_coroutineRunner));
-        ServicesLocator.Register<ISpawnerService>(new SpawnerService());
-        ServicesLocator.Register<ICoroutineRunner>(_coroutineRunner);
+        ServiceLocator.Register<IStateSwitchService>(new StateSwitchService(_stateMachine));
+        ServiceLocator.Register<ILevelLoadingService>(new LevelLoadingService(_stateMachine));
+        ServiceLocator.Register<IInputService>(new InputService());
+        ServiceLocator.Register<ITimeService>(new TimeService(_coroutineRunner));
+        ServiceLocator.Register<ISpawnerService>(new SpawnerService());
+        ServiceLocator.Register(_coroutineRunner);
+        ServiceLocator.Register<IGameFactory>(new GameFactory());
+
+        IWindowService windowService = new WindowService(new UIFactory());
+        ServiceLocator.Register(windowService);
+        ServiceLocator.Register<IGameConditionService>(new GameConditionService(windowService));
     }
 }

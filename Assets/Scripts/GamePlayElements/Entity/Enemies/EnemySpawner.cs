@@ -7,18 +7,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Enemy _enemyPrefab;
 
     private IReadOnlyList<SpawnerActivator> _spawnPoints;
-    private ISpawnerService _spawnerService;
     private ObjectPool<Enemy> _pool;
     private DayCycle _dayCycle;
     private Player _player;
     private LevelConfig _currentConfig;
+    private Coroutine _spawnRoutine;
 
     private WaitForSeconds _nightSpawnDelay;
     private WaitForSeconds _daySpawnDelay;
 
     public void Init(Player player, DayCycle dayCycle, LevelConfig config)
     {
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
         _player = player;
         _dayCycle = dayCycle;
         _currentConfig = config;
@@ -29,7 +28,17 @@ public class EnemySpawner : MonoBehaviour
 
         _pool = new ObjectPool<Enemy>(_enemyPrefab, 0, true);
 
-        StartCoroutine(SpawnRoutine());
+    }
+
+    public void StartSpawn()
+    {
+        _spawnRoutine = StartCoroutine(SpawnRoutine());
+    }
+
+    public void StopSpawn()
+    {
+        if (_spawnRoutine != null)
+            StopCoroutine(_spawnRoutine);
     }
 
     private IEnumerator SpawnRoutine()

@@ -31,7 +31,7 @@ namespace YG.Example
             string platformName = $"platform = <color=#cd5200>{YG2.platform}</color>";
             string isFirstGameSession = $"is First Game Session = {YG2.isFirstGameSession.ToString()}";
             string gameplaying = $"is Gameplaying = {YG2.isGameplaying.ToString()}";
-            string pauseGame = $"is Pause Game = {YG2.isPauseGame.ToString()}";
+            string pauseGame = $"is PauseAll Game = {YG2.isPauseGame.ToString()}";
             string buildNumber = $"build Number = {YG2.buildNumber.ToString()}";
 
             dataText.text = $"{platformName}\n{isFirstGameSession}\n{gameplaying}\n{pauseGame}\n{buildNumber}";

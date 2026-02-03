@@ -23,7 +23,7 @@ public class ResourceCollector : MonoBehaviour, IBuffble
         _wait = new WaitForSeconds(_flyDelay);
         _collectionCollider = GetComponent<SphereCollider>();
         _startRange = _collectionCollider.radius;
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
     }
 
     private void Start()
@@ -65,5 +65,14 @@ public class ResourceCollector : MonoBehaviour, IBuffble
     {
         _collectionCollider.radius = _startRange * (1 + value);
         RangeSeted?.Invoke(_collectionCollider.radius);
+    }
+
+    public void RemoveBuff()
+    {
+        _collectionCollider.radius = _startRange;
+    }
+
+    public void EnableBuff()
+    {
     }
 }

@@ -1,20 +1,18 @@
-public class SpeedBuff : IBuff
+public class SpeedBuff : Buff
 {
-    private Mover _mover;
+    private IBuffble _buffbleComponent;
 
-    public SpeedBuff(Mover mover)
+    public SpeedBuff(IBuffble mover) => _buffbleComponent = mover;
+
+    public override BuffType Type => BuffType.MoveSpeed;
+
+    public override void Upgrade()
     {
-        _mover = mover;
+        _buffbleComponent.ApplyBuff(Config.IncreaseValue);
     }
 
-    public BuffType Type => BuffType.MoveSpeed;
-
-    public void UpdateBuff(float value)
+    public override void Remove()
     {
-        _mover.ApplyBuff(value);
-    }
-
-    public void EnableBuff()
-    {
+        _buffbleComponent.RemoveBuff();
     }
 }

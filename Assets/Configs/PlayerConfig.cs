@@ -1,17 +1,13 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/Player")]
-public class PlayerConfig : MoveConfig, ILevelConfig
+public class PlayerConfig : ScriptableObject, ILevelConfig
 {
-    [SerializeField] private float _healthRegeneration = 1f;
-    [SerializeField] private int _inventoryCapacity = 1000;
+    [field: SerializeField] public MoveConfig MoveConfig { get; private set; }
+    [field: SerializeField] public HealthConfig HealthConfig { get; private set; }
 
-    [SerializeField] private float _baseLvlCost = 100f;
-    [SerializeField] private float _levelCostMultiplier = 1.5f;
-
-    public float HealthRegeneration => _healthRegeneration;
-    public int InventoryCapacity => _inventoryCapacity;
-
-    public float BaseLvlCost => _baseLvlCost;
-    public float LevelCostMultiplier => _levelCostMultiplier;
+    [field: SerializeField] public float HealthRegeneration { get; private set; } = 1f;
+    [field: SerializeField] public int InventoryCapacity { get; private set; } = 10000;
+    [field: SerializeField] public float BaseLvlCost { get; private set; } = 100f;
+    [field: SerializeField] public float LevelCostMultiplier { get; private set; } = 1.5f;
 }

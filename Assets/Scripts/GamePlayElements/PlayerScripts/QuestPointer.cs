@@ -14,24 +14,29 @@ public class QuestPointer : MonoBehaviour
         _player = player;
         _tutorial = tutorial;
 
-        _tutorial.QuestSeted += OnQuestSeted;
-        _tutorial.Complited += OnQuestCompleted;
-        _tutorial.CompliteWithoutLust += OnQuestCompleted;
+        _tutorial.QuestStarted += OnQuestSeted;
+        _tutorial.QuestCompleted += OnQuestCompleted;
     }
 
     private void OnDestroy()
     {
-        _tutorial.QuestSeted -= OnQuestSeted;
-        _tutorial.Complited -= OnQuestCompleted;
-        _tutorial.CompliteWithoutLust -= OnQuestCompleted;
+        _tutorial.QuestStarted -= OnQuestSeted;
+        _tutorial.QuestCompleted -= OnQuestCompleted;
         StopPointerRoutine();
     }
 
     private void OnQuestSeted(IQuest quest)
     {
+        if (quest == null)
+        {
+            StopPointerRoutine();
+            gameObject.SetActive(false);
+            return;
+        }
+
         _target = quest.TryGetTarget();
 
-        if (_target != null)
+        if (_target != Vector3.zero)
         {
             gameObject.SetActive(true);
             StartPointerRoutine();

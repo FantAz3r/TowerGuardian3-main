@@ -3,51 +3,50 @@ using UnityEngine;
 
 public class Portal : BuildingObject
 {
-    [SerializeField] private MeshRenderer _materialInner;
-    [SerializeField] private MeshRenderer _materialOuter; 
+    [SerializeField] private LevelID _nextLevel;
+    [SerializeField] private LevelID _currentLevel;
 
-    private LevelID _levelID;
-    private LevelID _currentLevel;
-    private WinLevelMenu _winMenu;
-    private LouseLevelMenu _louseMenu;
-    private StartLevelMenu _startLevelMenu;
+    private bool _canExit = true;
+    private IGameConditionService _conditionService;
 
     public event Action EnemyEntered;
     public event Action Entered;
-    public LevelID NextLevel => _levelID;
+    public LevelID NextLevel => _nextLevel;
 
-    public void Init(WinLevelMenu finishLMenu, LouseLevelMenu louseMenu, LevelID portalLevelID, Material material, LevelID currentLevel = LevelID.None, StartLevelMenu startLevelMenu = null)
+    private void Awake()
     {
-        _winMenu = finishLMenu;
-        _louseMenu = louseMenu;
-        _currentLevel = currentLevel;
-        _levelID = portalLevelID;
-        _startLevelMenu = startLevelMenu;
-
-        _materialInner.material = material;
-        _materialInner.material = material;
+        _conditionService = ServiceLocator.Get<IGameConditionService>();
     }
 
     private void OnTriggerEnter(Collider other)
-    {    
-        if (other.TryGetComponent<Player>(out _))
-        {
-            if (_currentLevel == LevelID.Tower)
-            {
-                _startLevelMenu.SetPortalLevel(_levelID);
-            }
-            else
-            {
-                _winMenu.LevelEnd(_levelID);
-            }
-
-            Entered?.Invoke();
-        }
-
-        if(other.TryGetComponent(out Enemy enemy))
+    {
+        if (other.TryGetComponent(out Enemy enemy))
         {
             EnemyEntered?.Invoke();
             enemy.gameObject.SetActive(false);
         }
+
+        if (_canExit == false)
+            return;
+
+        if (other.TryGetComponent<Player>(out _))
+        {
+            if (_currentLevel == LevelID.Tower)
+            {
+                _conditionService.OnStart(this);
+            }
+            else
+            {
+                _conditionService.OnWin();
+            }
+
+            Entered?.Invoke();
+        }
+    }
+
+    public void CanExit(bool canExit)
+    {
+        gameObject.SetActive(true);
+        _canExit = canExit;
     }
 }

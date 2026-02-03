@@ -10,17 +10,24 @@ public class CollectQuest : Quest
 
     public override void Run()
     {
+        base.Run();
         _inventory.WoodCollected += UpdateProgress;
-    }
-
-    public override void Stop()
-    {
-        _inventory.WoodCollected -= UpdateProgress;
     }
 
     public override void Complete()
     {
-        Stop();
         base.Complete();
+        _inventory.WoodCollected -= UpdateProgress;
+    }
+
+    public override void UpdateProgress()
+    {
+        CurrentValue++;
+        base.UpdateProgress();
+
+        if(CurrentValue >= Config.TargetValue)
+        {
+            Complete();
+        }
     }
 }

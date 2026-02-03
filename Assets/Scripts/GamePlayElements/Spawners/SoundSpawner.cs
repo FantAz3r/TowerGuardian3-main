@@ -17,7 +17,7 @@ public class SoundSpawner : BaseSpawner
     public SoundSpawner(SoundData data, SoundObject prefab)
     {
         _soundData = data;
-        _coroutineRunner = ServicesLocator.GetService<ICoroutineRunner>();
+        _coroutineRunner = ServiceLocator.Get<ICoroutineRunner>();
 
         foreach (var info in data.SoundInfos)
         {

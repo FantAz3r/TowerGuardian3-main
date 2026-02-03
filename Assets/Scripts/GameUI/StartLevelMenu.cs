@@ -7,43 +7,48 @@ public class StartLevelMenu : LevelMenu
     [SerializeField] private Button _startButton;
     [SerializeField] private TMP_Text _levelText;
 
-    private LevelID _portalLevel;
-    public LevelID PortalLevel => _portalLevel;
+    private LevelID _nextLevel;
+
+    public void Init(ScoreCounter scoreCounter, LevelID currentLevel, LevelID nextLevel)
+    {
+        base.Init(scoreCounter, currentLevel);
+        _nextLevel = nextLevel;
+        _levelText.text = nextLevel.ToString();
+    }
 
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         _startButton.onClick.AddListener(OnStartClicked);
+
     }
 
-    public void SetPortalLevel(LevelID level)
+    protected override void OnDisable()
     {
-        _portalLevel = level;
-        _levelText.text = level.ToString();
-        OpenMenu();
+        _startButton.onClick.RemoveListener(OnStartClicked);
+        base.OnDisable();
     }
 
-    protected override void OpenMenu()
+    public override void Open()
     {
-        base.OpenMenu();
-        ScoreCounter.OnEndLevel(_portalLevel);
+        base.Open();
+        ScoreCounter.OnEndLevel(_nextLevel);
     }
 
     private void OnStartClicked()
     {
-        StateSwitchService.Switch(_portalLevel);
-        CloseMenu();
+        StateSwitchService.Switch(_nextLevel);
+        Close();
     }
 
     protected override void OnHomeClicked()
     {
-        CloseMenu();
-    }
-
-    protected override void OnDestroy()
-    {
-        _startButton.onClick.RemoveListener(OnStartClicked);
-        base.OnDestroy();
+        Close();
     }
 }
 

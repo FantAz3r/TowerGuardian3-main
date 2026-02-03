@@ -1,6 +1,3 @@
-public interface IBuff
+public interface IBuff : IItem<BuffType, BuffConfig>
 {
-    BuffType Type { get; }
-    void EnableBuff();
-    void UpdateBuff(float value);
 }

@@ -31,7 +31,7 @@ namespace YG.Example
             rotationObj.Rotate(Vector3.up * 30 * Time.deltaTime);
 
             timeScaleText.text = "Time Scale: " + Time.timeScale;
-            audioPauseText.text = "Audio Pause: " + AudioListener.pause;
+            audioPauseText.text = "Audio PauseAll: " + AudioListener.pause;
 
             if (Time.timeScale != 1)
             {

@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d414dbdc31c1646ad23cdb64714c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 11400000, guid: a723b5db6c77e274eb43c07896b6ed8b, type: 2}
+  _configObject: {fileID: 0}
   _obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: a723b5db6c77e274eb43c07896b6ed8b, type: 2}
+  _config: {fileID: 11400000, guid: f06681e7829e60e40943e43d67ff873b, type: 2}
   _type: 0
 --- !u!114 &2766612530285442000
 MonoBehaviour:
@@ -440,7 +440,7 @@ PrefabInstance:
     - target: {fileID: 8840934544898626473, guid: 1f05b36eff9f0c941a187ddef4a43a0a, type: 3}
       propertyPath: _config
       value: 
-      objectReference: {fileID: 11400000, guid: a723b5db6c77e274eb43c07896b6ed8b, type: 2}
+      objectReference: {fileID: 11400000, guid: e96252a20119eea4886b8b47a66ba8b9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5545680536550988291, guid: 1f05b36eff9f0c941a187ddef4a43a0a, type: 3}

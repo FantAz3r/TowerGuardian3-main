@@ -44,6 +44,12 @@ public class DayCycle : MonoBehaviour
     private float GetIntensity(DayPhase phase)
         => phase == DayPhase.Day ? _dayLightIntensity : _nightLightIntensity;
 
+
+    private void Awake()
+    {
+        _currentPhase = DayPhase.Day;
+    }
+
     public void Init(LevelConfig config)
     {
         _dayDuration = config.DayDuration;
@@ -55,12 +61,19 @@ public class DayCycle : MonoBehaviour
         _transitionDuration = config.TransitionDuration;
         _timeRemaining = config.DayDuration;
         _directionalLight = GetComponent<Light>();
-        StartCoroutine(CheckForInfinite());
     }
 
-    private void Awake()
+    public void StartDayCycle()
     {
-        _currentPhase = DayPhase.Day;
+        _phaseCoroutine = StartCoroutine(CheckForInfinite());
+    }
+
+    public void StopDayCycle()
+    {
+        if(_phaseCoroutine != null)
+        {
+            StopCoroutine(_phaseCoroutine);
+        }
     }
 
     private IEnumerator CycleCoroutine()
@@ -136,14 +149,12 @@ public class DayCycle : MonoBehaviour
         if (_dayDuration == -1)
         {
             ApplyLighting(_dayLightColor, _dayLightIntensity);
-            OnPhaseInfinited?.Invoke(DayPhase.Day);
             yield break;
         }
 
         if (_nightDuration == -1)
         {
             ApplyLighting(_nightLightColor, _nightLightIntensity);
-            OnPhaseInfinited?.Invoke(DayPhase.Night);
             yield break;
         }
 

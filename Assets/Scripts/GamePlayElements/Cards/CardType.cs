@@ -1,6 +1,6 @@
 public enum CardType 
 {
-   WeaponSetter,
+   Weapon,
    Buff,
    Ability
 }

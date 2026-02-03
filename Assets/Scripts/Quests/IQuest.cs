@@ -4,12 +4,11 @@ using UnityEngine;
 public interface IQuest
 {
     QuestConfig Config { get; }
-    int Goal { get; }
-
-    event Action<int> Updated;
 
     event Action OnCompleted;
 
+    QuestType GetQuestType();
+    void SetConfig(QuestConfig config);
     void UpdateProgress();
     void Run();
     void Stop();

@@ -13,21 +13,19 @@ public class LevelViewer : MonoBehaviour
     public void Init(PlayerExperience playerExperience)
     {
         _playerExperience = playerExperience;
+
+        gameObject.SetActive(true);
+        View(_playerExperience.CurrentExp, _playerExperience.ExpToNextLevel);
+
         _playerExperience.OnExperienceAdded += View;
         _playerExperience.OnLevelUp += OnLevelUp;
-
-
-        View(_playerExperience.CurrentExp, _playerExperience.ExpToNextLevel);
-        OnLevelUp(_playerExperience.CurrentLevel);
+        OnLevelUp();
     }
 
     private void OnDestroy()
     {
-        if (_playerExperience != null)
-        {
-            _playerExperience.OnExperienceAdded -= View;
-            _playerExperience.OnLevelUp -= OnLevelUp;
-        }
+        _playerExperience.OnExperienceAdded -= View;
+        _playerExperience.OnLevelUp -= OnLevelUp;
     }
 
     private void View(float currentExp, float expForNextLevel)
@@ -36,8 +34,8 @@ public class LevelViewer : MonoBehaviour
         _experienceFillImage.value = Mathf.Clamp01(currentExp / expForNextLevel);
     }
 
-    private void OnLevelUp(int newLevel)
+    private void OnLevelUp()
     {
-        _levelText.text = newLevel.ToString();
+        _levelText.text = _playerExperience.CurrentLevel.ToString();
     }
 }

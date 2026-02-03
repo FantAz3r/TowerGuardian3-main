@@ -1,34 +1,31 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using YG;
 
 public class ScoreCounter
 {
     private float _currentScore;
-    private int _time = 0;
+    private float _time = 0;
     private LevelID _currentLevel;
 
     private LevelConfig _config;
     private PlayerAttacker _attacker;
     private Player _player;
     private AllAbilities _allAbilities;
-    private DayCycle _dayCycle;
 
-    public event Action<float, int, int> LevelEnded;
+    public event Action<float, float, int> LevelEnded;
 
-    public ScoreCounter(Player player, LevelConfig config, DayCycle dayCycle)
+    public ScoreCounter(Player player, LevelConfig config)
     {
         _player = player;
         _config = config;
-        _dayCycle = dayCycle;
 
         _currentLevel = _config.Level;
-        _attacker = _player.GetComponentInChildren<PlayerAttacker>();
-        _allAbilities = _player.GetComponentInChildren<AllAbilities>();
+        _attacker = _player.Attacker;
 
         _attacker.DialedDamage += Add;
-        _allAbilities.DialedDamage += Add;
-        _dayCycle.TimePassedFromStart += AddTime;
+        _time = Time.time;
     }
 
     public void OnEndLevel(LevelID level = LevelID.None)
@@ -36,24 +33,18 @@ public class ScoreCounter
         if(level == LevelID.None)
         {
             _attacker.DialedDamage -= Add;
-            _allAbilities.DialedDamage -= Add;
-            LevelEnded?.Invoke(_currentScore, _time, CalculateStars());
+            LevelEnded?.Invoke(_currentScore, Time.time - _time, CalculateStars());
             SaveScore();
         }
         else
         {
-            ShowBestScore(level);
+            LoadBestScore(level);
         }
     }
 
     private void Add(float score)
     {
         _currentScore += score;
-    }
-
-    private void AddTime(float value)
-    {
-        _time = (int)value;
     }
 
     private int CalculateStars()
@@ -106,7 +97,7 @@ public class ScoreCounter
         YG2.SaveProgress();
     }
 
-    private void ShowBestScore(LevelID level)
+    private void LoadBestScore(LevelID level)
     {
         if (YG2.saves.LevelsProgress == null)
         {

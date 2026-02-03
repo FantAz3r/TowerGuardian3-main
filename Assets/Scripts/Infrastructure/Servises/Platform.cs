@@ -5,14 +5,14 @@ using UnityEngine;
 public class Platform : InteractionMethod
 {
     [SerializeField] private float _interactionTime = 1.5f;
-
     private float _currentTime = 0f;
     private float _delta = 0.1f;
     private bool _playerInZone = false;
 
+    private IWindowService _windowService;
+    private Player _player;
     private WaitForSeconds _wait;
     private Coroutine _timerCoroutine = null;
-    private PlatformViewer _viewer;
 
     public event Action PlayerEnteredZone;
     public event Action PlayerExitedZone;
@@ -21,16 +21,17 @@ public class Platform : InteractionMethod
 
     private void Awake()
     {
+        _windowService = ServiceLocator.Get<IWindowService>();
         _wait = new WaitForSeconds(_delta);
-        _viewer = GetComponent<PlatformViewer>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Player>(out _))
+        if (other.TryGetComponent(out Player player))
         {
             _playerInZone = true;
             PlayerEnteredZone?.Invoke();
+            _player = player;
             StartTimerCoroutine();
         }
     }
@@ -39,16 +40,11 @@ public class Platform : InteractionMethod
     {
         if (other.TryGetComponent<Player>(out _))
         {
+            _player = null;
             _playerInZone = false;
             PlayerExitedZone?.Invoke();
             StartTimerCoroutine();
         }
-    }
-
-    public override void Init(IAction action, GameUI gameUI, string name = "")
-    {
-        base.Init(action, gameUI, name);
-        _viewer.SetText(name);
     }
 
     private void StartTimerCoroutine()
@@ -92,7 +88,7 @@ public class Platform : InteractionMethod
 
     public override void Interact()
     {
-        base.Interact();
+        _windowService.Open(WindowType.Shop, _player.gameObject);
     }
 }
 

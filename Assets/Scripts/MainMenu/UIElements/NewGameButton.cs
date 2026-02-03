@@ -10,7 +10,7 @@ public class NewGameButton : MonoBehaviour
 
     private void Awake()
     {
-        _switchService = ServicesLocator.GetService<IStateSwitchService>();
+        _switchService = ServiceLocator.Get<IStateSwitchService>();
         _button = GetComponent<Button>();
     }
 

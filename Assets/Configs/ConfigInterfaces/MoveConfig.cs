@@ -1,10 +1,8 @@
 using UnityEngine;
+[CreateAssetMenu(fileName = "MoveConfig", menuName = "Configs/MoveConfig")]
 
-public abstract class MoveConfig : HealthConfig, IMoveConfig
+public class MoveConfig : ScriptableObject, IMoveConfig
 {
-    [SerializeField] private float _moveSpeed = 1f;
-    [SerializeField] private float _rotationSpeed = 1f;
-
-    public float MoveSpeed => _moveSpeed;
-    public float RotationSpeed => _rotationSpeed;
+    [field: SerializeField] public float MoveSpeed { get; private set; } = 1f;
+    [field: SerializeField] public float RotationSpeed { get; private set; } = 1f;
 }

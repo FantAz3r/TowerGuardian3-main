@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 
-public class Mover : MonoBehaviour
+public class Mover : MonoBehaviour, IBuffble
 {
     [SerializeField] private MoveConfig _configObject;
     [SerializeField] private LayerMask _obstacleLayerMask;
@@ -21,9 +21,9 @@ public class Mover : MonoBehaviour
         if (_configObject == null)
             throw new ArgumentNullException();
 
-        _moveSpeed = _configObject.MoveSpeed;
-        _startSpeed = _moveSpeed;
-    }
+        _startSpeed = _configObject.MoveSpeed;
+        _moveSpeed = _startSpeed;
+    } 
 
     private void Update()
     {
@@ -57,5 +57,14 @@ public class Mover : MonoBehaviour
     public void ApplyBuff(float value)
     {
         _moveSpeed = _startSpeed * (1 + value);
+    }
+
+    public void RemoveBuff()
+    {
+        _moveSpeed = _startSpeed;
+    }
+
+    public void EnableBuff()
+    {
     }
 }

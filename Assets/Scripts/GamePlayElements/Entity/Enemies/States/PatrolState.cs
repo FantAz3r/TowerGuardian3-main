@@ -59,7 +59,7 @@ public class PatrolState : State
             }
             else
             {
-                _animator.UpdateSpeed(_stateMashine.Config.MoveSpeed);
+                _animator.UpdateSpeed(_stateMashine.Config.MoveConfig.MoveSpeed);
             }
 
             yield return _delay;

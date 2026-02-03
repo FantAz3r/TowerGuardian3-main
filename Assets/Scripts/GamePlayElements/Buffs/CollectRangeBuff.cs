@@ -1,20 +1,25 @@
-public class CollectRangeBuff : IBuff
+public class CollectRangeBuff : Buff
 {
-    private ResourceCollector _collector;
+    private IBuffble _buffbleObject;
 
-    public CollectRangeBuff(ResourceCollector collector)
+    public CollectRangeBuff(IBuffble collector)
     {
-        _collector = collector;
+        _buffbleObject = collector;
     }
 
-    public BuffType Type => BuffType.CollectRange;
-    
-    public void UpdateBuff(float value)
+    public override BuffType Type => BuffType.CollectRange;
+
+    public override void Enable()
     {
-        _collector.ApplyBuff(value);
     }
 
-    public void EnableBuff()
+    public override void Upgrade()
     {
+        _buffbleObject.ApplyBuff(Config.IncreaseValue);
+    }
+
+    public override void Remove()
+    {
+        _buffbleObject.RemoveBuff();
     }
 }

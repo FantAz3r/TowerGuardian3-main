@@ -17,7 +17,7 @@ public class ResourcePiece : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponentInChildren<ResourcePieceAnimator>();
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
     }
 
     public void OnTake()

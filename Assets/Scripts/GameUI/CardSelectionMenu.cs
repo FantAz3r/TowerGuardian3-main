@@ -1,133 +1,123 @@
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using YG;
 
-public class CardSelectionMenu : MonoBehaviour
+public class CardSelectionMenu : PauseWindow
 {
-    [SerializeField] private TMP_Text _text;
-    [SerializeField] private Button _showButton;
-    [SerializeField] private UIDummy _panel;
+    [SerializeField] private RectTransform _buttonsParent;
 
-    private GameUI _uiRoot;
     private List<CardButton> _cardsButtons;
-    private PlayerExperience _playerExperience;
     private CardSelector _selector;
-    private ITimeService _timeService;
-    private int _selectCount;
+    private Player _player;
+    private List<ICardConfig> _currentCards;
+    private IWindowService _windowService; 
 
-    public void Init(PlayerExperience playerExperience, CardSelector selector, List<CardButton> cardsButtons, GameUI uiRoot)
+    protected override void Awake()
     {
-        _uiRoot = uiRoot;
-        _playerExperience = playerExperience;
-        _selector = selector;
-        _cardsButtons = cardsButtons;
-        _timeService = ServicesLocator.GetService<ITimeService>();
+        base.Awake();
+        _selector = new CardSelector(Resources.Load<CardData>(GameConstants.CardData));
+        _windowService = ServiceLocator.Get<IWindowService>();
+    }
 
-        LoadUpgradeScore();
-        _showButton.gameObject.SetActive(_selectCount > 0);
-        _text.text = _selectCount.ToString();
+    public void Init(Player player)
+    {
+        _player = player;
+    }
 
-        _playerExperience.OnLevelUp += AddPoints;
-
-        GridLayoutGroup panel = GetComponentInChildren<GridLayoutGroup>();
+    private void OnDisable()
+    {
+        _cardsButtons.Clear();
 
         foreach (var button in _cardsButtons)
         {
-            button.Selected += Close;
-            button.transform.SetParent(panel.transform);
+            button.Selected -= CloseMenu;
+            Destroy(button.gameObject);
         }
-
-        _panel.gameObject.SetActive(false);
     }
 
-    private void OnDestroy()
+    public override void Open()
     {
-        _playerExperience.OnLevelUp -= AddPoints;
+        base.Open();
+        OpenMenu();
+    }
 
-        foreach (var button in _cardsButtons)
+
+    public void OpenMenu()
+    {
+        if (_currentCards == null)
         {
-            button.Selected -= Close;
+            _currentCards = _selector.GetCards().ToList();
         }
+
+        if (_currentCards.Count == 0 || _player.Experience.UpgradePoints <= 0)
+            return;
+
+        _cardsButtons = CreateCards();
+
+        base.Open();
+        ShowCards(_currentCards);
     }
 
-    public void Open()
-    {
-        List<ICardConfig> cards = _selector.GetCards().ToList();
 
-        if (cards.Count > 0)
-        {
-            if (_selectCount < 0)
-                return;
-
-            MenuOpen();
-            _uiRoot.HUD.Disable();
-            ShowCards(cards);
-        }
-    }
-
-    public void Close()
-    {
-        _selectCount--;
-        _text.text = _selectCount.ToString();
-
-        if (_selectCount > 0)
-        {
-            Open();
-        }
-        else
-        {
-            ShowButton();
-            CloseMenu();
-            _uiRoot.HUD.Enable();
-            SaveUpgradeScore();
-        }
-    }
-
-    public void AddPoints(int points)
-    {
-        _selectCount += points;
-        _showButton.gameObject.SetActive(true);
-        _text.text = _selectCount.ToString();
-        SaveUpgradeScore();
-    }
-
-    private void ShowCards(List<ICardConfig> cards)
-    {
-        for (int i = 0; i < cards.Count; i++)
-        {
-            _cardsButtons[i].gameObject.SetActive(true);
-            _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i]);
-            _cardsButtons[i].SetCard(cards[i]);
-        }
-    }
-
-    private void MenuOpen()
-    {
-        _panel.gameObject.SetActive(true);
-        _timeService.PauseGame();
-    }
 
     public void CloseMenu()
     {
-        _panel.gameObject.SetActive(false);
-        _timeService.Resume();
+        _player.Experience.RemoveUpgradePoint(1);
+        DestroyCards();
+
+        if (_player.Experience.UpgradePoints > 0)
+        {
+            OpenMenu();
+        }
+        else
+        {
+            base.Close();
+            _windowService.Open(WindowType.HUD);
+        }
     }
 
-    private void ShowButton()
+
+    private void ShowCards(List<ICardConfig> cards)
     {
-        _showButton.gameObject.SetActive(_selectCount > 0);
+        for (int i = 0; i < _cardsButtons.Count; i++)
+        {
+            if (i < cards.Count)
+            {
+                _cardsButtons[i].gameObject.SetActive(true);
+                _cardsButtons[i].GetComponent<CardViewer>().Render(cards[i]);
+                _cardsButtons[i].SetCard(cards[i]);
+            }
+            else
+            {
+                _cardsButtons[i].gameObject.SetActive(false);
+            }
+        }
     }
 
-    private void SaveUpgradeScore()
+    private List<CardButton> CreateCards()
     {
-        YG2.saves.UpgradePoints = _selectCount;
+        int maxCardCount = 3;
+        List<CardButton> cards = new List<CardButton>();
+        CardButton prefab = Resources.Load<CardButton>(GameConstants.Card);
+
+        for (int i = 0; i < maxCardCount; i++)
+        {
+            CardButton card = Instantiate(prefab, _buttonsParent);
+            card.Init(_player.CardHolder);
+            cards.Add(card);
+            card.Selected += CloseMenu;
+        }
+
+        return cards;
     }
 
-    private void LoadUpgradeScore()
+    private void DestroyCards()
     {
-        _selectCount = YG2.saves.UpgradePoints;
+        foreach (var cardButton in _cardsButtons)
+        {
+            Destroy(cardButton);
+        }
+
+        _currentCards = null;
     }
 }

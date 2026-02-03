@@ -1,33 +1,26 @@
 
-using UnityEngine;
-
 public class UpgradeQuest : Quest
 {
-    private PlayerCardConfigContainer _cardContainer;
-    public override QuestType GetQuestType()
-    {
-        return QuestType.Upgrade;
-    }
+    private Player _player;
+    public override QuestType GetQuestType() => QuestType.Upgrade;
 
-    public UpgradeQuest(PlayerCardConfigContainer cardContainer)
-    {
-        _cardContainer = cardContainer;
-    }
+    public UpgradeQuest(Player player) => _player = player;
 
     public override void Run()
     {
-        _cardContainer.Added += Complete;
-        _cardContainer.Upgraded += Complite;
+        base.Run();
+        _player.CardHolder.CardAdded += Complete;
+        _player.CardHolder.Upgraded += Complete;
     }
 
     public override void Complete()
     {
-        _cardContainer.Added -= Complete;
-        _cardContainer.Upgraded += Complite;
         base.Complete();
+        _player.CardHolder.CardAdded -= Complete;
+        _player.CardHolder.Upgraded -= Complete;
     }
 
-    private void Complite(ICardConfig useles)
+    private void Complete(ICardConfig useles)
     {
         Complete();
     }

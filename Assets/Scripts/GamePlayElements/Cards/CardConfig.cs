@@ -1,31 +1,37 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CardConfig : ShopConfig, ICardConfig
 {
     [SerializeField, Range(0f, 1f)] private float _chanceToView;
-    [SerializeField] private int _level = 0;
+    [field: SerializeField] public int Level { get; private set; } = 0; 
     [SerializeField] private bool _hasPlayer;
     [SerializeField] private bool _isBought;
 
     public float ChanceToView => _chanceToView;
-    public int Level => _level;
     public bool HasPlayer => _hasPlayer;
     public bool IsBought => _isBought;
+
+    public event Action Upgraded;
 
     public abstract CardType GetCardType();
     public abstract List<CardStats> GetStats();
 
-    public CardSaveData CreateSaveData(bool isBought = false) => new CardSaveData(_level, ID, isBought, _hasPlayer);
+    public CardSaveData CreateSaveData(bool isBought = false) => new CardSaveData(Level, ID, isBought, _hasPlayer);
 
     public void InitFromData(CardSaveData data)
     {
-        _level = data.Level;
+        Level = data.Level;
         _hasPlayer = data.HasPlayer;
         _isBought = data.IsBought;
     } 
 
-    public void Upgrade() => _level++;
+    public void Upgrade()
+    {
+        Level++;
+        Upgraded?.Invoke();
+    }
 
     public override List<CostInfo> GetCosts()
     {
@@ -34,7 +40,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
 
         foreach (var info in Costs)
         {
-            float newAmount = info.Value * Mathf.Pow(_level == 0 ? 1 : _level, exponent);
+            float newAmount = info.Value * Mathf.Pow(Level == 0 ? 1 : Level, exponent);
             increasedCosts.Add(new CostInfo(info.ResourceType, Mathf.CeilToInt(newAmount), info.Image));
         }
 

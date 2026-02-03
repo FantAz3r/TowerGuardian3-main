@@ -11,7 +11,7 @@ public class BackGroundMusic : MonoBehaviour
 
     private void Awake()
     {
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
     }
 
     private void Start()
@@ -25,7 +25,7 @@ public class BackGroundMusic : MonoBehaviour
     {
         int previousIndex = -1;
 
-        while (true)
+        while (enabled)
         {
             int randomIndex;
 

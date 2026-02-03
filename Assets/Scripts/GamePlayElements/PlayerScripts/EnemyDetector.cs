@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemyDetector : MonoBehaviour
 {
     public event Action<float> OnGetExperience;
-    public event Action<Health> OnKilled;
     public event Action OnEnemyKilled;
     public event Action OnBossKilled;
 
@@ -26,7 +25,7 @@ public class EnemyDetector : MonoBehaviour
 
     private void OnEnemyDied(Health health)
     {
-        if (health.TryGetComponent<IDemageable>(out var enemy))
+        if (health.TryGetComponent(out IDemageable enemy))
         {
             enemy.Killed -= OnEnemyDied;
         }

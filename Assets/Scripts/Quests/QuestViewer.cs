@@ -1,43 +1,53 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class QuestViewer : MonoBehaviour
+public class QuestViewer : WindowBase
 {
     [SerializeField] private Image _image;
     [SerializeField] private TMP_Text _description;
+    [SerializeField] private TMP_Text _progress;
+    [SerializeField] private TMP_Text _timer;
 
-    private Tutorial _tutorial;
-
-    public void Init(Tutorial tutorial)
+    public void Render(IQuest quest)
     {
-        _tutorial = tutorial;
-        _tutorial.QuestSeted += Render;
-        _tutorial.QuestUpdated += UpdateProgress;
-        _tutorial.Complited += Complite;
-        gameObject.SetActive(false);
-    }
-
-    private void OnDestroy()
-    {
-        _tutorial.QuestSeted -= Render;
-        _tutorial.QuestUpdated -= UpdateProgress;
-    }
-
-    private void Render(Quest quest)
-    {
-        gameObject.SetActive(true);
+        Open();
         _image.sprite = quest.Config.Image;
         _description.text = quest.Config.Description;
+
+        if (quest.Config.IsProgressQuest == false)
+            _progress.gameObject.SetActive(false);
+        else
+            _progress.gameObject.SetActive(true);
+
+        if (quest.Config.IsTimeQuest == false)
+            _timer.gameObject.SetActive(false);
+        else
+            _timer.gameObject.SetActive(true);
     }
 
-    private void UpdateProgress(string description)
+    public void UpdateProgress(float currentValue, float targetValue)
     {
-        _description.text = description;
+        if (_progress.enabled == false)
+            return;
+
+        _progress.text = $"{currentValue}/{targetValue}";
     }
 
-    private void Complite()
+    public void UpdateTime(float time)
     {
-        gameObject.SetActive(false);
+        if (_timer.enabled == false)
+            return;
+
+        int oneMinute = 60;
+        int minutes = Mathf.FloorToInt(time / oneMinute);
+        int seconds = Mathf.FloorToInt(time % oneMinute);
+        _timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        Destroy(gameObject);
     }
 }

@@ -18,5 +18,7 @@ MonoBehaviour:
   _descriptionEN: Level complete! Time to leave.
   _descriptionTR: "B\xF6l\xFCm tamamland\u0131! Ayr\u0131lma vakti."
   _questType: 6
-  _targetValue: 1
-  _targetTransform: {fileID: 0}
+  _isProgressQuest: 0
+  _targetValue: 0
+  _isTimeQuest: 0
+  _timeLimit: 0

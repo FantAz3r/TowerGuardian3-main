@@ -6,19 +6,19 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private readonly ICoroutineRunner _coroutineRunner;
 
     private SceneLoader _sceneLoader;
-    private UIFactory _uiFactory;
-    private GameFactory _gameFactory;
+    private IGameFactory _gameFactory;
+    private IWindowService _windowService;
     private LevelID _currentLevel;
     private LevelID _previousLevel;
 
-    public LoadingLevelState( ICoroutineRunner coroutineRunner)
+    public LoadingLevelState(ICoroutineRunner coroutineRunner)
     {
         _coroutineRunner = coroutineRunner;
     }
 
     public void Enter(LevelID level)
     {
-        CteateFactories();
+        CreateFactories();
         InitCurrentLevel(level);
 
         if(level != LevelID.MainMenu)
@@ -30,7 +30,14 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     public void Exit()
     {
-        _gameFactory.ClearSpawners();
+        ServiceLocator.Get<ISpawnerService>().DestroySpawners();
+    }
+
+    private void CreateFactories()
+    {
+        _gameFactory = ServiceLocator.Get<IGameFactory>();
+        _sceneLoader = new SceneLoader(_coroutineRunner);
+        _windowService = ServiceLocator.Get<IWindowService>();
     }
 
     private void InitCurrentLevel(LevelID level)
@@ -69,78 +76,63 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         }
     }
 
-    private void CteateFactories()
-    {
-        _sceneLoader = new SceneLoader(_coroutineRunner);
-        _uiFactory = new UIFactory();
-        _gameFactory = new GameFactory();
-    }
-
     private void InitMainMenu()
     {
-        _uiFactory.CreateFocusController();
-        _uiFactory.CreateUIRoot();
-        _uiFactory.CreateSounds();
-        _uiFactory.CreateSettings();
-        _uiFactory.CreateBackgroundSounds();
+        _gameFactory.SetCurrentLevel(_currentLevel);
+        _gameFactory.CreateFocusController();
+        _gameFactory.CreateSpawners();
+        _gameFactory.CreateBackgroundSounds();
+
+        _windowService.CreateUIRoot();
+        _windowService.Open(WindowType.Background);
+        _windowService.Open(WindowType.MainMenu);
     }
 
     private void InitGameLevel()
     {
+        _gameFactory.SetCurrentLevel(_currentLevel);
+        _gameFactory.SetSceneContainer();
         _gameFactory.CreateFocusController();
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreatePlayer(_previousLevel);
+        _gameFactory.CreateScoreCounter();
         _gameFactory.CreateSpawners();
-        _gameFactory.CreateWeaponFactory();
+        _windowService.CreateUIRoot();
         _gameFactory.CreateCamera();
         _gameFactory.CreateEventSystem();
-        _gameFactory.CreateCards();
         _gameFactory.CreateLight();
         _gameFactory.CreateEnemies();
-        _gameFactory.CreateScoreCounter();
-
-        _gameFactory.CreateUI();
-        _gameFactory.CreateHUD();
-        _gameFactory.InitUIWindows();
-
-        _gameFactory.CreateCardButtons();
-        _gameFactory.CreateCardsSelectionMenu();
 
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
         _gameFactory.CreateTutorial();
-
         _gameFactory.CreateBackgroundSounds();
+
+        _windowService.Open(WindowType.HUD);
+        _gameFactory.RunLevel();
     }
 
     private void InitTowerLevel()
     {
+        _gameFactory.SetCurrentLevel(_currentLevel);
         _gameFactory.CreateFocusController();
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreateLight();
         _gameFactory.CreatePlayer(_previousLevel);
+        _gameFactory.CreateScoreCounter();
         _gameFactory.CreateEventSystem();
         _gameFactory.CreateSpawners();
+        _windowService.CreateUIRoot();
+
+        _gameFactory.CreateCamera();
         _gameFactory.CreateTower();
 
-        _gameFactory.CreateScoreCounter();
-        _gameFactory.CreateWeaponFactory();
-        _gameFactory.CreateCamera();
-        _gameFactory.CreateCards();
-
-        _gameFactory.CreateUI();
-        _gameFactory.CreateHUD();
-        _gameFactory.InitUIWindows();
-
-        _gameFactory.CreateCardButtons();
-        _gameFactory.CreateCardsSelectionMenu();
-
-        _gameFactory.CreateActions();
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
         _gameFactory.CreateTutorial();
-
-        _gameFactory.InitPlatforms();
         _gameFactory.CreateBackgroundSounds();
+
+        _windowService.Open(WindowType.HUD);
+        _gameFactory.RunLevel();
     }
 }

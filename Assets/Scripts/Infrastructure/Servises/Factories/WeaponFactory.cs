@@ -1,47 +1,23 @@
 using UnityEngine;
 
-public class WeaponFactory: ICardFactory
+public class WeaponFactory : ICardFactory
 {
-    private AttackZone _attackZone;
-    private Transform _player;
-    private Fist _container;
-    private PlayerAttacker _attacker;
+    private Player _player;
 
-    public WeaponFactory(Transform player, AttackZone attackZone)
-    {
-        _player = player;
-        _attackZone = attackZone;
+    public WeaponFactory(Player player) => _player = player;
 
-        _container = _player.GetComponentInChildren<Fist>();
-        _attacker = _container.GetComponentInParent<PlayerAttacker>();
-    }
+    public CardType Type => CardType.Weapon;
 
-    public CardType Type => CardType.WeaponSetter;
-
-    public void ActivateCard(ICardConfig config)
+    public void Create(ICardConfig config)
     {
         if (config is WeaponConfig weaponConfig)
         {
-            Create(weaponConfig);
+            GameObject weaponObject = Object.Instantiate(weaponConfig.Prefab.gameObject, _player.Fist.transform);
+            weaponObject.transform.localPosition = Vector3.zero;
+            Weapon weapon = weaponObject.GetComponent<Weapon>();
+            weapon.Init(_player.AttackZone);
+            _player.Attacker.AddWeapon(weapon);
         }
-    }
-
-    private void Create(WeaponConfig config)
-    {
-        foreach (var item in _attacker.WeaponsInInventory)
-        {
-            if (item.Config.ID == config.ID)
-            {
-                _attacker.AddWeapon(item);
-                return;
-            }
-        }
-
-        GameObject weaponObject = Object.Instantiate(config.Prefab.gameObject, _container.transform);
-        weaponObject.transform.localPosition = Vector3.zero;
-        Weapon weapon = weaponObject.GetComponent<Weapon>();
-        weapon.Init(_attackZone);
-        _attacker.AddWeapon(weapon);
     }
 }
 

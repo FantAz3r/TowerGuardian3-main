@@ -27,7 +27,6 @@ public class LanguageSwitcher : MonoBehaviour
         YG2.SwitchLanguage(_currentLanguage);
         SetLanguage(_currentLanguage);
         EnableCurrentToggle();
-
     }
 
     private void OnDisable()

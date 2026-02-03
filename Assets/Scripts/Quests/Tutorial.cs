@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 using YG;
 
 public class Tutorial : MonoBehaviour
 {
-    private List<QuestConfig> _questConfigs = new();
     private List<IQuest> _quests = new();
 
     private QuestBuilder _builder;
@@ -15,83 +13,64 @@ public class Tutorial : MonoBehaviour
     private LevelID _level;
     private IQuest _currentQuest;
     private bool _isTutorialComplete = false;
-    private int _valueProgress;
 
-    public event Action<IQuest> QuestSeted;
-    public event Action<string> QuestUpdated;
-    public event Action Complited;
-    public event Action CompliteWithoutLust;
+    public event Action AllQuestsCompleted, QuestCompleted;
+    public event Action<IQuest> QuestStarted;
 
-    public void Init(QuestBuilder builder, QuestData questData, LevelID level, IReadOnlyList<QuestType> questsForThisLevel)
+    public void Init(QuestBuilder builder, LevelID level, IReadOnlyList<QuestType> questsForThisLevel)
     {
         _level = level;
         _builder = builder;
+        QuestData questData = Resources.Load<QuestData>(GameConstants.QuestData);
 
         foreach (var questInfo in questData.QuestInfos)
         {
             if (questsForThisLevel.Contains(questInfo.Type))
             {
-                _questConfigs.Add(questInfo.Config);
                 _quests.Add(_builder.GetQuest(questInfo.Config));
             }
         }
 
-        YG2.onSwitchLang += OnChangeLang;
+        LoadQuestProgress();
     }
 
-    public void RunNextQuest()
+    public void RunQuests()
     {
-        if (_currentQuestIndex > 0)
+        SwitchQuest();
+    }
+
+    private void OnDestroy()
+    {
+        SaveQuestProgress();
+    }
+
+    private void SwitchQuest()
+    {
+        if (_currentQuest != null)
         {
-            _quests[_currentQuestIndex].Stop();
-            _quests[_currentQuestIndex].OnCompleted -= OnQuestCompleted;
+            _currentQuest.OnCompleted -= OnQuestCompleted;
+            _currentQuest.Stop();
         }
 
         _currentQuestIndex++;
 
-        if (_currentQuestIndex >= _quests.Count - 1)
-        {
-            CompliteWithoutLust?.Invoke();
-        }
-
         if (_currentQuestIndex >= _quests.Count)
         {
-            _isTutorialComplete = true;
-            Complited?.Invoke();
+            _currentQuest = null;
+            AllQuestsCompleted?.Invoke();
             return;
         }
 
         _currentQuest = _quests[_currentQuestIndex];
         _currentQuest.OnCompleted += OnQuestCompleted;
         _currentQuest.Run();
-        QuestSeted?.Invoke(_currentQuest);
-
-        _currentQuest.Updated += OnQuestUpdated;
-    }
-
-    private void OnQuestUpdated(int value)
-    {
-        _valueProgress = value;
-        string updatebleDescription = $"{_currentQuest.Config.Description} {_valueProgress}/ {_currentQuest.Goal}";
-        QuestUpdated?.Invoke(updatebleDescription);
+        QuestStarted?.Invoke(_currentQuest);
     }
 
     private void OnQuestCompleted()
     {
-        _currentQuest.Updated -= OnQuestUpdated;
-        RunNextQuest();
-    }
-
-    private void OnChangeLang(string useles)
-    {
-        int minGoalForView = 2;
-        QuestSeted?.Invoke(_currentQuest);
-
-        if (_currentQuest.Goal >= minGoalForView)
-        {
-            string updatebleDescription = $"{_currentQuest.Config.Description} {_valueProgress}/ {_currentQuest.Goal}";
-            QuestUpdated?.Invoke(updatebleDescription);
-        }
+        QuestCompleted?.Invoke();
+        SwitchQuest();
     }
 
     private void SaveQuestProgress()
@@ -103,7 +82,7 @@ public class Tutorial : MonoBehaviour
 
         if (_isTutorialComplete == false)
         {
-            var saveData = new QuestSaveData(_level, _valueProgress, _currentQuestIndex);
+            var saveData = new QuestSaveData(_level, 0,0, _currentQuestIndex);
             if (index >= 0)
                 YG2.saves.QuestProgress[index] = saveData;
             else
@@ -111,7 +90,7 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
-            var saveData = new QuestSaveData(_level, 0, 0);
+            var saveData = new QuestSaveData(_level, 0, 0, 0);
             if (index >= 0)
                 YG2.saves.QuestProgress[index] = saveData;
             else
@@ -137,22 +116,12 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
-            _currentQuestIndex = saveData.QuestID - 1;
+            _currentQuestIndex = saveData.QuestIndex - 1;
         }
     }
 
     private void ResetProgress()
     {
         _currentQuestIndex = 0;
-        _valueProgress = 0;
     }
-
-    private void UpdateProgress(QuestSaveData saveData, int index)
-    {
-        if (index >= 0)
-            YG2.saves.QuestProgress[index] = saveData;
-        else
-            YG2.saves.QuestProgress.Add(saveData);
-    }
-
 }

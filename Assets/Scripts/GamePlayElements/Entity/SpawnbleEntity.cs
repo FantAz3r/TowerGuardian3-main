@@ -11,7 +11,7 @@ public class SpawnbleEntity : MonoBehaviour
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
 
         _health.Healed += OnHeal;
         _health.DamageTaken += OnTakeDamage;

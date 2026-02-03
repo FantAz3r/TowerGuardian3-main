@@ -1,39 +1,9 @@
 {
-    "idSave": 10298,
+    "idSave": 1359,
     "AllCards": [
-        {
-            "ID": "13f3c7d5-8723-43a2-8739-bb50875891dd",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "033888aa-cee4-442f-b7fd-38a4e0e8f850",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
         {
             "ID": "461a6838-bb21-4e2b-83ea-91f625be7fde",
             "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "14ceb4cf-2180-47f1-9722-7bee9685c697",
-            "Level": 4,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "f16b46a5-a46e-42d8-afc5-54d237d09e9e",
-            "Level": 2,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
-            "Level": 3,
             "IsBought": true,
             "HasPlayer": true
         }
@@ -45,30 +15,18 @@
         "HasPlayer": false
     },
     "PlayerWeapons": [],
-    "Coins": 10,
-    "Wood": 135,
-    "Stones": 20,
-    "Level": 12,
-    "UpgradePoints": 0,
-    "CurrentEXP": 52.162391662597659,
+    "Coins": 1,
+    "Wood": 4,
+    "Stones": 1,
+    "Level": 2,
+    "UpgradePoints": 1,
+    "CurrentEXP": 8.0,
     "CurrentLevel": 3,
     "PlayerPosition": {
-        "x": -2.0483999252319338,
+        "x": 3.0561513900756838,
         "y": 0.0520816445350647,
-        "z": 8.753500938415528
+        "z": 5.351119041442871
     },
-    "QuestProgress": [
-        {
-            "Level": 2,
-            "QuestProgress": 0,
-            "QuestIndex": 3
-        },
-        {
-            "Level": 3,
-            "QuestProgress": 12,
-            "QuestIndex": 4
-        }
-    ],
     "LevelsProgress": [],
     "CurrentFloor": 1,
     "Language": "ru",
@@ -76,16 +34,16 @@
     "Mute": true,
     "Volumes": [
         {
-            "Name": "Background",
-            "Volume": -2.72350811958313
-        },
-        {
             "Name": "UI",
-            "Volume": -2.7675352096557619
+            "Volume": -3.6826179027557375
         },
         {
             "Name": "Effects",
-            "Volume": -2.7675352096557619
+            "Volume": -3.6826179027557375
+        },
+        {
+            "Name": "Background",
+            "Volume": -6.458397388458252
         }
     ]
 }

@@ -16,13 +16,18 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     public event Action<float, float> Cooldowning;
 
     public float Cooldown => _config.Cooldown;
-    public override AbilityType AbilityType => AbilityType.ThrowingAxes;
+    public override AbilityType Type => AbilityType.ThrowingAxes;
+    public override AbilityConfig Config => _config;
 
     private void Awake()
     {
         _player = GetComponentInParent<Player>();
-        _attacker = _player.GetComponentInChildren<PlayerAttacker>();
+        _attacker = _player.Attacker;
         _attacker.WeaponSeted += CheckWeapon;
+    }
+
+    private void OnEnable()
+    {
         CheckWeapon(_attacker.CurrentWeapon);
     }
 
@@ -63,6 +68,9 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
     private void CheckWeapon(IWeapon weapon)
     {
+        if (weapon == null)
+            return;
+
         if (weapon.Config.WeaponType == WeaponType.Axe)
         {
             base.UnlockAbility();
@@ -87,7 +95,6 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     private void Return()
     {
         _attacker.ActivateWeapon(_axe);
-        Debug.Log("axe seted");
         _thrownAxe.Returned -= Return;
     }
 }

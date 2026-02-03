@@ -10,6 +10,7 @@ public class PlayerExperience : MonoBehaviour
 
     private EnemyDetector _enemyDetector;
     private int _currentLevel = 1;
+    private int _upgradePoints = 0;
     private float _currentExp = 0f;
 
     private Queue<float> _expQueue = new Queue<float>();
@@ -17,9 +18,14 @@ public class PlayerExperience : MonoBehaviour
 
     public float CurrentExp => _currentExp;
     public int CurrentLevel => _currentLevel;
+    public int UpgradePoints => _upgradePoints;
 
-    public event Action<int> OnLevelUp;
-    public event Action <float, float> OnExperienceAdded; 
+    public event Action OnLevelUp;
+
+    public event Action OnUpgradePointAdded;
+    public event Action OnUpgradePointRemoved;
+
+    public event Action<float, float> OnExperienceAdded;
 
     public float ExpToNextLevel => _config.BaseLvlCost * Mathf.Pow(_config.LevelCostMultiplier, _currentLevel - 1);
 
@@ -28,7 +34,7 @@ public class PlayerExperience : MonoBehaviour
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
 
         if (_enemyDetector != null)
-            _enemyDetector.OnGetExperience += Add;
+            _enemyDetector.OnGetExperience += AddEXP;
 
         LoadLevel();
     }
@@ -36,17 +42,29 @@ public class PlayerExperience : MonoBehaviour
     private void OnDestroy()
     {
         if (_enemyDetector != null)
-            _enemyDetector.OnGetExperience -= Add;
+            _enemyDetector.OnGetExperience -= AddEXP;
 
         SaveLevel();
     }
 
-    public void Add(float amount)
+    public void AddEXP(float amount)
     {
         _expQueue.Enqueue(amount);
 
         if (_isUpdating == false)
             StartCoroutine(ProcessExpQueue());
+    }
+
+    public void AddUpgradePoints(int count)
+    {
+        _upgradePoints += count;
+        OnUpgradePointAdded?.Invoke();
+    }
+
+    public void RemoveUpgradePoint(int count)
+    {
+        _upgradePoints -= count;
+        OnUpgradePointRemoved?.Invoke();
     }
 
     private IEnumerator ProcessExpQueue()
@@ -77,7 +95,7 @@ public class PlayerExperience : MonoBehaviour
             LevelUp();
 
             OnExperienceAdded?.Invoke(_currentExp, ExpToNextLevel);
-            yield return new WaitForSeconds(0.1f); 
+            yield return new WaitForSeconds(0.1f);
         }
 
         yield return AnimateExperience(_currentExp, targetExp);
@@ -97,34 +115,35 @@ public class PlayerExperience : MonoBehaviour
             float currentExp = Mathf.Lerp(startExp, targetExp, elapsed / duration);
             float normalizedExp = Mathf.Clamp01(currentExp / ExpToNextLevel);
 
-            OnExperienceAdded?.Invoke( currentExp, ExpToNextLevel);
+            OnExperienceAdded?.Invoke(currentExp, ExpToNextLevel);
 
             yield return null;
         }
 
-        OnExperienceAdded?.Invoke( targetExp, ExpToNextLevel);
+        OnExperienceAdded?.Invoke(targetExp, ExpToNextLevel);
     }
 
     private void LevelUp()
     {
-        int upggradePointPerLevel = 1;
+        AddUpgradePoints(1);
         _currentLevel++;
-        OnLevelUp?.Invoke(upggradePointPerLevel);
+        OnLevelUp?.Invoke();
     }
 
     private void SaveLevel()
     {
         YG2.saves.Level = _currentLevel;
         YG2.saves.CurrentEXP = _currentExp;
+        YG2.saves.UpgradePoints = _upgradePoints;
         YG2.SaveProgress();
     }
-
 
     private void LoadLevel()
     {
         if (YG2.saves == null)
             return;
 
+        _upgradePoints = YG2.saves.UpgradePoints;
         _currentLevel = YG2.saves.Level;
         _currentExp = YG2.saves.CurrentEXP;
     }

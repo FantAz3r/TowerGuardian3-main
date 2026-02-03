@@ -17,12 +17,12 @@ public class TimeService : IService, ITimeService
         _wait = new WaitForSeconds(_time);
     }
 
-    public void Pause()
+    public void PauseAll()
     {
         YG2.PauseGame(true, true, true, true, true);
     }
 
-    public void PauseGame()
+    public void Pause()
     {
         YG2.PauseGame(true, true, false, false, false);
         IsPaused = true;
@@ -51,7 +51,7 @@ public class TimeService : IService, ITimeService
 
     private IEnumerator PauseCoroutine(float seconds)
     {
-        Pause();
+        PauseAll();
 
         yield return _wait;
 

@@ -4,6 +4,7 @@ public class TransparencyTrigger : MonoBehaviour
 {
     private Transform _player;
     private Vector3 _offset = new Vector3(0,1,0);
+
     public void Init(Transform player)
     {
         _player = player;

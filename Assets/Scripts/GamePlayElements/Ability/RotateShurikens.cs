@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateShurikens : Ability, IDamageAbility
+public class RotateShurikens : Ability
 {
     [SerializeField] private RotatingShurikenConfig _config;
 
@@ -11,10 +10,9 @@ public class RotateShurikens : Ability, IDamageAbility
     private Coroutine _rotateCoroutine;
     private int _activeCount = 0;
     private int _maxCount = 6;
+    public override AbilityType Type => AbilityType.RotatingShuriken;
 
-    public event Action<float> DialedDamage;
-
-    public override AbilityType AbilityType => AbilityType.RotatingShuriken;
+    public override AbilityConfig Config => _config;
 
     private void Awake()
     {
@@ -24,27 +22,25 @@ public class RotateShurikens : Ability, IDamageAbility
             _shurikens.Add(shuriken);
             shuriken.gameObject.SetActive(false);
         }
+
+        _config.Upgraded += Upgrade;
     }
 
     private void OnDisable()
     {
-        foreach (var shuricen in _shurikens)
-        {
-            shuricen.DialedDamage -= OnHit;
-        }
-
         _activeCount = 0;
 
         if (_rotateCoroutine != null)
         {
             StopCoroutine(_rotateCoroutine);
         }
+
+        _config.Upgraded -= Upgrade;
     }
 
     public override void Enable()
     {
         _rotateCoroutine = StartCoroutine(Rotate());
-        base.Enable();
         LoadAbillity();
     }
 
@@ -76,7 +72,7 @@ public class RotateShurikens : Ability, IDamageAbility
         }
     }
 
-    public override void Upgrade()
+    public void Upgrade()
     {
         LoadAbillity();
     }
@@ -116,17 +112,11 @@ public class RotateShurikens : Ability, IDamageAbility
         UpdatePositions();
     }
 
-    public void OnHit(int damage)
-    {
-        DialedDamage?.Invoke(damage);
-    }
-
     private void ActivateShuriken(int index)
     {
         var shuriken = _shurikens[index];
         shuriken.gameObject.SetActive(true);
         shuriken.SetParametrs(_config.Damage, _config.SpinSpeed);
-        shuriken.DialedDamage += OnHit;
     }
 
     public override void Remove()
@@ -137,6 +127,5 @@ public class RotateShurikens : Ability, IDamageAbility
         }
 
         _activeCount = 0;
-        base.Remove();
     }
 }

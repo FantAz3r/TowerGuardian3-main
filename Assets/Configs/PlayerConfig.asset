@@ -12,14 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1b3fdbc6bf0674bb94e1062f23adba, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  _maxHealth: 50
-  _damageToErn: 0
-  _rewardCount: 0
-  _spawnResource: 2
-  _spawnEffect: 0
-  _moveSpeed: 4
-  _rotationSpeed: 10
-  _healthRegeneration: 0.1
-  _inventoryCapacity: 99999
-  _baseLvlCost: 10
-  _levelCostMultiplier: 1.2
+  <MoveConfig>k__BackingField: {fileID: 11400000, guid: 75c5370c09ccf9c448707875ca4bd747, type: 2}
+  <HealthConfig>k__BackingField: {fileID: 11400000, guid: 6ac17825e1095594a925f0036122424e, type: 2}
+  <HealthRegeneration>k__BackingField: 1
+  <InventoryCapacity>k__BackingField: 10000
+  <BaseLvlCost>k__BackingField: 12
+  <LevelCostMultiplier>k__BackingField: 1.2

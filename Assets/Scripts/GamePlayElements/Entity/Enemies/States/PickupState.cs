@@ -76,7 +76,7 @@ public class PickupState : State
     {
         float treshold = 1f;
         _agent.destination = _thrownObject.position;
-        _animator.UpdateSpeed(_stateMachine.Config.MoveSpeed);
+        _animator.UpdateSpeed(_stateMachine.Config.MoveConfig.MoveSpeed);
 
         while (_agent.pathPending || _agent.remainingDistance > treshold)
         {

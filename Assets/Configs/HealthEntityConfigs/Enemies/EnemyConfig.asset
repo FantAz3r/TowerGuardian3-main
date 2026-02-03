@@ -12,18 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896487cc993eb9e42ab3018d45dc8184, type: 3}
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
-  _maxHealth: 15
-  _damageToErn: 0
-  _rewardCount: 1
-  _spawnResource: 2
-  _spawnEffect: 0
-  _moveSpeed: 5
-  _rotationSpeed: 90
-  _detectionRadius: 15
-  _damage: 3
-  _attackRange: 1.5
-  _attackAriaCenter: {x: 0, y: 0, z: 1.26}
-  _attackCooldown: 2
-  _jumpDamage: 0
-  _allowedStates: 000000000100000002000000
-  _throwDamage: 0
+  <MoveConfig>k__BackingField: {fileID: 11400000, guid: e96252a20119eea4886b8b47a66ba8b9, type: 2}
+  <HealthConfig>k__BackingField: {fileID: 11400000, guid: f06681e7829e60e40943e43d67ff873b, type: 2}
+  <DetectionRadius>k__BackingField: 10
+  <Damage>k__BackingField: 2
+  <AttackRange>k__BackingField: 1.5
+  <AttackAriaCenter>k__BackingField: {x: 0, y: 0, z: 0}
+  <AttackCooldown>k__BackingField: 1
+  <JumpDamage>k__BackingField: 0
+  <ThrowDamage>k__BackingField: 0
+  allowedStates: 000000000100000002000000

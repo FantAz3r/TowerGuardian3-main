@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public abstract class HealthConfig : ScriptableObject, IDemageableConfig
+[CreateAssetMenu(fileName = "HealthConfig", menuName = "Configs/HealthConfig")]
+public class HealthConfig : ScriptableObject, IDemageableConfig
 {
-    [SerializeField] private float _maxHealth = 1f;
-    [SerializeField] private float _damageToErn;
-    [SerializeField] private int _rewardCount;
-    [SerializeField] private ResourceType _spawnResource;
-    [SerializeField] private EffectType _spawnEffect;
-
-    public float MaxHealth => _maxHealth;
-    public float DamageToErn => _damageToErn;
-    public int RewardCount => _rewardCount;
-    public ResourceType SpawnResource => _spawnResource;
-    public EffectType SpawnEffect => _spawnEffect;
+    [field: SerializeField] public float MaxHealth { get; private set; } = 1f;
+    [field: SerializeField] public float DamageToErn { get; private set; }
+    [field: SerializeField] public int RewardCount { get; private set; }
+    [field: SerializeField] public ResourceType SpawnResource { get; private set; }
+    [field: SerializeField] public EffectType SpawnEffect { get; private set; }
 }

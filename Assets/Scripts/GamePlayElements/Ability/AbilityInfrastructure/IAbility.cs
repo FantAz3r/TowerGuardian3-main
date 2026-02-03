@@ -1,7 +1,3 @@
-public interface IAbility 
+public interface IAbility : IItem<AbilityType, AbilityConfig>
 {
-    AbilityType AbilityType { get; }
-    void Enable();
-    void Upgrade();
-    void Remove();
 }

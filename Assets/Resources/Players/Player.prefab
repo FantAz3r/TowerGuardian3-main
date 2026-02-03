@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 1780471275890372835}
   - component: {fileID: 3820031484318594102}
   - component: {fileID: 3072303267542088898}
-  - component: {fileID: 8079752438915498104}
   - component: {fileID: -2597494668989160889}
   - component: {fileID: 762481495982142268}
   - component: {fileID: 8023230514114427221}
@@ -58,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d414dbdc31c1646ad23cdb64714c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configObject: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
+  _configObject: {fileID: 11400000, guid: 75c5370c09ccf9c448707875ca4bd747, type: 2}
   _obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 5441
@@ -138,6 +137,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fc06ee5cfdff54ca09471575ecb6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Attacker>k__BackingField: {fileID: 5258447158781507512}
+  <Inventory>k__BackingField: {fileID: 8788501789289663847}
+  <AttackZone>k__BackingField: {fileID: 4989473844494154052}
+  <Experience>k__BackingField: {fileID: 5764731817335193132}
+  <CardHolder>k__BackingField: {fileID: 3072303267542088898}
+  <AllAbilities>k__BackingField: {fileID: 6410369119527503014}
+  <Detector>k__BackingField: {fileID: 3918306888492116849}
+  <Health>k__BackingField: {fileID: 1780471275890372835}
+  <PlayerMover>k__BackingField: {fileID: 3334812847297818829}
+  <QuestPointer>k__BackingField: {fileID: 8561982015174870232}
+  <Fist>k__BackingField: {fileID: 4217819642772686924}
+  <ResourceCollector>k__BackingField: {fileID: 6653233145333004300}
+  <HealthRegeneration>k__BackingField: {fileID: 3820031484318594102}
+  <Mover>k__BackingField: {fileID: 7845630260713952501}
 --- !u!114 &1780471275890372835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
+  _config: {fileID: 11400000, guid: 6ac17825e1095594a925f0036122424e, type: 2}
   _type: 4
 --- !u!114 &3820031484318594102
 MonoBehaviour:
@@ -187,18 +200,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c8556b20de34aa4e8affcde32cbd720, type: 2}
   - {fileID: 11400000, guid: fe92c75a894b83a418c039c5f6720000, type: 2}
   - {fileID: 11400000, guid: 39054eaff696627499ce53ae68b7a827, type: 2}
---- !u!114 &8079752438915498104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472323202367812756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fee66011e62a2644bd4f596ead07df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-2597494668989160889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f92171977cb6eb4197fc7d508abcb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 023d5b3eb60e9af4393cdb76eee01ad3, type: 2}
+  _config: {fileID: 11400000, guid: 75c5370c09ccf9c448707875ca4bd747, type: 2}
 --- !u!114 &3334812847297818829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +714,7 @@ GameObject:
   - component: {fileID: 4267973903631605062}
   - component: {fileID: 7367152562142210317}
   - component: {fileID: 1310132161458922661}
+  - component: {fileID: 8556819746831047454}
   m_Layer: 3
   m_Name: AbilityContainer
   m_TagString: Untagged
@@ -799,6 +801,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 5e55fed614da8e84eb7d7ad3c77b8471, type: 2}
+--- !u!114 &8556819746831047454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463969757422294097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fee66011e62a2644bd4f596ead07df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6845490594394946248
 GameObject:
   m_ObjectHideFlags: 0

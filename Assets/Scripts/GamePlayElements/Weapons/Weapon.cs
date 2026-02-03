@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour, IWeapon
     public void Init(AttackZone attackZone)
     {
         _attackZone = attackZone;
-        _spawnerService = ServicesLocator.GetService<ISpawnerService>();
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
     }
 
     private void OnEnable()
