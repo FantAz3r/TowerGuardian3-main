@@ -14,5 +14,6 @@ public enum WindowType
     HUD,
     MainMenu,
     ShowCardsButton,
-    Background
+    Background,
+    DamageScreen
 }

@@ -18,15 +18,38 @@ public class SceneLoader
 
     private IEnumerator LoadScene(string nextScene, System.Action onLoaded)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Single);
+        LevelID level = LevelID.LoadScene;
 
-        while (asyncLoad.isDone == false)
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(level.ToString(), LoadSceneMode.Additive);
+        yield return asyncLoad;
+
+        Scene loadingScene = SceneManager.GetSceneByName(level.ToString());
+        SceneManager.SetActiveScene(loadingScene);
+
+        asyncLoad = SceneManager.UnloadSceneAsync(currentScene.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+        yield return asyncLoad;
+
+        yield return new WaitForSecondsRealtime(5);
+
+
+
+        asyncLoad = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
+        yield return asyncLoad;
+
+        currentScene = SceneManager.GetSceneByName(nextScene);
+
+        if (currentScene.IsValid())
         {
-            yield return null;
+            Debug.Log(currentScene.IsValid());
+            SceneManager.SetActiveScene(currentScene);
         }
 
-        var scene = SceneManager.GetActiveScene();
-        scene.GetRootGameObjects();
+        asyncLoad = SceneManager.UnloadSceneAsync(loadingScene.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+        yield return asyncLoad;
+
+
         onLoaded?.Invoke();
     }
 }

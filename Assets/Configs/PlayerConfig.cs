@@ -10,4 +10,5 @@ public class PlayerConfig : ScriptableObject, ILevelConfig
     [field: SerializeField] public int InventoryCapacity { get; private set; } = 10000;
     [field: SerializeField] public float BaseLvlCost { get; private set; } = 100f;
     [field: SerializeField] public float LevelCostMultiplier { get; private set; } = 1.5f;
+    [field: SerializeField] public EffectType LevelUpEffect { get; private set; }
 }

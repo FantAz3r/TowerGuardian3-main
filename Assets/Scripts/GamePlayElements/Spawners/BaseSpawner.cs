@@ -10,7 +10,7 @@ public abstract class BaseSpawner : ISpawner
     public virtual void Spawn(HealthConfig config, Vector3 position, int count) { }
     public virtual void Spawn(AudioClip clip, Vector3 position = default) { }
     public virtual void Spawn(Vector3 position, int damage, Color? textColor = null) { }
-    public virtual void Spawn(HealthConfig config, Vector3 position) { }
+    public virtual void Spawn(EffectType type, Vector3 position, Transform parent = null) { }
 
     public virtual void EnableSpawn()
     {

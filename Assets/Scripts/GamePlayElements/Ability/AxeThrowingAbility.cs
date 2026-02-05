@@ -6,7 +6,6 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 {
     [SerializeField] private AxeThrowingConfig _config;
 
-    private PlayerAttacker _attacker;
     private Player _player;
     private Weapon _axe;
     private ThrownAxe _thrownAxe;
@@ -21,29 +20,24 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
     private void Awake()
     {
-        _player = GetComponentInParent<Player>();
-        _attacker = _player.Attacker;
-        _attacker.WeaponSeted += CheckWeapon;
-    }
-
-    private void OnEnable()
-    {
-        CheckWeapon(_attacker.CurrentWeapon);
+        _player = ServiceLocator.Get<IGameFactory>().Player;
+        _player.Attacker.WeaponSeted += CheckWeapon;
+        CheckWeapon(_player.Attacker.CurrentWeapon);
     }
 
     private void OnDestroy()
     {
-        _attacker.WeaponSeted -= CheckWeapon;
+        _player.Attacker.WeaponSeted -= CheckWeapon;
     }
 
     public override void Use()
     {
         if (IsLock == false)
         {
-            if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
+            if (_player.Attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
             {
-                _axe = _attacker.CurrentWeapon;
-                _attacker.DeactivateWeapon();
+                _axe = _player.Attacker.CurrentWeapon;
+                _player.Attacker.DeactivateWeapon();
                 StartCoroutine(CooldownRoutine());
                 ThrowAxe(_axe);
             }
@@ -52,7 +46,6 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        base.LockAbility();
         float timer = 0f;
 
         while (_config.Cooldown >= timer)
@@ -63,7 +56,6 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0f);
-        base.UnlockAbility();
     }
 
     private void CheckWeapon(IWeapon weapon)
@@ -84,7 +76,7 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     private void ThrowAxe(Weapon currentWeapon)
     {
         Vector3 start = transform.position;
-        Vector3 forward = _attacker.transform.forward;
+        Vector3 forward = _player.Attacker.transform.forward;
         Vector3 end = start + forward * _config.FlightDistance;
 
         _thrownAxe = currentWeapon.GetComponent<ThrownAxe>();
@@ -94,7 +86,7 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
     private void Return()
     {
-        _attacker.ActivateWeapon(_axe);
+        _player.Attacker.ActivateWeapon(_axe);
         _thrownAxe.Returned -= Return;
     }
 }

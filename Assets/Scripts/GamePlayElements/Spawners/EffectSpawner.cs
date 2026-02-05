@@ -17,20 +17,30 @@ public class EffectSpawner : BaseSpawner
         }
     }
 
-    public override void Spawn(HealthConfig config, Vector3 position)
+    public override void Spawn(EffectType type, Vector3 position, Transform parent = null)
     {
         if (CanSpawn == false)
             return;
 
-        if (_pools.TryGetValue(config.SpawnEffect, out var pool) == false)
+        if (_pools.TryGetValue(type, out var pool) == false)
         {
-            Debug.LogWarning($"Pool for effect type {config.SpawnEffect} not found");
+            Debug.LogWarning($"Pool for effect type {type} not found");
             return;
         }
 
         Effect effect = pool.Get();
+
+        if (parent != null)
+        {
+            effect.transform.position = position;
+            effect.transform.SetParent(parent);
+        }
+        else
+        {
+            effect.transform.position = position + _offset;
+        }
+
         effect.gameObject.SetActive(true);
-        effect.transform.position = position + _offset;
 
         if (effect.TryGetComponent(out ParticleSystem particle))
         {

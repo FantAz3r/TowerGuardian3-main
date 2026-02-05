@@ -1,15 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AbilityConfig : CardConfig
 {
-    [SerializeField] private AbilityType _abilityType;
+    [field: SerializeField] public Ability Prefab { get; private set; }
+    [field: SerializeField] public AbilityType AbilityType { get; private set; }
 
-    public AbilityType Type => _abilityType;
-
-    public override CardType GetCardType()
-    {
-        return CardType.Ability;
-    }
+    public override CardType GetCardType() => CardType.Ability;
 }
 

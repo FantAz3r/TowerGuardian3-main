@@ -26,11 +26,12 @@ MonoBehaviour:
     Value: 20
     Image: {fileID: 454922556, guid: c80cfba900504e246bc955fcc768d713, type: 3}
   _id: 483f228c-2275-4fa0-9fde-0d5bce00e0f7
-  _chanceToView: 0.5
-  _level: 0
-  _hasPlayer: 0
-  _isBought: 0
-  _abilityType: 2
+  <ChanceToView>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <HasPlayer>k__BackingField: 0
+  <IsBought>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 844426594717728514, guid: 6c565a9290c9a2546b12ad961fe4e5e3, type: 3}
+  <AbilityType>k__BackingField: 2
   _damage: 3
   _bouncesCount: 20
   _bounceRange: 10

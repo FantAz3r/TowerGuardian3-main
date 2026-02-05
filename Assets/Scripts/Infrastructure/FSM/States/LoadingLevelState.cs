@@ -108,6 +108,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateTutorial();
         _gameFactory.CreateBackgroundSounds();
 
+
         _windowService.Open(WindowType.HUD);
         _gameFactory.RunLevel();
     }

@@ -26,9 +26,6 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         _attacker.WeaponDeactivated += LockAbility;
         _attacker.WeaponActivated += UnlockAbility;
         _config.Upgraded += Upgrade;
-
-        LoadAbility();
-        enabled = false;
     }
 
     private void OnDestroy()
@@ -54,7 +51,6 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        base.LockAbility();
         float timer = 0;
 
         while (_config.Cooldown >= timer)
@@ -65,7 +61,6 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0);
-        base.UnlockAbility();
     }
 
     public override void LockAbility()
@@ -85,13 +80,5 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
             _attacker.AttackAction(_config.AttackDelay);
             yield return _sleep;
         }
-    }
-
-    private void LoadAbility()
-    {
-        if (_config.HasPlayer == false)
-            return;
-
-        Upgrade();
     }
 }

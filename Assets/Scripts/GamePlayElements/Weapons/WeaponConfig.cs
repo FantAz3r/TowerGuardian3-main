@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class WeaponConfig : CardConfig
 {
-    [SerializeField] private Weapon _prefab;
-    [SerializeField] private WeaponType _type;
-    [SerializeField] private EntityType _targetType;
-    [SerializeField] private RuntimeAnimatorController _controller;
-
-    [SerializeField] private bool _isAreaDamage = false;  
-    [SerializeField] private float _baseDamage = 10f;
-    [SerializeField] private float _baseAttackDelay = 1f;
-    [SerializeField] private float _baseAttackRange = 2f;
-    [SerializeField] private float _baseMultiply = 2f;
+    [field: SerializeField] public Weapon Prefab { get; private set; }
+    [field: SerializeField] public WeaponType WeaponType { get; private set; }
+    [field: SerializeField] public EntityType TargetType { get; private set; }
+    [field: SerializeField] public RuntimeAnimatorController Controller { get; private set; }
+    [field: SerializeField] public AudioClip HitSound { get; private set; }
+    [field: SerializeField] public bool IsAreaDamage { get; private set; } = false;
+    [field: SerializeField] public float BaseDamage { get; private set; } = 10f;
+    [field: SerializeField] public float BaseAttackDelay { get; private set; } = 1f;
+    [field: SerializeField] public float BaseAttackRange { get; private set; } = 2f;
+    [field: SerializeField] public float BaseMultiply { get; private set; } = 2f;
 
     [SerializeField] private float _damageUpgradePercent = 0.25f;        
     [SerializeField] private float _attackDelayUpgradeFactor = -0.05f;   
@@ -22,37 +22,31 @@ public class WeaponConfig : CardConfig
     [SerializeField] private float _multiplyUpgradeValue = 0.1f;
     [SerializeField] private AudioClip _audioClip;
     
-    public Weapon Prefab => _prefab;
-    public EntityType TargetType => _targetType;
-    public WeaponType WeaponType => _type;
-    public RuntimeAnimatorController Controller => _controller;
     public float Damage => GetDamage(Level);
     public float AttackDelay => GetAttackDelay(Level);
     public float AttackRange => GetAttackRange(Level);
     public float Multiply => GetMultiply(Level);
-    public bool IsAreaDamage => _isAreaDamage;
-    public AudioClip HitSound => _audioClip;
 
     public override CardType GetCardType() => CardType.Weapon;
 
     public float GetDamage(int level)
     {
-        return _baseDamage * Mathf.Pow(1 + _damageUpgradePercent, level - 1);
+        return BaseDamage * Mathf.Pow(1 + _damageUpgradePercent, level - 1);
     }
 
     public float GetAttackDelay(int level)
     {
-        return Mathf.Max(0.1f, _baseAttackDelay * Mathf.Pow(1 + _attackDelayUpgradeFactor, level - 1));
+        return Mathf.Max(0.1f, BaseAttackDelay * Mathf.Pow(1 + _attackDelayUpgradeFactor, level - 1));
     }
 
     public float GetAttackRange(int level)
     {
-        return _baseAttackRange + _attackRangeUpgradeValue * (level - 1);
+        return BaseAttackRange + _attackRangeUpgradeValue * (level - 1);
     }
 
     public float GetMultiply(int level)
     {
-        return _baseMultiply + _multiplyUpgradeValue * (level - 1);
+        return BaseMultiply + _multiplyUpgradeValue * (level - 1);
     }
 
     public override List<CardStats> GetStats()

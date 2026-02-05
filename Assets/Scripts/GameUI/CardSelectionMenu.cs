@@ -41,7 +41,6 @@ public class CardSelectionMenu : PauseWindow
         OpenMenu();
     }
 
-
     public void OpenMenu()
     {
         if (_currentCards == null)
@@ -57,8 +56,6 @@ public class CardSelectionMenu : PauseWindow
         base.Open();
         ShowCards(_currentCards);
     }
-
-
 
     public void CloseMenu()
     {
@@ -115,7 +112,7 @@ public class CardSelectionMenu : PauseWindow
     {
         foreach (var cardButton in _cardsButtons)
         {
-            Destroy(cardButton);
+            Destroy(cardButton.gameObject);
         }
 
         _currentCards = null;

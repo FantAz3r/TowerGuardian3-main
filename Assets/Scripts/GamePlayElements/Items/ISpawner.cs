@@ -7,7 +7,7 @@ public interface ISpawner
     void Spawn(HealthConfig config, Vector3 position, int count);
     void Spawn(AudioClip clip, Vector3 position = default);
     void Spawn(Vector3 position, int damage, Color? textColor = null);
-    void Spawn(HealthConfig config, Vector3 position);
+    void Spawn(EffectType type, Vector3 position, Transform parent = null);
 
     void EnableSpawn();
     void DisableSpawn();

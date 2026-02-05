@@ -7,18 +7,17 @@ public class RotateShurikens : Ability
     [SerializeField] private RotatingShurikenConfig _config;
 
     private List<Shuriken> _shurikens = new List<Shuriken>();
-    private Coroutine _rotateCoroutine;
     private int _activeCount = 0;
     private int _maxCount = 6;
+    private float _angle = 0f;
     public override AbilityType Type => AbilityType.RotatingShuriken;
-
     public override AbilityConfig Config => _config;
 
     private void Awake()
     {
         for (int i = 0; i < _maxCount; i++)
         {
-            var shuriken = Instantiate(_config.Prefab, transform);
+            var shuriken = Instantiate(_config.ShuricrnPrefab, transform);
             _shurikens.Add(shuriken);
             shuriken.gameObject.SetActive(false);
         }
@@ -30,60 +29,39 @@ public class RotateShurikens : Ability
     {
         _activeCount = 0;
 
-        if (_rotateCoroutine != null)
-        {
-            StopCoroutine(_rotateCoroutine);
-        }
+        foreach (var shuriken in _shurikens)
+            shuriken.gameObject.SetActive(false);
 
         _config.Upgraded -= Upgrade;
     }
 
     public override void Enable()
     {
-        _rotateCoroutine = StartCoroutine(Rotate());
-        LoadAbillity();
-    }
+        base.Enable();
 
-    private IEnumerator Rotate()
-    {
-        float angle = 0f;
-
-        while (enabled)
+        if (_config.Level == 0)
         {
-            angle += _config.RotationSpeed * Time.deltaTime;
-            angle %= 360f;
-
-            if (_activeCount == 0) yield return null;
-
-            float angleStep = 360f / _activeCount;
-
-            for (int i = 0; i < _activeCount; i++)
-            {
-                float currentAngle = angle + angleStep * i;
-                Vector3 pos = new Vector3(
-                    Mathf.Cos(currentAngle * Mathf.Deg2Rad) * _config.Radius,
-                    0f,
-                    Mathf.Sin(currentAngle * Mathf.Deg2Rad) * _config.Radius);
-
-                _shurikens[i].transform.localPosition = pos;
-            }
-
-            yield return null;
+            _config.Upgrade();
         }
+        else
+        {
+            LoadAbility();
+        }
+
     }
 
-    public void Upgrade()
+    private void Update()
     {
-        LoadAbillity();
-    }
+        if (_activeCount == 0) return;
 
-    private void UpdatePositions()
-    {
+        _angle += _config.RotationSpeed * Time.deltaTime;
+        _angle %= 360f;
+
         float angleStep = 360f / _activeCount;
 
         for (int i = 0; i < _activeCount; i++)
         {
-            float currentAngle = angleStep * i;
+            float currentAngle = _angle + angleStep * i;
             Vector3 pos = new Vector3(
                 Mathf.Cos(currentAngle * Mathf.Deg2Rad) * _config.Radius,
                 0f,
@@ -93,23 +71,22 @@ public class RotateShurikens : Ability
         }
     }
 
-    private void LoadAbillity()
+    public void Upgrade()
     {
-        _activeCount = _config.Count;
+        LoadAbility();
+    }
+
+    private void LoadAbility()
+    {
+        _activeCount = Mathf.Min(_config.Count, _shurikens.Count);
 
         for (int i = 0; i < _shurikens.Count; i++)
         {
             if (i < _activeCount)
-            {
                 ActivateShuriken(i);
-            }
             else
-            {
                 _shurikens[i].gameObject.SetActive(false);
-            }
         }
-
-        UpdatePositions();
     }
 
     private void ActivateShuriken(int index)
@@ -121,11 +98,10 @@ public class RotateShurikens : Ability
 
     public override void Remove()
     {
-        foreach(var item in _shurikens)
-        {
+        foreach (var item in _shurikens)
             item.gameObject.SetActive(false);
-        }
 
         _activeCount = 0;
+        _angle = 0f;
     }
 }

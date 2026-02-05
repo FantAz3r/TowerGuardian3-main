@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class GameConditionService : IGameConditionService
 {
@@ -8,9 +9,9 @@ public class GameConditionService : IGameConditionService
 
     public event Action LevelComplited, LevelLoused, LevelStarted;
 
-    public void OnLouse()
+    public void OnLouse(GameObject louseReason = null)
     {
-        _windowService.Open(WindowType.LouseLevelMenu);
+        _windowService.Open(WindowType.LouseLevelMenu, louseReason);
     }
 
     public void OnStart(Portal portal)

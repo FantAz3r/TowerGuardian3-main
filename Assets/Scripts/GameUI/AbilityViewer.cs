@@ -40,7 +40,6 @@ public class AbilityViewer : MonoBehaviour
         _attacker = attacker;
         _iconImage.sprite = ability.Config.Icon;
         _cooldownFillImage.fillAmount = 0f;
-
         gameObject.SetActive(true);
 
         if (keyCode != AbilityKeyCode.None)
@@ -104,6 +103,7 @@ public class AbilityViewer : MonoBehaviour
         if (Ability is ICooldownAbility ability)
         {
             _cooldownText.enabled = true;
+            _cooldownText.text = ability.Cooldown.ToString();
             ability.Cooldowning += CooldownView;
         }
     }
@@ -127,6 +127,6 @@ public class AbilityViewer : MonoBehaviour
     private void CooldownView(float cooldown, float passTime)
     {
         _cooldownText.text = (cooldown - passTime).ToString();
-        _cooldownFillImage.fillAmount = passTime / cooldown;
+        _cooldownFillImage.fillAmount = 1- (passTime / cooldown);
     }
 }

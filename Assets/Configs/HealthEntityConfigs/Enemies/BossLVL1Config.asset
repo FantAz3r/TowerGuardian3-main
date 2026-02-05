@@ -12,18 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896487cc993eb9e42ab3018d45dc8184, type: 3}
   m_Name: BossLVL1Config
   m_EditorClassIdentifier: 
-  _maxHealth: 60
-  _damageToErn: 0
-  _rewardCount: 10
-  _spawnResource: 2
-  _spawnEffect: 0
-  _moveSpeed: 3
-  _rotationSpeed: 60
-  _detectionRadius: 20
-  _damage: 10
-  _attackRange: 2
-  _attackAriaCenter: {x: 0, y: 2, z: 2}
-  _attackCooldown: 2.5
-  _jumpDamage: 15
-  _allowedStates: 0000000001000000020000000400000005000000
-  _throwDamage: 20
+  <MoveConfig>k__BackingField: {fileID: 0}
+  <HealthConfig>k__BackingField: {fileID: 0}
+  <DetectionRadius>k__BackingField: 10
+  <Damage>k__BackingField: 10
+  <AttackRange>k__BackingField: 1.5
+  <AttackAriaCenter>k__BackingField: {x: 0, y: 0, z: 0}
+  <AttackCooldown>k__BackingField: 1
+  <JumpDamage>k__BackingField: 15
+  <ThrowDamage>k__BackingField: 0
+  allowedStates: 00000000

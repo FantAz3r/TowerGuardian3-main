@@ -20,7 +20,7 @@ public class WeaponPanel : MonoBehaviour
         }
 
         _player.CardHolder.CardAdded += OnWeaponAdded;
-        _player.CardHolder.CardAdded += OnWeaponRemoved;
+        _player.CardHolder.CardRemoved += OnWeaponRemoved;
     }
 
     private void OnEnable()
@@ -36,7 +36,7 @@ public class WeaponPanel : MonoBehaviour
     private void OnDestroy()
     {
         _player.CardHolder.CardAdded -= OnWeaponAdded;
-        _player.CardHolder.CardAdded -= OnWeaponRemoved;
+        _player.CardHolder.CardRemoved -= OnWeaponRemoved;
     }
 
     private void OnWeaponAdded(ICardConfig card)

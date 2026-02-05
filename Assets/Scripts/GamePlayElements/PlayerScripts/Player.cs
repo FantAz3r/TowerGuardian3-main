@@ -25,15 +25,17 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _conditionService = ServiceLocator.Get<IGameConditionService>();
+        Health.Died += OnDied;
     }
 
-    private void OnDisable()
+    private void OnDied()
     {
-        _conditionService.OnLouse();
+        _conditionService.OnLouse(Health.gameObject);
     }
 
     private void OnDestroy()
     {
+        Health.Died -= OnDied;
         IsAlive = false;
         YG2.saves.PlayerPosition = transform.position;
         YG2.SaveProgress();

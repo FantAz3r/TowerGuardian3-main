@@ -107,7 +107,6 @@ public class PlayerAnimator : MonoBehaviour
         _animator.SetFloat(_hashY, y, dampTime, Time.deltaTime);
     }
 
-
     private void OnWeaponSeted(IWeapon weapon)
     {
         if (weapon.Config.Controller == _attacker.PreviousWeapon.Config.Controller)
@@ -151,6 +150,16 @@ public class PlayerAnimator : MonoBehaviour
     public void OnAnimationUnequipWeapon()
     {
         _animator.SetBool(_hasWeapon, false);
+    }
+
+    public void OnEquipWeapon()
+    {
+        _attacker.OnEquipWeapon();
+    }
+
+    public void OnTakeOffWeapon()
+    {
+        _attacker.OnTakeOffWeapon();
     }
 
     public void PlayAttack(IWeapon weapon, float attackDelay)
@@ -238,15 +247,5 @@ public class PlayerAnimator : MonoBehaviour
     public void OnAnimationAttack()
     {
         _attacker.OnAnimationAttack();
-    }
-
-    public void OnEquipWeapon()
-    {
-        _attacker.OnEquipWeapon();
-    }
-
-    public void OnTakeOffWeapon()
-    {
-        _attacker.OnTakeOffWeapon();
     }
 }

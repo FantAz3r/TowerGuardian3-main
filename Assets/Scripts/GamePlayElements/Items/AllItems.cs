@@ -7,7 +7,7 @@ public abstract class AllItems<TItem, TConfig, TType> : MonoBehaviour
     where TConfig : class
 {
     public Player Player { get; private set; }
-    public List<TItem> Items { get; protected set; } = new();
+    public List<TItem> Items { get; private set; } = new();
 
     public event Action<TItem> Enabled, Upgraded, Removed;
 
@@ -15,7 +15,7 @@ public abstract class AllItems<TItem, TConfig, TType> : MonoBehaviour
     {
         Player = GetComponentInParent<Player>();
     }
-    
+
     private void OnEnable()
     {
         Player.CardHolder.CardAdded += OnActivate;
@@ -26,6 +26,11 @@ public abstract class AllItems<TItem, TConfig, TType> : MonoBehaviour
     {
         Player.CardHolder.CardAdded -= OnActivate;
         Player.CardHolder.CardRemoved -= OnRemove;
+    }
+
+    public void AddItem(TItem item)
+    {
+        Items.Add(item);
     }
 
     private void OnActivate(ICardConfig card)

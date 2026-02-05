@@ -10,6 +10,7 @@ public class Shuriken : MonoBehaviour
     private WaitForSeconds _delay;
     private Coroutine _rotateRoutine;
 
+    public bool IsActive => gameObject.activeSelf;
     public event Action<int> DialedDamage;
 
     private void Awake()

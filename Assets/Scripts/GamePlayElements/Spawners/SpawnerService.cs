@@ -37,11 +37,11 @@ public class SpawnerService : ISpawnerService
         }
     }
 
-    public void SendEffectReqest(HealthConfig config, Vector3 position)
+    public void SendEffectReqest(EffectType type, Vector3 position, Transform parent = null)
     {
         if (_spawners.TryGetValue(SpawnerType.Effects, out var spawner))
         {
-            spawner.Spawn(config, position);
+            spawner.Spawn(type, position, parent);
         }
     }
 

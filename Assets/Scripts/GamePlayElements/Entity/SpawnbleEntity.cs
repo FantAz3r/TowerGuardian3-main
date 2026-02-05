@@ -33,7 +33,7 @@ public class SpawnbleEntity : MonoBehaviour
     private void OnTakeDamage(float value)
     {
         _spawnerService.SendTextReqest(transform.position, (int)value);
-        _spawnerService.SendEffectReqest(_health.Config, transform.position);
+        _spawnerService.SendEffectReqest(_health.Config.SpawnEffect, transform.position);
 
         if (_health.Config.DamageToErn <= 0)
             return;

@@ -30,19 +30,20 @@ MonoBehaviour:
     Value: 15
     Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
   _id: f686a659-d96a-42e8-b503-c0666c1bb2f8
-  _chanceToView: 0.5
-  _level: 0
-  _hasPlayer: 0
-  _isBought: 0
-  _prefab: {fileID: -934408350477533787, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
-  _type: 1
-  _targetType: 0
-  _controller: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
-  _isAreaDamage: 0
-  _baseDamage: 3
-  _baseAttackDelay: 1.5
-  _baseAttackRange: 2
-  _baseMultiply: 2
+  <ChanceToView>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <HasPlayer>k__BackingField: 0
+  <IsBought>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: -934408350477533787, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
+  <WeaponType>k__BackingField: 1
+  <TargetType>k__BackingField: 0
+  <Controller>k__BackingField: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
+  <HitSound>k__BackingField: {fileID: 8300000, guid: d0cde5a83d2546a469373dd3b3c105f8, type: 3}
+  <IsAreaDamage>k__BackingField: 0
+  <BaseDamage>k__BackingField: 10
+  <BaseAttackDelay>k__BackingField: 1
+  <BaseAttackRange>k__BackingField: 2
+  <BaseMultiply>k__BackingField: 2
   _damageUpgradePercent: 0.25
   _attackDelayUpgradeFactor: -0.05
   _attackRangeUpgradeValue: 0.2

@@ -41,7 +41,7 @@ public class WindowService : IWindowService
                 break;
 
             case WindowType.LouseLevelMenu:
-                window = _uiFactory.CreateLouseLevelMenu();
+                window = _uiFactory.CreateLouseLevelMenu(payload);
                 _uiFactory.CloseHUD();
                 break;
 
@@ -74,6 +74,10 @@ public class WindowService : IWindowService
 
             case WindowType.Background:
                 window = _uiFactory.CreateBackground();
+                break;
+
+            case WindowType.DamageScreen:
+                window = _uiFactory.CreateDamageScreen();
                 break;
         }
 

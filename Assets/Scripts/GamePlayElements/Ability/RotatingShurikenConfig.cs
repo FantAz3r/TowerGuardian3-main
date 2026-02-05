@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/RotatingShuricenConfig")]
 public class RotatingShurikenConfig : AbilityConfig
 {
-    [SerializeField] private Shuriken _prefab;
+    [SerializeField] private Shuriken _shurikenPrefab;
     [SerializeField] private int _baseCount = 1;
     [SerializeField] private float _baseRadius = 3f;
     [SerializeField] private float _baseRotationSpeed = 90f;
@@ -21,7 +21,7 @@ public class RotatingShurikenConfig : AbilityConfig
     [SerializeField] private float _minRotationSpeed = 30f;
     [SerializeField] private float _minDamage = 1f;
 
-    public Shuriken Prefab => _prefab;
+    public Shuriken ShuricrnPrefab => _shurikenPrefab;
     public int Count => Mathf.Min(_maxCount, _baseCount + _countPerLevel * (Level - 1));
     public float Radius => Mathf.Max(_minRadius, _baseRadius + _radiusPerLevel * (Level - 1));
     public float RotationSpeed => Mathf.Max(_minRotationSpeed, _baseRotationSpeed + _rotationSpeedPerLevel * (Level - 1));

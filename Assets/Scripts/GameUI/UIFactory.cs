@@ -24,6 +24,8 @@ public class UIFactory
 
     public MainMenu CreateMainMenu()
     {
+        Settings settings = CreateSettings();
+        settings.Close();
         MainMenu mainMenu = CreateWindow(WindowType.MainMenu) as MainMenu;
         return mainMenu;
     }
@@ -53,6 +55,13 @@ public class UIFactory
     public void CloseHUD()
     {
         _hud?.Close();
+    }
+
+    public DamageScreen CreateDamageScreen()
+    {
+        DamageScreen window = CreateWindow(WindowType.DamageScreen, _backgroundContainer) as DamageScreen;
+        window.transform.SetAsFirstSibling();
+        return window;
     }
 
     public QuestViewer CreateQuestViewer()
@@ -118,10 +127,16 @@ public class UIFactory
         return winPanel;
     }
 
-    public LouseLevelMenu CreateLouseLevelMenu()
+    public LouseLevelMenu CreateLouseLevelMenu(GameObject louseReasonObject)
     {
         LouseLevelMenu louseLevelMenu = CreateWindow(WindowType.LouseLevelMenu) as LouseLevelMenu;
         louseLevelMenu.Init(_gameFactory.ScoreCounter, _gameFactory.CurrentLevel, _gameFactory.Player);
+
+        if(louseReasonObject != null && louseReasonObject.TryGetComponent(out Health louseReason))
+        {
+            louseLevelMenu.SetResurrection();
+        }
+
         return louseLevelMenu;
     }
 

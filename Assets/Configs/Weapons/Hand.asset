@@ -21,19 +21,20 @@ MonoBehaviour:
   _descriptionTR: 
   _costs: []
   _id: 521bccbd-6f06-453d-b923-7bfee13b2dec
-  _chanceToView: 0
-  _level: 0
-  _hasPlayer: 0
-  _isBought: 0
-  _prefab: {fileID: 0}
-  _type: 0
-  _targetType: 4
-  _controller: {fileID: 9100000, guid: cedb260312911b4488266dfcd5693a2a, type: 2}
-  _isAreaDamage: 0
-  _baseDamage: 4
-  _baseAttackDelay: 0.7
-  _baseAttackRange: 2
-  _baseMultiply: 2
+  <ChanceToView>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <HasPlayer>k__BackingField: 0
+  <IsBought>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 0}
+  <WeaponType>k__BackingField: 0
+  <TargetType>k__BackingField: 4
+  <Controller>k__BackingField: {fileID: 9100000, guid: cedb260312911b4488266dfcd5693a2a, type: 2}
+  <HitSound>k__BackingField: {fileID: 0}
+  <IsAreaDamage>k__BackingField: 0
+  <BaseDamage>k__BackingField: 10
+  <BaseAttackDelay>k__BackingField: 1
+  <BaseAttackRange>k__BackingField: 2
+  <BaseMultiply>k__BackingField: 2
   _damageUpgradePercent: 0.25
   _attackDelayUpgradeFactor: -0.05
   _attackRangeUpgradeValue: 0.2

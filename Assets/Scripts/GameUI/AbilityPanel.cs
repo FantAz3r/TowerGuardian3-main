@@ -43,8 +43,8 @@ public class AbilityPanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        _player.AllAbilities.Enabled -= RemoveView;
-        _player.AllAbilities.Removed -= View;
+        _player.AllAbilities.Enabled -= View;
+        _player.AllAbilities.Removed -= RemoveView;
         _inputService.OnAbillity1Used -= OnAbility1Used;
         _inputService.OnAbillity2Used -= OnAbility2Used;
         _inputService.OnAbillity3Used -= OnAbility3Used;

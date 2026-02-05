@@ -110,7 +110,6 @@ public class PlayerAttacker : MonoBehaviour
         _previousWeapon.TakeOff();
     }
 
-
     public void OnAnimationAttack()
     {
         if (_currentWeapon != null)

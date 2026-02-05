@@ -21,7 +21,8 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
         _factories = new Dictionary<CardType, ICardFactory>()
         {
-            { CardType.Weapon, new WeaponFactory(player) }
+            { CardType.Weapon, new WeaponFactory(player) },
+            {CardType.Ability, new AbilityFactory(player) }
         };
     }
 
@@ -112,7 +113,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
     private void AddCard(ICardConfig card)
     {
         _selectedConfigs.Add(card);
-        CardAdded?.Invoke(card);
         Create(card);
+        CardAdded?.Invoke(card);
     }
 }

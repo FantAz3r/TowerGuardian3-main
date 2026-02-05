@@ -16,7 +16,7 @@ public class SoundSetting : MonoBehaviour
     private Slider _volumeSlider;
     private float _currentValue;
 
-    private void Start()
+    private void Awake()
     {
         LoadVolume();
         _volumeSlider = GetComponent<Slider>();

@@ -31,11 +31,12 @@ MonoBehaviour:
     Value: 5
     Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
   _id: 13f3c7d5-8723-43a2-8739-bb50875891dd
-  _chanceToView: 0.5
-  _level: 0
-  _hasPlayer: 0
-  _isBought: 0
-  _abilityType: 1
+  <ChanceToView>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <HasPlayer>k__BackingField: 0
+  <IsBought>k__BackingField: 1
+  <Prefab>k__BackingField: {fileID: 4438864914896478579, guid: b9857439dc1cadc479c8a86bf2a38a45, type: 3}
+  <AbilityType>k__BackingField: 1
   _baseCooldown: 10
   _flightDuration: 1
   _baseFlightDistance: 10

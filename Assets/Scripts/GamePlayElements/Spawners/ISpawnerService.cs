@@ -7,7 +7,7 @@ public interface ISpawnerService : IService
     void SendItemReqest(HealthConfig config, Vector3 position, int count = 1);
     void SendSoundReqest(AudioClip clip, Vector3 position = default);
     void SendTextReqest(Vector3 position, int damage, Color? textColor = null);
-    void SendEffectReqest(HealthConfig config, Vector3 position);
+    void SendEffectReqest(EffectType type, Vector3 position, Transform parent = null);
 
     void EnableSpawner(SpawnerType spawnerType);
     void DisableSpawn(SpawnerType spawnerType);
