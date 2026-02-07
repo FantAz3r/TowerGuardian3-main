@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c29de2edc7538946b52d5b14693ec67, type: 3}
   m_Name: UpstairsQuest
   m_EditorClassIdentifier: 
-  _image: {fileID: 21300000, guid: 97da4b660387d8246859ba85ec5d60ab, type: 3}
-  _descriptionRU: "\u041F\u043E\u0434\u043D\u0438\u043C\u0430\u0439\u0441\u044F \u043F\u043E
-    \u043B\u0435\u0441\u0442\u043D\u0438\u0446\u0435"
-  _descriptionEN: Climb the stairs
-  _descriptionTR: "Merdivenlerden yukar\u0131 \xE7\u0131k\u0131n"
-  _questType: 8
-  _isProgressQuest: 0
-  _targetValue: 0
-  _isTimeQuest: 0
-  _timeLimit: 0
+  <Image>k__BackingField: {fileID: 21300000, guid: 97da4b660387d8246859ba85ec5d60ab, type: 3}
+  <DescriptionRU>k__BackingField: "\u041F\u043E\u0434\u043D\u0438\u043C\u0430\u0439\u0441\u044F
+    \u043F\u043E \u043B\u0435\u0441\u0442\u043D\u0438\u0446\u0435"
+  <DescriptionEN>k__BackingField: Climb the stairs
+  <DescriptionTR>k__BackingField: "Merdivenlerden \xE7\u0131k\u0131n"
+  <QuestType>k__BackingField: 8
+  <IsProgressQuest>k__BackingField: 0
+  <TargetValue>k__BackingField: 0
+  <IsTimeQuest>k__BackingField: 0
+  <TimeLimit>k__BackingField: 0
+  <ScorePoints>k__BackingField: 0

@@ -15,7 +15,6 @@ MonoBehaviour:
   _level: 3
   _quests: 010000000200000003000000040000000500000006000000
   _playerSpawnPoint: {x: 0, y: 0, z: 4}
-  _portalData: {fileID: 11400000, guid: d0916e15afa7dcb40ac97a40782559cd, type: 2}
   _dayDuration: 20
   _nightDuration: 15
   _dayLightIntensity: 1.5
@@ -23,9 +22,14 @@ MonoBehaviour:
   _transitionDuration: 2
   _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
   _nightLightColor: {r: 1, g: 0.5415317, b: 0, a: 1}
-  _container: {fileID: 4123103567900668795, guid: 7fd5f2745c3e24640a66b37e74bcae6c, type: 3}
-  _nightSpawnDelay: 3
-  _daySpawnDelay: 10
+  _nightSpawnDelay: 9999999
+  _daySpawnDelay: 9999999
+  <Waves>k__BackingField:
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 1
+    <Duration>k__BackingField: 1000000
   _scorePerTimeOneStar: 0.3
   _scorePerTimeTwoStar: 0.5
   _scorePerTimeThreeStar: 0.6

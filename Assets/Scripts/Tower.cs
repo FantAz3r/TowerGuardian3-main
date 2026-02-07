@@ -8,4 +8,6 @@ public class Tower : MonoBehaviour, ISceneContainer
     [field: SerializeField] public StairsTrigger StairsFirstFloor { get; private set; } 
     [field: SerializeField] public TowerRenderer TowerRenderer { get; private set; }
     [field: SerializeField] public List<Portal> Portals { get; private set; }
+
+    public List<SpawnerActivator> SpawnPoints => null;
 }

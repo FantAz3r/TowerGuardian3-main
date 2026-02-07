@@ -5,9 +5,9 @@ public class WinLevelMenu : LevelMenu
 {
     [SerializeField] private Button _nextLevelButton;
 
-    public override void Init(ScoreCounter scoreCounter, LevelID currentLevel)
+    public override void Init(ScoreCounter scoreCounter, LevelConfig levelConfig)
     {
-        base.Init(scoreCounter, currentLevel);
+        base.Init(scoreCounter, levelConfig);
     }
 
     protected override void Awake()

@@ -9,14 +9,14 @@ public class StartLevelMenu : LevelMenu
 
     private LevelID _nextLevel;
 
-    public void Init(ScoreCounter scoreCounter, LevelID currentLevel, LevelID nextLevel)
+    public void Init(ScoreCounter scoreCounter, LevelConfig levelConfig, LevelID nextLevel)
     {
-        base.Init(scoreCounter, currentLevel);
+        base.Init(scoreCounter, levelConfig);
         _nextLevel = nextLevel;
         _levelText.text = nextLevel.ToString();
     }
 
-    protected override void Awake()
+    protected override void Awake()    
     {
         base.Awake();
     }

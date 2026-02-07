@@ -6,23 +6,21 @@ public abstract class LevelMenu : PauseWindow
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _homeButton;
 
-    private ScoreCounter _scoreCounter;
-    private IStateSwitchService _stateSwitchService;
     private LevelID _currentLevel;
 
-    public ScoreCounter ScoreCounter => _scoreCounter;
-    public IStateSwitchService StateSwitchService => _stateSwitchService;
+    public ScoreCounter ScoreCounter { get; private set; }
+    public IStateSwitchService StateSwitchService { get; private set; }
 
-    public virtual void Init(ScoreCounter scoreCounter, LevelID currentLevel)
+    public virtual void Init(ScoreCounter scoreCounter, LevelConfig levelConfig)
     {
-        _scoreCounter = scoreCounter;
-        _currentLevel = currentLevel;
+        ScoreCounter = scoreCounter;
+        _currentLevel = levelConfig.Level;
     }
 
     protected override void Awake()
     {
         base.Awake();
-        _stateSwitchService = ServiceLocator.Get<IStateSwitchService>();
+        StateSwitchService = ServiceLocator.Get<IStateSwitchService>();
     }
 
     protected virtual void OnEnable()
@@ -53,13 +51,13 @@ public abstract class LevelMenu : PauseWindow
 
     private void OnRestartClicked()
     {
-        _stateSwitchService.Switch(_currentLevel);
+        StateSwitchService.Switch(_currentLevel);
         Close();
     }
 
     protected virtual void OnHomeClicked()
     {
-        _stateSwitchService.Switch(LevelID.Tower);
+        StateSwitchService.Switch(LevelID.Tower);
         Close();
     }
 }

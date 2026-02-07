@@ -8,7 +8,7 @@ public class GameFactory : IGameFactory
 {
     private Tower _tower;
     private EnemySpawner _enemySpawner;
-    private Tutorial _tutorial;
+    private QuestStateMachine _questRuner;
     private QuestBuilder _questBuilder;
     private PortalSwitcher _portalSwitcher;
     private ISceneContainer _sceneContainer;
@@ -113,7 +113,7 @@ public class GameFactory : IGameFactory
     public void CreateEnemies()
     {
         _enemySpawner = Object.Instantiate(Resources.Load<EnemySpawner>(GameConstants.EnemySpawner));
-        _enemySpawner.Init(Player, Cycle, LevelConfig);
+        _enemySpawner.Init(Player, Cycle, LevelConfig, _sceneContainer.SpawnPoints);
     }
 
     public void CreatePortalsFactory()
@@ -136,9 +136,9 @@ public class GameFactory : IGameFactory
 
     public void CreateTutorial()
     {
-        _tutorial = Object.Instantiate(Resources.Load<Tutorial>(GameConstants.Tutorial));
-        _tutorial.Init(_questBuilder, LevelConfig.Level, LevelConfig.Quests);
-        Player.QuestPointer.Init(Player.transform, _tutorial);
+        _questRuner = Object.Instantiate(Resources.Load<QuestStateMachine>(GameConstants.Tutorial));
+        _questRuner.Init(_questBuilder, LevelConfig.Level, LevelConfig.Quests);
+        Player.QuestPointer.Init(Player.transform, _questRuner);
     }
 
     public void CreateTower()
@@ -154,9 +154,13 @@ public class GameFactory : IGameFactory
 
     public void RunLevel()
     {
-        _tutorial?.RunQuests();
-        _enemySpawner?.StartSpawn();
+        _questRuner?.Run();
         Cycle?.StartDayCycle();
+
+        if(LevelConfig.Level != LevelID.Tower)
+        {
+            _enemySpawner?.StartSpawn();
+        }
     }
 }
 

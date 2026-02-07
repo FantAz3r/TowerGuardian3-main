@@ -11,12 +11,6 @@ public class PlayerHealthViewer : MonoBehaviour
 
     private Tween _healthTween;
     private Health _health;
-    private IWindowService _windowService;
-
-    private void Awake()
-    {
-        _windowService = ServiceLocator.Get<IWindowService>();
-    }
 
     public void Init(Health health)
     {
@@ -34,7 +28,6 @@ public class PlayerHealthViewer : MonoBehaviour
 
     private void View(float currentHealth, float maxHealth)
     {
-        _windowService.Open(WindowType.DamageScreen);
         _healthText.text = $"{currentHealth:F0} / {maxHealth:F0}";
 
         float startValue = _healthImage.value;

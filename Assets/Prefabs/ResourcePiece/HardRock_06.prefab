@@ -123,7 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pieceType: 0
+  _pickSound: {fileID: 0}
+  _collectSound: {fileID: 0}
   _amount: 1
+  <ScorePoints>k__BackingField: 2
 --- !u!54 &-2759677082107405534
 Rigidbody:
   m_ObjectHideFlags: 0

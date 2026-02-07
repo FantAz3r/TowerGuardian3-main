@@ -7,9 +7,9 @@ public class LouseLevelMenu : LevelMenu
     private Player _player;
     private int _resurrectionCount = 1;
 
-    public void Init(ScoreCounter scorecounter, LevelID currentLevel, Player player)
+    public void Init(ScoreCounter scorecounter, LevelConfig levelConfig, Player player)
     {
-        base.Init(scorecounter, currentLevel);
+        base.Init(scorecounter, levelConfig);
         _player = player;
     }
 
@@ -38,5 +38,11 @@ public class LouseLevelMenu : LevelMenu
     {
         _player.Health.Heal(_player.Health.MaxHealth);
         base.Close();
+    }
+
+    public override void Open()
+    {
+        base.Open();
+        ScoreCounter.OnEndLevel();
     }
 }

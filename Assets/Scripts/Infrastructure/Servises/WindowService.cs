@@ -84,7 +84,6 @@ public class WindowService : IWindowService
         if (window != null)
         {
             window.Open();
-            Debug.Log(type);
         }
 
         return window;

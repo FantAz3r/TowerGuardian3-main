@@ -123,16 +123,21 @@ public class UIFactory
     public WinLevelMenu CreateWinLevelMenu()
     {
         WinLevelMenu winPanel = CreateWindow(WindowType.WinLevelMenu) as WinLevelMenu;
-        winPanel.Init(_gameFactory.ScoreCounter, _gameFactory.CurrentLevel);
+        winPanel.Init(_gameFactory.ScoreCounter, _gameFactory.LevelConfig);
+
+        InitScoreViewer(winPanel);
+
         return winPanel;
     }
 
     public LouseLevelMenu CreateLouseLevelMenu(GameObject louseReasonObject)
     {
         LouseLevelMenu louseLevelMenu = CreateWindow(WindowType.LouseLevelMenu) as LouseLevelMenu;
-        louseLevelMenu.Init(_gameFactory.ScoreCounter, _gameFactory.CurrentLevel, _gameFactory.Player);
+        louseLevelMenu.Init(_gameFactory.ScoreCounter, _gameFactory.LevelConfig, _gameFactory.Player);
 
-        if(louseReasonObject != null && louseReasonObject.TryGetComponent(out Health louseReason))
+        InitScoreViewer(louseLevelMenu);
+
+        if (louseReasonObject != null && louseReasonObject.TryGetComponent(out Health louseReason))
         {
             louseLevelMenu.SetResurrection();
         }
@@ -145,7 +150,8 @@ public class UIFactory
         portalObject.TryGetComponent(out Portal portal);
 
         StartLevelMenu startLevelMenu = CreateWindow(WindowType.StartLevelMenu) as StartLevelMenu;
-        startLevelMenu.Init(_gameFactory.ScoreCounter, _gameFactory.CurrentLevel, portal.NextLevel);
+        startLevelMenu.Init(_gameFactory.ScoreCounter, _gameFactory.LevelConfig, portal.NextLevel);
+        InitScoreViewer(startLevelMenu);
         return startLevelMenu;
     }
 
@@ -169,6 +175,12 @@ public class UIFactory
             window = Object.Instantiate(prefab, parent);
 
         return window;
+    }
+
+    private void InitScoreViewer(LevelMenu levelMenu)
+    {
+        ScoreViewer scoreViewer = levelMenu.GetComponent<ScoreViewer>();
+        scoreViewer.Init(_gameFactory.ScoreCounter);
     }
 }
 

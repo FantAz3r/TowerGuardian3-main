@@ -14,6 +14,7 @@ public class PauseUI : PauseWindow
     {
         base.Awake();
         _windowService = ServiceLocator.Get<IWindowService>();
+        _stateMachine = ServiceLocator.Get<IStateSwitchService>();
     }
 
     private void OnEnable()

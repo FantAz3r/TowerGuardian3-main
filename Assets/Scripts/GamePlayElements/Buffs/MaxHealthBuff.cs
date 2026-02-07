@@ -12,6 +12,7 @@ public class MaxHealthBuff : Buff
 
     public override void Enable()
     {
+        _buffbleComponent.ApplyBuff(Config.IncreaseValue);
     }
 
     public override void Upgrade()

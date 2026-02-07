@@ -52,4 +52,41 @@ public static class Utils
 
         return list;
     }
+
+    public static T SelectAndUpdateWeights<T>(Dictionary<T, float> targetWeights, Dictionary<T, float> startWaights, out Dictionary<T, float> newWeights)
+    {
+        float totalWeight = targetWeights.Values.Sum();
+        float random = Random.Range(0, totalWeight);
+
+        float sum = 0;
+        T chosen = default;
+
+        foreach (var kvp in startWaights)
+        {
+            sum += kvp.Value;
+
+            if (random <= sum)
+            {
+                chosen = kvp.Key;
+                break;
+            }
+        }
+
+        float chosenWeight = startWaights[chosen];
+        float newChosenWeight = chosenWeight * (chosenWeight / totalWeight);
+        float freedWeight = chosenWeight - newChosenWeight;
+
+        var others = startWaights.Keys.Where(k => EqualityComparer<T>.Default.Equals(k, chosen) == false).ToList();
+        float sumOthersInitial = others.Sum(k => startWaights[k]);
+
+        newWeights = new Dictionary<T, float>();
+        newWeights[chosen] = newChosenWeight;
+
+        foreach (var other in others)
+        {
+            newWeights[other] = startWaights[other] + freedWeight * (startWaights[other] / sumOthersInitial);
+        }
+
+        return chosen;
+    }
 }

@@ -1,43 +1,6 @@
 {
-    "idSave": 3048,
-    "AllCards": [
-        {
-            "ID": "461a6838-bb21-4e2b-83ea-91f625be7fde",
-            "Level": 2,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "13f3c7d5-8723-43a2-8739-bb50875891dd",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
-            "Level": 3,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "14ceb4cf-2180-47f1-9722-7bee9685c697",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "f16b46a5-a46e-42d8-afc5-54d237d09e9e",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "033888aa-cee4-442f-b7fd-38a4e0e8f850",
-            "Level": 2,
-            "IsBought": true,
-            "HasPlayer": true
-        }
-    ],
+    "idSave": 6599,
+    "AllCards": [],
     "CurrentWeapon": {
         "ID": "",
         "Level": 0,
@@ -45,27 +8,19 @@
         "HasPlayer": false
     },
     "PlayerWeapons": [],
-    "Coins": 8,
-    "Wood": 92,
-    "Stones": 22,
-    "Level": 12,
-    "UpgradePoints": 3,
-    "CurrentEXP": 23.194854736328126,
-    "CurrentLevel": 2,
+    "Coins": 10,
+    "Wood": 180,
+    "Stones": 38,
+    "Level": 9,
+    "UpgradePoints": 9,
+    "CurrentEXP": 6.0109405517578129,
+    "CurrentLevel": 3,
     "PlayerPosition": {
-        "x": 29.51158332824707,
-        "y": -3.7676308155059816,
-        "z": -87.39454650878906
+        "x": -18.147754669189454,
+        "y": 0.0520816445350647,
+        "z": 43.35483169555664
     },
-    "LevelsProgress": [
-        {
-            "Level": 3,
-            "Score": 0,
-            "Stars": 0,
-            "Time": 92.49662017822266,
-            "IsComplite": false
-        }
-    ],
+    "LevelsProgress": [],
     "CurrentFloor": 1,
     "Language": "en",
     "ShowDamageNumber": true,
@@ -73,15 +28,15 @@
     "Volumes": [
         {
             "Name": "UI",
-            "Volume": 0.0
+            "Volume": -4.9042205810546879
         },
         {
             "Name": "Effects",
-            "Volume": 0.0
+            "Volume": -4.9042205810546879
         },
         {
             "Name": "Background",
-            "Volume": 0.0
+            "Volume": -13.015836715698243
         }
     ]
 }

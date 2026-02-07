@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896487cc993eb9e42ab3018d45dc8184, type: 3}
   m_Name: BossLVL1Config
   m_EditorClassIdentifier: 
-  <MoveConfig>k__BackingField: {fileID: 0}
-  <HealthConfig>k__BackingField: {fileID: 0}
-  <DetectionRadius>k__BackingField: 10
+  <MoveConfig>k__BackingField: {fileID: 11400000, guid: a853eb8eeb1b58241a91ed1ea87a6e7f, type: 2}
+  <HealthConfig>k__BackingField: {fileID: 11400000, guid: aa223c5592f246d44af57df6555d41d0, type: 2}
+  <DetectionRadius>k__BackingField: 50
   <Damage>k__BackingField: 10
   <AttackRange>k__BackingField: 1.5
   <AttackAriaCenter>k__BackingField: {x: 0, y: 0, z: 0}
-  <AttackCooldown>k__BackingField: 1
+  <AttackCooldown>k__BackingField: 3
   <JumpDamage>k__BackingField: 15
-  <ThrowDamage>k__BackingField: 0
-  allowedStates: 00000000
+  <ThrowDamage>k__BackingField: 15
+  allowedStates: 0000000001000000020000000400000005000000

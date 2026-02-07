@@ -9,6 +9,8 @@ public abstract class Quest : IQuest
     private QuestViewer _questViewer;
     private IGameConditionService _conditionService;
     private IWindowService _windowService;
+    private IScoreService _service;
+
     public QuestConfig Config { get; private set; }
     public float CurrentTime { get; protected set; } = 0;
     public int CurrentValue { get; protected set; } = 0;
@@ -20,6 +22,7 @@ public abstract class Quest : IQuest
         _isProgressQuest = Config.IsProgressQuest;
         _isTimeQuest = Config.IsTimeQuest;
 
+        _service = ServiceLocator.Get<IScoreService>();
         _windowService = ServiceLocator.Get<IWindowService>();
         _conditionService = ServiceLocator.Get<IGameConditionService>();
     }
@@ -56,6 +59,8 @@ public abstract class Quest : IQuest
 
     public virtual void Complete()
     {
+        _service.AddScore(ScoreType.Quest, Config.ScorePoints);
+
         YG2.onSwitchLang -= On—hangeLang;
         OnCompleted?.Invoke();
         _questViewer.Close();

@@ -6,22 +6,22 @@ public class QuestPointer : MonoBehaviour
 {
     private Transform _player;
     private Vector3 _target;
-    private Tutorial _tutorial;
+    private QuestStateMachine _questRunner;
     private Coroutine _pointerRoutine;
 
-    public void Init(Transform player, Tutorial tutorial)
+    public void Init(Transform player, QuestStateMachine questRuner)
     {
         _player = player;
-        _tutorial = tutorial;
+        _questRunner = questRuner;
 
-        _tutorial.QuestStarted += OnQuestSeted;
-        _tutorial.QuestCompleted += OnQuestCompleted;
+        _questRunner.QuestStarted += OnQuestSeted;
+        _questRunner.QuestCompleted += OnQuestCompleted;
     }
 
     private void OnDestroy()
     {
-        _tutorial.QuestStarted -= OnQuestSeted;
-        _tutorial.QuestCompleted -= OnQuestCompleted;
+        _questRunner.QuestStarted -= OnQuestSeted;
+        _questRunner.QuestCompleted -= OnQuestCompleted;
         StopPointerRoutine();
     }
 

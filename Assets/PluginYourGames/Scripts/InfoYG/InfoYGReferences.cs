@@ -15,7 +15,7 @@ namespace YG
         public const string PATCH_ASSETS_YG2 = "Assets/PluginYourGames";
         public const string CORE_FOLDER_YG2 = "PluginYourGames";
         public const string FIRST_STARTUP_KEY = "FirstStartup_YG2";
-        public const string DEMO_IMAGE = "demo image";
+        public const string DEMO_IMAGE = "demo _image";
 
         public static string PATCH_PC_YG2
         {

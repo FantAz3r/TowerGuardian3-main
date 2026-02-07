@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     private Dictionary<ResourceType, int> _resources = new();
     private int _currentAmount = 0;
     private int _startAmount = 0;
+    private IScoreService _scoreService;
 
     public Dictionary<ResourceType, int> Resources => _resources;
 
@@ -23,6 +24,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
+        _scoreService = ServiceLocator.Get<IScoreService>();
         _collector = GetComponentInChildren<ResourceCollector>();
 
         _resources.Add(ResourceType.Coin, _startAmount);
@@ -42,6 +44,8 @@ public class Inventory : MonoBehaviour
     {
         int spaceLeft = _config.InventoryCapacity - _currentAmount;
         int amountToAdd = Mathf.Min(resource.Amount, spaceLeft);
+
+        _scoreService.AddScore(ScoreType.Resource, resource.ScorePoints);
 
         if (resource.PeiceType == ResourceType.Stone)
             StoneCollected?.Invoke();

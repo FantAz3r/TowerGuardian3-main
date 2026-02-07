@@ -5,35 +5,27 @@ using YG;
 
 public class ScoreCounter
 {
-    private float _currentScore;
     private float _time = 0;
     private LevelID _currentLevel;
 
+    private IScoreService _scoreService;
     private LevelConfig _config;
-    private PlayerAttacker _attacker;
-    private Player _player;
-    private AllAbilities _allAbilities;
 
     public event Action<float, float, int> LevelEnded;
 
     public ScoreCounter(Player player, LevelConfig config)
     {
-        _player = player;
+        _scoreService = ServiceLocator.Get<IScoreService>();
         _config = config;
-
-        _currentLevel = _config.Level;
-        _attacker = _player.Attacker;
-
-        _attacker.DialedDamage += Add;
+        _currentLevel = config.Level;
         _time = Time.time;
     }
 
     public void OnEndLevel(LevelID level = LevelID.None)
     {
-        if(level == LevelID.None)
+        if (level == LevelID.None)
         {
-            _attacker.DialedDamage -= Add;
-            LevelEnded?.Invoke(_currentScore, Time.time - _time, CalculateStars());
+            LevelEnded?.Invoke(_scoreService.GetScore(), Time.time - _time, CalculateStars());
             SaveScore();
         }
         else
@@ -42,17 +34,12 @@ public class ScoreCounter
         }
     }
 
-    private void Add(float score)
-    {
-        _currentScore += score;
-    }
-
     private int CalculateStars()
     {
         float scoreForOneStar = _config.OneStarScore;
         float scoreForTwoStars = _config.TwoStarScore;
         float scoreForTreeStars = _config.ThreeStarScore;
-        float scorePerSecond = _currentScore / _time;
+        float scorePerSecond = _scoreService.GetScore() / _time;
 
         if (scorePerSecond < scoreForOneStar)
             return 0;
@@ -80,9 +67,9 @@ public class ScoreCounter
             {
                 levelFound = true;
 
-                if (_currentScore > levelSave.Score)
+                if (_scoreService.GetScore() > levelSave.Score)
                 {
-                    YG2.saves.LevelsProgress[i] = new LevelSaveData(_currentLevel, (int)_currentScore, CalculateStars(), _time);
+                    YG2.saves.LevelsProgress[i] = new LevelSaveData(_currentLevel, _scoreService.GetScore(), CalculateStars(), _time);
                 }
 
                 break;
@@ -91,7 +78,7 @@ public class ScoreCounter
 
         if (levelFound == false)
         {
-            YG2.saves.LevelsProgress.Add(new LevelSaveData(_currentLevel, (int)_currentScore, CalculateStars(), _time));
+            YG2.saves.LevelsProgress.Add(new LevelSaveData(_currentLevel, _scoreService.GetScore(), CalculateStars(), _time));
         }
 
         YG2.SaveProgress();

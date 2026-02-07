@@ -18,13 +18,19 @@ public class ScoreViewer : MonoBehaviour
     public void Init(ScoreCounter scoreCounter)
     {
         _scoreCounter = scoreCounter;
+        _scoreCounter.LevelEnded += View;
     }
 
-    public void View(float score, int time, int stars)
+    private void OnDestroy()
+    {
+        _scoreCounter.LevelEnded -= View;
+    }
+
+    public void View(float score, float time, int stars)
     {
         _scoreCount.text = score.ToString();
-        int minutes = time / 60;
-        int seconds = time % 60;
+        int minutes = (int)time / 60;
+        int seconds = (int)time % 60;
         _time.text = $"{minutes:D2}:{seconds:D2}";
 
         switch (stars)

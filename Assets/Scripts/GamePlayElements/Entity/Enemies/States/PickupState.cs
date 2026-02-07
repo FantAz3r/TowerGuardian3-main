@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class PickupState : State
 {
     private float _updateTime = 0.05f;

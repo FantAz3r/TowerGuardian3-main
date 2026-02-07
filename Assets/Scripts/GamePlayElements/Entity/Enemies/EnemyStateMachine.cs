@@ -29,7 +29,6 @@ public class EnemyStateMachine : MonoBehaviour
 
     public event Action<IEnemyState> StateChanged;
 
-    public Transform Target { get; private set; }
     public Mover Mover => _mover;
     public Rotator Rotator => _rotator;
     public AttackZone AttackZone => _attackZone;
@@ -142,6 +141,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         _currentState?.Exit();
         _currentState = newState;
+        Debug.Log(_currentState);
         StateChanged?.Invoke(_currentState);
         _currentState.Enter();
 

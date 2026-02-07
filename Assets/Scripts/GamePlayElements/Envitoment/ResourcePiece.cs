@@ -6,6 +6,7 @@ public class ResourcePiece : MonoBehaviour
     [SerializeField] private AudioClip _pickSound;
     [SerializeField] private AudioClip _collectSound;
     [SerializeField] private int _amount = 1;
+    [field: SerializeField] public int ScorePoints { get; private set; } = 1;
 
     private ResourcePieceAnimator _animator;
     private ISpawnerService _spawnerService;

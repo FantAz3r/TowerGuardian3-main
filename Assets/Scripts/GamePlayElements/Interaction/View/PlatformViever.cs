@@ -28,6 +28,7 @@ public class PlatformViewer : MonoBehaviour
         _platform.TimerUpdated += OnTimerUpdated;
         _platform.Disabled += OnPlatformDisable;
 
+        _timerViewer.fillAmount = 0;
         MovePlatform(_upPosition);
     }
 

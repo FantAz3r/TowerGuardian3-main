@@ -15,9 +15,7 @@ public class Weapon : MonoBehaviour, IWeapon
     private float _multiply;
 
     public event Action<int, Vector3, EntityType> HitedTarget;
-
     public WeaponConfig Config => _config;
-
 
     public void Init(AttackZone attackZone)
     {

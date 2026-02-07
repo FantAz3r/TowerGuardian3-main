@@ -13,6 +13,7 @@ public class PlayerExperience : MonoBehaviour
     private int _upgradePoints = 50;
     private float _currentExp = 0f;
     private ISpawnerService _spawnerService;
+    private IScoreService _scoreService;
     private Queue<float> _expQueue = new Queue<float>();
     private bool _isUpdating = false;
 
@@ -30,7 +31,7 @@ public class PlayerExperience : MonoBehaviour
     private void Awake()
     {
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
-
+        _scoreService = ServiceLocator.Get<IScoreService>();
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
 
         if (_enemyDetector != null)
@@ -125,6 +126,7 @@ public class PlayerExperience : MonoBehaviour
 
     private void LevelUp()
     {
+        _scoreService.AddScore(ScoreType.Levelup, _config.ScorePerLevel);
         _spawnerService.SendEffectReqest(_config.LevelUpEffect, transform.position, transform);
         AddUpgradePoints(1);
         _currentLevel++;

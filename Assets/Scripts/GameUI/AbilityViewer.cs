@@ -17,7 +17,6 @@ public class AbilityViewer : MonoBehaviour
     public AbilityKeyCode AbilityKey { get; private set; }
     public bool HasAbility { get; private set; }
 
-
     private void Awake()
     {
         HasAbility = false;
@@ -127,6 +126,11 @@ public class AbilityViewer : MonoBehaviour
     private void CooldownView(float cooldown, float passTime)
     {
         _cooldownText.text = (cooldown - passTime).ToString();
-        _cooldownFillImage.fillAmount = 1- (passTime / cooldown);
+        _cooldownFillImage.fillAmount = 1 - (passTime / cooldown);
+
+        if (_cooldownFillImage.fillAmount == 1)
+        {
+            _cooldownFillImage.fillAmount = 0;
+        }
     }
 }

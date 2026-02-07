@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c29de2edc7538946b52d5b14693ec67, type: 3}
   m_Name: CollectQuest
   m_EditorClassIdentifier: 
-  _image: {fileID: 21300000, guid: f045489519b1fa04d89108d2bee90918, type: 3}
-  _descriptionRU: "\u0421\u043E\u0431\u0435\u0440\u0438 \u0434\u0435\u0440\u0435\u0432\u043E"
-  _descriptionEN: Collect wood
-  _descriptionTR: "Odun toplay\u0131n"
-  _questType: 3
-  _isProgressQuest: 1
-  _targetValue: 5
-  _isTimeQuest: 0
-  _timeLimit: 0
+  <Image>k__BackingField: {fileID: 21300000, guid: 732042724d32d954097ea2bbb28a6faa, type: 3}
+  <DescriptionRU>k__BackingField: "\u0421\u043E\u0431\u0435\u0440\u0438 \u0434\u0435\u0440\u0435\u0432\u043E"
+  <DescriptionEN>k__BackingField: Collect the tree
+  <DescriptionTR>k__BackingField: "A\u011Fac\u0131 toplay\u0131n"
+  <QuestType>k__BackingField: 3
+  <IsProgressQuest>k__BackingField: 1
+  <TargetValue>k__BackingField: 5
+  <IsTimeQuest>k__BackingField: 0
+  <TimeLimit>k__BackingField: 0
+  <ScorePoints>k__BackingField: 50

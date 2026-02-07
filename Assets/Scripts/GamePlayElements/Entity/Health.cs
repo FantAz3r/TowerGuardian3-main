@@ -24,7 +24,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     public Transform GetTransform() => transform;
     public EntityType GetHealthType() => _type;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _maxHealth = _config.MaxHealth;
         _startMaxHealth = _config.MaxHealth;
@@ -59,7 +59,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         }
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         if (_currentValue <= 0) return;
 

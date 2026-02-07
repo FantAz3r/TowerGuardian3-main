@@ -35,5 +35,6 @@ public class BootstrapState : IState
         IWindowService windowService = new WindowService(new UIFactory());
         ServiceLocator.Register(windowService);
         ServiceLocator.Register<IGameConditionService>(new GameConditionService(windowService));
+        ServiceLocator.Register<IScoreService>(new ScoreService());
     }
 }

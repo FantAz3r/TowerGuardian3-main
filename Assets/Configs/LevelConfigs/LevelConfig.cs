@@ -8,7 +8,6 @@ public class LevelConfig : ScriptableObject
     [SerializeField] private LevelID _level = LevelID.Level1;
     [SerializeField] private List<QuestType> _quests;
     [SerializeField] private Vector3 _playerSpawnPoint;
-    [SerializeField] private PortalData _portalData;
 
     [Header("Day Phase Settings")]
     [SerializeField] private float _dayDuration = 15f;
@@ -20,9 +19,9 @@ public class LevelConfig : ScriptableObject
     [SerializeField] private Color _nightLightColor = Color.black;
 
     [Header("Enemy Spawn Settings")]
-    [SerializeField] private SpawnPointContainer _container;
     [SerializeField] private float _nightSpawnDelay = 3f;
     [SerializeField] private float _daySpawnDelay = 8f;
+    [field: SerializeField] public List<Wave> Waves { get; private set;}
 
     [Header("Level Score Settings")]
     [SerializeField] private float _scorePerTimeOneStar;
@@ -47,7 +46,5 @@ public class LevelConfig : ScriptableObject
     public Color DayLightColor => _dayLightColor;
     public Color NightLightColor => _nightLightColor;
 
-    public PortalData PortalData => _portalData;
-    public SpawnPointContainer SpawnPointContainer => _container;
     public IReadOnlyList<QuestType> Quests => _quests;
 }
