@@ -15,17 +15,47 @@ MonoBehaviour:
   _level: 4
   _quests: 050000000c00000006000000
   _playerSpawnPoint: {x: -5, y: 0, z: -5}
-  _portalData: {fileID: 11400000, guid: d659bf9e24ac3024cac1de0cdb3e4b27, type: 2}
-  _dayDuration: 15
-  _nightDuration: 15
+  _dayDuration: 60
+  _nightDuration: 60
   _dayLightIntensity: 1.5
   _nightLightIntensity: 0.8
-  _transitionDuration: 2
+  _transitionDuration: 1
   _dayLightColor: {r: 1, g: 0.97886616, b: 0.61698115, a: 1}
   _nightLightColor: {r: 0.40557137, g: 0.47083426, b: 0.990566, a: 1}
-  _container: {fileID: -4395280963196233909, guid: f4cbcf783fbb6dd4a9cfd8f401da6034, type: 3}
   _nightSpawnDelay: 3
-  _daySpawnDelay: 8
+  _daySpawnDelay: 7
+  <Waves>k__BackingField:
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 1
+    <Duration>k__BackingField: 30
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 7
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 1
+    <Duration>k__BackingField: 30
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 1
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 1
+    <Duration>k__BackingField: 90
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 1
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 2
+    <Duration>k__BackingField: 90
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 1
+    <Duration>k__BackingField: 9999999
   _scorePerTimeOneStar: 0.1
   _scorePerTimeTwoStar: 0.2
   _scorePerTimeThreeStar: 0.3

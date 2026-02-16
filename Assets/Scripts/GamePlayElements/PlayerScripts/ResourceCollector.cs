@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,11 +7,11 @@ using UnityEngine;
 public class ResourceCollector : MonoBehaviour, IBuffble
 {
     [SerializeField] private float _resourceFlySpeed = 2f;
-    [SerializeField] private float _flyDelay = 2f;
+    [SerializeField] private float _flyDelay = 1f;
     [SerializeField] private float _treshold = 0.5f;
 
-    private WaitForSeconds _wait;
     private HashSet<ResourcePiece> _activeResources = new HashSet<ResourcePiece>();
+    private WaitForSeconds _wait;
     private SphereCollider _collectionCollider;
     private float _startRange;
     private ISpawnerService _spawnerService;
@@ -20,8 +21,8 @@ public class ResourceCollector : MonoBehaviour, IBuffble
 
     private void Awake()
     {
-        _wait = new WaitForSeconds(_flyDelay);
         _collectionCollider = GetComponent<SphereCollider>();
+        _wait = new WaitForSeconds(_flyDelay);
         _startRange = _collectionCollider.radius;
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
     }

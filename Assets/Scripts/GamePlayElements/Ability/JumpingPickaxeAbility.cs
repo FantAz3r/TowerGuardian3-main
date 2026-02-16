@@ -10,16 +10,15 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     private Weapon _pickaxe;
     private JumpingPickaxe _jumpingPickaxe;
     private Player _player;
-    private WaitForSeconds _sleep;
     private PlayerAttacker _attacker;
     private WaitForSeconds _oneSecond = new WaitForSeconds(1);
 
-    public event Action<float, float> Cooldowning;
-
+    public bool IsCooldowning { get; private set; } = false;
     public float Cooldown => _cooldown;
     public override AbilityType Type => AbilityType.BouncingPickaxe;
-
     public override AbilityConfig Config => _config;
+
+    public event Action<float, float> Cooldowning;
 
     private void Awake()
     {
@@ -35,15 +34,18 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
 
     public override void Use()
     {
-        if (IsLock == false)
+        if (IsLock)
+            return;
+
+        if (IsCooldowning)
+            return;
+
+        if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Pickaxe)
         {
-            if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Pickaxe)
-            {
-                _pickaxe = _attacker.CurrentWeapon;
-                _attacker.DeactivateWeapon();
-                StartCoroutine(CooldownRoutine());
-                ThrowPickaxe(_pickaxe);
-            }
+            _pickaxe = _attacker.CurrentWeapon;
+            _attacker.DeactivateWeapon();
+            StartCoroutine(CooldownRoutine());
+            ThrowPickaxe(_pickaxe);
         }
     }
 
@@ -56,7 +58,7 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
-        base.LockAbility();
+        IsCooldowning = true;
         float timer = 0f;
 
         while (_cooldown >= timer)
@@ -67,7 +69,7 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_cooldown, 0f);
-        base.UnlockAbility();
+        IsCooldowning = true;
     }
 
     private void CheckWeapon(IWeapon weapon)
@@ -88,8 +90,6 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
         _attacker.ActivateWeapon(_pickaxe);
 
         _jumpingPickaxe.Returned -= Return;
-
-        _sleep = new WaitForSeconds(_cooldown);
         StartCoroutine(CooldownRoutine());
     }
 }

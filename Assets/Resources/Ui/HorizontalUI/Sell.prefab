@@ -525,6 +525,7 @@ GameObject:
   - component: {fileID: 5554111104902391768}
   - component: {fileID: 1922080685905988976}
   - component: {fileID: 3295604821274991063}
+  - component: {fileID: 6946107475801647944}
   m_Layer: 5
   m_Name: Sell Weapon Button
   m_TagString: Untagged
@@ -731,6 +732,26 @@ MonoBehaviour:
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
+--- !u!114 &6946107475801647944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741958289445611981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 150
+  m_MinHeight: 50
+  m_PreferredWidth: 200
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &1865349761685355086
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,6 +841,7 @@ GameObject:
   - component: {fileID: 4442533309279977189}
   - component: {fileID: 1732872860992761261}
   - component: {fileID: 2136317164913177187}
+  - component: {fileID: 1771348140187847684}
   m_Layer: 5
   m_Name: Sell Resources Button
   m_TagString: Untagged
@@ -1026,6 +1048,26 @@ MonoBehaviour:
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
+--- !u!114 &1771348140187847684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093594687078223817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 150
+  m_MinHeight: 50
+  m_PreferredWidth: 200
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &3334246227532516947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,6 +1800,7 @@ GameObject:
   - component: {fileID: 4933285421607968131}
   - component: {fileID: 1098813544380827671}
   - component: {fileID: 4311119848799079445}
+  - component: {fileID: 5169805006097146579}
   m_Layer: 5
   m_Name: Sell Ability Button
   m_TagString: Untagged
@@ -1964,6 +2007,26 @@ MonoBehaviour:
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
+--- !u!114 &5169805006097146579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3821342359359678388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 150
+  m_MinHeight: 50
+  m_PreferredWidth: 200
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &4227330168153591563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,6 +2350,7 @@ GameObject:
   - component: {fileID: 7947862330411197345}
   - component: {fileID: 8872973134346362064}
   - component: {fileID: 8311411518619383388}
+  - component: {fileID: 7954108426612162583}
   m_Layer: 5
   m_Name: Sell Buff Button
   m_TagString: Untagged
@@ -2493,6 +2557,26 @@ MonoBehaviour:
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
+--- !u!114 &7954108426612162583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258077249317693219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 150
+  m_MinHeight: 50
+  m_PreferredWidth: 200
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &4376015809931100727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2666,7 @@ GameObject:
   - component: {fileID: 831751719888224287}
   - component: {fileID: 3994935078609028319}
   - component: {fileID: 7612753567958063322}
+  - component: {fileID: 4138745929583881851}
   m_Layer: 5
   m_Name: Sell Button
   m_TagString: Untagged
@@ -2728,6 +2813,26 @@ MonoBehaviour:
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
+--- !u!114 &4138745929583881851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787800695289645109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 150
+  m_MinHeight: 50
+  m_PreferredWidth: 200
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &4811644363897647160
 GameObject:
   m_ObjectHideFlags: 0
@@ -4830,6 +4935,7 @@ GameObject:
   - component: {fileID: 1804799095394398865}
   - component: {fileID: 5519139233304625267}
   - component: {fileID: 6755230609005772334}
+  - component: {fileID: 7363470847882232080}
   m_Layer: 5
   m_Name: Buy Button
   m_TagString: Untagged
@@ -4990,6 +5096,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _closeWindow: {fileID: 124548455054765489}
   _openWindow: 2
+--- !u!114 &7363470847882232080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763787460656958012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 150
+  m_MinHeight: 50
+  m_PreferredWidth: 200
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &9117024200500942043
 GameObject:
   m_ObjectHideFlags: 0

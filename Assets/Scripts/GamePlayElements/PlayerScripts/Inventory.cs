@@ -122,7 +122,6 @@ public class Inventory : MonoBehaviour
         TotalAmountChanged?.Invoke(_currentAmount);
     }
 
-
     private void SaveResources()
     {
         _resources.TryGetValue(ResourceType.Coin, out int coins);

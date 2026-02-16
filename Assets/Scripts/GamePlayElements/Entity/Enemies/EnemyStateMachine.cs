@@ -53,6 +53,7 @@ public class EnemyStateMachine : MonoBehaviour
     {
         _player = player;
         _collider.enabled = true;
+        _agent.enabled = true;
 
         ActivateStates();
         _targetDetector.PlayerDetected += OnSeePlayer;
@@ -121,7 +122,7 @@ public class EnemyStateMachine : MonoBehaviour
     private void SetState(IEnemyState newState)
     {
         if (_currentState == newState)
-            return;
+            return; 
 
         StartCoroutine(SwitchState(newState));
     }
@@ -141,7 +142,6 @@ public class EnemyStateMachine : MonoBehaviour
 
         _currentState?.Exit();
         _currentState = newState;
-        Debug.Log(_currentState);
         StateChanged?.Invoke(_currentState);
         _currentState.Enter();
 

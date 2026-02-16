@@ -28,11 +28,21 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 01e6321b783ee49b5a496cb302a82e2b, type: 3}
-    totalSpriteSurfaceArea: 44488
     bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 73c3dce2a331f48d888ffe380c3bcc27: 21300000
+    - c097456343b504e0295bfe0d0b9d8aac: 21300000
+    - f6e4c9d3e0d914e5ea3e02dbf696e58d: 21300000
+    - abbc3d38588e54111901783e6057f7c4: 21300000
+    - e6b7878d0ca40426aa3198e30b853f54: 21300000
+    - 90894fce7f0284158bae2d2c6adb3950: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 73c3dce2a331f48d888ffe380c3bcc27, type: 3}
@@ -48,5 +58,6 @@ SpriteAtlas:
   - icon_sound
   - icon_help
   - btn_toggle_on
+  m_RenderDataMap: {}
   m_Tag: Setting
   m_IsVariant: 0

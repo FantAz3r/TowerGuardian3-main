@@ -7,10 +7,12 @@ public static class Utils
     public static Vector3 CalculateThrowForce(Vector3 start, Vector3 target, float angleDegrees = 45f)
     {
         float g = -Physics.gravity.y;
+        float treshold = 0.8f;
         Vector3 dir = target - start;
         float y = dir.y;
         dir.y = 0;
-        float x = dir.magnitude;
+
+        float x = dir.magnitude * treshold;
         float angle = angleDegrees * Mathf.Deg2Rad;
 
         if (x < 0.001f) return Vector3.zero;

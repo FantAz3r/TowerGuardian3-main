@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-
 public class Mover : MonoBehaviour, IBuffble
 {
     [SerializeField] private MoveConfig _configObject;

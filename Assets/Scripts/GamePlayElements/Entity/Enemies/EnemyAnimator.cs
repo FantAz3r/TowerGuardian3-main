@@ -56,8 +56,20 @@ public class EnemyAnimator : MonoBehaviour
         _animator.SetFloat(_hashSpeed, _currentSpeed);
     }
 
-    public void PlayAttack()
+    public void PlayAttack(float attackTime = 1f)
     {
+        AnimationClip attackClip = GetAnimationClip("Attack");
+
+        if (attackClip == null)
+        {
+            _animator.speed = 1f;
+            _animator.SetBool(_hashAttack, true);
+            return;
+        }
+
+        float clipLength = attackClip.length;
+        float speed = clipLength / attackTime;
+        _animator.speed = speed;
         _animator.SetBool(_hashAttack, true);
     }
 
@@ -105,5 +117,15 @@ public class EnemyAnimator : MonoBehaviour
     public void OnAnimationDie()
     {
         _health.Die();
+    }
+
+    private AnimationClip GetAnimationClip(string clipName)
+    {
+        foreach (var clip in _animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+                return clip;
+        }
+        return null;
     }
 }

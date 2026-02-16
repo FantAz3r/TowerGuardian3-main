@@ -42,14 +42,13 @@ public class PickupState : State
     public override void Exit()
     {
         _hasObject = false;
-        _thrownObject = null;
-
         _agent.isStopped = true;
     }
 
     private void FindObject()
     {
         _thrownObject = _objectDetector.GetNearestResource();
+        Debug.Log(_thrownObject);
 
         if (_thrownObject != null)
         {
@@ -67,8 +66,8 @@ public class PickupState : State
         while (_hasObject == false)
             yield return _delay;
 
-        SetCanExit(true);
         _stateMachine.OnReadyToThrow(_thrownObject);
+        SetCanExit(true);
     }
 
     private IEnumerator PickUpRoutine()

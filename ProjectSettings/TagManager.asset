@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Floor
+  - Wall
+  - OuterCorner
+  - Room
   - Trees
   - Stones
   layers:
@@ -13,16 +17,16 @@ TagManager:
   - Player
   - Water
   - UI
-  - Ground
-  - Resources
-  - Buildings
   - Enemy
-  - UI
-  - ThrownOblect
+  - ThrownObject
   - PlayerWall
-  - Door
-  - NavMesh Ignore
-  - Weapon
+  - Resources
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -42,7 +46,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: UI
-    uniqueID: 577159793
     locked: 0

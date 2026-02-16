@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using YG;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
     private Dictionary<Enemy, float> _tempWaights = new();
 
 
-    public void Init(Player player, DayCycle dayCycle, LevelConfig config, List<SpawnerActivator> spawnPoints)
+    public void Init(Player player, DayCycle dayCycle, LevelConfig config, List<SpawnerActivator> spawnPoints )
     {
         _player = player;
         _dayCycle = dayCycle;
@@ -46,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemy in wave.Weight.Keys)
         {
             if (_pools.ContainsKey(enemy) == false)
-                _pools[enemy] = new ObjectPool<Enemy>(enemy, 0, true);
+                _pools[enemy] = new ObjectPool<Enemy>(enemy, 3, true);
         }
     }
 

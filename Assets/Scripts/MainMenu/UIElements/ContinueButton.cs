@@ -4,7 +4,7 @@ using YG;
 
 public class ContinueButton : MonoBehaviour
 {
-    private LevelID _levelToLoad;
+    [SerializeField] private LevelID _levelToLoad;
     private Button _button;
     private IStateSwitchService _switchService;
 

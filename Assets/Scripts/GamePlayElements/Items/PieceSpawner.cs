@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -30,27 +31,37 @@ public class PieceSpawner : BaseSpawner
         if (CanSpawn == false)
             return;
 
-        if (_pools.TryGetValue(config.SpawnResource, out var pool) == false)
+        if (_pools.TryGetValue(config.SpawnResource, out var pool) == false) 
             return;
 
         for (int i = 0; i < count; i++)
         {
             ResourcePiece piece = pool.Get();
-            piece.transform.position = CreateSpawnPoint(position);
+            Vector3 startPos = CreateSpawnPoint(position);
+            piece.transform.position = startPos;
 
-            piece.TryGetComponent(out Rigidbody rigidbody);
             Vector3 ejectDirection = Random.onUnitSphere;
             ejectDirection.y = Mathf.Abs(ejectDirection.y);
             ejectDirection.Normalize();
 
-            float force = Random.Range(_ejectForceMin, _ejectForceMax);
-            rigidbody.AddForce(ejectDirection * force, ForceMode.Impulse);
+            float distance = Random.Range(_ejectForceMin, _ejectForceMax);
+            Vector3 endPos = startPos + ejectDirection * distance;
+
+            float jumpPower = distance * 0.3f;
+            float duration = 0.4f;
+
+            piece.transform.DOJump(endPos, jumpPower, 1, duration)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    piece.GetComponent<Collider>().enabled = true;
+                });
         }
     }
 
     public override void DestroyPool()
     {
-        foreach(var pair in _pools)
+        foreach (var pair in _pools)
         {
             pair.Value.DestroyPool();
         }

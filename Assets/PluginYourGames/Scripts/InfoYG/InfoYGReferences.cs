@@ -15,7 +15,7 @@ namespace YG
         public const string PATCH_ASSETS_YG2 = "Assets/PluginYourGames";
         public const string CORE_FOLDER_YG2 = "PluginYourGames";
         public const string FIRST_STARTUP_KEY = "FirstStartup_YG2";
-        public const string DEMO_IMAGE = "demo _image";
+        public const string DEMO_IMAGE = "demo image";
 
         public static string PATCH_PC_YG2
         {
@@ -85,6 +85,16 @@ namespace YG
             }
         }
 
+        public static string PATCH_PC_TOOLS
+        {
+            get
+            {
+                string path = Path.Combine(PATCH_PC_YG2, "Tools");
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                return path;
+            }
+        }
         public static string PATCH_PC_EXAMPLE
         {
             get { return Path.Combine(PATCH_PC_YG2, "Example"); }

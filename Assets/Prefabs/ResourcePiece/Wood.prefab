@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3696505841873743227}
   - component: {fileID: 3923790784784915496}
   - component: {fileID: 561757668577521926}
-  - component: {fileID: 1972560369956028779}
-  m_Layer: 7
+  - component: {fileID: -2601640125126373547}
+  m_Layer: 9
   m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   _pickSound: {fileID: 0}
   _collectSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _amount: 1
+  <ScorePoints>k__BackingField: 1
 --- !u!136 &561757668577521926
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -74,7 +75,7 @@ CapsuleCollider:
   m_Height: 1.3133688
   m_Direction: 2
   m_Center: {x: -0.17669082, y: 0.17669001, z: 0.16758233}
---- !u!54 &1972560369956028779
+--- !u!54 &-2601640125126373547
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,6 +113,10 @@ PrefabInstance:
     - target: {fileID: 1447987709244396459, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
       propertyPath: m_Name
       value: Log_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447987709244396459, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2257316659483412753, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
       propertyPath: m_LocalScale.x

@@ -1,13 +1,11 @@
 public class BootstrapState : IState
 {
     private IGameStateMachine _stateMachine;
-    private readonly SceneLoader _sceneLoader;
     private ICoroutineRunner _coroutineRunner;
 
-    public BootstrapState(IGameStateMachine stateMachine, SceneLoader sceneLoader, ICoroutineRunner coroutineRunner)
+    public BootstrapState(IGameStateMachine stateMachine, ICoroutineRunner coroutineRunner)
     {
         _stateMachine = stateMachine;
-        _sceneLoader = sceneLoader;
         _coroutineRunner = coroutineRunner;
     }
 

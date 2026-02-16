@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4240861707536156201}
-  - component: {fileID: 5070174303540052161}
   - component: {fileID: -489043269219063817}
   - component: {fileID: 9189083670549185388}
-  m_Layer: 7
+  - component: {fileID: 4914858075650268278}
+  m_Layer: 9
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,33 +35,6 @@ Transform:
   - {fileID: 4742965246865058681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &5070174303540052161
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9143377791031440063}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &-489043269219063817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -99,6 +72,34 @@ MonoBehaviour:
   _pickSound: {fileID: 0}
   _collectSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _amount: 1
+  <ScorePoints>k__BackingField: 1
+--- !u!54 &4914858075650268278
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9143377791031440063}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2984143365425940694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110,6 +111,10 @@ PrefabInstance:
     - target: {fileID: 7201392123690039573, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
       propertyPath: m_Name
       value: HardRock_06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201392123690039573, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7546813994068566959, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
       propertyPath: m_LocalPosition.x

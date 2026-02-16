@@ -50,7 +50,7 @@ public class AttackState : State, IEnemyState
 
             if (timeSinceLastAttack >= attackCooldown)
             {
-                _animator.PlayAttack();
+                _animator.PlayAttack(attackCooldown);
                 timeSinceLastAttack = 0f;
             }
             else

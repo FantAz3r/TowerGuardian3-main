@@ -25,7 +25,7 @@ public class PatrolState : State
     {
         _agent.isStopped = false;
         Transform origin = _stateMashine.transform;
-        float edgeSize = 15f;
+        float edgeSize = 10f;
 
         _patrolPoints = new Vector3[]
         {
@@ -45,9 +45,9 @@ public class PatrolState : State
 
     public override IEnumerator UpdateRoutine()
     {
-        while (true)
+        while (_agent.isStopped == false)
         {
-            float threshold = 0.05f;
+            float threshold = 0.5f;
             Vector3 targetPosition = _patrolPoints[_currentPointIndex];
             _agent.destination = targetPosition;
             RotateTo(targetPosition);

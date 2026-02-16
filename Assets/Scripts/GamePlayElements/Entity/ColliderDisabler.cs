@@ -21,9 +21,13 @@ public class ColliderDisabler : MonoBehaviour
         _health.Died -= Disable;
     }
 
-    private void Disable()
+    public void Disable()
     {
         _collider.enabled = false;
     }
 
+    public void Enable()
+    {
+        _collider.enabled = true;
+    }
 }

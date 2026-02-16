@@ -10,10 +10,11 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
     private PlayerAttacker _attacker;
     private WaitForSeconds _sleep;
     private WaitForSeconds _oneSecond = new WaitForSeconds(1);
-
+    public bool IsCooldowning { get; private set; } = false;
     public override AbilityConfig Config => _config;
     public override AbilityType Type => AbilityType.Burst;
     public float Cooldown => _config.Cooldown;
+
 
     public event Action<float, float> Cooldowning;
 
@@ -37,11 +38,14 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
 
     public override void Use()
     {
-        if (IsLock == false)
-        {
-            StartCoroutine(CooldownRoutine());
-            StartCoroutine(AttackRoutine());
-        }
+        if (IsCooldowning)
+            return;
+
+        if (IsLock)
+            return;
+
+        StartCoroutine(CooldownRoutine());
+        StartCoroutine(AttackRoutine());
     }
 
     public void Upgrade()
@@ -51,6 +55,7 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
 
     public IEnumerator CooldownRoutine()
     {
+        IsCooldowning = true;
         float timer = 0;
 
         while (_config.Cooldown >= timer)
@@ -61,6 +66,7 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0);
+        IsCooldowning = false;
     }
 
     public override void LockAbility()

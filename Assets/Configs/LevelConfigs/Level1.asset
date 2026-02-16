@@ -22,14 +22,41 @@ MonoBehaviour:
   _transitionDuration: 2
   _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
   _nightLightColor: {r: 1, g: 0.5415317, b: 0, a: 1}
-  _nightSpawnDelay: 9999999
-  _daySpawnDelay: 9999999
+  _nightSpawnDelay: 3
+  _daySpawnDelay: 3
   <Waves>k__BackingField:
   - _weight:
       _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 1
+    <Duration>k__BackingField: 9999
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 10
+      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
+        Value: 3
       - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
         Value: 1
-    <Duration>k__BackingField: 1000000
+    <Duration>k__BackingField: 90
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 10
+      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
+        Value: 15
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 7
+    <Duration>k__BackingField: 90
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 1
+      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
+        Value: 3
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 3
+    <Duration>k__BackingField: 9999999
   _scorePerTimeOneStar: 0.3
   _scorePerTimeTwoStar: 0.5
   _scorePerTimeThreeStar: 0.6

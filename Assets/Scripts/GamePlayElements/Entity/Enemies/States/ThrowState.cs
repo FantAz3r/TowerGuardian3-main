@@ -65,22 +65,8 @@ public class ThrowState : State
 
     private void OnThrow()
     {
-        var rigidbody = _thrownObject.GetComponent<Rigidbody>();
-        _thrownObject.transform.parent = null;
-
-        if (rigidbody)
-        {
-            Vector3 velocity = Utils.CalculateThrowForce(_stateMachine.transform.position, _player.position);
-
-            if (velocity != Vector3.zero)
-            {
-                rigidbody.isKinematic = false;
-                rigidbody.AddForce(velocity, ForceMode.VelocityChange);
-            }
-        }
-
         ThrownObject thrownObject = _thrownObject.AddComponent<ThrownObject>();
-        thrownObject.StartFly(_stateMachine.Config.ThrowDamage);
+        thrownObject.StartFly(_stateMachine.Config.ThrowDamage, _player);
 
         isThrowing = false;
     }
@@ -89,5 +75,6 @@ public class ThrowState : State
     {
         isThrowing = false;
         _thrownObject = null;
+        SetCanExit(true);
     }
 }

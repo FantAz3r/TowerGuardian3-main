@@ -9,14 +9,14 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     private Player _player;
     private Weapon _axe;
     private ThrownAxe _thrownAxe;
-
     private WaitForSeconds _oneSecond = new WaitForSeconds(1);
 
-    public event Action<float, float> Cooldowning;
-
+    public bool IsCooldowning { get; private set; } = false;
     public float Cooldown => _config.Cooldown;
     public override AbilityType Type => AbilityType.ThrowingAxes;
     public override AbilityConfig Config => _config;
+
+    public event Action<float, float> Cooldowning;
 
     private void Awake()
     {
@@ -32,20 +32,23 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
     public override void Use()
     {
-        if (IsLock == false)
+        if (IsLock)
+            return;
+        if (IsCooldowning)
+            return;
+
+        if (_player.Attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
         {
-            if (_player.Attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
-            {
-                _axe = _player.Attacker.CurrentWeapon;
-                _player.Attacker.DeactivateWeapon();
-                StartCoroutine(CooldownRoutine());
-                ThrowAxe(_axe);
-            }
+            _axe = _player.Attacker.CurrentWeapon;
+            _player.Attacker.DeactivateWeapon();
+            StartCoroutine(CooldownRoutine());
+            ThrowAxe(_axe);
         }
     }
 
     public IEnumerator CooldownRoutine()
     {
+        IsCooldowning = true;
         float timer = 0f;
 
         while (_config.Cooldown >= timer)
@@ -56,6 +59,7 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0f);
+        IsCooldowning = true;
     }
 
     private void CheckWeapon(IWeapon weapon)

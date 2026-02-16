@@ -43,7 +43,6 @@ public class PlayerCardConfigContainer : MonoBehaviour
         if (_selectedConfigs.Contains(config) == false)
         {
             AddCard(config);
-            Debug.Log(config.Name);
         }
 
         if (config.HasPlayer || _startCards.Contains(config as CardConfig))
@@ -104,7 +103,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
         CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
 
-        if( string.IsNullOrEmpty(cardData.ID) == false)
+        if (string.IsNullOrEmpty(cardData.ID) == false)
         {
             card.InitFromData(cardData);
         }
