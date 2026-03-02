@@ -3,7 +3,7 @@ using UnityEngine;
 public class TransparencyTrigger : MonoBehaviour
 {
     private Transform _player;
-    private Vector3 _offset = new Vector3(0,1,0);
+    private Vector3 _offset = new Vector3(0, 1, 0);
 
     public void Init(Transform player)
     {
@@ -12,7 +12,6 @@ public class TransparencyTrigger : MonoBehaviour
 
     void Update()
     {
-        
         Vector3 direction = _player.position + _offset - transform.position;
         float distance = direction.magnitude;
 
@@ -20,9 +19,7 @@ public class TransparencyTrigger : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            TransparencyObject obj = hit.collider.GetComponent<TransparencyObject>();
-
-            if (obj != null)
+            if (hit.collider.TryGetComponent(out TransparencyObject obj))
             {
                 obj.MakeInvisible();
             }

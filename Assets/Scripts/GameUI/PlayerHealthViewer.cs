@@ -12,9 +12,9 @@ public class PlayerHealthViewer : MonoBehaviour
     private Tween _healthTween;
     private Health _health;
 
-    public void Init(Health health)
+    private void Awake()
     {
-        _health = health;
+        _health = ServiceLocator.Get<IGameFactory>().Player.Health;
         gameObject.SetActive(true);
         _healthImage.value = _health.CurrentHealth / _health.MaxHealth;
         _healthText.text = $"{_health.CurrentHealth} / {_health.MaxHealth}";

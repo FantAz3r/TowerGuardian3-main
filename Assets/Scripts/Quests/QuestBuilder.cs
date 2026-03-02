@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 public class QuestBuilder
 {
     private List<IQuest> _quests = new();
@@ -7,6 +9,7 @@ public class QuestBuilder
     private List<Portal> _portals;
     private TowerDoor _door;
     private StairsTrigger _stairsTrigger;
+    private QuestData _questData;
 
     public QuestBuilder(Player player,
         List<Portal> portals = null,
@@ -17,6 +20,7 @@ public class QuestBuilder
         _stairsTrigger = stairsTrigger;
         _portals = portals;
         _door = door;
+        _questData = Resources.Load<QuestData>(GameConstants.QuestData);
 
         CreateQuests();
     }
@@ -25,7 +29,8 @@ public class QuestBuilder
     {
         _quests.Add(new MoveQuest(_player.PlayerMover));
         _quests.Add(new AttackQuest(_player.Attacker));
-        _quests.Add(new CollectQuest(_player.Inventory));
+        _quests.Add(new CollectWoodQuest(_player.Inventory));
+        _quests.Add(new CollectStonesQuest(_player.Inventory));
         _quests.Add(new UpgradeQuest(_player));
         _quests.Add(new KillQuest(_player.Detector));
         _quests.Add(new ExitLevelQuest(_portals));
@@ -33,6 +38,8 @@ public class QuestBuilder
         _quests.Add(new UpstairsQuest(_stairsTrigger));
         _quests.Add(new EnterFirstLevelQuest(GetPortalByLevel(LevelID.Level1)));
         _quests.Add(new EnterSecondLevelQuest(GetPortalByLevel(LevelID.Level2)));
+        _quests.Add(new EnterThirdLevelQuest(GetPortalByLevel(LevelID.Level3)));
+        _quests.Add(new EnterFourthLevelQuest(GetPortalByLevel(LevelID.Level4)));
         _quests.Add(new DefendPortalQuest(_portals));
     }
 
@@ -49,17 +56,24 @@ public class QuestBuilder
         return null;
     }
 
-    public IQuest GetQuest(QuestConfig config)
+    public IQuest GetQuest(QuestType type)
     {
         foreach (IQuest quest in _quests)
         {
-            if (quest.GetQuestType() == config.QuestType)
+            if (quest.GetQuestType() == type)
             {
-                quest.SetConfig(config);
-                return quest;
+                foreach(var questinfo in _questData.QuestInfos)
+                {
+                    if(questinfo.Type == type)
+                    {
+                        quest.SetConfig(questinfo.Config);
+                        return quest;
+                    }    
+                }
             }
         }
 
+        Debug.Log(type);
         throw new ArgumentNullException();
     }
 }

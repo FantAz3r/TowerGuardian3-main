@@ -10,16 +10,19 @@ public class RegenerationBuff : Buff
 
     public override void Enable()
     {
+        base.Enable();
         _healthRegeneration.EnableBuff();
+        _healthRegeneration.ApplyBuff(Config.IncreaseValue);
     }
 
-    public override void Upgrade()
+    public override void Upgrade(ICardConfig useles)
     {
         _healthRegeneration.ApplyBuff(Config.IncreaseValue);
     }
 
     public override void Remove()
     {
+        base.Remove();
         _healthRegeneration.RemoveBuff();
     }
 }

@@ -14,8 +14,8 @@ public class EnterTowerQuest : Quest
 
     public override void Run()
     {
-        base.Run();
         _door.Opened += Complete;
+        base.Run();
     }
 
     public override void Complete()

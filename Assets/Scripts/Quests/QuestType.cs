@@ -13,5 +13,6 @@ public enum QuestType
     EnterLevel2,
     EnterLevel3,
     DefendPortal,
-    CollectStones
+    CollectStones,
+    EnterLevel4
 }

@@ -11,7 +11,6 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     private JumpingPickaxe _jumpingPickaxe;
     private Player _player;
     private PlayerAttacker _attacker;
-    private WaitForSeconds _oneSecond = new WaitForSeconds(1);
 
     public bool IsCooldowning { get; private set; } = false;
     public float Cooldown => _cooldown;
@@ -64,8 +63,8 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
         while (_cooldown >= timer)
         {
             Cooldowning?.Invoke(_cooldown, timer);
-            timer++;
-            yield return _oneSecond;
+            timer += Time.deltaTime;
+            yield return null;
         }
 
         Cooldowning?.Invoke(_cooldown, 0f);

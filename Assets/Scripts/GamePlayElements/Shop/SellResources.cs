@@ -11,10 +11,11 @@ public class SellResources : MonoBehaviour
     private List<SellResourceView> _productButtons = new();
     private Inventory _inventory;
 
-    public void Init(Inventory inventory)
+    private void Awake()
     {
-        _inventory = inventory;
+        _inventory = ServiceLocator.Get<IGameFactory>().Player.Inventory;
         _slider.gameObject.SetActive(false);
+        
     }
 
     public void RenderSellItems()

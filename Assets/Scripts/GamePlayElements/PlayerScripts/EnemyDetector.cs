@@ -35,16 +35,18 @@ public class EnemyDetector : MonoBehaviour
         }
 
         _service.AddScore(ScoreType.Kill, health.Config.ScorePoints);
-        OnGetExperience?.Invoke(enemy.Config.MaxHealth);
+
 
         switch (health.GetHealthType())
         {
             case EntityType.Enemy:
                 OnEnemyKilled?.Invoke();
+                OnGetExperience?.Invoke(enemy.Config.MaxHealth);
                 break;
 
             case EntityType.Boss:
                 OnBossKilled?.Invoke();
+                OnGetExperience?.Invoke(enemy.Config.MaxHealth);
                 break;
 
             default:

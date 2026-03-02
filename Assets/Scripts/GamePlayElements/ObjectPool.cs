@@ -77,6 +77,19 @@ public class ObjectPool<T> where T : MonoBehaviour
         throw new Exception($"No free elenent of type {typeof(T)}");
     }
 
+    public int GetActiveObjectsCount()
+    {
+        int count = 0;
+        foreach (var obj in _objects)
+        {
+            if (obj != null && obj.gameObject.activeInHierarchy)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void Clear()
     {
         foreach (var mono in _objects)

@@ -49,6 +49,155 @@ public static class UIText
         }
     };
 
+
+    private static readonly Dictionary<WindowType, Dictionary<string, string>> WindowTypeDict =
+    new Dictionary<WindowType, Dictionary<string, string>>
+    {
+        { WindowType.None, new Dictionary<string, string>
+            {
+                { Russian, "нет" },
+                { English, "none" },
+                { Turkish, "yok" }
+            }
+        },
+        { WindowType.QuestViewer, new Dictionary<string, string>
+            {
+                { Russian, "отрисовщик квестов" },
+                { English, "quest viewer" },
+                { Turkish, "görev görüntüleyici" }
+            }
+        },
+        { WindowType.Shop, new Dictionary<string, string>
+            {
+                { Russian, "магазин" },
+                { English, "shop" },
+                { Turkish, "dükkan" }
+            }
+        },
+        { WindowType.Sell, new Dictionary<string, string>
+            {
+                { Russian, "продажа" },
+                { English, "sell" },
+                { Turkish, "satış" }
+            }
+        },
+        { WindowType.WinLevelMenu, new Dictionary<string, string>
+            {
+                { Russian, "меню победы" },
+                { English, "win level menu" },
+                { Turkish, "seviye kazanma menüsü" }
+            }
+        },
+        { WindowType.StartLevelMenu, new Dictionary<string, string>
+            {
+                { Russian, "меню начала уровня" },
+                { English, "start level menu" },
+                { Turkish, "seviye başlatma menüsü" }
+            }
+        },
+        { WindowType.LouseLevelMenu, new Dictionary<string, string>
+            {
+                { Russian, "меню поражения" },
+                { English, "lose level menu" },
+                { Turkish, "seviye kaybetme menüsü" }
+            }
+        },
+        { WindowType.Settings, new Dictionary<string, string>
+            {
+                { Russian, "настройки" },
+                { English, "settings" },
+                { Turkish, "ayarlar" }
+            }
+        },
+        { WindowType.MainSettings, new Dictionary<string, string>
+            {
+                { Russian, "главные настройки" },
+                { English, "main settings" },
+                { Turkish, "ana ayarlar" }
+            }
+        },
+        { WindowType.Pause, new Dictionary<string, string>
+            {
+                { Russian, "пауза" },
+                { English, "pause" },
+                { Turkish, "duraklat" }
+            }
+        },
+        { WindowType.CardMenu, new Dictionary<string, string>
+            {
+                { Russian, "меню карт" },
+                { English, "card menu" },
+                { Turkish, "kart menüsü" }
+            }
+        },
+        { WindowType.HUD, new Dictionary<string, string>
+            {
+                { Russian, "интерфейс" },
+                { English, "HUD" },
+                { Turkish, "gösterge paneli" }
+            }
+        },
+        { WindowType.MainMenu, new Dictionary<string, string>
+            {
+                { Russian, "главное меню" },
+                { English, "main menu" },
+                { Turkish, "ana menü" }
+            }
+        },
+        { WindowType.ShowCardsButton, new Dictionary<string, string>
+            {
+                { Russian, "кнопка показать карты" },
+                { English, "show cards button" },
+                { Turkish, "kartları göster düğmesi" }
+            }
+        },
+        { WindowType.Background, new Dictionary<string, string>
+            {
+                { Russian, "фон" },
+                { English, "background" },
+                { Turkish, "arka plan" }
+            }
+        },
+        { WindowType.DamageScreen, new Dictionary<string, string>
+            {
+                { Russian, "экран урона" },
+                { English, "damage screen" },
+                { Turkish, "hasar ekranı" }
+            }
+        },
+        { WindowType.WaveViewer, new Dictionary<string, string>
+            {
+                { Russian, "отображатель волн" },
+                { English, "wave viewer" },
+                { Turkish, "dalga görüntüleyici" }
+            }
+        },
+        { WindowType.Joystick, new Dictionary<string, string>
+            {
+                { Russian, "джойстик" },
+                { English, "joystick" },
+                { Turkish, "joystick" }
+            }
+        },
+
+        { WindowType.Inventory, new Dictionary<string, string>
+            {
+                { Russian, "Инвентарь" },
+                { English, "Inventory" },
+                { Turkish, "Envanter" }
+
+            }
+        },
+        { WindowType.LeaderBoard, new Dictionary<string, string>
+            {
+                { Russian, "Таблица Лидеров" },
+                { English, "Leaderboard" },
+                { Turkish, "Liderlik Tablosu" }
+
+            }
+        }
+    };
+
     private static readonly Dictionary<string, string> DamageDict = new Dictionary<string, string>
     {
         { Russian, "урон" },
@@ -161,6 +310,23 @@ public static class UIText
         { Turkish, "LVL" }
     };
 
+    private static readonly Dictionary<string, string> YourBestScoreDict = new Dictionary<string, string>
+    {
+        { Russian, "ВАШ ЛУЧШИЙ СЧЕТ" },
+        { English, "YOUR BEST SCORE" },
+        { Turkish, "EN İYİ SKORUN" }
+    };
+
+    private static readonly Dictionary<string, string> NoBestScoreDict = new Dictionary<string, string>
+    {
+        { Russian, "НЕТ СЧЕТА" },
+        { English, "NO SCORE" },
+        { Turkish, "PUAN YOK" }
+    };
+
+
+    public static string YourBestScore => GetText(YourBestScoreDict);
+    public static string NoBestScore => GetText(NoBestScoreDict);
     public static string Damage => GetText(DamageDict);
     public static string AttackDelay => GetText(AttackDelayDict);
     public static string AttackRange => GetText(AttackRangeDict);
@@ -188,6 +354,19 @@ public static class UIText
     public static string GetEntityTypeText(EntityType type)
     {
         if (EntityTypeDict.TryGetValue(type, out var translations))
+        {
+            if (string.IsNullOrEmpty(CurrentLanguage) == false && translations.TryGetValue(CurrentLanguage, out var localized))
+                return localized;
+
+            if (translations.TryGetValue(English, out var en)) return en;
+        }
+
+        return type.ToString();
+    }
+
+    public static string GetWindowTypeText(WindowType type)
+    {
+        if (WindowTypeDict.TryGetValue(type, out var translations))
         {
             if (string.IsNullOrEmpty(CurrentLanguage) == false && translations.TryGetValue(CurrentLanguage, out var localized))
                 return localized;

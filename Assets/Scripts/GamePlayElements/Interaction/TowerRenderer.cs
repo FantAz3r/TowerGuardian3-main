@@ -43,14 +43,18 @@ public class TowerRenderer : MonoBehaviour
 
     private void HandleGoingUp(int floorNumber)
     {
+        _floors[_currentFloor].Decor.SetActive(false);
         _currentFloor = floorNumber + 1;
         _floors[_currentFloor].gameObject.SetActive(true);
+        _floors[_currentFloor].Decor.SetActive(true);
     }
 
     private void HandleGoingDown(int floorNumber)
     {
         _floors[_currentFloor].gameObject.SetActive(false);
         _currentFloor -= 1;
+        _floors[_currentFloor].Decor.SetActive(true);
+
     }
 
     private void SaveTower()

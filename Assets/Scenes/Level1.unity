@@ -5,8 +5,8 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
-    smallestHole: 0.25
+    smallestOccluder: 4
+    smallestHole: 0.1
     backfaceThreshold: 100
   m_SceneGUID: 2c61680bb190a344ea0f5ae29d0d517b
   m_OcclusionCullingData: {fileID: 36300000, guid: ec738dff7c37e3d40bd5343818f65e1a, type: 2}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,11 +133,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4269905472749670510, guid: dfd44c42333742d4284dba5dc32f8170, type: 3}
       propertyPath: _nextLevel
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4269905472749670510, guid: dfd44c42333742d4284dba5dc32f8170, type: 3}
       propertyPath: _currentLevel
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4403356820932259114, guid: dfd44c42333742d4284dba5dc32f8170, type: 3}
       propertyPath: m_Size.y
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 12767262}
   - component: {fileID: 12767261}
   - component: {fileID: 12767264}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5017,8 +5017,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 83.700066, y: 15.262484, z: 13.52467}
-  m_Center: {x: -3.2881126, y: -3.5142431, z: 15.2807865}
+  m_Size: {x: 83.700066, y: 19.789291, z: 13.52467}
+  m_Center: {x: -3.2881126, y: -1.2508388, z: 15.2807865}
 --- !u!1001 &580319539
 PrefabInstance:
   m_ObjectHideFlags: 0

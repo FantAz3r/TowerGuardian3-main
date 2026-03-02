@@ -6,21 +6,18 @@ public abstract class LevelMenu : PauseWindow
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _homeButton;
 
-    private LevelID _currentLevel;
-
+    public LevelID _currentLevel { get; private set; }
     public ScoreCounter ScoreCounter { get; private set; }
     public IStateSwitchService StateSwitchService { get; private set; }
-
-    public virtual void Init(ScoreCounter scoreCounter, LevelConfig levelConfig)
-    {
-        ScoreCounter = scoreCounter;
-        _currentLevel = levelConfig.Level;
-    }
+    public IGameFactory GameFactory { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
         StateSwitchService = ServiceLocator.Get<IStateSwitchService>();
+        GameFactory = ServiceLocator.Get<IGameFactory>();
+        ScoreCounter = GameFactory.ScoreCounter;
+        _currentLevel = GameFactory.LevelConfig.Level;
     }
 
     protected virtual void OnEnable()

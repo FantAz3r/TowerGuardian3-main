@@ -10,7 +10,7 @@ public abstract class Buff : IBuff
         Config.Upgraded += Upgrade;
     }
 
-    public virtual void Upgrade()
+    public virtual void Upgrade(ICardConfig useles)
     {
 
     }

@@ -78,62 +78,60 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitMainMenu()
     {
-        _gameFactory.SetCurrentLevel(_currentLevel);
-        _gameFactory.CreateFocusController();
-        _gameFactory.CreateSpawners();
-        _gameFactory.CreateBackgroundSounds();
-
-        _windowService.CreateUIRoot();
+        CommonInit();
         _windowService.Open(WindowType.Background);
         _windowService.Open(WindowType.MainMenu);
     }
 
     private void InitGameLevel()
     {
-        _gameFactory.SetCurrentLevel(_currentLevel);
+        CommonInit();
+
         _gameFactory.SetSceneContainer();
-        _gameFactory.CreateFocusController();
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreatePlayer(_previousLevel);
         _gameFactory.CreateScoreCounter();
-        _gameFactory.CreateSpawners();
-        _windowService.CreateUIRoot();
         _gameFactory.CreateCamera();
         _gameFactory.CreateEventSystem();
         _gameFactory.CreateLight();
         _gameFactory.CreateEnemies();
-
+        _windowService.CreateJoystick();
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
-        _gameFactory.CreateTutorial();
-        _gameFactory.CreateBackgroundSounds();
-
+        _gameFactory.CreateQuestRuner();
 
         _windowService.Open(WindowType.HUD);
+        _windowService.Open(WindowType.WaveViewer);
         _gameFactory.RunLevel();
     }
 
     private void InitTowerLevel()
     {
-        _gameFactory.SetCurrentLevel(_currentLevel);
-        _gameFactory.CreateFocusController();
+        CommonInit();
+
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreateLight();
         _gameFactory.CreatePlayer(_previousLevel);
         _gameFactory.CreateScoreCounter();
         _gameFactory.CreateEventSystem();
-        _gameFactory.CreateSpawners();
-        _windowService.CreateUIRoot();
-
+        _windowService.CreateJoystick();
         _gameFactory.CreateCamera();
         _gameFactory.CreateTower();
-
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
-        _gameFactory.CreateTutorial();
-        _gameFactory.CreateBackgroundSounds();
+        _gameFactory.CreateQuestRuner();
 
         _windowService.Open(WindowType.HUD);
+
         _gameFactory.RunLevel();
+    }
+
+    private void CommonInit()
+    {
+        _gameFactory.SetCurrentLevel(_currentLevel);
+        _gameFactory.CreateFocusController();
+        _gameFactory.CreateSpawners();
+        _windowService.CreateUIRoot();
+        _gameFactory.CreateBackgroundSounds();
     }
 }

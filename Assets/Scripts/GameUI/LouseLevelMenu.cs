@@ -4,13 +4,15 @@ using UnityEngine.UI;
 public class LouseLevelMenu : LevelMenu
 {
     [SerializeField] private Button _resurrectionButton;
+    [SerializeField] private AudioClip _louseSound;
     private Player _player;
     private int _resurrectionCount = 1;
+    private IGameFactory _gameFactory;
 
-    public void Init(ScoreCounter scorecounter, LevelConfig levelConfig, Player player)
+    protected override void Awake()
     {
-        base.Init(scorecounter, levelConfig);
-        _player = player;
+        base.Awake();
+        _player = GameFactory.Player;
     }
 
     public void SetResurrection()
@@ -43,6 +45,7 @@ public class LouseLevelMenu : LevelMenu
     public override void Open()
     {
         base.Open();
-        ScoreCounter.OnEndLevel();
+        ScoreCounter.OnEndLevel(this);
+        ServiceLocator.Get<ISpawnerService>().SendSoundReqest(_louseSound);
     }
 }

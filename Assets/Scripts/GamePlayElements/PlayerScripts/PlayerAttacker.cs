@@ -15,13 +15,11 @@ public class PlayerAttacker : MonoBehaviour
     private float _defoultAttackTime = 1f;
     private float _emptyTargetAttackDelay = 0.1f;
 
+    public event Action<IWeapon, float> Attacked;
     public event Action<IWeapon> WeaponSeted;
     public event Action<IWeapon> WeaponRemoved;
     public event Action WeaponDeactivated;
     public event Action WeaponActivated;
-
-    public event Action<float> DialedDamage;
-    public event Action<IWeapon, float> Attacked;
 
     public event Action Hited;
     public event Action Suspended;

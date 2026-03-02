@@ -3,6 +3,7 @@ using UnityEngine;
 
 public interface IQuest
 {
+    bool CanStop { get; }
     QuestConfig Config { get; }
 
     event Action OnCompleted;

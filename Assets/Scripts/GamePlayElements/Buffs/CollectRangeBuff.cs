@@ -11,15 +11,18 @@ public class CollectRangeBuff : Buff
 
     public override void Enable()
     {
+        base.Enable();
+        _buffbleObject.ApplyBuff(Config.IncreaseValue);
     }
 
-    public override void Upgrade()
+    public override void Upgrade(ICardConfig useles)
     {
         _buffbleObject.ApplyBuff(Config.IncreaseValue);
     }
 
     public override void Remove()
     {
+        base.Remove();
         _buffbleObject.RemoveBuff();
     }
 }

@@ -6,7 +6,6 @@ public class PatrolState : State
 {
     private float _updateTime = 0.05f;
     private WaitForSeconds _delay;
-    private EnemyStateMachine _stateMashine;
     private EnemyAnimator _animator;
     private Vector3[] _patrolPoints;
     private int _currentPointIndex;
@@ -14,7 +13,6 @@ public class PatrolState : State
 
     public PatrolState(EnemyStateMachine stateMachine, NavMeshAgent agent, EnemyAnimator animator) : base(stateMachine, true)
     {
-        _stateMashine = stateMachine;
         _agent = agent;
         _animator = animator;
 
@@ -24,7 +22,7 @@ public class PatrolState : State
     public override void Enter()
     {
         _agent.isStopped = false;
-        Transform origin = _stateMashine.transform;
+        Transform origin = StateMachine.transform;
         float edgeSize = 10f;
 
         _patrolPoints = new Vector3[]
@@ -59,7 +57,7 @@ public class PatrolState : State
             }
             else
             {
-                _animator.UpdateSpeed(_stateMashine.Config.MoveConfig.MoveSpeed);
+                _animator.UpdateSpeed(StateMachine.Config.MoveConfig.MoveSpeed);
             }
 
             yield return _delay;

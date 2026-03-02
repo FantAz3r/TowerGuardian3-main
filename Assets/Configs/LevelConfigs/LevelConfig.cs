@@ -18,9 +18,6 @@ public class LevelConfig : ScriptableObject
     [SerializeField] private Color _dayLightColor = Color.white;
     [SerializeField] private Color _nightLightColor = Color.black;
 
-    [Header("Enemy Spawn Settings")]
-    [SerializeField] private float _nightSpawnDelay = 3f;
-    [SerializeField] private float _daySpawnDelay = 8f;
     [field: SerializeField] public List<Wave> Waves { get; private set;}
 
     [Header("Level Score Settings")]
@@ -36,8 +33,6 @@ public class LevelConfig : ScriptableObject
     public float DayLightIntensity => _dayLightIntensity;
     public float NightLightIntensity => _nightLightIntensity;
     public float TransitionDuration => _transitionDuration;
-    public float NightSpawnDelay => _nightSpawnDelay;
-    public float DaySpawnDelay => _daySpawnDelay;
 
     public float OneStarScore => _scorePerTimeOneStar;
     public float TwoStarScore => _scorePerTimeTwoStar;

@@ -15,5 +15,10 @@ public enum WindowType
     MainMenu,
     ShowCardsButton,
     Background,
-    DamageScreen
+    DamageScreen,
+    WaveViewer,
+    Joystick,
+    LeaderBoard,
+    Previous,
+    Inventory
 }

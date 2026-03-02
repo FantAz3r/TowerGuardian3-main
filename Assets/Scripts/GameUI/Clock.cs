@@ -12,13 +12,14 @@ public class Clock : MonoBehaviour
     private DayPhase _currentPhase;
     private float _currentPhaseDuration;
 
-    public void Init(DayCycle dayCycle)
+    private void Awake()
     {
-        _dayCycle = dayCycle;
+        _dayCycle = ServiceLocator.Get<IGameFactory>().Cycle;
         _dayCycle.OnPhaseChanged += OnPhaseChanged;
         _dayCycle.TimePassedFromTransition += OnTimePassedFromTransition;
         TrySetInfiniteTime();
     }
+    
 
     private void OnDestroy()
     {

@@ -6,7 +6,13 @@ public class SpeedBuff : Buff
 
     public override BuffType Type => BuffType.MoveSpeed;
 
-    public override void Upgrade()
+    public override void Enable()
+    {
+        base.Enable();
+        _buffbleComponent.ApplyBuff(Config.IncreaseValue);
+    }
+
+    public override void Upgrade(ICardConfig useles)
     {
         _buffbleComponent.ApplyBuff(Config.IncreaseValue);
     }

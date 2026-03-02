@@ -27,13 +27,19 @@ public class BackGroundMusic : MonoBehaviour
 
         while (enabled)
         {
+            if (_musics.Count == 1)
+            {
+                Debug.Log("Необходимо хотя бы 2 трека");
+                yield break;
+            }
+
             int randomIndex;
 
             do
             {
                 randomIndex = Random.Range(0, _musics.Count);
             }
-            while (randomIndex == previousIndex && _musics.Count > 1);
+            while (randomIndex == previousIndex);
 
             previousIndex = randomIndex;
             AudioClip clip = _musics[randomIndex];

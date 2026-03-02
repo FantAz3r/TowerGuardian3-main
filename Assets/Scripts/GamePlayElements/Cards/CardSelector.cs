@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CardSelector
 {
+    private const int MaxWeaponCards = 3;
+    private const int MaxAbilityCards = 3;
+
     private CardData _cardData;
     private int _cardsPerSelect;
     private int _maxLevel = 100;
@@ -79,6 +82,58 @@ public class CardSelector
 
     private List<ICardConfig> FilterCards(List<ICardConfig> allCards)
     {
-        return allCards.FindAll(card => card.Level < _maxLevel && card.IsBought);
+        int weaponCount = 0;
+        int abilityCount = 0;
+
+        foreach (var card in allCards)
+        {
+            if (card is WeaponConfig && card.HasPlayer)
+                weaponCount++;
+
+            if (card is AbilityConfig && card.HasPlayer)
+                abilityCount++;
+        }
+
+        var filteredCards = new List<ICardConfig>();
+
+        foreach (var card in allCards)
+        {
+            if (card.Level >= _maxLevel)
+                continue;
+
+            if (card is WeaponConfig)
+            {
+                if (weaponCount < MaxWeaponCards)
+                {
+                    if (card.IsBought)
+                        filteredCards.Add(card);
+                }
+                else
+                {
+                    if (card.HasPlayer)
+                        filteredCards.Add(card);
+                }
+            }
+            else if (card is AbilityConfig)
+            {
+                if (abilityCount < MaxAbilityCards)
+                {
+                    if (card.IsBought)
+                        filteredCards.Add(card);
+                }
+                else
+                {
+                    if (card.HasPlayer)
+                        filteredCards.Add(card);
+                }
+            }
+            else
+            {
+                filteredCards.Add(card);
+            }
+        }
+
+        return filteredCards;
     }
+
 }

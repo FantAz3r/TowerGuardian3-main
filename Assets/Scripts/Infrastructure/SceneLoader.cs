@@ -31,9 +31,7 @@ public class SceneLoader
         asyncLoad = SceneManager.UnloadSceneAsync(currentScene.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
         yield return asyncLoad;
 
-        yield return new WaitForSecondsRealtime(5);
-
-
+        yield return new WaitForSecondsRealtime(Random.Range(1,6));
 
         asyncLoad = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
         yield return asyncLoad;
@@ -42,7 +40,6 @@ public class SceneLoader
 
         if (currentScene.IsValid())
         {
-            Debug.Log(currentScene.IsValid());
             SceneManager.SetActiveScene(currentScene);
         }
 

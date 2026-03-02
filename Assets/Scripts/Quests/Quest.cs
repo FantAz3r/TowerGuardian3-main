@@ -6,16 +6,18 @@ public abstract class Quest : IQuest
 {
     private bool _isProgressQuest;
     private bool _isTimeQuest;
-    private QuestViewer _questViewer;
     private IGameConditionService _conditionService;
     private IWindowService _windowService;
     private IScoreService _service;
 
+    public QuestViewer QuestViewer { get; private set; }
     public QuestConfig Config { get; private set; }
     public float CurrentTime { get; protected set; } = 0;
     public int CurrentValue { get; protected set; } = 0;
+    public bool CanStop { get; protected set; } = true;
 
     public event Action OnCompleted;
+
     public void SetConfig(QuestConfig config)
     {
         Config = config;
@@ -32,8 +34,8 @@ public abstract class Quest : IQuest
     public virtual void Run() 
     {
         YG2.onSwitchLang += On—hangeLang;
-        _questViewer = _windowService.Open(WindowType.QuestViewer) as QuestViewer;
-        _questViewer.Render(this);
+        QuestViewer = _windowService.Open(WindowType.QuestViewer) as QuestViewer;
+        QuestViewer.Render(this);
         UpdateProgress();
         UpdateTime();
     }
@@ -43,13 +45,13 @@ public abstract class Quest : IQuest
     public virtual void UpdateProgress() 
     {
         if (_isProgressQuest)
-            _questViewer.UpdateProgress(CurrentValue, Config.TargetValue);
+            QuestViewer.UpdateProgress(CurrentValue, Config.TargetValue);
     }
 
     public virtual void UpdateTime()
     {
         if (_isTimeQuest)
-            _questViewer.UpdateTime(CurrentTime);
+            QuestViewer.UpdateTime(CurrentTime);
     }
 
     public virtual void Stop() 
@@ -63,7 +65,7 @@ public abstract class Quest : IQuest
 
         YG2.onSwitchLang -= On—hangeLang;
         OnCompleted?.Invoke();
-        _questViewer.Close();
+        QuestViewer.Close();
     }
 
     public virtual void Fail()
@@ -74,6 +76,9 @@ public abstract class Quest : IQuest
 
     private void On—hangeLang(string useles)
     {
-        _questViewer.Render(this);
+        if(QuestViewer != null)
+        {
+            QuestViewer.Render(this);
+        }
     }
 }

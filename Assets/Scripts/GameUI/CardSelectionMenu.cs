@@ -1,27 +1,27 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class CardSelectionMenu : PauseWindow
 {
     [SerializeField] private RectTransform _buttonsParent;
+    [SerializeField] private TMP_Text _levelText;
 
     private List<CardButton> _cardsButtons;
     private CardSelector _selector;
     private Player _player;
     private List<ICardConfig> _currentCards;
-    private IWindowService _windowService; 
+    private IWindowService _windowService;
+    private ITimeService _timeService;
 
     protected override void Awake()
     {
         base.Awake();
         _selector = new CardSelector(Resources.Load<CardData>(GameConstants.CardData));
         _windowService = ServiceLocator.Get<IWindowService>();
-    }
-
-    public void Init(Player player)
-    {
-        _player = player;
+        _timeService = ServiceLocator.Get<ITimeService>();
+        _player = ServiceLocator.Get<IGameFactory>().Player;
     }
 
     private void OnDisable()
@@ -43,17 +43,17 @@ public class CardSelectionMenu : PauseWindow
 
     public void OpenMenu()
     {
+        _levelText.text = _player.Experience.CurrentLevel.ToString();
+
         if (_currentCards == null)
         {
             _currentCards = _selector.GetCards().ToList();
         }
 
-        if (_currentCards.Count == 0 || _player.Experience.UpgradePoints <= 0)
+        if (_currentCards.Count == 0)
             return;
 
         _cardsButtons = CreateCards();
-
-        base.Open();
         ShowCards(_currentCards);
     }
 
@@ -69,10 +69,19 @@ public class CardSelectionMenu : PauseWindow
         else
         {
             base.Close();
+            _timeService.SlowMotion(0, 0);
             _windowService.Open(WindowType.HUD);
+            _timeService.SlowMotion(1, 1);
         }
     }
 
+    public void PostponeChoise()
+    {
+        base.Close();
+        _timeService.SlowMotion(0, 0);
+        _windowService.Open(WindowType.HUD);
+        _timeService.SlowMotion(1, 1);
+    }
 
     private void ShowCards(List<ICardConfig> cards)
     {

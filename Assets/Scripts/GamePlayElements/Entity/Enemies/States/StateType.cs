@@ -6,4 +6,6 @@ public enum StateType
     JumpAttack,
     Thrown,
     FindObject,
+    Escape,
+    EnterPortal
 }

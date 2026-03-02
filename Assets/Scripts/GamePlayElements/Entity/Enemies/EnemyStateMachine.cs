@@ -15,6 +15,7 @@ public class EnemyStateMachine : MonoBehaviour
     private EnemyAnimator _animator;
     private NavMeshAgent _agent;
     private Player _player;
+    private Vector3 _target;
     private PickUper _picker;
     private Health _health;
     private Collider _collider;
@@ -54,6 +55,10 @@ public class EnemyStateMachine : MonoBehaviour
         _player = player;
         _collider.enabled = true;
         _agent.enabled = true;
+
+        _agent.speed = Config.MoveConfig.MoveSpeed;
+        _agent.angularSpeed = Config.MoveConfig.RotationSpeed;
+
 
         ActivateStates();
         _targetDetector.PlayerDetected += OnSeePlayer;
@@ -170,6 +175,12 @@ public class EnemyStateMachine : MonoBehaviour
                     break;
                 case StateType.FindObject:
                     _states.Add(StateType.FindObject, new PickupState(this, _animator, _objectDetector, _agent, _picker));
+                    break;
+                case StateType.Escape:
+                    _states.Add(StateType.Escape, new EscapeState(this, _player.transform, _agent));
+                    break;
+                case StateType.EnterPortal:
+                    _states.Add(StateType.EnterPortal, new EnterPortalState(this, _target, _agent));
                     break;
             }
         }

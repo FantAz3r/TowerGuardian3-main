@@ -48,7 +48,7 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         StartCoroutine(AttackRoutine());
     }
 
-    public void Upgrade()
+    public void Upgrade(ICardConfig useles)
     {
         _sleep = new WaitForSeconds(_config.AttackDelay);
     }
@@ -61,8 +61,8 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
         while (_config.Cooldown >= timer)
         {
             Cooldowning?.Invoke(_config.Cooldown, timer);
-            timer += 1;
-            yield return _oneSecond;
+            timer += Time.deltaTime;
+            yield return null;
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0);

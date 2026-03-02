@@ -40,19 +40,8 @@ public class AbilityViewer : MonoBehaviour
         _iconImage.sprite = ability.Config.Icon;
         _cooldownFillImage.fillAmount = 0f;
         gameObject.SetActive(true);
-
-        if (keyCode != AbilityKeyCode.None)
-        {
-            AbilityKey = keyCode;
-            _button.interactable = true;
-            _keyCode.gameObject.SetActive(true);
-            _keyCode.text = ((int)AbilityKey).ToString();
-        }
-        else
-        {
-            _keyCode.gameObject.SetActive(false);
-        }
-
+        SetKeyCode(keyCode);
+        
         _attacker.WeaponSeted += UpdateLock;
         _attacker.WeaponActivated += UpdateLock;
         _attacker.WeaponDeactivated += UpdateLock;
@@ -102,7 +91,7 @@ public class AbilityViewer : MonoBehaviour
         if (Ability is ICooldownAbility ability)
         {
             _cooldownText.enabled = true;
-            _cooldownText.text = ability.Cooldown.ToString();
+            _cooldownText.text = ability.Cooldown.ToString("F1");
             ability.Cooldowning += CooldownView;
         }
     }
@@ -125,12 +114,27 @@ public class AbilityViewer : MonoBehaviour
 
     private void CooldownView(float cooldown, float passTime)
     {
-        _cooldownText.text = (cooldown - passTime).ToString();
+        _cooldownText.text = (cooldown - passTime).ToString("F1");
         _cooldownFillImage.fillAmount = 1 - (passTime / cooldown);
 
         if (_cooldownFillImage.fillAmount == 1)
         {
             _cooldownFillImage.fillAmount = 0;
+        }
+    }
+
+    private void SetKeyCode(AbilityKeyCode keyCode)
+    {
+        if (keyCode != AbilityKeyCode.None)
+        {
+            AbilityKey = keyCode;
+            _button.interactable = true;
+            _keyCode.gameObject.SetActive(true);
+            _keyCode.text = ((int)AbilityKey).ToString();
+        }
+        else
+        {
+            _keyCode.gameObject.SetActive(false);
         }
     }
 }

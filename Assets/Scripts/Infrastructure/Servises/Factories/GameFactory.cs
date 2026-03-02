@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameFactory : IGameFactory
 {
+    private Scene _scene;
     private Tower _tower;
     private EnemySpawner _enemySpawner;
-    private QuestStateMachine _questRuner;
     private QuestBuilder _questBuilder;
     private PortalSwitcher _portalSwitcher;
-    private ISceneContainer _sceneContainer;
     private ISpawnerService _spawnerService;
 
     public LevelID CurrentLevel { get; private set; }
@@ -19,6 +18,9 @@ public class GameFactory : IGameFactory
     public DayCycle Cycle { get; private set; }
     public Player Player { get; private set; }
     public ScoreCounter ScoreCounter { get; private set; }
+    public QuestStateMachine QuestRunner { get; private set; }
+
+    public ISceneContainer SceneContainer { get; private set; }
 
     public GameFactory()
     {
@@ -45,14 +47,14 @@ public class GameFactory : IGameFactory
 
     public void SetSceneContainer()
     {
-        var scene = SceneManager.GetActiveScene();
-        List<GameObject> parentObjects = scene.GetRootGameObjects().ToList();
+        _scene = SceneManager.GetActiveScene();
+        List<GameObject> parentObjects = _scene.GetRootGameObjects().ToList();
 
         foreach (var parent in parentObjects)
         {
             if (parent.TryGetComponent(out SceneContainer sceneContainer))
             {
-                _sceneContainer = sceneContainer;
+                SceneContainer = sceneContainer;
             }
         }
     }
@@ -100,7 +102,7 @@ public class GameFactory : IGameFactory
 
     public void CreateScoreCounter()
     {
-        ScoreCounter = new ScoreCounter(Player, LevelConfig);
+        ScoreCounter = new ScoreCounter();
     }
 
     public void CreateLight()
@@ -113,38 +115,47 @@ public class GameFactory : IGameFactory
     public void CreateEnemies()
     {
         _enemySpawner = Object.Instantiate(Resources.Load<EnemySpawner>(GameConstants.EnemySpawner));
-        _enemySpawner.Init(Player, Cycle, LevelConfig, _sceneContainer.SpawnPoints);
+        _enemySpawner.Init(Player, Cycle, LevelConfig, SceneContainer.SpawnPoints);
     }
 
     public void CreatePortalsFactory()
     {
         _portalSwitcher = new PortalSwitcher();
-        _portalSwitcher.Init(_sceneContainer.Portals);
+        _portalSwitcher.Init(SceneContainer.Portals);
     }
 
     public void CreateQuests()
     {
         if (LevelConfig.Level == LevelID.Tower)
         {
-            _questBuilder = new QuestBuilder(Player, _sceneContainer.Portals, _tower.Door, _tower.StairsFirstFloor);
+            _questBuilder = new QuestBuilder(Player, SceneContainer.Portals, _tower.Door, _tower.StairsFirstFloor);
         }
         else
         {
-            _questBuilder = new QuestBuilder(Player, _sceneContainer.Portals);
+            _questBuilder = new QuestBuilder(Player, SceneContainer.Portals);
         }
     }
 
-    public void CreateTutorial()
+    public void CreateQuestRuner()
     {
-        _questRuner = Object.Instantiate(Resources.Load<QuestStateMachine>(GameConstants.Tutorial));
-        _questRuner.Init(_questBuilder, LevelConfig.Level, LevelConfig.Quests);
-        Player.QuestPointer.Init(Player.transform, _questRuner);
+        QuestRunner = Object.Instantiate(Resources.Load<QuestStateMachine>(GameConstants.Tutorial));
+        QuestRunner.Init(_questBuilder, LevelConfig.Level, LevelConfig.Quests);
+        Player.QuestPointer.Init(Player.transform, QuestRunner);
     }
 
     public void CreateTower()
     {
-        _tower = Object.Instantiate(Resources.Load<Tower>(GameConstants.Tower));
-        _sceneContainer = _tower;
+        _scene = SceneManager.GetActiveScene();
+        List<GameObject> parentObjects = _scene.GetRootGameObjects().ToList();
+
+        foreach (var parent in parentObjects)
+        {
+            if (parent.TryGetComponent(out Tower sceneContainer))
+            {
+                _tower = sceneContainer;
+                SceneContainer = _tower;
+            }
+        }
     }
 
     public void CreateBackgroundSounds()
@@ -154,7 +165,7 @@ public class GameFactory : IGameFactory
 
     public void RunLevel()
     {
-        _questRuner?.Run();
+        QuestRunner?.Run();
         Cycle?.StartDayCycle();
 
         if(LevelConfig.Level != LevelID.Tower)
@@ -171,6 +182,8 @@ public interface IGameFactory : IService
     DayCycle Cycle { get; }
     Player Player { get; }
     ScoreCounter ScoreCounter { get; }
+    QuestStateMachine QuestRunner { get; }
+    ISceneContainer SceneContainer { get; }
 
     void SetCurrentLevel(LevelID level);
     void SetLevelConfig(LevelID level);
@@ -185,7 +198,7 @@ public interface IGameFactory : IService
     void CreateEnemies();
     void CreatePortalsFactory();
     void CreateQuests();
-    void CreateTutorial();
+    void CreateQuestRuner();
     void CreateTower();
     void CreateBackgroundSounds();
     void RunLevel();

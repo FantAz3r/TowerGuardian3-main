@@ -71,7 +71,7 @@ public class RotateShurikens : Ability
         }
     }
 
-    public void Upgrade()
+    public void Upgrade(ICardConfig useles)
     {
         LoadAbility();
     }

@@ -5,6 +5,7 @@ using YG;
 
 public abstract class BaseShop : PauseWindow
 {
+    [SerializeField] private ResourceViewer _resourceView;
     [SerializeField] private RectTransform _weaponContentParent, _abilitiesContentParent, _buffContentParent;
     [SerializeField] private Button _weaponButton, _abilityButton, _buffButton;
     [SerializeField] private ProductViewer _productButtonPrefab;
@@ -25,6 +26,7 @@ public abstract class BaseShop : PauseWindow
     {
         base.Awake();
         CardData = Resources.Load<CardData>(GameConstants.CardData);
+        Player = ServiceLocator.Get<IGameFactory>().Player;
     }
 
     private void OnDestroy()
@@ -33,11 +35,6 @@ public abstract class BaseShop : PauseWindow
         {
             button.BuyRequested -= OnTradeRequested;
         }
-    }
-
-    public virtual void Init(Player player)
-    {
-        Player = player;
     }
 
     public override void Open()
@@ -50,12 +47,6 @@ public abstract class BaseShop : PauseWindow
         ClearOldButtons();
         LoadCards();
         SetParents();
-    }
-
-    public override void Close()
-    {
-        base.Close();
-        Destroy(gameObject);
     }
 
     protected void ClearOldButtons()

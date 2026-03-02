@@ -3,22 +3,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using YG;
 
-public class InputService : IInputService
+public class InputService : IInputService, IAbilityInput
 {
     private PlayerInputActions _inputActions;
 
     public event Action<Vector2> MovePerformed;
-    public event Action MoveCanceled;
+    public event Action<Vector2> RotateDirectionSeted;
 
     public event Action OnAbillity1Used;
     public event Action OnAbillity2Used;
     public event Action OnAbillity3Used;
     public event Action OnAbillity4Used;
-
-    public event Action<Vector2> RotatePerformed;
-    public event Action<Vector2> RotateCanceled;
-
-    public event Action<Vector2> DirectionFromCursor;
 
     public Vector2 CursorOrigin { get; set; }
 
@@ -34,6 +29,7 @@ public class InputService : IInputService
         _inputActions.UI.ActivateAbility2.performed += OnAbility2Used;
         _inputActions.UI.ActivateAbility3.performed += OnAbility3Used;
         _inputActions.UI.ActivateAbility4.performed += OnAbility4Used;
+        _inputActions.UI.Pause.performed += PauseGame;
 
         _inputActions.Player.Rotate.performed += OnRotatePerformed;
         _inputActions.Player.Rotate.canceled += OnRotateCanceled;
@@ -67,7 +63,15 @@ public class InputService : IInputService
 
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {
-        MoveCanceled?.Invoke();
+        MovePerformed?.Invoke(Vector2.zero);
+    }
+
+    private void PauseGame(InputAction.CallbackContext context)
+    {
+        if(Time.timeScale != 0)
+        {
+            ServiceLocator.Get<IWindowService>().Open(WindowType.Pause);
+        }
     }
 
     private void OnRotatePerformed(InputAction.CallbackContext context)
@@ -78,12 +82,7 @@ public class InputService : IInputService
         {
             CursorOrigin = new Vector2(Screen.width / 2f, Screen.height / 2f);
             Vector2 cursorPos = context.ReadValue<Vector2>();
-            RotatePerformed?.Invoke(cursorPos);
             direction = cursorPos - CursorOrigin;
-        }
-        else
-        {
-            direction = context.ReadValue<Vector2>();
         }
 
         if (direction.sqrMagnitude > 0f)
@@ -91,15 +90,13 @@ public class InputService : IInputService
         else
             direction = Vector2.zero;
 
-        DirectionFromCursor?.Invoke(direction);
+        RotateDirectionSeted?.Invoke(direction);
     }
 
     private void OnRotateCanceled(InputAction.CallbackContext context)
     {
-        RotateCanceled?.Invoke(context.ReadValue<Vector2>());
-        DirectionFromCursor?.Invoke(Vector2.zero);
+        RotateDirectionSeted?.Invoke(Vector2.zero);
     }
-
 
     public void EnableInput()
     {
@@ -129,5 +126,10 @@ public class InputService : IInputService
 
         _inputActions.Dispose();
         _inputActions = null;
+    }
+
+    public IInputService GetSelf()
+    {
+        return this;
     }
 }

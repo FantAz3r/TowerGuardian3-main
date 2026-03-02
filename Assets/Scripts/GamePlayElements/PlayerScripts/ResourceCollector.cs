@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,6 +63,7 @@ public class ResourceCollector : MonoBehaviour, IBuffble
 
     public void ApplyBuff(float value)
     {
+        Debug.Log("радиус сбора увеличен");
         _collectionCollider.radius = _startRange * (1 + value);
         RangeSeted?.Invoke(_collectionCollider.radius);
     }

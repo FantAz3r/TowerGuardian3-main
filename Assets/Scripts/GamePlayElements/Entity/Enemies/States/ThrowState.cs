@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ThrowState : State
 {
-    private EnemyStateMachine _stateMachine;
     private EnemyAnimator _animator;
     private Transform _player;
     private Transform _thrownObject;
@@ -16,7 +15,6 @@ public class ThrowState : State
         Transform player
         ) : base(stateMachine, false)
     {
-        _stateMachine = stateMachine;
         _animator = animator;
         _player = player;
     }
@@ -36,7 +34,7 @@ public class ThrowState : State
         if (_thrownObject == null)
         {
             SetCanExit(true);
-            _stateMachine.OnChasePlayer();
+            StateMachine.OnChasePlayer();
             yield break;
         }
         else
@@ -45,7 +43,7 @@ public class ThrowState : State
         }
 
         SetCanExit(true);
-        _stateMachine.OnChasePlayer();
+        StateMachine.OnChasePlayer();
     }
 
     private IEnumerator ThrownRoutine()
@@ -66,7 +64,7 @@ public class ThrowState : State
     private void OnThrow()
     {
         ThrownObject thrownObject = _thrownObject.AddComponent<ThrownObject>();
-        thrownObject.StartFly(_stateMachine.Config.ThrowDamage, _player);
+        thrownObject.StartFly(StateMachine.Config.ThrowDamage, _player);
 
         isThrowing = false;
     }

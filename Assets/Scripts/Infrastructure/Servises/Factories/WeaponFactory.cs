@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponFactory : ICardFactory
@@ -10,6 +12,16 @@ public class WeaponFactory : ICardFactory
 
     public void Create(ICardConfig config)
     {
+        List<Weapon> weapons = _player.Fist.transform.GetComponentsInChildren<Weapon>().ToList();
+
+        foreach(var weapon in weapons)
+        {
+            if(config.ID == weapon.Config.ID)
+            {
+                return;
+            }
+        }
+
         if (config is WeaponConfig weaponConfig)
         {
             GameObject weaponObject = Object.Instantiate(weaponConfig.Prefab.gameObject, _player.Fist.transform);

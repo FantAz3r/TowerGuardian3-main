@@ -1,5 +1,7 @@
 using Crystal;
 using UnityEngine;
+using UnityEngine.InputSystem.OnScreen;
+using YG;
 
 public class UIFactory
 {
@@ -46,7 +48,6 @@ public class UIFactory
         }
 
         _hud = CreateWindow(WindowType.HUD) as HUD;
-        _hud.Init(_gameFactory.Player, _gameFactory.Cycle);
         CreateShowCardsButton();
 
         return _hud;
@@ -55,6 +56,12 @@ public class UIFactory
     public void CloseHUD()
     {
         _hud?.Close();
+    }
+
+    public WaveViewer CreateWaveViewer()
+    {
+        WaveViewer waveViewer = CreateWindow(WindowType.WaveViewer, _hud.transform) as WaveViewer;
+        return waveViewer;
     }
 
     public DamageScreen CreateDamageScreen()
@@ -70,31 +77,63 @@ public class UIFactory
         return questViewer;
     }
 
-    public ShowCardsButton CreateShowCardsButton()
+    public void CreateJoystick()
     {
-        ShowCardsButton cardButton = CreateWindow(WindowType.ShowCardsButton, _hud.transform) as ShowCardsButton;
-        cardButton.Init(_gameFactory.Player);
-        return cardButton;
+        if(YG2.envir.isDesktop == false)
+        {
+            IInputService inpusService = ServiceLocator.Get<IInputService>().GetSelf();
+            Joystick joystick = Object.Instantiate(Resources.Load<Joystick>(GameConstants.Joystick), _backgroundContainer);
+            joystick.transform.SetAsFirstSibling();
+
+            if (inpusService is MobileInput mobileInput)
+            {
+                mobileInput.Init(joystick);
+            }
+        }
     }
+
+    public CardInventory CreateInventory()
+    {
+        CardInventory inventory = CreateWindow(WindowType.Inventory) as CardInventory;
+        return inventory;
+    }
+
+    public PauseWindow CreateLeaderboard()
+    {
+        PauseWindow leaderboard = CreateWindow(WindowType.LeaderBoard) as PauseWindow;
+        return leaderboard;
+    }
+
+   public ShowCardsButton CreateShowCardsButton()
+   {
+       ShowCardsButton cardButton = CreateWindow(WindowType.ShowCardsButton, _hud.transform) as ShowCardsButton;
+       return cardButton;
+   }
 
     public Shop CreateShop()
     {
         Shop shop = CreateWindow(WindowType.Shop) as Shop;
-        shop.Init(_gameFactory.Player);
         return shop;
     }
 
     public Sell CreateSell()
     {
         Sell sell = CreateWindow(WindowType.Sell) as Sell;
-        sell.Init(_gameFactory.Player);
         return sell;
     }
 
     public PauseUI CreatePauseUI()
     {
-        PauseUI pause = CreateWindow(WindowType.Pause) as PauseUI;
-        return pause;
+        if(_gameFactory.LevelConfig == null)
+            return null;
+
+        if(((int)_gameFactory.LevelConfig.Level) >=3)
+        {
+            PauseUI pause = CreateWindow(WindowType.Pause) as PauseUI;
+            return pause;
+        }
+
+        return null;
     }
 
     public Settings CreateSettings()
@@ -116,26 +155,18 @@ public class UIFactory
     public CardSelectionMenu CreateCardSelectionMenu()
     {
         _cardMenu = CreateWindow(WindowType.CardMenu) as CardSelectionMenu;
-        _cardMenu.Init(_gameFactory.Player);
         return _cardMenu;
     }
 
     public WinLevelMenu CreateWinLevelMenu()
     {
         WinLevelMenu winPanel = CreateWindow(WindowType.WinLevelMenu) as WinLevelMenu;
-        winPanel.Init(_gameFactory.ScoreCounter, _gameFactory.LevelConfig);
-
-        InitScoreViewer(winPanel);
-
         return winPanel;
     }
 
     public LouseLevelMenu CreateLouseLevelMenu(GameObject louseReasonObject)
     {
         LouseLevelMenu louseLevelMenu = CreateWindow(WindowType.LouseLevelMenu) as LouseLevelMenu;
-        louseLevelMenu.Init(_gameFactory.ScoreCounter, _gameFactory.LevelConfig, _gameFactory.Player);
-
-        InitScoreViewer(louseLevelMenu);
 
         if (louseReasonObject != null && louseReasonObject.TryGetComponent(out Health louseReason))
         {
@@ -150,8 +181,7 @@ public class UIFactory
         portalObject.TryGetComponent(out Portal portal);
 
         StartLevelMenu startLevelMenu = CreateWindow(WindowType.StartLevelMenu) as StartLevelMenu;
-        startLevelMenu.Init(_gameFactory.ScoreCounter, _gameFactory.LevelConfig, portal.NextLevel);
-        InitScoreViewer(startLevelMenu);
+        startLevelMenu.Init(portal.NextLevel);
         return startLevelMenu;
     }
 
@@ -175,12 +205,6 @@ public class UIFactory
             window = Object.Instantiate(prefab, parent);
 
         return window;
-    }
-
-    private void InitScoreViewer(LevelMenu levelMenu)
-    {
-        ScoreViewer scoreViewer = levelMenu.GetComponent<ScoreViewer>();
-        scoreViewer.Init(_gameFactory.ScoreCounter);
     }
 }
 

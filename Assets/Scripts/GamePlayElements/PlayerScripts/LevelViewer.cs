@@ -10,9 +10,9 @@ public class LevelViewer : MonoBehaviour
 
     private PlayerExperience _playerExperience;
 
-    public void Init(PlayerExperience playerExperience)
+    private void Awake()
     {
-        _playerExperience = playerExperience;
+        _playerExperience = ServiceLocator.Get<IGameFactory>().Player.Experience;
 
         gameObject.SetActive(true);
         View(_playerExperience.CurrentExp, _playerExperience.ExpToNextLevel);

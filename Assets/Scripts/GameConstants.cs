@@ -11,10 +11,10 @@ public static class GameConstants
     public static string BackGroundMusic = "Prefabs/BackgroundSounds";
     public static string FocusController = "Prefabs/FocusController";
 
+    
     public static string MenuCanvas = "Prefabs/MenuMenu";
+    public static string Joystick = "Ui/HorizontalUI/Dynamic Joystick";
     public static string DesktopGameUI = "Prefabs/DesktopGameUI";
-    public static string MobileHorizontalGameUI = "Prefabs/MobileHorizontalGameUI";
-    public static string MobileVerticalGameUI = "Prefabs/MobileVerticalGameUI";
     public static string OrientationSwitcher = "Prefabs/OrientationSwitcher";
 
     public static string EnemySpawner = "Enemy/EnemyFactory";

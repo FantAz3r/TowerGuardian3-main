@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAnimator : MonoBehaviour
 {
+
     [Header("Настройки")]
     [SerializeField] private float _speedMultiplier = 1f;
     [SerializeField] private float _smoothTime = 0.05f;
@@ -12,12 +14,16 @@ public class EnemyAnimator : MonoBehaviour
 
     private float _currentSpeed;
     private float _velSpeed;
+    private int _hashAttackSpeedMultiplayer;
     private int _hashSpeed;
     private int _hashAttack;
     private int _hashPickUp;
     private int _hashThrow;
     private int _hashJump;
     private int _hashDie;
+    private int _hashRandom;
+
+    private List<AnimationClip> _attackClips;
 
     public event Action Attacked;
     public event Action Throwed;
@@ -30,12 +36,15 @@ public class EnemyAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
         _health = GetComponentInParent<Health>();
 
+        _hashRandom = Animator.StringToHash("Random");
         _hashSpeed = Animator.StringToHash("Speed");
         _hashAttack = Animator.StringToHash("Attack");
         _hashPickUp = Animator.StringToHash("Pick");
         _hashThrow = Animator.StringToHash("Throw");
         _hashJump = Animator.StringToHash("Jump");
         _hashDie = Animator.StringToHash("Die");
+        _hashAttackSpeedMultiplayer = Animator.StringToHash("AttackSpeed");
+        _attackClips = GetAnimationClipsContaining("Hited");
     }
 
     private void OnEnable()
@@ -58,18 +67,9 @@ public class EnemyAnimator : MonoBehaviour
 
     public void PlayAttack(float attackTime = 1f)
     {
-        AnimationClip attackClip = GetAnimationClip("Attack");
-
-        if (attackClip == null)
-        {
-            _animator.speed = 1f;
-            _animator.SetBool(_hashAttack, true);
-            return;
-        }
-
-        float clipLength = attackClip.length;
-        float speed = clipLength / attackTime;
-        _animator.speed = speed;
+        int random = UnityEngine.Random.Range(0, _attackClips.Count);
+        _animator.SetInteger(_hashRandom, random);
+        _animator.SetFloat(_hashAttackSpeedMultiplayer, _attackClips[random].length / attackTime);
         _animator.SetBool(_hashAttack, true);
     }
 
@@ -100,6 +100,7 @@ public class EnemyAnimator : MonoBehaviour
 
     public void OnAnimationAttack()
     {
+        Debug.Log("Attack");
         Attacked?.Invoke();
     }
 
@@ -119,13 +120,18 @@ public class EnemyAnimator : MonoBehaviour
         _health.Die();
     }
 
-    private AnimationClip GetAnimationClip(string clipName)
+
+    private List<AnimationClip> GetAnimationClipsContaining(string partialName)
     {
+        List<AnimationClip> clips = new List<AnimationClip>();
         foreach (var clip in _animator.runtimeAnimatorController.animationClips)
         {
-            if (clip.name == clipName)
-                return clip;
+            if (clip.name.Contains(partialName))
+            {
+                clips.Add(clip);
+            }
         }
-        return null;
+        return clips;
     }
+
 }

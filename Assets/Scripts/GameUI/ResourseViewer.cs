@@ -6,18 +6,24 @@ public class ResourceViewer : MonoBehaviour
     [SerializeField] private List<ResourcePieceView> _resourceAmount;
     private Inventory _inventory;
 
-    public void Init(Inventory inventory)
+    private void Awake()
     {
-        _inventory = inventory;
+        _inventory = ServiceLocator.Get<IGameFactory>().Player.Inventory;
         OnResourceChanged(_inventory.Resources);
 
         _inventory.ResourceChanged -= OnResourceChanged;
         _inventory.ResourceChanged += OnResourceChanged;
     }
 
+   
     private void OnDestroy()
     {
         _inventory.ResourceChanged -= OnResourceChanged;
+    }
+
+    private void OnEnable()
+    {
+        OnResourceChanged(_inventory.Resources);
     }
 
     private void OnResourceChanged(Dictionary<ResourceType, int> resourses)

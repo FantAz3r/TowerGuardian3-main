@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +5,13 @@ using UnityEngine;
 
 public class TransparencyObject : MonoBehaviour
 {
+    [SerializeField] private Material _transparentMaterial;
+
     private List<MeshRenderer> _meshRenderers = new();
-    private Coroutine _disableCoroutine;
+    private Coroutine _changeMaterialCoroutine;
     private readonly WaitForSeconds _wait = new WaitForSeconds(0.5f);
+    private List<Material[]> _originalMaterials;
+
 
     private void Awake()
     {
@@ -18,31 +21,44 @@ public class TransparencyObject : MonoBehaviour
         {
             Debug.LogWarning("TransparencyObject требует MeshRenderer на объекте");
         }
+
+        _originalMaterials = new List<Material[]>();
+        
+        foreach (var mr in _meshRenderers)
+        {
+            _originalMaterials.Add(mr.materials);
+        }
     }
 
     public void MakeInvisible()
     {
-        if (_disableCoroutine != null)
-            StopCoroutine(_disableCoroutine);
+        if (_changeMaterialCoroutine != null)
+            StopCoroutine(_changeMaterialCoroutine);
 
-        _disableCoroutine = StartCoroutine(DisableRoutine());
+        _changeMaterialCoroutine = StartCoroutine(ChangeMaterialRoutine());
     }
 
-    private IEnumerator DisableRoutine()
+    private IEnumerator ChangeMaterialRoutine()
     {
-        foreach (var item in _meshRenderers)
+        for (int i = 0; i < _meshRenderers.Count; i++)
         {
-            item.enabled = false;
+            var mr = _meshRenderers[i];
 
+            var newMaterials = new Material[mr.materials.Length];
+
+            for (int j = 0; j < newMaterials.Length; j++)
+                newMaterials[j] = _transparentMaterial;
+
+            mr.materials = newMaterials;
         }
 
         yield return _wait;
 
-        foreach (var item in _meshRenderers)
+        for (int i = 0; i < _meshRenderers.Count; i++)
         {
-            item.enabled = true;
+            _meshRenderers[i].materials = _originalMaterials[i];
         }
 
-        _disableCoroutine = null;
+        _changeMaterialCoroutine = null;
     }
 }

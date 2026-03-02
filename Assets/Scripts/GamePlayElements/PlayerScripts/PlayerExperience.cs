@@ -6,14 +6,21 @@ using YG;
 
 public class PlayerExperience : MonoBehaviour
 {
+    private const float _slowDuration = 0.3f;
+
     [SerializeField] private PlayerConfig _config;
 
     private EnemyDetector _enemyDetector;
     private int _currentLevel = 1;
-    private int _upgradePoints = 50;
+    private int _upgradePoints = 0;
     private float _currentExp = 0f;
+    private WaitForSecondsRealtime _slowDurationForCards = new WaitForSecondsRealtime(_slowDuration);
+    private WaitForSeconds _animationDelay = new WaitForSeconds(0.1f);
+
     private ISpawnerService _spawnerService;
     private IScoreService _scoreService;
+    private IWindowService _windowService;
+    private ITimeService _timeService;
     private Queue<float> _expQueue = new Queue<float>();
     private bool _isUpdating = false;
 
@@ -30,9 +37,12 @@ public class PlayerExperience : MonoBehaviour
 
     private void Awake()
     {
+        _timeService = ServiceLocator.Get<ITimeService>();
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
         _scoreService = ServiceLocator.Get<IScoreService>();
+        _windowService = ServiceLocator.Get<IWindowService>();
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
+
 
         if (_enemyDetector != null)
             _enemyDetector.OnGetExperience += AddEXP;
@@ -40,12 +50,15 @@ public class PlayerExperience : MonoBehaviour
         LoadLevel();
     }
 
+    private void OnDisable()
+    {
+        SaveLevel();
+    }
+
     private void OnDestroy()
     {
         if (_enemyDetector != null)
             _enemyDetector.OnGetExperience -= AddEXP;
-
-        SaveLevel();
     }
 
     public void AddEXP(float amount)
@@ -56,9 +69,9 @@ public class PlayerExperience : MonoBehaviour
             StartCoroutine(ProcessExpQueue());
     }
 
-    public void AddUpgradePoints(int count)
+    public void AddUpgradePoints(int pointsCount)
     {
-        _upgradePoints += count;
+        _upgradePoints += pointsCount;
         OnUpgradePointAdded?.Invoke();
     }
 
@@ -87,6 +100,11 @@ public class PlayerExperience : MonoBehaviour
 
         while (targetExp >= ExpToNextLevel)
         {
+            AddUpgradePoints(1);
+            _timeService.SlowMotion(0, _slowDuration);
+            yield return _slowDurationForCards;
+            _windowService.Open(WindowType.CardMenu);
+
             float fillTo = ExpToNextLevel;
 
             yield return AnimateExperience(_currentExp, fillTo);
@@ -96,11 +114,12 @@ public class PlayerExperience : MonoBehaviour
             LevelUp();
 
             OnExperienceAdded?.Invoke(_currentExp, ExpToNextLevel);
-            yield return new WaitForSeconds(0.1f);
+            yield return _animationDelay;
         }
 
         yield return AnimateExperience(_currentExp, targetExp);
         _currentExp = targetExp;
+
 
         OnExperienceAdded?.Invoke(_currentExp, ExpToNextLevel);
     }
@@ -128,7 +147,6 @@ public class PlayerExperience : MonoBehaviour
     {
         _scoreService.AddScore(ScoreType.Levelup, _config.ScorePerLevel);
         _spawnerService.SendEffectReqest(_config.LevelUpEffect, transform.position, transform);
-        AddUpgradePoints(1);
         _currentLevel++;
         OnLevelUp?.Invoke();
     }

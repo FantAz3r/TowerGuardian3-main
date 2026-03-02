@@ -4,11 +4,7 @@ using UnityEngine.UI;
 public class WinLevelMenu : LevelMenu
 {
     [SerializeField] private Button _nextLevelButton;
-
-    public override void Init(ScoreCounter scoreCounter, LevelConfig levelConfig)
-    {
-        base.Init(scoreCounter, levelConfig);
-    }
+    [SerializeField] private AudioClip _winSound;
 
     protected override void Awake()
     {
@@ -36,6 +32,7 @@ public class WinLevelMenu : LevelMenu
     public override void Open()
     {
         base.Open();
-        ScoreCounter.OnEndLevel();
+        ScoreCounter.OnEndLevel(this);
+        ServiceLocator.Get<ISpawnerService>().SendSoundReqest(_winSound);
     }
 }

@@ -9,13 +9,11 @@ public class ChaseState : State
     private WaitForSeconds _sleep;
 
     private EnemyAnimator _animator;
-    private EnemyStateMachine _stateMachine;
     private Transform _player;
     private NavMeshAgent _agent;
 
     public ChaseState(EnemyStateMachine stateMachine, NavMeshAgent agent, EnemyAnimator animator, Transform target) : base(stateMachine, true)
     {
-        _stateMachine = stateMachine;
         _agent = agent ?? throw new ArgumentNullException(nameof(agent));
         _animator = animator ?? throw new ArgumentNullException(nameof(animator));
         _player = target ?? throw new ArgumentNullException(nameof(target));
@@ -38,7 +36,7 @@ public class ChaseState : State
         {
             RotateTo(_player.position);
             _agent.destination = _player.position;
-            _animator.UpdateSpeed(_stateMachine.Config.MoveConfig.MoveSpeed);
+            _animator.UpdateSpeed(StateMachine.Config.MoveConfig.MoveSpeed);
             yield return _sleep;
         }
     }

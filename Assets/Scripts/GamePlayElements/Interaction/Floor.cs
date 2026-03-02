@@ -7,6 +7,7 @@ public class Floor : MonoBehaviour
     [SerializeField] private StairsTrigger _downTrigger;
     [SerializeField] private int _floorNumber;
     public int FloorNumber => _floorNumber;
+    [field: SerializeField] public GameObject Decor { get; private set; }
 
     public event Action<int> GoingDown;
     public event Action<int> GoingUp;   

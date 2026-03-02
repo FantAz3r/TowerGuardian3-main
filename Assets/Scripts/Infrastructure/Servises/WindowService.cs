@@ -3,94 +3,143 @@ using UnityEngine;
 public class WindowService : IWindowService
 {
     private readonly UIFactory _uiFactory;
-
+    private WindowBase _currentWindow = null;
+    private WindowType _currentWindowType = WindowType.None;
+    private WindowType _previousWindowType = WindowType.None;
     public WindowService(UIFactory uiFactory) =>
         _uiFactory = uiFactory;
 
     public WindowBase Open(WindowType type, GameObject payload = null)
     {
-        WindowBase window = null;
+        if (type == WindowType.None)
+            return null;
+
+        if (type != _currentWindowType)
+        {
+            _previousWindowType = _currentWindowType;
+            _currentWindowType = type;
+        }
 
         switch (type)
         {
             case WindowType.None:
                 break;
 
+            case WindowType.WaveViewer:
+                _currentWindow = _uiFactory.CreateWaveViewer();
+                break;
             case WindowType.QuestViewer:
-                window = _uiFactory.CreateQuestViewer();
+                _currentWindow = _uiFactory.CreateQuestViewer();
                 break;
 
             case WindowType.Shop:
-                window = _uiFactory.CreateShop();
+                _currentWindow = _uiFactory.CreateShop();
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.Sell:
-                window = _uiFactory.CreateSell();
+                _currentWindow = _uiFactory.CreateSell();
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.WinLevelMenu:
-                window = _uiFactory.CreateWinLevelMenu();
+                _currentWindow = _uiFactory.CreateWinLevelMenu();
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.StartLevelMenu:
-                window = _uiFactory.CreateStartLevelMenu(payload);
+                _currentWindow = _uiFactory.CreateStartLevelMenu(payload);
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.LouseLevelMenu:
-                window = _uiFactory.CreateLouseLevelMenu(payload);
+                _currentWindow = _uiFactory.CreateLouseLevelMenu(payload);
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.Settings:
-                window = _uiFactory.CreateSettings();
+                _currentWindow = _uiFactory.CreateSettings();
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.Pause:
-                window = _uiFactory.CreatePauseUI();
+                _currentWindow = _uiFactory.CreatePauseUI();
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.CardMenu:
-                window = _uiFactory.CreateCardSelectionMenu();
+                _currentWindow = _uiFactory.CreateCardSelectionMenu();
                 _uiFactory.CloseHUD();
                 break;
 
             case WindowType.HUD:
-                window = _uiFactory.CreateHUD();
+                _currentWindow = _uiFactory.CreateHUD();
                 break;
 
             case WindowType.MainMenu:
-                window = _uiFactory.CreateMainMenu();
+                _currentWindow = _uiFactory.CreateMainMenu();
                 break;
 
             case WindowType.MainSettings:
-                window = _uiFactory.CreateSettings();
+                _currentWindow = _uiFactory.CreateSettings();
                 break;
 
             case WindowType.Background:
-                window = _uiFactory.CreateBackground();
+                _currentWindow = _uiFactory.CreateBackground();
                 break;
 
             case WindowType.DamageScreen:
-                window = _uiFactory.CreateDamageScreen();
+                _currentWindow = _uiFactory.CreateDamageScreen();
+                break;
+
+            case WindowType.LeaderBoard:
+                _currentWindow = _uiFactory.CreateLeaderboard();
+                _uiFactory.CloseHUD();
+                break;
+            case WindowType.Inventory:
+                _currentWindow = _uiFactory.CreateInventory();
+                _uiFactory.CloseHUD();
                 break;
         }
 
-        if (window != null)
+        if (_currentWindow != null)
         {
-            window.Open();
+            _currentWindow.Open();
         }
 
-        return window;
+        return _currentWindow;
+    }
+
+    public WindowBase OpenPreviousWindow()
+    {
+        if (_previousWindowType != WindowType.None)
+        {
+            var temp = _currentWindowType;
+            _currentWindowType = _previousWindowType;
+            _previousWindowType = temp;
+
+            var window = Open(_currentWindowType);
+
+            if (_currentWindow != null)
+            {
+                _currentWindow.Open();
+            }
+
+            return window;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void CreateUIRoot()
     {
         _uiFactory.CreateUIRoot();
+    }
+
+    public void CreateJoystick()
+    {
+        _uiFactory.CreateJoystick();
     }
 }

@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using YG;
 
 public class EnemySpawner : MonoBehaviour
 {
     private IReadOnlyList<SpawnerActivator> _spawnPoints;
+    private List<SpawnerActivator> _activeSpawnPoints = new();
     private DayCycle _dayCycle;
     private Player _player;
-    private LevelConfig _currentConfig;
     private Coroutine _spawnRoutine;
     private Coroutine _waveRoutine;
 
@@ -22,25 +21,37 @@ public class EnemySpawner : MonoBehaviour
 
     private Dictionary<Enemy, ObjectPool<Enemy>> _pools = new Dictionary<Enemy, ObjectPool<Enemy>>();
     private Dictionary<Enemy, float> _startWaights = new();
-    private Dictionary<Enemy, float> _tempWaights = new();
 
-
-    public void Init(Player player, DayCycle dayCycle, LevelConfig config, List<SpawnerActivator> spawnPoints )
+    public void Init(Player player, DayCycle dayCycle, LevelConfig config, List<SpawnerActivator> spawnPoints)
     {
         _player = player;
         _dayCycle = dayCycle;
-        _currentConfig = config;
         _spawnPoints = spawnPoints;
-
-        _nightSpawnDelay = new WaitForSeconds(_currentConfig.NightSpawnDelay);
-        _daySpawnDelay = new WaitForSeconds(_currentConfig.DaySpawnDelay);
         _waves = config.Waves;
+
+        foreach(var spawnPoint in _spawnPoints)
+        {
+            spawnPoint.Detected += AddSpawnPoint;
+            spawnPoint.Losted += RemoveSpawnPoint;
+        }
 
         SetupPoolsAndWeightsForWave(_waves[_currentWaveIndex]);
     }
 
+    private void OnDestroy()
+    {
+        foreach (var spawnPoint in _spawnPoints)
+        {
+            spawnPoint.Detected -= AddSpawnPoint;
+            spawnPoint.Losted -= RemoveSpawnPoint;
+        }
+    }
+
     private void SetupPoolsAndWeightsForWave(Wave wave)
     {
+        _nightSpawnDelay = new WaitForSeconds(wave.NightSpawnDelay);
+        _daySpawnDelay = new WaitForSeconds(wave.DaySpawnDelay);
+
         _startWaights = wave.Weight.ToDictionary(kv => kv.Key, kv => (float)kv.Value);
         _waveDuration = new WaitForSeconds(_waves[_currentWaveIndex].Duration);
 
@@ -53,7 +64,17 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn()
     {
-        if (_spawnPoints == null || _spawnPoints.Count == 0)
+        if (_activeSpawnPoints == null || _activeSpawnPoints.Count == 0)
+            return;
+
+        int totalActiveEnemies = 0;
+
+        foreach (var item in _pools.Values)
+        {
+            totalActiveEnemies += item.GetActiveObjectsCount(); 
+        }
+
+        if (totalActiveEnemies >= _waves[_currentWaveIndex].MaxEnemyCount)
             return;
 
         Enemy chosenEnemy = ChooseEnemyWithPseudoRandom();
@@ -66,7 +87,7 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy enemyInstance = pool.Get();
 
-        var spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+        var spawnPoint = _activeSpawnPoints[Random.Range(0, _activeSpawnPoints.Count)];
         enemyInstance.transform.position = spawnPoint.transform.position;
         enemyInstance.transform.LookAt(_player.transform);
 
@@ -124,20 +145,16 @@ public class EnemySpawner : MonoBehaviour
 
     private Enemy ChooseEnemyWithPseudoRandom()
     {
-        if (_startWaights.Count == 1)
-            return _startWaights.Keys.First();
+        return Utils.SelectByWeights(_startWaights);
+    }
 
-        if (_tempWaights.Count == 0)
-        {
-            Enemy enemy = Utils.SelectAndUpdateWeights(_startWaights, _startWaights, out Dictionary<Enemy, float> newWeights);
-            _tempWaights = newWeights;
-            return enemy;
-        }
-        else
-        {
-            Enemy enemy = Utils.SelectAndUpdateWeights(_startWaights, _tempWaights, out Dictionary<Enemy, float> newWeights);
-            _tempWaights = newWeights;
-            return enemy;
-        }
+    private void AddSpawnPoint(SpawnerActivator spawner)
+    {
+        _activeSpawnPoints.Add(spawner);
+    }
+
+    private void RemoveSpawnPoint(SpawnerActivator spawner)
+    {
+        _activeSpawnPoints.Remove(spawner);
     }
 }

@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using YG;
+
+public class EnterThirdLevelQuest : Quest
+{
+    private Portal _portalLevel3;
+    public override QuestType GetQuestType() => QuestType.EnterLevel3;
+
+    public EnterThirdLevelQuest(Portal portal)
+    {
+        _portalLevel3 = portal;
+    }
+
+    public override Vector3 TryGetTarget()
+    {
+        return _portalLevel3.transform.position;
+    }
+
+    public override void Run()
+    {
+        base.Run();
+
+        foreach (var levelData in YG2.saves.LevelsProgress)
+        {
+            if (levelData.Level == LevelID.Level3 && levelData.IsComplite)
+            {
+                Complete();
+                break;
+            }
+        }
+    }
+
+    public override void Complete()
+    {
+        base.Complete();
+    }
+}

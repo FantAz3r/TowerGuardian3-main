@@ -9,6 +9,10 @@ public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     [SerializeField] private Sprite _highlightedSprite;
     [SerializeField] private Sprite _normalSprite;
+
+    [SerializeField] private Color _highlightedColor = Color.white;
+    [SerializeField] private Color _normalColor = Color.white;
+
     [SerializeField] private AudioClip _pressedSound;
     [SerializeField] private AudioClip _highlightedSound;
 
@@ -25,12 +29,14 @@ public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void OnDisable() 
     {
+        _buttonImage.color = _normalColor;
         _buttonImage.sprite = _normalSprite;
         _animator.SetTrigger("Normal");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        _buttonImage.color = _highlightedColor;
         _buttonImage.sprite = _highlightedSprite;
         _animator.SetTrigger("Highlighted");
         _spawnerService.SendSoundReqest(_highlightedSound);
@@ -38,6 +44,7 @@ public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        _buttonImage.color = _normalColor;
         _buttonImage.sprite = _normalSprite;
         _animator.SetTrigger("Normal");
     }

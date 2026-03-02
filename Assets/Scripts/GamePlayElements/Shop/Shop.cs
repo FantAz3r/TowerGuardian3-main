@@ -50,8 +50,8 @@ public class Shop : BaseShop
 
         Player.Inventory?.SpendResource(config.GetCosts());
 
-        config.Upgrade();
         UpdateCardSave(config);
+        Player.CardHolder.Add(config);
 
         ClearOldButtons();
         LoadContent();

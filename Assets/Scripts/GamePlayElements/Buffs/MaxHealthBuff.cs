@@ -12,16 +12,18 @@ public class MaxHealthBuff : Buff
 
     public override void Enable()
     {
+        base.Enable();
         _buffbleComponent.ApplyBuff(Config.IncreaseValue);
     }
 
-    public override void Upgrade()
+    public override void Upgrade(ICardConfig useles)
     {
         _buffbleComponent.ApplyBuff(Config.IncreaseValue);
     }
 
     public override void Remove()
     {
+        base.Remove();
         _buffbleComponent.RemoveBuff();
     }
 }

@@ -31,7 +31,10 @@ public class ResourceSpawner : MonoBehaviour
             if (IsValidSpawnPosition(spawnPos))
             {
                 GameObject resourcePrefab = _resourcePrefabs[Random.Range(0, _resourcePrefabs.Length)];
-                GameObject spawnedResource = Instantiate(resourcePrefab, spawnPos, Quaternion.identity);
+
+                Quaternion randomRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+
+                GameObject spawnedResource = Instantiate(resourcePrefab, spawnPos, randomRotation);
                 spawnedResource.transform.SetParent(transform);
 
                 spawned++;

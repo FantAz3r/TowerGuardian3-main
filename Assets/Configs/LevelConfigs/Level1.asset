@@ -12,33 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864116a1b449ef545916bc24a1bcfff1, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  _level: 3
-  _quests: 010000000200000003000000040000000500000006000000
+  _level: 4
+  _quests: 0100000002000000030000000400000005000000
   _playerSpawnPoint: {x: 0, y: 0, z: 4}
   _dayDuration: 20
-  _nightDuration: 15
-  _dayLightIntensity: 1.5
-  _nightLightIntensity: 0.8
+  _nightDuration: 20
+  _dayLightIntensity: 2
+  _nightLightIntensity: 2
   _transitionDuration: 2
-  _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
-  _nightLightColor: {r: 1, g: 0.5415317, b: 0, a: 1}
-  _nightSpawnDelay: 3
-  _daySpawnDelay: 3
+  _dayLightColor: {r: 0.8962264, g: 0.89115345, b: 0.89115345, a: 1}
+  _nightLightColor: {r: 0.52456385, g: 0.39569238, b: 0.8490566, a: 1}
   <Waves>k__BackingField:
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
         Value: 1
-    <Duration>k__BackingField: 9999
+    <Duration>k__BackingField: 30
+    <NightSpawnDelay>k__BackingField: 1
+    <DaySpawnDelay>k__BackingField: 10
+    <MaxEnemyCount>k__BackingField: 10
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
         Value: 10
       - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
         Value: 3
-      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
-        Value: 1
-    <Duration>k__BackingField: 90
+    <Duration>k__BackingField: 60
+    <NightSpawnDelay>k__BackingField: 1
+    <DaySpawnDelay>k__BackingField: 7
+    <MaxEnemyCount>k__BackingField: 20
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
@@ -46,17 +48,23 @@ MonoBehaviour:
       - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
         Value: 15
       - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
-        Value: 7
-    <Duration>k__BackingField: 90
+        Value: 3
+    <Duration>k__BackingField: 80
+    <NightSpawnDelay>k__BackingField: 1
+    <DaySpawnDelay>k__BackingField: 6
+    <MaxEnemyCount>k__BackingField: 35
   - _weight:
       _serializedList:
-      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
-        Value: 1
-      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
-        Value: 3
       - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
         Value: 3
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 3
+      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
+        Value: 3
     <Duration>k__BackingField: 9999999
+    <NightSpawnDelay>k__BackingField: 0.5
+    <DaySpawnDelay>k__BackingField: 5
+    <MaxEnemyCount>k__BackingField: 50
   _scorePerTimeOneStar: 0.3
   _scorePerTimeTwoStar: 0.5
   _scorePerTimeThreeStar: 0.6

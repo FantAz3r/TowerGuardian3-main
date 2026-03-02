@@ -10,9 +10,9 @@ public class ShowCardsButton : WindowBase
     private Player _player;
     private IWindowService _windowService;
 
-    public void Init(Player player)
+    private void Awake()
     {
-        _player = player;
+        _player = ServiceLocator.Get<IGameFactory>().Player;
         _windowService = ServiceLocator.Get<IWindowService>();
 
         _player.Experience.OnUpgradePointAdded += Open;
@@ -23,6 +23,7 @@ public class ShowCardsButton : WindowBase
     private void OnEnable()
     {
         _showButton.onClick.AddListener(OnShowButtonClicked);
+        Open();
     }
 
     private void OnDisable()
@@ -40,7 +41,7 @@ public class ShowCardsButton : WindowBase
     {
         if (_player.Experience.UpgradePoints > 0)
         {
-            gameObject.SetActive(true);
+            base.Open();
             _text.text = _player.Experience.UpgradePoints.ToString();
         }
         else
@@ -63,7 +64,7 @@ public class ShowCardsButton : WindowBase
 
         if (_player.Experience.UpgradePoints <= 0)
         {
-            gameObject.SetActive(false);
+            base.Close();
         }
     }
 }

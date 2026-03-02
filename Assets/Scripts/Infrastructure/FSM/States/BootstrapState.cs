@@ -1,3 +1,6 @@
+using UnityEngine;
+using YG;
+
 public class BootstrapState : IState
 {
     private IGameStateMachine _stateMachine;
@@ -24,7 +27,7 @@ public class BootstrapState : IState
     {
         ServiceLocator.Register<IStateSwitchService>(new StateSwitchService(_stateMachine));
         ServiceLocator.Register<ILevelLoadingService>(new LevelLoadingService(_stateMachine));
-        ServiceLocator.Register<IInputService>(new InputService());
+
         ServiceLocator.Register<ITimeService>(new TimeService(_coroutineRunner));
         ServiceLocator.Register<ISpawnerService>(new SpawnerService());
         ServiceLocator.Register(_coroutineRunner);
@@ -34,5 +37,17 @@ public class BootstrapState : IState
         ServiceLocator.Register(windowService);
         ServiceLocator.Register<IGameConditionService>(new GameConditionService(windowService));
         ServiceLocator.Register<IScoreService>(new ScoreService());
+
+
+        if (YG2.envir.isDesktop)
+        {
+            InputService inputService = new InputService();
+            ServiceLocator.Register<IInputService>(inputService);
+            ServiceLocator.Register<IAbilityInput>(inputService);
+        }
+        else
+        {
+            ServiceLocator.Register<IInputService>(new MobileInput());
+        }
     }
 }

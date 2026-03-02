@@ -5,13 +5,13 @@ using UnityEngine;
 public class Platform : InteractionMethod
 {
     [SerializeField] private float _interactionTime = 1.5f;
+    [field: SerializeField] public WindowType WindowType { get; private set; }
+
     private float _currentTime = 0f;
-    private float _delta = 0.1f;
     private bool _playerInZone = false;
 
     private IWindowService _windowService;
     private Player _player;
-    private WaitForSeconds _wait;
     private Coroutine _timerCoroutine = null;
 
     public event Action PlayerEnteredZone;
@@ -22,7 +22,6 @@ public class Platform : InteractionMethod
     private void Awake()
     {
         _windowService = ServiceLocator.Get<IWindowService>();
-        _wait = new WaitForSeconds(_delta);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +60,7 @@ public class Platform : InteractionMethod
         {
             if (_playerInZone)
             {
-                _currentTime += _delta;
+                _currentTime += Time.deltaTime;
 
                 if (_currentTime >= _interactionTime)
                 {
@@ -73,7 +72,7 @@ public class Platform : InteractionMethod
             }
             else
             {
-                _currentTime -= _delta;
+                _currentTime -= Time.deltaTime;
                 if (_currentTime <= 0f)
                 {
                     _currentTime = 0f;
@@ -82,13 +81,13 @@ public class Platform : InteractionMethod
             }
 
             TimerUpdated?.Invoke(_currentTime, _interactionTime);
-            yield return _wait;
+            yield return null;
         }
     }
 
     public override void Interact()
     {
-        _windowService.Open(WindowType.Shop, _player.gameObject);
+        _windowService.Open(WindowType);
     }
 }
 

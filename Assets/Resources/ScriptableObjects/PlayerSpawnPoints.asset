@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerSpawnPoints
   m_EditorClassIdentifier: 
   SpawnPoints:
-  - PreviousLevel: 3
-    SpawnPoint: {fileID: 2488177192478189346, guid: 560e998c425c8a148ada127924f45e79, type: 3}
   - PreviousLevel: 4
-    SpawnPoint: {fileID: 7306359511443409615, guid: 5485ebb5b1b948444881d9142349afe1, type: 3}
+    SpawnPoint: {fileID: 2488177192478189346, guid: 560e998c425c8a148ada127924f45e79, type: 3}
   - PreviousLevel: 5
-    SpawnPoint: {fileID: 8614574940237076452, guid: 0cd1951db0dee9744a49d4a85eca8872, type: 3}
+    SpawnPoint: {fileID: 7306359511443409615, guid: 5485ebb5b1b948444881d9142349afe1, type: 3}
   - PreviousLevel: 6
+    SpawnPoint: {fileID: 8614574940237076452, guid: 0cd1951db0dee9744a49d4a85eca8872, type: 3}
+  - PreviousLevel: 7
     SpawnPoint: {fileID: 9002018104078618023, guid: e4c98480fcb7fde4daf0a482f27a624a, type: 3}

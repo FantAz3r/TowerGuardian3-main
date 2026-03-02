@@ -1,5 +1,5 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace YG.Example
 {
@@ -12,7 +12,7 @@ namespace YG.Example
         void Start()
         {
             if (textRU != string.Empty)
-                GetComponent<Text>().text = textRU;
+                GetComponent<TMP_Text>().text = textRU;
         }
 #endif
     }

@@ -54,12 +54,12 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
         while (_config.Cooldown >= timer)
         {
             Cooldowning?.Invoke(_config.Cooldown, timer);
-            timer++;
-            yield return _oneSecond;
+            timer += Time.deltaTime;
+            yield return null;
         }
 
         Cooldowning?.Invoke(_config.Cooldown, 0f);
-        IsCooldowning = true;
+        IsCooldowning = false;
     }
 
     private void CheckWeapon(IWeapon weapon)

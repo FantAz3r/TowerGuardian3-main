@@ -13,6 +13,9 @@ public class ContinueButton : MonoBehaviour
         _switchService = ServiceLocator.Get<IStateSwitchService>();
         _button = GetComponent<Button>();
         LoadLevel();
+
+        if(YG2.isFirstGameSession)
+            gameObject.SetActive(false);
     }
 
     private void OnEnable()

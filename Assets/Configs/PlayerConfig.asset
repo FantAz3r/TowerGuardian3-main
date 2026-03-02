@@ -15,7 +15,8 @@ MonoBehaviour:
   <MoveConfig>k__BackingField: {fileID: 11400000, guid: 75c5370c09ccf9c448707875ca4bd747, type: 2}
   <HealthConfig>k__BackingField: {fileID: 11400000, guid: 6ac17825e1095594a925f0036122424e, type: 2}
   <HealthRegeneration>k__BackingField: 1
-  <InventoryCapacity>k__BackingField: 10000
-  <BaseLvlCost>k__BackingField: 12
-  <LevelCostMultiplier>k__BackingField: 1.2
+  <InventoryCapacity>k__BackingField: 99999
+  <BaseLvlCost>k__BackingField: 25
+  <LevelCostMultiplier>k__BackingField: 1.12
   <LevelUpEffect>k__BackingField: 3
+  <ScorePerLevel>k__BackingField: 50

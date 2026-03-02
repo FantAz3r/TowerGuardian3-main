@@ -48,7 +48,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Rotate"",
                     ""type"": ""Value"",
-                    ""id"": ""63eec312-712e-46c6-be25-6ca6a453231f"",
+                    ""id"": ""db95a12c-51fa-48c2-b127-bd68f8ead439"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -124,7 +124,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""17d05d4a-1a74-4c22-bef0-85785c3e37d7"",
+                    ""id"": ""117bee21-3a15-4dbf-93ed-2e29035034af"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -134,9 +134,20 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""ad4b90eb-b660-4268-9b30-30bf615d3c57"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": """",
-                    ""id"": ""042c2213-437a-4e69-b8d8-d3976da0682c"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""1851cd61-da6c-4213-b011-573de795ec1b"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile"",
@@ -185,6 +196,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""933b518e-e7ad-4aa5-af32-650cdc09b48c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,7 +236,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""ActivateAbility3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -227,8 +247,19 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""ActivateAbility4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d205e18f-229a-4f36-a2fc-0c2eed7e4580"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -276,6 +307,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_ActivateAbility2 = m_UI.FindAction("ActivateAbility2", throwIfNotFound: true);
         m_UI_ActivateAbility3 = m_UI.FindAction("ActivateAbility3", throwIfNotFound: true);
         m_UI_ActivateAbility4 = m_UI.FindAction("ActivateAbility4", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -403,6 +435,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_ActivateAbility2;
     private readonly InputAction m_UI_ActivateAbility3;
     private readonly InputAction m_UI_ActivateAbility4;
+    private readonly InputAction m_UI_Pause;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -411,6 +444,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @ActivateAbility2 => m_Wrapper.m_UI_ActivateAbility2;
         public InputAction @ActivateAbility3 => m_Wrapper.m_UI_ActivateAbility3;
         public InputAction @ActivateAbility4 => m_Wrapper.m_UI_ActivateAbility4;
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -432,6 +466,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ActivateAbility4.started += instance.OnActivateAbility4;
             @ActivateAbility4.performed += instance.OnActivateAbility4;
             @ActivateAbility4.canceled += instance.OnActivateAbility4;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -448,6 +485,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ActivateAbility4.started -= instance.OnActivateAbility4;
             @ActivateAbility4.performed -= instance.OnActivateAbility4;
             @ActivateAbility4.canceled -= instance.OnActivateAbility4;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -495,5 +535,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnActivateAbility2(InputAction.CallbackContext context);
         void OnActivateAbility3(InputAction.CallbackContext context);
         void OnActivateAbility4(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

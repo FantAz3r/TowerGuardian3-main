@@ -25,7 +25,6 @@ public class DayCycle : MonoBehaviour
     public float NightDuration => _nightDuration;
     public float TransitionDuration => _transitionDuration;
 
-    public event Action<DayPhase> OnPhaseInfinited;
     public event Action<DayPhase> OnPhaseChanged;
     public event Action<float> TimePassedFromTransition;
     public event Action<float> TimePassedFromStart;

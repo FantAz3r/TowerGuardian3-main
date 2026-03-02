@@ -9,6 +9,7 @@ public class EnemyConfig : ScriptableObject
     [field: SerializeField] public float DetectionRadius { get; private set; } = 10f;
     [field: SerializeField] public int Damage { get; private set; } = 10;
     [field: SerializeField] public float AttackRange { get; private set; } = 1.5f;
+    [field: SerializeField] public AudioClip HitSound { get; private set; }
     [field: SerializeField] public Vector3 AttackAriaCenter { get; private set; }
     [field: SerializeField] public float AttackCooldown { get; private set; } = 1f;
     [field: SerializeField] public float JumpDamage { get; private set; } = 15;

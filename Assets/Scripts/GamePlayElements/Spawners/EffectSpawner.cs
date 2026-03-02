@@ -23,10 +23,7 @@ public class EffectSpawner : BaseSpawner
             return;
 
         if (_pools.TryGetValue(type, out var pool) == false)
-        {
-            Debug.LogWarning($"Pool for effect type {type} not found");
             return;
-        }
 
         Effect effect = pool.Get();
 

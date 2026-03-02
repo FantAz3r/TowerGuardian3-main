@@ -6,12 +6,6 @@ public class Sell : BaseShop
 {
     [SerializeField] private SellResources _resourcesPanel;
 
-    public override void Init(Player player)
-    {
-        base.Init(player);
-        _resourcesPanel.Init(player.Inventory);
-    }
-
     public override void Open()
     {
         base.Open();
@@ -56,7 +50,7 @@ public class Sell : BaseShop
             CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
             card.InitFromData(cardData);
 
-            if (card.HasPlayer)
+            if (card.IsBought)
             {
                 Configs.Add(card);
             }

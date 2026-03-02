@@ -6,6 +6,7 @@ public class TimeService : IService, ITimeService
 {
     private readonly ICoroutineRunner _coroutineRunner;
     private Coroutine _pauseCoroutine;
+    private Coroutine _slowMotionCoroutine;
     private WaitForSeconds _wait;
     private float _time;
 
@@ -46,10 +47,10 @@ public class TimeService : IService, ITimeService
             _coroutineRunner.StopCoroutine(_pauseCoroutine);
 
         _time = seconds;
-        _pauseCoroutine = _coroutineRunner.StartCoroutine(PauseCoroutine(seconds));
+        _pauseCoroutine = _coroutineRunner.StartCoroutine(PauseCoroutine());
     }
 
-    private IEnumerator PauseCoroutine(float seconds)
+    private IEnumerator PauseCoroutine()
     {
         PauseAll();
 
@@ -57,6 +58,30 @@ public class TimeService : IService, ITimeService
 
         Resume();
         _pauseCoroutine = null;
+    }
+
+    public void SlowMotion(float targetTimeScale, float duration)
+    {
+        if (_slowMotionCoroutine != null)
+            _coroutineRunner.StopCoroutine(_slowMotionCoroutine);
+
+        _slowMotionCoroutine = _coroutineRunner.StartCoroutine(SlowMotionCoroutine(targetTimeScale, duration));
+    }
+
+    private IEnumerator SlowMotionCoroutine(float targetTimeScale, float duration)
+    {
+        float startTimeScale = Time.timeScale;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime; 
+            Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, elapsed / duration);
+            yield return null;
+        }
+
+        Time.timeScale = targetTimeScale;
+        _slowMotionCoroutine = null;
     }
 }
 

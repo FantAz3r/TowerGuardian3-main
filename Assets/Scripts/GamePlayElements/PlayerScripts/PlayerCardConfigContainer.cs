@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using YG;
 
 public class PlayerCardConfigContainer : MonoBehaviour
 {
+    [field: SerializeField] public int MaxWeaponCards { get; private set; } = 4;
+    [field: SerializeField] public  int MaxAbilityCards { get; private set; } = 4;
+
     [SerializeField] private CardData _cardData;
     [SerializeField] private List<CardConfig> _startCards;
 
@@ -45,7 +49,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
             AddCard(config);
         }
 
-        if (config.HasPlayer || _startCards.Contains(config as CardConfig))
+        if (config.IsBought)
         {
             config.Upgrade();
             Upgraded?.Invoke();
@@ -56,8 +60,16 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
     public void Remove(ICardConfig config)
     {
+        config.SetBought(false);
+        SaveInInventory(config);
+    }
+
+    public void SaveInInventory(ICardConfig config)
+    {
         _selectedConfigs.Remove(config);
+        config.SetHasPlayer(false);
         CardRemoved?.Invoke(config);
+        UpdateCardSave(config);
     }
 
     private void Create(ICardConfig card)
@@ -74,7 +86,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
             YG2.saves.AllCards = new();
 
         YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
-        YG2.saves.AllCards.Add(new CardSaveData(card.Level, card.ID, card.IsBought, true));
+        YG2.saves.AllCards.Add(new CardSaveData(card.Level, card.ID, card.IsBought, card.HasPlayer));
         YG2.SaveProgress();
     }
 
@@ -90,7 +102,6 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
             if (card.HasPlayer)
             {
-                LoadCard(card);
                 AddCard(card);
             }
         }
@@ -109,9 +120,64 @@ public class PlayerCardConfigContainer : MonoBehaviour
         }
     }
 
-    private void AddCard(ICardConfig card)
+    public void AddCard(ICardConfig card)
     {
+        LoadCard(card);
+
+        int weaponCount = 0;
+        int abilityCount = 0;
+
+        foreach (var item in _selectedConfigs)
+        {
+            if (item is WeaponConfig && item.HasPlayer)
+                weaponCount++;
+
+            if (item is AbilityConfig && item.HasPlayer)
+                abilityCount++;
+        }
+        Debug.Log(weaponCount + " weapons " + abilityCount + " abilities");
+
         _selectedConfigs.Add(card);
+        
+
+        if(card is WeaponConfig)
+        {
+            if(weaponCount < MaxWeaponCards)
+            {
+               card.SetHasPlayer(true);
+               ActivateCard(card);
+
+            }
+            else
+            {
+                card.SetHasPlayer(false);
+            }
+        }
+        else if (card is AbilityConfig)
+        {
+            if (abilityCount < MaxAbilityCards)
+            {
+                card.SetHasPlayer(true);
+                ActivateCard(card);
+
+            }
+            else
+            {
+                card.SetHasPlayer(false);
+            }
+        }
+        else
+        {
+            card.SetHasPlayer(true);
+            ActivateCard(card);
+        }
+
+        UpdateCardSave(card);
+    }
+
+    private void ActivateCard(ICardConfig card)
+    {
+        Debug.Log(card.Name + " Card Added?");
         Create(card);
         CardAdded?.Invoke(card);
     }

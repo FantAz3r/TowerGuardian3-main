@@ -4,16 +4,19 @@ using UnityEngine.UI;
 
 public class StartLevelMenu : LevelMenu
 {
+    private const int _enumGameLevelOffset = 3;
+
     [SerializeField] private Button _startButton;
-    [SerializeField] private TMP_Text _levelText;
+    [SerializeField] private TMP_Text _levelNumberText;
+    [SerializeField] private TMP_Text _levelScoreInfo;
 
     private LevelID _nextLevel;
 
-    public void Init(ScoreCounter scoreCounter, LevelConfig levelConfig, LevelID nextLevel)
+    public void Init(LevelID nextLevel)
     {
-        base.Init(scoreCounter, levelConfig);
         _nextLevel = nextLevel;
-        _levelText.text = nextLevel.ToString();
+        _levelNumberText.text = ((int)nextLevel - _enumGameLevelOffset).ToString();
+        ShowScoreInfo();
     }
 
     protected override void Awake()    
@@ -37,7 +40,7 @@ public class StartLevelMenu : LevelMenu
     public override void Open()
     {
         base.Open();
-        ScoreCounter.OnEndLevel(_nextLevel);
+        ScoreCounter.OnEndLevel(this, _nextLevel);
     }
 
     private void OnStartClicked()
@@ -49,6 +52,18 @@ public class StartLevelMenu : LevelMenu
     protected override void OnHomeClicked()
     {
         Close();
+    }
+
+    private void ShowScoreInfo()
+    {
+        if(ScoreCounter.HasScoreInfo(_nextLevel))
+        {
+            _levelScoreInfo.text = UIText.YourBestScore;
+        }
+        else
+        {
+            _levelScoreInfo.text = UIText.NoBestScore;
+        }
     }
 }
 

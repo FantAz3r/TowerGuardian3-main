@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -2597494668989160889}
   - component: {fileID: 762481495982142268}
   - component: {fileID: 8023230514114427221}
+  - component: {fileID: 2239994769552644814}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -60,7 +61,7 @@ MonoBehaviour:
   _configObject: {fileID: 11400000, guid: 75c5370c09ccf9c448707875ca4bd747, type: 2}
   _obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 5441
+    m_Bits: 1345
 --- !u!136 &7987849491214751494
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -109,7 +110,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &5081398009426885774
 MonoBehaviour:
@@ -200,6 +201,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c8556b20de34aa4e8affcde32cbd720, type: 2}
   - {fileID: 11400000, guid: fe92c75a894b83a418c039c5f6720000, type: 2}
   - {fileID: 11400000, guid: 39054eaff696627499ce53ae68b7a827, type: 2}
+  - {fileID: 11400000, guid: 810d00b8884d8e14bacc776b6b3a5850, type: 2}
 --- !u!114 &-2597494668989160889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +250,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2239994769552644814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472323202367812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266449e83147c504283c897ecfc0b18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rayDistance: 0.1
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &497643833354922766
 GameObject:
   m_ObjectHideFlags: 0

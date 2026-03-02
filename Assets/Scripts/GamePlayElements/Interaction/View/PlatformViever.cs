@@ -28,6 +28,7 @@ public class PlatformViewer : MonoBehaviour
         _platform.TimerUpdated += OnTimerUpdated;
         _platform.Disabled += OnPlatformDisable;
 
+        _text.text = UIText.GetWindowTypeText(_platform.WindowType);
         _timerViewer.fillAmount = 0;
         MovePlatform(_upPosition);
     }
@@ -37,11 +38,6 @@ public class PlatformViewer : MonoBehaviour
         _platform.PlayerEnteredZone -= OnPlayerEnteredZone;
         _platform.PlayerExitedZone -= OnPlayerExitedZone;
         _platform.TimerUpdated -= OnTimerUpdated;
-    }
-
-    public void SetText(string text)
-    {
-        _text.text = text;
     }
 
     private void OnPlayerEnteredZone()

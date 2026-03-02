@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +19,7 @@ public class DefendPortalQuest : Quest
     public override void Run()
     {
         base.Run();
+        CanStop = false;
         _enemyCount = 0;
         _portal.EnemyEntered += UpdateProgress;
         _portal.CanExit(false);
@@ -53,12 +53,14 @@ public class DefendPortalQuest : Quest
 
     public override void Fail()
     {
+        CanStop = true;
         _portal.EnemyEntered -= UpdateProgress;
         base.Fail();
     }
 
     public override void Complete()
     {
+        CanStop = true;
         _portal.CanExit(true);
         _portal.EnemyEntered -= UpdateProgress;
         base.Complete();

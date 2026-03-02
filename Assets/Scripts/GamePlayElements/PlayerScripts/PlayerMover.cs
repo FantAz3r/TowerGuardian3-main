@@ -17,8 +17,7 @@ public class PlayerMover : MonoBehaviour
         _inputService = ServiceLocator.Get<IInputService>();
 
         _inputService.MovePerformed += OnMove;
-        _inputService.MoveCanceled += OnMoveCanceled;
-        _inputService.DirectionFromCursor += OnRotate;
+        _inputService.RotateDirectionSeted += OnRotate;
     }
 
     private void OnDestroy()
@@ -26,8 +25,7 @@ public class PlayerMover : MonoBehaviour
         if (_inputService != null)
         {
             _inputService.MovePerformed -= OnMove;
-            _inputService.MoveCanceled -= OnMoveCanceled;
-            _inputService.DirectionFromCursor -= OnRotate;
+            _inputService.RotateDirectionSeted -= OnRotate;
         }
     }
 
@@ -37,11 +35,6 @@ public class PlayerMover : MonoBehaviour
 
         if (direction != Vector2.zero)
             Moved?.Invoke();
-    }
-
-    private void OnMoveCanceled()
-    {
-        _mover.SetDirection(Vector2.zero);
     }
 
     private void OnRotate(Vector2 direction)

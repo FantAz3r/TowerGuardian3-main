@@ -9,7 +9,7 @@ public abstract class AllItems<TItem, TConfig, TType> : MonoBehaviour
     public Player Player { get; private set; }
     public List<TItem> Items { get; private set; } = new();
 
-    public event Action<TItem> Enabled, Upgraded, Removed;
+    public event Action<TItem> Enabled, Removed;
 
     protected virtual void Awake()
     {
@@ -43,6 +43,7 @@ public abstract class AllItems<TItem, TConfig, TType> : MonoBehaviour
                 {
                     item.Enable();
                     Enabled?.Invoke(item);
+                    Debug.Log(card.Name + " Enabled?");
                 }
             }
         }

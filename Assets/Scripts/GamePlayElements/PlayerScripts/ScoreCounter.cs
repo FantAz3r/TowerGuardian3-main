@@ -5,33 +5,67 @@ using YG;
 
 public class ScoreCounter
 {
+    private const string MainLeaderbord = "MainLiderboard";
+    private Dictionary<LevelID, string> LevelLeaderboards = new Dictionary<LevelID, string>
+    {
+        {LevelID.Level1, "Level 1 score" },
+        {LevelID.Level2, "Level 2 score" },
+        {LevelID.Level3, "Level 3 score" },
+        {LevelID.Level4, "Level 4 score" }
+    };
+
     private float _time = 0;
     private LevelID _currentLevel;
-
+    private Player _player;
     private IScoreService _scoreService;
     private LevelConfig _config;
 
-    public event Action<float, float, int> LevelEnded;
+    public event Action<float, float, int, int> LevelEnded;
 
-    public ScoreCounter(Player player, LevelConfig config)
+    public ScoreCounter()
     {
         _scoreService = ServiceLocator.Get<IScoreService>();
-        _config = config;
-        _currentLevel = config.Level;
+        _player = ServiceLocator.Get<IGameFactory>().Player;
+        _config = ServiceLocator.Get<IGameFactory>().LevelConfig;
+        _currentLevel = _config.Level;
         _time = Time.time;
     }
 
-    public void OnEndLevel(LevelID level = LevelID.None)
+    public void OnEndLevel(LevelMenu sender, LevelID level = LevelID.None)
     {
-        if (level == LevelID.None)
+        if (sender is WinLevelMenu winLevelMenu)
         {
-            LevelEnded?.Invoke(_scoreService.GetScore(), Time.time - _time, CalculateStars());
+            LevelEnded?.Invoke(_scoreService.GetScore(), Time.time - _time, CalculateStars(), (int)_scoreService.GetScore() / 20);
+            CalculateReward();
             SaveScore();
         }
-        else
+        else if (sender is LouseLevelMenu louseLevelMenu)
+        {
+            LevelEnded?.Invoke(_scoreService.GetScore(), Time.time - _time, 0, (int)_scoreService.GetScore() / 20);
+        }
+        else if (sender is StartLevelMenu startLevelMenu)
         {
             LoadBestScore(level);
         }
+    }
+
+    public bool HasScoreInfo(LevelID level)
+    {
+        if (YG2.saves.LevelsProgress == null)
+            return false;
+
+        var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == level);
+
+        return savedData.Score != 0 && savedData.Level != LevelID.None;
+    }
+
+    private void CalculateReward()
+    {
+        var costList = new List<CostInfo>()
+            {
+                new CostInfo(ResourceType.Coin, (int)_scoreService.GetScore() / 20)
+            };
+        _player.Inventory.AddResousres(costList);
     }
 
     private int CalculateStars()
@@ -70,6 +104,7 @@ public class ScoreCounter
                 if (_scoreService.GetScore() > levelSave.Score)
                 {
                     YG2.saves.LevelsProgress[i] = new LevelSaveData(_currentLevel, _scoreService.GetScore(), CalculateStars(), _time);
+                    UpdateLeaderboards(_currentLevel);
                 }
 
                 break;
@@ -88,19 +123,41 @@ public class ScoreCounter
     {
         if (YG2.saves.LevelsProgress == null)
         {
-            LevelEnded?.Invoke(0, 0, 0);
+            LevelEnded?.Invoke(0, 0, 0, 0);
             return;
         }
 
         var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == level);
-        
-        if(savedData.Level == LevelID.None)
+
+        if (savedData.Level == LevelID.None)
         {
-            LevelEnded?.Invoke(0, 0, 0);
+            LevelEnded?.Invoke(0, 0, 0, 0);
         }
         else
         {
-            LevelEnded?.Invoke(savedData.Score, savedData.Time, savedData.Stars);
+            LevelEnded?.Invoke(savedData.Score, savedData.Time, savedData.Stars, 0);
         }
+    }
+
+    private void UpdateLeaderboards(LevelID levelID)
+    {
+        int scoreFromAllLevels = 0;
+
+        foreach (var level in YG2.saves.LevelsProgress)
+        {
+            scoreFromAllLevels += level.Score;
+        }
+
+        YG2.SetLeaderboard(MainLeaderbord, scoreFromAllLevels);
+
+        foreach(var pair in LevelLeaderboards)
+        {
+            if(levelID == pair.Key)
+            {
+                var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == levelID);
+                YG2.SetLeaderboard(pair.Value, savedData.Score);
+            }
+        }
+        
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using YG;
 
 public class EnterSecondLevelQuest : Quest
 {
@@ -18,12 +19,19 @@ public class EnterSecondLevelQuest : Quest
     public override void Run()
     {
         base.Run();
-        _portalLevel2.Entered += Complete;
+
+        foreach (var levelData in YG2.saves.LevelsProgress)
+        {
+            if (levelData.Level == LevelID.Level2 && levelData.IsComplite)
+            {
+                Complete();
+                break;
+            }
+        }
     }
 
     public override void Complete()
     {
-        _portalLevel2.Entered -= Complete;
         base.Complete();
     }
 }

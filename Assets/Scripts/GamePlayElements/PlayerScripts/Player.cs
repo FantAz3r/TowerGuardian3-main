@@ -33,11 +33,16 @@ public class Player : MonoBehaviour
         _conditionService.OnLouse(Health.gameObject);
     }
 
+    private void OnDisable()
+    {
+        YG2.saves.PlayerPosition = transform.position;
+        YG2.SaveProgress();
+
+    }
+
     private void OnDestroy()
     {
         Health.Died -= OnDied;
         IsAlive = false;
-        YG2.saves.PlayerPosition = transform.position;
-        YG2.SaveProgress();
     }
 }

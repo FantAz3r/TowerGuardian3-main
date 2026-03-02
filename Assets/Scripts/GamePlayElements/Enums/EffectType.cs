@@ -5,4 +5,5 @@ public enum EffectType
     Stones,
     LevelUp,
     SwordTrails,
+    Expload,
 }

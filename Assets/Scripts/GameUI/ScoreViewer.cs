@@ -1,23 +1,22 @@
+using DG.Tweening;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreViewer : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _rewardCount;
     [SerializeField] private TMP_Text _scoreCount;
     [SerializeField] private TMP_Text _time;
-    [SerializeField] private Image _image;
 
-    [SerializeField] private Sprite _zeroStars;
-    [SerializeField] private Sprite _oneStars;
-    [SerializeField] private Sprite _twoStars;
-    [SerializeField] private Sprite _threeStars;
+    [SerializeField] private List<Image> _stars;
 
     private ScoreCounter _scoreCounter;
 
-    public void Init(ScoreCounter scoreCounter)
+    private void Awake()
     {
-        _scoreCounter = scoreCounter;
+        _scoreCounter = ServiceLocator.Get<IGameFactory>().ScoreCounter;
         _scoreCounter.LevelEnded += View;
     }
 
@@ -26,30 +25,47 @@ public class ScoreViewer : MonoBehaviour
         _scoreCounter.LevelEnded -= View;
     }
 
-    public void View(float score, float time, int stars)
+    public void View(float score, float time, int stars, int reward = default)
     {
+        if(reward != default && _rewardCount != null)
+        {
+            _rewardCount.text = reward.ToString();
+        }
+
         _scoreCount.text = score.ToString();
+
         int minutes = (int)time / 60;
         int seconds = (int)time % 60;
         _time.text = $"{minutes:D2}:{seconds:D2}";
 
-        switch (stars)
+        DrowStars(stars);
+    }
+
+    private void DrowStars(int count)
+    {
+        if(count == 0)
+            return;
+
+        for (int i = 0; i < _stars.Count; i++)
         {
-            case 0:
-                _image.sprite = _zeroStars;
-                break;
-            case 1:
-                _image.sprite = _oneStars;
-                break;
-            case 2:
-                _image.sprite = _twoStars;
-                break;
-            case 3:
-                _image.sprite = _threeStars;
-                break;
-            default:
-                _image.sprite = _zeroStars;
-                break;
+            _stars[i].gameObject.SetActive(false);
+            _stars[i].transform.localScale = Vector3.zero;
+        }
+
+        Sequence seq = DOTween.Sequence();
+        seq.SetUpdate(true);
+
+        for (int i = 0; i < count && i < _stars.Count; i++)
+        {
+            var star = _stars[i];
+            star.gameObject.SetActive(true);
+
+            seq.Append(
+                star.transform.DOScale(Vector3.one, 0.5f)
+                .SetEase(Ease.OutElastic)
+            );
+
+            seq.AppendInterval(0.3f).SetUpdate(true);
         }
     }
 }

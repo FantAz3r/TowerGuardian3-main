@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -46,7 +47,7 @@ public static class Utils
 
         for (int i = 0; i < n - 1; i++)
         {
-            int j = Random.Range(i, n);
+            int j = UnityEngine.Random.Range(i, n);
             T temp = list[i];
             list[i] = list[j];
             list[j] = temp;
@@ -58,7 +59,7 @@ public static class Utils
     public static T SelectAndUpdateWeights<T>(Dictionary<T, float> targetWeights, Dictionary<T, float> startWaights, out Dictionary<T, float> newWeights)
     {
         float totalWeight = targetWeights.Values.Sum();
-        float random = Random.Range(0, totalWeight);
+        float random = UnityEngine.Random.Range(0, totalWeight);
 
         float sum = 0;
         T chosen = default;
@@ -91,4 +92,38 @@ public static class Utils
 
         return chosen;
     }
+
+
+    public static T SelectByWeights<T>(Dictionary<T, float> targetWeights)
+    {
+        float totalWeight = 0f;
+        float cumulativeWeight = 0f;
+
+        if (targetWeights == null || targetWeights.Count == 0)
+            throw new ArgumentException("Словарь пуст или равен null");
+
+        foreach (var weight in targetWeights.Values)
+        {
+            if (weight < 0)
+                throw new ArgumentException("Вес не может быть отрицательным");
+
+            totalWeight += weight;
+        }
+
+        if (totalWeight == 0)
+            throw new InvalidOperationException("Суммарный вес равен нулю");
+
+        float randomValue = UnityEngine.Random.Range(0f, totalWeight);
+
+        foreach (var pair in targetWeights)
+        {
+            cumulativeWeight += pair.Value;
+
+            if (randomValue <= cumulativeWeight)
+                return pair.Key;
+        }
+
+        return targetWeights.Keys.Last();
+    }
+
 }

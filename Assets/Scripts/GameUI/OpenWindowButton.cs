@@ -28,6 +28,14 @@ public class OpenWindowButton : MonoBehaviour
     private void OnClick()
     {
         _closeWindow.Close();
-        _windowService.Open(_openWindow);
+
+        if(_openWindow == WindowType.Previous)
+        {
+            _windowService.OpenPreviousWindow();
+        }
+        else
+        {
+            _windowService.Open(_openWindow);
+        }
     }
 }

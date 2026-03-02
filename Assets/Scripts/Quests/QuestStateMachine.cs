@@ -1,18 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using YG;
 
 public class QuestStateMachine : MonoBehaviour
 {
     private List<IQuest> _quests = new();
-
     private QuestBuilder _builder;
     private int _currentQuestIndex = -1;
+    private int _startQuestIndex = -1;
     private LevelID _level;
     private IQuest _currentQuest;
-    private bool _isTutorialComplete = false;
+    private bool _isAllQuestsComplete = false;
 
     public event Action AllQuestsCompleted, QuestCompleted;
     public event Action<IQuest> QuestStarted;
@@ -21,22 +20,13 @@ public class QuestStateMachine : MonoBehaviour
     {
         _level = level;
         _builder = builder;
-        QuestData questData = Resources.Load<QuestData>(GameConstants.QuestData);
 
-        foreach (var questInfo in questData.QuestInfos)
+        foreach (var questType in questsForThisLevel)
         {
-            if (questsForThisLevel.Contains(questInfo.Type))
-            {
-                _quests.Add(_builder.GetQuest(questInfo.Config));
-            }
+            _quests.Add(_builder.GetQuest(questType));
         }
 
         LoadQuestProgress();
-    }
-
-    public void Run()
-    {
-        SwitchQuest();
     }
 
     private void OnDestroy()
@@ -44,23 +34,43 @@ public class QuestStateMachine : MonoBehaviour
         SaveQuestProgress();
     }
 
-    private void SwitchQuest()
+    public void Run()
+    {
+        SwitchQuest();
+    }
+
+    public void SetQuest(QuestType questType = default)
+    {
+        SwitchQuest(questType);
+    }
+
+    private void SwitchQuest(QuestType questType = default)
     {
         if (_currentQuest != null)
         {
             _currentQuest.Stop();
+            _currentQuest.OnCompleted -= OnQuestCompleted;
         }
 
-        _currentQuestIndex++;
-
-        if (_currentQuestIndex >= _quests.Count)
+        if (questType != default)
         {
-            _currentQuest = null;
-            AllQuestsCompleted?.Invoke();
-            return;
+            _currentQuest = _builder.GetQuest(questType);
+        }
+        else
+        {
+            _currentQuestIndex++;
+
+            if (_currentQuestIndex >= _quests.Count)
+            {
+                _currentQuest = null;
+                AllQuestsCompleted?.Invoke();
+                _isAllQuestsComplete = true;
+                return;
+            }
+
+            _currentQuest = _quests[_currentQuestIndex];
         }
 
-        _currentQuest = _quests[_currentQuestIndex];
         _currentQuest.OnCompleted += OnQuestCompleted;
         _currentQuest.Run();
         QuestStarted?.Invoke(_currentQuest);
@@ -68,6 +78,7 @@ public class QuestStateMachine : MonoBehaviour
 
     private void OnQuestCompleted()
     {
+        SaveQuestProgress();
         QuestCompleted?.Invoke();
         _currentQuest.OnCompleted -= OnQuestCompleted;
         SwitchQuest();
@@ -75,26 +86,28 @@ public class QuestStateMachine : MonoBehaviour
 
     private void SaveQuestProgress()
     {
-        if (YG2.saves.QuestProgress == null)
-            YG2.saves.QuestProgress = new List<QuestSaveData>();
+        YG2.saves.QuestProgress ??= new List<QuestSaveData>();
 
-        int index = YG2.saves.QuestProgress.FindIndex(q => q.Level == _level);
+        int index = YG2.saves.QuestProgress.FindIndex(quest => quest.Level == _level);
 
-        if (_isTutorialComplete == false)
+        QuestSaveData saveData;
+
+        if (_isAllQuestsComplete == false)
         {
-            var saveData = new QuestSaveData(_level, 0,0, _currentQuestIndex);
-            if (index >= 0)
-                YG2.saves.QuestProgress[index] = saveData;
-            else
-                YG2.saves.QuestProgress.Add(saveData);
+            saveData = new QuestSaveData(_level, 0, 0, _currentQuestIndex);
         }
         else
         {
-            var saveData = new QuestSaveData(_level, 0, 0, 0);
-            if (index >= 0)
-                YG2.saves.QuestProgress[index] = saveData;
-            else
-                YG2.saves.QuestProgress.Add(saveData);
+            saveData = new QuestSaveData(_level, 0, 0, _startQuestIndex);
+        }
+
+        if (index == -1)
+        {
+            YG2.saves.QuestProgress.Add(saveData);
+        }
+        else
+        {
+            YG2.saves.QuestProgress[index] = saveData;
         }
 
         YG2.SaveProgress();

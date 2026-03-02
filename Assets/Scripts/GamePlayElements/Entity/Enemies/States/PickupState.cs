@@ -7,7 +7,6 @@ public class PickupState : State
     private float _updateTime = 0.05f;
     private WaitForSeconds _delay;
 
-    private EnemyStateMachine _stateMachine;
     private EnemyAnimator _animator;
     private ThrownObjectDetector _objectDetector;
     private PickUper _pickUper;
@@ -22,7 +21,6 @@ public class PickupState : State
         NavMeshAgent agent,
         PickUper pickUper) : base(stateMachine, false)
     {
-        _stateMachine = stateMachine;
         _animator = animator;
         _objectDetector = objectDetector;
         _agent = agent;
@@ -48,16 +46,15 @@ public class PickupState : State
     private void FindObject()
     {
         _thrownObject = _objectDetector.GetNearestResource();
-        Debug.Log(_thrownObject);
 
         if (_thrownObject != null)
         {
-            _stateMachine.StartCoroutine(PickUpRoutine());
+            StateMachine.StartCoroutine(PickUpRoutine());
         }
         else
         {
             SetCanExit(true);
-            _stateMachine.OnLostPlayer();
+            StateMachine.OnLostPlayer();
         }
     }
 
@@ -66,7 +63,7 @@ public class PickupState : State
         while (_hasObject == false)
             yield return _delay;
 
-        _stateMachine.OnReadyToThrow(_thrownObject);
+        StateMachine.OnReadyToThrow(_thrownObject);
         SetCanExit(true);
     }
 
@@ -74,7 +71,7 @@ public class PickupState : State
     {
         float treshold = 1f;
         _agent.destination = _thrownObject.position;
-        _animator.UpdateSpeed(_stateMachine.Config.MoveConfig.MoveSpeed);
+        _animator.UpdateSpeed(StateMachine.Config.MoveConfig.MoveSpeed);
 
         while (_agent.pathPending || _agent.remainingDistance > treshold)
         {

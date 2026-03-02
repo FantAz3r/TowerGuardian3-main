@@ -6,24 +6,24 @@ public class AttackState : State, IEnemyState
     private float _updateTime = 0.05f;
     private WaitForSeconds _delay;
 
-    private EnemyStateMachine _stateMachine;
     private EnemyAnimator _animator;
     private Player _player;
     private IDemageable _playerHealth;
+    private ISpawnerService _spawnerService;
 
     public AttackState(EnemyStateMachine stateMachine, EnemyAnimator animator, Player target) : base(stateMachine, true)
     {
-        _stateMachine = stateMachine;
         _animator = animator;
         _player = target;
 
         _delay = new WaitForSeconds(_updateTime);
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
         _playerHealth = _player.GetComponent<IDemageable>();
     }
 
     public override void Enter()
     {
-        _stateMachine.Mover.SetDirection(Vector3.zero);
+        StateMachine.Mover.SetDirection(Vector3.zero);
         _animator.Attacked += OnAnimAttackHit;
     }
 
@@ -39,7 +39,7 @@ public class AttackState : State, IEnemyState
             yield break;
 
         float speedForAnimator = 0f;
-        float attackCooldown = _stateMachine.Config.AttackCooldown;
+        float attackCooldown = StateMachine.Config.AttackCooldown;
         float timeSinceLastAttack = 0f;
         _animator.PlayAttack();
 
@@ -64,7 +64,7 @@ public class AttackState : State, IEnemyState
 
     private void OnAnimAttackHit()
     {
-        int damage = _stateMachine.Config.Damage;
-        _playerHealth.TakeDamage(damage);
+        _spawnerService.SendSoundReqest(StateMachine.Config.HitSound, StateMachine.transform.position);
+        _playerHealth.TakeDamage(StateMachine.Config.Damage);
     }
 }

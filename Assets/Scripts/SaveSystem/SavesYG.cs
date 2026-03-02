@@ -30,5 +30,7 @@ namespace YG
         public bool ShowDamageNumber;
         public bool Mute;
         public List<SoundSaveData> Volumes;
+
+        public bool IsFirstGameSession;
     }
 }

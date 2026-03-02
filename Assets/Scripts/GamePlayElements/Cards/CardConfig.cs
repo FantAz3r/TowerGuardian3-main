@@ -9,7 +9,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
     [field: SerializeField] public bool HasPlayer { get; private set; }
     [field: SerializeField] public bool IsBought { get; private set; }
 
-    public event Action Upgraded;
+    public event Action<ICardConfig> Upgraded;
 
     public abstract CardType GetCardType();
     public abstract List<CardStats> GetStats();
@@ -26,7 +26,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
     public void Upgrade()
     {
         Level++;
-        Upgraded?.Invoke();
+        Upgraded?.Invoke(this);
     }
 
     public override List<CostInfo> GetCosts()
@@ -60,6 +60,11 @@ public abstract class CardConfig : ShopConfig, ICardConfig
     public void SetBought(bool isBought)
     {
         IsBought = isBought;
+    }
+
+    public void SetHasPlayer(bool hasPlayer)
+    {
+        HasPlayer = hasPlayer;
     }
 }
 
