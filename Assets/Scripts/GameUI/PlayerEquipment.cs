@@ -8,6 +8,7 @@ public class PlayerEquipment : MonoBehaviour
     [SerializeField] private UIItem _itemPrefab;
     [SerializeField] private VerticalLayoutGroup _abilitySlotsParent;
     [SerializeField] private VerticalLayoutGroup _weaponSlotsParent;
+    [SerializeField] private InventoryStats _inventoryStats;
     
     private Canvas _mainCanvas;
     private PlayerCardConfigContainer _cardHolder;
@@ -40,8 +41,13 @@ public class PlayerEquipment : MonoBehaviour
                 UIItem item = Instantiate(_itemPrefab, slot.transform);
                 item.Init(transform, _mainCanvas);
                 item.SetConfig(card);
+                item.StatsButton.Init(_inventoryStats);
                 slot.SetItem(item);
+                continue;
             }
+
+            slot.CurrentImage.enabled = true;
+
         }
     }
 }

@@ -12,6 +12,7 @@ public class PickupState : State
     private PickUper _pickUper;
     private NavMeshAgent _agent;
     private Transform _thrownObject;
+    private TargetDetector _targetDetector;
     private bool _hasObject = false;
 
     public PickupState(
@@ -19,7 +20,8 @@ public class PickupState : State
         EnemyAnimator animator,
         ThrownObjectDetector objectDetector,
         NavMeshAgent agent,
-        PickUper pickUper) : base(stateMachine, false)
+        PickUper pickUper,
+        TargetDetector targetDetector) : base(stateMachine, false)
     {
         _animator = animator;
         _objectDetector = objectDetector;
@@ -27,6 +29,7 @@ public class PickupState : State
         _pickUper = pickUper;
 
         _delay = new WaitForSeconds(_updateTime);
+        _targetDetector = targetDetector;
     }
 
     public override void Enter()
@@ -53,8 +56,7 @@ public class PickupState : State
         }
         else
         {
-            SetCanExit(true);
-            StateMachine.OnLostPlayer();
+            OnNullTrownOnject();
         }
     }
 
@@ -62,9 +64,6 @@ public class PickupState : State
     {
         while (_hasObject == false)
             yield return _delay;
-
-        StateMachine.OnReadyToThrow(_thrownObject);
-        SetCanExit(true);
     }
 
     private IEnumerator PickUpRoutine()
@@ -75,6 +74,12 @@ public class PickupState : State
 
         while (_agent.pathPending || _agent.remainingDistance > treshold)
         {
+            if(_thrownObject ==null)
+            {
+                OnNullTrownOnject();
+                yield break;
+            }
+
             RotateTo(_thrownObject.position);
             yield return _delay;
         }
@@ -84,11 +89,26 @@ public class PickupState : State
 
         while (_animator.IsPicked == false)
         {
+            if (_thrownObject == null)
+            {
+                OnNullTrownOnject();
+                yield break;
+            }
+
             yield return _delay;
         }
 
         _pickUper.Pickup(_thrownObject);
+        StateMachine.OnReadyToThrow(_thrownObject);
         _hasObject = true;
+        SetCanExit(true);
+    }
+
+    private void OnNullTrownOnject()
+    {
+        _targetDetector.gameObject.SetActive(true);
+        SetCanExit(true);
+        StateMachine.OnLostPlayer();
     }
 }
 

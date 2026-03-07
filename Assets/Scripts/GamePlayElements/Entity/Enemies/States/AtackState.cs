@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class AttackState : State, IEnemyState
 {
-    private float _updateTime = 0.05f;
-    private WaitForSeconds _delay;
-
+    private WaitForSeconds _delay = new WaitForSeconds(0.05f);
     private EnemyAnimator _animator;
     private Player _player;
     private IDemageable _playerHealth;
@@ -16,7 +14,6 @@ public class AttackState : State, IEnemyState
         _animator = animator;
         _player = target;
 
-        _delay = new WaitForSeconds(_updateTime);
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
         _playerHealth = _player.GetComponent<IDemageable>();
     }
@@ -65,6 +62,6 @@ public class AttackState : State, IEnemyState
     private void OnAnimAttackHit()
     {
         _spawnerService.SendSoundReqest(StateMachine.Config.HitSound, StateMachine.transform.position);
-        _playerHealth.TakeDamage(StateMachine.Config.Damage);
+        _playerHealth.TakeDamage(StateMachine.Config.GetDamage());
     }
 }

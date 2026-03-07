@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,16 +37,7 @@ public class RotateShurikens : Ability
     public override void Enable()
     {
         base.Enable();
-
-        if (_config.Level == 0)
-        {
-            _config.Upgrade();
-        }
-        else
-        {
-            LoadAbility();
-        }
-
+        LoadAbility();
     }
 
     private void Update()
@@ -103,5 +93,6 @@ public class RotateShurikens : Ability
 
         _activeCount = 0;
         _angle = 0f;
+        base.Remove();
     }
 }

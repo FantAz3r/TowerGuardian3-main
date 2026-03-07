@@ -69,18 +69,18 @@ public class CardSelectionMenu : PauseWindow
         else
         {
             base.Close();
-            _timeService.SlowMotion(0, 0);
+            _timeService.SmoothEditTimeScalse(0, 0);
             _windowService.Open(WindowType.HUD);
-            _timeService.SlowMotion(1, 1);
+            _timeService.SmoothEditTimeScalse(1, 1);
         }
     }
 
     public void PostponeChoise()
     {
         base.Close();
-        _timeService.SlowMotion(0, 0);
+        _timeService.SmoothEditTimeScalse(0, 0);
         _windowService.Open(WindowType.HUD);
-        _timeService.SlowMotion(1, 1);
+        _timeService.SmoothEditTimeScalse(1, 1);
     }
 
     private void ShowCards(List<ICardConfig> cards)

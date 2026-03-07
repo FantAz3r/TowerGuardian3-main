@@ -43,7 +43,6 @@ public abstract class AllItems<TItem, TConfig, TType> : MonoBehaviour
                 {
                     item.Enable();
                     Enabled?.Invoke(item);
-                    Debug.Log(card.Name + " Enabled?");
                 }
             }
         }

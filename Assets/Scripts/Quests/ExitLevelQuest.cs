@@ -7,6 +7,7 @@ public class ExitLevelQuest : Quest
 {
     private Portal _portal;
     private ICoroutineRunner _coroutineRunner;
+    private Coroutine _timeRoutine;
 
     public override QuestType GetQuestType() => QuestType.GetOut;
     public override Vector3 TryGetTarget() => _portal.transform.position;
@@ -22,14 +23,14 @@ public class ExitLevelQuest : Quest
         base.Run();
         _portal.gameObject.SetActive(true);
         _portal.CanExit(true);
-        _portal.Entered += Complete; 
-        _coroutineRunner.StartCoroutine(TimeRoutine());
+        _portal.Entered += Complete;
+        _timeRoutine = _coroutineRunner.StartCoroutine(TimeRoutine());
     }
 
     private IEnumerator TimeRoutine()
     {
         CurrentTime = Config.TimeLimit;
-        QuestViewer.ActivateWarning();
+        QuestViewer.Highlighter.ActivateWarning();
 
         while (CurrentTime >= 0)
         {
@@ -38,13 +39,14 @@ public class ExitLevelQuest : Quest
             yield return null;
         }
 
-        QuestViewer.DeactivateWarning();
+        QuestViewer.Highlighter.DeactivateWarning();
         base.Fail();
     }
 
     public override void Complete()
     {
-        QuestViewer.DeactivateWarning();
+        _coroutineRunner.StopCoroutine(_timeRoutine);
+        QuestViewer.Highlighter.ActivateWarning();
         _portal.Entered -= Complete;
         base.Complete();
     }

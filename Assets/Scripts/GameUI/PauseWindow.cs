@@ -1,5 +1,11 @@
+using DG.Tweening;
+using UnityEngine;
+
 public class PauseWindow : WindowBase
 {
+    private const float ViewDuration = 0.5f;
+    private const float TargetScale = 1f;
+
     private ITimeService _timeService;
 
     protected virtual void Awake()
@@ -10,13 +16,19 @@ public class PauseWindow : WindowBase
     public override void Open()
     {
         base.Open();
-        _timeService.Pause();
+        Time.timeScale = 0;
+
+        transform.localScale = Vector3.zero;
+
+        transform.DOScale(TargetScale, ViewDuration)
+            .SetEase(Ease.OutBounce)
+            .SetUpdate(true);
     }
 
     public override void Close()
     {
         base.Close();
-        _timeService.Resume();
+        Time.timeScale = 1;
         Destroy(gameObject);
     }
 }

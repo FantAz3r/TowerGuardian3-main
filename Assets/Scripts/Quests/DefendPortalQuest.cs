@@ -7,7 +7,6 @@ public class DefendPortalQuest : Quest
 {
     private Portal _portal;
     private ICoroutineRunner _coroutineRunner;
-    private int _enemyCount = 0;
     public override QuestType GetQuestType() => QuestType.DefendPortal;
 
     public DefendPortalQuest(List<Portal> portals)
@@ -20,7 +19,6 @@ public class DefendPortalQuest : Quest
     {
         base.Run();
         CanStop = false;
-        _enemyCount = 0;
         _portal.EnemyEntered += UpdateProgress;
         _portal.CanExit(false);
         _coroutineRunner.StartCoroutine(TimeRoutine());
@@ -28,10 +26,10 @@ public class DefendPortalQuest : Quest
 
     public override void UpdateProgress()
     {
-        _enemyCount++;
+        CurrentValue++;
         base.UpdateProgress();
 
-        if (_enemyCount >= Config.TargetValue)
+        if (CurrentValue >= Config.TargetValue)
         {
             Fail();
         }
@@ -61,7 +59,7 @@ public class DefendPortalQuest : Quest
     public override void Complete()
     {
         CanStop = true;
-        _portal.CanExit(true);
+        _portal.CanExit(false);
         _portal.EnemyEntered -= UpdateProgress;
         base.Complete();
     }

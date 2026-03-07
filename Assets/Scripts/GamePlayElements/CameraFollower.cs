@@ -9,6 +9,7 @@ public class CameraFollower : MonoBehaviour
     private Vector3 _currentPosition;
     private Health _playerHealth;
 
+
     public void Init(Transform target)
     {
         _target = target;

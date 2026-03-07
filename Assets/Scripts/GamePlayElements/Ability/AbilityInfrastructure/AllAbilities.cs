@@ -1,5 +1,3 @@
-using System.Linq;
-
 public class AllAbilities : AllItems<IAbility, AbilityConfig, AbilityType>
 {
     protected override void Awake()

@@ -14,9 +14,34 @@ public class EnemyConfig : ScriptableObject
     [field: SerializeField] public float AttackCooldown { get; private set; } = 1f;
     [field: SerializeField] public float JumpDamage { get; private set; } = 15;
     [field: SerializeField] public int ThrowDamage { get; private set; }
+    [field: SerializeField] public int Level { get; private set; } = 1;
+
+    [SerializeField] private float _damageGrowthMultiplier = 2f;
+
+    [SerializeField] private float _healthGrowthPerLevel = 3f;
 
     [SerializeField] private List<StateType> allowedStates;
 
     public IReadOnlyList<StateType> AllowedStates => allowedStates;
+
+    public void SetLevel(int level)
+    {
+        Level = Mathf.Max(level, 1);
+    }
+
+    public float GetMoveSpeed()
+    {
+        return MoveConfig.MoveSpeed + Level;
+    }
+
+    public int GetDamage()
+    {
+        return Mathf.RoundToInt(Damage * Mathf.Pow(_damageGrowthMultiplier, Level));
+    }
+
+    public float GetMaxHealth()
+    {
+        return Mathf.RoundToInt(HealthConfig.MaxHealth * Mathf.Pow(_healthGrowthPerLevel, Level));
+    }
 }
 

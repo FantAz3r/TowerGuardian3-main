@@ -17,11 +17,11 @@ MonoBehaviour:
   _playerSpawnPoint: {x: 122.22, y: 0.5, z: 50.27}
   _dayDuration: 30
   _nightDuration: 90
-  _dayLightIntensity: 2
-  _nightLightIntensity: 1.5
+  _dayLightIntensity: 1
+  _nightLightIntensity: 1
   _transitionDuration: 2.5
-  _dayLightColor: {r: 1, g: 0.57924527, b: 0.57924527, a: 1}
-  _nightLightColor: {r: 0.30566037, g: 0.30566037, b: 1, a: 1}
+  _dayLightColor: {r: 0.764151, g: 0.5154415, b: 0.5154415, a: 1}
+  _nightLightColor: {r: 0.24870951, g: 0.24870951, b: 0.764151, a: 1}
   <Waves>k__BackingField:
   - _weight:
       _serializedList:

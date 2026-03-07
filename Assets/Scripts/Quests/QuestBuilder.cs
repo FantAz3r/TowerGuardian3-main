@@ -27,7 +27,7 @@ public class QuestBuilder
 
     private void CreateQuests()
     {
-        _quests.Add(new MoveQuest(_player.PlayerMover));
+        _quests.Add(new MoveQuest());
         _quests.Add(new AttackQuest(_player.Attacker));
         _quests.Add(new CollectWoodQuest(_player.Inventory));
         _quests.Add(new CollectStonesQuest(_player.Inventory));
@@ -41,6 +41,8 @@ public class QuestBuilder
         _quests.Add(new EnterThirdLevelQuest(GetPortalByLevel(LevelID.Level3)));
         _quests.Add(new EnterFourthLevelQuest(GetPortalByLevel(LevelID.Level4)));
         _quests.Add(new DefendPortalQuest(_portals));
+        _quests.Add(new SwapWeaponQuest());
+        _quests.Add(new SelectWeaponCardQuest());
     }
 
     private Portal GetPortalByLevel(LevelID level)
@@ -73,7 +75,6 @@ public class QuestBuilder
             }
         }
 
-        Debug.Log(type);
         throw new ArgumentNullException();
     }
 }

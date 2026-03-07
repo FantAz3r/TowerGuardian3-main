@@ -17,8 +17,8 @@ MonoBehaviour:
   _playerSpawnPoint: {x: 47, y: 0, z: -40}
   _dayDuration: 40
   _nightDuration: 60
-  _dayLightIntensity: 1.5
-  _nightLightIntensity: 1
+  _dayLightIntensity: 1
+  _nightLightIntensity: 0.8
   _transitionDuration: 2.5
   _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
   _nightLightColor: {r: 1, g: 0.5426357, b: 0, a: 1}
@@ -59,7 +59,7 @@ MonoBehaviour:
         Value: 8
       - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
         Value: 2
-    <Duration>k__BackingField: 120
+    <Duration>k__BackingField: 999999
     <NightSpawnDelay>k__BackingField: 0.5
     <DaySpawnDelay>k__BackingField: 4
     <MaxEnemyCount>k__BackingField: 40

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class EffectSpawner : BaseSpawner
 {
-    private Vector3 _offset = new Vector3(0, 1, 0);
+    private EffectData _data;
     private Dictionary<EffectType, ObjectPool<Effect>> _pools = new Dictionary<EffectType, ObjectPool<Effect>>();
 
     public override SpawnerType GetSpawnerType() => SpawnerType.Effects;
 
     public EffectSpawner(EffectData data)
     {
+        _data = data;
+
         foreach (var effect in data.EffectInfos)
         {
             _pools.Add(effect.EffectType, new ObjectPool<Effect>(effect.Prefab, 0, true));
@@ -34,7 +36,7 @@ public class EffectSpawner : BaseSpawner
         }
         else
         {
-            effect.transform.position = position + _offset;
+            effect.transform.position = position + _data.GetEffectInfo(type).Offset;
         }
 
         effect.gameObject.SetActive(true);

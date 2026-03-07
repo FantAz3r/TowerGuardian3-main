@@ -7,6 +7,7 @@ public class UIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 {
     [field: SerializeField] public Image SlotImag { get; private set; }
     [field: SerializeField] public TMP_Text ItemLevelText { get; private set; }
+    [field: SerializeField] public StatsButton StatsButton { get; private set; }
 
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private RectTransform _rectTransform;
@@ -37,6 +38,8 @@ public class UIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        StatsButton.OnClick();
+
         _previousParent = transform.parent;
         _previousSlot = _previousParent.GetComponent<InventorySlot>();
 
@@ -47,24 +50,35 @@ public class UIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        InventorySlot currentSlot = transform.parent.GetComponent<InventorySlot>();
+        InventorySlot newSlot = null;
 
-        if (currentSlot == null || currentSlot.CurrentItem != this)
+        if (transform.parent != null)
+            newSlot = transform.parent.GetComponent<InventorySlot>();
+
+        if (newSlot == null || newSlot.CurrentItem != null)
         {
             transform.SetParent(_previousParent);
             transform.localPosition = Vector3.zero;
-
         }
         else
         {
-            if (_previousSlot != null && _previousSlot != currentSlot)
+            if (_previousSlot != null && _previousSlot != newSlot)
             {
-
                 _previousSlot.RemoveItem(this);
+                newSlot.AddItem(this);
+
+                if (_previousSlot.CurrentImage != null)
+                {
+                    _previousSlot.CurrentImage.enabled = true;
+
+                }
 
             }
+            else if (_previousSlot == newSlot)
+            {
+                transform.localPosition = Vector3.zero;
+            }
 
-            transform.localPosition = Vector3.zero;
         }
 
         _canvasGroup.blocksRaycasts = true;

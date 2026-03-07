@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using YG;
 
@@ -135,7 +134,6 @@ public class PlayerCardConfigContainer : MonoBehaviour
             if (item is AbilityConfig && item.HasPlayer)
                 abilityCount++;
         }
-        Debug.Log(weaponCount + " weapons " + abilityCount + " abilities");
 
         _selectedConfigs.Add(card);
         
@@ -177,7 +175,6 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
     private void ActivateCard(ICardConfig card)
     {
-        Debug.Log(card.Name + " Card Added?");
         Create(card);
         CardAdded?.Invoke(card);
     }

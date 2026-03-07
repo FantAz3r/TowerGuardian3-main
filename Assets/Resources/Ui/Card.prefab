@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280963492
-  m_fontColor: {r: 0.6415094, g: 0.3176987, b: 0.16642934, a: 1}
+    rgba: 4278585087
+  m_fontColor: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -677,9 +677,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 20
+  m_MinHeight: -0
   m_PreferredWidth: 250
-  m_PreferredHeight: 20
+  m_PreferredHeight: 0
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -913,9 +913,9 @@ RectTransform:
   - {fileID: 2505212075659703955}
   - {fileID: 4041501240420453556}
   - {fileID: 3151390497323078561}
+  - {fileID: 7489360055537637911}
   - {fileID: 7089123371257593265}
   - {fileID: 542367300704822615}
-  - {fileID: 7489360055537637911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

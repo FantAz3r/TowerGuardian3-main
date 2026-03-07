@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
+    [SerializeField] private float _gravityMultiplier = 3f;
     [SerializeField] private float _rayDistance = 1.1f;
     [SerializeField] private LayerMask _groundLayer;
 
@@ -35,6 +36,8 @@ public class GroundDetector : MonoBehaviour
             if (isGrounded == false)
             {
                 _playerRigidbody.useGravity = true;
+                Vector3 extraGravity = Physics.gravity * _gravityMultiplier;
+                _playerRigidbody.AddForce(extraGravity, ForceMode.Acceleration);
             }
             else
             {
@@ -43,12 +46,5 @@ public class GroundDetector : MonoBehaviour
 
             yield return _wait;
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        // Для визуализации рейкаста в редакторе
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * _rayDistance);
     }
 }

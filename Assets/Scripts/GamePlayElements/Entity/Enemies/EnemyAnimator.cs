@@ -100,7 +100,6 @@ public class EnemyAnimator : MonoBehaviour
 
     public void OnAnimationAttack()
     {
-        Debug.Log("Attack");
         Attacked?.Invoke();
     }
 

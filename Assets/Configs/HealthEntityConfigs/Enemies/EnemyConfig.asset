@@ -15,11 +15,14 @@ MonoBehaviour:
   <MoveConfig>k__BackingField: {fileID: 11400000, guid: e96252a20119eea4886b8b47a66ba8b9, type: 2}
   <HealthConfig>k__BackingField: {fileID: 11400000, guid: f06681e7829e60e40943e43d67ff873b, type: 2}
   <DetectionRadius>k__BackingField: 10
-  <Damage>k__BackingField: 2
+  <Damage>k__BackingField: 4
   <AttackRange>k__BackingField: 1.5
   <HitSound>k__BackingField: {fileID: 8300000, guid: 2ff48fc4321871c41adc645f8d35f75c, type: 3}
   <AttackAriaCenter>k__BackingField: {x: 0, y: 0, z: 0}
   <AttackCooldown>k__BackingField: 1.5
   <JumpDamage>k__BackingField: 0
   <ThrowDamage>k__BackingField: 0
+  <Level>k__BackingField: 1
+  _damageGrowthMultiplier: 2
+  _healthGrowthPerLevel: 3
   allowedStates: 000000000100000002000000

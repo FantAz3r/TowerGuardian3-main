@@ -79,11 +79,6 @@ public class GameFactory : IGameFactory
         _spawnerService.RegisterSpawner(new EffectSpawner(effectData));
     }
 
-    public void CreateFocusController()
-    {
-        ApplicationFocusController focusController = Object.Instantiate(Resources.Load<ApplicationFocusController>(GameConstants.FocusController));
-    }
-
     public void CreateCamera()
     {
         CameraFollower camera = Object.Instantiate(Resources.Load<CameraFollower>(GameConstants.MainCamera));
@@ -108,14 +103,11 @@ public class GameFactory : IGameFactory
     public void CreateLight()
     {
         Cycle = Object.Instantiate(Resources.Load<DayCycle>(GameConstants.DirectionLight));
-        Cycle.Init(LevelConfig);
     }
-
 
     public void CreateEnemies()
     {
         _enemySpawner = Object.Instantiate(Resources.Load<EnemySpawner>(GameConstants.EnemySpawner));
-        _enemySpawner.Init(Player, Cycle, LevelConfig, SceneContainer.SpawnPoints);
     }
 
     public void CreatePortalsFactory()
@@ -140,7 +132,7 @@ public class GameFactory : IGameFactory
     {
         QuestRunner = Object.Instantiate(Resources.Load<QuestStateMachine>(GameConstants.Tutorial));
         QuestRunner.Init(_questBuilder, LevelConfig.Level, LevelConfig.Quests);
-        Player.QuestPointer.Init(Player.transform, QuestRunner);
+        Player.QuestPointer.Init();
     }
 
     public void CreateTower()
@@ -190,7 +182,6 @@ public interface IGameFactory : IService
     void SetSceneContainer();
     void CreatePlayer(LevelID previousLevel);
     void CreateSpawners();
-    void CreateFocusController();
     void CreateCamera();
     void CreateEventSystem();
     void CreateScoreCounter();

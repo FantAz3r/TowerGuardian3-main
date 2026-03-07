@@ -55,10 +55,14 @@ public class AbilityPanel : MonoBehaviour
     {
         _player.AllAbilities.Enabled -= View;
         _player.AllAbilities.Removed -= RemoveView;
-        _inputService.OnAbillity1Used -= OnAbility1Used;
-        _inputService.OnAbillity2Used -= OnAbility2Used;
-        _inputService.OnAbillity3Used -= OnAbility3Used;
-        _inputService.OnAbillity4Used -= OnAbility4Used;
+
+        if (YG2.envir.isDesktop)
+        {
+            _inputService.OnAbillity1Used -= OnAbility1Used;
+            _inputService.OnAbillity2Used -= OnAbility2Used;
+            _inputService.OnAbillity3Used -= OnAbility3Used;
+            _inputService.OnAbillity4Used -= OnAbility4Used;
+        }
     }
 
     private void ActivateAbilityByKey(AbilityKeyCode key)
@@ -79,12 +83,12 @@ public class AbilityPanel : MonoBehaviour
 
         foreach (var pair in _viewersSlots)
         {
-            if (pair.Value == false) 
+            if (pair.Value == false)
             {
                 var viewer = pair.Key;
                 var key = GetFreeKey(ability);
                 viewer.ActivateViewer(ability, key, _player.Attacker);
-                _viewersSlots[viewer] = true; 
+                _viewersSlots[viewer] = true;
                 break;
             }
         }
@@ -100,8 +104,8 @@ public class AbilityPanel : MonoBehaviour
             {
                 SetFreeKey(viewer);
                 viewer.DeactivateViewer();
-                _viewersSlots[viewer] = false; 
-                break; 
+                _viewersSlots[viewer] = false;
+                break;
             }
         }
 
@@ -110,7 +114,7 @@ public class AbilityPanel : MonoBehaviour
 
     private void SetFreeKey(AbilityViewer viewer)
     {
-        if(viewer.AbilityKey == AbilityKeyCode.None)
+        if (viewer.AbilityKey == AbilityKeyCode.None)
             return;
 
         if (_keyCodes.ContainsKey(viewer.AbilityKey))

@@ -18,4 +18,6 @@ public interface ICardConfig : IShopConfig
     void InitFromData(CardSaveData data);
     void SetBought(bool isBought);
     void SetHasPlayer(bool hasPlayer);
+
+    void SetChanceToView(float chance);
 }

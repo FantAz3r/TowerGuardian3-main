@@ -66,5 +66,10 @@ public abstract class CardConfig : ShopConfig, ICardConfig
     {
         HasPlayer = hasPlayer;
     }
+
+    public void SetChanceToView(float chance)
+    {
+        ChanceToView = Mathf.Clamp01(chance);
+    }
 }
 

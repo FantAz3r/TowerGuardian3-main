@@ -37,7 +37,7 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
         if (IsCooldowning)
             return;
 
-        if (_player.Attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe)
+        if (_player.Attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe && _player.Attacker.CurrentWeapon.gameObject.activeSelf == true)
         {
             _axe = _player.Attacker.CurrentWeapon;
             _player.Attacker.DeactivateWeapon();

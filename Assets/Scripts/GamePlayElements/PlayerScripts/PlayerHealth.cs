@@ -17,4 +17,9 @@ public class PlayerHealth : Health
 
         _windowService.Open(WindowType.DamageScreen);
     }
+
+    public void HealMaxHealth()
+    {
+        base.Heal(MaxHealth);
+    }
 }

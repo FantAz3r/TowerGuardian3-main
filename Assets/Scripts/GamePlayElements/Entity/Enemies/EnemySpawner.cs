@@ -5,31 +5,32 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    private const int NoGameLevelCount = 4;
     private IReadOnlyList<SpawnerActivator> _spawnPoints;
     private List<SpawnerActivator> _activeSpawnPoints = new();
     private DayCycle _dayCycle;
     private Player _player;
-    private Coroutine _spawnRoutine;
-    private Coroutine _waveRoutine;
-
-    private WaitForSeconds _nightSpawnDelay;
-    private WaitForSeconds _daySpawnDelay;
-    private WaitForSeconds _waveDuration;
-
+    private Coroutine _spawnRoutine, _waveRoutine;
+    private WaitForSeconds _nightSpawnDelay, _daySpawnDelay, _waveDuration;
+    private LevelConfig _levelConfig;
     private List<Wave> _waves;
     private int _currentWaveIndex = 0;
 
     private Dictionary<Enemy, ObjectPool<Enemy>> _pools = new Dictionary<Enemy, ObjectPool<Enemy>>();
     private Dictionary<Enemy, float> _startWaights = new();
 
-    public void Init(Player player, DayCycle dayCycle, LevelConfig config, List<SpawnerActivator> spawnPoints)
-    {
-        _player = player;
-        _dayCycle = dayCycle;
-        _spawnPoints = spawnPoints;
-        _waves = config.Waves;
+    private IGameFactory _gameFactory;
 
-        foreach(var spawnPoint in _spawnPoints)
+    private void Awake()
+    {
+        _gameFactory = ServiceLocator.Get<IGameFactory>();
+        _levelConfig = _gameFactory.LevelConfig;
+        _player = _gameFactory.Player;
+        _dayCycle = _gameFactory.Cycle;
+        _spawnPoints = _gameFactory.SceneContainer.SpawnPoints;
+        _waves = _levelConfig.Waves;
+
+        foreach (var spawnPoint in _spawnPoints)
         {
             spawnPoint.Detected += AddSpawnPoint;
             spawnPoint.Losted += RemoveSpawnPoint;
@@ -58,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemy in wave.Weight.Keys)
         {
             if (_pools.ContainsKey(enemy) == false)
-                _pools[enemy] = new ObjectPool<Enemy>(enemy, 3, true);
+                _pools[enemy] = new ObjectPool<Enemy>(enemy, 0, true);
         }
     }
 
@@ -77,7 +78,7 @@ public class EnemySpawner : MonoBehaviour
         if (totalActiveEnemies >= _waves[_currentWaveIndex].MaxEnemyCount)
             return;
 
-        Enemy chosenEnemy = ChooseEnemyWithPseudoRandom();
+        Enemy chosenEnemy = GetRandomEnemy();
 
         if (_pools.TryGetValue(chosenEnemy, out var pool) == false)
         {
@@ -92,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
         enemyInstance.transform.LookAt(_player.transform);
 
         var stateMachine = enemyInstance.GetComponent<EnemyStateMachine>();
-        stateMachine.Init(_player);
+        stateMachine.Init((int)_levelConfig.Level - NoGameLevelCount);
     }
 
     public void SetWave(int waveIndex)
@@ -143,7 +144,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private Enemy ChooseEnemyWithPseudoRandom()
+    private Enemy GetRandomEnemy()
     {
         return Utils.SelectByWeights(_startWaights);
     }

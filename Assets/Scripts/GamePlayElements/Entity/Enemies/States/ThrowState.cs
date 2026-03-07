@@ -7,16 +7,21 @@ public class ThrowState : State
     private EnemyAnimator _animator;
     private Transform _player;
     private Transform _thrownObject;
+    private TargetDetector _targetDetector;
+    private ISpawnerService _spawnerService;
     private bool isThrowing = false;
 
     public ThrowState(
         EnemyStateMachine stateMachine,
         EnemyAnimator animator,
-        Transform player
+        Transform player,
+        TargetDetector targetDetector
         ) : base(stateMachine, false)
     {
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
         _animator = animator;
         _player = player;
+        _targetDetector = targetDetector;
     }
 
     public override void Enter()
@@ -64,7 +69,8 @@ public class ThrowState : State
     private void OnThrow()
     {
         ThrownObject thrownObject = _thrownObject.AddComponent<ThrownObject>();
-        thrownObject.StartFly(StateMachine.Config.ThrowDamage, _player);
+        thrownObject.StartFly(StateMachine.Config.ThrowDamage, _player.position);
+        _spawnerService.SendEffectReqest(EffectType.AimPoint, _player.position );
 
         isThrowing = false;
     }
@@ -73,6 +79,7 @@ public class ThrowState : State
     {
         isThrowing = false;
         _thrownObject = null;
+        _targetDetector.gameObject.SetActive( true);
         SetCanExit(true);
     }
 }

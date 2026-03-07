@@ -7,7 +7,7 @@ public class PlayerHealthViewer : MonoBehaviour
 {
     [SerializeField] private Slider _healthImage;
     [SerializeField] private TMP_Text _healthText;
-    [SerializeField] private float _smoothSpeed = 2f;
+    [SerializeField] private float _smoothSpeed = 10f;
 
     private Tween _healthTween;
     private Health _health;
@@ -19,6 +19,11 @@ public class PlayerHealthViewer : MonoBehaviour
         _healthImage.value = _health.CurrentHealth / _health.MaxHealth;
         _healthText.text = $"{_health.CurrentHealth} / {_health.MaxHealth}";
         _health.IsValueChange += View;
+    }
+
+    private void OnEnable()
+    {
+        View(_health.CurrentHealth, _health.MaxHealth);
     }
 
     private void OnDestroy()

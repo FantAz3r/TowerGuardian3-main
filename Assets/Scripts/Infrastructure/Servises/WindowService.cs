@@ -100,6 +100,9 @@ public class WindowService : IWindowService
                 _currentWindow = _uiFactory.CreateInventory();
                 _uiFactory.CloseHUD();
                 break;
+            case WindowType.MenuLeaderboard:
+                _currentWindow = _uiFactory.CreateMenuLeaderboard();
+                break;
         }
 
         if (_currentWindow != null)

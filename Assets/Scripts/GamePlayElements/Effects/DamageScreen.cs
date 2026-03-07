@@ -6,7 +6,7 @@ using DG.Tweening;
 public class DamageScreen : WindowBase
 {
     [Tooltip("Время жизни эффекта в секундах")]
-    [SerializeField] private float _lifetime = 1f;
+    [SerializeField] private float _lifetime = 0.5f;
 
     private Image image;
 
@@ -32,6 +32,4 @@ public class DamageScreen : WindowBase
             Destroy(gameObject);
         });
     }
-
-
 }

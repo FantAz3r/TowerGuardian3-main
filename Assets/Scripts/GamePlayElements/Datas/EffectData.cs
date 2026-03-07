@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,4 +7,15 @@ using UnityEngine;
 public class EffectData : ScriptableObject
 {
     public List<EffectInfo> EffectInfos = new List<EffectInfo>();
+
+    public EffectInfo GetEffectInfo(EffectType type)
+    {
+        foreach(var info in EffectInfos)
+        {
+            if(info.EffectType == type)
+                return info;
+        }
+
+        return default;
+    }
 }

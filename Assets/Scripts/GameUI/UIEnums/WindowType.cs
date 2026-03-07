@@ -20,5 +20,6 @@ public enum WindowType
     Joystick,
     LeaderBoard,
     Previous,
-    Inventory
+    Inventory,
+    MenuLeaderboard
 }

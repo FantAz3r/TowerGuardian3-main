@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WaveViewer : WindowBase
 {
     [SerializeField] private Slider _waveSlider;
-    [SerializeField] private RectTransform _flagsContainer; 
+    [SerializeField] private RectTransform _flagsContainer;
     [SerializeField] private GameObject _flagPrefab;
 
     private float _elapsedTime = 0f;
@@ -16,6 +16,7 @@ public class WaveViewer : WindowBase
     private QuestStateMachine _questRunner;
     private ICoroutineRunner _coroutineRunner;
     private IGameFactory _gameFactory;
+    private Coroutine _waveRoutine;
 
     private void Awake()
     {
@@ -44,6 +45,12 @@ public class WaveViewer : WindowBase
         DrawFlags();
     }
 
+    private void OnDisable()
+    {
+        if (_waveRoutine != null)
+            _coroutineRunner.StopCoroutine(_waveRoutine);
+    }
+
     private void DrawFlags()
     {
         foreach (Transform child in _flagsContainer)
@@ -53,20 +60,20 @@ public class WaveViewer : WindowBase
 
         float containerWidth = _flagsContainer.rect.width;
 
-        for (int i = 0; i < _waves.Count-1; i++)
+        for (int i = 0; i < _waves.Count - 1; i++)
         {
             var flag = Instantiate(_flagPrefab, _flagsContainer);
             var layoutElement = flag.GetComponent<LayoutElement>();
             layoutElement.flexibleWidth = _waves[i].Duration;
 
-            if(i== 0)
+            if (i == 0)
             {
                 Image image = flag.GetComponent<Image>();
                 image.enabled = false;
             }
         }
 
-        _coroutineRunner.StartCoroutine(WaitForSliderToMax());
+        _waveRoutine = _coroutineRunner.StartCoroutine(WaitForSliderToMax());
     }
 
     private IEnumerator WaitForSliderToMax()

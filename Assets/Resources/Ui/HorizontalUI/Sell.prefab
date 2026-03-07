@@ -732,6 +732,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &6946107475801647944
@@ -1048,6 +1050,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &1771348140187847684
@@ -2007,6 +2011,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &5169805006097146579
@@ -2557,6 +2563,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &7954108426612162583
@@ -2813,6 +2821,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
   _normalSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &4138745929583881851
@@ -3348,7 +3358,7 @@ MonoBehaviour:
       de: 
       hi: 
   text: 
-  ru: "\u041A\u0443\u043F\u0438\u0442\u044C"
+  ru: "\u041F\u043E\u043A\u0443\u043F\u043A\u0430"
   en: Buy
   tr: "Sat\u0131n almak"
   az: 
@@ -4906,6 +4916,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: e38850710ce804e5c9bc4cd0c3898101, type: 3}
   _normalSprite: {fileID: 21300000, guid: d380a1e54c93e4ef29797f9a282b2c72, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &3022715943867032845
@@ -5082,6 +5094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &6755230609005772334
@@ -6745,6 +6759,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: 0f2b2e6269d6f492e974b2954f4d9569, type: 3}
   _normalSprite: {fileID: 21300000, guid: 8f62adceef57646cda0c35d60e3c03f8, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &5885278846722337356 stripped
@@ -7174,6 +7190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightedSprite: {fileID: 21300000, guid: e38850710ce804e5c9bc4cd0c3898101, type: 3}
   _normalSprite: {fileID: 21300000, guid: 482db5766c3c6413d949d1bbbd304643, type: 3}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _pressedSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _highlightedSound: {fileID: 8300000, guid: 1c616bdc37da7be4da8fba7fdef6d8f4, type: 3}
 --- !u!114 &8659013533860422502 stripped

@@ -2,9 +2,5 @@
 {
     bool IsPaused { get; }
 
-    void PauseAll();
-    void Pause();
-    void PauseForSeconds(float seconds);
-    void Resume();
-    void SlowMotion(float targetTimeScale, float duration);
+    void SmoothEditTimeScalse(float targetTimeScale, float duration);
 }

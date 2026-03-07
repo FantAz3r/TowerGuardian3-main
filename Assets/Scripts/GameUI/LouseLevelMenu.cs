@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,22 +6,42 @@ public class LouseLevelMenu : LevelMenu
 {
     [SerializeField] private Button _resurrectionButton;
     [SerializeField] private AudioClip _louseSound;
+
+    private string _rewardId = "HealPlayer";
     private Player _player;
-    private int _resurrectionCount = 1;
-    private IGameFactory _gameFactory;
+    private IADVServise _advService;
+    private bool _canResurrection=true;
 
     protected override void Awake()
     {
+        _advService = ServiceLocator.Get<IADVServise>();
         base.Awake();
         _player = GameFactory.Player;
+        _resurrectionButton.gameObject.SetActive(false);
     }
 
-    public void SetResurrection()
+    public void SetResurrection() 
     {
-        if (_resurrectionCount > 0)
-        {
-            _resurrectionCount--;
-            _resurrectionButton.gameObject.SetActive(true);
+        bool show = _canResurrection && _advService.CanShowRewardADV(_rewardId);
+        _canResurrection = show == false; 
+        SetResurrectionButtonActive(show);
+    }
+
+    private void SetResurrectionButtonActive(bool active) 
+    { 
+        _resurrectionButton.gameObject.SetActive(active);
+
+        if (active) 
+        { 
+            _resurrectionButton.transform.localScale = Vector3.one;
+            _resurrectionButton.transform.DOScale(1.1f, 0.6f).
+                SetLoops(-1, LoopType.Yoyo).
+                SetEase(Ease.InOutSine).
+                SetUpdate(true);
+        } 
+        else 
+        { 
+            _resurrectionButton.transform.localScale = Vector3.one; 
         }
     }
 
@@ -34,12 +55,21 @@ public class LouseLevelMenu : LevelMenu
     {
         base.OnDisable();
         _resurrectionButton.onClick.RemoveListener(Resurrection);
+        _resurrectionButton.transform.DOKill();
+
     }
 
     private void Resurrection()
     {
-        _player.Health.Heal(_player.Health.MaxHealth);
+        
+        _advService.TryShowRewardADV(_rewardId, () =>
+        {
+            _player.Health.HealMaxHealth();
+        });
+
+        
         base.Close();
+        WindowService.Open(WindowType.HUD);
     }
 
     public override void Open()

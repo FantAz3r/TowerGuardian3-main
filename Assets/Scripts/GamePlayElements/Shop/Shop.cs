@@ -41,7 +41,6 @@ public class Shop : BaseShop
 
     protected override void OnTradeRequested(ProductViewer button, ICardConfig config)
     {
-
         if (CanAfford(config) == false)
         {
             Debug.Log("Не хватает ресурсов");

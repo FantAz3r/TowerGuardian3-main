@@ -50,14 +50,18 @@ public class EnemyStateMachine : MonoBehaviour
         _collider = GetComponent<Collider>();
     }
 
-    public void Init(Player player)
+    public void Init(int enemyLevel)
     {
-        _player = player;
+        _player = ServiceLocator.Get<IGameFactory>().Player;
         _collider.enabled = true;
         _agent.enabled = true;
 
-        _agent.speed = Config.MoveConfig.MoveSpeed;
+        Config.SetLevel(enemyLevel);
+
+        _agent.speed = Config.GetMoveSpeed();
         _agent.angularSpeed = Config.MoveConfig.RotationSpeed;
+
+        _health.Init(Config.GetMaxHealth());
 
 
         ActivateStates();
@@ -84,12 +88,14 @@ public class EnemyStateMachine : MonoBehaviour
         else
         {
             SetState(_states[StateType.FindObject]);
+            _targetDetector.gameObject.SetActive(false);
         }
     }
 
     public void OnDie()
     {
         _collider.enabled = false;
+        _agent.enabled = false;
 
         StopCoroutine(_currentCoroutine);
         _currentCoroutine = null;
@@ -104,7 +110,14 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void OnLostPlayer()
     {
-        SetState(_states[StateType.Patrol]);
+        if (_targetDetector.HasTarget)
+        {
+            SetState(_states[StateType.Chase]);
+        }
+        else
+        {
+            SetState(_states[StateType.Patrol]);
+        }
     }
 
     private void OnPlayerInMeleeRange()
@@ -127,7 +140,7 @@ public class EnemyStateMachine : MonoBehaviour
     private void SetState(IEnemyState newState)
     {
         if (_currentState == newState)
-            return; 
+            return;
 
         StartCoroutine(SwitchState(newState));
     }
@@ -146,6 +159,7 @@ public class EnemyStateMachine : MonoBehaviour
         }
 
         _currentState?.Exit();
+
         _currentState = newState;
         StateChanged?.Invoke(_currentState);
         _currentState.Enter();
@@ -171,10 +185,10 @@ public class EnemyStateMachine : MonoBehaviour
                     _states.Add(StateType.Attack, new AttackState(this, _animator, _player));
                     break;
                 case StateType.Thrown:
-                    _states.Add(StateType.Thrown, new ThrowState(this, _animator, _player.transform));
+                    _states.Add(StateType.Thrown, new ThrowState(this, _animator, _player.transform, _targetDetector));
                     break;
                 case StateType.FindObject:
-                    _states.Add(StateType.FindObject, new PickupState(this, _animator, _objectDetector, _agent, _picker));
+                    _states.Add(StateType.FindObject, new PickupState(this, _animator, _objectDetector, _agent, _picker, _targetDetector));
                     break;
                 case StateType.Escape:
                     _states.Add(StateType.Escape, new EscapeState(this, _player.transform, _agent));

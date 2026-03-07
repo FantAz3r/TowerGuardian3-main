@@ -24,6 +24,7 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
         _player = GetComponentInParent<Player>();
         _attacker = _player.Attacker;
         _attacker.WeaponSeted += CheckWeapon;
+        CheckWeapon(_player.Attacker.CurrentWeapon);
     }
 
     private void OnDestroy()

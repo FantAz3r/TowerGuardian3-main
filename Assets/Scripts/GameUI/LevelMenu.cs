@@ -10,12 +10,15 @@ public abstract class LevelMenu : PauseWindow
     public ScoreCounter ScoreCounter { get; private set; }
     public IStateSwitchService StateSwitchService { get; private set; }
     public IGameFactory GameFactory { get; private set; }
+    public IWindowService WindowService { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
+        WindowService = ServiceLocator.Get<IWindowService>();   
         StateSwitchService = ServiceLocator.Get<IStateSwitchService>();
         GameFactory = ServiceLocator.Get<IGameFactory>();
+
         ScoreCounter = GameFactory.ScoreCounter;
         _currentLevel = GameFactory.LevelConfig.Level;
     }

@@ -47,10 +47,8 @@ public class DayCycle : MonoBehaviour
     private void Awake()
     {
         _currentPhase = DayPhase.Day;
-    }
 
-    public void Init(LevelConfig config)
-    {
+        LevelConfig config = ServiceLocator.Get<IGameFactory>().LevelConfig;
         _dayDuration = config.DayDuration;
         _nightDuration = config.NightDuration;
         _dayLightColor = config.DayLightColor;

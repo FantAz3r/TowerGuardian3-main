@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class FireballAbility : Ability, ICooldownAbility
 {
-    [SerializeField] private FireBallConfig _config;
+    [SerializeField] private FireballConfig _config;
 
     private Vector3 _offset = new Vector3(0, 1, 0);
     private Player _player;
+    private Coroutine _cooldownRoutine;
     public override AbilityType Type => AbilityType.FireBall;
     public override AbilityConfig Config => _config;
     public bool IsCooldowning { get; private set; } = false;
     public float Cooldown => _config.Cooldown;
+
 
     public event Action<float, float> Cooldowning;
 
@@ -19,8 +21,12 @@ public class FireballAbility : Ability, ICooldownAbility
     private void OnEnable()
     {
         _player = GetComponentInParent<Player>();
-        StartCoroutine(CooldownRoutine());
+        _cooldownRoutine = StartCoroutine(CooldownRoutine());
+    }
 
+    private void OnDisable()
+    {
+        StopCoroutine(_cooldownRoutine);
     }
 
     public IEnumerator CooldownRoutine()
@@ -44,6 +50,7 @@ public class FireballAbility : Ability, ICooldownAbility
                 IsCooldowning = false;
                 ThrowFireBall();
             }
+
             yield return null;
         }
     }

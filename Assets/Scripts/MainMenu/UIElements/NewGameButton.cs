@@ -35,7 +35,6 @@ public class NewGameButton : MonoBehaviour
     {
         if (YG2.saves.AllCards != null) YG2.saves.AllCards.Clear();
         if (YG2.saves.PlayerWeapons != null) YG2.saves.PlayerWeapons.Clear();
-        if (YG2.saves.LevelsProgress != null) YG2.saves.LevelsProgress.Clear();
         if (YG2.saves.QuestProgress != null) YG2.saves.QuestProgress.Clear();
 
         YG2.saves.Coins = 33333;

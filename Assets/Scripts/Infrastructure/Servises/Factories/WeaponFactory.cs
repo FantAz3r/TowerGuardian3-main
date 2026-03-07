@@ -25,7 +25,6 @@ public class WeaponFactory : ICardFactory
         if (config is WeaponConfig weaponConfig)
         {
             GameObject weaponObject = Object.Instantiate(weaponConfig.Prefab.gameObject, _player.Fist.transform);
-            weaponObject.transform.localPosition = Vector3.zero;
             Weapon weapon = weaponObject.GetComponent<Weapon>();
             weapon.Init(_player.AttackZone);
             _player.Attacker.AddWeapon(weapon);

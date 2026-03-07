@@ -6,7 +6,7 @@ using YG;
 
 public class PlayerExperience : MonoBehaviour
 {
-    private const float _slowDuration = 0.3f;
+    private const float _slowDuration = 0.1f;
 
     [SerializeField] private PlayerConfig _config;
 
@@ -48,11 +48,6 @@ public class PlayerExperience : MonoBehaviour
             _enemyDetector.OnGetExperience += AddEXP;
 
         LoadLevel();
-    }
-
-    private void OnDisable()
-    {
-        SaveLevel();
     }
 
     private void OnDestroy()
@@ -101,7 +96,7 @@ public class PlayerExperience : MonoBehaviour
         while (targetExp >= ExpToNextLevel)
         {
             AddUpgradePoints(1);
-            _timeService.SlowMotion(0, _slowDuration);
+            _timeService.SmoothEditTimeScalse(0, _slowDuration);
             yield return _slowDurationForCards;
             _windowService.Open(WindowType.CardMenu);
 
@@ -149,6 +144,7 @@ public class PlayerExperience : MonoBehaviour
         _spawnerService.SendEffectReqest(_config.LevelUpEffect, transform.position, transform);
         _currentLevel++;
         OnLevelUp?.Invoke();
+        SaveLevel();
     }
 
     private void SaveLevel()

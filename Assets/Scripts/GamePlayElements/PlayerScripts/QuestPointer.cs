@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class QuestPointer : MonoBehaviour
 {
-    private Transform _player;
     private Vector3 _target;
     private QuestStateMachine _questRunner;
     private Coroutine _pointerRoutine;
+    private IGameFactory _gameFactory;
 
-    public void Init(Transform player, QuestStateMachine questRuner)
+    public void Init()
     {
-        _player = player;
-        _questRunner = questRuner;
+        _gameFactory = ServiceLocator.Get<IGameFactory>();
+        _questRunner = _gameFactory.QuestRunner;
 
         _questRunner.QuestStarted += OnQuestSeted;
         _questRunner.QuestCompleted += OnQuestCompleted;
@@ -20,8 +20,12 @@ public class QuestPointer : MonoBehaviour
 
     private void OnDestroy()
     {
-        _questRunner.QuestStarted -= OnQuestSeted;
-        _questRunner.QuestCompleted -= OnQuestCompleted;
+        if (_questRunner != null)
+        {
+            _questRunner.QuestStarted -= OnQuestSeted;
+            _questRunner.QuestCompleted -= OnQuestCompleted;
+        }
+
         StopPointerRoutine();
     }
 
@@ -74,22 +78,17 @@ public class QuestPointer : MonoBehaviour
 
     private IEnumerator PointerCoroutine()
     {
-        float offsetY = 0.3f;
-
         while (_target != Vector3.zero)
         {
-            Vector3 direction = _target - _player.position;
-            direction.y = 0f;
+            Vector3 direction = (_target - transform.position).normalized;
 
-            if (direction.sqrMagnitude >= 0.01f)
+            if (direction.sqrMagnitude > 0.001f)
             {
-                transform.rotation = Quaternion.LookRotation(direction);
-
-                Vector3 offsetFlat = direction.normalized;
-                transform.position = _player.position + offsetFlat + Vector3.up * offsetY;
+                Quaternion targetRotation = Quaternion.FromToRotation(Vector3.up, direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
             }
 
-            yield return null; 
+            yield return null;
         }
 
         gameObject.SetActive(false);

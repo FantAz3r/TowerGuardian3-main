@@ -6,7 +6,7 @@ public class Fireball : MonoBehaviour
     [SerializeField] private LayerMask _collisionLayers;
     [SerializeField] private LayerMask _damageableLayers;
 
-    private FireBallConfig _config;
+    private FireballConfig _config;
     private Vector3 _endPoint;
     private Collider _collider;
     private ISpawnerService _spawnerService;
@@ -17,7 +17,7 @@ public class Fireball : MonoBehaviour
         _collider = GetComponent<Collider>();
     }
 
-    public void Init(Vector3 endPoint, FireBallConfig config)
+    public void Init(Vector3 endPoint, FireballConfig config)
     {
         _config = config;
         _endPoint = endPoint;

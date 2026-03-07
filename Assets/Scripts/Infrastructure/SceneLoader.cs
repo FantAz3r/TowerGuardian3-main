@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class SceneLoader
 {
     private readonly ICoroutineRunner _coroutineRunner;
+    private float _minLoadTime = 1;
+    private float _maxLoadTime = 3;
 
     public SceneLoader(ICoroutineRunner coroutineRunner)
     {
@@ -31,7 +34,9 @@ public class SceneLoader
         asyncLoad = SceneManager.UnloadSceneAsync(currentScene.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
         yield return asyncLoad;
 
-        yield return new WaitForSecondsRealtime(Random.Range(1,6));
+        TryShowInterstitialADV(nextScene);
+
+         yield return new WaitForSecondsRealtime(Random.Range(_minLoadTime, _maxLoadTime));
 
         asyncLoad = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
         yield return asyncLoad;
@@ -48,5 +53,15 @@ public class SceneLoader
 
 
         onLoaded?.Invoke();
+    }
+
+    private void TryShowInterstitialADV(string nextScene)
+    {
+        if (nextScene != LevelID.MainMenu.ToString() &&
+            nextScene != LevelID.None.ToString() &&
+            nextScene != LevelID.LoadScene.ToString())
+        {
+            YG2.InterstitialAdvShow();
+        }
     }
 }

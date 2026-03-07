@@ -17,16 +17,14 @@ GameObject:
   - component: {fileID: 5856974560295256393}
   - component: {fileID: 5435373761146260452}
   - component: {fileID: 8983203508556038218}
-  - component: {fileID: 6059624382516020876}
-  - component: {fileID: 5986887971566721670}
-  - component: {fileID: 3399267145604328110}
-  - component: {fileID: 7049775228978568600}
-  m_Layer: 11
+  - component: {fileID: 6730335991847040064}
+  - component: {fileID: 4702331554616363773}
+  m_Layer: 7
   m_Name: HardRock_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6719093811295938516
 Transform:
@@ -38,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.81, y: 0.81, z: 0.81}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: b7b7e789149ac0a45a9a5aba4af48825, type: 2}
+  _config: {fileID: 11400000, guid: b26b1a103c162d346a80c03f405a0f95, type: 2}
   _type: 1
 --- !u!114 &-6866118477402451762
 MonoBehaviour:
@@ -144,7 +142,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &5856974560295256393
 MonoBehaviour:
@@ -182,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401588010eefbde4baf86a1eec71c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!208 &6059624382516020876
+--- !u!208 &6730335991847040064
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,42 +196,7 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.030000001, y: 0.62600005, z: 0.13000001}
   m_TimeToStationary: 0.5
---- !u!114 &5986887971566721670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6229837917760634222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401588010eefbde4baf86a1eec71c5c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!136 &3399267145604328110
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6229837917760634222}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.35334226
-  m_Height: 1.2524594
-  m_Direction: 1
-  m_Center: {x: -0.030065594, y: 0.6260509, z: 0.13013156}
---- !u!136 &7049775228978568600
+--- !u!136 &4702331554616363773
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,4 +218,4 @@ CapsuleCollider:
   m_Radius: 0.35334224
   m_Height: 1.2524594
   m_Direction: 1
-  m_Center: {x: -0.030065611, y: 0.62605065, z: 0.13013095}
+  m_Center: {x: -0.030065611, y: 0.6260509, z: 0.13013095}

@@ -4,9 +4,11 @@ using UnityEngine;
 public class EnemyDetector : MonoBehaviour
 {
     private IScoreService _service;
+
     public event Action<float> OnGetExperience;
     public event Action OnEnemyKilled;
     public event Action OnBossKilled;
+
     private void Awake()
     {
         _service = ServiceLocator.Get<IScoreService>();

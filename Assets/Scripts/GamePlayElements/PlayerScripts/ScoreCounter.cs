@@ -8,10 +8,10 @@ public class ScoreCounter
     private const string MainLeaderbord = "MainLiderboard";
     private Dictionary<LevelID, string> LevelLeaderboards = new Dictionary<LevelID, string>
     {
-        {LevelID.Level1, "Level 1 score" },
-        {LevelID.Level2, "Level 2 score" },
-        {LevelID.Level3, "Level 3 score" },
-        {LevelID.Level4, "Level 4 score" }
+        {LevelID.Level1, "FirstLevelScore" },
+        {LevelID.Level2, "SecondLevelScore" },
+        {LevelID.Level3, "ThirdLevelScore" },
+        {LevelID.Level4, "FourthLevelScore" }
     };
 
     private float _time = 0;
@@ -29,6 +29,7 @@ public class ScoreCounter
         _config = ServiceLocator.Get<IGameFactory>().LevelConfig;
         _currentLevel = _config.Level;
         _time = Time.time;
+        UpdateMainLeaderbord();
     }
 
     public void OnEndLevel(LevelMenu sender, LevelID level = LevelID.None)
@@ -104,7 +105,7 @@ public class ScoreCounter
                 if (_scoreService.GetScore() > levelSave.Score)
                 {
                     YG2.saves.LevelsProgress[i] = new LevelSaveData(_currentLevel, _scoreService.GetScore(), CalculateStars(), _time);
-                    UpdateLeaderboards(_currentLevel);
+                    UpdateLevelLeaderboards(_currentLevel);
                 }
 
                 break;
@@ -114,6 +115,7 @@ public class ScoreCounter
         if (levelFound == false)
         {
             YG2.saves.LevelsProgress.Add(new LevelSaveData(_currentLevel, _scoreService.GetScore(), CalculateStars(), _time));
+            UpdateLevelLeaderboards(_currentLevel);
         }
 
         YG2.SaveProgress();
@@ -139,7 +141,19 @@ public class ScoreCounter
         }
     }
 
-    private void UpdateLeaderboards(LevelID levelID)
+    private void UpdateLevelLeaderboards(LevelID levelID)
+    {
+        foreach(var pair in LevelLeaderboards)
+        {
+            if(levelID == pair.Key)
+            {
+                var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == levelID);
+                YG2.SetLeaderboard(pair.Value, savedData.Score);
+            }
+        }
+    }
+
+    private void UpdateMainLeaderbord()
     {
         int scoreFromAllLevels = 0;
 
@@ -149,15 +163,5 @@ public class ScoreCounter
         }
 
         YG2.SetLeaderboard(MainLeaderbord, scoreFromAllLevels);
-
-        foreach(var pair in LevelLeaderboards)
-        {
-            if(levelID == pair.Key)
-            {
-                var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == levelID);
-                YG2.SetLeaderboard(pair.Value, savedData.Score);
-            }
-        }
-        
     }
 }

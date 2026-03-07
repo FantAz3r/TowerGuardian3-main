@@ -1,15 +1,9 @@
 {
-    "idSave": 9717,
+    "idSave": 10288,
     "AllCards": [
         {
-            "ID": "461a6838-bb21-4e2b-83ea-91f625be7fde",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
             "ID": "6809a072-2f9b-472c-bead-b31e4c6975db",
-            "Level": 1,
+            "Level": 16,
             "IsBought": true,
             "HasPlayer": true
         }
@@ -21,33 +15,48 @@
         "HasPlayer": false
     },
     "PlayerWeapons": [],
-    "Coins": 33333,
-    "Wood": 33333,
-    "Stones": 33333,
-    "Level": 2,
+    "Coins": 31444,
+    "Wood": 33920,
+    "Stones": 33675,
+    "Level": 0,
     "UpgradePoints": 0,
-    "CurrentEXP": 12.678573608398438,
+    "CurrentEXP": 0.0,
     "CurrentLevel": 4,
     "PlayerPosition": {
-        "x": 17.960121154785158,
-        "y": 0.0530814528465271,
-        "z": 6.038349151611328
+        "x": 7.651376724243164,
+        "y": 0.007268369197845459,
+        "z": 17.6158504486084
     },
     "QuestProgress": [
         {
             "Level": 3,
             "QuestProgress": 0.0,
             "CurrentTime": 0.0,
-            "QuestIndex": 3
+            "QuestIndex": 4
         },
         {
             "Level": 4,
             "QuestProgress": 0.0,
             "CurrentTime": 0.0,
-            "QuestIndex": 3
+            "QuestIndex": 2
         }
     ],
-    "LevelsProgress": [],
+    "LevelsProgress": [
+        {
+            "Level": 4,
+            "Score": 527,
+            "Stars": 3,
+            "Time": 94.92537689208985,
+            "IsComplite": true
+        },
+        {
+            "Level": 6,
+            "Score": 734,
+            "Stars": 3,
+            "Time": 83.32166290283203,
+            "IsComplite": true
+        }
+    ],
     "CurrentFloor": 1,
     "Language": "ru",
     "ShowDamageNumber": true,
@@ -55,15 +64,15 @@
     "Volumes": [
         {
             "Name": "Background",
-            "Volume": -16.79294776916504
+            "Volume": -22.77308464050293
         },
         {
             "Name": "UI",
-            "Volume": -6.073173522949219
+            "Volume": -10.033548355102539
         },
         {
             "Name": "Effects",
-            "Volume": -6.073173522949219
+            "Volume": -10.033548355102539
         }
     ],
     "IsFirstGameSession": false

@@ -129,7 +129,6 @@ public class LoadingLevelState : IPayloadedState<LevelID>
     private void CommonInit()
     {
         _gameFactory.SetCurrentLevel(_currentLevel);
-        _gameFactory.CreateFocusController();
         _gameFactory.CreateSpawners();
         _windowService.CreateUIRoot();
         _gameFactory.CreateBackgroundSounds();

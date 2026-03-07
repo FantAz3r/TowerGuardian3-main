@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Abilities/FireBallConfig")]
-public class FireBallConfig : AbilityConfig
+public class FireballConfig : AbilityConfig
 {
     [field: SerializeField] public Fireball FireballPrefab { get; private set; }
 

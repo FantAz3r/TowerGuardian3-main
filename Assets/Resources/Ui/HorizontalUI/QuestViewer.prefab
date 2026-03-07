@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8470494853469932518}
   - component: {fileID: 7857354971485833465}
   - component: {fileID: 8210281771522520230}
+  - component: {fileID: 2150301940531929120}
   m_Layer: 0
   m_Name: QuestViewer
   m_TagString: Untagged
@@ -89,11 +90,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81845948433deb428c9ac0219e3c9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Highlighter>k__BackingField: {fileID: 2150301940531929120}
   _image: {fileID: 3273586602060700532}
-  _warningFrame: {fileID: 7857354971485833465}
   _description: {fileID: 7105700592389593484}
   _progress: {fileID: 1201670221613886420}
   _timer: {fileID: 6804666953100559619}
+--- !u!114 &2150301940531929120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5198609170925674033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0205b0018d54f34479f07b1eddaedda8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _warningFrame: {fileID: 7857354971485833465}
 --- !u!1001 &6406662851235882497
 PrefabInstance:
   m_ObjectHideFlags: 0

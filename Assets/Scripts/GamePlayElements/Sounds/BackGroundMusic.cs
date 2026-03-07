@@ -8,44 +8,54 @@ public class BackGroundMusic : MonoBehaviour
     [SerializeField] private float _delayBetweenTracks = 1f;
 
     private ISpawnerService _spawnerService;
+    private ICoroutineRunner _coroutineRunner;
+    private Coroutine _audioRoutine;
+    private int _previousIndex = -1;
 
     private void Awake()
     {
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
+        _coroutineRunner = ServiceLocator.Get<ICoroutineRunner>();
     }
 
     private void Start()
     {
         if (_musics == null || _musics.Count == 0) return;
 
-        StartCoroutine(PlayMusicSequence());
+        StartNextTrack();
     }
 
-    private IEnumerator PlayMusicSequence()
+    private void OnDisable()
     {
-        int previousIndex = -1;
+        if (_audioRoutine != null)
+            _coroutineRunner.StopCoroutine(_audioRoutine);
+    }
 
-        while (enabled)
+    private void StartNextTrack()
+    {
+        if (_musics.Count == 1)
         {
-            if (_musics.Count == 1)
-            {
-                Debug.Log("Необходимо хотя бы 2 трека");
-                yield break;
-            }
-
-            int randomIndex;
-
-            do
-            {
-                randomIndex = Random.Range(0, _musics.Count);
-            }
-            while (randomIndex == previousIndex);
-
-            previousIndex = randomIndex;
-            AudioClip clip = _musics[randomIndex];
-            _spawnerService.SendSoundReqest(clip);
-
-            yield return new WaitForSeconds(clip.length + _delayBetweenTracks);
+            Debug.Log("Необходимо 2 трека");
+            return;
         }
+
+        int randomIndex;
+
+        do
+        {
+            randomIndex = Random.Range(0, _musics.Count);
+        }
+        while (randomIndex == _previousIndex);
+
+        _previousIndex = randomIndex;
+        AudioClip clip = _musics[randomIndex];
+        _spawnerService.SendSoundReqest(clip);
+        _audioRoutine = _coroutineRunner.StartCoroutine(PlayAndWait(clip));
+    }
+
+    private IEnumerator PlayAndWait(AudioClip clip)
+    {
+        yield return new WaitForSeconds(clip.length + _delayBetweenTracks);
+        StartNextTrack();
     }
 }

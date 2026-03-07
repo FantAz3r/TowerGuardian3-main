@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 5466911329091501717}
   - component: {fileID: 7798732254085007967}
   - component: {fileID: -8340058777579418164}
-  - component: {fileID: 4022336116664493848}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: Hammer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8591273635324488586}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.35355335, y: 0.61237246, z: -0.61237246, w: 0.35355335}
-  m_LocalPosition: {x: 0.094, y: 0, z: 0.163}
+  m_LocalRotation: {x: 0.3324743, y: 0.51338017, z: -0.7396688, w: 0.28069872}
+  m_LocalPosition: {x: 0.081, y: 0.044, z: 0.177}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 30, z: -90}
+  m_LocalEulerAnglesHint: {x: 71.105, y: -38.962, z: -166.813}
 --- !u!33 &5466911329091501717
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -98,25 +97,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 7fcec575bdfc7a547a1a2eacc87dc40f, type: 2}
---- !u!64 &4022336116664493848
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8591273635324488586}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5585701443973051977, guid: 1978b0a3e563c684a926418906719528, type: 3}

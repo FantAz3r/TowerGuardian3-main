@@ -1,21 +1,12 @@
-using UnityEngine;
-
 public class MoveQuest : Quest
 {
     private PlayerMover _mover;
-    public MoveQuest(PlayerMover mover)
-    {
-        _mover = mover;
-    }
 
-    public override QuestType GetQuestType()
-    {
-        return QuestType.Move;
-    }
+    public override QuestType GetQuestType() => QuestType.Move; 
 
     public override void Run()
     {
-        Debug.Log("start move Quest");
+        _mover = ServiceLocator.Get<IGameFactory>().Player.PlayerMover;
         base.Run();
         _mover.Moved += Complete;
     }

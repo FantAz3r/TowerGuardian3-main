@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,10 +6,12 @@ using UnityEngine;
 public class WeaponPanel : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown _dropdown;
-
+    [field: SerializeField] public Highlighter Highlighter { get; private set; }
     private Player _player;
     private List<WeaponConfig> _configs = new List<WeaponConfig>();
 
+    public event Action WeaponSwaped;
+    public event Action WeaponAdded;
 
     private void Awake()
     {
@@ -53,10 +56,11 @@ public class WeaponPanel : MonoBehaviour
             var option = new TMP_Dropdown.OptionData();
             option.image = weapon.Icon;
 
-
-            card.Upgraded += OnWeaponUpgraded;
-
             _dropdown.options.Add(option);
+            WeaponAdded?.Invoke();
+
+            OnWeaponUpgraded(card);
+            card.Upgraded += OnWeaponUpgraded;
             _dropdown.RefreshShownValue();
         }
     }
@@ -73,6 +77,28 @@ public class WeaponPanel : MonoBehaviour
                 _configs.RemoveAt(index);
                 _dropdown.options.RemoveAt(index);
                 _dropdown.RefreshShownValue();
+
+                int currentIndex = _dropdown.value;
+
+                if (index == currentIndex)
+                {
+                    if (_configs.Count > 0)
+                    {
+                        int newIndex = Mathf.Clamp(index, 0, _configs.Count - 1);
+                        _dropdown.value = newIndex;
+
+                        _player.Attacker.SetWeapon(_configs[newIndex]);
+                        WeaponSwaped?.Invoke();
+                    }
+                    else
+                    {
+                        WeaponSwaped?.Invoke();
+                    }
+                }
+                else if (index < currentIndex)
+                {
+                    _dropdown.value = currentIndex - 1;
+                }
             }
         }
     }
@@ -85,6 +111,7 @@ public class WeaponPanel : MonoBehaviour
 
         _dropdown.options[index].text = config.Level.ToString();
         _dropdown.RefreshShownValue();
+        WeaponAdded?.Invoke();
 
         if (_dropdown.value == index)
         {
@@ -97,5 +124,6 @@ public class WeaponPanel : MonoBehaviour
     {
         var selectedConfig = _configs[index];
         _player.Attacker.SetWeapon(selectedConfig);
+        WeaponSwaped?.Invoke();
     }
 }

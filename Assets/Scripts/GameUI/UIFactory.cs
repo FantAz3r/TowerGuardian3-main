@@ -1,16 +1,14 @@
 using Crystal;
 using UnityEngine;
-using UnityEngine.InputSystem.OnScreen;
 using YG;
 
-public class UIFactory
+public class UIFactory: IUIFactory
 {
     private WindowData _windowData;
     private IGameFactory _gameFactory;
     private Transform _uiRoot;
     private Transform _backgroundContainer;
-    private CardSelectionMenu _cardMenu;
-    private HUD _hud;
+    public HUD HUD { get; private set; }
 
     public UIFactory()
     {
@@ -28,8 +26,8 @@ public class UIFactory
     {
         Settings settings = CreateSettings();
         settings.Close();
-        MainMenu mainMenu = CreateWindow(WindowType.MainMenu) as MainMenu;
-        return mainMenu;
+
+        return CreateWindow(WindowType.MainMenu) as MainMenu;
     }
 
     public WindowBase CreateBackground()
@@ -41,27 +39,26 @@ public class UIFactory
 
     public HUD CreateHUD()
     {
-        if (_hud != null)
+        if (HUD != null)
         {
-            _hud.Open();
-            return _hud;
+            HUD.Open();
+            return HUD;
         }
 
-        _hud = CreateWindow(WindowType.HUD) as HUD;
+        HUD = CreateWindow(WindowType.HUD) as HUD;
         CreateShowCardsButton();
 
-        return _hud;
+        return HUD;
     }
 
     public void CloseHUD()
     {
-        _hud?.Close();
+        HUD?.Close();
     }
 
     public WaveViewer CreateWaveViewer()
     {
-        WaveViewer waveViewer = CreateWindow(WindowType.WaveViewer, _hud.transform) as WaveViewer;
-        return waveViewer;
+        return CreateWindow(WindowType.WaveViewer, HUD.transform) as WaveViewer;
     }
 
     public DamageScreen CreateDamageScreen()
@@ -73,8 +70,7 @@ public class UIFactory
 
     public QuestViewer CreateQuestViewer()
     {
-        QuestViewer questViewer = CreateWindow(WindowType.QuestViewer, _hud.transform) as QuestViewer;
-        return questViewer;
+        return CreateWindow(WindowType.QuestViewer, HUD.transform) as QuestViewer;
     }
 
     public void CreateJoystick()
@@ -94,32 +90,32 @@ public class UIFactory
 
     public CardInventory CreateInventory()
     {
-        CardInventory inventory = CreateWindow(WindowType.Inventory) as CardInventory;
-        return inventory;
+        return CreateWindow(WindowType.Inventory) as CardInventory; ;
     }
 
     public PauseWindow CreateLeaderboard()
     {
-        PauseWindow leaderboard = CreateWindow(WindowType.LeaderBoard) as PauseWindow;
-        return leaderboard;
+        return CreateWindow(WindowType.LeaderBoard) as PauseWindow; ;
+    }
+
+    public PauseWindow CreateMenuLeaderboard()
+    {
+        return CreateWindow(WindowType.MenuLeaderboard) as PauseWindow; ;
     }
 
    public ShowCardsButton CreateShowCardsButton()
    {
-       ShowCardsButton cardButton = CreateWindow(WindowType.ShowCardsButton, _hud.transform) as ShowCardsButton;
-       return cardButton;
+       return CreateWindow(WindowType.ShowCardsButton, HUD.transform) as ShowCardsButton; ;
    }
 
     public Shop CreateShop()
     {
-        Shop shop = CreateWindow(WindowType.Shop) as Shop;
-        return shop;
+        return CreateWindow(WindowType.Shop) as Shop;
     }
 
     public Sell CreateSell()
     {
-        Sell sell = CreateWindow(WindowType.Sell) as Sell;
-        return sell;
+        return CreateWindow(WindowType.Sell) as Sell;
     }
 
     public PauseUI CreatePauseUI()
@@ -154,14 +150,12 @@ public class UIFactory
 
     public CardSelectionMenu CreateCardSelectionMenu()
     {
-        _cardMenu = CreateWindow(WindowType.CardMenu) as CardSelectionMenu;
-        return _cardMenu;
+        return CreateWindow(WindowType.CardMenu) as CardSelectionMenu;
     }
 
     public WinLevelMenu CreateWinLevelMenu()
     {
-        WinLevelMenu winPanel = CreateWindow(WindowType.WinLevelMenu) as WinLevelMenu;
-        return winPanel;
+        return CreateWindow(WindowType.WinLevelMenu) as WinLevelMenu;
     }
 
     public LouseLevelMenu CreateLouseLevelMenu(GameObject louseReasonObject)

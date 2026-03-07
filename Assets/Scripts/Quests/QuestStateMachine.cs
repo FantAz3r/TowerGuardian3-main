@@ -29,11 +29,6 @@ public class QuestStateMachine : MonoBehaviour
         LoadQuestProgress();
     }
 
-    private void OnDestroy()
-    {
-        SaveQuestProgress();
-    }
-
     public void Run()
     {
         SwitchQuest();
@@ -67,6 +62,11 @@ public class QuestStateMachine : MonoBehaviour
                 _isAllQuestsComplete = true;
                 return;
             }
+            
+            if(_currentQuestIndex < 0)
+            {
+                _currentQuestIndex = 0; 
+            }
 
             _currentQuest = _quests[_currentQuestIndex];
         }
@@ -74,6 +74,8 @@ public class QuestStateMachine : MonoBehaviour
         _currentQuest.OnCompleted += OnQuestCompleted;
         _currentQuest.Run();
         QuestStarted?.Invoke(_currentQuest);
+
+        SaveQuestProgress();
     }
 
     private void OnQuestCompleted()
@@ -129,7 +131,7 @@ public class QuestStateMachine : MonoBehaviour
         }
         else
         {
-            _currentQuestIndex = saveData.QuestIndex - 1;
+            _currentQuestIndex = saveData.QuestIndex-1;
         }
     }
 

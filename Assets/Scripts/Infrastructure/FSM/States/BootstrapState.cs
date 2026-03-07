@@ -1,4 +1,3 @@
-using UnityEngine;
 using YG;
 
 public class BootstrapState : IState
@@ -27,13 +26,16 @@ public class BootstrapState : IState
     {
         ServiceLocator.Register<IStateSwitchService>(new StateSwitchService(_stateMachine));
         ServiceLocator.Register<ILevelLoadingService>(new LevelLoadingService(_stateMachine));
-
+        ServiceLocator.Register<IADVServise>(new ADVService());
         ServiceLocator.Register<ITimeService>(new TimeService(_coroutineRunner));
         ServiceLocator.Register<ISpawnerService>(new SpawnerService());
         ServiceLocator.Register(_coroutineRunner);
         ServiceLocator.Register<IGameFactory>(new GameFactory());
 
-        IWindowService windowService = new WindowService(new UIFactory());
+        IUIFactory uIFactory = new UIFactory();
+        ServiceLocator.Register(uIFactory);
+
+        IWindowService windowService = new WindowService(uIFactory as UIFactory);
         ServiceLocator.Register(windowService);
         ServiceLocator.Register<IGameConditionService>(new GameConditionService(windowService));
         ServiceLocator.Register<IScoreService>(new ScoreService());

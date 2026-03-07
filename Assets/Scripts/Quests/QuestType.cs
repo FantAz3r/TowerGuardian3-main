@@ -14,5 +14,7 @@ public enum QuestType
     EnterLevel3,
     DefendPortal,
     CollectStones,
-    EnterLevel4
+    EnterLevel4,
+    SwapWeapon,
+    SelectWeaponCard
 }

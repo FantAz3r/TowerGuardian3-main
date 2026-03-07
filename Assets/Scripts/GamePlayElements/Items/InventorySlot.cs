@@ -1,13 +1,18 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using YG;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
+    [field: SerializeField] public bool IsActiveSlot { get; private set; }
+
+    [SerializeField] private Image _weaponImage;
+    [SerializeField] private Image _abilityImage;
+    
     [SerializeField] private CardType _slotType;
-    [SerializeField] private bool _isActiveSlot;
     private PlayerCardConfigContainer _cardHolrer;
 
+    public Image CurrentImage { get; private set; }
     public UIItem CurrentItem { get; private set; }
 
     private void Awake()
@@ -18,7 +23,16 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     public void Init(CardType slotType, bool isActiveSlot)
     {
         _slotType = slotType;
-        _isActiveSlot = isActiveSlot;
+        IsActiveSlot = isActiveSlot;
+
+        if (_slotType == CardType.Weapon)
+        {
+            CurrentImage = _weaponImage;
+        }
+        else if (_slotType == CardType.Ability)
+        {
+            CurrentImage = _abilityImage;
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -38,7 +52,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         itemTransform.SetParent(transform);
         itemTransform.localPosition = Vector3.zero;
 
-        AddItem(draggedItem);
+        if (CurrentImage != null)
+            CurrentImage.enabled = false;
     }
 
     public void SetItem(UIItem item)
@@ -48,17 +63,19 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public void AddItem(UIItem item)
     {
+        Debug.Log("rgaerhgaeh");
         SetItem(item);
 
-        if (_isActiveSlot)
+        if (IsActiveSlot)
         {
             _cardHolrer.AddCard(item.SlotConfig);
         }
+
     }
 
     public void RemoveItem(UIItem item)
     {
-        if (_isActiveSlot)
+        if (IsActiveSlot)
         {
             _cardHolrer.SaveInInventory(item.SlotConfig);
         }

@@ -5,10 +5,10 @@ using UnityEngine;
 public class Lava : MonoBehaviour
 {
     public int damagePerTick = 2;        
-    public float damageInterval = 1f;
+    public float damageInterval = 0.5f;
     private WaitForSeconds _delay;
 
-    private Dictionary<Health, Coroutine> damagedObjects = new Dictionary<Health, Coroutine>();
+    private Dictionary<Health, Coroutine> _damagedObjects = new Dictionary<Health, Coroutine>();
 
     private void Awake()
     {
@@ -19,10 +19,10 @@ public class Lava : MonoBehaviour
     {
         Health damageable = other.GetComponent<Health>();
 
-        if (damageable != null && !damagedObjects.ContainsKey(damageable))
+        if (damageable != null && _damagedObjects.ContainsKey(damageable) == false)
         {
             Coroutine damageCoroutine = StartCoroutine(DamageOverTime(damageable));
-            damagedObjects.Add(damageable, damageCoroutine);
+            _damagedObjects.Add(damageable, damageCoroutine);
         }
     }
 
@@ -30,10 +30,10 @@ public class Lava : MonoBehaviour
     {
         Health damageable = other.GetComponent<Health>();
 
-        if (damageable != null && damagedObjects.ContainsKey(damageable))
+        if (damageable != null && _damagedObjects.ContainsKey(damageable))
         {
-            StopCoroutine(damagedObjects[damageable]);
-            damagedObjects.Remove(damageable);
+            StopCoroutine(_damagedObjects[damageable]);
+            _damagedObjects.Remove(damageable);
         }
     }
 
@@ -41,8 +41,8 @@ public class Lava : MonoBehaviour
     {
         while (enabled)
         {
-            yield return _delay;
             target.TakeDamage(damagePerTick);
+            yield return _delay;
         }
     }
 }

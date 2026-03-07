@@ -8,6 +8,7 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
     private Health _health;
     private float _delay = 2f;
     private float _regenAccumulated = 0f;
+    private float _startRegenValue = 1;
     private float _regenValue;
     private bool _isRegeneration = false;
     private float _timer = 0f;
@@ -15,7 +16,8 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _regenValue = _config.HealthRegeneration;
+        _startRegenValue = _config.HealthRegeneration;
+        _regenValue = _startRegenValue;
     }
 
     public void EnableBuff()
@@ -59,11 +61,12 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
 
     public void ApplyBuff(float value)
     {
-        _regenValue = _regenValue * (1 + value);
+        _isRegeneration = true;
+        _regenValue = _startRegenValue * (1 + value);
     }
 
     public void RemoveBuff()
     {
-        _regenValue = 0;
+        _isRegeneration = false;
     }
 }

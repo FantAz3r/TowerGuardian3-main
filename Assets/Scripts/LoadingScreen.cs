@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class LoadingScreen : MonoBehaviour
 {
     [SerializeField] private RectTransform _image;
