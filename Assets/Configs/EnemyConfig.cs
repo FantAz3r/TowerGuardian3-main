@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyConfig", menuName = "Configs/EnemyConfig")]
@@ -14,19 +13,16 @@ public class EnemyConfig : ScriptableObject
     [field: SerializeField] public float AttackCooldown { get; private set; } = 1f;
     [field: SerializeField] public float JumpDamage { get; private set; } = 15;
     [field: SerializeField] public int ThrowDamage { get; private set; }
-    [field: SerializeField] public int Level { get; private set; } = 1;
+    [field: SerializeField] public int Level { get; private set; } = 0;
+    [field: SerializeField] public RuntimeAnimatorController Controller { get; private set; }
 
     [SerializeField] private float _damageGrowthMultiplier = 2f;
 
     [SerializeField] private float _healthGrowthPerLevel = 3f;
 
-    [SerializeField] private List<StateType> allowedStates;
-
-    public IReadOnlyList<StateType> AllowedStates => allowedStates;
-
     public void SetLevel(int level)
     {
-        Level = Mathf.Max(level, 1);
+        Level = Mathf.Max(level, 0);
     }
 
     public float GetMoveSpeed()

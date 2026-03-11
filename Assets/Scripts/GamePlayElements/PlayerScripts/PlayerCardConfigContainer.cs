@@ -10,7 +10,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
     [SerializeField] private CardData _cardData;
     [SerializeField] private List<CardConfig> _startCards;
-
+    [SerializeField] private Player _player;
     private Dictionary<CardType, ICardFactory> _factories;
     private List<ICardConfig> _selectedConfigs = new();
     public IReadOnlyList<ICardConfig> SelectedCardConfigs => _selectedConfigs;
@@ -20,12 +20,10 @@ public class PlayerCardConfigContainer : MonoBehaviour
 
     private void Awake()
     {
-        Player player = GetComponentInParent<Player>();
-
         _factories = new Dictionary<CardType, ICardFactory>()
         {
-            { CardType.Weapon, new WeaponFactory(player) },
-            {CardType.Ability, new AbilityFactory(player) }
+            {CardType.Weapon, new WeaponFactory(_player) },
+            {CardType.Ability, new AbilityFactory(_player) }
         };
     }
 
@@ -37,6 +35,8 @@ public class PlayerCardConfigContainer : MonoBehaviour
         {
             card.SetBought(true);
         }
+
+        _player.Attacker.LoadCurrentWeapon();
     }
 
     public void Add(ICardConfig config)

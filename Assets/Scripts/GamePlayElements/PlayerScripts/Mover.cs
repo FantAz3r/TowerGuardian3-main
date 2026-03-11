@@ -7,8 +7,9 @@ public class Mover : MonoBehaviour, IBuffble
     [SerializeField] private LayerMask _obstacleLayerMask;
 
     private float _rayDistance = 1f;
-    private float _moveSpeed;
+    private float _currentMoveSpeed;
     private float _startSpeed;
+    private StatsCalculator _statsCalculator;
 
     public Vector2 Direction { get; private set; }
 
@@ -16,11 +17,12 @@ public class Mover : MonoBehaviour, IBuffble
 
     private void Awake()
     {
+        _statsCalculator = new StatsCalculator();
+
         if (_configObject == null)
             throw new ArgumentNullException();
-
         _startSpeed = _configObject.MoveSpeed;
-        _moveSpeed = _startSpeed;
+        _currentMoveSpeed = _startSpeed;
     } 
 
     private void Update()
@@ -47,19 +49,26 @@ public class Mover : MonoBehaviour, IBuffble
             return;
         }
 
-        float moveStep = _moveSpeed * Time.deltaTime;
+        float moveStep = _currentMoveSpeed * Time.deltaTime;
         transform.Translate(moveDir * moveStep, Space.World);
     }
 
 
-    public void ApplyBuff(float value)
+    public void ApplyBuff(IEffect effect)
     {
-        _moveSpeed = _startSpeed * (1 + value);
+        _statsCalculator.AddEffect(effect);
+        _currentMoveSpeed = _statsCalculator.Calculate(_startSpeed);
     }
 
-    public void RemoveBuff()
+    public void Recalculate()
     {
-        _moveSpeed = _startSpeed;
+        _currentMoveSpeed = _statsCalculator.Calculate(_startSpeed);
+    }
+
+    public void RemoveBuff(IEffect effect)
+    {
+        _statsCalculator.RemoveEffect(effect);
+        _currentMoveSpeed = _statsCalculator.Calculate(_startSpeed);
     }
 
     public void EnableBuff()

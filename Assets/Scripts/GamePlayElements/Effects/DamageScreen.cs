@@ -6,7 +6,7 @@ using DG.Tweening;
 public class DamageScreen : WindowBase
 {
     [Tooltip("Время жизни эффекта в секундах")]
-    [SerializeField] private float _lifetime = 0.5f;
+    [SerializeField] private float _lifetime = 0.35f;
 
     private Image image;
 
@@ -24,8 +24,8 @@ public class DamageScreen : WindowBase
         Sequence seq = DOTween.Sequence();
 
         seq.Append(image.DOFade(1f, fadeInTime));
-
         seq.Append(image.DOFade(0f, fadeOutTime));
+        seq.SetUpdate(true);
 
         seq.OnComplete(() =>
         {

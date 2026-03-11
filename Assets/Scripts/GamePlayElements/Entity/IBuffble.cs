@@ -1,6 +1,8 @@
 ﻿public interface IBuffble
 {
     void EnableBuff();
-    void ApplyBuff(float value);
-    void RemoveBuff();
+    void ApplyBuff(IEffect effect);
+
+    void Recalculate();
+    void RemoveBuff(IEffect effect);
 }

@@ -1,67 +1,48 @@
-using System.Collections;
 using UnityEngine;
 
-public class AttackState : State, IEnemyState
+public class AttackStateBehaviour : State
 {
-    private WaitForSeconds _delay = new WaitForSeconds(0.05f);
-    private EnemyAnimator _animator;
     private Player _player;
-    private IDemageable _playerHealth;
     private ISpawnerService _spawnerService;
+    private float _timeSinceLastAttack;
 
-    public AttackState(EnemyStateMachine stateMachine, EnemyAnimator animator, Player target) : base(stateMachine, true)
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _animator = animator;
-        _player = target;
-
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        _player = Enemy.Target?.GetComponent<Player>();
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
-        _playerHealth = _player.GetComponent<IDemageable>();
+
+        Enemy.AnimationAnimator.Attacked += OnAnimAttackHit;
+
+        _timeSinceLastAttack = Enemy.Config.AttackCooldown; 
+        Enemy.Agent.IsStopAgent(true);
     }
 
-    public override void Enter()
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        StateMachine.Mover.SetDirection(Vector3.zero);
-        _animator.Attacked += OnAnimAttackHit;
-    }
+        if (_player == null && _player.IsAlive == false) return;
 
-    public override void Exit()
-    {
-        _animator.Attacked -= OnAnimAttackHit;
-        _animator.SuspendAttack();
-    }
+        RotateTo(_player.transform.position);
+        _timeSinceLastAttack += Time.deltaTime;
 
-    public override IEnumerator UpdateRoutine()
-    {
-        if (_player == null)
-            yield break;
-
-        float speedForAnimator = 0f;
-        float attackCooldown = StateMachine.Config.AttackCooldown;
-        float timeSinceLastAttack = 0f;
-        _animator.PlayAttack();
-
-        while (_player.IsAlive)
+        if (_timeSinceLastAttack >= Enemy.Config.AttackCooldown)
         {
-            RotateTo(_player.transform.position);
-            _animator.UpdateSpeed(speedForAnimator);
-
-            if (timeSinceLastAttack >= attackCooldown)
-            {
-                _animator.PlayAttack(attackCooldown);
-                timeSinceLastAttack = 0f;
-            }
-            else
-            {
-                timeSinceLastAttack += Time.deltaTime;
-            }
-
-            yield return _delay;
+            Enemy.AnimationAnimator.PlayAttack();
+            _timeSinceLastAttack = 0f;
         }
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Enemy.AnimationAnimator.Attacked -= OnAnimAttackHit;
+        Enemy.AnimationAnimator.SuspendAttack();
+        Enemy.Agent.IsStopAgent(false);
+
     }
 
     private void OnAnimAttackHit()
     {
-        _spawnerService.SendSoundReqest(StateMachine.Config.HitSound, StateMachine.transform.position);
-        _playerHealth.TakeDamage(StateMachine.Config.GetDamage());
+        _spawnerService.SendSoundReqest(Enemy.Config.HitSound, Enemy.transform.position);
+        _player.Health.TakeDamage(Enemy.Config.GetDamage());
     }
 }

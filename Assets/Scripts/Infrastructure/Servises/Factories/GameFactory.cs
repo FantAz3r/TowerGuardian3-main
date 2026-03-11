@@ -61,8 +61,8 @@ public class GameFactory : IGameFactory
 
     public void CreatePlayer(LevelID previousLevel)
     {
-        PlayerSpawnPointSeter spawner = new PlayerSpawnPointSeter(Resources.Load<PlayerSpawnPoints>(GameConstants.PlayerSpawnPoints));
-        Player = Object.Instantiate(Resources.Load<Player>(GameConstants.Player), spawner.GetSpawnPoint(LevelConfig, previousLevel), Quaternion.identity);
+        PlayerSpawnPointSeter spawner = new PlayerSpawnPointSeter(SceneContainer);
+        Player = Object.Instantiate(Resources.Load<Player>(GameConstants.Player), spawner.GetSpawnPoint(LevelConfig.Level, previousLevel), Quaternion.identity);
     }
 
     public void CreateSpawners()

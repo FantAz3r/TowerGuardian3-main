@@ -1,29 +1,8 @@
 public class MaxHealthBuff : Buff
 {
-    private IBuffble _buffbleComponent;
-
-    public MaxHealthBuff(Health health)
+    public MaxHealthBuff(IBuffble buffbleObject) : base(buffbleObject)
     {
-        _buffbleComponent = health;
     }
 
     public override BuffType Type => BuffType.MaxHp;
-
-
-    public override void Enable()
-    {
-        base.Enable();
-        _buffbleComponent.ApplyBuff(Config.IncreaseValue);
-    }
-
-    public override void Upgrade(ICardConfig useles)
-    {
-        _buffbleComponent.ApplyBuff(Config.IncreaseValue);
-    }
-
-    public override void Remove()
-    {
-        base.Remove();
-        _buffbleComponent.RemoveBuff();
-    }
 }

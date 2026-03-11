@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: -5379759425470595804}
   - component: {fileID: -8490982945830886450}
   - component: {fileID: 2559678172821163533}
+  - component: {fileID: 6343063528321097347}
+  - component: {fileID: 7065843849239186859}
   m_Layer: 7
   m_Name: Cave_Lair_Vegetation_Swamp_Tree_Roots_Large_01_Atlased
   m_TagString: Untagged
@@ -32,13 +34,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7714810419608185479}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0.009668979, y: 0.9966016, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &4073959975244703431
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -108,10 +110,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.270097
+  m_Radius: 2.4137151
   m_Height: 22.270363
   m_Direction: 2
-  m_Center: {x: 0.95325565, y: 5.6968575, z: -1.3893948}
+  m_Center: {x: 3.7502873, y: 5.0102944, z: -1.389395}
 --- !u!114 &-5803774375937530509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498161b863c0dee4e983137e86d419ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 0}
+  _config: {fileID: 11400000, guid: 6d959f3e8cd64234690688e5f276b5f8, type: 2}
   _type: 2
 --- !u!54 &-372038298627191353
 Rigidbody:
@@ -196,5 +198,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a15d927a500c20428640261cb7bc65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6343063528321097347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714810419608185479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401588010eefbde4baf86a1eec71c5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7065843849239186859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714810419608185479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e52d697b4404f84c9cd639a20f89138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

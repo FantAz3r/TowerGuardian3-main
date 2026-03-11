@@ -5,7 +5,9 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
 {
     [SerializeField] private PlayerConfig _config;
 
+    private StatsCalculator _statsCalculator;
     private Health _health;
+
     private float _delay = 2f;
     private float _regenAccumulated = 0f;
     private float _startRegenValue = 1;
@@ -15,18 +17,20 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
 
     private void Awake()
     {
+        _statsCalculator = new StatsCalculator();
         _health = GetComponent<Health>();
+
         _startRegenValue = _config.HealthRegeneration;
         _regenValue = _startRegenValue;
-    }
 
-    public void EnableBuff()
-    {
-        _isRegeneration = true;
+        _health.Died += DisableRegeneration;
+        _health.Resurected += EnableBuff;
     }
 
     private void OnDestroy()
     {
+        _health.Died -= DisableRegeneration;
+        _health.Resurected -= EnableBuff;
         _isRegeneration = false;
     }
 
@@ -59,13 +63,35 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
         }
     }
 
-    public void ApplyBuff(float value)
+    public void EnableBuff()
     {
         _isRegeneration = true;
-        _regenValue = _startRegenValue * (1 + value);
     }
 
-    public void RemoveBuff()
+    public void ApplyBuff(IEffect effect)
+    {
+        _isRegeneration = true;
+        _statsCalculator.AddEffect(effect);
+        _regenValue = _statsCalculator.Calculate(_startRegenValue);
+    }
+
+    public void Recalculate()
+    {
+        _regenValue = _statsCalculator.Calculate(_startRegenValue);
+    }
+
+    public void RemoveBuff(IEffect effect)
+    {
+        _statsCalculator.RemoveEffect(effect);
+        _regenValue = _statsCalculator.Calculate(_startRegenValue);
+
+        if(_statsCalculator.GetEffectsCount() == 0)
+        {
+            _isRegeneration = false;
+        }
+    }
+
+    public void DisableRegeneration()
     {
         _isRegeneration = false;
     }

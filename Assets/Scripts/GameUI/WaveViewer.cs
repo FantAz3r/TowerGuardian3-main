@@ -45,7 +45,7 @@ public class WaveViewer : WindowBase
         DrawFlags();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (_waveRoutine != null)
             _coroutineRunner.StopCoroutine(_waveRoutine);

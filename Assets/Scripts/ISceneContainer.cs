@@ -4,4 +4,5 @@ public interface ISceneContainer
 {
     List<Portal> Portals { get; }
     List<SpawnerActivator> SpawnPoints { get; }
+    List<PlayerSpawnPoint> PlayerSpawnPoints { get; }
 }

@@ -11,7 +11,8 @@ public class ScoreCounter
         {LevelID.Level1, "FirstLevelScore" },
         {LevelID.Level2, "SecondLevelScore" },
         {LevelID.Level3, "ThirdLevelScore" },
-        {LevelID.Level4, "FourthLevelScore" }
+        {LevelID.Level4, "FourthLevelScore" },
+        {LevelID.Level5, "FifthLevelScore" }
     };
 
     private float _time = 0;

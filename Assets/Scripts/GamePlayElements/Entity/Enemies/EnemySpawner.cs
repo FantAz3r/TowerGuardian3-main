@@ -88,12 +88,11 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy enemyInstance = pool.Get();
 
-        var spawnPoint = _activeSpawnPoints[Random.Range(0, _activeSpawnPoints.Count)];
+        var spawnPoint = _activeSpawnPoints[Random.Range(0, _activeSpawnPoints.Count-1)];
         enemyInstance.transform.position = spawnPoint.transform.position;
         enemyInstance.transform.LookAt(_player.transform);
 
-        var stateMachine = enemyInstance.GetComponent<EnemyStateMachine>();
-        stateMachine.Init((int)_levelConfig.Level - NoGameLevelCount);
+        enemyInstance.Init(_player.transform, (int)_levelConfig.Level - NoGameLevelCount);
     }
 
     public void SetWave(int waveIndex)

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
+    [SerializeField] private Player _player;
+
     [Header("Настройки")]
     [SerializeField] private float _speedMultiplier = 1f;
     [SerializeField] private float _smoothTime = 0.05f;
@@ -10,12 +12,7 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Параметры поиска клипа атаки")]
     [Tooltip("Имя клипа атаки внутри AnimatorController. Если пусто, будет попытка взять первый попавшийся клип.")]
     [SerializeField] private string attackClipName = "Attack";
-
-    private Animator _animator;
-    private Mover _mover;
-    private Rotator _rotator;
-    private PlayerAttacker _attacker;
-    private Health _health;
+    
     private int _hashX;
     private int _hashY;
     private int _hashWeaponSeted;
@@ -24,20 +21,21 @@ public class PlayerAnimator : MonoBehaviour
     private int _hashRandom;
     private int _hasWeapon;
     private int _hashDie;
+    private int _hashRevive;
 
     private float _currentSpeed;
     private float _velSpeed;
 
+    private IInputService _inputService;
+    private IGameConditionService _gameConditionService;
     private Coroutine _resetSpeedCoroutine;
     private float _defaultAnimatorSpeed = 1f;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
-        _mover = GetComponent<Mover>();
-        _rotator = GetComponentInChildren<Rotator>();
-        _attacker = GetComponentInChildren<PlayerAttacker>();
-        _health = GetComponent<Health>();
+        _inputService = ServiceLocator.Get<IInputService>();
+        _gameConditionService = ServiceLocator.Get<IGameConditionService>();
+        _inputService.EnableInput();
 
         _hashX = Animator.StringToHash("X");
         _hashY = Animator.StringToHash("Y");
@@ -46,33 +44,34 @@ public class PlayerAnimator : MonoBehaviour
         _hashAttack = Animator.StringToHash("Attack");
         _hashRandom = Animator.StringToHash("Random");
         _hasWeapon = Animator.StringToHash("HasWeapon");
-        _hashDie = Animator.StringToHash("Die");
+        _hashDie = Animator.StringToHash("Died");
+        _hashRevive = Animator.StringToHash("Revive");
 
-        if (_animator != null)
-            _defaultAnimatorSpeed = _animator.speed;
+        if (_player.Animator != null)
+            _defaultAnimatorSpeed = _player.Animator.speed;
     }
 
     private void OnEnable()
     {
-        if (_attacker == null)
+        if (_player.Attacker == null)
             return;
 
-        _attacker.WeaponSeted += OnWeaponSeted;
-        _attacker.WeaponRemoved += OnWeaponRemoved;
-        _attacker.Attacked += PlayAttack;
-        _attacker.Suspended += OnSuspendAttack;
-        _health.Died += OnDie;
+        _player.Attacker.WeaponSeted += OnWeaponSeted;
+        _player.Attacker.WeaponRemoved += OnWeaponRemoved;
+        _player.Attacker.Attacked += PlayAttack;
+        _player.Attacker.Suspended += OnSuspendAttack;
+        _player.Health.Died += OnDie;
     }
 
     private void OnDisable()
     {
-        if (_attacker == null)
+        if (_player.Attacker == null)
             return;
 
-        _attacker.WeaponSeted -= OnWeaponSeted;
-        _attacker.WeaponRemoved -= OnWeaponRemoved;
-        _attacker.Attacked -= PlayAttack;
-        _health.Died -= OnDie;
+        _player.Attacker.WeaponSeted -= OnWeaponSeted;
+        _player.Attacker.WeaponRemoved -= OnWeaponRemoved;
+        _player.Attacker.Attacked -= PlayAttack;
+        _player.Health.Died -= OnDie;
     }
 
     private void Update()
@@ -87,10 +86,10 @@ public class PlayerAnimator : MonoBehaviour
         float dampTime = 0.05f;
         float trashhold = 0.001f;
 
-        Vector2 lookDirection = _rotator.CurrentDirection.normalized;
-        Vector2 moveDirection = _mover.Direction.normalized;
+        Vector2 lookDirection = _player.Rotator.CurrentDirection.normalized;
+        Vector2 moveDirection = _player.Mover.Direction.normalized;
 
-        float moveSpeed = _mover.Direction.SqrMagnitude();
+        float moveSpeed = _player.Mover.Direction.SqrMagnitude();
 
         if (moveSpeed > trashhold)
         {
@@ -103,21 +102,21 @@ public class PlayerAnimator : MonoBehaviour
         float targetSpeed = moveSpeed * _speedMultiplier;
         _currentSpeed = Mathf.SmoothDamp(_currentSpeed, targetSpeed, ref _velSpeed, _smoothTime);
 
-        _animator.SetFloat(_hashX, x, dampTime, Time.deltaTime);
-        _animator.SetFloat(_hashY, y, dampTime, Time.deltaTime);
+        _player.Animator.SetFloat(_hashX, x, dampTime, Time.deltaTime);
+        _player.Animator.SetFloat(_hashY, y, dampTime, Time.deltaTime);
     }
 
     private void OnWeaponSeted(IWeapon weapon)
     {
-        if (weapon.Config.Controller == _attacker.PreviousWeapon.Config.Controller)
+        if (weapon.Config.Controller == _player.Attacker.PreviousWeapon.Config.Controller)
         {
             SetParametrs();
         }
         else
         {
-            if (_attacker.PreviousWeapon.Config.WeaponType == WeaponType.None)
+            if (_player.Attacker.PreviousWeapon.Config.WeaponType == WeaponType.None)
             {
-                _animator.runtimeAnimatorController = weapon.Config.Controller;
+                _player.Animator.runtimeAnimatorController = weapon.Config.Controller;
                 SetParametrs();
             }
             else if (weapon.Config.WeaponType == WeaponType.None)
@@ -130,47 +129,47 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SwapController()
     {
-        _animator.runtimeAnimatorController = _attacker.CurrentWeapon.Config.Controller;
-        _animator.speed = _defaultAnimatorSpeed;
+        _player.Animator.runtimeAnimatorController = _player.Attacker.CurrentWeapon.Config.Controller;
+        _player.Animator.speed = _defaultAnimatorSpeed;
     }
 
     public void OnWeaponRemoved(IWeapon weapon)
     {
         if (weapon.Config.WeaponType != WeaponType.None)
         {
-            _animator.SetTrigger(_hashWeaponRemoved);
+            _player.Animator.SetTrigger(_hashWeaponRemoved);
         }
     }
 
     public void OnAnimationEquipWeapon()
     {
-        _animator.SetBool(_hasWeapon, true);
+        _player.Animator.SetBool(_hasWeapon, true);
     }
 
     public void OnAnimationUnequipWeapon()
     {
-        _animator.SetBool(_hasWeapon, false);
+        _player.Animator.SetBool(_hasWeapon, false);
     }
 
     public void OnEquipWeapon()
     {
-        _attacker.OnEquipWeapon();
+        _player.Attacker.OnEquipWeapon();
     }
 
     public void OnTakeOffWeapon()
     {
-        _attacker.OnTakeOffWeapon();
+        _player.Attacker.OnTakeOffWeapon();
     }
 
     public void PlayAttack(IWeapon weapon, float attackDelay)
     {
-        if (_animator == null)
+        if (_player.Animator == null)
             return;
 
         if (weapon.Config.WeaponType == WeaponType.None)
         {
             int random = Random.Range(0, 2);
-            _animator.SetInteger(_hashRandom, random);
+            _player.Animator.SetInteger(_hashRandom, random);
         }
 
         float clipLength = GetAttackClipLength();
@@ -180,34 +179,34 @@ public class PlayerAnimator : MonoBehaviour
         if (_resetSpeedCoroutine != null)
             StopCoroutine(_resetSpeedCoroutine);
 
-        _animator.speed = requiredSpeed;
-        _animator.SetBool(_hashAttack, true);
+        _player.Animator.speed = requiredSpeed;
+        _player.Animator.SetBool(_hashAttack, true);
         _resetSpeedCoroutine = StartCoroutine(ResetAnimatorSpeedAfter(desiredDuration));
     }
 
     private void OnSuspendAttack()
     {
-        _animator.SetBool(_hashAttack, false);
+        _player.Animator.SetBool(_hashAttack, false);
     }
 
     private void SetParametrs()
     {
-        _animator.SetTrigger(_hashWeaponSeted);
+        _player.Animator.SetTrigger(_hashWeaponSeted);
     }
 
     private IEnumerator ResetAnimatorSpeedAfter(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        _animator.speed = _defaultAnimatorSpeed;
+        _player.Animator.speed = _defaultAnimatorSpeed;
         _resetSpeedCoroutine = null;
     }
 
     private float GetAttackClipLength()
     {
-        if (_animator == null)
+        if (_player.Animator == null)
             return _defaultAnimatorSpeed;
 
-        var controller = _animator.runtimeAnimatorController;
+        var controller = _player.Animator.runtimeAnimatorController;
         if (controller == null)
             return _defaultAnimatorSpeed;
 
@@ -236,16 +235,24 @@ public class PlayerAnimator : MonoBehaviour
 
     public void OnDie()
     {
-        _animator.SetTrigger(_hashDie);
+        _inputService.DisableInput();
+        _player.Animator.SetTrigger(_hashDie);
+        _player.Health.Died -= OnDie;
     }
 
     public void OnAnimationDie()
     {
-        _health.Die();
+        _gameConditionService.OnLouse(_player.Health.gameObject);
     }
 
     public void OnAnimationAttack()
     {
-        _attacker.OnAnimationAttack();
+        _player.Attacker.OnAnimationAttack();
+    }
+
+    public void OnRevive()
+    {
+        _player.Animator.SetTrigger(_hashRevive);
+        _player.Health.Died += OnDie;
     }
 }

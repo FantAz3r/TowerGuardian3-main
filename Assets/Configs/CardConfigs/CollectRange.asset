@@ -28,10 +28,11 @@ MonoBehaviour:
     Value: 2
     Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
   _id: a604511b-5dc5-43e9-a047-aa9f378a5a7a
-  _chanceToView: 0.5
-  _level: 0
-  _hasPlayer: 0
-  _isBought: 0
+  <ChanceToView>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <HasPlayer>k__BackingField: 0
+  <IsBought>k__BackingField: 0
+  <EffectType>k__BackingField: 2
   _buffType: 6
-  _baseIncreaseValue: 0.2
+  _baseIncreaseValue: 1.2
   _upgradeValuePerLevel: 0.1

@@ -1,202 +1,105 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    [SerializeField] private EnemyConfig _config;
+    [SerializeField] private Enemy _enemy;
 
-    private Mover _mover;
-    private Rotator _rotator;
-    private AttackZone _attackZone;
-    private IEnemyState _currentState;
-    private EnemyAnimator _animator;
-    private NavMeshAgent _agent;
-    private Player _player;
-    private Vector3 _target;
-    private PickUper _picker;
-    private Health _health;
-    private Collider _collider;
-
-    private Coroutine _currentCoroutine;
-
-    private ThrownObjectDetector _objectDetector;
-    private TargetDetector _targetDetector;
-    private AttackDetector _attackDetector;
-
-    private Dictionary<StateType, State> _states = new Dictionary<StateType, State>();
-
-    public event Action<IEnemyState> StateChanged;
-
-    public Mover Mover => _mover;
-    public Rotator Rotator => _rotator;
-    public AttackZone AttackZone => _attackZone;
-    public EnemyConfig Config => _config;
+    private int _hashIsSeePlayer, _hashIsPlayerInAttackRange, _hashRandom, _hashHasObject, _hashPick, _hashThrowEnded;
 
     private void Awake()
     {
-        _health = GetComponent<Health>();
-        _mover = GetComponent<Mover>();
-        _rotator = GetComponentInChildren<Rotator>();
-        _attackZone = GetComponentInChildren<AttackZone>();
-        _animator = GetComponentInChildren<EnemyAnimator>();
-        _agent = GetComponent<NavMeshAgent>();
-        _targetDetector = GetComponentInChildren<TargetDetector>();
-        _attackDetector = GetComponentInChildren<AttackDetector>();
-        _objectDetector = GetComponentInChildren<ThrownObjectDetector>();
-        _picker = GetComponentInChildren<PickUper>();
-        _collider = GetComponent<Collider>();
+        _hashIsSeePlayer = Animator.StringToHash("SeePlayer");
+        _hashIsPlayerInAttackRange = Animator.StringToHash("PlayerInAttackRange");
+        _hashRandom = Animator.StringToHash("Random");
+        _hashHasObject = Animator.StringToHash("HasObject");
+        _hashPick = Animator.StringToHash("IsPickup");
+        _hashThrowEnded = Animator.StringToHash("ThrowEnded");
     }
 
-    public void Init(int enemyLevel)
+    public void Init()
     {
-        _player = ServiceLocator.Get<IGameFactory>().Player;
-        _collider.enabled = true;
-        _agent.enabled = true;
+        _enemy.Agent.EnableAgent(true);
+        _enemy.Collider.enabled = true;
 
-        Config.SetLevel(enemyLevel);
+        _enemy.TargetDetector.PlayerDetected += OnSeePlayer;
+        _enemy.TargetDetector.PlayerLost += OnLostPlayer;
 
-        _agent.speed = Config.GetMoveSpeed();
-        _agent.angularSpeed = Config.MoveConfig.RotationSpeed;
+        _enemy.AttackDetector.PlayerDetected += OnPlayerInMeleeRange;
+        _enemy.AttackDetector.PlayerLost += OnChasePlayer;
 
-        _health.Init(Config.GetMaxHealth());
-
-
-        ActivateStates();
-        _targetDetector.PlayerDetected += OnSeePlayer;
-        _targetDetector.PlayerLost += OnLostPlayer;
-        _attackDetector.PlayerDetected += OnPlayerInMeleeRange;
-        _attackDetector.PlayerLost += OnChasePlayer;
-        _health.Died += OnDie;
-
-        if (_states.ContainsKey(StateType.Patrol))
-        {
-            SetState(_states[StateType.Patrol]);
-        }
+        _enemy.Health.Died += OnDie;
     }
 
     private void OnSeePlayer()
     {
-        int random = UnityEngine.Random.Range(0, 2);
+        SetRandom();
+        _enemy.BehaviorAnimator.SetBool(_hashIsSeePlayer, true);
+    }
 
-        if (random == 0 || _states.ContainsKey(StateType.FindObject) == false)
+    public void SetRandom(int random = -1)
+    {
+        if(random != -1)
         {
-            SetState(_states[StateType.Chase]);
+            _enemy.BehaviorAnimator.SetInteger(_hashRandom, random);
         }
         else
         {
-            SetState(_states[StateType.FindObject]);
-            _targetDetector.gameObject.SetActive(false);
+            _enemy.BehaviorAnimator.SetInteger(_hashRandom, Random.Range(0, 2));
         }
     }
 
     public void OnDie()
     {
-        _collider.enabled = false;
-        _agent.enabled = false;
+        _enemy.Collider.enabled = false;
+        _enemy.Agent.EnableAgent(false);
 
-        StopCoroutine(_currentCoroutine);
-        _currentCoroutine = null;
-        _currentState?.Exit();
-
-        _targetDetector.PlayerDetected -= OnSeePlayer;
-        _targetDetector.PlayerLost -= OnLostPlayer;
-        _attackDetector.PlayerDetected -= OnPlayerInMeleeRange;
-        _attackDetector.PlayerLost -= OnChasePlayer;
-        _health.Died -= OnDie;
+        _enemy.TargetDetector.PlayerDetected -= OnSeePlayer;
+        _enemy.TargetDetector.PlayerLost -= OnLostPlayer;
+        _enemy.AttackDetector.PlayerDetected -= OnPlayerInMeleeRange;
+        _enemy.AttackDetector.PlayerLost -= OnChasePlayer;
+        _enemy.Health.Died -= OnDie;
     }
 
     public void OnLostPlayer()
     {
-        if (_targetDetector.HasTarget)
-        {
-            SetState(_states[StateType.Chase]);
-        }
-        else
-        {
-            SetState(_states[StateType.Patrol]);
-        }
+        _enemy.BehaviorAnimator.SetBool(_hashIsSeePlayer, false);
+        _enemy.BehaviorAnimator.SetBool(_hashIsPlayerInAttackRange, false);
     }
 
     private void OnPlayerInMeleeRange()
     {
-        SetState(_states[StateType.Attack]);
+        _enemy.BehaviorAnimator.SetBool(_hashIsSeePlayer, true);
+        _enemy.BehaviorAnimator.SetBool(_hashIsPlayerInAttackRange, true);
     }
 
     public void OnChasePlayer()
     {
-        SetState(_states[StateType.Chase]);
+        _enemy.BehaviorAnimator.SetBool(_hashIsPlayerInAttackRange, false);
     }
 
-    public void OnReadyToThrow(Transform throwObject)
+    public void OnReadyToThrow()
     {
-        ThrowState throwState = _states[StateType.Thrown] as ThrowState;
-        throwState.SetThrownObject(throwObject);
-        SetState(_states[StateType.Thrown]);
+        _enemy.BehaviorAnimator.SetBool(_hashPick, false);
+        _enemy.BehaviorAnimator.SetBool(_hashHasObject, true);
     }
 
-    private void SetState(IEnemyState newState)
+    public void OnNullTrownObject()
     {
-        if (_currentState == newState)
-            return;
-
-        StartCoroutine(SwitchState(newState));
+        _enemy.BehaviorAnimator.SetBool(_hashHasObject, false);
     }
 
-    private IEnumerator SwitchState(IEnemyState newState)
+    public void OnStartPickup()
     {
-        if (_currentCoroutine != null)
-        {
-            while (_currentState.CanExit == false)
-            {
-                yield return null;
-            }
-
-            StopCoroutine(_currentCoroutine);
-            _currentCoroutine = null;
-        }
-
-        _currentState?.Exit();
-
-        _currentState = newState;
-        StateChanged?.Invoke(_currentState);
-        _currentState.Enter();
-
-        _currentCoroutine = StartCoroutine(_currentState.UpdateRoutine());
+        _enemy.BehaviorAnimator.SetBool(_hashPick, true);
     }
 
-    private void ActivateStates()
+    public void OnStopPickup()
     {
-        _states.Clear();
+        _enemy.BehaviorAnimator.SetBool(_hashPick, false);
+    }
 
-        foreach (var stateType in _config.AllowedStates)
-        {
-            switch (stateType)
-            {
-                case StateType.Patrol:
-                    _states.Add(StateType.Patrol, new PatrolState(this, _agent, _animator));
-                    break;
-                case StateType.Chase:
-                    _states.Add(StateType.Chase, new ChaseState(this, _agent, _animator, _player.transform));
-                    break;
-                case StateType.Attack:
-                    _states.Add(StateType.Attack, new AttackState(this, _animator, _player));
-                    break;
-                case StateType.Thrown:
-                    _states.Add(StateType.Thrown, new ThrowState(this, _animator, _player.transform, _targetDetector));
-                    break;
-                case StateType.FindObject:
-                    _states.Add(StateType.FindObject, new PickupState(this, _animator, _objectDetector, _agent, _picker, _targetDetector));
-                    break;
-                case StateType.Escape:
-                    _states.Add(StateType.Escape, new EscapeState(this, _player.transform, _agent));
-                    break;
-                case StateType.EnterPortal:
-                    _states.Add(StateType.EnterPortal, new EnterPortalState(this, _target, _agent));
-                    break;
-            }
-        }
+    public void OnThrowEnded()
+    {
+        _enemy.BehaviorAnimator.SetTrigger(_hashThrowEnded);
     }
 }

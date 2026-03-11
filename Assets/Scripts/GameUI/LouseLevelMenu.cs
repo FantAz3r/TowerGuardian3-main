@@ -10,10 +10,12 @@ public class LouseLevelMenu : LevelMenu
     private string _rewardId = "HealPlayer";
     private Player _player;
     private IADVServise _advService;
+    private IInputService _inputService;
     private bool _canResurrection=true;
 
     protected override void Awake()
     {
+        _inputService = ServiceLocator.Get<IInputService>();
         _advService = ServiceLocator.Get<IADVServise>();
         base.Awake();
         _player = GameFactory.Player;
@@ -64,9 +66,11 @@ public class LouseLevelMenu : LevelMenu
         
         _advService.TryShowRewardADV(_rewardId, () =>
         {
-            _player.Health.HealMaxHealth();
+            _player.Health.Resurect();
         });
 
+        _player.PlayerAnimator.OnRevive();
+        _inputService.EnableInput();
         
         base.Close();
         WindowService.Open(WindowType.HUD);

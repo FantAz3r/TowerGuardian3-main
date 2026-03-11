@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1286727987519819015}
   - component: {fileID: 8898738597190543392}
   - component: {fileID: -7064231531099091760}
+  - component: {fileID: -3585603078715472925}
   m_Layer: 7
   m_Name: SM_Medium_Rock_Rectangle_07
   m_TagString: Untagged
@@ -187,3 +188,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a15d927a500c20428640261cb7bc65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &-3585603078715472925
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767610070460702575}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.53400004, y: 0.753, z: 0.50100005}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.135, y: 0.19100001, z: 0.047000002}
+  m_TimeToStationary: 0.5

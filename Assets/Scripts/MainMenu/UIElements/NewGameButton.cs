@@ -37,10 +37,11 @@ public class NewGameButton : MonoBehaviour
         if (YG2.saves.PlayerWeapons != null) YG2.saves.PlayerWeapons.Clear();
         if (YG2.saves.QuestProgress != null) YG2.saves.QuestProgress.Clear();
 
-        YG2.saves.Coins = 33333;
-        YG2.saves.Wood = 33333;
-        YG2.saves.Stones = 33333;
+        YG2.saves.Coins = 550;
+        YG2.saves.Wood = 500;
+        YG2.saves.Stones = 500;
 
+        YG2.saves.CurrentWeapon = new CardSaveData();
         YG2.saves.Level = 0;
         YG2.saves.UpgradePoints = 0;
         YG2.saves.CurrentEXP = 0f;

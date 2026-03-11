@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
     [field: SerializeField] public HealthRegeneration HealthRegeneration { get; private set; }
     [field: SerializeField] public Mover Mover { get; private set; }
     [field: SerializeField] public Camera ModelViewCamera { get; private set; }
+    [field: SerializeField] public Animator Animator { get; private set; }
+    [field: SerializeField] public Rotator Rotator { get; private set; }
+    [field: SerializeField] public PlayerAnimator PlayerAnimator { get; private set; }
+
+
 
     private IGameConditionService _conditionService;
     private WaitForSecondsRealtime _delay = new WaitForSecondsRealtime(5);
@@ -27,7 +32,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _conditionService = ServiceLocator.Get<IGameConditionService>();
-        Health.Died += OnDied;
     }
 
     private void Start()
@@ -47,14 +51,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnDied()
-    {
-        _conditionService.OnLouse(Health.gameObject);
-    }
-
     private void OnDestroy()
     {
-        Health.Died -= OnDied;
         IsAlive = false;
     }
 }

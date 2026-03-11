@@ -9,6 +9,7 @@ public class ResourceCollector : MonoBehaviour, IBuffble
     [SerializeField] private float _flyDelay = 1f;
     [SerializeField] private float _treshold = 0.5f;
 
+    private StatsCalculator _statsCalculator;
     private HashSet<ResourcePiece> _activeResources = new HashSet<ResourcePiece>();
     private WaitForSeconds _wait;
     private SphereCollider _collectionCollider;
@@ -20,6 +21,7 @@ public class ResourceCollector : MonoBehaviour, IBuffble
 
     private void Awake()
     {
+        _statsCalculator = new StatsCalculator();
         _collectionCollider = GetComponent<SphereCollider>();
         _wait = new WaitForSeconds(_flyDelay);
         _startRange = _collectionCollider.radius;
@@ -61,18 +63,27 @@ public class ResourceCollector : MonoBehaviour, IBuffble
         _spawnerService.SendSoundReqest(resource.CollectSound, transform.position);
     }
 
-    public void ApplyBuff(float value)
+    public void EnableBuff()
     {
-        _collectionCollider.radius = _startRange * (1 + value);
+    }
+
+    public void ApplyBuff(IEffect effect)
+    {
+        _statsCalculator.AddEffect(effect);
+        _collectionCollider.radius = _statsCalculator.Calculate(_startRange);
         RangeSeted?.Invoke(_collectionCollider.radius);
     }
 
-    public void RemoveBuff()
+    public void Recalculate()
     {
-        _collectionCollider.radius = _startRange;
+        _collectionCollider.radius = _statsCalculator.Calculate(_startRange);
+        RangeSeted?.Invoke(_collectionCollider.radius);
     }
 
-    public void EnableBuff()
+    public void RemoveBuff(IEffect effect)
     {
+        _statsCalculator.RemoveEffect(effect);
+        _collectionCollider.radius = _statsCalculator.Calculate(_startRange);
+        RangeSeted?.Invoke(_collectionCollider.radius);
     }
 }

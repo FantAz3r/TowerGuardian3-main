@@ -1,34 +1,36 @@
-using System.Collections;
 using UnityEngine;
 
-public abstract class State : IEnemyState
+public abstract class State : StateMachineBehaviour
 {
-    protected EnemyStateMachine StateMachine { get; private set; }
-    private bool _canExit;
-    public bool CanExit => _canExit;
-
-    public State(EnemyStateMachine stateMachine, bool canExit)
-    {
-        StateMachine = stateMachine;
-        _canExit = canExit;
-    }
+    protected Enemy Enemy { get; private set; }
    
-    public abstract void Enter();
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Enemy = animator.GetComponent<Enemy>();
+    }
 
-    public abstract void Exit();
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
 
-    public abstract IEnumerator UpdateRoutine();
+    }
+
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+
+    }
 
     public void RotateTo(Vector3 target)
     {
-        Vector3 direction3D = target - StateMachine.transform.position;
+        Vector3 direction3D = target - Enemy.transform.position;
         direction3D.y = 0f;
         Vector2 direction = new Vector2(direction3D.x, direction3D.z).normalized;
-        StateMachine.Rotator.SetDirection(direction);
+        Enemy.Rotator.SetDirection(direction);
     }
 
-    public void SetCanExit(bool canExit)
+    public void FollowTargetPoint(Vector3 point)
     {
-        _canExit = canExit;
+        RotateTo(point);
+        Enemy.Agent.SetDestination(point);
+        Enemy.AnimationAnimator.UpdateSpeed(Enemy.Config.MoveConfig.MoveSpeed);
     }
 }

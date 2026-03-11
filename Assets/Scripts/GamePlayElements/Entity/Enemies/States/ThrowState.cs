@@ -1,85 +1,54 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThrowState : State
 {
-    private EnemyAnimator _animator;
-    private Transform _player;
-    private Transform _thrownObject;
-    private TargetDetector _targetDetector;
     private ISpawnerService _spawnerService;
-    private bool isThrowing = false;
+    private bool _isThrowing;
 
-    public ThrowState(
-        EnemyStateMachine stateMachine,
-        EnemyAnimator animator,
-        Transform player,
-        TargetDetector targetDetector
-        ) : base(stateMachine, false)
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateEnter(animator, stateInfo, layerIndex);
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
-        _animator = animator;
-        _player = player;
-        _targetDetector = targetDetector;
+
+        _isThrowing = true;
+        Enemy.AnimationAnimator.Throwed += OnThrow;
+
+        RotateTo(Enemy.Target.position);
+        Enemy.AnimationAnimator.PlayThrow();
     }
 
-    public override void Enter()
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        isThrowing = true;
-    }
+        if (Enemy == null || Enemy.Target == null) return;
 
-    public void SetThrownObject(Transform thrownObject)
-    {
-        _thrownObject = thrownObject;
-    }
-
-    public override IEnumerator UpdateRoutine()
-    {
-        if (_thrownObject == null)
+        if (_isThrowing)
         {
-            SetCanExit(true);
-            StateMachine.OnChasePlayer();
-            yield break;
+            RotateTo(Enemy.Target.position);
         }
-        else
-        {
-            yield return ThrownRoutine();
-        }
-
-        SetCanExit(true);
-        StateMachine.OnChasePlayer();
     }
 
-    private IEnumerator ThrownRoutine()
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _animator.Throwed += OnThrow;
-        RotateTo(_player.transform.position);
-        _animator.PlayThrow();
-
-        while (isThrowing)
+        if (Enemy != null)
         {
-            yield return null;
+            Enemy.AnimationAnimator.Throwed -= OnThrow;
+            Enemy.TargetDetector.gameObject.SetActive(true);
+            Enemy.SetThrownObject(null);
         }
 
-        _animator.Throwed -= OnThrow;
-        _thrownObject = null;
+        _isThrowing = false;
     }
 
     private void OnThrow()
     {
-        ThrownObject thrownObject = _thrownObject.AddComponent<ThrownObject>();
-        thrownObject.StartFly(StateMachine.Config.ThrowDamage, _player.position);
-        _spawnerService.SendEffectReqest(EffectType.AimPoint, _player.position );
+        if (Enemy.ThrownObject == null) return;
 
-        isThrowing = false;
-    }
-
-    public override void Exit()
-    {
-        isThrowing = false;
-        _thrownObject = null;
-        _targetDetector.gameObject.SetActive( true);
-        SetCanExit(true);
+        ThrownObject thrownObject = Enemy.ThrownObject.gameObject.AddComponent<ThrownObject>();
+        thrownObject.StartFly(Enemy.Config.ThrowDamage, Enemy.Target.position);
+        
+        _spawnerService.SendEffectReqest(EffectType.AimPoint, Enemy.Target.position);
+        _isThrowing = false;
+        Enemy.StateMachine.OnThrowEnded();
+        
     }
 }

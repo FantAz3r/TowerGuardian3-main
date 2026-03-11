@@ -1,25 +1,11 @@
-using System.Collections;
 using UnityEngine;
 
-public class DieState : State, IEnemyState
+public class DieState : State
 {
-    private WaitForSeconds _dieAnimation = new WaitForSeconds(3);
-
-    public DieState(EnemyStateMachine stateMachine, bool canExit) : base(stateMachine, false)
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-    }
-
-    public override void Enter()
-    {
-    }
-
-    public override void Exit()
-    {
-    }
-
-    public override IEnumerator UpdateRoutine()
-    {
-        yield return _dieAnimation;
-        SetCanExit(true);
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        Enemy.AnimationAnimator.PlayDie();
+        Enemy.StateMachine.OnDie();
     }
 }

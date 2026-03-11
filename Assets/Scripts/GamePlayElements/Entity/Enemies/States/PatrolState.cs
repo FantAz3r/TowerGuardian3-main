@@ -1,28 +1,16 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PatrolState : State
 {
-    private float _updateTime = 0.05f;
-    private WaitForSeconds _delay;
-    private EnemyAnimator _animator;
     private Vector3[] _patrolPoints;
     private int _currentPointIndex;
-    private NavMeshAgent _agent;
+    private bool _isWaitingForNextPoint = false;
 
-    public PatrolState(EnemyStateMachine stateMachine, NavMeshAgent agent, EnemyAnimator animator) : base(stateMachine, true)
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _agent = agent;
-        _animator = animator;
+        base.OnStateEnter(animator, stateInfo, layerIndex);
 
-        _delay = new WaitForSeconds(_updateTime);
-    }
-
-    public override void Enter()
-    {
-        _agent.isStopped = false;
-        Transform origin = StateMachine.transform;
+        Transform origin = Enemy.transform;
         float edgeSize = 10f;
 
         _patrolPoints = new Vector3[]
@@ -36,31 +24,24 @@ public class PatrolState : State
         _currentPointIndex = 0;
     }
 
-    public override void Exit()
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _agent.isStopped = true;
     }
 
-    public override IEnumerator UpdateRoutine()
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        while (_agent.isStopped == false)
+        float threshold = 1f;
+
+        if (Enemy.Agent.GetRemainingDistance() <= threshold && _isWaitingForNextPoint == false)
         {
-            float threshold = 0.5f;
-            Vector3 targetPosition = _patrolPoints[_currentPointIndex];
-            _agent.destination = targetPosition;
-            RotateTo(targetPosition);
-
-
-            if (_agent.remainingDistance < threshold)
-            {
-                _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
-            }
-            else
-            {
-                _animator.UpdateSpeed(StateMachine.Config.MoveConfig.MoveSpeed);
-            }
-
-            yield return _delay;
+            _isWaitingForNextPoint = true;
+            _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
         }
+        else
+        {
+            _isWaitingForNextPoint = false;
+        }
+
+        FollowTargetPoint(_patrolPoints[_currentPointIndex]);
     }
 }

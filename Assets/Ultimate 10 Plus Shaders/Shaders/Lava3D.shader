@@ -31,7 +31,7 @@ ________________________________________________________________________________
 
 Shader "Ultimate 10+ Shaders/Lava3D"
 {
-    Properties
+   Properties
     {
         [HDR] _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
@@ -39,7 +39,7 @@ Shader "Ultimate 10+ Shaders/Lava3D"
         _FlowDirection ("Flow Direction", Vector) = (1, 0, 0, 0)
         _Speed ("Speed", float) = 0.25
         _Amplitude ("Amplitude", float) = 1.0
-
+        
         [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
     }
     SubShader
@@ -82,9 +82,9 @@ Shader "Ultimate 10+ Shaders/Lava3D"
         UNITY_INSTANCING_BUFFER_END(Props)
 
         fixed4 pixel;
-        void surf (Input IN, inout SurfaceOutputStandard o)
+       void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            pixel = tex2D (_MainTex, IN.uv_MainTex + _FlowDirection * fmod(_Time.y, 1200) * _Speed) * _Color;
+            pixel = tex2D (_MainTex, IN.uv_MainTex + _FlowDirection.xy * fmod(_Time.y, 1200) * _Speed) * _Color;
             o.Albedo = pixel.rgb;
         }
             

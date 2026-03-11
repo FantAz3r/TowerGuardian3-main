@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuffConfig", menuName = "Configs/BuffConfig")]
 public class BuffConfig : CardConfig
 {
+    [field: SerializeField] public BuffEffectType EffectType { get; private set; }
     [SerializeField] private BuffType _buffType;
 
     [SerializeField] private float _baseIncreaseValue = 0.2f;

@@ -6,6 +6,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     [SerializeField] private HealthConfig _config;
     [SerializeField] private EntityType _type;
 
+    private StatsCalculator _statsCalculator;
     private float _currentValue, _startMaxHealth, _maxHealth;
 
     public HealthConfig Config => _config;
@@ -16,13 +17,14 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     public event Action<float> DamageTaken, Healed;
     public event Action<Health> Killed;
 
-    public event Action Died, Destroyed;
+    public event Action Died, Destroyed, Resurected;
 
     public Transform GetTransform() => transform;
     public EntityType GetHealthType() => _type;
 
     protected virtual void Awake()
     {
+        _statsCalculator = new StatsCalculator();
         _maxHealth = _config.MaxHealth;
         _startMaxHealth = _config.MaxHealth;
     }
@@ -79,20 +81,21 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         }
     }
 
-    public void ApplyBuff(float value)
+    public void ApplyBuff(IEffect effect)
     {
-        float scaleRatio = _currentValue / _maxHealth;
-        _maxHealth = _startMaxHealth * (value + 1);
-        _currentValue = _maxHealth * scaleRatio;
-        IsValueChange?.Invoke(_currentValue, _maxHealth);
+        _statsCalculator.AddEffect(effect);
+        UpdateHealth();
     }
 
-    public void RemoveBuff()
+    public void Recalculate()
     {
-        float scaleRatio = _currentValue / _maxHealth;
-        _maxHealth = _startMaxHealth;
-        _currentValue = _maxHealth * scaleRatio;
-       IsValueChange?.Invoke(_currentValue, _maxHealth);
+        UpdateHealth();
+    }
+
+    public void RemoveBuff(IEffect effect)
+    {
+        _statsCalculator.RemoveEffect(effect);
+        UpdateHealth();
     }
 
     public void DieAction()
@@ -106,7 +109,21 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         gameObject.SetActive(false);
     }
 
+    public void Resurect()
+    {
+        Heal(MaxHealth);
+        Resurected?.Invoke();
+    }
+
     public void EnableBuff()
     {
+    }
+
+    private void UpdateHealth()
+    {
+        float scaleRatio = _currentValue / _maxHealth;
+        _maxHealth = _statsCalculator.Calculate(_startMaxHealth);
+        _currentValue = _maxHealth * scaleRatio;
+        IsValueChange?.Invoke(_currentValue, _maxHealth);
     }
 }

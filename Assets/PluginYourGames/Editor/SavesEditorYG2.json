@@ -1,31 +1,24 @@
 {
-    "idSave": 10288,
-    "AllCards": [
-        {
-            "ID": "6809a072-2f9b-472c-bead-b31e4c6975db",
-            "Level": 16,
-            "IsBought": true,
-            "HasPlayer": true
-        }
-    ],
+    "idSave": 16880,
+    "AllCards": [],
     "CurrentWeapon": {
-        "ID": "",
-        "Level": 0,
-        "IsBought": false,
+        "ID": "521bccbd-6f06-453d-b923-7bfee13b2dec",
+        "Level": 1,
+        "IsBought": true,
         "HasPlayer": false
     },
     "PlayerWeapons": [],
-    "Coins": 31444,
-    "Wood": 33920,
-    "Stones": 33675,
+    "Coins": 550,
+    "Wood": 500,
+    "Stones": 500,
     "Level": 0,
     "UpgradePoints": 0,
     "CurrentEXP": 0.0,
-    "CurrentLevel": 4,
+    "CurrentLevel": 3,
     "PlayerPosition": {
-        "x": 7.651376724243164,
-        "y": 0.007268369197845459,
-        "z": 17.6158504486084
+        "x": 11.040672302246094,
+        "y": 8.417566299438477,
+        "z": -39.5023193359375
     },
     "QuestProgress": [
         {
@@ -33,20 +26,14 @@
             "QuestProgress": 0.0,
             "CurrentTime": 0.0,
             "QuestIndex": 4
-        },
-        {
-            "Level": 4,
-            "QuestProgress": 0.0,
-            "CurrentTime": 0.0,
-            "QuestIndex": 2
         }
     ],
     "LevelsProgress": [
         {
             "Level": 4,
-            "Score": 527,
+            "Score": 2247,
             "Stars": 3,
-            "Time": 94.92537689208985,
+            "Time": 7.719840049743652,
             "IsComplite": true
         },
         {
@@ -64,15 +51,15 @@
     "Volumes": [
         {
             "Name": "Background",
-            "Volume": -22.77308464050293
+            "Volume": -26.823366165161134
         },
         {
             "Name": "UI",
-            "Volume": -10.033548355102539
+            "Volume": -21.132047653198243
         },
         {
             "Name": "Effects",
-            "Volume": -10.033548355102539
+            "Volume": -21.132047653198243
         }
     ],
     "IsFirstGameSession": false

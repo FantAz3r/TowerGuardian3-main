@@ -1,35 +1,36 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using YG;
 
 public class PlayerSpawnPointSeter
 {
-    private PlayerSpawnPoints _spawnPointsData;
+    private ISceneContainer _sceneContainer;
 
-    public PlayerSpawnPointSeter(PlayerSpawnPoints spawnPointsData)
+    public PlayerSpawnPointSeter(ISceneContainer sceneContainer)
     {
-        _spawnPointsData = spawnPointsData;
+        _sceneContainer = sceneContainer;
     }
 
-    public Vector3 GetSpawnPoint(LevelConfig config, LevelID previousLevel)
+    public Vector3 GetSpawnPoint(LevelID currentLevel, LevelID previousLevel)
     {
         if (previousLevel == LevelID.None || previousLevel == LevelID.MainMenu)
         {
             if (YG2.saves.PlayerPosition == Vector3.zero)
             {
-                return config.PlayerSpawnPoint;
+                return _sceneContainer.PlayerSpawnPoints.First().transform.position;
             }
 
             return YG2.saves.PlayerPosition;
         }
 
-        if (config.Level == LevelID.Tower)
+        if (currentLevel == LevelID.Tower)
         {
-            foreach (var point in _spawnPointsData.SpawnPoints)
+            foreach (var point in _sceneContainer.PlayerSpawnPoints)
             {
                 if (point.PreviousLevel == previousLevel)
                 {
-                    return point.SpawnPoint.position;
+                    return point.transform.position;
                 }
             }
 
@@ -37,7 +38,7 @@ public class PlayerSpawnPointSeter
         }
         else
         {
-            return config.PlayerSpawnPoint;
+            return _sceneContainer.PlayerSpawnPoints.First().transform.position;
         }
     }
 }

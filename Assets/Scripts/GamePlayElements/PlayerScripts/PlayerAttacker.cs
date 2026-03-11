@@ -38,7 +38,7 @@ public class PlayerAttacker : MonoBehaviour
         _currentWeapon.Init(attackZone);
         _weaponsInInventory.Add(_currentWeapon);
 
-        SetWeapon(_currentWeapon.Config);
+       
     }
 
     public void AddWeapon(Weapon weapon)
@@ -63,6 +63,7 @@ public class PlayerAttacker : MonoBehaviour
                 UpdateWeapon();
                 WeaponSeted?.Invoke(_currentWeapon);
 
+                SaveCurrentWeapon(_currentWeapon.Config);
                 StartAttacking();
                 return;
             }
@@ -114,6 +115,25 @@ public class PlayerAttacker : MonoBehaviour
         {
             _currentWeapon.Attack();
             Hited?.Invoke();
+        }
+    }
+
+    public void LoadCurrentWeapon()
+    {
+        if (YG2.saves.CurrentWeapon.ID == default)
+        {
+            SetWeapon(_currentWeapon.Config);
+        }
+        else
+        {
+            foreach (var weapon in _weaponsInInventory)
+            {
+
+                if (weapon.Config.ID == YG2.saves.CurrentWeapon.ID)
+                {
+                    SetWeapon(weapon.Config);
+                }
+            }
         }
     }
 

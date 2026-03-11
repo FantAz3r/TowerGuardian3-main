@@ -112,7 +112,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &5081398009426885774
 MonoBehaviour:
@@ -155,6 +155,9 @@ MonoBehaviour:
   <HealthRegeneration>k__BackingField: {fileID: 3820031484318594102}
   <Mover>k__BackingField: {fileID: 7845630260713952501}
   <ModelViewCamera>k__BackingField: {fileID: 763526106753509075}
+  <Animator>k__BackingField: {fileID: 8023230514114427221}
+  <Rotator>k__BackingField: {fileID: 6992114218835685138}
+  <PlayerAnimator>k__BackingField: {fileID: 762481495982142268}
 --- !u!114 &325926260405469938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +212,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fe92c75a894b83a418c039c5f6720000, type: 2}
   - {fileID: 11400000, guid: 4b12ff8e62b0bb74b8a7e64315f7bc28, type: 2}
   - {fileID: 11400000, guid: 16028540473f72b41b1faf4d5345422f, type: 2}
+  _player: {fileID: 5455729604310408274}
 --- !u!114 &-2597494668989160889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47c460eb9ade140a0abd8dcc9511ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 5455729604310408274}
   _speedMultiplier: 1
   _smoothTime: 0.05
   attackClipName: Attack
@@ -472,13 +477,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4004048508999904615}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.12982178, y: 1.21, z: 2.1360016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4144196830429454860}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &763526106753509075
 Camera:
   m_ObjectHideFlags: 0
@@ -514,7 +519,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 1.75
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

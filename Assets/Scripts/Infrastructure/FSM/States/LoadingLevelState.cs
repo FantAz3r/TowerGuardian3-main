@@ -67,6 +67,10 @@ public class LoadingLevelState : IPayloadedState<LevelID>
                 _sceneLoader.Load(level.ToString(), InitGameLevel);
                 break;
 
+            case LevelID.Level5:
+                _sceneLoader.Load(level.ToString(), InitGameLevel);
+                break;
+
             case LevelID.Tower:
                 _sceneLoader.Load(level.ToString(), InitTowerLevel);
                 break;
@@ -111,12 +115,12 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
         _gameFactory.SetLevelConfig(_currentLevel);
         _gameFactory.CreateLight();
+        _gameFactory.CreateTower();
         _gameFactory.CreatePlayer(_previousLevel);
         _gameFactory.CreateScoreCounter();
         _gameFactory.CreateEventSystem();
         _windowService.CreateJoystick();
         _gameFactory.CreateCamera();
-        _gameFactory.CreateTower();
         _gameFactory.CreatePortalsFactory();
         _gameFactory.CreateQuests();
         _gameFactory.CreateQuestRuner();
