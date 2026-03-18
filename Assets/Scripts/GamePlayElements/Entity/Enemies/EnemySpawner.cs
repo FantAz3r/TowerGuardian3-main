@@ -6,7 +6,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     private const int NoGameLevelCount = 4;
-    private IReadOnlyList<SpawnerActivator> _spawnPoints;
+
+    private List<SpawnerActivator> _spawnPoints;
     private List<SpawnerActivator> _activeSpawnPoints = new();
     private DayCycle _dayCycle;
     private Player _player;
@@ -30,10 +31,15 @@ public class EnemySpawner : MonoBehaviour
         _spawnPoints = _gameFactory.SceneContainer.SpawnPoints;
         _waves = _levelConfig.Waves;
 
-        foreach (var spawnPoint in _spawnPoints)
+        foreach (SpawnerActivator spawnPoint in _spawnPoints)
         {
-            spawnPoint.Detected += AddSpawnPoint;
-            spawnPoint.Losted += RemoveSpawnPoint;
+            if(spawnPoint != null)
+            {
+                spawnPoint.Detected += AddSpawnPoint;
+                spawnPoint.Losted += RemoveSpawnPoint;
+                spawnPoint.Destroyed += OnDestroySpawnPoint;
+
+            }
         }
 
         SetupPoolsAndWeightsForWave(_waves[_currentWaveIndex]);
@@ -43,8 +49,12 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var spawnPoint in _spawnPoints)
         {
-            spawnPoint.Detected -= AddSpawnPoint;
-            spawnPoint.Losted -= RemoveSpawnPoint;
+            if (spawnPoint != null)
+            {
+                spawnPoint.Detected -= AddSpawnPoint;
+                spawnPoint.Losted -= RemoveSpawnPoint;
+                spawnPoint.Destroyed -= OnDestroySpawnPoint;
+            }
         }
     }
 
@@ -61,6 +71,15 @@ public class EnemySpawner : MonoBehaviour
             if (_pools.ContainsKey(enemy) == false)
                 _pools[enemy] = new ObjectPool<Enemy>(enemy, 0, true);
         }
+    }
+
+    private void OnDestroySpawnPoint(SpawnerActivator spawnerActivator)
+    {
+        spawnerActivator.Destroyed -= OnDestroySpawnPoint;
+        spawnerActivator.Detected -= AddSpawnPoint;
+        spawnerActivator.Losted -= RemoveSpawnPoint;
+        _spawnPoints.Remove(spawnerActivator);
+        _activeSpawnPoints.Remove(spawnerActivator);
     }
 
     private void Spawn()
@@ -126,7 +145,7 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        while (enabled)
+        while (_player.IsAlive)
         {
             Spawn();
             yield return (_dayCycle.CurrentPhase == DayPhase.Day) ? _daySpawnDelay : _nightSpawnDelay;
@@ -135,7 +154,7 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator WaveRoutine()
     {
-        while (enabled)
+        while (_player.IsAlive)
         {
             SetWave(_currentWaveIndex);
             yield return _waveDuration;

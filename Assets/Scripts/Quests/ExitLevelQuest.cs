@@ -43,10 +43,20 @@ public class ExitLevelQuest : Quest
         base.Fail();
     }
 
+
+    public override void Stop()
+    {
+        _portal.Entered -= Complete;
+        _coroutineRunner.StopCoroutine(_timeRoutine);
+        QuestViewer.Highlighter.DeactivateWarning();
+        base.Stop();
+    }
+    
+
     public override void Complete()
     {
         _coroutineRunner.StopCoroutine(_timeRoutine);
-        QuestViewer.Highlighter.ActivateWarning();
+        QuestViewer.Highlighter.DeactivateWarning();
         _portal.Entered -= Complete;
         base.Complete();
     }

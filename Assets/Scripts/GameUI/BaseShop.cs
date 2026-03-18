@@ -86,7 +86,7 @@ public abstract class BaseShop : PauseWindow
 
     protected virtual CardSaveData CreateSaveData(ICardConfig card)
     {
-        return new CardSaveData(0, card.ID, false, false);
+        return new CardSaveData(card.Level, card.ID, card.IsBought, card.HasPlayer);
     }
 
     protected void UpdateCardSave(ICardConfig card)

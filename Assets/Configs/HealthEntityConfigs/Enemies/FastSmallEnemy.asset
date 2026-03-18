@@ -14,15 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MoveConfig>k__BackingField: {fileID: 11400000, guid: a597da141acd67349af6dcd2ea8acc97, type: 2}
   <HealthConfig>k__BackingField: {fileID: 11400000, guid: b4d08c32463b6944c9f7faed277b3368, type: 2}
-  <DetectionRadius>k__BackingField: 10
+  <DetectionRadius>k__BackingField: 25
   <Damage>k__BackingField: 4
-  <AttackRange>k__BackingField: 1
+  <AttackRange>k__BackingField: 2
   <HitSound>k__BackingField: {fileID: 8300000, guid: d89c207a21ab64b4ba9c74827ef0916e, type: 3}
   <AttackAriaCenter>k__BackingField: {x: 0, y: 0, z: 0.7}
-  <AttackCooldown>k__BackingField: 1.5
+  <AttackCooldown>k__BackingField: 1.3
   <JumpDamage>k__BackingField: 0
   <ThrowDamage>k__BackingField: 0
   <Level>k__BackingField: 0
   <Controller>k__BackingField: {fileID: 9100000, guid: b43c45ae26e7f1846afbc608f358a596, type: 2}
   _damageGrowthMultiplier: 2
-  _healthGrowthPerLevel: 3

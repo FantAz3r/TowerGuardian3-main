@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour, ISceneContainer
     [field: SerializeField] public TowerRenderer TowerRenderer { get; private set; }
     [field: SerializeField] public List<Portal> Portals { get; private set; }
     [field: SerializeField] public List<PlayerSpawnPoint> PlayerSpawnPoints { get; private set; }
+    [field: SerializeField] public List<GameObject> QuestObjects { get; private set; }
 
     public List<SpawnerActivator> SpawnPoints => null;
 }

@@ -97,6 +97,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreateScoreCounter();
         _gameFactory.CreateCamera();
         _gameFactory.CreateEventSystem();
+        _gameFactory.CreateCardSelector();
         _gameFactory.CreateLight();
         _gameFactory.CreateEnemies();
         _windowService.CreateJoystick();
@@ -119,6 +120,8 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         _gameFactory.CreatePlayer(_previousLevel);
         _gameFactory.CreateScoreCounter();
         _gameFactory.CreateEventSystem();
+        _gameFactory.CreateCardSelector();
+
         _windowService.CreateJoystick();
         _gameFactory.CreateCamera();
         _gameFactory.CreatePortalsFactory();

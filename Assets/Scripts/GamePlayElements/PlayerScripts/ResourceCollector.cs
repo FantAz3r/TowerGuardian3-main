@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ResourceCollector : MonoBehaviour, IBuffble
 {
-    [SerializeField] private float _resourceFlySpeed = 2f;
+    [SerializeField] private float _resourceFlySpeed = 10f;
     [SerializeField] private float _flyDelay = 1f;
     [SerializeField] private float _treshold = 0.5f;
 

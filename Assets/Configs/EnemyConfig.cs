@@ -18,11 +18,10 @@ public class EnemyConfig : ScriptableObject
 
     [SerializeField] private float _damageGrowthMultiplier = 2f;
 
-    [SerializeField] private float _healthGrowthPerLevel = 3f;
-
     public void SetLevel(int level)
     {
         Level = Mathf.Max(level, 0);
+        HealthConfig.SetLevel(level);
     }
 
     public float GetMoveSpeed()
@@ -33,11 +32,6 @@ public class EnemyConfig : ScriptableObject
     public int GetDamage()
     {
         return Mathf.RoundToInt(Damage * Mathf.Pow(_damageGrowthMultiplier, Level));
-    }
-
-    public float GetMaxHealth()
-    {
-        return Mathf.RoundToInt(HealthConfig.MaxHealth * Mathf.Pow(_healthGrowthPerLevel, Level));
     }
 }
 

@@ -7,22 +7,17 @@ using YG;
 public class PlayerAttacker : MonoBehaviour
 {
     private List<Weapon> _weaponsInInventory = new();
-    private Weapon _currentWeapon;
-    private Weapon _previousWeapon = null;
+    private Weapon _currentWeapon, _previousWeapon = null;
     private Coroutine _attackCoroutine;
-    private WaitForSeconds _attackDelay;
-    private WaitForSeconds _delay;
+    private WaitForSeconds _attackDelay, _delay;
     private float _defoultAttackTime = 1f;
     private float _emptyTargetAttackDelay = 0.1f;
 
     public event Action<IWeapon, float> Attacked;
-    public event Action<IWeapon> WeaponSeted;
-    public event Action<IWeapon> WeaponRemoved;
-    public event Action WeaponDeactivated;
-    public event Action WeaponActivated;
-
-    public event Action Hited;
-    public event Action Suspended;
+    public event Action<IWeapon> WeaponSeted, WeaponRemoved;
+    public event Action<ICardConfig> SavedWeaponAdded;
+    public event Action WeaponDeactivated, WeaponActivated;
+    public event Action Hited, Suspended;
 
     public IReadOnlyList<Weapon> WeaponsInInventory => _weaponsInInventory;
     public Weapon CurrentWeapon => _currentWeapon;
@@ -37,8 +32,6 @@ public class PlayerAttacker : MonoBehaviour
         _currentWeapon = GetComponentInChildren<Weapon>();
         _currentWeapon.Init(attackZone);
         _weaponsInInventory.Add(_currentWeapon);
-
-       
     }
 
     public void AddWeapon(Weapon weapon)
@@ -106,7 +99,12 @@ public class PlayerAttacker : MonoBehaviour
 
     public void OnTakeOffWeapon()
     {
-        _previousWeapon.TakeOff();
+        foreach(var weapon in _weaponsInInventory)
+        {
+            weapon.gameObject.SetActive(false);
+        }
+
+        _previousWeapon?.TakeOff();
     }
 
     public void OnAnimationAttack()
@@ -132,6 +130,7 @@ public class PlayerAttacker : MonoBehaviour
                 if (weapon.Config.ID == YG2.saves.CurrentWeapon.ID)
                 {
                     SetWeapon(weapon.Config);
+                    SavedWeaponAdded?.Invoke(weapon.Config);
                 }
             }
         }

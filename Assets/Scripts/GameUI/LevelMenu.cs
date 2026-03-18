@@ -3,10 +3,13 @@ using UnityEngine.UI;
 
 public abstract class LevelMenu : PauseWindow
 {
+    public const int EnumGameLevelOffset = 3;
+
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _homeButton;
 
-    public LevelID _currentLevel { get; private set; }
+    public IGameConditionService ConditionService{ get; private set; }
+    public LevelID CurrentLevel { get; private set; }
     public ScoreCounter ScoreCounter { get; private set; }
     public IStateSwitchService StateSwitchService { get; private set; }
     public IGameFactory GameFactory { get; private set; }
@@ -15,12 +18,13 @@ public abstract class LevelMenu : PauseWindow
     protected override void Awake()
     {
         base.Awake();
+        ConditionService = ServiceLocator.Get<IGameConditionService>();
         WindowService = ServiceLocator.Get<IWindowService>();   
         StateSwitchService = ServiceLocator.Get<IStateSwitchService>();
         GameFactory = ServiceLocator.Get<IGameFactory>();
 
         ScoreCounter = GameFactory.ScoreCounter;
-        _currentLevel = GameFactory.LevelConfig.Level;
+        CurrentLevel = GameFactory.LevelConfig.Level;
     }
 
     protected virtual void OnEnable()
@@ -51,13 +55,15 @@ public abstract class LevelMenu : PauseWindow
 
     private void OnRestartClicked()
     {
-        StateSwitchService.Switch(_currentLevel);
+        StateSwitchService.Switch(CurrentLevel);
+        ConditionService.SetLevelEnded();
         Close();
     }
 
     protected virtual void OnHomeClicked()
     {
         StateSwitchService.Switch(LevelID.Tower);
+        ConditionService.SetLevelEnded();
         Close();
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
@@ -24,21 +23,31 @@ public class Sell : BaseShop
 
     protected override void OnTradeRequested(ProductViewer button, ICardConfig config)
     {
-        List<CostInfo> sellPrice = config.GetSellCosts();
-        Player.Inventory.AddResousres(sellPrice);
+        Player.Inventory.AddResousres(config.GetSellCosts());
 
         if (config is ICardConfig card)
         {
-            Configs.Remove(card);
-            Player.CardHolder.Remove(card);
+            if (card.Level > 1)
+            {
+                card.Regrade();
+            }
+            else
+            {
+                card.Regrade();
+                card.SetBought(false);
+                card.SetHasPlayer(false);
+
+                Player.CardHolder.Remove(card);
+                Configs.Remove(card);
+            }
 
             UpdateCardSave(card);
-            Player.Experience.AddUpgradePoints(card.Level);
         }
 
         ClearOldButtons();
         LoadContent();
     }
+
 
     protected override void LoadCards()
     {
@@ -60,7 +69,7 @@ public class Sell : BaseShop
     protected override void OnParentFounded(RectTransform parent, ICardConfig config)
     {
         var button = CreateButton(parent);
-        button.Render(config, true);
+        button.Render(config, false);
     }
 }
 

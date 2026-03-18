@@ -13,7 +13,6 @@ public class CameraFollower : MonoBehaviour
     public void Init(Transform target)
     {
         _target = target;
-        transform.rotation = Quaternion.Euler(_rotation);
         _playerHealth = target.GetComponent<Health>();
 
         if (_playerHealth != null)

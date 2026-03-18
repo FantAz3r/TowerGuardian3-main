@@ -5,9 +5,8 @@ public class ThrownObject : MonoBehaviour
 {
     private CapsuleCollider _collider;
     private Rigidbody _rigidbody;
-    private float _duration = 1.5f , _damageRadius = 4f, _arcHeight = 3f;
+    private float _duration = 1.3f , _damageRadius = 4f, _arcHeight = 4f;
     private int _damage;
-    private bool _isFalling = false;
 
 
     public void StartFly(int damage, Vector3 endPoint)
@@ -26,7 +25,6 @@ public class ThrownObject : MonoBehaviour
 
         transform.DOMove(peakPos, _duration * 0.5f).SetEase(Ease.OutQuad).OnComplete(() =>
         {
-            _isFalling = true;
             _collider.enabled = true;
             _rigidbody.constraints = RigidbodyConstraints.None;
 
@@ -35,12 +33,6 @@ public class ThrownObject : MonoBehaviour
                 FallDown();
             });
         });
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (_isFalling)
-            FallDown();
     }
 
     public void FallDown()

@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class AttackStateBehaviour : State
 {
-    private Player _player;
+    private Health _target;
     private ISpawnerService _spawnerService;
     private float _timeSinceLastAttack;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        _player = Enemy.Target?.GetComponent<Player>();
+        _target = Enemy.Target?.GetComponent<Health>();
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
 
         Enemy.AnimationAnimator.Attacked += OnAnimAttackHit;
@@ -20,14 +20,14 @@ public class AttackStateBehaviour : State
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (_player == null && _player.IsAlive == false) return;
+        if (_target == null && _target.IsAlive == false) return;
 
-        RotateTo(_player.transform.position);
+        RotateTo(_target.transform.position);
         _timeSinceLastAttack += Time.deltaTime;
 
-        if (_timeSinceLastAttack >= Enemy.Config.AttackCooldown)
+        if (_timeSinceLastAttack >= Enemy.Config.AttackCooldown )
         {
-            Enemy.AnimationAnimator.PlayAttack();
+            Enemy.AnimationAnimator.PlayAttack(Enemy.Config.AttackCooldown);
             _timeSinceLastAttack = 0f;
         }
     }
@@ -37,12 +37,11 @@ public class AttackStateBehaviour : State
         Enemy.AnimationAnimator.Attacked -= OnAnimAttackHit;
         Enemy.AnimationAnimator.SuspendAttack();
         Enemy.Agent.IsStopAgent(false);
-
     }
 
     private void OnAnimAttackHit()
     {
         _spawnerService.SendSoundReqest(Enemy.Config.HitSound, Enemy.transform.position);
-        _player.Health.TakeDamage(Enemy.Config.GetDamage());
+        _target.TakeDamage(Enemy.Config.GetDamage());
     }
 }

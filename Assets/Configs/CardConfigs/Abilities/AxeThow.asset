@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: AxeThow
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 86f42bf55f3db5843944402c0a32993b, type: 3}
-  _nameRu: "\u041B\u0435\u0442\u044F\u0449\u0438\u0439 \u0442\u043E\u043F\u043E\u0440"
-  _nameEn: Flying Axe
-  _nameTr: "U\xE7an Balta"
-  _descriptionRU: "\u0412\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442\u0441\u044F
-    \u043A\u0430\u043A \u0431\u0443\u043C\u0435\u0440\u0430\u043D\u0433"
-  _descriptionEN: Comes back like a boomerang
-  _descriptionTR: "Bir bumerang gibi geri d\xF6ner."
+  _nameRu: "\u0411\u0440\u043E\u0441\u043E\u043A \u0442\u043E\u043F\u043E\u0440\u0430"
+  _nameEn: Axe Throw
+  _nameTr: Balta atma
+  _descriptionRU: "\u041B\u0435\u0442\u0438\u0442 \u0432\u043F\u0435\u0440\u0451\u0434
+    \u0438 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442\u0441\u044F.
+    \u0414\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F
+    \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u0437\u044F\u0442\u044C
+    \u0442\u043E\u043F\u043E\u0440 \u0432 \u0440\u0443\u043A\u0438"
+  _descriptionEN: Flies forward and returns. You need to pick up an axe to use it.
+  _descriptionTR: "\u0130leri do\u011Fru u\xE7ar ve geri d\xF6ner. Kullanmak i\xE7in
+    baltay\u0131 elinize alman\u0131z gerekir"
   _costs:
   - ResourceType: 0
     Value: 7
@@ -40,7 +44,5 @@ MonoBehaviour:
   _baseCooldown: 10
   _flightDuration: 1
   _baseFlightDistance: 10
-  _baseDamage: 7
-  _cooldownPerLevel: -1
-  _flightDistancePerLevel: 0.5
-  _damagePerLevel: 1
+  _cooldownPerLevel: 0.2
+  _flightDistancePerLevel: 0.4

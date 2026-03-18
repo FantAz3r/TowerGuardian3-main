@@ -22,32 +22,27 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public Rotator Rotator { get; private set; }
     [field: SerializeField] public PlayerAnimator PlayerAnimator { get; private set; }
+    [field: SerializeField] public EnemyDetector EnemyDetector { get; private set; }
 
 
+    public float _saveInterval = 0.5f;
+    private float _lastSaveTime = 0;
 
-    private IGameConditionService _conditionService;
-    private WaitForSecondsRealtime _delay = new WaitForSecondsRealtime(5);
     public bool IsAlive { get; private set; } = true;
-
-    private void Awake()
-    {
-        _conditionService = ServiceLocator.Get<IGameConditionService>();
-    }
 
     private void Start()
     {
         YG2.saves.PlayerPosition = transform.position;
         YG2.SaveProgress();
-        StartCoroutine(SaveRoutine());
     }
 
-    private IEnumerator SaveRoutine()
+    private void Update()
     {
-        while(enabled)
+        if (Time.time >= _lastSaveTime + _saveInterval)
         {
+            _lastSaveTime = Time.time;
             YG2.saves.PlayerPosition = transform.position;
             YG2.SaveProgress();
-            yield return _delay;
         }
     }
 

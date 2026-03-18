@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   _level: 6
-  _quests: 010000000500000004000000
+  _quests: 050000001100000013000000
   _playerSpawnPoint: {x: 47, y: 0, z: -40}
-  _dayDuration: 40
-  _nightDuration: 60
+  _dayDuration: 20
+  _nightDuration: 30
   _dayLightIntensity: 1
   _nightLightIntensity: 0.8
   _transitionDuration: 2.5
@@ -30,7 +30,7 @@ MonoBehaviour:
     <Duration>k__BackingField: 60
     <NightSpawnDelay>k__BackingField: 2
     <DaySpawnDelay>k__BackingField: 8
-    <MaxEnemyCount>k__BackingField: 15
+    <MaxEnemyCount>k__BackingField: 10
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
@@ -40,14 +40,16 @@ MonoBehaviour:
     <Duration>k__BackingField: 90
     <NightSpawnDelay>k__BackingField: 2.5
     <DaySpawnDelay>k__BackingField: 7
-    <MaxEnemyCount>k__BackingField: 20
+    <MaxEnemyCount>k__BackingField: 15
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
         Value: 1
+      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
+        Value: 3
     <Duration>k__BackingField: 120
-    <NightSpawnDelay>k__BackingField: 4
-    <DaySpawnDelay>k__BackingField: 5.5
+    <NightSpawnDelay>k__BackingField: 5
+    <DaySpawnDelay>k__BackingField: 5
     <MaxEnemyCount>k__BackingField: 25
   - _weight:
       _serializedList:

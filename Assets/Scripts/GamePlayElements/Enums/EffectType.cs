@@ -6,5 +6,6 @@ public enum EffectType
     LevelUp,
     SwordTrails,
     Expload,
-    AimPoint
+    AimPoint,
+    PortalChrge
 }

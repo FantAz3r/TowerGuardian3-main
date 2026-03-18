@@ -1,30 +1,72 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetDetector : MonoBehaviour
 {
-    public bool HasTarget { get; private set; } = false;
+    private PortalFrame _portalFrame;
+    private Player _player;
 
-    public event Action PlayerDetected;
-    public event Action PlayerLost;
+    private List<Transform> _targets = new List<Transform>();
+
+    public event Action<Transform> TargetDetected;
+    public event Action<Transform> TargetLost;
 
     private void OnTriggerEnter(Collider other)
     {
-        HasTarget = true;
-
-        if (other.TryGetComponent<Player>(out _))
+        if (other.TryGetComponent(out PortalFrame portalFrame))
         {
-            PlayerDetected?.Invoke();
+            if (portalFrame.IsActive)
+            {
+                _portalFrame = portalFrame;
+
+                if (_targets.Contains(portalFrame.transform) == false)
+                {
+                    _targets.Add(_portalFrame.transform);
+                }
+
+                _portalFrame.Disabled += OnTargetDisabled;
+            }
+        }
+
+        if (other.TryGetComponent(out Player player))
+        {
+            _player = player;
+
+            if (_targets.Contains(_player.transform) == false)
+            {
+                _targets.Add(_player.transform);
+            }
+        }
+
+        UpdateTarget();
+    }
+
+    private void OnTargetDisabled()
+    {
+        _portalFrame.Disabled -= OnTargetDisabled;
+        _targets.Remove(_portalFrame.transform);
+
+        if (_player != null)
+        {
+            TargetLost?.Invoke(_player.transform);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void UpdateTarget()
     {
-        HasTarget = false;
-
-        if (other.TryGetComponent<Player>(out _))
+        foreach (Transform target in _targets)
         {
-            PlayerLost?.Invoke();
+            if (target.TryGetComponent<PortalFrame>(out _))
+            {
+                TargetDetected?.Invoke(target);
+                return;
+            }
+        }
+
+        if (_player != null)
+        {
+            TargetDetected?.Invoke(_player.transform);
         }
     }
 }

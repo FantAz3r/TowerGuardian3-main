@@ -10,10 +10,10 @@ public class ThrowState : State
         base.OnStateEnter(animator, stateInfo, layerIndex);
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
 
+        Enemy.Agent.IsStopAgent(true);
         _isThrowing = true;
         Enemy.AnimationAnimator.Throwed += OnThrow;
 
-        RotateTo(Enemy.Target.position);
         Enemy.AnimationAnimator.PlayThrow();
     }
 
@@ -37,18 +37,19 @@ public class ThrowState : State
         }
 
         _isThrowing = false;
+        Enemy.Agent.IsStopAgent(false);
     }
 
     private void OnThrow()
     {
+        _isThrowing = false;
+        Enemy.StateMachine.OnThrowEnded();
         if (Enemy.ThrownObject == null) return;
 
         ThrownObject thrownObject = Enemy.ThrownObject.gameObject.AddComponent<ThrownObject>();
         thrownObject.StartFly(Enemy.Config.ThrowDamage, Enemy.Target.position);
         
         _spawnerService.SendEffectReqest(EffectType.AimPoint, Enemy.Target.position);
-        _isThrowing = false;
-        Enemy.StateMachine.OnThrowEnded();
         
     }
 }

@@ -15,7 +15,7 @@ public class ResourceViewer : MonoBehaviour
         _inventory.ResourceChanged += OnResourceChanged;
     }
 
-   
+
     private void OnDestroy()
     {
         _inventory.ResourceChanged -= OnResourceChanged;
@@ -32,7 +32,14 @@ public class ResourceViewer : MonoBehaviour
         {
             if (resourses.ContainsKey(text.TextType))
             {
-                text.SetText(resourses[text.TextType].ToString());
+                if (resourses[text.TextType] <= 0)
+                {
+                    text.SetText(0.ToString());
+                }
+                else 
+                {
+                    text.SetText(resourses[text.TextType].ToString());
+                }
             }
         }
     }

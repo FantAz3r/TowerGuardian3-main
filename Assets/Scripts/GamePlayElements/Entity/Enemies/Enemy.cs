@@ -11,18 +11,19 @@ public class Enemy : MonoBehaviour
     [field: SerializeField] public EnemyStateMachine StateMachine { get; private set; }
     [field: SerializeField] public EnemyMover Agent { get; private set; }
     [field: SerializeField] public TargetDetector TargetDetector { get; private set; }
-    [field: SerializeField] public AttackDetector AttackDetector { get; private set; }
     [field: SerializeField] public ThrownObjectDetector ThrownObjectDetector { get; private set; }
     [field: SerializeField] public PickUper PickUper { get; private set; }
     [field: SerializeField] public Collider Collider { get; private set; }
+    [field: SerializeField] public SphereCollider TargetDetectorCollider { get; private set; }
 
     public Transform Target { get; private set; }
     public Transform ThrownObject { get; private set; }
 
-
     public void Init(Transform player, int level)
     {
         BehaviorAnimator.runtimeAnimatorController = Config.Controller;
+        TargetDetectorCollider.radius = Config.DetectionRadius;
+
         Target = player;
 
         Config.SetLevel(level);
@@ -30,12 +31,22 @@ public class Enemy : MonoBehaviour
         Agent.SetMoveSpeed(Config.GetMoveSpeed());
         Agent.SetAngularSpeed(Config.MoveConfig.RotationSpeed);
 
-        Health.Init(Config.GetMaxHealth());
+        Health.Init(Config.HealthConfig.GetMaxHealth());
         StateMachine.Init();
+    }
+
+    public void SetNewTarget(Transform newTarget)
+    {
+        Target = newTarget;
     }
 
     public void SetThrownObject(Transform thrownObject)
     {
         ThrownObject = thrownObject;
+    }
+
+    private void OnDisable()
+    {
+        Target = null;
     }
 }

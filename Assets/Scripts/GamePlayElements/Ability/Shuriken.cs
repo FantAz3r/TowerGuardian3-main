@@ -1,41 +1,25 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class Shuriken : MonoBehaviour
 {
     private int _damage;
     private float _speenSpeed;
-    private float _updateTime = 0.05f;
-    private WaitForSeconds _delay;
-    private Coroutine _rotateRoutine;
+    private bool _isRotate = true;
 
     public bool IsActive => gameObject.activeSelf;
     public event Action<int> DialedDamage;
 
-    private void Awake()
-    {
-        _delay = new WaitForSeconds(_updateTime);
-    }
-
     private void OnDisable()
     {
-        if (_rotateRoutine != null)
-        {
-            StopCoroutine(_rotateRoutine);
-        }
+        _isRotate = false;
     }
 
     public void SetParametrs(int damage, float speenSpeed)
     {
-        if(_rotateRoutine != null)
-        {
-            StopCoroutine(_rotateRoutine);
-        }
-
         _damage = damage;
         _speenSpeed = speenSpeed;
-        _rotateRoutine = StartCoroutine(SpeenRoutine());
+        _isRotate = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,12 +32,11 @@ public class Shuriken : MonoBehaviour
         }
     }
 
-    private IEnumerator SpeenRoutine()
+    private void Update()
     {
-        while (enabled)
+        if(_isRotate)
         {
             transform.Rotate(0, _speenSpeed * Time.deltaTime, 0);
-            yield return null;
         }
     }
 }

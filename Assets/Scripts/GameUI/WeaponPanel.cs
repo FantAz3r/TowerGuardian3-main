@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponPanel : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class WeaponPanel : MonoBehaviour
 
         _player.CardHolder.CardAdded += OnWeaponAdded;
         _player.CardHolder.CardRemoved += OnWeaponRemoved;
+        _player.Attacker.SavedWeaponAdded += OnSevedWeaponAdded;
     }
 
     private void OnEnable()
@@ -42,6 +44,7 @@ public class WeaponPanel : MonoBehaviour
     {
         _player.CardHolder.CardAdded -= OnWeaponAdded;
         _player.CardHolder.CardRemoved -= OnWeaponRemoved;
+        _player.Attacker.SavedWeaponAdded -= OnSevedWeaponAdded;
     }
 
     private void OnWeaponAdded(ICardConfig card)
@@ -119,10 +122,28 @@ public class WeaponPanel : MonoBehaviour
         }
     }
 
+    private void OnSevedWeaponAdded(ICardConfig cardConfig)
+    {
+        _dropdown.onValueChanged.RemoveListener(OnDropdownSelected);
+
+        for (int i = 0; i < _dropdown.options.Count; i++)
+        {
+            if (cardConfig.Icon == _dropdown.options[i].image)
+            {
+                _dropdown.value = i;
+                _dropdown.RefreshShownValue();
+                break;
+            }
+        }
+
+        _dropdown.onValueChanged.AddListener(OnDropdownSelected);
+    }
+
 
     private void OnDropdownSelected(int index)
     {
         var selectedConfig = _configs[index];
+
         _player.Attacker.SetWeapon(selectedConfig);
         WeaponSwaped?.Invoke();
     }

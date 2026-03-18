@@ -22,16 +22,16 @@ MonoBehaviour:
   _descriptionTR: "Kaynak toplama yar\u0131\xE7ap\u0131n\u0131 art\u0131r\u0131r."
   _costs:
   - ResourceType: 2
-    Value: 5
+    Value: 10
     Image: {fileID: 21300000, guid: 20d21a867b3174de9aa1b81823b2b7ef, type: 3}
   - ResourceType: 0
     Value: 2
     Image: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
   _id: a604511b-5dc5-43e9-a047-aa9f378a5a7a
   <ChanceToView>k__BackingField: 0
-  <Level>k__BackingField: 0
-  <HasPlayer>k__BackingField: 0
-  <IsBought>k__BackingField: 0
+  <Level>k__BackingField: 4
+  <HasPlayer>k__BackingField: 1
+  <IsBought>k__BackingField: 1
   <EffectType>k__BackingField: 2
   _buffType: 6
   _baseIncreaseValue: 1.2

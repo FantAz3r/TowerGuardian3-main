@@ -25,9 +25,9 @@ public class ProductViewer : MonoBehaviour
     public void Render(ICardConfig config, bool isBuy, bool interactable = true)
     {
         _config = config;
-        _image.sprite = _config.Icon;
-        _name.text = _config.Name ?? string.Empty;
-        _description.text = _config.Description ?? string.Empty;
+        _image.sprite = config.Icon;
+        _name.text = config.Name ?? string.Empty;
+        _description.text = config.Description ?? string.Empty;
 
         if(_config is CardConfig card)
         {

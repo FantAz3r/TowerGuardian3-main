@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class StartLevelMenu : LevelMenu
 {
-    private const int _enumGameLevelOffset = 3;
-
     [SerializeField] private Button _startButton;
     [SerializeField] private TMP_Text _levelNumberText;
     [SerializeField] private TMP_Text _levelScoreInfo;
@@ -15,7 +13,7 @@ public class StartLevelMenu : LevelMenu
     public void Init(LevelID nextLevel)
     {
         _nextLevel = nextLevel;
-        _levelNumberText.text = ((int)nextLevel - _enumGameLevelOffset).ToString();
+        _levelNumberText.text = ((int)nextLevel - EnumGameLevelOffset).ToString();
         ShowScoreInfo();
     }
 
@@ -46,6 +44,7 @@ public class StartLevelMenu : LevelMenu
     private void OnStartClicked()
     {
         StateSwitchService.Switch(_nextLevel);
+        ConditionService.SetLevelEnded();
         Close();
     }
 

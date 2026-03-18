@@ -23,7 +23,7 @@ public class NewGameButton : MonoBehaviour
     {
         _button.onClick.RemoveListener(OnClicked);
     }
-       
+
     public void OnClicked()
     {
         _button.interactable = false;
@@ -36,10 +36,11 @@ public class NewGameButton : MonoBehaviour
         if (YG2.saves.AllCards != null) YG2.saves.AllCards.Clear();
         if (YG2.saves.PlayerWeapons != null) YG2.saves.PlayerWeapons.Clear();
         if (YG2.saves.QuestProgress != null) YG2.saves.QuestProgress.Clear();
+        ResetLevels();
 
-        YG2.saves.Coins = 550;
-        YG2.saves.Wood = 500;
-        YG2.saves.Stones = 500;
+        YG2.saves.Coins =0;
+        YG2.saves.Wood = 0;
+        YG2.saves.Stones = 0;
 
         YG2.saves.CurrentWeapon = new CardSaveData();
         YG2.saves.Level = 0;
@@ -49,5 +50,21 @@ public class NewGameButton : MonoBehaviour
         YG2.saves.CurrentFloor = 0;
         YG2.saves.PlayerPosition = Vector3.zero;
         YG2.SaveProgress();
+    }
+
+    private void ResetLevels()
+    {
+        if (YG2.saves.LevelsProgress == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < YG2.saves.LevelsProgress.Count; i++)
+        {
+            var level = YG2.saves.LevelsProgress[i];
+            level.Stars = 0;
+            level.IsComplite = false;  
+            YG2.saves.LevelsProgress[i] = level;
+        }
     }
 }

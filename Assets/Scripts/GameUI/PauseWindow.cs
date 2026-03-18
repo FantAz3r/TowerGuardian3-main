@@ -16,7 +16,7 @@ public class PauseWindow : WindowBase
     public override void Open()
     {
         base.Open();
-        Time.timeScale = 0;
+        _timeService.StopGame();
 
         transform.localScale = Vector3.zero;
 
@@ -28,7 +28,7 @@ public class PauseWindow : WindowBase
     public override void Close()
     {
         base.Close();
-        Time.timeScale = 1;
+        _timeService.ResumeGame();
         Destroy(gameObject);
     }
 }

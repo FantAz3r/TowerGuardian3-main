@@ -58,6 +58,9 @@ public class AbilityPanel : MonoBehaviour
 
         if (YG2.envir.isDesktop)
         {
+            if(_inputService == null)
+                return;
+
             _inputService.OnAbillity1Used -= OnAbility1Used;
             _inputService.OnAbillity2Used -= OnAbility2Used;
             _inputService.OnAbillity3Used -= OnAbility3Used;

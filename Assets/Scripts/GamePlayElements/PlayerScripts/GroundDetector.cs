@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
@@ -8,43 +7,31 @@ public class GroundDetector : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
 
     private Rigidbody _playerRigidbody;
-    private WaitForSeconds _wait = new WaitForSeconds(0.05f);
-    private Coroutine _groundCheckCoroutine;
 
     private void Awake()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
     }
-    private void OnEnable()
-    {
-        _groundCheckCoroutine = StartCoroutine(GroundCheckRoutine());
-    }
 
-    private void OnDisable()
+    private void Update()
     {
-        if (_groundCheckCoroutine != null)
-            StopCoroutine(_groundCheckCoroutine);
-    }
+        RaycastHit hit;
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, _rayDistance, _groundLayer);
 
-    private IEnumerator GroundCheckRoutine()
-    {
-        while (enabled)
+        if (!isGrounded)
         {
-            RaycastHit hit;
-            bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, _rayDistance, _groundLayer);
+            _playerRigidbody.useGravity = true;
 
-            if (isGrounded == false)
-            {
-                _playerRigidbody.useGravity = true;
-                Vector3 extraGravity = Physics.gravity * _gravityMultiplier;
-                _playerRigidbody.AddForce(extraGravity, ForceMode.Acceleration);
-            }
-            else
-            {
-                _playerRigidbody.useGravity = false;
-            }
-
-            yield return _wait;
+            Vector3 extraGravity = Physics.gravity * _gravityMultiplier;
+            _playerRigidbody.AddForce(extraGravity, ForceMode.Acceleration);
+        }
+        else
+        {
+            _playerRigidbody.useGravity = false;
+            Vector3 velocity = _playerRigidbody.velocity;
+            velocity.x = 0f;
+            velocity.z = 0f;
+            _playerRigidbody.velocity = velocity;
         }
     }
 }

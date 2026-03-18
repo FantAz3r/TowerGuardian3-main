@@ -10,7 +10,7 @@ public class TransparencyTrigger : MonoBehaviour
         _player = player;
     }
 
-    void Update()
+    private void Update()
     {
         Vector3 direction = _player.position + _offset - transform.position;
         float distance = direction.magnitude;

@@ -30,7 +30,7 @@ MonoBehaviour:
     Value: 15
     Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
   _id: f686a659-d96a-42e8-b503-c0666c1bb2f8
-  <ChanceToView>k__BackingField: 0
+  <ChanceToView>k__BackingField: 1
   <Level>k__BackingField: 0
   <HasPlayer>k__BackingField: 0
   <IsBought>k__BackingField: 1
@@ -40,12 +40,12 @@ MonoBehaviour:
   <Controller>k__BackingField: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
   <HitSound>k__BackingField: {fileID: 8300000, guid: d0cde5a83d2546a469373dd3b3c105f8, type: 3}
   <IsAreaDamage>k__BackingField: 0
-  <BaseDamage>k__BackingField: 10
-  <BaseAttackDelay>k__BackingField: 1
+  <BaseDamage>k__BackingField: 5
+  <BaseAttackDelay>k__BackingField: 1.3
   <BaseAttackRange>k__BackingField: 2
   <BaseMultiply>k__BackingField: 2
-  _damageUpgradePercent: 0.25
-  _attackDelayUpgradeFactor: -0.05
-  _attackRangeUpgradeValue: 0.2
+  _damageUpgradePercent: 0.1
+  _attackDelayUpgradeFactor: -0.003
+  _attackRangeUpgradeValue: 0
   _multiplyUpgradeValue: 0
   _audioClip: {fileID: 8300000, guid: d0cde5a83d2546a469373dd3b3c105f8, type: 3}

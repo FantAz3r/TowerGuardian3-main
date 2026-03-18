@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
 {
     private IScoreService _service;
+
+    private List<Health> _targets = new();
+    public IReadOnlyList<Health> Targets => _targets;
 
     public event Action<float> OnGetExperience;
     public event Action OnEnemyKilled;
@@ -15,40 +19,40 @@ public class EnemyDetector : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IDemageable enemy) && enemy != null)
+        if (other.TryGetComponent(out Health enemy) && enemy != null)
         {
             enemy.Killed += OnEnemyDied;
+            _targets.Add(enemy);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out IDemageable enemy) && enemy != null)
+        if (other.TryGetComponent(out Health enemy) && enemy != null)
         {
             enemy.Killed -= OnEnemyDied;
+            _targets.Remove(enemy);
         }
     }
 
-    private void OnEnemyDied(Health health)
+    private void OnEnemyDied(Health target)
     {
-        if (health.TryGetComponent(out IDemageable enemy))
+
+        target.Killed -= OnEnemyDied;
+        _targets.Remove(target);
+        _service.AddScore(ScoreType.Kill, target.Config.ScorePoints);
+
+
+        if (target.GetHealthType() == EntityType.Enemy)
         {
-            enemy.Killed -= OnEnemyDied;
-        }
-
-        _service.AddScore(ScoreType.Kill, health.Config.ScorePoints);
-
-
-        if (health.GetHealthType() == EntityType.Enemy)
-        {
-            OnGetExperience?.Invoke(health.MaxHealth);
+            OnGetExperience?.Invoke(target.MaxHealth);
         }
         else
         {
-            OnGetExperience?.Invoke(health.MaxHealth / 2);
+            OnGetExperience?.Invoke(target.MaxHealth / 2);
         }
 
-        switch (health.GetHealthType())
+        switch (target.GetHealthType())
         {
             case EntityType.Enemy:
                 OnEnemyKilled?.Invoke();

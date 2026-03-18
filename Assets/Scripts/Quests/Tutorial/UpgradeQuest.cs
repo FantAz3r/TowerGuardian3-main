@@ -20,6 +20,13 @@ public class UpgradeQuest : Quest
         _player.CardHolder.Upgraded -= Complete;
     }
 
+    public override void Stop()
+    {
+        base.Stop();
+        _player.CardHolder.CardAdded -= Complete;
+        _player.CardHolder.Upgraded -= Complete;
+    }
+
     private void Complete(ICardConfig useles)
     {
         Complete();

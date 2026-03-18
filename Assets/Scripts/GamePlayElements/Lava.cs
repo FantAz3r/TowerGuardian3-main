@@ -1,28 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    public int damagePerTick = 2;        
-    public float damageInterval = 0.5f;
-    private WaitForSeconds _delay;
+    [SerializeField] private int damagePerTick = 2;
+    [SerializeField] private float damageInterval = 0.5f;
+    private float _lastDamageTime = 0;
 
-    private Dictionary<Health, Coroutine> _damagedObjects = new Dictionary<Health, Coroutine>();
-
-    private void Awake()
-    {
-        _delay = new WaitForSeconds(damageInterval);
-    }
+    private List<Health> _entities = new();
 
     private void OnTriggerEnter(Collider other)
     {
         Health damageable = other.GetComponent<Health>();
 
-        if (damageable != null && _damagedObjects.ContainsKey(damageable) == false)
+        if (damageable != null && _entities.Contains(damageable) == false)
         {
-            Coroutine damageCoroutine = StartCoroutine(DamageOverTime(damageable));
-            _damagedObjects.Add(damageable, damageCoroutine);
+            _entities.Add(damageable);
         }
     }
 
@@ -30,19 +23,24 @@ public class Lava : MonoBehaviour
     {
         Health damageable = other.GetComponent<Health>();
 
-        if (damageable != null && _damagedObjects.ContainsKey(damageable))
+        if (damageable != null && _entities.Contains(damageable))
         {
-            StopCoroutine(_damagedObjects[damageable]);
-            _damagedObjects.Remove(damageable);
+            _entities.Remove(damageable);
         }
     }
 
-    private IEnumerator DamageOverTime(Health target)
+    private void Update()
     {
-        while (enabled)
+        if (_entities.Count == 0) return;
+
+        if (Time.time >= _lastDamageTime + damageInterval)
         {
-            target.TakeDamage(damagePerTick);
-            yield return _delay;
+            _lastDamageTime = Time.time;
+
+            foreach (Health health in _entities)
+            {
+                health.TakeDamage(damagePerTick);
+            }
         }
     }
 }

@@ -44,8 +44,13 @@ public abstract class Quest : IQuest
 
     public virtual void UpdateProgress() 
     {
+        UpdateProgress(CurrentValue, Config.TargetValue);
+    }
+
+    public virtual void UpdateProgress(float currentValue, float targetValue)
+    {
         if (_isProgressQuest)
-            QuestViewer.UpdateProgress(CurrentValue, Config.TargetValue);
+            QuestViewer.UpdateProgress(currentValue, targetValue);
     }
 
     public virtual void UpdateTime()

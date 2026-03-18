@@ -9,7 +9,6 @@ public class Portal : BuildingObject
     private bool _canExit = true;
     private IGameConditionService _conditionService;
 
-    public event Action EnemyEntered;
     public event Action Entered;
     public LevelID NextLevel => _nextLevel;
 
@@ -20,12 +19,6 @@ public class Portal : BuildingObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
-        {
-            EnemyEntered?.Invoke();
-            enemy.gameObject.SetActive(false);
-        }
-
         if (_canExit == false)
             return;
 
@@ -46,7 +39,6 @@ public class Portal : BuildingObject
 
     public void CanExit(bool canExit)
     {
-        gameObject.SetActive(true);
         _canExit = canExit;
     }
 }

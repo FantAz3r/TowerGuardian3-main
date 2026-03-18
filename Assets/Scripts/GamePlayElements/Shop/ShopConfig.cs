@@ -39,7 +39,7 @@ public abstract class ShopConfig : ScriptableObject, IShopConfig
 
     public IReadOnlyList<CostInfo> Costs => _costs;
     public virtual List<CostInfo> GetCosts() => _costs;
-    public virtual List<CostInfo> GetSellCosts() => null;
+    public virtual List<CostInfo> GetSellCosts() => _costs;
 
     public string OnCorrectLanguage(string ru, string en, string tr)
     {

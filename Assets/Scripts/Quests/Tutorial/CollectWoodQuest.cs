@@ -12,6 +12,13 @@ public class CollectWoodQuest : Quest
     {
         base.Run();
         _inventory.WoodCollected += UpdateProgress;
+        CurrentValue--;
+    }
+
+    public override void Stop()
+    {
+        base.Stop();
+        _inventory.WoodCollected -= UpdateProgress;
     }
 
     public override void Complete()

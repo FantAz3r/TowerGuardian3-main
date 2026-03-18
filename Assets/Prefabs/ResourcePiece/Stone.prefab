@@ -72,6 +72,7 @@ MonoBehaviour:
   _pickSound: {fileID: 0}
   _collectSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _amount: 1
+  _outlineRenderer: {fileID: 5879811189985628182}
   <ScorePoints>k__BackingField: 1
 --- !u!54 &4914858075650268278
 Rigidbody:
@@ -156,6 +157,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8714614311818401984, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: acd8f714506fd6540a36a074eb7f1491, type: 2}
     m_RemovedComponents:
     - {fileID: 5545692118297375374, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
     - {fileID: -2759677082107405534, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
@@ -167,5 +172,10 @@ PrefabInstance:
 --- !u!4 &4742965246865058681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7546813994068566959, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
+  m_PrefabInstance: {fileID: 2984143365425940694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5879811189985628182 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8714614311818401984, guid: 9aa2cd2d8b6d1424faf5c8ebf69f8ce2, type: 3}
   m_PrefabInstance: {fileID: 2984143365425940694}
   m_PrefabAsset: {fileID: 0}

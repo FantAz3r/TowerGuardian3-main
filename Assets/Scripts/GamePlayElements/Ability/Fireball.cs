@@ -24,9 +24,9 @@ public class Fireball : MonoBehaviour
         Fly();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (((1 << other.gameObject.layer) & _collisionLayers) == 0) return;
+        if (((1 << collision.gameObject.layer) & _collisionLayers) == 0) return;
 
         Explode();
     }
@@ -36,7 +36,6 @@ public class Fireball : MonoBehaviour
         transform.parent = null;
 
         if (_collider != null) _collider.enabled = true;
-
 
         float distance = Vector3.Distance(transform.position, _endPoint);
         float duration = distance / _config.FlySpeed;

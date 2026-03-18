@@ -38,7 +38,7 @@ public class PortalSwitcher
 
     private void EnableTowerPortal()
     {
-        //DisablePortals();
+        DisablePortals();
 
         Portal firstPortal = _portals.Find(portal => portal.NextLevel == LevelID.Level1);
         firstPortal.gameObject.SetActive(true);
@@ -48,11 +48,11 @@ public class PortalSwitcher
 
         for (int i = 1; i <= YG2.saves.LevelsProgress.Count; i++)
         {
-            LevelSaveData prevLevelData = YG2.saves.LevelsProgress[i-1];
+            LevelSaveData prevLevelData = YG2.saves.LevelsProgress[i - 1];
 
             if (prevLevelData.IsComplite)
             {
-                Portal portal = _portals.Find(portal => portal.NextLevel == YG2.saves.LevelsProgress[i-1].Level +1);
+                Portal portal = _portals.Find(portal => portal.NextLevel == YG2.saves.LevelsProgress[i - 1].Level + 1);
 
                 if (portal != null)
                 {

@@ -13,24 +13,24 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   _level: 7
-  _quests: 030000000d000000
-  _playerSpawnPoint: {x: 122.22, y: 0.5, z: 50.27}
-  _dayDuration: 30
-  _nightDuration: 90
+  _quests: 1200000013000000
+  _playerSpawnPoint: {x: -95, y: 0.7, z: 80}
+  _dayDuration: 10
+  _nightDuration: 45
   _dayLightIntensity: 1
-  _nightLightIntensity: 1
-  _transitionDuration: 2.5
-  _dayLightColor: {r: 0.764151, g: 0.5154415, b: 0.5154415, a: 1}
-  _nightLightColor: {r: 0.24870951, g: 0.24870951, b: 0.764151, a: 1}
+  _nightLightIntensity: 0.5
+  _transitionDuration: 2
+  _dayLightColor: {r: 1, g: 1, b: 1, a: 1}
+  _nightLightColor: {r: 1, g: 0, b: 0, a: 1}
   <Waves>k__BackingField:
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
         Value: 1
-    <Duration>k__BackingField: 120
-    <NightSpawnDelay>k__BackingField: 2
-    <DaySpawnDelay>k__BackingField: 5
-    <MaxEnemyCount>k__BackingField: 20
+    <Duration>k__BackingField: 30
+    <NightSpawnDelay>k__BackingField: 1
+    <DaySpawnDelay>k__BackingField: 4
+    <MaxEnemyCount>k__BackingField: 15
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
@@ -38,45 +38,45 @@ MonoBehaviour:
       - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
         Value: 1
     <Duration>k__BackingField: 60
-    <NightSpawnDelay>k__BackingField: 1.5
-    <DaySpawnDelay>k__BackingField: 4
+    <NightSpawnDelay>k__BackingField: 1
+    <DaySpawnDelay>k__BackingField: 3
     <MaxEnemyCount>k__BackingField: 30
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
-        Value: 5
+        Value: 3
       - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
         Value: 3
       - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
         Value: 1
     <Duration>k__BackingField: 60
-    <NightSpawnDelay>k__BackingField: 1.2
-    <DaySpawnDelay>k__BackingField: 3.5
-    <MaxEnemyCount>k__BackingField: 35
-  - _weight:
-      _serializedList:
-      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
-        Value: 4
-      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
-        Value: 4
-      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
-        Value: 3
-    <Duration>k__BackingField: 60
-    <NightSpawnDelay>k__BackingField: 1
+    <NightSpawnDelay>k__BackingField: 0.5
     <DaySpawnDelay>k__BackingField: 3
-    <MaxEnemyCount>k__BackingField: 40
+    <MaxEnemyCount>k__BackingField: 1
   - _weight:
       _serializedList:
       - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
         Value: 2
       - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
-        Value: 6
+        Value: 1
       - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
-        Value: 10
+        Value: 1
+    <Duration>k__BackingField: 60
+    <NightSpawnDelay>k__BackingField: 0.5
+    <DaySpawnDelay>k__BackingField: 3
+    <MaxEnemyCount>k__BackingField: 45
+  - _weight:
+      _serializedList:
+      - Key: {fileID: 5957561379783450222, guid: 8576dfe1e7d8dd9469cb61c346aa881b, type: 3}
+        Value: 1
+      - Key: {fileID: 8023698574128024959, guid: ce76b9ccfbfb3d446baaacbb3a138477, type: 3}
+        Value: 2
+      - Key: {fileID: 5957561379783450222, guid: 635f63329860e824caae0d4ccbaff543, type: 3}
+        Value: 3
     <Duration>k__BackingField: 99999
-    <NightSpawnDelay>k__BackingField: 0.4
-    <DaySpawnDelay>k__BackingField: 2.5
-    <MaxEnemyCount>k__BackingField: 50
+    <NightSpawnDelay>k__BackingField: 0.5
+    <DaySpawnDelay>k__BackingField: 3
+    <MaxEnemyCount>k__BackingField: 60
   _scorePerTimeOneStar: 1
   _scorePerTimeTwoStar: 2
   _scorePerTimeThreeStar: 3

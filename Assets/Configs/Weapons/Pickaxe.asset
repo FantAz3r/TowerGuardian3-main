@@ -22,7 +22,7 @@ MonoBehaviour:
   _descriptionTR: "Ta\u015Flar\u0131 normal \u015Fekilde k\u0131rar"
   _costs:
   - ResourceType: 2
-    Value: 5
+    Value: 10
     Image: {fileID: 454922556, guid: c80cfba900504e246bc955fcc768d713, type: 3}
   - ResourceType: 0
     Value: 5
@@ -38,12 +38,12 @@ MonoBehaviour:
   <Controller>k__BackingField: {fileID: 9100000, guid: 70ead82f7c7b39a49a2e86d81d672d51, type: 2}
   <HitSound>k__BackingField: {fileID: 8300000, guid: ec3af2a4cbdfe6c4db2015e06011dc21, type: 3}
   <IsAreaDamage>k__BackingField: 0
-  <BaseDamage>k__BackingField: 10
-  <BaseAttackDelay>k__BackingField: 1
+  <BaseDamage>k__BackingField: 7
+  <BaseAttackDelay>k__BackingField: 1.1
   <BaseAttackRange>k__BackingField: 2
   <BaseMultiply>k__BackingField: 2
-  _damageUpgradePercent: 0.25
-  _attackDelayUpgradeFactor: -0.05
-  _attackRangeUpgradeValue: 0.2
+  _damageUpgradePercent: 0.15
+  _attackDelayUpgradeFactor: -0.004
+  _attackRangeUpgradeValue: 0
   _multiplyUpgradeValue: 0
   _audioClip: {fileID: 8300000, guid: 82620ada7ef04c84095b45d4fbd392ac, type: 3}

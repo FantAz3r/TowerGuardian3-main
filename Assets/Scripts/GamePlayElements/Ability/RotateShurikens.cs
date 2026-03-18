@@ -24,7 +24,7 @@ public class RotateShurikens : Ability
         _config.Upgraded += Upgrade;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _activeCount = 0;
 
@@ -68,9 +68,9 @@ public class RotateShurikens : Ability
 
     private void LoadAbility()
     {
-        _activeCount = Mathf.Min(_config.Count, _shurikens.Count);
+        _activeCount = Mathf.Max(1, _config.Count);
 
-        for (int i = 0; i < _shurikens.Count; i++)
+        for (int i = 0; i < _maxCount; i++)
         {
             if (i < _activeCount)
                 ActivateShuriken(i);

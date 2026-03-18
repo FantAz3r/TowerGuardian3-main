@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f80a2a199372247a3200e9b7de36be, type: 3}
   m_Name: BigTree
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 25
-  <DamageToErn>k__BackingField: 5
-  <RewardCount>k__BackingField: 4
+  <MaxHealth>k__BackingField: 50
+  <DamageToErn>k__BackingField: 25
+  <RewardCount>k__BackingField: 20
+  <ScorePoints>k__BackingField: 0
   <SpawnResource>k__BackingField: 1
   <SpawnEffect>k__BackingField: 1

@@ -11,6 +11,8 @@ public static class GameConstants
     public static string BackGroundMusic = "Prefabs/BackgroundSounds";
     public static string FocusController = "Prefabs/FocusController";
 
+    public static string PortalFrame = "buidingObjects/PortalFrame";
+
     
     public static string MenuCanvas = "Prefabs/MenuMenu";
     public static string Joystick = "Ui/HorizontalUI/Dynamic Joystick";

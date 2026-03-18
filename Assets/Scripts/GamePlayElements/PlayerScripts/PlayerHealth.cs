@@ -14,7 +14,6 @@ public class PlayerHealth : Health
             return;
 
         base.TakeDamage(damage);
-
         _windowService.Open(WindowType.DamageScreen);
     }
 

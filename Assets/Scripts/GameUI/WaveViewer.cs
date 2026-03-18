@@ -47,7 +47,7 @@ public class WaveViewer : WindowBase
 
     private void OnDestroy()
     {
-        if (_waveRoutine != null)
+        if (_waveRoutine != null && _coroutineRunner != null)
             _coroutineRunner.StopCoroutine(_waveRoutine);
     }
 

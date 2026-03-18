@@ -4,14 +4,17 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     [SerializeField] private MoveConfig _config;
-
+    private bool _canRotate = true;
     public Vector2 CurrentDirection { get; private set; }
 
     public void SetDirection(Vector2 direction) => CurrentDirection = direction;
 
     private void Update()
     {
-        Rotate();
+        if(_canRotate)
+        {
+            Rotate();
+        }
     }
 
     private void Rotate()
@@ -29,4 +32,6 @@ public class Rotator : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, newAngle, 0f);
     }
+
+    public void CanRotate(bool canRotate) => _canRotate = canRotate;
 }

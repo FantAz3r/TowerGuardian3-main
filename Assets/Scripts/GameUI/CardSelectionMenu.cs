@@ -18,10 +18,10 @@ public class CardSelectionMenu : PauseWindow
     protected override void Awake()
     {
         base.Awake();
-        _selector = new CardSelector(Resources.Load<CardData>(GameConstants.CardData));
         _windowService = ServiceLocator.Get<IWindowService>();
         _timeService = ServiceLocator.Get<ITimeService>();
         _player = ServiceLocator.Get<IGameFactory>().Player;
+        _selector = ServiceLocator.Get<IGameFactory>().CardSelector;
     }
 
     private void OnDisable()
@@ -43,7 +43,7 @@ public class CardSelectionMenu : PauseWindow
 
     public void OpenMenu()
     {
-        _levelText.text = _player.Experience.CurrentLevel.ToString();
+        _levelText.text = (_player.Experience.CurrentLevel +1).ToString();
 
         if (_currentCards == null)
         {
@@ -59,6 +59,7 @@ public class CardSelectionMenu : PauseWindow
 
     public void CloseMenu()
     {
+        _selector.SaveCurrentCards(null);
         _player.Experience.RemoveUpgradePoint(1);
         DestroyCards();
 
@@ -77,6 +78,7 @@ public class CardSelectionMenu : PauseWindow
 
     public void PostponeChoise()
     {
+        _selector.SaveCurrentCards(_currentCards);
         base.Close();
         _timeService.SmoothEditTimeScalse(0, 0);
         _windowService.Open(WindowType.HUD);

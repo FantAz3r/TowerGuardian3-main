@@ -12,12 +12,19 @@ public class CollectStonesQuest : Quest
     {
         base.Run();
         _inventory.StoneCollected += UpdateProgress;
+        CurrentValue--;
     }
 
     public override void Complete()
     {
         base.Complete();
         _inventory.StoneCollected -= UpdateProgress;
+    }
+
+    public override void Stop()
+    {
+        _inventory.StoneCollected -= UpdateProgress;
+        base.Stop();
     }
 
     public override void UpdateProgress()

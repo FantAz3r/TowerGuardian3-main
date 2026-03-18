@@ -63,7 +63,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public void AddItem(UIItem item)
     {
-        Debug.Log("rgaerhgaeh");
         SetItem(item);
 
         if (IsActiveSlot)

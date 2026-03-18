@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class AttackZone : MonoBehaviour
 {
-    [SerializeField] private Color gizmoColor = new Color(1f, 0f, 0f, 0.25f);
+    [SerializeField] private LayerMask _attackableLayers;
+    [SerializeField] private Color _gizmoColor = new Color(1f, 0f, 0f, 0.25f);
     private float _range;
     private IDemageable _selfHealth;
 
@@ -17,7 +18,7 @@ public class AttackZone : MonoBehaviour
         SetAttackData(range);
         List<Health> targets = new List<Health>();
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, _attackableLayers);
 
         foreach (Collider collider in hitColliders)
         {
@@ -42,7 +43,7 @@ public class AttackZone : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = gizmoColor;
+        Gizmos.color = _gizmoColor;
         Gizmos.DrawSphere(transform.position, _range);
     }
 }

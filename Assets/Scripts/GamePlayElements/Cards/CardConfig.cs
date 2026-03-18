@@ -29,6 +29,14 @@ public abstract class CardConfig : ShopConfig, ICardConfig
         Upgraded?.Invoke(this);
     }
 
+    public void Regrade()
+    {
+        if (Level <= 0) return;
+
+        Level--;
+        Upgraded?.Invoke(this);
+    }
+
     public override List<CostInfo> GetCosts()
     {
         List<CostInfo> increasedCosts = new();
@@ -51,7 +59,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
         foreach (var info in GetCosts())
         {
             float newAmount = info.Value * sellCoefficient;
-            sellCosts.Add(new CostInfo(info.ResourceType, Mathf.CeilToInt(newAmount)));
+            sellCosts.Add(new CostInfo(info.ResourceType, Mathf.CeilToInt(newAmount), info.Image));
         }
 
         return sellCosts;

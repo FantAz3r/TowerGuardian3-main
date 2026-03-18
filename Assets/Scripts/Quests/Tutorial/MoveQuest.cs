@@ -11,6 +11,12 @@ public class MoveQuest : Quest
         _mover.Moved += Complete;
     }
 
+    public override void Stop()
+    {
+        base.Stop();
+        _mover.Moved -= Complete;
+    }
+
     public override void Complete()
     {
         _mover.Moved -= Complete;

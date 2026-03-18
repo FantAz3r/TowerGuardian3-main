@@ -40,9 +40,12 @@ public class QuestBuilder
         _quests.Add(new EnterSecondLevelQuest(GetPortalByLevel(LevelID.Level2)));
         _quests.Add(new EnterThirdLevelQuest(GetPortalByLevel(LevelID.Level3)));
         _quests.Add(new EnterFourthLevelQuest(GetPortalByLevel(LevelID.Level4)));
-        _quests.Add(new DefendPortalQuest(_portals));
         _quests.Add(new SwapWeaponQuest());
+        _quests.Add(new DefendPortalQuest());
         _quests.Add(new SelectWeaponCardQuest());
+        _quests.Add(new OutpostCaptureQuest());
+        _quests.Add(new DestroyEnemyBuildingsQuest());
+        _quests.Add(new StayAliveQuest());
     }
 
     private Portal GetPortalByLevel(LevelID level)

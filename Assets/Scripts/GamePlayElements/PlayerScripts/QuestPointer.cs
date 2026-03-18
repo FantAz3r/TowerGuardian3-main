@@ -11,8 +11,7 @@ public class QuestPointer : MonoBehaviour
 
     public void Init()
     {
-        _gameFactory = ServiceLocator.Get<IGameFactory>();
-        _questRunner = _gameFactory.QuestRunner;
+        _questRunner = ServiceLocator.Get<IGameFactory>().QuestRunner;
 
         _questRunner.QuestStarted += OnQuestSeted;
         _questRunner.QuestCompleted += OnQuestCompleted;

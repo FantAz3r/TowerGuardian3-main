@@ -34,7 +34,7 @@ public class QuestViewer : WindowBase
         if (_progress != null && _progress.gameObject.activeSelf == false)
             return;
 
-        _progress.text = $"{currentValue}/{targetValue}";
+        _progress.text = $"{currentValue:0}/{targetValue:0}";
     }
 
     public void UpdateTime(float time)

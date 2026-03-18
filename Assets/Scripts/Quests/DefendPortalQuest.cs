@@ -1,38 +1,48 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class DefendPortalQuest : Quest
 {
-    private Portal _portal;
+    private PortalFrame _portalFrame;
     private ICoroutineRunner _coroutineRunner;
-    public override QuestType GetQuestType() => QuestType.DefendPortal;
+    private Coroutine _timeRoutine;
 
-    public DefendPortalQuest(List<Portal> portals)
+    public override QuestType GetQuestType() => QuestType.DefendPortal;
+    public override Vector3 TryGetTarget() => _portalFrame.transform.position;
+
+    public DefendPortalQuest()
     {
-        _portal = portals.First();
         _coroutineRunner = ServiceLocator.Get<ICoroutineRunner>();
     }
 
     public override void Run()
     {
+        ServiceLocator.Get<IGameFactory>().SceneContainer.QuestObjects.First().TryGetComponent(out PortalFrame portalFrame);
+
+        if(portalFrame == null)
+        {
+            Complete();
+            return;
+        }
+
+        _portalFrame = portalFrame;
+        _portalFrame.Activate();
+
         base.Run();
         CanStop = false;
-        _portal.EnemyEntered += UpdateProgress;
-        _portal.CanExit(false);
-        _coroutineRunner.StartCoroutine(TimeRoutine());
+
+        _portalFrame.Health.IsValueChange += UpdateProgress;
+        _portalFrame.Health.Died += Fail;
+
+        UpdateProgress(_portalFrame.Health.CurrentHealth, _portalFrame.Health.MaxHealth);
+
+        _timeRoutine = _coroutineRunner.StartCoroutine(TimeRoutine());
     }
 
-    public override void UpdateProgress()
+    public override void UpdateProgress(float currentHealth, float maxHealth)
     {
-        CurrentValue++;
-        base.UpdateProgress();
-
-        if (CurrentValue >= Config.TargetValue)
-        {
-            Fail();
-        }
+        base.UpdateProgress(currentHealth, maxHealth);
     }
 
     private IEnumerator TimeRoutine()
@@ -51,17 +61,34 @@ public class DefendPortalQuest : Quest
 
     public override void Fail()
     {
-        CanStop = true;
-        _portal.EnemyEntered -= UpdateProgress;
+        EndQuest();
         base.Fail();
+    }
+
+    public override void Stop()
+    {
+        base.Stop();
+        EndQuest();
     }
 
     public override void Complete()
     {
-        CanStop = true;
-        _portal.CanExit(false);
-        _portal.EnemyEntered -= UpdateProgress;
+        EndQuest();
         base.Complete();
+    }
+
+    private void EndQuest()
+    {
+        _coroutineRunner.StopCoroutine(_timeRoutine);
+
+        if (_portalFrame != null)
+        {
+            _portalFrame.Health.IsValueChange -= UpdateProgress;
+            _portalFrame.Health.Died -= Fail;
+            _portalFrame.Deactivate();
+        }
+
+        CanStop = true;
     }
 }
 

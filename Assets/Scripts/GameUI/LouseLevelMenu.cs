@@ -58,12 +58,10 @@ public class LouseLevelMenu : LevelMenu
         base.OnDisable();
         _resurrectionButton.onClick.RemoveListener(Resurrection);
         _resurrectionButton.transform.DOKill();
-
     }
 
     private void Resurrection()
     {
-        
         _advService.TryShowRewardADV(_rewardId, () =>
         {
             _player.Health.Resurect();
@@ -73,6 +71,7 @@ public class LouseLevelMenu : LevelMenu
         _inputService.EnableInput();
         
         base.Close();
+
         WindowService.Open(WindowType.HUD);
     }
 

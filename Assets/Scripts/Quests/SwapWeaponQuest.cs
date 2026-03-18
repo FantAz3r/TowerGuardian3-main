@@ -17,4 +17,11 @@ public class SwapWeaponQuest : Quest
         _panel.Highlighter.DeactivateWarning();
         base.Complete();
     }
+
+    public override void Stop()
+    {
+        base.Stop();
+        _panel.WeaponSwaped -= Complete;
+        _panel.Highlighter.DeactivateWarning();
+    }
 }

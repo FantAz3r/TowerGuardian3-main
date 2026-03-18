@@ -13,6 +13,7 @@ public class GameFactory : IGameFactory
     private PortalSwitcher _portalSwitcher;
     private ISpawnerService _spawnerService;
 
+    public CardSelector CardSelector { get; private set; }
     public LevelID CurrentLevel { get; private set; }
     public LevelConfig LevelConfig { get; private set; }
     public DayCycle Cycle { get; private set; }
@@ -95,6 +96,11 @@ public class GameFactory : IGameFactory
         eventSystem.AddComponent<StandaloneInputModule>();
     }
 
+    public void CreateCardSelector()
+    {
+        CardSelector = new CardSelector();
+    }
+
     public void CreateScoreCounter()
     {
         ScoreCounter = new ScoreCounter();
@@ -160,7 +166,7 @@ public class GameFactory : IGameFactory
         QuestRunner?.Run();
         Cycle?.StartDayCycle();
 
-        if(LevelConfig.Level != LevelID.Tower)
+        if (LevelConfig.Level != LevelID.Tower)
         {
             _enemySpawner?.StartSpawn();
         }
@@ -176,7 +182,7 @@ public interface IGameFactory : IService
     ScoreCounter ScoreCounter { get; }
     QuestStateMachine QuestRunner { get; }
     ISceneContainer SceneContainer { get; }
-
+    CardSelector CardSelector { get; }
     void SetCurrentLevel(LevelID level);
     void SetLevelConfig(LevelID level);
     void SetSceneContainer();
@@ -184,6 +190,7 @@ public interface IGameFactory : IService
     void CreateSpawners();
     void CreateCamera();
     void CreateEventSystem();
+    void CreateCardSelector();
     void CreateScoreCounter();
     void CreateLight();
     void CreateEnemies();

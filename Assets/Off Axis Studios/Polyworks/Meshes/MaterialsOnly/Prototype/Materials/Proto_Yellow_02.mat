@@ -12,9 +12,10 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _EMISSION
   - _GLOSSYREFLECTIONS_OFF
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -79,9 +80,9 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
-    - _Glossiness: 0.189
+    - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metallic: 0.788
+    - _Metallic: 0.83
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -98,7 +99,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.854902, g: 0.6470588, b: 0.1254902, a: 1}
     - _Color: {r: 1, g: 0.87152433, b: 0.023584902, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.4, g: 0.4, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &680540520562821939

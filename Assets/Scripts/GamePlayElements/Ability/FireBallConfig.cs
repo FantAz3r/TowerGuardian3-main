@@ -11,7 +11,7 @@ public class FireballConfig : AbilityConfig
     [SerializeField] private float _exploadRange = 5f;
     [SerializeField] private float _flySpeed = 20f;
     [SerializeField] private float _cooldown = 20f;
-    [SerializeField] private float _minCooldown = 5f;
+    [SerializeField] private float _minCooldown = 2.5f;
 
     [SerializeField] private float _cooldownPerLevel = 1f;
     [SerializeField] private float _damagePerLevel = 2f;

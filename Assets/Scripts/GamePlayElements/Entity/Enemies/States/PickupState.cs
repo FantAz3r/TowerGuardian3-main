@@ -9,8 +9,8 @@ public class PickupState : State
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
         _isPickingUp = false;
-        Enemy.StateMachine.OnStartPickup();
 
+        Enemy.StateMachine.OnStartPickup();
         Enemy.TargetDetector.gameObject.SetActive(false);
         FindObject();
     }

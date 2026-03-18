@@ -1,10 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WinLevelMenu : LevelMenu
 {
+
     [SerializeField] private Button _nextLevelButton;
     [SerializeField] private AudioClip _winSound;
+    [SerializeField] private TMP_Text _levelNumberText;
 
     protected override void Awake()
     {
@@ -26,12 +29,13 @@ public class WinLevelMenu : LevelMenu
     private void OnNextLevelClicked()
     {
         StateSwitchService.Switch(LevelID.Tower);
-        Close();
+        base.Close();
     }
 
     public override void Open()
     {
         base.Open();
+        _levelNumberText.text = ((int)CurrentLevel - EnumGameLevelOffset).ToString();
         ScoreCounter.OnEndLevel(this);
         ServiceLocator.Get<ISpawnerService>().SendSoundReqest(_winSound);
     }

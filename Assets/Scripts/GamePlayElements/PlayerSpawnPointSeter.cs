@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using YG;
 
 public class PlayerSpawnPointSeter
 {
@@ -16,12 +15,8 @@ public class PlayerSpawnPointSeter
     {
         if (previousLevel == LevelID.None || previousLevel == LevelID.MainMenu)
         {
-            if (YG2.saves.PlayerPosition == Vector3.zero)
-            {
-                return _sceneContainer.PlayerSpawnPoints.First().transform.position;
-            }
 
-            return YG2.saves.PlayerPosition;
+            return _sceneContainer.PlayerSpawnPoints.First().transform.position;
         }
 
         if (currentLevel == LevelID.Tower)

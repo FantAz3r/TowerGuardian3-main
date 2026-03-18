@@ -10,14 +10,21 @@ public class CardSelector
     private int _cardsPerSelect;
     private int _maxLevel = 100;
 
-    public CardSelector(CardData cardData, int cardsCount = 3)
+    private List<ICardConfig> _currentCards = new();
+
+    public CardSelector(int cardsCount = 3)
     {
-        _cardData = cardData;
+        _cardData = Resources.Load<CardData>(GameConstants.CardData);
         _cardsPerSelect = cardsCount;
     }
 
     public IEnumerable<ICardConfig>GetCards()
     {
+        if(_currentCards != null && _currentCards.Count >0)
+        {
+            return _currentCards;
+        }
+
         List<ICardConfig> startFiltered = FilterCards(_cardData.GetConfigs());
 
         if (startFiltered.Count == 0)
@@ -44,6 +51,17 @@ public class CardSelector
         }
 
         return selectedCards;
+    }
+
+    public void SaveCurrentCards(List<ICardConfig> currentCards)
+    {
+        if(currentCards == null)
+        {
+            _currentCards.Clear();
+            return;
+        }
+       
+        _currentCards = currentCards;
     }
 
     private ICardConfig SelectCardByChance(IList<ICardConfig> list)

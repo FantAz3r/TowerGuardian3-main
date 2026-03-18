@@ -9,6 +9,7 @@ public class KillQuest : Quest
     public override void Run()
     {
         base.Run();
+        CurrentValue--;
         _enemyDetector.OnEnemyKilled += UpdateProgress;
     }
 
@@ -16,6 +17,12 @@ public class KillQuest : Quest
     {
         _enemyDetector.OnEnemyKilled -= UpdateProgress;
         base.Complete();
+    }
+
+    public override void Stop()
+    {
+        _enemyDetector.OnEnemyKilled -= UpdateProgress;
+        base.Stop();
     }
 
     public override void UpdateProgress()

@@ -11,6 +11,7 @@ public class QuestStateMachine : MonoBehaviour
     private int _startQuestIndex = -1;
     private LevelID _level;
     private IQuest _currentQuest;
+    private IGameConditionService _conditionService;
     private bool _isAllQuestsComplete = false;
 
     public event Action AllQuestsCompleted, QuestCompleted;
@@ -27,6 +28,13 @@ public class QuestStateMachine : MonoBehaviour
         }
 
         LoadQuestProgress();
+
+        _conditionService = ServiceLocator.Get<IGameConditionService>();
+    }
+
+    private void OnDestroy()
+    {
+        _currentQuest?.Stop();
     }
 
     public void Run()
@@ -90,6 +98,9 @@ public class QuestStateMachine : MonoBehaviour
     {
         YG2.saves.QuestProgress ??= new List<QuestSaveData>();
 
+        if (_level != LevelID.Tower)
+            return;
+        
         int index = YG2.saves.QuestProgress.FindIndex(quest => quest.Level == _level);
 
         QuestSaveData saveData;
@@ -119,7 +130,7 @@ public class QuestStateMachine : MonoBehaviour
     {
         if (YG2.saves.QuestProgress == null)
         {
-            ResetProgress();
+            _currentQuestIndex = -1;
             return;
         }
 
@@ -127,16 +138,11 @@ public class QuestStateMachine : MonoBehaviour
 
         if (saveData.Level == LevelID.None)
         {
-            ResetProgress();
+            _currentQuestIndex = -1;
         }
         else
         {
             _currentQuestIndex = saveData.QuestIndex-1;
         }
-    }
-
-    private void ResetProgress()
-    {
-        _currentQuestIndex = -1;
     }
 }

@@ -93,6 +93,8 @@ public class ScoreCounter
     {
         YG2.saves.LevelsProgress ??= new List<LevelSaveData>();
 
+        int newScore = _scoreService.GetScore();
+        int newStars = CalculateStars();
         bool levelFound = false;
 
         for (int i = 0; i < YG2.saves.LevelsProgress.Count; i++)
@@ -103,11 +105,14 @@ public class ScoreCounter
             {
                 levelFound = true;
 
-                if (_scoreService.GetScore() > levelSave.Score)
-                {
-                    YG2.saves.LevelsProgress[i] = new LevelSaveData(_currentLevel, _scoreService.GetScore(), CalculateStars(), _time);
-                    UpdateLevelLeaderboards(_currentLevel);
-                }
+                int updatedScore = (newScore > levelSave.Score) ? newScore : levelSave.Score;
+
+                int updatedStars = Mathf.Max(newStars, levelSave.Stars);
+                float updatedTime = Mathf.Min(_time, levelSave.Time);
+
+                YG2.saves.LevelsProgress[i] = new LevelSaveData(_currentLevel, updatedScore, updatedStars, updatedTime);
+
+                UpdateLevelLeaderboards(_currentLevel);
 
                 break;
             }
@@ -115,7 +120,7 @@ public class ScoreCounter
 
         if (levelFound == false)
         {
-            YG2.saves.LevelsProgress.Add(new LevelSaveData(_currentLevel, _scoreService.GetScore(), CalculateStars(), _time));
+            YG2.saves.LevelsProgress.Add(new LevelSaveData(_currentLevel, newScore, newStars, _time));
             UpdateLevelLeaderboards(_currentLevel);
         }
 

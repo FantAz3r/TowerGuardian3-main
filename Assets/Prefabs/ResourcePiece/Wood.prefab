@@ -51,6 +51,7 @@ MonoBehaviour:
   _pickSound: {fileID: 0}
   _collectSound: {fileID: 8300000, guid: 31d0b8f2f9189d14e9b135159446abab, type: 3}
   _amount: 1
+  _outlineRenderer: {fileID: 5330931166458980755}
   <ScorePoints>k__BackingField: 1
 --- !u!136 &561757668577521926
 CapsuleCollider:
@@ -110,6 +111,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3696505841873743227}
     m_Modifications:
+    - target: {fileID: 1087818692828033662, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087818692828033662, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76ba0edbd7986ce4a8dddee7b6f9aa65, type: 2}
+    - target: {fileID: 1087818692828033662, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76ba0edbd7986ce4a8dddee7b6f9aa65, type: 2}
     - target: {fileID: 1447987709244396459, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
       propertyPath: m_Name
       value: Log_01
@@ -182,6 +195,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
+--- !u!23 &5330931166458980755 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1087818692828033662, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}
+  m_PrefabInstance: {fileID: 5108191318850657261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6462781439842145020 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2257316659483412753, guid: 64aaa8c698778aa4798fa25e58dd80d1, type: 3}

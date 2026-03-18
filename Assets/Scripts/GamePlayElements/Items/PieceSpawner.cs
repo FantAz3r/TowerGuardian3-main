@@ -34,7 +34,11 @@ public class PieceSpawner : BaseSpawner
         if (_pools.TryGetValue(config.SpawnResource, out var pool) == false) 
             return;
 
-        for (int i = 0; i < count; i++)
+        float rootDegree = 2.5f;
+        int spawnCount = Mathf.CeilToInt(Mathf.Pow(count, 1f / rootDegree));
+        int pointsPerObject = Mathf.CeilToInt((float)count / spawnCount);
+
+        for (int i = 0; i < spawnCount; i++)
         {
             ResourcePiece piece = pool.Get();
             Vector3 startPos = CreateSpawnPoint(position);
@@ -49,6 +53,8 @@ public class PieceSpawner : BaseSpawner
 
             float jumpPower = distance * 0.3f;
             float duration = 0.4f;
+
+            piece.SetAmount(pointsPerObject);
 
             piece.transform.DOJump(endPos, jumpPower, 1, duration)
                 .SetEase(Ease.OutQuad)

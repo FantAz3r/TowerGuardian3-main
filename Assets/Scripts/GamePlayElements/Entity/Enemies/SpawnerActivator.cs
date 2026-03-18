@@ -4,8 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class SpawnerActivator : MonoBehaviour
 {
-    public event Action<SpawnerActivator> Detected;
-    public event Action<SpawnerActivator> Losted;
+    public event Action<SpawnerActivator> Detected, Losted, Destroyed;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,5 +20,10 @@ public class SpawnerActivator : MonoBehaviour
         {
             Losted?.Invoke(this);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Destroyed?.Invoke(this);
     }
 }

@@ -16,5 +16,8 @@ public enum QuestType
     CollectStones,
     EnterLevel4,
     SwapWeapon,
-    SelectWeaponCard
+    SelectWeaponCard,
+    OutpostCapture,
+    DestroyBuildings,
+    StayAlive
 }

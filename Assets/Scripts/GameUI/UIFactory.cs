@@ -2,7 +2,7 @@ using Crystal;
 using UnityEngine;
 using YG;
 
-public class UIFactory: IUIFactory
+public class UIFactory : IUIFactory
 {
     private WindowData _windowData;
     private IGameFactory _gameFactory;
@@ -39,6 +39,8 @@ public class UIFactory: IUIFactory
 
     public HUD CreateHUD()
     {
+        ServiceLocator.Get<IGameConditionService>().SetEndLevelWindowOpen(false);
+
         if (HUD != null)
         {
             HUD.Open();
@@ -75,7 +77,7 @@ public class UIFactory: IUIFactory
 
     public void CreateJoystick()
     {
-        if(YG2.envir.isDesktop == false)
+        if (YG2.envir.isDesktop == false)
         {
             IInputService inpusService = ServiceLocator.Get<IInputService>().GetSelf();
             Joystick joystick = Object.Instantiate(Resources.Load<Joystick>(GameConstants.Joystick), _backgroundContainer);
@@ -103,10 +105,10 @@ public class UIFactory: IUIFactory
         return CreateWindow(WindowType.MenuLeaderboard) as PauseWindow; ;
     }
 
-   public ShowCardsButton CreateShowCardsButton()
-   {
-       return CreateWindow(WindowType.ShowCardsButton, HUD.transform) as ShowCardsButton; ;
-   }
+    public ShowCardsButton CreateShowCardsButton()
+    {
+        return CreateWindow(WindowType.ShowCardsButton, HUD.transform) as ShowCardsButton; ;
+    }
 
     public Shop CreateShop()
     {
@@ -120,10 +122,10 @@ public class UIFactory: IUIFactory
 
     public PauseUI CreatePauseUI()
     {
-        if(_gameFactory.LevelConfig == null)
+        if (_gameFactory.LevelConfig == null)
             return null;
 
-        if(((int)_gameFactory.LevelConfig.Level) >=3)
+        if (((int)_gameFactory.LevelConfig.Level) >= 3)
         {
             PauseUI pause = CreateWindow(WindowType.Pause) as PauseUI;
             return pause;
@@ -161,6 +163,7 @@ public class UIFactory: IUIFactory
     public LouseLevelMenu CreateLouseLevelMenu(GameObject louseReasonObject)
     {
         LouseLevelMenu louseLevelMenu = CreateWindow(WindowType.LouseLevelMenu) as LouseLevelMenu;
+        Debug.Log(louseLevelMenu);
 
         if (louseReasonObject != null && louseReasonObject.TryGetComponent(out Health louseReason))
         {

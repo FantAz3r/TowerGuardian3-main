@@ -34,11 +34,9 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
 
     public override void Use()
     {
-        if (IsLock)
-            return;
+        if (IsLock) return;
 
-        if (IsCooldowning)
-            return;
+        if (IsCooldowning) return;
 
         if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Pickaxe)
         {
@@ -53,7 +51,7 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     {
         _jumpingPickaxe = currentWeapon.GetComponent<JumpingPickaxe>();
         _jumpingPickaxe.Returned += Return;
-        _jumpingPickaxe.Throw(_config.BouncesCount, _config.BounceRange, _config.Damage, _config.FlySpeed);
+        _jumpingPickaxe.Throw(_config.BouncesCount, _config.BounceRange, _pickaxe.Config.Damage, _config.FlySpeed);
     }
 
     public IEnumerator CooldownRoutine()
@@ -69,7 +67,7 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
         }
 
         Cooldowning?.Invoke(_cooldown, 0f);
-        IsCooldowning = true;
+        IsCooldowning = false;
     }
 
     private void CheckWeapon(IWeapon weapon)

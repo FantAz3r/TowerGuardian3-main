@@ -96,7 +96,7 @@ Rigidbody:
   m_GameObject: {fileID: 472323202367812756}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -158,6 +158,8 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 8023230514114427221}
   <Rotator>k__BackingField: {fileID: 6992114218835685138}
   <PlayerAnimator>k__BackingField: {fileID: 762481495982142268}
+  <EnemyDetector>k__BackingField: {fileID: 3918306888492116849}
+  _saveInterval: 0.5
 --- !u!114 &325926260405469938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266449e83147c504283c897ecfc0b18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravityMultiplier: 3
-  _rayDistance: 0.1
+  _gravityMultiplier: 2
+  _rayDistance: 0.3
   _groundLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -324,9 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d930e6b5252b48d4db72adb0b4420c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceFlySpeed: 10
-  _flyDelay: 2
-  _treshold: 1
+  _resourceFlySpeed: 15
+  _flyDelay: 0.3
+  _treshold: 0.7
 --- !u!135 &7629082267473678285
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -791,7 +793,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89d018f09293bd41868be6250abf622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 1, g: 0, b: 0, a: 0.25}
+  _attackableLayers:
+    serializedVersion: 2
+    m_Bits: 33216
+  _gizmoColor: {r: 1, g: 0, b: 0, a: 0.25}
 --- !u!1 &6872175815449730819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,6 +1300,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4144196830429454860}
     m_Modifications:
+    - target: {fileID: 3016924496630956531, guid: 406157928943b4a49ace04f5517bc7ff, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b2385c82b0af5d4db2b1197673d1ca5, type: 2}
     - target: {fileID: 3665570179786694694, guid: 406157928943b4a49ace04f5517bc7ff, type: 3}
       propertyPath: m_Name
       value: Proto_Symbol_Arrow_Straight_01

@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: StonePieceConfig
   m_EditorClassIdentifier: 
   _icon: {fileID: 1332438145, guid: c3ad00a8626a7f44397c0824c17a23a0, type: 3}
-  _name: Stone
-  _description: 
+  _nameRu: "\u0416\u0435\u043B\u0435\u0437\u043E"
+  _nameEn: Iron
+  _nameTr: Demir
+  _descriptionRU: "\u0416\u0435\u043B\u0435\u0437\u043E"
+  _descriptionEN: Iron
+  _descriptionTR: Demir
   _costs:
   - ResourceType: 2
     Value: 5
     Image: {fileID: 21300000, guid: 20d21a867b3174de9aa1b81823b2b7ef, type: 3}
+  _id: 
   _type: 0

@@ -57,14 +57,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.53173774
+      - time: 0.5085419
         functionName: OnEquipWeapon
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 9f47c460eb9ade140a0abd8dcc9511ac, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9114452
+      - time: 0.556701
         functionName: OnAnimationEquipWeapon
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 9f47c460eb9ade140a0abd8dcc9511ac, type: 3}

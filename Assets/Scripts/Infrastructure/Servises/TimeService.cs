@@ -17,6 +17,19 @@ public class TimeService : IService, ITimeService
         _wait = new WaitForSeconds(_time);
     }
 
+    public void StopGame()
+    {
+        if(_slowMotionCoroutine != null)
+            _coroutineRunner.StopCoroutine(_slowMotionCoroutine);
+
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
     public void SmoothEditTimeScalse(float targetTimeScale, float duration)
     {
         if (_slowMotionCoroutine != null)

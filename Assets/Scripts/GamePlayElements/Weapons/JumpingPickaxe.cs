@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class JumpingPickaxe : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _particleSystem;
     private Vector3 _positionInHand = new Vector3(0.123f, 0.054f, 0.155f);
-    private Vector3 _rotationInHand = new Vector3(124, 132, -8.35f);
+    private Vector3 _rotationInHand = new Vector3(0, 38, -100);
 
     private Fist _hand;
     private Health _currentTarget = null;
@@ -14,7 +15,7 @@ public class JumpingPickaxe : MonoBehaviour
 
     private int _currentHitCount = 0;
     private int _maxHitCount;
-    private int _damage;
+    private float _damage;
     private float _flySpeed;
     private float _searchRange;
 
@@ -25,7 +26,7 @@ public class JumpingPickaxe : MonoBehaviour
         _hand = GetComponentInParent<Fist>();
     }
 
-    public void Throw(int bounceCount, float searchRange, int damage, float flySpeed)
+    public void Throw(int bounceCount, float searchRange, float damage, float flySpeed)
     {
         _damage = damage;
         _flySpeed = flySpeed;
@@ -33,6 +34,7 @@ public class JumpingPickaxe : MonoBehaviour
         _searchRange = searchRange;
 
         transform.SetParent(null);
+        _particleSystem.gameObject.SetActive(true);
         NextMove();
     }
 
@@ -54,11 +56,18 @@ public class JumpingPickaxe : MonoBehaviour
     {
         float threshold = 0.1f;
         Vector3 offset = new Vector3(0, 1, 0);
+        int rotations = 4;
+        float totalAngle = 0f;
 
         while (Vector3.SqrMagnitude(transform.position - (target.position + offset)) > threshold * threshold)
         {
             Vector3 targetPos = target.position + offset;
             transform.position = Vector3.MoveTowards(transform.position, targetPos, _flySpeed * Time.deltaTime);
+
+            float angleStep = rotations * 360f * Time.deltaTime;
+            totalAngle += angleStep;
+            transform.rotation = Quaternion.Euler(0, 0, totalAngle);
+
             yield return null;
         }
 
@@ -129,6 +138,7 @@ public class JumpingPickaxe : MonoBehaviour
 
     private void SetInHand()
     {
+        _particleSystem.gameObject.SetActive(false);
         transform.SetParent(_hand.transform);
         transform.localPosition = _positionInHand;
         transform.localRotation = Quaternion.Euler(_rotationInHand);

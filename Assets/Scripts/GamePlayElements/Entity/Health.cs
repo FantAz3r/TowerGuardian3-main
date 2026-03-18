@@ -12,8 +12,9 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     public HealthConfig Config => _config;
     public float CurrentHealth => _currentValue;
     public float MaxHealth => _maxHealth;
+    public bool IsAlive { get; private set; } = true;
 
-    public event Action<float,float> IsValueChange, MaxHealthChanged;
+    public event Action<float, float> IsValueChange, MaxHealthChanged;
     public event Action<float> DamageTaken, Healed;
     public event Action<Health> Killed;
 
@@ -31,6 +32,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public void Init(float maxHealth)
     {
+        IsAlive = true;
         _maxHealth = maxHealth;
         _startMaxHealth = maxHealth;
         _currentValue = _maxHealth;
@@ -39,6 +41,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public void OnEnable()
     {
+        IsAlive = true;
         _currentValue = _maxHealth;
     }
 
@@ -49,6 +52,8 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public void Heal(float healAmount)
     {
+        if (IsAlive == false) return;
+        
         if (_currentValue >= 0 && healAmount > 0)
         {
             if (_currentValue + healAmount > _maxHealth)
@@ -68,6 +73,8 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public virtual void TakeDamage(float damage)
     {
+        if (IsAlive == false) { return; }
+
         if (_currentValue <= 0) return;
 
         float damageTaken = Mathf.Min(damage, _currentValue);
@@ -100,6 +107,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public void DieAction()
     {
+        IsAlive = false;
         Died?.Invoke();
         Killed?.Invoke(this);
     }
@@ -111,6 +119,7 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public void Resurect()
     {
+        IsAlive = true;
         Heal(MaxHealth);
         Resurected?.Invoke();
     }

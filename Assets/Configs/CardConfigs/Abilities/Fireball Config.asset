@@ -40,12 +40,12 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 4050332179480168018, guid: 03c308d5c738e214d90e10dd050da96a, type: 3}
   <AbilityType>k__BackingField: 5
   <FireballPrefab>k__BackingField: {fileID: 2950884488222914401, guid: b3f003429948ed94ebe359d6830df43d, type: 3}
-  _exploadDamage: 2
+  _exploadDamage: 3
   _maxFlyDistance: 15
   _exploadRange: 5
   _flySpeed: 20
   _cooldown: 10
-  _minCooldown: 6
-  _cooldownPerLevel: 0.3
+  _minCooldown: 2
+  _cooldownPerLevel: 0.35
   _damagePerLevel: 1
   _distancePerLevel: 1

@@ -39,14 +39,15 @@ public class SpawnbleEntity : MonoBehaviour
             return;
 
         int spawnCount = 0;
+        float damageToErn = _health.Config.DamageToErn * _health.Config.GetMaxHealth() / _health.Config.MaxHealth;
         _damageAccumulator += value;
 
-        if(_damageAccumulator >= _health.Config.DamageToErn)
+        if(_damageAccumulator >= damageToErn)
         {
-            int rewardsCount = (int)(_damageAccumulator / _health.Config.DamageToErn);
-            spawnCount = rewardsCount * _health.Config.RewardCount;
+            int rewardsCount = (int)(_damageAccumulator / damageToErn);
+            spawnCount = rewardsCount * CalculateRewardToKill();
             _spawnerService.SendItemReqest(_health.Config, transform.position, spawnCount);
-            _damageAccumulator -= rewardsCount * _health.Config.DamageToErn;
+            _damageAccumulator -= rewardsCount * damageToErn;
         }
     }
 
@@ -55,6 +56,11 @@ public class SpawnbleEntity : MonoBehaviour
         if (_health.Config.DamageToErn > 0)
             return;
 
-        _spawnerService.SendItemReqest(_health.Config, transform.position, _health.Config.RewardCount);
+        _spawnerService.SendItemReqest(_health.Config, transform.position, CalculateRewardToKill());
+    }
+
+    private int CalculateRewardToKill()
+    {
+        return Mathf.CeilToInt(_health.Config.RewardCount * _health.Config.GetMaxHealth() / _health.Config.MaxHealth);
     }
 }

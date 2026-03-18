@@ -9,7 +9,6 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     private Player _player;
     private Weapon _axe;
     private ThrownAxe _thrownAxe;
-    private WaitForSeconds _oneSecond = new WaitForSeconds(1);
 
     public bool IsCooldowning { get; private set; } = false;
     public float Cooldown => _config.Cooldown;
@@ -85,7 +84,7 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
         _thrownAxe = currentWeapon.GetComponent<ThrownAxe>();
         _thrownAxe.Returned += Return;
-        _thrownAxe.Throw(start, end, _config.FlightDuration, _config.Damage);
+        _thrownAxe.Throw(start, end, _config.FlightDuration, _axe.Config.Damage);
     }
 
     private void Return()

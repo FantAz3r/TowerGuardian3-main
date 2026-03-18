@@ -95,10 +95,13 @@ public class PlayerExperience : MonoBehaviour
 
         while (targetExp >= ExpToNextLevel)
         {
-            AddUpgradePoints(1);
-            _timeService.SmoothEditTimeScalse(0, _slowDuration);
-            yield return _slowDurationForCards;
-            _windowService.Open(WindowType.CardMenu);
+            if (ServiceLocator.Get<IGameConditionService>().IsEndLevelWindowOpen == false)
+            {
+                AddUpgradePoints(1);
+                _timeService.SmoothEditTimeScalse(0, _slowDuration);
+                yield return _slowDurationForCards;
+                _windowService.Open(WindowType.CardMenu);
+            }
 
             float fillTo = ExpToNextLevel;
 

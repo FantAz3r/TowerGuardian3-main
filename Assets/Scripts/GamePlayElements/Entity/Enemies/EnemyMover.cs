@@ -27,13 +27,17 @@ public class EnemyMover : MonoBehaviour, IBuffble
         {
             _agent.SetDestination(point);
         }
-        else
-        {
-            Debug.Log("gjOjvozdvbprbnzhzr");
-        }
     }
 
-    public float GetRemainingDistance() => _agent.remainingDistance;
+    public float GetRemainingDistance()
+    {
+        if (_agent.isActiveAndEnabled)
+        {
+           return _agent.remainingDistance;
+        }
+
+        return 0;
+    }
 
     public bool GetPathPedding() => _agent.pathPending;
 

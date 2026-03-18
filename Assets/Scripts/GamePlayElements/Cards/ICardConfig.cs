@@ -15,6 +15,7 @@ public interface ICardConfig : IShopConfig
     CardSaveData CreateSaveData(bool isBought = false);
 
     void Upgrade();
+    void Regrade();
     void InitFromData(CardSaveData data);
     void SetBought(bool isBought);
     void SetHasPlayer(bool hasPlayer);

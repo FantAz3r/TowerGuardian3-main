@@ -57,8 +57,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5629552
+      - time: 0.5474913
         functionName: OnTakeOffWeapon
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 9f47c460eb9ade140a0abd8dcc9511ac, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.57216495
+        functionName: OnAnimationUnequipWeapon
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 9f47c460eb9ade140a0abd8dcc9511ac, type: 3}
         floatParameter: 0
@@ -66,13 +73,6 @@ ModelImporter:
         messageOptions: 0
       - time: 1
         functionName: SwapController
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 9f47c460eb9ade140a0abd8dcc9511ac, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.52715117
-        functionName: OnAnimationUnequipWeapon
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 9f47c460eb9ade140a0abd8dcc9511ac, type: 3}
         floatParameter: 0

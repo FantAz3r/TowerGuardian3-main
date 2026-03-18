@@ -3,13 +3,13 @@ using UnityEngine;
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
-
-    private int _hashIsSeePlayer, _hashIsPlayerInAttackRange, _hashRandom, _hashHasObject, _hashPick, _hashThrowEnded;
+    private float _attackRangeTreshold = 1.1f;
+    private int _hashIsSeeTarget, _hashTargetInAttackRange, _hashRandom, _hashHasObject, _hashPick, _hashThrowEnded;
 
     private void Awake()
     {
-        _hashIsSeePlayer = Animator.StringToHash("SeePlayer");
-        _hashIsPlayerInAttackRange = Animator.StringToHash("PlayerInAttackRange");
+        _hashIsSeeTarget = Animator.StringToHash("SeeTarget");
+        _hashTargetInAttackRange = Animator.StringToHash("TargetInAttackRange");
         _hashRandom = Animator.StringToHash("Random");
         _hashHasObject = Animator.StringToHash("HasObject");
         _hashPick = Animator.StringToHash("IsPickup");
@@ -20,20 +20,50 @@ public class EnemyStateMachine : MonoBehaviour
     {
         _enemy.Agent.EnableAgent(true);
         _enemy.Collider.enabled = true;
-
-        _enemy.TargetDetector.PlayerDetected += OnSeePlayer;
-        _enemy.TargetDetector.PlayerLost += OnLostPlayer;
-
-        _enemy.AttackDetector.PlayerDetected += OnPlayerInMeleeRange;
-        _enemy.AttackDetector.PlayerLost += OnChasePlayer;
+        _enemy.Rotator.CanRotate(true);
+        
+        _enemy.TargetDetector.TargetDetected += OnSeeTarget;
+        _enemy.TargetDetector.TargetLost += OnLostTarget;
 
         _enemy.Health.Died += OnDie;
     }
 
-    private void OnSeePlayer()
+    private void Update()
     {
+        if(_enemy.Target == null) 
+            return;
+
+        float sqrDistance = (transform.position - _enemy.Target.transform.position).sqrMagnitude;
+
+        if (sqrDistance <= _enemy.Config.AttackRange * _enemy.Config.AttackRange)
+        {
+            _enemy.BehaviorAnimator.SetBool(_hashTargetInAttackRange, true);
+        }
+        else if(sqrDistance >= _enemy.Config.AttackRange * _enemy.Config.AttackRange * _attackRangeTreshold)
+        {
+            _enemy.BehaviorAnimator.SetBool(_hashTargetInAttackRange, false);
+        }
+
+        if(sqrDistance <= _enemy.Config.DetectionRadius * _enemy.Config.DetectionRadius)
+        {
+            _enemy.BehaviorAnimator.SetBool(_hashIsSeeTarget, true);
+        }
+        else
+        {
+            _enemy.BehaviorAnimator.SetBool(_hashIsSeeTarget, false);
+        }
+
+    }
+
+    private void OnSeeTarget(Transform target)
+    {
+        _enemy.SetNewTarget(target);
         SetRandom();
-        _enemy.BehaviorAnimator.SetBool(_hashIsSeePlayer, true);
+    }
+
+    private void OnLostTarget(Transform target)
+    {
+        _enemy.SetNewTarget(target);
     }
 
     public void SetRandom(int random = -1)
@@ -44,7 +74,7 @@ public class EnemyStateMachine : MonoBehaviour
         }
         else
         {
-            _enemy.BehaviorAnimator.SetInteger(_hashRandom, Random.Range(0, 2));
+            _enemy.BehaviorAnimator.SetInteger(_hashRandom, Random.Range(0, 4));
         }
     }
 
@@ -52,29 +82,9 @@ public class EnemyStateMachine : MonoBehaviour
     {
         _enemy.Collider.enabled = false;
         _enemy.Agent.EnableAgent(false);
+        _enemy.Rotator.CanRotate(false);
 
-        _enemy.TargetDetector.PlayerDetected -= OnSeePlayer;
-        _enemy.TargetDetector.PlayerLost -= OnLostPlayer;
-        _enemy.AttackDetector.PlayerDetected -= OnPlayerInMeleeRange;
-        _enemy.AttackDetector.PlayerLost -= OnChasePlayer;
         _enemy.Health.Died -= OnDie;
-    }
-
-    public void OnLostPlayer()
-    {
-        _enemy.BehaviorAnimator.SetBool(_hashIsSeePlayer, false);
-        _enemy.BehaviorAnimator.SetBool(_hashIsPlayerInAttackRange, false);
-    }
-
-    private void OnPlayerInMeleeRange()
-    {
-        _enemy.BehaviorAnimator.SetBool(_hashIsSeePlayer, true);
-        _enemy.BehaviorAnimator.SetBool(_hashIsPlayerInAttackRange, true);
-    }
-
-    public void OnChasePlayer()
-    {
-        _enemy.BehaviorAnimator.SetBool(_hashIsPlayerInAttackRange, false);
     }
 
     public void OnReadyToThrow()
@@ -100,6 +110,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void OnThrowEnded()
     {
+        SetRandom();
         _enemy.BehaviorAnimator.SetTrigger(_hashThrowEnded);
     }
 }

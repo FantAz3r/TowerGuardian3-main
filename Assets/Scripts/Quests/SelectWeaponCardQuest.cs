@@ -16,6 +16,13 @@ public class SelectWeaponCardQuest : Quest
         _panel.WeaponAdded += Complete;
     }
 
+    public override void Stop()
+    {
+        _panel.WeaponAdded -= Complete;
+        base.Stop();
+        SetWeaponCardChance(0);
+    }
+
     public override void Complete()
     {
         _panel.WeaponAdded -= Complete;

@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Параметры поиска клипа атаки")]
     [Tooltip("Имя клипа атаки внутри AnimatorController. Если пусто, будет попытка взять первый попавшийся клип.")]
     [SerializeField] private string attackClipName = "Attack";
-    
+
     private int _hashX;
     private int _hashY;
     private int _hashWeaponSeted;
@@ -58,6 +58,7 @@ public class PlayerAnimator : MonoBehaviour
 
         _player.Attacker.WeaponSeted += OnWeaponSeted;
         _player.Attacker.WeaponRemoved += OnWeaponRemoved;
+
         _player.Attacker.Attacked += PlayAttack;
         _player.Attacker.Suspended += OnSuspendAttack;
         _player.Health.Died += OnDie;
@@ -135,7 +136,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void OnWeaponRemoved(IWeapon weapon)
     {
-        if (weapon.Config.WeaponType != WeaponType.None)
+        if(weapon != null)
         {
             _player.Animator.SetTrigger(_hashWeaponRemoved);
         }
@@ -144,6 +145,7 @@ public class PlayerAnimator : MonoBehaviour
     public void OnAnimationEquipWeapon()
     {
         _player.Animator.SetBool(_hasWeapon, true);
+        _player.Animator.ResetTrigger(_hashWeaponRemoved);
     }
 
     public void OnAnimationUnequipWeapon()

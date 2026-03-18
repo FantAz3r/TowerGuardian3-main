@@ -14,6 +14,12 @@ public class AttackQuest : Quest
         _attacker.Hited += Complete;
     }
 
+    public override void Stop()
+    {
+        base.Stop();
+        _attacker.Hited -= Complete;
+    }
+
     public override void Complete()
     {
         _attacker.Hited -= Complete;
