@@ -62,6 +62,7 @@ public class HealthViewer : MonoBehaviour
         _healthSlider.minValue = 0;
         _healthSlider.maxValue = maxHealth;
         _healthSlider.value = currentHealth;
+        Debug.Log(_healthSlider.maxValue);
     }
 }
 

@@ -6,6 +6,7 @@ public abstract class InteractionMethod : MonoBehaviour
 {
     [field: SerializeField] public float InteractionTime { get; private set; } = 1.5f;
     [SerializeField] private Collider _collider;
+    [SerializeField] private bool _canUpdate = false;
 
     private float _currentTime = 0f;
     private bool _playerInZone = false;
@@ -54,6 +55,7 @@ public abstract class InteractionMethod : MonoBehaviour
         {
             _playerInZone = false;
             PlayerExitedZone?.Invoke();
+
             StartTimerCoroutine();
         }
     }
@@ -79,7 +81,7 @@ public abstract class InteractionMethod : MonoBehaviour
                     _currentTime = InteractionTime;
 
                     Interact();
-                    _isTimerUpdate = false;
+                    _isTimerUpdate = _canUpdate;
                     yield break;
                 }
             }

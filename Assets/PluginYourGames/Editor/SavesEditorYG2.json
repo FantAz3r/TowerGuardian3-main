@@ -1,61 +1,73 @@
 {
-    "idSave": 75858,
+    "idSave": 80105,
     "AllCards": [
         {
+            "ID": "13f3c7d5-8723-43a2-8739-bb50875891dd",
+            "Level": 9,
+            "IsBought": true,
+            "HasPlayer": true
+        },
+        {
             "ID": "3579314f-bc1d-4316-b295-7e1736a6cd1b",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "f686a659-d96a-42e8-b503-c0666c1bb2f8",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "f16b46a5-a46e-42d8-afc5-54d237d09e9e",
-            "Level": 2,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "14ceb4cf-2180-47f1-9722-7bee9685c697",
-            "Level": 1,
+            "Level": 5,
             "IsBought": true,
             "HasPlayer": true
         },
         {
             "ID": "033888aa-cee4-442f-b7fd-38a4e0e8f850",
-            "Level": 3,
+            "Level": 29,
+            "IsBought": true,
+            "HasPlayer": true
+        },
+        {
+            "ID": "14ceb4cf-2180-47f1-9722-7bee9685c697",
+            "Level": 7,
+            "IsBought": true,
+            "HasPlayer": true
+        },
+        {
+            "ID": "f16b46a5-a46e-42d8-afc5-54d237d09e9e",
+            "Level": 6,
+            "IsBought": true,
+            "HasPlayer": true
+        },
+        {
+            "ID": "6809a072-2f9b-472c-bead-b31e4c6975db",
+            "Level": 21,
+            "IsBought": true,
+            "HasPlayer": true
+        },
+        {
+            "ID": "f9a44341-423b-4381-8132-27f01b90fcca",
+            "Level": 1,
             "IsBought": true,
             "HasPlayer": true
         },
         {
             "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
-            "Level": 5,
+            "Level": 75,
             "IsBought": true,
             "HasPlayer": true
         }
     ],
     "CurrentWeapon": {
         "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
-        "Level": 1,
+        "Level": 56,
         "IsBought": true,
         "HasPlayer": true
     },
     "PlayerWeapons": [],
-    "Coins": 102,
-    "Wood": 84,
-    "Stones": 66,
-    "Level": 14,
-    "UpgradePoints": 1,
+    "Coins": 177,
+    "Wood": 1360,
+    "Stones": 1011,
+    "Level": 27,
+    "UpgradePoints": 0,
     "CurrentEXP": 0.0,
-    "CurrentLevel": 4,
+    "CurrentLevel": 6,
     "PlayerPosition": {
-        "x": 17.393600463867189,
-        "y": 0.007268428802490234,
-        "z": 14.222173690795899
+        "x": -15.202266693115235,
+        "y": 0.052081525325775149,
+        "z": -4.760299205780029
     },
     "QuestProgress": [
         {
@@ -95,14 +107,14 @@
             "IsComplite": false
         }
     ],
-    "CurrentFloor": 1,
+    "CurrentFloor": 2,
     "Language": "ru",
-    "ShowDamageNumber": true,
+    "ShowDamageNumber": false,
     "Mute": true,
     "Volumes": [
         {
             "Name": "Background",
-            "Volume": -5.35457706451416
+            "Volume": -7.3913187980651859
         },
         {
             "Name": "UI",

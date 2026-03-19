@@ -22,6 +22,9 @@ public class Highlighter : MonoBehaviour
 
     public void DeactivateWarning()
     {
+        if (_warningFrame == null)
+            return;
+
         _warningTween?.Kill();
         _warningFrame.enabled = false;
     }

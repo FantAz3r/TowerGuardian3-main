@@ -10771,6 +10771,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 442997427999740020, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
+      propertyPath: <Portals>k__BackingField.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 442997427999740020, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
+      propertyPath: <Portals>k__BackingField.Array.data[4]
+      value: 
+      objectReference: {fileID: 1482954393}
     - target: {fileID: 713126109843374789, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
       propertyPath: m_Name
       value: Decor
@@ -10779,6 +10787,10 @@ PrefabInstance:
       propertyPath: _collider
       value: 
       objectReference: {fileID: 1281435876}
+    - target: {fileID: 2270896129078860449, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
+      propertyPath: _canUpdate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3538997042685926494, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
       propertyPath: m_Name
       value: Tower
@@ -10827,10 +10839,18 @@ PrefabInstance:
       propertyPath: _collider
       value: 
       objectReference: {fileID: 1281435877}
+    - target: {fileID: 8319505656286551629, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
+      propertyPath: _canUpdate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9028754130027084379, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
       propertyPath: _collider
       value: 
       objectReference: {fileID: 1281435875}
+    - target: {fileID: 9028754130027084379, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
+      propertyPath: _canUpdate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11001,6 +11021,17 @@ Transform:
   - {fileID: 233140170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1482954393 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2750277035342606830, guid: 158faaa9d6e28764c9d213442b434999, type: 3}
+  m_PrefabInstance: {fileID: 1281435874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2158847e8e445ac4fbb3690b30159152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1566243047
 GameObject:
   m_ObjectHideFlags: 0
