@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class CinematicCamera : MonoBehaviour
@@ -8,7 +9,7 @@ public class CinematicCamera : MonoBehaviour
     [SerializeField] private float minDistance = 5f; // ћинимальна€ дистанци€ камеры от игрока
     [SerializeField] private float maxDistance = 15f; // ћаксимальна€ дистанци€ камеры от игрока
 
-    private Transform player; // »грок, вокруг которого вращаемс€
+    [SerializeField] private Transform player; // »грок, вокруг которого вращаемс€
     private float currentDistance;
     private bool isZooming = false;
 
@@ -22,7 +23,7 @@ public class CinematicCamera : MonoBehaviour
 
     private void Start()
     {
-        player = ServiceLocator.Get<IGameFactory>().Player.transform;
+        player = ServiceLocator.Get<IGameFactory>().SceneContainer.Portals.First().transform;
         // ѕроинициализируем начальное рассто€ние камеры от игрока по горизонтальной плоскости
         Vector3 offset = transform.position - player.position;
         currentDistance = new Vector2(offset.x, offset.z).magnitude;

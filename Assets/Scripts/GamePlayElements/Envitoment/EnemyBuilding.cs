@@ -39,5 +39,4 @@ public class EnemyBuilding : MonoBehaviour
 
         Destroy(gameObject);
     }
-
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class Shop : BaseShop
@@ -41,6 +42,11 @@ public class Shop : BaseShop
 
     protected override void OnTradeRequested(ProductViewer button, ICardConfig config)
     {
+        if(config.Level >= config.MaxCardLevel)
+        {
+            return;
+        }
+
         if (CanAfford(config) == false)
         {
             Debug.Log("Не хватает ресурсов");
@@ -73,7 +79,7 @@ public class Shop : BaseShop
 
     protected override void OnParentFounded(RectTransform parent, ICardConfig config)
     {
-        CreateButton(parent);
+       CreateButton(parent);
     }
 }
 

@@ -8,6 +8,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
     [field: SerializeField] public int Level { get; private set; } = 0;
     [field: SerializeField] public bool HasPlayer { get; private set; }
     [field: SerializeField] public bool IsBought { get; private set; }
+    [field: SerializeField] public int MaxCardLevel { get; private set; } = 100;
 
     public event Action<ICardConfig> Upgraded;
 
@@ -25,13 +26,17 @@ public abstract class CardConfig : ShopConfig, ICardConfig
 
     public void Upgrade()
     {
+        if (Level >= MaxCardLevel)
+            return;
+
         Level++;
         Upgraded?.Invoke(this);
     }
 
     public void Regrade()
     {
-        if (Level <= 0) return;
+        if (Level <= 0) 
+            return;
 
         Level--;
         Upgraded?.Invoke(this);

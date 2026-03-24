@@ -1,73 +1,31 @@
 {
-    "idSave": 80105,
+    "idSave": 137,
     "AllCards": [
         {
-            "ID": "13f3c7d5-8723-43a2-8739-bb50875891dd",
-            "Level": 9,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "3579314f-bc1d-4316-b295-7e1736a6cd1b",
-            "Level": 5,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "033888aa-cee4-442f-b7fd-38a4e0e8f850",
-            "Level": 29,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "14ceb4cf-2180-47f1-9722-7bee9685c697",
-            "Level": 7,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "f16b46a5-a46e-42d8-afc5-54d237d09e9e",
-            "Level": 6,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "6809a072-2f9b-472c-bead-b31e4c6975db",
-            "Level": 21,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
-            "ID": "f9a44341-423b-4381-8132-27f01b90fcca",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        },
-        {
             "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
-            "Level": 75,
+            "Level": 1,
             "IsBought": true,
             "HasPlayer": true
         }
     ],
     "CurrentWeapon": {
         "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
-        "Level": 56,
+        "Level": 1,
         "IsBought": true,
         "HasPlayer": true
     },
     "PlayerWeapons": [],
-    "Coins": 177,
-    "Wood": 1360,
-    "Stones": 1011,
-    "Level": 27,
+    "Coins": 6,
+    "Wood": 16,
+    "Stones": 10,
+    "Level": 1,
     "UpgradePoints": 0,
     "CurrentEXP": 0.0,
-    "CurrentLevel": 6,
+    "CurrentLevel": 4,
     "PlayerPosition": {
-        "x": -15.202266693115235,
-        "y": 0.052081525325775149,
-        "z": -4.760299205780029
+        "x": 1.4331116676330567,
+        "y": 0.00726848840713501,
+        "z": 13.307886123657227
     },
     "QuestProgress": [
         {
@@ -77,53 +35,11 @@
             "QuestIndex": 3
         }
     ],
-    "LevelsProgress": [
-        {
-            "Level": 4,
-            "Score": 4576,
-            "Stars": 0,
-            "Time": 14.371238708496094,
-            "IsComplite": false
-        },
-        {
-            "Level": 6,
-            "Score": 10306,
-            "Stars": 0,
-            "Time": 8.451993942260743,
-            "IsComplite": false
-        },
-        {
-            "Level": 5,
-            "Score": 9198,
-            "Stars": 0,
-            "Time": 6.006420612335205,
-            "IsComplite": false
-        },
-        {
-            "Level": 7,
-            "Score": 3831,
-            "Stars": 0,
-            "Time": 6.046132564544678,
-            "IsComplite": false
-        }
-    ],
-    "CurrentFloor": 2,
+    "LevelsProgress": [],
+    "CurrentFloor": 1,
     "Language": "ru",
     "ShowDamageNumber": false,
-    "Mute": true,
-    "Volumes": [
-        {
-            "Name": "Background",
-            "Volume": -7.3913187980651859
-        },
-        {
-            "Name": "UI",
-            "Volume": -4.447208881378174
-        },
-        {
-            "Name": "Effects",
-            "Volume": -4.447208881378174
-        }
-    ],
+    "Mute": false,
+    "Volumes": [],
     "IsFirstGameSession": false
 }

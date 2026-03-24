@@ -69,8 +69,8 @@ public abstract class Quest : IQuest
         _service.AddScore(ScoreType.Quest, Config.ScorePoints);
 
         YG2.onSwitchLang -= On—hangeLang;
-        OnCompleted?.Invoke();
         QuestViewer.Close();
+        OnCompleted?.Invoke();
     }
 
     public virtual void Fail()

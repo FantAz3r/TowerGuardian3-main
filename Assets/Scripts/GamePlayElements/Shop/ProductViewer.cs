@@ -29,24 +29,39 @@ public class ProductViewer : MonoBehaviour
         _name.text = config.Name ?? string.Empty;
         _description.text = config.Description ?? string.Empty;
 
-        if(_config is CardConfig card)
+
+
+        if (_config is CardConfig card && _config.Level < _config.MaxCardLevel)
         {
             _level.text = $"{UIText.LVL} {card.Level.ToString()}";
         }
+        else
+        {
+            _level.text = $"{UIText.MaxLevel}";
+        }
+
 
         for (int i = 0; i < _costs.Count; i++)
         {
-            if(isBuy)
+            if (isBuy)
             {
-                if (i < _config.GetCosts().Count)
+                if(_config.Level < _config.MaxCardLevel)
                 {
-                    _costs[i].gameObject.SetActive(true);
-                    _costs[i].Render(_config.GetCosts()[i]);
+                    if (i < _config.GetCosts().Count)
+                    {
+                        _costs[i].gameObject.SetActive(true);
+                        _costs[i].Render(_config.GetCosts()[i]);
+                    }
+                    else
+                    {
+                        _costs[i].gameObject.SetActive(false);
+                    }
                 }
                 else
                 {
                     _costs[i].gameObject.SetActive(false);
                 }
+               
             }
             else
             {

@@ -38,7 +38,7 @@ public class PortalSwitcher
 
     private void EnableTowerPortal()
     {
-        //DisablePortals();
+        DisablePortals();
 
         Portal firstPortal = _portals.Find(portal => portal.NextLevel == LevelID.Level1);
         firstPortal.gameObject.SetActive(true);

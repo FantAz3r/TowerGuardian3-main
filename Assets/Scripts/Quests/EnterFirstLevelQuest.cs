@@ -20,6 +20,8 @@ public class EnterFirstLevelQuest : Quest
     {
         base.Run();
 
+        if(YG2.saves.LevelsProgress == null) return;
+
         foreach (var levelData in YG2.saves.LevelsProgress)
         {
             if (levelData.Level == LevelID.Level1 && levelData.IsComplite)

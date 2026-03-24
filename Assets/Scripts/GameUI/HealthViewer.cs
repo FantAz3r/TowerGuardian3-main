@@ -17,17 +17,21 @@ public class HealthViewer : MonoBehaviour
         _health = GetComponent<Health>();
     }
 
+    private void Start()
+    {
+        OnMaxHealthChanged(_health.CurrentHealth, _health.MaxHealth);
+        _healthSlider.gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
         _health.MaxHealthChanged += OnMaxHealthChanged;
         _health.IsValueChange += OnHealthChanged;
-
-        _healthSlider.gameObject.SetActive(_iaActive);
-        OnMaxHealthChanged(_health.CurrentHealth, _health.MaxHealth);
     }
 
     private void OnDisable()
     {
+        _health.MaxHealthChanged -= OnMaxHealthChanged;
         _health.IsValueChange -= OnHealthChanged;
     }
 
@@ -62,7 +66,6 @@ public class HealthViewer : MonoBehaviour
         _healthSlider.minValue = 0;
         _healthSlider.maxValue = maxHealth;
         _healthSlider.value = currentHealth;
-        Debug.Log(_healthSlider.maxValue);
     }
 }
 

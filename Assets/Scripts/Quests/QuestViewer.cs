@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,19 @@ public class QuestViewer : WindowBase
     [SerializeField] private TMP_Text _description;
     [SerializeField] private TMP_Text _progress;
     [SerializeField] private TMP_Text _timer;
+
+    [SerializeField] private RectTransform _panelRectTransform;
+
+    [SerializeField] private float _animationDuration = 0.5f;
+    [SerializeField] private Vector2 _hiddenPosition = new Vector2(800, 0f); 
+    private Vector2 _visiblePosition = new Vector2(-50, -70f); 
+    private Tween _currentTween;
+
+    private void Awake()
+    {
+        _visiblePosition = _panelRectTransform.anchoredPosition;
+        _panelRectTransform.anchoredPosition = _hiddenPosition;
+    }
 
     public void Render(IQuest quest)
     {
@@ -39,7 +53,7 @@ public class QuestViewer : WindowBase
 
     public void UpdateTime(float time)
     {
-        if (_timer != null &&  _timer.gameObject.activeSelf == false)
+        if (_timer != null && _timer.gameObject.activeSelf == false)
             return;
 
         int oneMinute = 60;
@@ -48,10 +62,23 @@ public class QuestViewer : WindowBase
         _timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+    public override void Open()
+    {
+        base.Open();
+
+        _currentTween?.Kill();
+        _currentTween = _panelRectTransform.DOAnchorPos(_visiblePosition, _animationDuration).SetEase(Ease.OutCubic);
+    }
+
     public override void Close()
     {
-        base.Close();
-        Destroy(gameObject);
+        _currentTween?.Kill();
+        _currentTween = _panelRectTransform.DOAnchorPos(_hiddenPosition, _animationDuration)
+            .SetEase(Ease.InCubic)
+            .OnComplete(() => {
+                base.Close();
+                Destroy(gameObject);
+            });
     }
 
     private void RenderDescription(IQuest quest)

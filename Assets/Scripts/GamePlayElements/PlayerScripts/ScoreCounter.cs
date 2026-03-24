@@ -161,6 +161,8 @@ public class ScoreCounter
 
     private void UpdateMainLeaderbord()
     {
+        if(YG2.saves.LevelsProgress == null) return;
+
         int scoreFromAllLevels = 0;
 
         foreach (var level in YG2.saves.LevelsProgress)

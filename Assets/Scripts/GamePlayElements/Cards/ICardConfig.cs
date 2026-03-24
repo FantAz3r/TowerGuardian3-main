@@ -7,6 +7,7 @@ public interface ICardConfig : IShopConfig
     int Level { get; }
     bool HasPlayer { get; }
     bool IsBought { get; }
+    int MaxCardLevel { get; }
 
     event Action<ICardConfig> Upgraded;
 

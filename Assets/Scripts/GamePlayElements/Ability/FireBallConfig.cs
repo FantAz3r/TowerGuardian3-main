@@ -19,7 +19,7 @@ public class FireballConfig : AbilityConfig
 
     public float ExploadDamage => Mathf.Max(_exploadDamage, _exploadDamage + _damagePerLevel * (Level - 1));
     public float MaxFlyDistance => Mathf.Max(_maxFlyDistance, _maxFlyDistance + _distancePerLevel * (Level - 1));
-    public float Cooldown => Mathf.Min(_minCooldown, _cooldown - _cooldownPerLevel * (Level - 1));
+    public float Cooldown => Mathf.Max(_minCooldown, _cooldown - _cooldownPerLevel * (Level - 1));
     public float ExploadRange => _exploadRange; 
     public float FlySpeed => _flySpeed;        
 

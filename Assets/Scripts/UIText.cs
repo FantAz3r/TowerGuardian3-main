@@ -296,6 +296,13 @@ public static class UIText
         { Turkish, "Çarpan" }
     };
 
+    private static readonly Dictionary<string, string> MaxLevelDict = new Dictionary<string, string>
+    {
+        { Russian, "Макс. уровень" },
+        { English, "Max Level" },
+        { Turkish, "Maks Seviye" }
+    };
+
     private static readonly Dictionary<string, string> ShopDict = new Dictionary<string, string>
     {
         { Russian, "Maгазин" },
@@ -343,6 +350,8 @@ public static class UIText
     public static string Multiplier => GetText(MultiplierDict);
     public static string Shop => GetText(ShopDict);
     public static string LVL => GetText(LVLDict);
+    public static string MaxLevel => GetText(MaxLevelDict);
+
 
     private static string GetText(Dictionary<string, string> dict)
     {
