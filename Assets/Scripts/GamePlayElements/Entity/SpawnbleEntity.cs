@@ -13,15 +13,23 @@ public class SpawnbleEntity : MonoBehaviour
         _health = GetComponent<Health>();
         _spawnerService = ServiceLocator.Get<ISpawnerService>();
 
+        _health.Died += OnDie;
+    }
+
+    private void OnEnable()
+    {
         _health.Healed += OnHeal;
         _health.DamageTaken += OnTakeDamage;
-        _health.Died += OnDie;
+    }
+
+    private void OnDisable()
+    {
+        _health.Healed -= OnHeal;
+        _health.DamageTaken -= OnTakeDamage;
     }
 
     private void OnDestroy()
     {
-        _health.Healed -= OnHeal;
-        _health.DamageTaken -= OnTakeDamage;
         _health.Died -= OnDie;
     }
 

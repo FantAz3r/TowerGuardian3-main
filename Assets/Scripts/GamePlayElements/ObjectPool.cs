@@ -94,9 +94,12 @@ public class ObjectPool<T> where T : MonoBehaviour
     {
         foreach (var mono in _objects)
         {
-            if (mono.gameObject.activeInHierarchy)
+            if(mono != null)
             {
-                mono.gameObject.SetActive(false);
+                if (mono.gameObject.activeInHierarchy)
+                {
+                    mono.gameObject.SetActive(false);
+                }
             }
         }
     }

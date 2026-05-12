@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using YG;
 
 public class SceneLoader
 {
@@ -14,54 +13,47 @@ public class SceneLoader
         _coroutineRunner = coroutineRunner;
     }
 
-    public void Load(string name, System.Action onLoaded)
+    public void Load(string name, System.Action onLoaded, bool hasLoading)
     {
-        _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+        _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded, hasLoading));
     }
 
-    private IEnumerator LoadScene(string nextScene, System.Action onLoaded)
+    private IEnumerator LoadScene(string nextScene, System.Action onLoaded, bool hasLoading)
     {
-        LevelID level = LevelID.LoadScene;
+        AsyncOperation asyncLoad = null;
 
-        Scene currentScene = SceneManager.GetActiveScene();
+        Scene currentActiveScene = SceneManager.GetActiveScene();
+        Scene loadingScene = default;
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(level.ToString(), LoadSceneMode.Additive);
-        yield return asyncLoad;
+        if (hasLoading)
+        {
+            asyncLoad = SceneManager.LoadSceneAsync(LevelID.LoadScene.ToString(), LoadSceneMode.Additive);
+            yield return asyncLoad;
 
-        Scene loadingScene = SceneManager.GetSceneByName(level.ToString());
-        SceneManager.SetActiveScene(loadingScene);
+            loadingScene = SceneManager.GetSceneByName(LevelID.LoadScene.ToString());
+            SceneManager.SetActiveScene(loadingScene);
 
-        asyncLoad = SceneManager.UnloadSceneAsync(currentScene.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-        yield return asyncLoad;
-
-        TryShowInterstitialADV(nextScene);
-
-         yield return new WaitForSecondsRealtime(Random.Range(_minLoadTime, _maxLoadTime));
+            yield return new WaitForSecondsRealtime(Random.Range(_minLoadTime, _maxLoadTime));
+        }
 
         asyncLoad = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
         yield return asyncLoad;
 
-        currentScene = SceneManager.GetSceneByName(nextScene);
+        Scene newScene = SceneManager.GetSceneByName(nextScene);
 
-        if (currentScene.IsValid())
+        if (newScene.IsValid())
         {
-            SceneManager.SetActiveScene(currentScene);
+            SceneManager.SetActiveScene(newScene);
+            asyncLoad = SceneManager.UnloadSceneAsync(currentActiveScene);
+            yield return asyncLoad;
         }
 
-        asyncLoad = SceneManager.UnloadSceneAsync(loadingScene.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-        yield return asyncLoad;
-
+        if (loadingScene != default && loadingScene.IsValid())
+        {
+            asyncLoad = SceneManager.UnloadSceneAsync(loadingScene);
+            yield return asyncLoad;
+        }
 
         onLoaded?.Invoke();
-    }
-
-    private void TryShowInterstitialADV(string nextScene)
-    {
-        if (nextScene != LevelID.MainMenu.ToString() &&
-            nextScene != LevelID.None.ToString() &&
-            nextScene != LevelID.LoadScene.ToString())
-        {
-            YG2.InterstitialAdvShow();
-        }
     }
 }

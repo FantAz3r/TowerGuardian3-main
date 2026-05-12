@@ -26,7 +26,6 @@ public class BootstrapState : IState
     {
         ServiceLocator.Register<IStateSwitchService>(new StateSwitchService(_stateMachine));
         ServiceLocator.Register<ILevelLoadingService>(new LevelLoadingService(_stateMachine));
-        ServiceLocator.Register<IADVServise>(new ADVService());
         ServiceLocator.Register<ITimeService>(new TimeService(_coroutineRunner));
         ServiceLocator.Register<ISpawnerService>(new SpawnerService());
         ServiceLocator.Register(_coroutineRunner);
@@ -39,6 +38,10 @@ public class BootstrapState : IState
         ServiceLocator.Register(windowService);
         ServiceLocator.Register<IGameConditionService>(new GameConditionService(windowService));
         ServiceLocator.Register<IScoreService>(new ScoreService());
+
+        SoundService soundService = new SoundService();
+        ServiceLocator.Register<ISoundService>(soundService);
+        ServiceLocator.Register<IADVServise>(new ADVService(soundService));
 
 
         if (YG2.envir.isDesktop)

@@ -9,6 +9,7 @@ public class SoundSpawner : BaseSpawner
     private SoundData _soundData;
     private WaitForSecondsRealtime _delay;
     private ICoroutineRunner _coroutineRunner;
+    private ISoundService _soundService;
     private HashSet<AudioClip> _blockedClips = new();
     private float _minDelayBetweenSameClip = 0.15f;
 
@@ -18,7 +19,7 @@ public class SoundSpawner : BaseSpawner
     {
         _soundData = data;
         _coroutineRunner = ServiceLocator.Get<ICoroutineRunner>();
-
+        _soundService = ServiceLocator.Get<ISoundService>();
         foreach (var info in data.SoundInfos)
         {
             if (_pools.ContainsKey(info.AudioGroup) == false)
@@ -35,6 +36,14 @@ public class SoundSpawner : BaseSpawner
         foreach (var pair in _pools)
         {
             pair.Value.DestroyPool();
+        }
+    }
+
+    public override void ClearObjects()
+    {
+        foreach (var pair in _pools)
+        {
+            pair.Value.Clear();
         }
     }
 
@@ -61,6 +70,7 @@ public class SoundSpawner : BaseSpawner
 
         soundObject.PlayAndDisable(clip);
         _blockedClips.Add(clip);
+        _soundService.Add(soundObject);
         _coroutineRunner.StartCoroutine(UnblockClipAfterDelay(clip));
     }
 

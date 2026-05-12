@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
 
         foreach (SpawnerActivator spawnPoint in _spawnPoints)
         {
-            if(spawnPoint != null)
+            if (spawnPoint != null)
             {
                 spawnPoint.Detected += AddSpawnPoint;
                 spawnPoint.Losted += RemoveSpawnPoint;
@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
 
         foreach (var item in _pools.Values)
         {
-            totalActiveEnemies += item.GetActiveObjectsCount(); 
+            totalActiveEnemies += item.GetActiveObjectsCount();
         }
 
         if (totalActiveEnemies >= _waves[_currentWaveIndex].MaxEnemyCount)
@@ -107,11 +107,19 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy enemyInstance = pool.Get();
 
-        var spawnPoint = _activeSpawnPoints[Random.Range(0, _activeSpawnPoints.Count-1)];
+        var spawnPoint = _activeSpawnPoints[Random.Range(0, _activeSpawnPoints.Count - 1)];
         enemyInstance.transform.position = spawnPoint.transform.position;
         enemyInstance.transform.LookAt(_player.transform);
 
         enemyInstance.Init(_player.transform, (int)_levelConfig.Level - NoGameLevelCount);
+    }
+
+    public Enemy SpawnBoss(Enemy boss, Vector3 spawnPosition)
+    {
+        Enemy enemy = Instantiate(boss, spawnPosition, Quaternion.identity);
+        enemy.Init(_player.transform);
+        enemy.transform.LookAt(_player.transform);
+        return enemy;
     }
 
     public void SetWave(int waveIndex)
@@ -140,6 +148,27 @@ public class EnemySpawner : MonoBehaviour
         {
             StopCoroutine(_spawnRoutine);
             _spawnRoutine = null;
+        }
+
+        if (_waveRoutine != null)
+        {
+            StopCoroutine(_waveRoutine);
+            _waveRoutine = null;
+        }
+    }
+
+    public void ClearEnemies()
+    {
+        StopSpawn();
+
+        foreach (var spawner in _activeSpawnPoints)
+        {
+            spawner.gameObject.SetActive(false);
+        }
+
+        foreach (var pair in _pools)
+        {
+            pair.Value.Clear();
         }
     }
 

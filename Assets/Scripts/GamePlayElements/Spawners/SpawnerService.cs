@@ -45,6 +45,16 @@ public class SpawnerService : ISpawnerService
         }
     }
 
+    public Projectile SendProjectileRequest(ProjectileType type, Vector3 position, Transform parent = null)
+    {
+        if (_spawners.TryGetValue(SpawnerType.Projectile, out var spawner))
+        {
+            return spawner.Spawn(type, position, parent);
+        }
+
+        return null;
+    }
+
     public void EnableSpawner(SpawnerType spawnerType)
     {
         if (_spawners.TryGetValue(spawnerType, out var spawner))
@@ -58,6 +68,14 @@ public class SpawnerService : ISpawnerService
         if (_spawners.TryGetValue(spawnerType, out var spawner))
         {
             spawner.DisableSpawn();
+        }
+    }
+
+    public void ClearObjects(SpawnerType spawnerType)
+    {
+        if (_spawners.TryGetValue(spawnerType, out var spawner))
+        {
+            spawner.ClearObjects();
         }
     }
 

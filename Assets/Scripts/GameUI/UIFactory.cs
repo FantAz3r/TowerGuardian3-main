@@ -58,6 +58,11 @@ public class UIFactory : IUIFactory
         HUD?.Close();
     }
 
+    public BossHealthViewer CreateBossHealthView()
+    {
+        return CreateWindow(WindowType.BossHealth, HUD.transform) as BossHealthViewer;
+    }
+
     public WaveViewer CreateWaveViewer()
     {
         return CreateWindow(WindowType.WaveViewer, HUD.transform) as WaveViewer;
@@ -163,7 +168,6 @@ public class UIFactory : IUIFactory
     public LouseLevelMenu CreateLouseLevelMenu(GameObject louseReasonObject)
     {
         LouseLevelMenu louseLevelMenu = CreateWindow(WindowType.LouseLevelMenu) as LouseLevelMenu;
-        Debug.Log(louseLevelMenu);
 
         if (louseReasonObject != null && louseReasonObject.TryGetComponent(out Health louseReason))
         {

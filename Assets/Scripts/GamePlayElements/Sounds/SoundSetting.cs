@@ -7,6 +7,10 @@ using YG;
 [RequireComponent(typeof(Slider))]
 public class SoundSetting : MonoBehaviour
 {
+    private const float DefaultSliderValue = 0.5f;
+    private const int VolumeForce = 10;
+    private const float VolumeCurrentValueMultiplier = 0.05f;
+
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private List<string> _volumeParameters;
 
@@ -15,20 +19,20 @@ public class SoundSetting : MonoBehaviour
     private float _maxDecibels = 0f;
     private Slider _volumeSlider;
     private float _currentValue;
+    private float _lastSavedSliderValue;
 
     private void Awake()
     {
-        LoadVolume();
         _volumeSlider = GetComponent<Slider>();
 
-        if (_volumeParameters.Count > 0 && _audioMixer.GetFloat(_volumeParameters[0], out float dB))
+        if (YG2.isFirstGameSession || YG2.saves == null || YG2.saves.Volumes == null)
         {
-            if (_currentValue == 0)
-            {
-                _currentValue = dB;
-            }
-
-            _volumeSlider.value = Mathf.Pow(10, _currentValue / 20);
+            _volumeSlider.value = DefaultSliderValue;
+            SetVolume(_volumeSlider.value);
+        }
+        else
+        {
+            LoadVolume();
         }
 
         _volumeSlider.onValueChanged.AddListener(SetVolume);
@@ -50,13 +54,14 @@ public class SoundSetting : MonoBehaviour
             dB = _minDecibels;
 
         dB = Mathf.Clamp(dB, _minDecibels, _maxDecibels);
-        _currentValue = dB;
-        SaveVolume();
 
         foreach (var param in _volumeParameters)
         {
             _audioMixer.SetFloat(param, dB);
         }
+
+        _lastSavedSliderValue = sliderValue;
+        SaveVolume();
     }
 
     private void SaveVolume()
@@ -70,11 +75,11 @@ public class SoundSetting : MonoBehaviour
 
             if (index >= 0)
             {
-                YG2.saves.Volumes[index] = new SoundSaveData(volumeParam, _currentValue);
+                YG2.saves.Volumes[index] = new SoundSaveData(volumeParam, _lastSavedSliderValue);
             }
             else
             {
-                YG2.saves.Volumes.Add(new SoundSaveData(volumeParam, _currentValue));
+                YG2.saves.Volumes.Add(new SoundSaveData(volumeParam, _lastSavedSliderValue));
             }
         }
 
@@ -90,12 +95,15 @@ public class SoundSetting : MonoBehaviour
 
         if (string.IsNullOrEmpty(soundData.Name) == false)
         {
-            _currentValue = soundData.Volume;
-
-            foreach (var param in _volumeParameters)
-            {
-                _audioMixer.SetFloat(param, _currentValue);
-            }
+            float loadedSliderValue = soundData.Volume;
+            _volumeSlider.value = loadedSliderValue;
+            _lastSavedSliderValue = loadedSliderValue;
+            SetVolume(_volumeSlider.value);
+        }
+        else
+        {
+            _volumeSlider.value = DefaultSliderValue;
+            SetVolume(_volumeSlider.value);
         }
     }
 }

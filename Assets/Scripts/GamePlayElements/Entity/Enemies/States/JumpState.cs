@@ -1,52 +1,44 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class JumpState : State
 {
-   //private EnemyStateMachine _stateMachine;
-   //private EnemyAnimator _animator;
-   //private Transform _player;
-   //private NavMeshAgent _agent;
-   //
-   //public JumpState(EnemyStateMachine stateMachine, EnemyAnimator animator, Transform target,  NavMeshAgent agent) : base(stateMachine, false)
-   //{
-   //    _stateMachine = stateMachine;
-   //    _animator = animator;
-   //    _player = target;
-   //    _agent = agent;
-   //}
-   //
-   //public override void Enter()
-   //{
-   //    _agent.isStopped = false;
-   //    _animator.Attacked += OnAnimAttackJump;
-   //}
-   //
-   //public override void Exit()
-   //{
-   //    _animator.Attacked -= OnAnimAttackJump;
-   //    _animator.SuspendAttack();
-   //    _agent.isStopped = true;
-   //}
-   //
-   //public override IEnumerator UpdateRoutine()
-   //{
-   //    _agent.SetDestination(_player.position);
-   //    _animator.PlayAttack();
-   //    yield return null;
-   //}
-   //
-   //private void OnAnimAttackJump()
-   //{
-   //    var playerHealth = _player.GetComponent<IDemageable>();
-   //    int damage = (int)_stateMachine.Config.JumpDamage;
-   //
-   //    if (playerHealth != null)
-   //    {
-   //        playerHealth.TakeDamage(damage);
-   //    }
-   //
-   //    SetCanExit(true);
-   //}
+    private const float JumpAttackCooldown = 9;
+    private const float _rangeMultipier = 0.8f;
+    private ISpawnerService _spawnerService;
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
+
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        Enemy.AnimationAnimator.PlayJump();
+        Enemy.AnimationAnimator.Grounded += OnGrounded;
+
+        Enemy.StateMachine.SetCooldown(JumpAttackCooldown);
+        Enemy.Agent.SetDestination(Enemy.Target.position);
+        Enemy.Agent.SetMoveSpeed(Enemy.Config.MoveConfig.MoveSpeed * 5);
+        _spawnerService.SendSoundReqest(Enemy.Config.JumpSound, Enemy.transform.position);
+    }
+
+    private void OnGrounded()
+    {
+        _spawnerService.SendEffectReqest(EffectType.Bounce, Enemy.transform.position);
+        Enemy.Agent.SetMoveSpeed(Enemy.Config.MoveConfig.MoveSpeed);
+        Enemy.AnimationAnimator.Grounded -= OnGrounded;
+
+        Collider[] hits = Physics.OverlapSphere(Enemy.transform.position, Enemy.Config.AttackRange * _rangeMultipier);
+
+        foreach (var hit in hits)
+        {
+            if( hit.TryGetComponent(out Health demadeable))
+            {
+                if (demadeable == Enemy.Health)
+                {
+                    continue; 
+                }
+
+                demadeable.TakeDamage(Enemy.Config.JumpDamage);
+            }
+        }
+    }
 }

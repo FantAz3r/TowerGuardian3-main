@@ -7,5 +7,6 @@ public enum StateType
     Thrown,
     FindObject,
     Escape,
-    EnterPortal
+    EnterPortal,
+    ThornAttack
 }

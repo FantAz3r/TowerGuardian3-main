@@ -26,6 +26,11 @@ public class QuestViewer : WindowBase
         _panelRectTransform.anchoredPosition = _hiddenPosition;
     }
 
+    private void OnDestroy()
+    {
+        _currentTween?.Kill();
+    }
+
     public void Render(IQuest quest)
     {
         Open();

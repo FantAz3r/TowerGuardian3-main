@@ -8,8 +8,9 @@ public interface ISpawner
     void Spawn(AudioClip clip, Vector3 position = default);
     void Spawn(Vector3 position, int damage, Color? textColor = null);
     void Spawn(EffectType type, Vector3 position, Transform parent = null);
-
+    Projectile Spawn(ProjectileType projectileType, Vector3 position, Transform parent = null);
     void EnableSpawn();
     void DisableSpawn();
+    void ClearObjects();
     void DestroyPool();
 }

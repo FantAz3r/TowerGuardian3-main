@@ -12,7 +12,12 @@ public class EnemyConfig : ScriptableObject
     [field: SerializeField] public Vector3 AttackAriaCenter { get; private set; }
     [field: SerializeField] public float AttackCooldown { get; private set; } = 1f;
     [field: SerializeField] public float JumpDamage { get; private set; } = 15;
+    [field: SerializeField] public AudioClip JumpSound { get; private set; }
     [field: SerializeField] public int ThrowDamage { get; private set; }
+    [field: SerializeField] public int ThronDamage { get; private set; }
+    [field: SerializeField] public AudioClip ThronAttackSound { get; private set; }
+    [field: SerializeField] public int LevaRockDamage { get; private set; }
+    [field: SerializeField] public AudioClip UltimateSound { get; private set; }
     [field: SerializeField] public int Level { get; private set; } = 0;
     [field: SerializeField] public RuntimeAnimatorController Controller { get; private set; }
 
@@ -26,7 +31,7 @@ public class EnemyConfig : ScriptableObject
 
     public float GetMoveSpeed()
     {
-        return MoveConfig.MoveSpeed + Level;
+        return MoveConfig.MoveSpeed + Level/2;
     }
 
     public int GetDamage()

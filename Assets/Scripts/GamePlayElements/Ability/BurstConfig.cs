@@ -5,15 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/BurstAbilityConfig")]
 public class BurstConfig : AbilityConfig
 {
-    [SerializeField] private int _baseHitCount = 4;
+    [SerializeField] private int _baseHitCount = 3;
     [SerializeField] private float _baseAttackDelay = 0.3f;
     [SerializeField] private float _baseCooldown = 15f;
 
-    [SerializeField] private int _hitCountPerLevel = 1;
-    [SerializeField] private float _attackDelayReductionPerLevel = 0.02f;
-    [SerializeField] private float _cooldownReductionPerLevel = 1f;
+    [SerializeField] private float _hitCountPerLevel = 0.2f;
+    [SerializeField] private float _attackDelayReductionPerLevel = 0.01f;
+    [SerializeField] private float _cooldownReductionPerLevel = 0.25f;
 
-    [SerializeField] private float _minCooldown = 3f;
+    [SerializeField] private float _minCooldown = 6f;
     [SerializeField] private float _minAttackDelay = 0.1f;
 
     public int HitCount => GetHitCount(Level);
@@ -22,7 +22,7 @@ public class BurstConfig : AbilityConfig
 
     public int GetHitCount(int level)
     {
-        return _baseHitCount + _hitCountPerLevel * (level - 1);
+        return (int)(_baseHitCount + (level - 1) * _hitCountPerLevel);
     }
 
     public float GetAttackDelay(int level)

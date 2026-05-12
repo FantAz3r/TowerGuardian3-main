@@ -55,6 +55,9 @@ public class Weapon : MonoBehaviour, IWeapon
             if (target == null)
                 continue;
 
+            if(target.IsImmunity)
+                continue;
+
             float damageToDeal = _damage;
 
             if (target.GetHealthType() == _config.TargetType)

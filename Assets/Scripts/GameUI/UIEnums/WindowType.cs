@@ -21,5 +21,6 @@ public enum WindowType
     LeaderBoard,
     Previous,
     Inventory,
-    MenuLeaderboard
+    MenuLeaderboard,
+    BossHealth
 }

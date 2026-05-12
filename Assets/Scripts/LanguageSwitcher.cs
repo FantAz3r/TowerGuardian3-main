@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
+using YG.Insides;
 
 public class LanguageSwitcher : MonoBehaviour
 {
@@ -14,7 +15,16 @@ public class LanguageSwitcher : MonoBehaviour
 
     private void Awake()
     {
-        _defaultLanguage = YG2.envir.language;
+        _defaultLanguage = YG2.envir.language; 
+
+        if (string.IsNullOrEmpty(_currentLanguage))
+        {
+            _currentLanguage = _defaultLanguage;
+            SaveLanguage();
+        }
+
+        SetLanguage(_currentLanguage);
+
     }
 
     private void OnEnable()
@@ -23,9 +33,6 @@ public class LanguageSwitcher : MonoBehaviour
         _toggleEn.onValueChanged.AddListener(isOn => OnToggleChanged("en", isOn));
         _toggleTr.onValueChanged.AddListener(isOn => OnToggleChanged("tr", isOn));
 
-        LoadLanguage();
-        YG2.SwitchLanguage(_currentLanguage);
-        SetLanguage(_currentLanguage);
         EnableCurrentToggle();
     }
 
@@ -34,15 +41,14 @@ public class LanguageSwitcher : MonoBehaviour
         _toggleRu.onValueChanged.RemoveAllListeners();
         _toggleEn.onValueChanged.RemoveAllListeners();
         _toggleTr.onValueChanged.RemoveAllListeners();
-        SaveLanguage();
+
+        SaveLanguage(); 
     }
 
     private void OnToggleChanged(string lang, bool isOn)
     {
-        if (isOn == false)
-        {
+        if (!isOn)
             return;
-        }
 
         if (lang == _currentLanguage)
             return;
@@ -52,12 +58,9 @@ public class LanguageSwitcher : MonoBehaviour
 
     private void EnableCurrentToggle()
     {
-        if(_currentLanguage == "ru")
-            _toggleRu.isOn = true;
-        else if (_currentLanguage == "en")
-            _toggleEn.isOn = true;
-        else if (_currentLanguage == "tr")
-            _toggleTr.isOn = true;
+        _toggleRu.isOn = (_currentLanguage == "ru");
+        _toggleEn.isOn = (_currentLanguage == "en");
+        _toggleTr.isOn = (_currentLanguage == "tr");
     }
 
     private void SetLanguage(string lang)
@@ -76,15 +79,18 @@ public class LanguageSwitcher : MonoBehaviour
 
     private void SaveLanguage()
     {
+        if (YG2.saves == null)
+            return;
+
         YG2.saves.Language = _currentLanguage;
         YG2.SaveProgress();
     }
 
     private void LoadLanguage()
     {
-        if (YG2.saves == null)
+        if (YG2.saves == null || string.IsNullOrEmpty(YG2.saves.Language))
         {
-            _currentLanguage = _defaultLanguage;
+            _currentLanguage = null; 
             return;
         }
 

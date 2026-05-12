@@ -53,6 +53,10 @@ public class Mover : MonoBehaviour, IBuffble
         transform.Translate(moveDir * moveStep, Space.World);
     }
 
+    public void Push(Vector3 direction, float force)
+    {
+
+    }
 
     public void ApplyBuff(IEffect effect)
     {

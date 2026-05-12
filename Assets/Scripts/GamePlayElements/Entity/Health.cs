@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuffble
@@ -13,12 +14,18 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     public float CurrentHealth => _currentValue;
     public float MaxHealth => _maxHealth;
     public bool IsAlive { get; private set; } = true;
+    public bool IsImmunity { get; private set; } = false;
 
     public event Action<float, float> IsValueChange, MaxHealthChanged;
     public event Action<float> DamageTaken, Healed;
     public event Action<Health> Killed;
 
-    public event Action Died, Destroyed, Resurected;
+    public event Action Died,
+        Destroyed,
+        Resurected,
+        ImmunityObjectHited,
+        ImmunityActivated,
+        ImmunityDisabled;
 
     public Transform GetTransform() => transform;
     public EntityType GetHealthType() => _type;
@@ -75,6 +82,12 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     {
         if (IsAlive == false) { return; }
 
+        if (IsImmunity)
+        {
+            ImmunityObjectHited?.Invoke();
+            return;
+        }
+
         if (_currentValue <= 0) return;
 
         float damageTaken = Mathf.Min(damage, _currentValue);
@@ -86,6 +99,30 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
         {
             DieAction();
         }
+    }
+
+    public void ImmunityEnable()
+    {
+        IsImmunity = true;
+        ImmunityActivated?.Invoke();
+    }
+
+    public void ImmunityDisable()
+    {
+        IsImmunity = false;
+        ImmunityDisabled.Invoke();
+    }
+
+    public void ImmunityPerTime(float time)
+    {
+        StartCoroutine(ImmunityRourine(time));
+    }
+
+    private IEnumerator ImmunityRourine(float time)
+    {
+        ImmunityEnable();
+        yield return new WaitForSeconds(time);
+        ImmunityDisable();
     }
 
     public void ApplyBuff(IEffect effect)

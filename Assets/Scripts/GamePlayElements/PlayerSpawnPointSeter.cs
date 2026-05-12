@@ -16,23 +16,18 @@ public class PlayerSpawnPointSeter
     {
         if (previousLevel == LevelID.None || previousLevel == LevelID.MainMenu)
         {
-            if (currentLevel == LevelID.Tower && YG2.saves.PlayerPosition != Vector3.zero)
+            if (currentLevel == LevelID.Tower && YG2.saves.PreviousLevel != LevelID.None)
             {
-                return YG2.saves.PlayerPosition;
+                return GetPortalPoint(YG2.saves.PreviousLevel);
             }
 
             return _sceneContainer.PlayerSpawnPoints.First().transform.position;
         }
 
+
         if (currentLevel == LevelID.Tower)
         {
-            foreach (var point in _sceneContainer.PlayerSpawnPoints)
-            {
-                if (point.PreviousLevel == previousLevel)
-                {
-                    return point.transform.position;
-                }
-            }
+            return GetPortalPoint(previousLevel);
 
             throw new ArgumentNullException("нет соответствующей точки спавна");
         }
@@ -40,5 +35,18 @@ public class PlayerSpawnPointSeter
         {
             return _sceneContainer.PlayerSpawnPoints.First().transform.position;
         }
+    }
+
+    private Vector3 GetPortalPoint(LevelID previousLevel)
+    {
+        foreach (var point in _sceneContainer.PlayerSpawnPoints)
+        {
+            if (point.PreviousLevel == previousLevel)
+            {
+                return point.transform.position;
+            }
+        }
+
+        return Vector3.zero;
     }
 }

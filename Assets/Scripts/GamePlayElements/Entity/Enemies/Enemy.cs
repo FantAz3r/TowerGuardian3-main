@@ -13,13 +13,17 @@ public class Enemy : MonoBehaviour
     [field: SerializeField] public TargetDetector TargetDetector { get; private set; }
     [field: SerializeField] public ThrownObjectDetector ThrownObjectDetector { get; private set; }
     [field: SerializeField] public PickUper PickUper { get; private set; }
+    [field: SerializeField] public ProjectileSpawner ProjectileSpawner { get; private set; }
+    [field: SerializeField] public ProjectileRotator ProjectileRotator { get; private set; }
     [field: SerializeField] public Collider Collider { get; private set; }
     [field: SerializeField] public SphereCollider TargetDetectorCollider { get; private set; }
+    [field: SerializeField] public Orbit Orbit { get; private set; }
+    [field: SerializeField] public ForceField ForceField { get; private set; }
 
     public Transform Target { get; private set; }
     public Transform ThrownObject { get; private set; }
 
-    public void Init(Transform player, int level)
+    public void Init(Transform player, int level = 0)
     {
         BehaviorAnimator.runtimeAnimatorController = Config.Controller;
         TargetDetectorCollider.radius = Config.DetectionRadius;

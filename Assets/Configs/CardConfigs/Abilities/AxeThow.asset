@@ -39,10 +39,11 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <HasPlayer>k__BackingField: 0
   <IsBought>k__BackingField: 1
+  <MaxCardLevel>k__BackingField: 100
   <Prefab>k__BackingField: {fileID: 4438864914896478579, guid: b9857439dc1cadc479c8a86bf2a38a45, type: 3}
   <AbilityType>k__BackingField: 1
   _baseCooldown: 10
   _flightDuration: 1
   _baseFlightDistance: 10
-  _cooldownPerLevel: 0.2
+  _cooldownPerLevel: 0.25
   _flightDistancePerLevel: 0.4

@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackGroundMusic : MonoBehaviour
+public class BackgroundMusic : MonoBehaviour
 {
-    [SerializeField] private List<AudioClip> _musics; 
-    [SerializeField] private float _delayBetweenTracks = 1f;
+    [SerializeField] private List<AudioClip> _musics;
+    [SerializeField] private List<AudioClip> _battleSounds;
+    [SerializeField] private float _delayAfterTrack = 1f;
 
+    private List<AudioClip> _currentSounds = new();
     private ISpawnerService _spawnerService;
     private ICoroutineRunner _coroutineRunner;
     private Coroutine _audioRoutine;
-    private int _previousIndex = -1;
+    private int _previousMusicIndex = -1;
 
     private void Awake()
     {
@@ -22,40 +24,51 @@ public class BackGroundMusic : MonoBehaviour
     {
         if (_musics == null || _musics.Count == 0) return;
 
-        StartNextTrack();
+        _currentSounds = _musics;
+        StartNextTrack(ref _previousMusicIndex);
     }
 
     private void OnDisable()
     {
-        if (_audioRoutine != null)
-            _coroutineRunner.StopCoroutine(_audioRoutine);
+        StopAudioRoutine();
     }
 
-    private void StartNextTrack()
+    private void StartNextTrack(ref int previousIndex)
     {
-        if (_musics.Count == 1)
+        if (_currentSounds == null || _currentSounds.Count == 0)
         {
-            Debug.Log("Необходимо 2 трека");
             return;
         }
 
-        int randomIndex;
+        int randomIndex = Random.Range(0, _currentSounds.Count);
 
-        do
-        {
-            randomIndex = Random.Range(0, _musics.Count);
-        }
-        while (randomIndex == _previousIndex);
+        previousIndex = randomIndex;
+        AudioClip clip = _currentSounds[randomIndex];
 
-        _previousIndex = randomIndex;
-        AudioClip clip = _musics[randomIndex];
         _spawnerService.SendSoundReqest(clip);
         _audioRoutine = _coroutineRunner.StartCoroutine(PlayAndWait(clip));
     }
 
     private IEnumerator PlayAndWait(AudioClip clip)
     {
-        yield return new WaitForSeconds(clip.length + _delayBetweenTracks);
-        StartNextTrack();
+        yield return new WaitForSeconds(clip.length + _delayAfterTrack);
+        StartNextTrack(ref _previousMusicIndex);
+    }
+
+    public void StartBattleMusic()
+    {
+        _spawnerService.ClearObjects(SpawnerType.Sounds);
+        StopAudioRoutine();
+        _currentSounds = _battleSounds;
+        StartNextTrack(ref _previousMusicIndex);
+    }
+
+    private void StopAudioRoutine()
+    {
+        if (_audioRoutine != null && _coroutineRunner != null)
+        {
+            _coroutineRunner.StopCoroutine(_audioRoutine);
+            _audioRoutine = null;
+        }
     }
 }

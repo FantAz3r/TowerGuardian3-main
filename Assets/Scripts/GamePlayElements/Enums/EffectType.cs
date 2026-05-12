@@ -7,5 +7,6 @@ public enum EffectType
     SwordTrails,
     Expload,
     AimPoint,
-    PortalChrge
+    PortalChrge,
+    Bounce
 }

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class LouseLevelMenu : LevelMenu
 {
+    private float ImmunityTime = 5f;
+
     [SerializeField] private Button _resurrectionButton;
     [SerializeField] private AudioClip _louseSound;
 
@@ -11,7 +13,7 @@ public class LouseLevelMenu : LevelMenu
     private Player _player;
     private IADVServise _advService;
     private IInputService _inputService;
-    private bool _canResurrection=true;
+    private bool _canResurrection = true;
 
     protected override void Awake()
     {
@@ -22,28 +24,28 @@ public class LouseLevelMenu : LevelMenu
         _resurrectionButton.gameObject.SetActive(false);
     }
 
-    public void SetResurrection() 
+    public void SetResurrection()
     {
         bool show = _canResurrection && _advService.CanShowRewardADV(_rewardId);
-        _canResurrection = show == false; 
+        _canResurrection = show == false;
         SetResurrectionButtonActive(show);
     }
 
-    private void SetResurrectionButtonActive(bool active) 
-    { 
+    private void SetResurrectionButtonActive(bool active)
+    {
         _resurrectionButton.gameObject.SetActive(active);
 
-        if (active) 
-        { 
+        if (active)
+        {
             _resurrectionButton.transform.localScale = Vector3.one;
             _resurrectionButton.transform.DOScale(1.1f, 0.6f).
                 SetLoops(-1, LoopType.Yoyo).
                 SetEase(Ease.InOutSine).
                 SetUpdate(true);
-        } 
-        else 
-        { 
-            _resurrectionButton.transform.localScale = Vector3.one; 
+        }
+        else
+        {
+            _resurrectionButton.transform.localScale = Vector3.one;
         }
     }
 
@@ -62,17 +64,16 @@ public class LouseLevelMenu : LevelMenu
 
     private void Resurrection()
     {
+        base.Close();
+        WindowService.Open(WindowType.HUD);
+
         _advService.TryShowRewardADV(_rewardId, () =>
         {
             _player.Health.Resurect();
+            _player.PlayerAnimator.OnRevive();
+            _inputService.EnableInput();
+            _player.Health.ImmunityPerTime(ImmunityTime);
         });
-
-        _player.PlayerAnimator.OnRevive();
-        _inputService.EnableInput();
-        
-        base.Close();
-
-        WindowService.Open(WindowType.HUD);
     }
 
     public override void Open()

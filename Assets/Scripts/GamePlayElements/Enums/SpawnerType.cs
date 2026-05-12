@@ -5,5 +5,7 @@ public enum SpawnerType
     Resources,
     Text,
     Effects,
-    Sounds
+    Sounds,
+    GameObjects,
+    Projectile
 }

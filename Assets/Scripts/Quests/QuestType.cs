@@ -19,5 +19,9 @@ public enum QuestType
     SelectWeaponCard,
     OutpostCapture,
     DestroyBuildings,
-    StayAlive
+    StayAlive,
+    KillBoss,
+    EnterArena,
+    GameComplete,
+    EnterLevel5,
 }

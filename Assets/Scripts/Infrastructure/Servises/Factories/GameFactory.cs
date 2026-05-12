@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,11 +9,12 @@ public class GameFactory : IGameFactory
 {
     private Scene _scene;
     private Tower _tower;
-    private EnemySpawner _enemySpawner;
     private QuestBuilder _questBuilder;
     private PortalSwitcher _portalSwitcher;
     private ISpawnerService _spawnerService;
 
+    public EnemySpawner EnemySpawner { get; private set; }
+    public BackgroundMusic BackGroundMusic { get; private set; }
     public CardSelector CardSelector { get; private set; }
     public LevelID CurrentLevel { get; private set; }
     public LevelConfig LevelConfig { get; private set; }
@@ -74,6 +76,7 @@ public class GameFactory : IGameFactory
         SoundData soundData = Resources.Load<SoundData>(GameConstants.SoundData);
         SoundObject soundObject = Resources.Load<SoundObject>(GameConstants.SoundObject);
 
+        _spawnerService.RegisterSpawner(new ProjectileSpawner());
         _spawnerService.RegisterSpawner(new SoundSpawner(soundData, soundObject));
         _spawnerService.RegisterSpawner(new PieceSpawner(resourceData));
         _spawnerService.RegisterSpawner(new DamageNumberSpawner(textObject));
@@ -113,7 +116,7 @@ public class GameFactory : IGameFactory
 
     public void CreateEnemies()
     {
-        _enemySpawner = Object.Instantiate(Resources.Load<EnemySpawner>(GameConstants.EnemySpawner));
+        EnemySpawner = Object.Instantiate(Resources.Load<EnemySpawner>(GameConstants.EnemySpawner));
     }
 
     public void CreatePortalsFactory()
@@ -158,17 +161,21 @@ public class GameFactory : IGameFactory
 
     public void CreateBackgroundSounds()
     {
-        BackGroundMusic backGroundMusic = Object.Instantiate(Resources.Load<BackGroundMusic>(GameConstants.BackGroundMusic));
+        BackGroundMusic = Object.Instantiate(Resources.Load<BackgroundMusic>(GameConstants.BackGroundMusic));
     }
 
     public void RunLevel()
     {
+        int maxTweens = 1000;
+        int maxSequence = 200;
+
+        DOTween.SetTweensCapacity(maxTweens, maxSequence);
         QuestRunner?.Run();
         Cycle?.StartDayCycle();
 
         if (LevelConfig.Level != LevelID.Tower)
         {
-            _enemySpawner?.StartSpawn();
+            EnemySpawner?.StartSpawn();
         }
     }
 }
@@ -183,6 +190,9 @@ public interface IGameFactory : IService
     QuestStateMachine QuestRunner { get; }
     ISceneContainer SceneContainer { get; }
     CardSelector CardSelector { get; }
+    EnemySpawner EnemySpawner { get; }
+    BackgroundMusic BackGroundMusic { get; }
+
     void SetCurrentLevel(LevelID level);
     void SetLevelConfig(LevelID level);
     void SetSceneContainer();

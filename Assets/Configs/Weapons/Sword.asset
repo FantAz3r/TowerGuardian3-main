@@ -31,9 +31,10 @@ MonoBehaviour:
     Image: {fileID: 1399562470, guid: 0e21a5ee5c292fd43898ac1680a47ffd, type: 3}
   _id: f686a659-d96a-42e8-b503-c0666c1bb2f8
   <ChanceToView>k__BackingField: 1
-  <Level>k__BackingField: 0
-  <HasPlayer>k__BackingField: 0
+  <Level>k__BackingField: 30
+  <HasPlayer>k__BackingField: 1
   <IsBought>k__BackingField: 1
+  <MaxCardLevel>k__BackingField: 100
   <Prefab>k__BackingField: {fileID: -934408350477533787, guid: b84d7ca3927758646a65731cc107aa76, type: 3}
   <WeaponType>k__BackingField: 1
   <TargetType>k__BackingField: 0
@@ -44,7 +45,7 @@ MonoBehaviour:
   <BaseAttackDelay>k__BackingField: 1.3
   <BaseAttackRange>k__BackingField: 2
   <BaseMultiply>k__BackingField: 2
-  _damageUpgradePercent: 0.1
+  _damageUpgradePercent: 0.05
   _attackDelayUpgradeFactor: -0.003
   _attackRangeUpgradeValue: 0
   _multiplyUpgradeValue: 0

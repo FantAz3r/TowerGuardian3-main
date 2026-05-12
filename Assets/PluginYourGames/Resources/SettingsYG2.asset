@@ -357,7 +357,7 @@ MonoBehaviour:
     autoApplySettings: 1
     autoPauseGame: 1
     editEventSystem: 1
-    autoGRA: 1
+    autoGRA: 0
     logInEditor: 1
     archivingBuild: 1
     autoDefineSymbols: 1
@@ -365,12 +365,12 @@ MonoBehaviour:
     loadSceneIfSDKLate: 0
     loadSceneIndex: 0
     initDelaySimulation: 0
-    buildNumber: 58
+    buildNumber: 70
   Simulation:
     device: 0
     language: ru
-    advIntervalSimulation: 60
-    durationAdv: 0.5
+    advIntervalSimulation: 10
+    durationAdv: 5
     loadAdv: 0
     testFailAds: 0
   Templates:

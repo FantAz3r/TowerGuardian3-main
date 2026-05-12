@@ -1,32 +1,26 @@
 {
-    "idSave": 137,
-    "AllCards": [
-        {
-            "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
-            "Level": 1,
-            "IsBought": true,
-            "HasPlayer": true
-        }
-    ],
+    "idSave": 5923,
+    "AllCards": [],
     "CurrentWeapon": {
-        "ID": "49a8d902-507d-46ad-917d-ddeda18a1417",
+        "ID": "521bccbd-6f06-453d-b923-7bfee13b2dec",
         "Level": 1,
         "IsBought": true,
-        "HasPlayer": true
+        "HasPlayer": false
     },
     "PlayerWeapons": [],
-    "Coins": 6,
-    "Wood": 16,
-    "Stones": 10,
-    "Level": 1,
+    "Coins": 0,
+    "Wood": 24,
+    "Stones": 6,
+    "Level": 0,
     "UpgradePoints": 0,
     "CurrentEXP": 0.0,
-    "CurrentLevel": 4,
     "PlayerPosition": {
-        "x": 1.4331116676330567,
-        "y": 0.00726848840713501,
-        "z": 13.307886123657227
+        "x": 16.853477478027345,
+        "y": 8.41756534576416,
+        "z": -51.59142303466797
     },
+    "CurrentLevel": 3,
+    "PreviousLevel": 0,
     "QuestProgress": [
         {
             "Level": 3,
@@ -35,11 +29,32 @@
             "QuestIndex": 3
         }
     ],
-    "LevelsProgress": [],
+    "LevelsProgress": [
+        {
+            "Level": 4,
+            "Score": 41,
+            "Stars": 0,
+            "Time": 14.857244491577149,
+            "IsComplite": false
+        }
+    ],
     "CurrentFloor": 1,
     "Language": "ru",
-    "ShowDamageNumber": false,
+    "ShowDamageNumber": true,
     "Mute": false,
-    "Volumes": [],
+    "Volumes": [
+        {
+            "Name": "Background",
+            "Volume": 0.22700415551662446
+        },
+        {
+            "Name": "UI",
+            "Volume": 0.7979541420936585
+        },
+        {
+            "Name": "Effects",
+            "Volume": 0.7979541420936585
+        }
+    ],
     "IsFirstGameSession": false
 }

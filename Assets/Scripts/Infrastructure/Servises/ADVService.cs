@@ -5,9 +5,14 @@ using YG;
 
 public class ADVService : IADVServise
 {
-    private Dictionary<string, float> _lastRunTimes = new Dictionary<string, float>();
     private const float CooldownSeconds = 60f;
+    private Dictionary<string, float> _lastRunTimes = new Dictionary<string, float>();
+    private ISoundService _soundService;
 
+    public ADVService(ISoundService soundService)
+    {
+        _soundService = soundService;
+    }
 
     public void TryShowRewardADV(string rewardID, Action callback)
     {
@@ -22,7 +27,9 @@ public class ADVService : IADVServise
         }
 
         _lastRunTimes[rewardID] = currentTime;
+        _soundService.StopAll();
 
+        YG2.onCloseAnyAdv += OnCloseADV;
         YG2.RewardedAdvShow(rewardID, callback);
     }
 
@@ -39,5 +46,23 @@ public class ADVService : IADVServise
         }
 
         return true;
+    }
+
+    public void TryShowInterstitialADV(string nextLevel)
+    {
+        if (nextLevel != LevelID.MainMenu.ToString() &&
+            nextLevel != LevelID.None.ToString() &&
+            nextLevel != LevelID.LoadScene.ToString())
+        {
+            YG2.InterstitialAdvShow();
+            YG2.onCloseAnyAdv += OnCloseADV;
+            _soundService.StopAll();
+        }
+    }
+
+    private void OnCloseADV()
+    {
+        _soundService.ContinueAll();
+        YG2.onCloseAnyAdv -= OnCloseADV;
     }
 }

@@ -6,12 +6,14 @@ public class QuestPointer : MonoBehaviour
     private Vector3 _target;
     private QuestStateMachine _questRunner;
     private Player _player;
+
     private Tween _jumpTween;
+    private Tween _moveTween;
 
     private float _arrowMoveSpeed = 8f;
     private float _jumpHeight = 0.5f;
     private float _jumpDuration = 0.5f;
-    private float _jumpStartDistance = 10f;
+    private float _jumpStartDistance = 7f;
 
     [SerializeField] private Vector3 _jumpOffset = new Vector3(0, 6f, 0);
     [SerializeField] private Vector3 _playerOffset = new Vector3(0, 3f, 0);
@@ -23,19 +25,21 @@ public class QuestPointer : MonoBehaviour
     {
         _player = ServiceLocator.Get<IGameFactory>().Player;
         _questRunner = ServiceLocator.Get<IGameFactory>().QuestRunner;
+
         _questRunner.QuestStarted += OnQuestSeted;
         _questRunner.QuestCompleted += OnQuestCompleted;
     }
 
     private void OnDestroy()
     {
+        _jumpTween?.Kill();
+        _moveTween?.Kill();
+
         if (_questRunner != null)
         {
             _questRunner.QuestStarted -= OnQuestSeted;
             _questRunner.QuestCompleted -= OnQuestCompleted;
         }
-
-        StopJump();
     }
 
     private void Update()
@@ -50,7 +54,7 @@ public class QuestPointer : MonoBehaviour
             if (_isOverTarget)
             {
                 transform.SetParent(_player.transform);
-                StopJump();
+                _jumpTween?.Kill();
                 _isOverTarget = false;
             }
 
@@ -79,7 +83,7 @@ public class QuestPointer : MonoBehaviour
 
     private void OnQuestSeted(IQuest quest)
     {
-        StopJump();
+        _jumpTween?.Kill();
         transform.SetParent(_player.transform);
 
         if (quest == null)
@@ -109,24 +113,23 @@ public class QuestPointer : MonoBehaviour
     {
         _target = Vector3.zero;
         gameObject.SetActive(false);
-        StopJump();
+        _jumpTween?.Pause();
     }
 
     void MoveArrow()
     {
-        if (_isMoving) return; 
+        if (_isMoving) return;
 
         Vector3 targetPos = _target + _jumpOffset;
 
         _isMoving = true;
-        transform.DOMove(new Vector3(targetPos.x, transform.position.y, targetPos.z), _jumpDuration)
+        _moveTween = transform.DOMove(new Vector3(targetPos.x, transform.position.y, targetPos.z), _jumpDuration)
             .SetEase(Ease.Linear)
             .OnComplete(() => _isMoving = false);
 
         transform.rotation = Quaternion.Euler(0, 180f, 180);
         StartJump();
     }
-
 
     private void StartJump()
     {
@@ -135,14 +138,5 @@ public class QuestPointer : MonoBehaviour
         _jumpTween = transform.DOLocalMoveY(transform.localPosition.y + _jumpHeight, _jumpDuration)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine);
-    }
-
-    private void StopJump()
-    {
-        if (_jumpTween != null)
-        {
-            _jumpTween.Kill();
-            _jumpTween = null;
-        }
     }
 }

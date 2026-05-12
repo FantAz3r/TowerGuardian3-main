@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896487cc993eb9e42ab3018d45dc8184, type: 3}
+  m_Name: FinalBoss
+  m_EditorClassIdentifier: 
+  <MoveConfig>k__BackingField: {fileID: 11400000, guid: f0a36cf56b110eb43b3213e8a5ca777f, type: 2}
+  <HealthConfig>k__BackingField: {fileID: 11400000, guid: 58350929aca70da469025e0e27dba006, type: 2}
+  <DetectionRadius>k__BackingField: 15
+  <Damage>k__BackingField: 80
+  <AttackRange>k__BackingField: 6
+  <HitSound>k__BackingField: {fileID: 8300000, guid: b56134739a93d964898473d585a9e5fd, type: 3}
+  <AttackAriaCenter>k__BackingField: {x: 0, y: 0, z: 0}
+  <AttackCooldown>k__BackingField: 2.5
+  <JumpDamage>k__BackingField: 100
+  <JumpSound>k__BackingField: {fileID: 8300000, guid: 371b0368a151e0448b13277e1abc1c66, type: 3}
+  <ThrowDamage>k__BackingField: 0
+  <ThronDamage>k__BackingField: 50
+  <ThronAttackSound>k__BackingField: {fileID: 8300000, guid: ba9366b51cd7cd948961cfa52e41a941, type: 3}
+  <LevaRockDamage>k__BackingField: 65
+  <UltimateSound>k__BackingField: {fileID: 8300000, guid: 24f0e625e09e1184cac65b28b0778357, type: 3}
+  <Level>k__BackingField: 0
+  <Controller>k__BackingField: {fileID: 9100000, guid: 2d065bf6f4f40be4ca5bed9a457f0461, type: 2}
+  _damageGrowthMultiplier: 2

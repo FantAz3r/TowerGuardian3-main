@@ -40,12 +40,16 @@ public class QuestBuilder
         _quests.Add(new EnterSecondLevelQuest(GetPortalByLevel(LevelID.Level2)));
         _quests.Add(new EnterThirdLevelQuest(GetPortalByLevel(LevelID.Level3)));
         _quests.Add(new EnterFourthLevelQuest(GetPortalByLevel(LevelID.Level4)));
+        _quests.Add(new EnterFinalLevelQuest(GetPortalByLevel(LevelID.Level5)));
         _quests.Add(new SwapWeaponQuest());
         _quests.Add(new DefendPortalQuest());
         _quests.Add(new SelectWeaponCardQuest());
         _quests.Add(new OutpostCaptureQuest());
         _quests.Add(new DestroyEnemyBuildingsQuest());
         _quests.Add(new StayAliveQuest());
+        _quests.Add(new EnterArenaQuest());
+        _quests.Add(new KillBossQuest());
+        _quests.Add(new GameCompleteQuest());
     }
 
     private Portal GetPortalByLevel(LevelID level)

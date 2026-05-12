@@ -44,6 +44,7 @@ public class StartLevelMenu : LevelMenu
     private void OnStartClicked()
     {
         StateSwitchService.Switch(_nextLevel);
+        ADVServise.TryShowInterstitialADV(_nextLevel.ToString());
         ConditionService.SetLevelEnded();
         Close();
     }

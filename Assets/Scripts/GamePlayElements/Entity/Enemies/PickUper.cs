@@ -3,6 +3,7 @@ using UnityEngine;
 public class PickUper : MonoBehaviour
 {
     [SerializeField] private Vector3 _offset;
+
     public void Pickup(Transform pickObject)
     {
         Collider collider = pickObject.GetComponent<Collider>();

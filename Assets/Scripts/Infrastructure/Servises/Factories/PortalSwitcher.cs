@@ -20,14 +20,6 @@ public class PortalSwitcher
         }
     }
 
-    private void EnablePortals()
-    {
-        foreach (Portal portal in _portals)
-        {
-            portal.gameObject.SetActive(true);
-        }
-    }
-
     private void DisablePortals()
     {
         foreach (Portal portal in _portals)

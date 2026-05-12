@@ -9,10 +9,12 @@ public class PauseUI : PauseWindow
 
     private IStateSwitchService _stateMachine;
     private IWindowService _windowService;
+    private IADVServise _advServise;
 
     protected override void Awake()
     {
         base.Awake();
+        _advServise = ServiceLocator.Get<IADVServise>();
         _windowService = ServiceLocator.Get<IWindowService>();
         _stateMachine = ServiceLocator.Get<IStateSwitchService>();
     }
@@ -31,13 +33,14 @@ public class PauseUI : PauseWindow
 
     private void OnHomeClicked()
     {
-
         base.Close();
         _windowService.Open(WindowType.HUD);
+        string levelName = SceneManager.GetActiveScene().name;
 
-        if (SceneManager.GetActiveScene().name != LevelID.Tower.ToString())
+        if (levelName != LevelID.Tower.ToString())
         {
             _stateMachine.Switch(LevelID.Tower);
+            _advServise.TryShowInterstitialADV(levelName);
         }
     }
 }

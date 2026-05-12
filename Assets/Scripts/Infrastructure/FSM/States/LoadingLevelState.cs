@@ -42,37 +42,41 @@ public class LoadingLevelState : IPayloadedState<LevelID>
 
     private void InitCurrentLevel(LevelID level)
     {
+        YG2.saves.PreviousLevel = _currentLevel;
+        YG2.SaveProgress();
+
         _previousLevel = _currentLevel;
         _currentLevel = level;
 
         switch (level)
         {
             case LevelID.MainMenu:
-                _sceneLoader.Load(level.ToString(), InitMainMenu);
+                _sceneLoader.Load(level.ToString(), InitMainMenu, false);
+                YG2.GameReadyAPI();
                 break;
 
             case LevelID.Level1:
-                _sceneLoader.Load(level.ToString(), InitGameLevel);
+                _sceneLoader.Load(level.ToString(), InitGameLevel, true);
                 break;
 
             case LevelID.Level2:
-                _sceneLoader.Load(level.ToString(), InitGameLevel);
+                _sceneLoader.Load(level.ToString(), InitGameLevel, true);
                 break;
 
             case LevelID.Level3:
-                _sceneLoader.Load(level.ToString(), InitGameLevel);
+                _sceneLoader.Load(level.ToString(), InitGameLevel, true);
                 break;
 
             case LevelID.Level4:
-                _sceneLoader.Load(level.ToString(), InitGameLevel);
+                _sceneLoader.Load(level.ToString(), InitGameLevel, true);
                 break;
 
             case LevelID.Level5:
-                _sceneLoader.Load(level.ToString(), InitGameLevel);
+                _sceneLoader.Load(level.ToString(), InitGameLevel, true);
                 break;
 
             case LevelID.Tower:
-                _sceneLoader.Load(level.ToString(), InitTowerLevel);
+                _sceneLoader.Load(level.ToString(), InitTowerLevel, true);
                 break;
 
             default:

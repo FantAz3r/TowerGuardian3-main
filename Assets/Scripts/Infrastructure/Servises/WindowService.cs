@@ -103,6 +103,9 @@ public class WindowService : IWindowService
             case WindowType.MenuLeaderboard:
                 _currentWindow = _uiFactory.CreateMenuLeaderboard();
                 break;
+                case WindowType.BossHealth:
+                _currentWindow = _uiFactory.CreateBossHealthView();
+                break;
         }
 
         if (_currentWindow != null)

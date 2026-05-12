@@ -3,8 +3,24 @@ using UnityEngine;
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
-    private float _attackRangeTreshold = 1.1f;
-    private int _hashIsSeeTarget, _hashTargetInAttackRange, _hashRandom, _hashHasObject, _hashPick, _hashThrowEnded;
+    private const int MaxRandomValue = 4,
+        MinRandomValue = 0;
+
+    private float _attackRangeTreshold = 1.1f,
+        _abilityCooldown = 0,
+        _ultimateCooldown = 0;
+
+    private int _hashIsSeeTarget,
+        _hashTargetInAttackRange,
+        _hashRandom,
+        _hashHasObject,
+        _hashPick,
+        _hashThrowEnded,
+        _hashUltimateCooldown,
+        _hashIsUltimateActive,
+        _hashHealth,
+        _hashIsThornAttack,
+        _hashCooldown;
 
     private void Awake()
     {
@@ -14,6 +30,11 @@ public class EnemyStateMachine : MonoBehaviour
         _hashHasObject = Animator.StringToHash("HasObject");
         _hashPick = Animator.StringToHash("IsPickup");
         _hashThrowEnded = Animator.StringToHash("ThrowEnded");
+        _hashHealth = Animator.StringToHash("Health");
+        _hashIsUltimateActive = Animator.StringToHash("IsUltimateActive");
+        _hashUltimateCooldown = Animator.StringToHash("UltimateCooldown");
+        _hashIsThornAttack = Animator.StringToHash("IsThornAttack");
+        _hashCooldown = Animator.StringToHash("Cooldown");
     }
 
     public void Init()
@@ -21,7 +42,7 @@ public class EnemyStateMachine : MonoBehaviour
         _enemy.Agent.EnableAgent(true);
         _enemy.Collider.enabled = true;
         _enemy.Rotator.CanRotate(true);
-        
+
         _enemy.TargetDetector.TargetDetected += OnSeeTarget;
         _enemy.TargetDetector.TargetLost += OnLostTarget;
 
@@ -30,7 +51,19 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Update()
     {
-        if(_enemy.Target == null) 
+        if (HasParameter(_hashRandom))
+        {
+            _enemy.BehaviorAnimator.SetInteger(_hashRandom, Random.Range(MinRandomValue, MaxRandomValue));
+        }
+
+        if(HasParameter(_hashHealth))
+        {
+            _enemy.BehaviorAnimator.SetFloat(_hashHealth, _enemy.Health.CurrentHealth / _enemy.Health.MaxHealth);
+        }
+
+        UpdateTimer();
+
+        if (_enemy.Target == null)
             return;
 
         float sqrDistance = (transform.position - _enemy.Target.transform.position).sqrMagnitude;
@@ -39,12 +72,12 @@ public class EnemyStateMachine : MonoBehaviour
         {
             _enemy.BehaviorAnimator.SetBool(_hashTargetInAttackRange, true);
         }
-        else if(sqrDistance >= _enemy.Config.AttackRange * _enemy.Config.AttackRange * _attackRangeTreshold)
+        else if (sqrDistance >= _enemy.Config.AttackRange * _enemy.Config.AttackRange * _attackRangeTreshold)
         {
             _enemy.BehaviorAnimator.SetBool(_hashTargetInAttackRange, false);
         }
 
-        if(sqrDistance <= _enemy.Config.DetectionRadius * _enemy.Config.DetectionRadius)
+        if (sqrDistance <= _enemy.Config.DetectionRadius * _enemy.Config.DetectionRadius)
         {
             _enemy.BehaviorAnimator.SetBool(_hashIsSeeTarget, true);
         }
@@ -52,13 +85,23 @@ public class EnemyStateMachine : MonoBehaviour
         {
             _enemy.BehaviorAnimator.SetBool(_hashIsSeeTarget, false);
         }
+    }
 
+    public void SetCooldown(float cooldown)
+    {
+        _abilityCooldown = cooldown;
+        _enemy.BehaviorAnimator.SetFloat(_hashCooldown, _abilityCooldown);
+    }
+
+    public void SetUltimateCooldown(float cooldown)
+    {
+        _ultimateCooldown = cooldown;
+        _enemy.BehaviorAnimator.SetFloat(_hashUltimateCooldown, _ultimateCooldown);
     }
 
     private void OnSeeTarget(Transform target)
     {
         _enemy.SetNewTarget(target);
-        SetRandom();
     }
 
     private void OnLostTarget(Transform target)
@@ -66,24 +109,11 @@ public class EnemyStateMachine : MonoBehaviour
         _enemy.SetNewTarget(target);
     }
 
-    public void SetRandom(int random = -1)
-    {
-        if(random != -1)
-        {
-            _enemy.BehaviorAnimator.SetInteger(_hashRandom, random);
-        }
-        else
-        {
-            _enemy.BehaviorAnimator.SetInteger(_hashRandom, Random.Range(0, 4));
-        }
-    }
-
     public void OnDie()
     {
         _enemy.Collider.enabled = false;
         _enemy.Agent.EnableAgent(false);
         _enemy.Rotator.CanRotate(false);
-
         _enemy.Health.Died -= OnDie;
     }
 
@@ -103,6 +133,26 @@ public class EnemyStateMachine : MonoBehaviour
         _enemy.BehaviorAnimator.SetBool(_hashPick, true);
     }
 
+    public void StartThornsAttack()
+    {
+        _enemy.BehaviorAnimator.SetBool(_hashIsThornAttack, true);
+    }
+
+    public void OnEndThornAttack()
+    {
+        _enemy.BehaviorAnimator.SetBool(_hashIsThornAttack, false);
+    }
+
+    public void StatrUltimate()
+    {
+        _enemy.BehaviorAnimator.SetBool(_hashIsUltimateActive, true);
+    }
+
+    public void EndUltimate()
+    {
+        _enemy.BehaviorAnimator.SetBool(_hashIsUltimateActive, false);
+    }
+
     public void OnStopPickup()
     {
         _enemy.BehaviorAnimator.SetBool(_hashPick, false);
@@ -110,7 +160,36 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void OnThrowEnded()
     {
-        SetRandom();
         _enemy.BehaviorAnimator.SetTrigger(_hashThrowEnded);
+    }
+
+    private void UpdateTimer()
+    {
+        if(HasParameter(_hashCooldown))
+        {
+            if (_abilityCooldown > 0)
+            {
+                _abilityCooldown -= Time.deltaTime;
+                _enemy.BehaviorAnimator.SetFloat(_hashCooldown, _abilityCooldown);
+            }
+        }
+
+        if (HasParameter(_hashUltimateCooldown))
+        {
+            if (_ultimateCooldown > 0)
+            {
+                _ultimateCooldown -= Time.deltaTime;
+                _enemy.BehaviorAnimator.SetFloat(_hashUltimateCooldown, _ultimateCooldown);
+            }
+        }
+    }
+
+    private bool HasParameter(int hash)
+    {
+        foreach (AnimatorControllerParameter param in _enemy.BehaviorAnimator.parameters)
+        {
+            if (Animator.StringToHash(param.name) == hash) return true;
+        }
+        return false;
     }
 }

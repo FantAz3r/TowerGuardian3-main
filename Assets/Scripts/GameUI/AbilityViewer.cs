@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class AbilityViewer : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class AbilityViewer : MonoBehaviour
         _cooldownFillImage.fillAmount = 0f;
         gameObject.SetActive(true);
         SetKeyCode(keyCode);
-        
+
         _attacker.WeaponSeted += UpdateLock;
         _attacker.WeaponActivated += UpdateLock;
         _attacker.WeaponDeactivated += UpdateLock;
@@ -52,7 +53,7 @@ public class AbilityViewer : MonoBehaviour
     public void DeactivateViewer()
     {
         UnsubscribeEvents();
-    
+
         HasAbility = false;
         Ability = null;
         gameObject.SetActive(false);
@@ -75,7 +76,7 @@ public class AbilityViewer : MonoBehaviour
 
     private void UpdateLock()
     {
-        if(Ability is UsebleAbility usebleAbility)
+        if (Ability is UsebleAbility usebleAbility)
         {
             _lockImage.gameObject.SetActive(usebleAbility.IsLock);
         }
@@ -98,7 +99,7 @@ public class AbilityViewer : MonoBehaviour
 
     private void UnsubscribeEvents()
     {
-        if(_attacker != null)
+        if (_attacker != null)
         {
             _attacker.WeaponSeted -= UpdateLock;
             _attacker.WeaponActivated -= UpdateLock;
@@ -125,16 +126,26 @@ public class AbilityViewer : MonoBehaviour
 
     private void SetKeyCode(AbilityKeyCode keyCode)
     {
+
         if (keyCode != AbilityKeyCode.None)
         {
             AbilityKey = keyCode;
             _button.interactable = true;
-            _keyCode.gameObject.SetActive(true);
-            _keyCode.text = ((int)AbilityKey).ToString();
+
+            if (YG2.envir.isDesktop)
+            {
+                _keyCode.gameObject.SetActive(true);
+                _keyCode.text = ((int)AbilityKey).ToString();
+            }
+            else
+            {
+                _keyCode.gameObject.SetActive(false);
+            }
         }
         else
         {
             _keyCode.gameObject.SetActive(false);
         }
+
     }
 }

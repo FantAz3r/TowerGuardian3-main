@@ -18,8 +18,9 @@ namespace YG
         public int UpgradePoints;
         public float CurrentEXP;
 
-        public LevelID CurrentLevel;
         public Vector3 PlayerPosition;
+        public LevelID CurrentLevel;
+        public LevelID PreviousLevel;
 
         public List<QuestSaveData> QuestProgress;
         public List<LevelSaveData> LevelsProgress;

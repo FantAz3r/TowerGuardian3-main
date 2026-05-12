@@ -33,9 +33,11 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <HasPlayer>k__BackingField: 0
   <IsBought>k__BackingField: 0
+  <MaxCardLevel>k__BackingField: 100
   <Prefab>k__BackingField: {fileID: 842302510514045741, guid: 4c6f57ce67f88214c8ea073c94704cb0, type: 3}
   <AbilityType>k__BackingField: 3
-  _baseHitCount: 4
+  _baseHitCount: 2
+  _maxHitCount: 7
   _baseAttackDelay: 0.3
   _baseCooldown: 15
   _hitCountPerLevel: 1

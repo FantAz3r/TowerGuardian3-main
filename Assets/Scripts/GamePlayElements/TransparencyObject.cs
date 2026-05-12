@@ -11,10 +11,11 @@ public class TransparencyObject : MonoBehaviour
     private Coroutine _changeMaterialCoroutine;
     private readonly WaitForSeconds _wait = new WaitForSeconds(0.5f);
     private List<Material[]> _originalMaterials;
-
+    private ICoroutineRunner _coroutineRunner;
 
     private void Awake()
     {
+        _coroutineRunner = ServiceLocator.Get<ICoroutineRunner>();
         _meshRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
 
         if (_meshRenderers.Count == 0)
@@ -33,9 +34,9 @@ public class TransparencyObject : MonoBehaviour
     public void MakeInvisible()
     {
         if (_changeMaterialCoroutine != null)
-            StopCoroutine(_changeMaterialCoroutine);
+            _coroutineRunner.StopCoroutine(_changeMaterialCoroutine);
 
-        _changeMaterialCoroutine = StartCoroutine(ChangeMaterialRoutine());
+        _changeMaterialCoroutine = _coroutineRunner.StartCoroutine(ChangeMaterialRoutine());
     }
 
     private IEnumerator ChangeMaterialRoutine()
@@ -56,7 +57,10 @@ public class TransparencyObject : MonoBehaviour
 
         for (int i = 0; i < _meshRenderers.Count; i++)
         {
-            _meshRenderers[i].materials = _originalMaterials[i];
+            if (_meshRenderers[i] != null)
+            {
+                _meshRenderers[i].materials = _originalMaterials[i];
+            }
         }
 
         _changeMaterialCoroutine = null;

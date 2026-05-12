@@ -7,6 +7,11 @@ public class Highlighter : MonoBehaviour
     [SerializeField] private Image _warningFrame;
     private Tween _warningTween;
 
+    private void OnDestroy()
+    {
+        _warningTween?.Kill();
+    }
+
     public void ActivateWarning()
     {
         if (_warningFrame == null)

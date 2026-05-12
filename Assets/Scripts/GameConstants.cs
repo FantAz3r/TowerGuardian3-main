@@ -12,6 +12,7 @@ public static class GameConstants
     public static string FocusController = "Prefabs/FocusController";
 
     public static string PortalFrame = "buidingObjects/PortalFrame";
+    public static string FinalBoss = "Enemy/FinalBoss";
 
     
     public static string MenuCanvas = "Prefabs/MenuMenu";
@@ -32,4 +33,5 @@ public static class GameConstants
     public static string PlayerSpawnPoints = "ScriptableObjects/PlayerSpawnPoints";
     public static string SoundData = "ScriptableObjects/SoundData";
     public static string WindowData = "ScriptableObjects/WindowData";
+    public static string ProjectileData = "ScriptableObjects/ProjectileData";
 }

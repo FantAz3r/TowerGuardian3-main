@@ -11,7 +11,6 @@ public class QuestStateMachine : MonoBehaviour
     private int _startQuestIndex = -1;
     private LevelID _level;
     private IQuest _currentQuest;
-    private IGameConditionService _conditionService;
     private bool _isAllQuestsComplete = false;
 
     public event Action AllQuestsCompleted, QuestCompleted;
@@ -28,8 +27,6 @@ public class QuestStateMachine : MonoBehaviour
         }
 
         LoadQuestProgress();
-
-        _conditionService = ServiceLocator.Get<IGameConditionService>();
     }
 
     private void OnDestroy()

@@ -81,7 +81,7 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
 
     private IEnumerator AttackRoutine()
     {
-        for (int i = 0; i < _config.HitCount; i++)
+        for (int i = 0; i <= _config.HitCount; i++)
         {
             _attacker.AttackAction(_config.AttackDelay);
             yield return _sleep;

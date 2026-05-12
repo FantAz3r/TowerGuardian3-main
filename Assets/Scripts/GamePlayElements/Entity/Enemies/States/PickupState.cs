@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PickupState : State
 {
+    private const float AbilityCooldown = 15;
     private bool _isPickingUp; 
     private float _threshold = 1f;
 
@@ -11,6 +12,7 @@ public class PickupState : State
         _isPickingUp = false;
 
         Enemy.StateMachine.OnStartPickup();
+        Enemy.StateMachine.SetCooldown(AbilityCooldown);
         Enemy.TargetDetector.gameObject.SetActive(false);
         FindObject();
     }

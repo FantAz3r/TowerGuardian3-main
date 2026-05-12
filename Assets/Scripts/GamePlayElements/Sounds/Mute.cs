@@ -12,15 +12,16 @@ public class Mute : MonoBehaviour
 
     private void Awake()
     {
-        _toggle.isOn = true;
+        bool isMuted = false;
 
-        if (YG2.isFirstGameSession == false)
+        if (YG2.isFirstGameSession == false && YG2.saves != null)
         {
-            _toggle.isOn = YG2.saves.Mute;
+            isMuted = YG2.saves.Mute;
         }
 
+        _toggle.isOn = isMuted == false;
         _toggle.onValueChanged.AddListener(OnToggleValueChanged);
-        ApplyToggleState(_toggle.isOn);
+        ApplyToggleState(_toggle.isOn == false);
     }
 
     private void OnDestroy()
@@ -30,19 +31,20 @@ public class Mute : MonoBehaviour
 
     private void OnToggleValueChanged(bool isOn)
     {
-        ApplyToggleState(isOn);
-        SaveSetting(isOn);
+        bool isMuted = isOn == false;
+        ApplyToggleState(isMuted);
+        SaveSetting(isMuted);
     }
 
     private void ApplyToggleState(bool isMuted)
     {
         if (isMuted)
         {
-            _mixer.SetFloat(VolumeParameter, 0);
+            _mixer.SetFloat(VolumeParameter, -80f);
         }
         else
         {
-            _mixer.SetFloat(VolumeParameter, -80f);
+            _mixer.SetFloat(VolumeParameter, 0);
         }
     }
 
@@ -52,4 +54,3 @@ public class Mute : MonoBehaviour
         YG2.SaveProgress();
     }
 }
-

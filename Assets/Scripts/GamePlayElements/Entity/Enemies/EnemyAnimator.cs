@@ -22,11 +22,13 @@ public class EnemyAnimator : MonoBehaviour
     private int _hashJump;
     private int _hashDie;
     private int _hashRandom;
+    private int _hashUltimateAttack;
+    private int _hashThornsAttack;
+    private int _hashEndUltimate;
 
     private List<AnimationClip> _attackClips;
 
-    public event Action Attacked;
-    public event Action Throwed;
+    public event Action Attacked, Grounded, Throwed, ThornAttacked;
 
     public bool IsThrowing { get; private set; }
     public bool IsPicked { get; private set; }
@@ -43,7 +45,10 @@ public class EnemyAnimator : MonoBehaviour
         _hashThrow = Animator.StringToHash("Throw");
         _hashJump = Animator.StringToHash("Jump");
         _hashDie = Animator.StringToHash("Die");
+        _hashUltimateAttack = Animator.StringToHash("LavaBallAttack");
+        _hashEndUltimate = Animator.StringToHash("EndUltimate");
         _hashAttackSpeedMultiplayer = Animator.StringToHash("AttackSpeed");
+        _hashThornsAttack = Animator.StringToHash("IsThornAttack");
         _attackClips = GetAnimationClipsContaining("Hited");
     }
 
@@ -98,6 +103,23 @@ public class EnemyAnimator : MonoBehaviour
         _animator.SetTrigger(_hashDie);
     }
 
+    public void PlaytUtlimate()
+    {
+        _animator.SetTrigger(_hashUltimateAttack);
+        _animator.ResetTrigger(_hashEndUltimate);
+
+    }
+
+    public void PlayEndUltimate()
+    {
+        _animator.SetTrigger(_hashEndUltimate);
+    }
+
+    public void PlayThornsAttack()
+    {
+        _animator.SetBool(_hashThornsAttack, true);
+    }
+
     public void OnAnimationAttack()
     {
         Attacked?.Invoke();
@@ -119,10 +141,22 @@ public class EnemyAnimator : MonoBehaviour
         _health.Die();
     }
 
+    public void OnAimationThornsAttack()
+    {
+        _animator.SetBool(_hashThornsAttack, false);
+        ThornAttacked?.Invoke();
+    }
+
+    public void OnAnimationJump()
+    {
+        Grounded?.Invoke();
+        _animator.ResetTrigger(_hashJump);
+    }
 
     private List<AnimationClip> GetAnimationClipsContaining(string partialName)
     {
         List<AnimationClip> clips = new List<AnimationClip>();
+
         foreach (var clip in _animator.runtimeAnimatorController.animationClips)
         {
             if (clip.name.Contains(partialName))

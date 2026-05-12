@@ -51,6 +51,12 @@ public class WaveViewer : WindowBase
             _coroutineRunner.StopCoroutine(_waveRoutine);
     }
 
+    public void StopWaves()
+    {
+        if (_waveRoutine != null && _coroutineRunner != null)
+            _coroutineRunner.StopCoroutine(_waveRoutine);
+    }
+
     private void DrawFlags()
     {
         foreach (Transform child in _flagsContainer)

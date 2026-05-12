@@ -8,7 +8,8 @@ public abstract class LevelMenu : PauseWindow
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _homeButton;
 
-    public IGameConditionService ConditionService{ get; private set; }
+    public IADVServise ADVServise { get; private set; }
+    public IGameConditionService ConditionService { get; private set; }
     public LevelID CurrentLevel { get; private set; }
     public ScoreCounter ScoreCounter { get; private set; }
     public IStateSwitchService StateSwitchService { get; private set; }
@@ -19,9 +20,10 @@ public abstract class LevelMenu : PauseWindow
     {
         base.Awake();
         ConditionService = ServiceLocator.Get<IGameConditionService>();
-        WindowService = ServiceLocator.Get<IWindowService>();   
+        WindowService = ServiceLocator.Get<IWindowService>();
         StateSwitchService = ServiceLocator.Get<IStateSwitchService>();
         GameFactory = ServiceLocator.Get<IGameFactory>();
+        ADVServise = ServiceLocator.Get<IADVServise>();
 
         ScoreCounter = GameFactory.ScoreCounter;
         CurrentLevel = GameFactory.LevelConfig.Level;
@@ -29,7 +31,7 @@ public abstract class LevelMenu : PauseWindow
 
     protected virtual void OnEnable()
     {
-        if(_restartButton != null)
+        if (_restartButton != null)
         {
             _restartButton.onClick.AddListener(OnRestartClicked);
         }
@@ -56,6 +58,7 @@ public abstract class LevelMenu : PauseWindow
     private void OnRestartClicked()
     {
         StateSwitchService.Switch(CurrentLevel);
+        ADVServise.TryShowInterstitialADV(CurrentLevel.ToString());
         ConditionService.SetLevelEnded();
         Close();
     }
@@ -63,6 +66,7 @@ public abstract class LevelMenu : PauseWindow
     protected virtual void OnHomeClicked()
     {
         StateSwitchService.Switch(LevelID.Tower);
+        ADVServise.TryShowInterstitialADV(LevelID.Tower.ToString());
         ConditionService.SetLevelEnded();
         Close();
     }
