@@ -19,7 +19,6 @@ public class Clock : MonoBehaviour
         _dayCycle.TimePassedFromTransition += OnTimePassedFromTransition;
         TrySetInfiniteTime();
     }
-    
 
     private void OnDestroy()
     {
@@ -49,7 +48,6 @@ public class Clock : MonoBehaviour
 
         SetClockRotation(angle, _currentPhase);
 
-
         int minutes = Mathf.FloorToInt(timeRemaining / oneMinute);
         int seconds = Mathf.FloorToInt(timeRemaining % oneMinute);
         _remainingTime.text = $"{minutes:00}:{seconds:00}";
@@ -78,7 +76,6 @@ public class Clock : MonoBehaviour
             _dayCycle.TimePassedFromTransition -= OnTimePassedFromTransition;
         }
     }
-
 
     private void SetClockRotation(float angle, DayPhase phase)
     {

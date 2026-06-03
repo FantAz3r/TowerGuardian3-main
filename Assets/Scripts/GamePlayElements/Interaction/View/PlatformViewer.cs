@@ -26,7 +26,6 @@ public class PlatformViewer : MonoBehaviour
         _platform.PlayerEnteredZone += OnPlayerEnteredZone;
         _platform.PlayerExitedZone += OnPlayerExitedZone;
         _platform.TimerUpdated += OnTimerUpdated;
-        _platform.Disabled += OnPlatformDisable;
 
         _text.text = UIText.GetWindowTypeText(_platform.WindowType);
         _timerViewer.fillAmount = 0;
@@ -74,10 +73,5 @@ public class PlatformViewer : MonoBehaviour
     private void MovePlatform(Vector3 position)
     {
         _button.position = position;
-    }
-
-    private void OnPlatformDisable()
-    {
-
     }
 }

@@ -27,7 +27,7 @@ public class InventoryStats : MonoBehaviour
 
     private void InitStats(ICardConfig config)
     {
-        _stats.text = "";
+        _stats.text = string.Empty;
 
         foreach (var item in config.GetStats())
         {

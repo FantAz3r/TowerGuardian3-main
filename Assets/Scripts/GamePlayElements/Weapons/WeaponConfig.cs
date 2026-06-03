@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class WeaponConfig : CardConfig
 {
+    [SerializeField] private float _damageUpgradePercent = 0.25f;        
+    [SerializeField] private float _attackDelayUpgradeFactor = -0.05f;   
+    [SerializeField] private float _attackRangeUpgradeValue = 0.2f;      
+    [SerializeField] private float _multiplyUpgradeValue = 0.1f;
+    [SerializeField] private AudioClip _audioClip;
+
     [field: SerializeField] public Weapon Prefab { get; private set; }
     [field: SerializeField] public WeaponType WeaponType { get; private set; }
     [field: SerializeField] public EntityType TargetType { get; private set; }
@@ -16,11 +22,6 @@ public class WeaponConfig : CardConfig
     [field: SerializeField] public float BaseAttackRange { get; private set; } = 2f;
     [field: SerializeField] public float BaseMultiply { get; private set; } = 2f;
 
-    [SerializeField] private float _damageUpgradePercent = 0.25f;        
-    [SerializeField] private float _attackDelayUpgradeFactor = -0.05f;   
-    [SerializeField] private float _attackRangeUpgradeValue = 0.2f;      
-    [SerializeField] private float _multiplyUpgradeValue = 0.1f;
-    [SerializeField] private AudioClip _audioClip;
     
     public float Damage => GetDamage(Level);
     public float AttackDelay => GetAttackDelay(Level);

@@ -9,7 +9,7 @@ public class Mute : MonoBehaviour
 
     [SerializeField] private Toggle _toggle;
     [SerializeField] private AudioMixer _mixer;
-
+     
     private void Awake()
     {
         bool isMuted = false;

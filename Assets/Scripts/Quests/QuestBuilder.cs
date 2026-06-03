@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class QuestBuilder
 {
-    private List<IQuest> _quests = new();
+    private List<IQuest> _quests = new ();
     private Player _player;
     private List<Portal> _portals;
     private TowerDoor _door;
     private StairsTrigger _stairsTrigger;
     private QuestData _questData;
 
-    public QuestBuilder(Player player,
+    public QuestBuilder(
+        Player player,
         List<Portal> portals = null,
         TowerDoor door = null,
         StairsTrigger stairsTrigger = null)
@@ -71,9 +72,9 @@ public class QuestBuilder
         {
             if (quest.GetQuestType() == type)
             {
-                foreach(var questinfo in _questData.QuestInfos)
+                foreach (var questinfo in _questData.QuestInfos)
                 {
-                    if(questinfo.Type == type)
+                    if (questinfo.Type == type)
                     {
                         quest.SetConfig(questinfo.Config);
                         return quest;

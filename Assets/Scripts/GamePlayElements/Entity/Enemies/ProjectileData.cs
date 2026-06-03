@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Datas", menuName = "Datas/Projectile")]
 
-public class ProjectileData: ScriptableObject
+public class ProjectileData : ScriptableObject
 {
     public List<ProjectileInfo> ProjectileInfos = new List<ProjectileInfo>();
 

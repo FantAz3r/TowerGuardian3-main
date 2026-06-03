@@ -6,18 +6,23 @@ using YG;
 
 public class PlayerAttacker : MonoBehaviour
 {
-    private List<Weapon> _weaponsInInventory = new();
-    private Weapon _currentWeapon, _previousWeapon = null;
+    private List<Weapon> _weaponsInInventory = new ();
+    private Weapon _currentWeapon = null;
+    private Weapon _previousWeapon = null;
     private Coroutine _attackCoroutine;
-    private WaitForSeconds _attackDelay, _delay;
+    private WaitForSeconds _attackDelay;
+    private WaitForSeconds _delay;
     private float _defoultAttackTime = 1f;
     private float _emptyTargetAttackDelay = 0.1f;
 
     public event Action<IWeapon, float> Attacked;
-    public event Action<IWeapon> WeaponSeted, WeaponRemoved;
+    public event Action<IWeapon> WeaponSeted;
+    public event Action<IWeapon> WeaponRemoved;
     public event Action<ICardConfig> SavedWeaponAdded;
-    public event Action WeaponDeactivated, WeaponActivated;
-    public event Action Hited, Suspended;
+    public event Action WeaponDeactivated;
+    public event Action WeaponActivated;
+    public event Action Hited;
+    public event Action Suspended;
 
     public IReadOnlyList<Weapon> WeaponsInInventory => _weaponsInInventory;
     public Weapon CurrentWeapon => _currentWeapon;
@@ -99,7 +104,7 @@ public class PlayerAttacker : MonoBehaviour
 
     public void OnTakeOffWeapon()
     {
-        foreach(var weapon in _weaponsInInventory)
+        foreach (var weapon in _weaponsInInventory)
         {
             weapon.gameObject.SetActive(false);
         }
@@ -126,7 +131,6 @@ public class PlayerAttacker : MonoBehaviour
         {
             foreach (var weapon in _weaponsInInventory)
             {
-
                 if (weapon.Config.ID == YG2.saves.CurrentWeapon.ID)
                 {
                     SetWeapon(weapon.Config);

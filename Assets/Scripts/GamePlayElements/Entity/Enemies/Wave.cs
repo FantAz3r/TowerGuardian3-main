@@ -1,7 +1,7 @@
-using AYellowpaper.SerializedCollections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using AYellowpaper.SerializedCollections;
 
 [Serializable]
 public struct Wave
@@ -11,7 +11,6 @@ public struct Wave
     [field: SerializeField][field: Min(0.1f)] public float NightSpawnDelay { get; private set; }
     [field: SerializeField][field: Min(0.1f)] public float DaySpawnDelay { get; private set; }
     [field: SerializeField][field: Min(1f)] public int MaxEnemyCount { get; private set; }
-
 
     public IReadOnlyDictionary<Enemy, int> Weight => _weight;
 }

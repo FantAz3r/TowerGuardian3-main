@@ -3,10 +3,9 @@ using UnityEngine;
 
 public interface IQuest
 {
+    event Action OnCompleted;
     bool CanStop { get; }
     QuestConfig Config { get; }
-
-    event Action OnCompleted;
 
     QuestType GetQuestType();
     void SetConfig(QuestConfig config);

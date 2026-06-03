@@ -9,12 +9,12 @@ public class CardButton : MonoBehaviour
     private Button _button;
     private PlayerCardConfigContainer _playerCards;
 
+    public event Action Selected;
+
     public void Init(PlayerCardConfigContainer playerCards)
     {
         _playerCards = playerCards;
     }
-
-    public event Action Selected;
 
     private void Awake()
     {

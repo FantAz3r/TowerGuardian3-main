@@ -7,8 +7,6 @@ public class EffectSpawner : BaseSpawner
     private EffectData _data;
     private Dictionary<EffectType, ObjectPool<Effect>> _pools = new Dictionary<EffectType, ObjectPool<Effect>>();
 
-    public override SpawnerType GetSpawnerType() => SpawnerType.Effects;
-
     public EffectSpawner(EffectData data)
     {
         _data = data;
@@ -18,6 +16,8 @@ public class EffectSpawner : BaseSpawner
             _pools.Add(effect.EffectType, new ObjectPool<Effect>(effect.Prefab, 0, true));
         }
     }
+
+    public override SpawnerType GetSpawnerType() => SpawnerType.Effects;
 
     public override void Spawn(EffectType type, Vector3 position, Transform parent = null)
     {
@@ -47,7 +47,6 @@ public class EffectSpawner : BaseSpawner
             effect.GetComponent<MonoBehaviour>().StartCoroutine(ReturnToPoolAfterDuration(effect, pool, particle.main.duration));
         }
     }
-
 
     public override void DestroyPool()
     {

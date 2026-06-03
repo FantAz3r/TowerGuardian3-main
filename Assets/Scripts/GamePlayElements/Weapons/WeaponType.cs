@@ -5,5 +5,5 @@ public enum WeaponType
     Axe,
     Pickaxe,
     Hummer,
-    Shield
+    Shield,
 }

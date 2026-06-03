@@ -5,17 +5,16 @@ using UnityEngine;
 public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 {
     [SerializeField] private AxeThrowingConfig _config;
-
     private Player _player;
     private Weapon _axe;
     private ThrownAxe _thrownAxe;
 
-    public bool IsCooldowning { get; private set; } = false;
+    public event Action<float, float> Cooldowning;
+
     public float Cooldown => _config.Cooldown;
     public override AbilityType Type => AbilityType.ThrowingAxes;
     public override AbilityConfig Config => _config;
-
-    public event Action<float, float> Cooldowning;
+    public bool IsCooldowning { get; private set; } = false;
 
     private void Awake()
     {
@@ -68,11 +67,11 @@ public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
 
         if (weapon.Config.WeaponType == WeaponType.Axe)
         {
-            base.UnlockAbility();
+            UnlockAbility();
         }
         else
         {
-            base.LockAbility();
+            LockAbility();
         }
     }
 

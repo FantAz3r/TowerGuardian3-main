@@ -21,7 +21,7 @@ public class LoadingLevelState : IPayloadedState<LevelID>
         CreateFactories();
         InitCurrentLevel(level);
 
-        if(level != LevelID.MainMenu)
+        if (level != LevelID.MainMenu)
         {
             YG2.saves.CurrentLevel = level;
             YG2.SaveProgress();

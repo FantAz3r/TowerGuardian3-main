@@ -37,7 +37,7 @@ public class HealthViewer : MonoBehaviour
 
     private void OnHealthChanged(float currentHealth, float maxHealth)
     {
-        if(_iaActive == false)
+        if (_iaActive == false)
             _healthSlider.gameObject.SetActive(true);
 
         if (_smoothChangeCoroutine != null)
@@ -68,4 +68,3 @@ public class HealthViewer : MonoBehaviour
         _healthSlider.value = currentHealth;
     }
 }
-

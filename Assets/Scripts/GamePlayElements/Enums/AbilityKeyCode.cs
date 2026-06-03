@@ -4,5 +4,5 @@ public enum AbilityKeyCode
     First,
     Second,
     Third,
-    Fourth
+    Fourth,
 }

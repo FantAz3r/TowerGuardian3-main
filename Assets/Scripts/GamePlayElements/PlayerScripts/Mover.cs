@@ -38,7 +38,7 @@ public class Mover : MonoBehaviour, IBuffble
         }
 
         Vector3 moveDir = new Vector3(direction.x, 0f, direction.y).normalized;
-        Vector3 offset = new Vector3 (0, 1, 0);
+        Vector3 offset = new Vector3(0, 1, 0);
         RaycastHit hit;
         bool isHit = Physics.Raycast(transform.position + offset, moveDir, out hit, _rayDistance, _obstacleLayerMask);
 
@@ -55,7 +55,6 @@ public class Mover : MonoBehaviour, IBuffble
 
     public void Push(Vector3 direction, float force)
     {
-
     }
 
     public void ApplyBuff(IEffect effect)

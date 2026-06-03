@@ -4,13 +4,14 @@ public class SelectWeaponCardQuest : Quest
 {
     private WeaponPanel _panel;
     private CardData _data;
-    public override QuestType GetQuestType() => QuestType.SelectWeaponCard;
 
     public SelectWeaponCardQuest()
     {
         _data = Resources.Load<CardData>(GameConstants.CardData);
         SetWeaponCardChance(0);
     }
+
+    public override QuestType GetQuestType() => QuestType.SelectWeaponCard;
 
     public override void Run()
     {
@@ -37,9 +38,9 @@ public class SelectWeaponCardQuest : Quest
 
     private void SetWeaponCardChance(float chance)
     {
-        foreach(var card in _data.GetConfigs())
+        foreach (var card in _data.GetConfigs())
         {
-            if(card.GetCardType() == CardType.Weapon)
+            if (card.GetCardType() == CardType.Weapon)
             {
                 card.SetChanceToView(chance);
             }

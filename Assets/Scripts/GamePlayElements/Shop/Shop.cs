@@ -42,7 +42,7 @@ public class Shop : BaseShop
 
     protected override void OnTradeRequested(ProductViewer button, ICardConfig config)
     {
-        if(config.Level >= config.MaxCardLevel)
+        if (config.Level >= config.MaxCardLevel)
         {
             return;
         }
@@ -82,4 +82,3 @@ public class Shop : BaseShop
        CreateButton(parent);
     }
 }
-

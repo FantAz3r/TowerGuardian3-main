@@ -1,7 +1,7 @@
 public class AddFlatEffect : IEffect
 {
-    private float _value;
     private readonly int _id;
+    private float _value;
 
     public AddFlatEffect(float value)
     {

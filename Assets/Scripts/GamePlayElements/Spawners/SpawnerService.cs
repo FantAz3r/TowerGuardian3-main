@@ -13,7 +13,7 @@ public class SpawnerService : ISpawnerService
             _spawners[type] = spawner;
     }
 
-    public void SendItemReqest(HealthConfig config, Vector3 position, int count = 1 )
+    public void SendItemReqest(HealthConfig config, Vector3 position, int count = 1)
     {
         if (_spawners.TryGetValue(SpawnerType.Resources, out var spawner))
         {
@@ -81,7 +81,7 @@ public class SpawnerService : ISpawnerService
 
     public void DestroySpawners()
     {
-        foreach(var pair in _spawners)
+        foreach (var pair in _spawners)
         {
             pair.Value.DestroyPool();
         }

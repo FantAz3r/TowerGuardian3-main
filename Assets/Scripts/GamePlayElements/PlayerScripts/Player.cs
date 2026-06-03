@@ -1,9 +1,11 @@
-using System.Collections;
 using UnityEngine;
 using YG;
 
 public class Player : MonoBehaviour
 {
+    private float _saveInterval = 0.5f;
+    private float _lastSaveTime = 0;
+
     [field: SerializeField] public PlayerAttacker Attacker { get; private set; }
     [field: SerializeField] public Inventory Inventory { get; private set; }
     [field: SerializeField] public AttackZone AttackZone { get; private set; }
@@ -23,10 +25,6 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Rotator Rotator { get; private set; }
     [field: SerializeField] public PlayerAnimator PlayerAnimator { get; private set; }
     [field: SerializeField] public EnemyDetector EnemyDetector { get; private set; }
-
-
-    public float _saveInterval = 0.5f;
-    private float _lastSaveTime = 0;
 
     public bool IsAlive { get; private set; } = true;
 

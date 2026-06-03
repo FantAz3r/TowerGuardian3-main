@@ -8,24 +8,28 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
     [SerializeField] private EntityType _type;
 
     private StatsCalculator _statsCalculator;
-    private float _currentValue, _startMaxHealth, _maxHealth;
+    private float _currentValue;
+    private float  _startMaxHealth;
+    private float  _maxHealth;
+
+    public event Action<float, float> IsValueChange;
+    public event Action<float, float> MaxHealthChanged;
+    public event Action<float> DamageTaken;
+    public event Action<float> Healed;
+    public event Action<Health> Killed;
+
+    public event Action Died;
+    public event Action Destroyed;
+    public event Action Resurected;
+    public event Action ImmunityObjectHited;
+    public event Action ImmunityActivated;
+    public event Action ImmunityDisabled;
 
     public HealthConfig Config => _config;
     public float CurrentHealth => _currentValue;
     public float MaxHealth => _maxHealth;
     public bool IsAlive { get; private set; } = true;
     public bool IsImmunity { get; private set; } = false;
-
-    public event Action<float, float> IsValueChange, MaxHealthChanged;
-    public event Action<float> DamageTaken, Healed;
-    public event Action<Health> Killed;
-
-    public event Action Died,
-        Destroyed,
-        Resurected,
-        ImmunityObjectHited,
-        ImmunityActivated,
-        ImmunityDisabled;
 
     public Transform GetTransform() => transform;
     public EntityType GetHealthType() => _type;
@@ -59,8 +63,9 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public void Heal(float healAmount)
     {
-        if (IsAlive == false) return;
-        
+        if (IsAlive == false) 
+            return;
+
         if (_currentValue >= 0 && healAmount > 0)
         {
             if (_currentValue + healAmount > _maxHealth)
@@ -80,7 +85,8 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
 
     public virtual void TakeDamage(float damage)
     {
-        if (IsAlive == false) { return; }
+        if (IsAlive == false)
+            return; 
 
         if (IsImmunity)
         {
@@ -88,7 +94,8 @@ public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuf
             return;
         }
 
-        if (_currentValue <= 0) return;
+        if (_currentValue <= 0)
+            return;
 
         float damageTaken = Mathf.Min(damage, _currentValue);
         _currentValue -= damageTaken;

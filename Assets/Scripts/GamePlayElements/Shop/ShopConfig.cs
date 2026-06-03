@@ -4,7 +4,11 @@ using YG;
 
 public abstract class ShopConfig : ScriptableObject, IShopConfig
 {
-    [SerializeField] protected Sprite _icon;
+    private const string RuLanguage = "ru";
+    private const string EnLanguage = "en";
+    private const string TRLanguage = "tr";
+
+    protected Sprite _icon;
 
     [SerializeField] private string _nameRu;
     [SerializeField] private string _nameEn;
@@ -15,7 +19,8 @@ public abstract class ShopConfig : ScriptableObject, IShopConfig
     [SerializeField] private string _descriptionTR;
 
     [SerializeField] protected List<CostInfo> _costs = new List<CostInfo>();
-    [SerializeField, HideInInspector] private string _id;
+
+    [SerializeField][HideInInspector] private string _id;
 
     public string ID
     {
@@ -28,6 +33,7 @@ public abstract class ShopConfig : ScriptableObject, IShopConfig
                 UnityEditor.EditorUtility.SetDirty(this);
 #endif
             }
+
             return _id;
         }
     }
@@ -47,14 +53,14 @@ public abstract class ShopConfig : ScriptableObject, IShopConfig
 
         switch (lang)
         {
-            case "ru":
-                return ru ;
-            case "en":
-                return en ;
-            case "tr":
-                return tr ;
+            case RuLanguage:
+                return ru;
+            case EnLanguage:
+                return en;
+            case TRLanguage:
+                return tr;
             default:
-                return "" ;
+                return string.Empty;
         }
     }
 }

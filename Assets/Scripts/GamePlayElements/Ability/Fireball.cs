@@ -48,7 +48,6 @@ public class Fireball : MonoBehaviour
             });
     }
 
-
     private void Explode()
     {
         _spawnerService.SendEffectReqest(EffectType.Expload, transform.position);

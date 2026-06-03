@@ -23,7 +23,6 @@ public class ProgressReseter : MonoBehaviour
 
     private void ResetProgress()
     {
-
         if (YG2.saves.AllCards != null) YG2.saves.AllCards.Clear();
         if (YG2.saves.PlayerWeapons != null) YG2.saves.PlayerWeapons.Clear();
 

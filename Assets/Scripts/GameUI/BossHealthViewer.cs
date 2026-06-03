@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossHealthViewer: WindowBase
+public class BossHealthViewer : WindowBase
 {
     [SerializeField] private Slider _healthImage;
     [SerializeField] private TMP_Text _healthText;
@@ -15,7 +15,7 @@ public class BossHealthViewer: WindowBase
     public void Init(Health health)
     {
         _health = health;
-        base.Open();
+        Open();
         _healthImage.value = _health.CurrentHealth / _health.MaxHealth;
         _healthText.text = $"{_health.CurrentHealth} / {_health.MaxHealth}";
         _health.IsValueChange += View;
@@ -24,7 +24,7 @@ public class BossHealthViewer: WindowBase
 
     private void OnEnable()
     {
-        if(_health != null)
+        if (_health != null)
         {
             View(_health.CurrentHealth, _health.MaxHealth);
         }

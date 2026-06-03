@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,5 +5,4 @@ using UnityEngine;
 public class PlayerSpawnPoints : ScriptableObject
 {
     public List<PointInfo> SpawnPoints = new ();
-
 }

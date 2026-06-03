@@ -4,5 +4,5 @@ public enum BuffEffectType
     MultiplyFlat,
     Multiply,
     Additive,
-    Exponent
+    Exponent,
 }

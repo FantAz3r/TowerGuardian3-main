@@ -71,4 +71,3 @@ public class CounterSlider : MonoBehaviour
         Close();
     }
 }
-

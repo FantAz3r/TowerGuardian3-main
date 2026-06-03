@@ -5,8 +5,9 @@ using UnityEngine;
 public class AbilityFactory : ICardFactory
 {
     private Player _player;
-    public CardType Type => CardType.Ability;
     public AbilityFactory(Player player) => _player = player;
+
+    public CardType Type => CardType.Ability;
 
     public void Create(ICardConfig config)
     {

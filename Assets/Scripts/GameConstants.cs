@@ -14,7 +14,6 @@ public static class GameConstants
     public static string PortalFrame = "buidingObjects/PortalFrame";
     public static string FinalBoss = "Enemy/FinalBoss";
 
-    
     public static string MenuCanvas = "Prefabs/MenuMenu";
     public static string Joystick = "Ui/HorizontalUI/Dynamic Joystick";
     public static string DesktopGameUI = "Prefabs/DesktopGameUI";

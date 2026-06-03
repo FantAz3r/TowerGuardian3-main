@@ -9,9 +9,9 @@ public class EffectData : ScriptableObject
 
     public EffectInfo GetEffectInfo(EffectType type)
     {
-        foreach(var info in EffectInfos)
+        foreach (var info in EffectInfos)
         {
-            if(info.EffectType == type)
+            if (info.EffectType == type)
                 return info;
         }
 

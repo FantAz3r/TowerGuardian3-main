@@ -3,10 +3,11 @@ using UnityEngine;
 public class GameConditionService : IGameConditionService
 {
     private IWindowService _windowService;
-    public bool IsLevelEnded { get; private set; } = false;
-    public bool IsEndLevelWindowOpen { get; private set; } = false;
 
     public GameConditionService(IWindowService windowService) => _windowService = windowService;
+
+    public bool IsLevelEnded { get; private set; } = false;
+    public bool IsEndLevelWindowOpen { get; private set; } = false;
 
     public void OnLouse(GameObject louseReason = null)
     {

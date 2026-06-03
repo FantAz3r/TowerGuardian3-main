@@ -26,7 +26,6 @@ public class StartLevelMenu : LevelMenu
     {
         base.OnEnable();
         _startButton.onClick.AddListener(OnStartClicked);
-
     }
 
     protected override void OnDisable()
@@ -56,7 +55,7 @@ public class StartLevelMenu : LevelMenu
 
     private void ShowScoreInfo()
     {
-        if(ScoreCounter.HasScoreInfo(_nextLevel))
+        if (ScoreCounter.HasScoreInfo(_nextLevel))
         {
             _levelScoreInfo.text = UIText.YourBestScore;
         }
@@ -66,4 +65,3 @@ public class StartLevelMenu : LevelMenu
         }
     }
 }
-

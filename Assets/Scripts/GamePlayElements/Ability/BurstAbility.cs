@@ -9,14 +9,13 @@ public class BurstAbility : UsebleAbility, ICooldownAbility
     private Player _player;
     private PlayerAttacker _attacker;
     private WaitForSeconds _sleep;
-    private WaitForSeconds _oneSecond = new WaitForSeconds(1);
+
+    public event Action<float, float> Cooldowning;
+
     public bool IsCooldowning { get; private set; } = false;
     public override AbilityConfig Config => _config;
     public override AbilityType Type => AbilityType.Burst;
     public float Cooldown => _config.Cooldown;
-
-
-    public event Action<float, float> Cooldowning;
 
     private void Awake()
     {

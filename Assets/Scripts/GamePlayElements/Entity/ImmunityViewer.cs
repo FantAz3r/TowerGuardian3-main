@@ -45,7 +45,6 @@ public class ImmunityViewer : MonoBehaviour
         _targetRenderer.enabled = false;
     }
 
-
     private void OnHit()
     {
         _fresnelTween?.Kill();

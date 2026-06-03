@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class StayAliveQuest : Quest
 {
-    public override QuestType GetQuestType() => QuestType.StayAlive;
-
     private Effect _effect;
     private EffectData _effectData;
     private Portal _portal;
@@ -12,9 +10,10 @@ public class StayAliveQuest : Quest
 
     public StayAliveQuest()
     {
-       
         _effectData = Resources.Load<EffectData>(GameConstants.EffectData);
     }
+
+    public override QuestType GetQuestType() => QuestType.StayAlive;
 
     public override void Run()
     {

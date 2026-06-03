@@ -14,7 +14,7 @@ public class CardInventory : PauseWindow
 
     private Canvas _canvas;
     private CardData _cardData;
-    private List<InventorySlot> _slots = new();
+    private List<InventorySlot> _slots = new ();
 
     protected override void Awake()
     {
@@ -71,7 +71,7 @@ public class CardInventory : PauseWindow
             }
         }
 
-        if(_slots.Count == 0)
+        if (_slots.Count == 0)
         {
             _tipText.gameObject.SetActive(true);
         }

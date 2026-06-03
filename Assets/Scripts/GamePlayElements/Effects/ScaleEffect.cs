@@ -1,5 +1,5 @@
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
 public class ScaleEffect : MonoBehaviour
@@ -7,7 +7,7 @@ public class ScaleEffect : MonoBehaviour
     private ParticleSystem _particles;
     private Vector3 initialScale;
 
-    void Start()
+    private void Start()
     {
         _particles = GetComponent<ParticleSystem>();
         float lifetime = _particles.main.duration;
@@ -21,9 +21,7 @@ public class ScaleEffect : MonoBehaviour
 
         seq.OnComplete(() =>
         {
-            // Например, уничтожаем объект по окончании анимации
             Destroy(gameObject);
         });
     }
 }
-

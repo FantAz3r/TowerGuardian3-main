@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
 public class EnterThirdLevelQuest : Quest
 {
     private Portal _portalLevel3;
-    public override QuestType GetQuestType() => QuestType.EnterLevel3;
 
     public EnterThirdLevelQuest(Portal portal)
     {
         _portalLevel3 = portal;
     }
+
+    public override QuestType GetQuestType() => QuestType.EnterLevel3;
 
     public override Vector3 TryGetTarget()
     {

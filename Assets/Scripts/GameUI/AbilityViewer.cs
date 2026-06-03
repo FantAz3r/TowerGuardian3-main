@@ -126,7 +126,6 @@ public class AbilityViewer : MonoBehaviour
 
     private void SetKeyCode(AbilityKeyCode keyCode)
     {
-
         if (keyCode != AbilityKeyCode.None)
         {
             AbilityKey = keyCode;
@@ -146,6 +145,5 @@ public class AbilityViewer : MonoBehaviour
         {
             _keyCode.gameObject.SetActive(false);
         }
-
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class TransparencyObject : MonoBehaviour
 {
+    private readonly WaitForSeconds _wait = new WaitForSeconds(0.5f);
+
     [SerializeField] private Material _transparentMaterial;
 
-    private List<MeshRenderer> _meshRenderers = new();
+    private List<MeshRenderer> _meshRenderers = new ();
     private Coroutine _changeMaterialCoroutine;
-    private readonly WaitForSeconds _wait = new WaitForSeconds(0.5f);
     private List<Material[]> _originalMaterials;
     private ICoroutineRunner _coroutineRunner;
 

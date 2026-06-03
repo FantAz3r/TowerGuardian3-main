@@ -12,12 +12,12 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     private Player _player;
     private PlayerAttacker _attacker;
 
+    public event Action<float, float> Cooldowning;
+
     public bool IsCooldowning { get; private set; } = false;
     public float Cooldown => _cooldown;
     public override AbilityType Type => AbilityType.BouncingPickaxe;
     public override AbilityConfig Config => _config;
-
-    public event Action<float, float> Cooldowning;
 
     private void Awake()
     {
@@ -74,11 +74,11 @@ public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     {
         if (weapon.Config.WeaponType == WeaponType.Pickaxe)
         {
-            base.UnlockAbility();
+            UnlockAbility();
         }
         else
         {
-            base.LockAbility();
+            LockAbility();
         }
     }
 

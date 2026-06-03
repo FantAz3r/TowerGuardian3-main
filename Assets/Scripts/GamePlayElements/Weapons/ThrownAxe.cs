@@ -28,7 +28,7 @@ public class ThrownAxe : MonoBehaviour
         Disable();
     }
 
-    public void Throw( Vector3 start, Vector3 end, float duration, float damage)
+    public void Throw(Vector3 start, Vector3 end, float duration, float damage)
     {
         transform.SetParent(null);
         _start = start;

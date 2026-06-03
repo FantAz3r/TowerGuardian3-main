@@ -27,9 +27,9 @@ public class AllBuffs : AllItems<IBuff, BuffConfig, BuffType>
 
         foreach (var buff in Items)
         {
-            foreach(var config in cardData.BuffConfigs)
+            foreach (var config in cardData.BuffConfigs)
             {
-                if(buff.Type == config.BuffType)
+                if (buff.Type == config.BuffType)
                 {
                     buff.SetConfig(config);
                 }

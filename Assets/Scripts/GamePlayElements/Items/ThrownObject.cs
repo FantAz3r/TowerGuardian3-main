@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class ThrownObject : MonoBehaviour
 {
+    private const float Half = 0.5f;  
+
     private CapsuleCollider _collider;
     private Rigidbody _rigidbody;
-    private float _duration = 1.3f , _damageRadius = 4f, _arcHeight = 4f;
+    private float _duration = 1.3f;
+    private float _damageRadius = 4f; 
+    private float _arcHeight = 4f;
     private int _damage;
-
 
     public void StartFly(int damage, Vector3 endPoint)
     {
@@ -20,15 +23,14 @@ public class ThrownObject : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
         Vector3 startPos = transform.position;
+        Vector3 peakPos = (startPos + endPoint) * Half + Vector3.up * _arcHeight;
 
-        Vector3 peakPos = (startPos + endPoint) * 0.5f + Vector3.up * _arcHeight;
-
-        transform.DOMove(peakPos, _duration * 0.5f).SetEase(Ease.OutQuad).OnComplete(() =>
+        transform.DOMove(peakPos, _duration * Half).SetEase(Ease.OutQuad).OnComplete(() =>
         {
             _collider.enabled = true;
             _rigidbody.constraints = RigidbodyConstraints.None;
 
-            transform.DOMove(endPoint, _duration * 0.5f).SetEase(Ease.InQuad).OnComplete(() =>
+            transform.DOMove(endPoint, _duration * Half).SetEase(Ease.InQuad).OnComplete(() =>
             {
                 FallDown();
             });

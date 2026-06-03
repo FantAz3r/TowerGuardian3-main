@@ -4,5 +4,5 @@ public enum EntityType
     Stone,
     Tree,
     Boss,
-    Generic
+    Generic,
 }

@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WeaponPanel : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown _dropdown;
-    [field: SerializeField] public Highlighter Highlighter { get; private set; }
     private Player _player;
     private List<WeaponConfig> _configs = new List<WeaponConfig>();
 
     public event Action WeaponSwaped;
     public event Action WeaponAdded;
+
+    [field: SerializeField] public Highlighter Highlighter { get; private set; }
 
     private void Awake()
     {
@@ -138,7 +138,6 @@ public class WeaponPanel : MonoBehaviour
 
         _dropdown.onValueChanged.AddListener(OnDropdownSelected);
     }
-
 
     private void OnDropdownSelected(int index)
     {

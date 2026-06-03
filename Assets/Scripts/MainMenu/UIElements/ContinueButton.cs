@@ -14,7 +14,7 @@ public class ContinueButton : MonoBehaviour
         _button = GetComponent<Button>();
         LoadLevel();
 
-        if(YG2.isFirstGameSession)
+        if (YG2.isFirstGameSession)
             gameObject.SetActive(false);
     }
 

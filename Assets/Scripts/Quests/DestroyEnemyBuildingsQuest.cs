@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestroyEnemyBuildingsQuest : Quest
 {
     private ICoroutineRunner _coroutineRunner;
-    private List<EnemyBuilding> _buildings = new();
+    private List<EnemyBuilding> _buildings = new ();
     private Coroutine _timeRoutine;
     public override QuestType GetQuestType() => QuestType.DestroyBuildings;
 
@@ -16,7 +16,7 @@ public class DestroyEnemyBuildingsQuest : Quest
 
         foreach (var item in ServiceLocator.Get<IGameFactory>().SceneContainer.QuestObjects)
         {
-            if(item.TryGetComponent(out EnemyBuilding building))
+            if (item.TryGetComponent(out EnemyBuilding building))
             {
                 _buildings.Add(building);
             }
@@ -41,7 +41,7 @@ public class DestroyEnemyBuildingsQuest : Quest
     private void OnBuildingDestroyed()
     {
         CurrentValue++;
-        base.UpdateProgress(CurrentValue, Config.TargetValue);
+        UpdateProgress(CurrentValue, Config.TargetValue);
 
         if (CurrentValue >= Config.TargetValue)
         {
@@ -57,6 +57,7 @@ public class DestroyEnemyBuildingsQuest : Quest
             building.Destroyed += OnBuildingDestroyed;
         }
     }
+
     public override void Fail()
     {
         base.Fail();
@@ -72,7 +73,7 @@ public class DestroyEnemyBuildingsQuest : Quest
         while (CurrentTime >= 0)
         {
             CurrentTime -= Time.deltaTime;
-            base.UpdateTime();
+            UpdateTime();
             yield return null;
         }
 

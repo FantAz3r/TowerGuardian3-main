@@ -76,7 +76,6 @@ public class JumpingPickaxe : MonoBehaviour
         if (_currentTarget != null)
         {
             OnHit(_currentTarget);
-
         }
         else
         {

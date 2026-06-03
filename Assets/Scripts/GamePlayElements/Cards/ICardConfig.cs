@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 public interface ICardConfig : IShopConfig
 {
+    event Action<ICardConfig> Upgraded;
     float ChanceToView { get; }
     int Level { get; }
     bool HasPlayer { get; }
     bool IsBought { get; }
     int MaxCardLevel { get; }
-
-    event Action<ICardConfig> Upgraded;
 
     CardType GetCardType();
     List<CardStats> GetStats();

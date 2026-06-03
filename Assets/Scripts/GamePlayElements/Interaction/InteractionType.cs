@@ -4,5 +4,5 @@
     OpenShop,
     OpenCraftMenu,
     OpenBuildMenu,
-    SellResources
+    SellResources,
 }

@@ -10,13 +10,13 @@ public abstract class Quest : IQuest
     private IWindowService _windowService;
     private IScoreService _service;
 
+    public event Action OnCompleted;
+
     public QuestViewer QuestViewer { get; private set; }
     public QuestConfig Config { get; private set; }
     public float CurrentTime { get; protected set; } = 0;
     public int CurrentValue { get; protected set; } = 0;
     public bool CanStop { get; protected set; } = true;
-
-    public event Action OnCompleted;
 
     public void SetConfig(QuestConfig config)
     {
@@ -81,7 +81,7 @@ public abstract class Quest : IQuest
 
     private void On—hangeLang(string useles)
     {
-        if(QuestViewer != null)
+        if (QuestViewer != null)
         {
             QuestViewer.Render(this);
         }

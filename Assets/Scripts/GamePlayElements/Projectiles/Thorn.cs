@@ -26,7 +26,7 @@ public class Thorn : Projectile
 
     public override void Appear()
     {
-        Vector3 startPosition = transform.position - Vector3.up ;
+        Vector3 startPosition = transform.position - Vector3.up;
         transform.position = startPosition;
         transform.localScale = Vector3.zero;
 

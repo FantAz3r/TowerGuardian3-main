@@ -31,7 +31,7 @@ public class SoundObject : MonoBehaviour
 
     private System.Collections.IEnumerator DisableAfterSeconds(float clipLength)
     {
-        while(_currentPlayTime <= clipLength)
+        while (_currentPlayTime <= clipLength)
         {
             _currentPlayTime += Time.deltaTime;
             yield return null;
@@ -50,7 +50,6 @@ public class SoundObject : MonoBehaviour
         }
 
         _audioSource.Pause();
-
     }
 
     public void ContinueSound()
@@ -59,4 +58,3 @@ public class SoundObject : MonoBehaviour
         _coroutine = StartCoroutine(DisableAfterSeconds(_audioClip.length - _currentPlayTime));
     }
 }
-

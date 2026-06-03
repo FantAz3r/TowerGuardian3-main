@@ -21,7 +21,6 @@ public class PickupState : State
     {
     }
 
-
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (Enemy.ThrownObject == null)
@@ -73,4 +72,3 @@ public class PickupState : State
         Enemy.StateMachine.OnStopPickup();
     }
 }
-

@@ -13,4 +13,3 @@ public class ResourcePieceView : MonoBehaviour
         _text.text = amount;
     }
 }
-

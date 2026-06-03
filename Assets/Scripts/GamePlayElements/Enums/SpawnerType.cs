@@ -7,5 +7,5 @@ public enum SpawnerType
     Effects,
     Sounds,
     GameObjects,
-    Projectile
+    Projectile,
 }

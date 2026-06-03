@@ -4,7 +4,7 @@ using YG;
 
 public class PortalSwitcher
 {
-    private List<Portal> _portals = new();
+    private List<Portal> _portals = new ();
 
     public void Init(List<Portal> portals)
     {

@@ -5,25 +5,27 @@ using YG;
 
 public class PlayerCardConfigContainer : MonoBehaviour
 {
-    [field: SerializeField] public int MaxWeaponCards { get; private set; } = 4;
-    [field: SerializeField] public  int MaxAbilityCards { get; private set; } = 4;
-
     [SerializeField] private CardData _cardData;
     [SerializeField] private List<CardConfig> _startCards;
     [SerializeField] private Player _player;
-    private Dictionary<CardType, ICardFactory> _factories;
-    private List<ICardConfig> _selectedConfigs = new();
-    public IReadOnlyList<ICardConfig> SelectedCardConfigs => _selectedConfigs;
 
-    public event Action<ICardConfig> CardAdded, CardRemoved;
+    private Dictionary<CardType, ICardFactory> _factories;
+    private List<ICardConfig> _selectedConfigs = new ();
+
+    public event Action<ICardConfig> CardAdded;
+    public event Action<ICardConfig> CardRemoved;
     public event Action Upgraded;
+
+    [field: SerializeField] public int MaxWeaponCards { get; private set; } = 4;
+    [field: SerializeField] public int MaxAbilityCards { get; private set; } = 4;
+    public IReadOnlyList<ICardConfig> SelectedCardConfigs => _selectedConfigs;
 
     private void Awake()
     {
         _factories = new Dictionary<CardType, ICardFactory>()
         {
-            {CardType.Weapon, new WeaponFactory(_player) },
-            {CardType.Ability, new AbilityFactory(_player) }
+            {CardType.Weapon, new WeaponFactory (_player) },
+            {CardType.Ability, new AbilityFactory (_player) },
         };
     }
 
@@ -82,7 +84,7 @@ public class PlayerCardConfigContainer : MonoBehaviour
     private void UpdateCardSave(ICardConfig card)
     {
         if (YG2.saves.AllCards == null)
-            YG2.saves.AllCards = new();
+            YG2.saves.AllCards = new ();
 
         YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
         YG2.saves.AllCards.Add(new CardSaveData(card.Level, card.ID, card.IsBought, card.HasPlayer));
@@ -136,15 +138,13 @@ public class PlayerCardConfigContainer : MonoBehaviour
         }
 
         _selectedConfigs.Add(card);
-        
 
-        if(card is WeaponConfig)
+        if (card is WeaponConfig)
         {
-            if(weaponCount < MaxWeaponCards)
+            if (weaponCount < MaxWeaponCards)
             {
-               card.SetHasPlayer(true);
-               ActivateCard(card);
-
+                card.SetHasPlayer(true);
+                ActivateCard(card);
             }
             else
             {
@@ -157,7 +157,6 @@ public class PlayerCardConfigContainer : MonoBehaviour
             {
                 card.SetHasPlayer(true);
                 ActivateCard(card);
-
             }
             else
             {

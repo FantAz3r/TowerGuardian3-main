@@ -6,13 +6,13 @@ public class AbilityPanel : MonoBehaviour
 {
     [SerializeField] private List<AbilityViewer> _viewers;
 
-    private Dictionary<AbilityViewer, bool> _viewersSlots = new();
-    private Dictionary<AbilityKeyCode, bool> _keyCodes = new()
+    private Dictionary<AbilityViewer, bool> _viewersSlots = new ();
+    private Dictionary<AbilityKeyCode, bool> _keyCodes = new ()
     {
         { AbilityKeyCode.First, false },
         { AbilityKeyCode.Second, false },
         { AbilityKeyCode.Third, false },
-        { AbilityKeyCode.Fourth, false}
+        { AbilityKeyCode.Fourth, false },
     };
 
     private Player _player;
@@ -58,7 +58,7 @@ public class AbilityPanel : MonoBehaviour
 
         if (YG2.envir.isDesktop)
         {
-            if(_inputService == null)
+            if (_inputService == null)
                 return;
 
             _inputService.OnAbillity1Used -= OnAbility1Used;
@@ -146,9 +146,7 @@ public class AbilityPanel : MonoBehaviour
         foreach (var viewer in _viewers)
         {
             if (viewer.HasAbility == false)
-            {
                 continue;
-            }
             else
                 return;
         }

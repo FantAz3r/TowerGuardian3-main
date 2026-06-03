@@ -25,7 +25,7 @@ public class RotatingShurikenConfig : AbilityConfig
     public int Count => Mathf.Min(_maxCount, _baseCount + _countPerLevel * (Level - 1));
     public float Radius => Mathf.Max(_minRadius, _baseRadius + _radiusPerLevel * (Level - 1));
     public float RotationSpeed => Mathf.Max(_minRotationSpeed, _baseRotationSpeed + _rotationSpeedPerLevel * (Level - 1));
-    public int Damage => (int) Mathf.Max(_minDamage, _baseDamage + _damagePerLevel * (Level - 1));
+    public int Damage => (int)Mathf.Max(_minDamage, _baseDamage + _damagePerLevel * (Level - 1));
     public float SpinSpeed => _spinSpeed;
 
     public override List<CardStats> GetStats()

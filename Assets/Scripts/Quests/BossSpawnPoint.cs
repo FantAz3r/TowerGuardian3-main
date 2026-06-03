@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class BossSpawnPoint: MonoBehaviour
+public class BossSpawnPoint : MonoBehaviour
 {
 }

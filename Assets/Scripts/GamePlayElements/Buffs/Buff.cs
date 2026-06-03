@@ -2,14 +2,14 @@ public abstract class Buff : IBuff
 {
     private IEffect _effect;
 
-    public IBuffble BuffbleObject { get; private set; }
-    public BuffConfig Config { get; private set; }
-    public abstract BuffType Type { get; }
-
     public Buff(IBuffble buffbleObject)
     {
         BuffbleObject = buffbleObject;
     }
+
+    public IBuffble BuffbleObject { get; private set; }
+    public BuffConfig Config { get; private set; }
+    public abstract BuffType Type { get; }
 
     public virtual void SetConfig(BuffConfig config)
     {

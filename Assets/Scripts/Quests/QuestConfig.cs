@@ -35,7 +35,7 @@ public class QuestConfig : ScriptableObject
             case "tr":
                 return tr;
             default:
-                return "";
+                return string.Empty;
         }
     }
 }

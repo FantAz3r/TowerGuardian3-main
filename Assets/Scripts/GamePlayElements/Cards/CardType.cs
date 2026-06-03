@@ -4,5 +4,5 @@ public enum CardType
    Buff,
    Ability,
    Any,
-   None
+   None,
 }

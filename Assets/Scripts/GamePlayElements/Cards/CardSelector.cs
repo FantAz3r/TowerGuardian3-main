@@ -10,7 +10,7 @@ public class CardSelector
     private int _cardsPerSelect;
     private int _maxLevel = 100;
 
-    private List<ICardConfig> _currentCards = new();
+    private List<ICardConfig> _currentCards = new ();
 
     public CardSelector(int cardsCount = 3)
     {
@@ -18,9 +18,9 @@ public class CardSelector
         _cardsPerSelect = cardsCount;
     }
 
-    public IEnumerable<ICardConfig>GetCards()
+    public IEnumerable<ICardConfig> GetCards()
     {
-        if(_currentCards != null && _currentCards.Count >0)
+        if(_currentCards != null && _currentCards.Count > 0)
         {
             return _currentCards;
         }
@@ -153,5 +153,4 @@ public class CardSelector
 
         return filteredCards;
     }
-
 }

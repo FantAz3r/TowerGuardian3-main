@@ -14,13 +14,12 @@ public class FireballAbility : Ability, ICooldownAbility
     private Coroutine _cooldownRoutine;
     private Fireball _fireball;
 
+    public event Action<float, float> Cooldowning;
+
     public override AbilityType Type => AbilityType.FireBall;
     public override AbilityConfig Config => _config;
     public bool IsCooldowning { get; private set; } = false;
     public float Cooldown => _config.Cooldown;
-
-
-    public event Action<float, float> Cooldowning;
 
     private void Awake()
     {
@@ -140,7 +139,6 @@ public class FireballAbility : Ability, ICooldownAbility
             }
         }
     }
-
 
     private void ShotTowards(Vector3 spawnPoint)
     {

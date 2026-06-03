@@ -5,8 +5,9 @@ using UnityEngine;
 public class StairsTrigger : MonoBehaviour
 {
     private Collider _collider;
-    public Vector3 Center => _collider.bounds.center;
+
     public event Action Entered;
+    public Vector3 Center => _collider.bounds.center;
 
     private void Awake()
     {

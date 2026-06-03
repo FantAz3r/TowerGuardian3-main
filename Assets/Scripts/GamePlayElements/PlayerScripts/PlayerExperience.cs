@@ -24,15 +24,14 @@ public class PlayerExperience : MonoBehaviour
     private Queue<float> _expQueue = new Queue<float>();
     private bool _isUpdating = false;
 
-    public float CurrentExp => _currentExp;
-    public int CurrentLevel => _currentLevel;
-    public int UpgradePoints => _upgradePoints;
-
     public event Action OnLevelUp;
     public event Action OnUpgradePointAdded;
     public event Action OnUpgradePointRemoved;
     public event Action<float, float> OnExperienceAdded;
 
+    public float CurrentExp => _currentExp;
+    public int CurrentLevel => _currentLevel;
+    public int UpgradePoints => _upgradePoints;
     public float ExpToNextLevel => _config.BaseLvlCost * Mathf.Pow(_config.LevelCostMultiplier, _currentLevel - 1);
 
     private void Awake()
@@ -42,7 +41,6 @@ public class PlayerExperience : MonoBehaviour
         _scoreService = ServiceLocator.Get<IScoreService>();
         _windowService = ServiceLocator.Get<IWindowService>();
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
-
 
         if (_enemyDetector != null)
             _enemyDetector.OnGetExperience += AddEXP;
@@ -117,7 +115,6 @@ public class PlayerExperience : MonoBehaviour
 
         yield return AnimateExperience(_currentExp, targetExp);
         _currentExp = targetExp;
-
 
         OnExperienceAdded?.Invoke(_currentExp, ExpToNextLevel);
     }

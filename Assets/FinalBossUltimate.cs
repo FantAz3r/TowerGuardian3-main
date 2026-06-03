@@ -14,7 +14,7 @@ public class FinalBossUltimate : State
     private ISceneContainer _sceneContainer;
     private ISpawnerService _spawnerService;
     private Vector3 _arenaCenter;
-    private List<Orbit> _orbits = new();
+    private List<Orbit> _orbits = new ();
     private float _spawnTimer;
 
 

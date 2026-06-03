@@ -6,19 +6,19 @@ using YG;
 
 public class QuestViewer : WindowBase
 {
-    [field: SerializeField] public Highlighter Highlighter { get; private set; }
 
     [SerializeField] private Image _image;
     [SerializeField] private TMP_Text _description;
     [SerializeField] private TMP_Text _progress;
     [SerializeField] private TMP_Text _timer;
-
     [SerializeField] private RectTransform _panelRectTransform;
-
     [SerializeField] private float _animationDuration = 0.5f;
     [SerializeField] private Vector2 _hiddenPosition = new Vector2(800, 0f); 
+
     private Vector2 _visiblePosition = new Vector2(-50, -70f); 
     private Tween _currentTween;
+
+    [field: SerializeField] public Highlighter Highlighter { get; private set; }
 
     private void Awake()
     {
@@ -80,7 +80,8 @@ public class QuestViewer : WindowBase
         _currentTween?.Kill();
         _currentTween = _panelRectTransform.DOAnchorPos(_hiddenPosition, _animationDuration)
             .SetEase(Ease.InCubic)
-            .OnComplete(() => {
+            .OnComplete(() => 
+            {
                 base.Close();
                 Destroy(gameObject);
             });

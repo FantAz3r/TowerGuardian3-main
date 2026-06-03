@@ -10,7 +10,7 @@ public class PlayerHealth : Health
 
     public override void TakeDamage(float damage)
     {
-        if(damage < 0)
+        if (damage < 0)
             return;
 
         base.TakeDamage(damage);
@@ -19,6 +19,6 @@ public class PlayerHealth : Health
 
     public void HealMaxHealth()
     {
-        base.Heal(MaxHealth);
+        Heal(MaxHealth);
     }
 }

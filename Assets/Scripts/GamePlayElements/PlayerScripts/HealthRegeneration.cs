@@ -85,7 +85,7 @@ public class HealthRegeneration : MonoBehaviour, IBuffble
         _statsCalculator.RemoveEffect(effect);
         _regenValue = _statsCalculator.Calculate(_startRegenValue);
 
-        if(_statsCalculator.GetEffectsCount() == 0)
+        if (_statsCalculator.GetEffectsCount() == 0)
         {
             _isRegeneration = false;
         }

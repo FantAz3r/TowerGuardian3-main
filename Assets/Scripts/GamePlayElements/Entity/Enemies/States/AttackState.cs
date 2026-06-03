@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackStateBehaviour : State
+public class AttackState : State
 {
     private Health _target;
     private ISpawnerService _spawnerService;
@@ -25,7 +25,7 @@ public class AttackStateBehaviour : State
         RotateTo(_target.transform.position);
         _timeSinceLastAttack += Time.deltaTime;
 
-        if (_timeSinceLastAttack >= Enemy.Config.AttackCooldown )
+        if (_timeSinceLastAttack >= Enemy.Config.AttackCooldown)
         {
             Enemy.AnimationAnimator.PlayAttack(Enemy.Config.AttackCooldown);
             _timeSinceLastAttack = 0f;

@@ -2,25 +2,25 @@ using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour
 {
+    private const int MaxRandomValue = 4;
+    private const int MinRandomValue = 0;
+
     [SerializeField] private Enemy _enemy;
-    private const int MaxRandomValue = 4,
-        MinRandomValue = 0;
+    private float _attackRangeTreshold = 1.1f;
+    private float _abilityCooldown = 0;
+    private float _ultimateCooldown = 0;
 
-    private float _attackRangeTreshold = 1.1f,
-        _abilityCooldown = 0,
-        _ultimateCooldown = 0;
-
-    private int _hashIsSeeTarget,
-        _hashTargetInAttackRange,
-        _hashRandom,
-        _hashHasObject,
-        _hashPick,
-        _hashThrowEnded,
-        _hashUltimateCooldown,
-        _hashIsUltimateActive,
-        _hashHealth,
-        _hashIsThornAttack,
-        _hashCooldown;
+    private int _hashIsSeeTarget;
+    private int _hashTargetInAttackRange;
+    private int _hashRandom;
+    private int _hashHasObject;
+    private int _hashPick;
+    private int _hashThrowEnded;
+    private int _hashUltimateCooldown;
+    private int _hashIsUltimateActive;
+    private int _hashHealth;
+    private int _hashIsThornAttack;
+    private int _hashCooldown;
 
     private void Awake()
     {
@@ -56,7 +56,7 @@ public class EnemyStateMachine : MonoBehaviour
             _enemy.BehaviorAnimator.SetInteger(_hashRandom, Random.Range(MinRandomValue, MaxRandomValue));
         }
 
-        if(HasParameter(_hashHealth))
+        if (HasParameter(_hashHealth))
         {
             _enemy.BehaviorAnimator.SetFloat(_hashHealth, _enemy.Health.CurrentHealth / _enemy.Health.MaxHealth);
         }
@@ -165,7 +165,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void UpdateTimer()
     {
-        if(HasParameter(_hashCooldown))
+        if (HasParameter(_hashCooldown))
         {
             if (_abilityCooldown > 0)
             {
@@ -190,6 +190,7 @@ public class EnemyStateMachine : MonoBehaviour
         {
             if (Animator.StringToHash(param.name) == hash) return true;
         }
+
         return false;
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 
 public class SoundService : ISoundService
 {
-    private HashSet<SoundObject> _soundObjects = new();
+    private HashSet<SoundObject> _soundObjects = new ();
 
     public void Add(SoundObject soundObject)
     {
@@ -25,7 +25,6 @@ public class SoundService : ISoundService
 
     public void ContinueAll()
     {
-
         foreach (var item in _soundObjects.ToList())
         {
             item.ContinueSound();

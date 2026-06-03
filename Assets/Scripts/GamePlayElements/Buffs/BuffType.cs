@@ -6,5 +6,5 @@ public enum BuffType
     ArmorPercent,
     ArmorFlat,
     MoveSpeed,
-    CollectRange
+    CollectRange,
 }

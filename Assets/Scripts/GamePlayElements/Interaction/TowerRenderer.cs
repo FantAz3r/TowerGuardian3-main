@@ -14,7 +14,7 @@ public class TowerRenderer : MonoBehaviour
 
         foreach (var floor in _floors)
         {
-            if(floor.FloorNumber > _currentFloor)
+            if (floor.FloorNumber > _currentFloor)
             {
                 _floors[floor.FloorNumber].gameObject.SetActive(false);
             }
@@ -64,11 +64,9 @@ public class TowerRenderer : MonoBehaviour
 
     private void LoadTower()
     {
-        if(YG2.saves.CurrentFloor == 0)
+        if (YG2.saves.CurrentFloor == 0)
             return;
 
         _currentFloor = YG2.saves.CurrentFloor;
     }
 }
-
-

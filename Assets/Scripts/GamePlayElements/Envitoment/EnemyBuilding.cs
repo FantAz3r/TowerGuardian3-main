@@ -1,11 +1,9 @@
-using DG.Tweening;
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyBuilding : MonoBehaviour
 {
-    [field: SerializeField] public Health Health { get; private set; }
-
     [SerializeField] private float _shakeDuration = 0.3f;
     [SerializeField] private float _shakeStrength = 0.2f;
     [SerializeField] private int _vibrato = 10;
@@ -14,6 +12,8 @@ public class EnemyBuilding : MonoBehaviour
     private Tween _shakeTween;
 
     public event Action Destroyed;
+
+    [field: SerializeField] public Health Health { get; private set; }
 
     private void Start()
     {

@@ -4,22 +4,19 @@ using UnityEngine;
 public class TimeService : IService, ITimeService
 {
     private readonly ICoroutineRunner _coroutineRunner;
-    private Coroutine _pauseCoroutine;
-    private Coroutine _slowMotionCoroutine;
-    private WaitForSeconds _wait;
-    private float _time;
 
-    public bool IsPaused { get; private set; }
+    private Coroutine _slowMotionCoroutine;
 
     public TimeService(ICoroutineRunner coroutineRunner)
     {
         _coroutineRunner = coroutineRunner;
-        _wait = new WaitForSeconds(_time);
     }
+
+    public bool IsPaused { get; private set; }
 
     public void StopGame()
     {
-        if(_slowMotionCoroutine != null)
+        if (_slowMotionCoroutine != null)
             _coroutineRunner.StopCoroutine(_slowMotionCoroutine);
 
         Time.timeScale = 0;
@@ -54,5 +51,3 @@ public class TimeService : IService, ITimeService
         _slowMotionCoroutine = null;
     }
 }
-
-

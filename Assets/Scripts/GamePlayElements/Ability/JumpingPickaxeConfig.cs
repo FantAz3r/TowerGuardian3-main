@@ -24,8 +24,7 @@ public class JumpingPickaxeConfig : AbilityConfig
         {
             new CardStats(UIText.BouncesCount, BouncesCount, Mathf.Max(_bouncesCount, _bouncesCount + _bouncePerLevel * Level)),
             new CardStats(UIText.BounceRange, BounceRange, Mathf.Max(_bounceRange, _bounceRange + _rangePerLevel * Level)), 
-            new CardStats(UIText.CooldownPerHit, CooldownPerHit, Mathf.Max(_cooldownPerHit, _cooldownPerHit - _cooldownPerLevel * Level)) 
+            new CardStats(UIText.CooldownPerHit, CooldownPerHit, Mathf.Max(_cooldownPerHit, _cooldownPerHit - _cooldownPerLevel * Level)), 
         };
     }
 }
-

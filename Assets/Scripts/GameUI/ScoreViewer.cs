@@ -1,5 +1,5 @@
-using DG.Tweening;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +27,7 @@ public class ScoreViewer : MonoBehaviour
 
     public void View(float score, float time, int stars, int reward = default)
     {
-        if(reward != default && _rewardCount != null)
+        if (reward != default && _rewardCount != null)
         {
             _rewardCount.text = reward.ToString();
         }
@@ -43,7 +43,7 @@ public class ScoreViewer : MonoBehaviour
 
     private void DrowStars(int count)
     {
-        if(count == 0)
+        if (count == 0)
             return;
 
         for (int i = 0; i < _stars.Count; i++)
@@ -62,8 +62,7 @@ public class ScoreViewer : MonoBehaviour
 
             seq.Append(
                 star.transform.DOScale(Vector3.one, 0.5f)
-                .SetEase(Ease.OutElastic)
-            );
+                .SetEase(Ease.OutElastic));
 
             seq.AppendInterval(0.3f).SetUpdate(true);
         }

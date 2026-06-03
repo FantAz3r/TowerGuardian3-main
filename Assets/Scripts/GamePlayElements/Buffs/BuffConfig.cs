@@ -1,16 +1,14 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BuffConfig", menuName = "Configs/BuffConfig")]
 public class BuffConfig : CardConfig
 {
-    [field: SerializeField] public BuffEffectType EffectType { get; private set; }
     [SerializeField] private BuffType _buffType;
-
     [SerializeField] private float _baseIncreaseValue = 0.2f;
     [SerializeField] private float _upgradeValuePerLevel = 0.1f;
 
+    [field: SerializeField] public BuffEffectType EffectType { get; private set; }
     public BuffType BuffType => _buffType;
     public float IncreaseValue => GetIncreaseValue(Level);
 
@@ -26,11 +24,9 @@ public class BuffConfig : CardConfig
 
         return new List<CardStats>
         {
-            new CardStats(UIText.IncreaseValue, GetIncreaseValue(level), GetIncreaseValue(nextLevel))
+            new CardStats(UIText.IncreaseValue, GetIncreaseValue(level), GetIncreaseValue(nextLevel)),
         };
-        
     }
 
     public override CardType GetCardType() => CardType.Buff;
 }
-

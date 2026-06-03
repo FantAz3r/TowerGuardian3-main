@@ -41,7 +41,6 @@ public class ComboCounter : MonoBehaviour
         }
 
         _comboCoroutine = StartCoroutine(ResetComboAfterDelay());
-
     }
 
     private IEnumerator ResetComboAfterDelay()

@@ -99,7 +99,6 @@ public class PlayerAnimator : MonoBehaviour
             y = Mathf.Cos(angleDifference);
         }
 
-
         float targetSpeed = moveSpeed * _speedMultiplier;
         _currentSpeed = Mathf.SmoothDamp(_currentSpeed, targetSpeed, ref _velSpeed, _smoothTime);
 
@@ -122,7 +121,6 @@ public class PlayerAnimator : MonoBehaviour
             }
             else if (weapon.Config.WeaponType == WeaponType.None)
             {
-
                 return;
             }
         }
@@ -136,7 +134,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void OnWeaponRemoved(IWeapon weapon)
     {
-        if(weapon != null)
+        if (weapon != null)
         {
             _player.Animator.SetTrigger(_hashWeaponRemoved);
         }

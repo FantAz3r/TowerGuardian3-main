@@ -12,14 +12,12 @@ public class LavaRock : Projectile
 
     public override void Appear()
     {
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out PlayerHealth health) && _hasDamagedPlayer ==false)
+        if (other.TryGetComponent(out PlayerHealth health) && _hasDamagedPlayer == false)
         {
-            Debug.Log(_damage);
             health.TakeDamage(_damage);
             _hasDamagedPlayer = true;
             gameObject.SetActive(false);

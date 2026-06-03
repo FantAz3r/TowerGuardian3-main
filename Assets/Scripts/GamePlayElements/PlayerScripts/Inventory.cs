@@ -8,12 +8,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] private PlayerConfig _config;
 
     private ResourceCollector _collector;
-    private Dictionary<ResourceType, int> _resources = new();
+    private Dictionary<ResourceType, int> _resources = new ();
     private int _currentAmount = 0;
     private int _startAmount = 0;
     private IScoreService _scoreService;
-
-    public Dictionary<ResourceType, int> Resources => _resources;
 
     public event Action<Dictionary<ResourceType, int>> ResourceChanged;
     public event Action ResourceAdded;
@@ -21,6 +19,8 @@ public class Inventory : MonoBehaviour
     public event Action WoodCollected;
     public event Action StoneCollected;
     public event Action CoinCollected;
+
+    public Dictionary<ResourceType, int> Resources => _resources;
 
     private void Awake()
     {

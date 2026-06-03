@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class UIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [field: SerializeField] public Image SlotImag { get; private set; }
-    [field: SerializeField] public TMP_Text ItemLevelText { get; private set; }
-    [field: SerializeField] public StatsButton StatsButton { get; private set; }
-
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private RectTransform _rectTransform;
 
@@ -16,6 +12,9 @@ public class UIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private Canvas _mainCanvas;
     private Transform _previousParent;
     private InventorySlot _previousSlot;
+    [field: SerializeField] public Image SlotImag { get; private set; }
+    [field: SerializeField] public TMP_Text ItemLevelText { get; private set; }
+    [field: SerializeField] public StatsButton StatsButton { get; private set; }
     public ICardConfig SlotConfig { get; private set; }
 
     public void Init(Transform inventory, Canvas mainCanvas)
@@ -70,15 +69,12 @@ public class UIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
                 if (_previousSlot.CurrentImage != null)
                 {
                     _previousSlot.CurrentImage.enabled = true;
-
                 }
-
             }
             else if (_previousSlot == newSlot)
             {
                 transform.localPosition = Vector3.zero;
             }
-
         }
 
         _canvasGroup.blocksRaycasts = true;

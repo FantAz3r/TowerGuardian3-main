@@ -1,8 +1,6 @@
 public class RegenerationBuff : Buff
 {
-    public RegenerationBuff(IBuffble buffbleObject) : base(buffbleObject)
-    {
-    }
+    public RegenerationBuff(IBuffble buffbleObject) : base(buffbleObject) { }
 
     public override BuffType Type => BuffType.HpRegen;
 

@@ -1,17 +1,16 @@
-using DG.Tweening;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PieceSpawner : BaseSpawner
 {
-    private Dictionary<ResourceType, ObjectPool<ResourcePiece>> _pools = new Dictionary<ResourceType, ObjectPool<ResourcePiece>>();
-    private ResourceData _data;
-
     private readonly float _ejectForceMin = 5f;
     private readonly float _ejectForceMax = 10f;
     private readonly float _ejectRadius = 2f;
-    public override SpawnerType GetSpawnerType() => SpawnerType.Resources;
+
+    private Dictionary<ResourceType, ObjectPool<ResourcePiece>> _pools = new Dictionary<ResourceType, ObjectPool<ResourcePiece>>();
+    private ResourceData _data;
 
     public PieceSpawner(ResourceData data)
     {
@@ -25,6 +24,8 @@ public class PieceSpawner : BaseSpawner
             }
         }
     }
+
+    public override SpawnerType GetSpawnerType() => SpawnerType.Resources;
 
     public override void Spawn(HealthConfig config, Vector3 position, int count = 0)
     {

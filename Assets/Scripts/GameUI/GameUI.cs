@@ -22,5 +22,4 @@ public class GameUI : MonoBehaviour
     [field: SerializeField] public Settings Settings { get; private set; }
     [field: SerializeField] public SwichDamageNumbers SwichDamageNumbers { get; private set; }
     [field: SerializeField] public Mute Mute { get; private set; }
-
 }

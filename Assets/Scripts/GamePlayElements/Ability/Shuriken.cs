@@ -7,8 +7,9 @@ public class Shuriken : MonoBehaviour
     private float _speenSpeed;
     private bool _isRotate = true;
 
-    public bool IsActive => gameObject.activeSelf;
     public event Action<int> DialedDamage;
+
+    public bool IsActive => gameObject.activeSelf;
 
     private void OnDisable()
     {
@@ -34,7 +35,7 @@ public class Shuriken : MonoBehaviour
 
     private void Update()
     {
-        if(_isRotate)
+        if (_isRotate)
         {
             transform.Rotate(0, _speenSpeed * Time.deltaTime, 0);
         }

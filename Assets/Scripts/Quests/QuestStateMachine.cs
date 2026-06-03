@@ -5,7 +5,7 @@ using YG;
 
 public class QuestStateMachine : MonoBehaviour
 {
-    private List<IQuest> _quests = new();
+    private List<IQuest> _quests = new ();
     private QuestBuilder _builder;
     private int _currentQuestIndex = -1;
     private int _startQuestIndex = -1;
@@ -13,7 +13,8 @@ public class QuestStateMachine : MonoBehaviour
     private IQuest _currentQuest;
     private bool _isAllQuestsComplete = false;
 
-    public event Action AllQuestsCompleted, QuestCompleted;
+    public event Action AllQuestsCompleted;
+    public event Action QuestCompleted;
     public event Action<IQuest> QuestStarted;
 
     public void Init(QuestBuilder builder, LevelID level, IReadOnlyList<QuestType> questsForThisLevel)
@@ -67,10 +68,10 @@ public class QuestStateMachine : MonoBehaviour
                 _isAllQuestsComplete = true;
                 return;
             }
-            
-            if(_currentQuestIndex < 0)
+
+            if (_currentQuestIndex < 0)
             {
-                _currentQuestIndex = 0; 
+                _currentQuestIndex = 0;
             }
 
             _currentQuest = _quests[_currentQuestIndex];
@@ -97,7 +98,7 @@ public class QuestStateMachine : MonoBehaviour
 
         if (_level != LevelID.Tower)
             return;
-        
+
         int index = YG2.saves.QuestProgress.FindIndex(quest => quest.Level == _level);
 
         QuestSaveData saveData;
@@ -139,7 +140,7 @@ public class QuestStateMachine : MonoBehaviour
         }
         else
         {
-            _currentQuestIndex = saveData.QuestIndex-1;
+            _currentQuestIndex = saveData.QuestIndex - 1;
         }
     }
 }

@@ -7,192 +7,214 @@ public static class UIText
     private const string English = "en";
     private const string Turkish = "tr";
 
-    private static string CurrentLanguage => YG2.lang;
-
-    private static readonly Dictionary<EntityType, Dictionary<string, string>> EntityTypeDict =
+    private static readonly Dictionary<EntityType, Dictionary<string, string>> _entityTypeDict =
     new Dictionary<EntityType, Dictionary<string, string>>
     {
-        { EntityType.Enemy, new Dictionary<string, string>
+        {
+            EntityType.Enemy, new Dictionary<string, string>
             {
                 { Russian, "враг" },
                 { English, "enemy" },
-                { Turkish, "düşman" }
+                { Turkish, "düşman" },
             }
         },
-        { EntityType.Stone, new Dictionary<string, string>
+        {
+            EntityType.Stone, new Dictionary<string, string>
             {
                 { Russian, "камень" },
                 { English, "stone" },
-                { Turkish, "taş" }
+                { Turkish, "taş" },
             }
         },
-        { EntityType.Tree, new Dictionary<string, string>
+        {
+            EntityType.Tree, new Dictionary<string, string>
             {
                 { Russian, "дерево" },
                 { English, "tree" },
-                { Turkish, "ağaç" }
+                { Turkish, "ağaç" },
             }
         },
-        { EntityType.Boss, new Dictionary<string, string>
+        {
+            EntityType.Boss, new Dictionary<string, string>
             {
                 { Russian, "босс" },
                 { English, "boss" },
-                { Turkish, "baş düşman" }
+                { Turkish, "baş düşman" },
             }
         },
-        { EntityType.Generic, new Dictionary<string, string>
+        {
+            EntityType.Generic, new Dictionary<string, string>
             {
                 { Russian, "общий" },
                 { English, "generic" },
-                { Turkish, "genel" }
+                { Turkish, "genel" },
             }
         }
     };
 
-
-    private static readonly Dictionary<WindowType, Dictionary<string, string>> WindowTypeDict =
+    private static readonly Dictionary<WindowType, Dictionary<string, string>> _windowTypeDict =
     new Dictionary<WindowType, Dictionary<string, string>>
     {
-        { WindowType.None, new Dictionary<string, string>
+        {
+            WindowType.None, new Dictionary<string, string>
             {
                 { Russian, "нет" },
                 { English, "none" },
-                { Turkish, "yok" }
+                { Turkish, "yok" },
             }
         },
-        { WindowType.QuestViewer, new Dictionary<string, string>
+        {
+            WindowType.QuestViewer, new Dictionary<string, string>
             {
                 { Russian, "отрисовщик квестов" },
                 { English, "quest viewer" },
-                { Turkish, "görev görüntüleyici" }
+                { Turkish, "görev görüntüleyici" },
             }
         },
-        { WindowType.Shop, new Dictionary<string, string>
+        {
+            WindowType.Shop, new Dictionary<string, string>
             {
                 { Russian, "магазин" },
                 { English, "shop" },
-                { Turkish, "dükkan" }
+                { Turkish, "dükkan" },
             }
         },
-        { WindowType.Sell, new Dictionary<string, string>
+        {
+            WindowType.Sell, new Dictionary<string, string>
             {
                 { Russian, "продажа" },
                 { English, "sell" },
-                { Turkish, "satış" }
+                { Turkish, "satış" },
             }
         },
-        { WindowType.WinLevelMenu, new Dictionary<string, string>
+        {
+            WindowType.WinLevelMenu, new Dictionary<string, string>
             {
                 { Russian, "меню победы" },
                 { English, "win level menu" },
-                { Turkish, "seviye kazanma menüsü" }
+                { Turkish, "seviye kazanma menüsü" },
             }
         },
-        { WindowType.StartLevelMenu, new Dictionary<string, string>
+        {
+            WindowType.StartLevelMenu, new Dictionary<string, string>
             {
                 { Russian, "меню начала уровня" },
                 { English, "start level menu" },
-                { Turkish, "seviye başlatma menüsü" }
+                { Turkish, "seviye başlatma menüsü" },
             }
         },
-        { WindowType.LouseLevelMenu, new Dictionary<string, string>
+        {
+            WindowType.LouseLevelMenu, new Dictionary<string, string>
             {
                 { Russian, "меню поражения" },
                 { English, "lose level menu" },
-                { Turkish, "seviye kaybetme menüsü" }
+                { Turkish, "seviye kaybetme menüsü" },
             }
         },
-        { WindowType.Settings, new Dictionary<string, string>
+        {
+            WindowType.Settings, new Dictionary<string, string>
             {
                 { Russian, "настройки" },
                 { English, "settings" },
-                { Turkish, "ayarlar" }
+                { Turkish, "ayarlar" },
             }
         },
-        { WindowType.MainSettings, new Dictionary<string, string>
+        {
+            WindowType.MainSettings, new Dictionary<string, string>
             {
                 { Russian, "главные настройки" },
                 { English, "main settings" },
-                { Turkish, "ana ayarlar" }
+                { Turkish, "ana ayarlar" },
             }
         },
-        { WindowType.Pause, new Dictionary<string, string>
+        {
+            WindowType.Pause, new Dictionary<string, string>
             {
                 { Russian, "пауза" },
                 { English, "pause" },
-                { Turkish, "duraklat" }
+                { Turkish, "duraklat" },
             }
         },
-        { WindowType.CardMenu, new Dictionary<string, string>
+        {
+            WindowType.CardMenu, new Dictionary<string, string>
             {
                 { Russian, "меню карт" },
                 { English, "card menu" },
-                { Turkish, "kart menüsü" }
+                { Turkish, "kart menüsü" },
             }
         },
-        { WindowType.HUD, new Dictionary<string, string>
+        {
+            WindowType.HUD, new Dictionary<string, string>
             {
                 { Russian, "интерфейс" },
                 { English, "HUD" },
-                { Turkish, "gösterge paneli" }
+                { Turkish, "gösterge paneli" },
             }
         },
-        { WindowType.MainMenu, new Dictionary<string, string>
+        {
+            WindowType.MainMenu, new Dictionary<string, string>
             {
                 { Russian, "главное меню" },
                 { English, "main menu" },
-                { Turkish, "ana menü" }
+                { Turkish, "ana menü" },
             }
         },
-        { WindowType.ShowCardsButton, new Dictionary<string, string>
+        {
+            WindowType.ShowCardsButton, new Dictionary<string, string>
             {
                 { Russian, "кнопка показать карты" },
                 { English, "show cards button" },
-                { Turkish, "kartları göster düğmesi" }
+                { Turkish, "kartları göster düğmesi" },
             }
         },
-        { WindowType.Background, new Dictionary<string, string>
+        {
+            WindowType.Background, new Dictionary<string, string>
             {
                 { Russian, "фон" },
                 { English, "background" },
-                { Turkish, "arka plan" }
+                { Turkish, "arka plan" },
             }
         },
-        { WindowType.DamageScreen, new Dictionary<string, string>
+        {
+            WindowType.DamageScreen, new Dictionary<string, string>
             {
                 { Russian, "экран урона" },
                 { English, "damage screen" },
-                { Turkish, "hasar ekranı" }
+                { Turkish, "hasar ekranı" },
             }
         },
-        { WindowType.WaveViewer, new Dictionary<string, string>
+        {
+            WindowType.WaveViewer, new Dictionary<string, string>
             {
                 { Russian, "отображатель волн" },
                 { English, "wave viewer" },
-                { Turkish, "dalga görüntüleyici" }
+                { Turkish, "dalga görüntüleyici" },
             }
         },
-        { WindowType.Joystick, new Dictionary<string, string>
+        {
+            WindowType.Joystick, new Dictionary<string, string>
             {
                 { Russian, "джойстик" },
                 { English, "joystick" },
-                { Turkish, "joystick" }
+                { Turkish, "joystick" },
             }
         },
 
-        { WindowType.Inventory, new Dictionary<string, string>
+        {
+            WindowType.Inventory, new Dictionary<string, string>
             {
                 { Russian, "Инвентарь" },
                 { English, "Inventory" },
-                { Turkish, "Envanter" }
+                { Turkish, "Envanter" },
 
             }
         },
-        { WindowType.LeaderBoard, new Dictionary<string, string>
+        {
+            WindowType.LeaderBoard, new Dictionary<string, string>
             {
                 { Russian, "Таблица Лидеров" },
                 { English, "Leaderboard" },
-                { Turkish, "Liderlik Tablosu" }
+                { Turkish, "Liderlik Tablosu" },
 
             }
         }
@@ -202,136 +224,136 @@ public static class UIText
     {
         { Russian, "урон" },
         { English, "damage" },
-        { Turkish, "hasar" }
+        { Turkish, "hasar" },
     };
 
     private static readonly Dictionary<string, string> AttackDelayDict = new Dictionary<string, string>
     {
         { Russian, "задержка атаки" },
         { English, "attack delay" },
-        { Turkish, "saldırı gecikmesi" }
+        { Turkish, "saldırı gecikmesi" },
     };
 
     private static readonly Dictionary<string, string> AttackRangeDict = new Dictionary<string, string>
     {
         { Russian, "дальность атаки" },
         { English, "attack range" },
-        { Turkish, "saldırı menzili" }
+        { Turkish, "saldırı menzili" },
     };
 
     private static readonly Dictionary<string, string> FlightDistanceDict = new Dictionary<string, string>
     {
         { Russian, "дальность полёта" },
         { English, "flight distance" },
-        { Turkish, "uçuş mesafesi" }
+        { Turkish, "uçuş mesafesi" },
     };
 
     private static readonly Dictionary<string, string> CooldownDict = new Dictionary<string, string>
     {
         { Russian, "перезарядка" },
         { English, "cooldown" },
-        { Turkish, "bekleme süresi" }
+        { Turkish, "bekleme süresi" },
     };
 
     private static readonly Dictionary<string, string> HitCountDict = new Dictionary<string, string>
     {
         { Russian, "количество ударов" },
         { English, "hit count" },
-        { Turkish, "vuruş sayısı" }
+        { Turkish, "vuruş sayısı" },
     };
 
     private static readonly Dictionary<string, string> BouncesCountDict = new Dictionary<string, string>
     {
         { Russian, "количество отскоков" },
         { English, "bounces count" },
-        { Turkish, "zıplama sayısı" }
+        { Turkish, "zıplama sayısı" },
     };
 
     private static readonly Dictionary<string, string> CooldownPerHitDict = new Dictionary<string, string>
     {
         { Russian, "перезарядка за удар" },
         { English, "cooldown per hit" },
-        { Turkish, "vuruş başına bekleme" }
+        { Turkish, "vuruş başına bekleme" },
     };
 
     private static readonly Dictionary<string, string> BounceRangeDict = new Dictionary<string, string>
     {
         { Russian, "радиус отскока" },
         { English, "bounce range" },
-        { Turkish, "zıplama menzili" }
+        { Turkish, "zıplama menzili" },
     };
 
     private static readonly Dictionary<string, string> RadiusDict = new Dictionary<string, string>
     {
         { Russian, "радиус" },
         { English, "radius" },
-        { Turkish, "yarıçap" }
+        { Turkish, "yarıçap" },
     };
 
     private static readonly Dictionary<string, string> RotationSpeedDict = new Dictionary<string, string>
     {
         { Russian, "скорость вращения" },
         { English, "rotation speed" },
-        { Turkish, "dönüş hızı" }
+        { Turkish, "dönüş hızı" },
     };
 
     private static readonly Dictionary<string, string> IncreaseValueDict = new Dictionary<string, string>
     {
         { Russian, "значение увеличения" },
         { English, "increase value" },
-        { Turkish, "artış değeri" }
+        { Turkish, "artış değeri" },
     };
 
     private static readonly Dictionary<string, string> CountDict = new Dictionary<string, string>
     {
         { Russian, "количество" },
         { English, "count" },
-        { Turkish, "saymak" }
+        { Turkish, "saymak" } ,
     };
 
     private static readonly Dictionary<string, string> MultiplierDict = new Dictionary<string, string>
     {
         { Russian, "Множитель к" },
         { English, "Multiplier to" },
-        { Turkish, "Çarpan" }
+        { Turkish, "Çarpan" } ,
     };
 
     private static readonly Dictionary<string, string> MaxLevelDict = new Dictionary<string, string>
     {
         { Russian, "Макс. уровень" },
         { English, "Max Level" },
-        { Turkish, "Maks Seviye" }
+        { Turkish, "Maks Seviye" } ,
     };
 
     private static readonly Dictionary<string, string> ShopDict = new Dictionary<string, string>
     {
         { Russian, "Maгазин" },
         { English, "Shop" },
-        { Turkish, "Mağaza" }
+        { Turkish, "Mağaza" } ,
     };
 
     private static readonly Dictionary<string, string> LVLDict = new Dictionary<string, string>
     {
         { Russian, "Ур" },
         { English, "LVL" },
-        { Turkish, "LVL" }
+        { Turkish, "LVL" } ,
     };
 
     private static readonly Dictionary<string, string> YourBestScoreDict = new Dictionary<string, string>
     {
         { Russian, "ВАШ ЛУЧШИЙ СЧЕТ" },
         { English, "YOUR BEST SCORE" },
-        { Turkish, "EN İYİ SKORUN" }
+        { Turkish, "EN İYİ SKORUN" } ,
     };
 
     private static readonly Dictionary<string, string> NoBestScoreDict = new Dictionary<string, string>
     {
         { Russian, "НЕТ СЧЕТА" },
         { English, "NO SCORE" },
-        { Turkish, "PUAN YOK" }
+        { Turkish, "PUAN YOK" } ,
     };
 
-
+    private static string CurrentLanguage => YG2.lang;
     public static string YourBestScore => GetText(YourBestScoreDict);
     public static string NoBestScore => GetText(NoBestScoreDict);
     public static string Damage => GetText(DamageDict);
@@ -352,7 +374,6 @@ public static class UIText
     public static string LVL => GetText(LVLDict);
     public static string MaxLevel => GetText(MaxLevelDict);
 
-
     private static string GetText(Dictionary<string, string> dict)
     {
         if (dict.TryGetValue(CurrentLanguage, out string value))
@@ -362,7 +383,7 @@ public static class UIText
 
     public static string GetEntityTypeText(EntityType type)
     {
-        if (EntityTypeDict.TryGetValue(type, out var translations))
+        if (_entityTypeDict.TryGetValue(type, out var translations))
         {
             if (string.IsNullOrEmpty(CurrentLanguage) == false && translations.TryGetValue(CurrentLanguage, out var localized))
                 return localized;
@@ -375,7 +396,7 @@ public static class UIText
 
     public static string GetWindowTypeText(WindowType type)
     {
-        if (WindowTypeDict.TryGetValue(type, out var translations))
+        if (_windowTypeDict.TryGetValue(type, out var translations))
         {
             if (string.IsNullOrEmpty(CurrentLanguage) == false && translations.TryGetValue(CurrentLanguage, out var localized))
                 return localized;

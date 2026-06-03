@@ -12,7 +12,6 @@ public class ResourceSpawner : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _resourceLayer;
 
-
     private void Start()
     {
         SpawnObject(_itemAmount);
@@ -49,20 +48,17 @@ public class ResourceSpawner : MonoBehaviour
         float decreaseValue = 2f;
         float offsetY = 0f;
         int randomX = Random.Range(
-            Mathf.CeilToInt(-_spawnZoneLength / decreaseValue),
-            Mathf.FloorToInt(_spawnZoneLength / decreaseValue) + 1
-        );
+             Mathf.CeilToInt(-_spawnZoneLength / decreaseValue),
+             Mathf.FloorToInt(_spawnZoneLength / decreaseValue) + 1);
 
         int randomZ = Random.Range(
-            Mathf.CeilToInt(-_spawnZoneWidth / decreaseValue),
-            Mathf.FloorToInt(_spawnZoneWidth / decreaseValue) + 1
-        );
+             Mathf.CeilToInt(-_spawnZoneWidth / decreaseValue),
+             Mathf.FloorToInt(_spawnZoneWidth / decreaseValue) + 1);
 
         Vector3 position = new Vector3(
-            transform.position.x + randomX,
-            transform.position.y,
-            transform.position.z + randomZ
-        );
+             transform.position.x + randomX,
+             transform.position.y,
+             transform.position.z + randomZ);
 
         RaycastHit hit;
 

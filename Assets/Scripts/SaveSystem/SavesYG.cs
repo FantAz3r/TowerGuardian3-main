@@ -5,7 +5,7 @@ namespace YG
 {
     public partial class SavesYG
     {
-        public int idSave;
+        public int IdSave;
         public List<CardSaveData> AllCards;
         public CardSaveData CurrentWeapon;
         public List<string> PlayerWeapons;

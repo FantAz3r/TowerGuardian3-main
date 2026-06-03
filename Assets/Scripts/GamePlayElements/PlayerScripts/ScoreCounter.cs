@@ -6,13 +6,14 @@ using YG;
 public class ScoreCounter
 {
     private const string MainLeaderbord = "MainLiderboard";
+
     private Dictionary<LevelID, string> LevelLeaderboards = new Dictionary<LevelID, string>
     {
-        {LevelID.Level1, "FirstLevelScore" },
-        {LevelID.Level2, "SecondLevelScore" },
-        {LevelID.Level3, "ThirdLevelScore" },
-        {LevelID.Level4, "FourthLevelScore" },
-        {LevelID.Level5, "FifthLevelScore" }
+        { LevelID.Level1, "FirstLevelScore" }, 
+        { LevelID.Level2, "SecondLevelScore" },
+        { LevelID.Level3, "ThirdLevelScore" },
+        { LevelID.Level4, "FourthLevelScore" },
+        { LevelID.Level5, "FifthLevelScore" },
     };
 
     private float _time = 0;
@@ -20,8 +21,6 @@ public class ScoreCounter
     private Player _player;
     private IScoreService _scoreService;
     private LevelConfig _config;
-
-    public event Action<float, float, int, int> LevelEnded;
 
     public ScoreCounter()
     {
@@ -32,6 +31,8 @@ public class ScoreCounter
         _time = Time.time;
         UpdateMainLeaderbord();
     }
+
+    public event Action<float, float, int, int> LevelEnded;
 
     public void OnEndLevel(LevelMenu sender, LevelID level = LevelID.None)
     {
@@ -65,8 +66,9 @@ public class ScoreCounter
     {
         var costList = new List<CostInfo>()
             {
-                new CostInfo(ResourceType.Coin, (int)_scoreService.GetScore() / 20)
+                new CostInfo(ResourceType.Coin, _scoreService.GetScore() / 20),
             };
+
         _player.Inventory.AddResousres(costList);
     }
 
@@ -150,9 +152,9 @@ public class ScoreCounter
 
     private void UpdateLevelLeaderboards(LevelID levelID)
     {
-        foreach(var pair in LevelLeaderboards)
+        foreach (var pair in LevelLeaderboards)
         {
-            if(levelID == pair.Key)
+            if (levelID == pair.Key)
             {
                 var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == levelID);
                 YG2.SetLeaderboard(pair.Value, savedData.Score);
@@ -162,7 +164,7 @@ public class ScoreCounter
 
     private void UpdateMainLeaderbord()
     {
-        if(YG2.saves.LevelsProgress == null) return;
+        if (YG2.saves.LevelsProgress == null) return;
 
         int scoreFromAllLevels = 0;
 

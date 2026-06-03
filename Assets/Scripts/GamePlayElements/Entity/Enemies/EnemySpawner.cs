@@ -8,17 +8,20 @@ public class EnemySpawner : MonoBehaviour
     private const int NoGameLevelCount = 4;
 
     private List<SpawnerActivator> _spawnPoints;
-    private List<SpawnerActivator> _activeSpawnPoints = new();
+    private List<SpawnerActivator> _activeSpawnPoints = new ();
     private DayCycle _dayCycle;
     private Player _player;
-    private Coroutine _spawnRoutine, _waveRoutine;
-    private WaitForSeconds _nightSpawnDelay, _daySpawnDelay, _waveDuration;
+    private Coroutine _spawnRoutine;
+    private Coroutine _waveRoutine;
+    private WaitForSeconds _nightSpawnDelay;
+    private WaitForSeconds _daySpawnDelay;
+    private WaitForSeconds _waveDuration;
     private LevelConfig _levelConfig;
     private List<Wave> _waves;
     private int _currentWaveIndex = 0;
 
     private Dictionary<Enemy, ObjectPool<Enemy>> _pools = new Dictionary<Enemy, ObjectPool<Enemy>>();
-    private Dictionary<Enemy, float> _startWaights = new();
+    private Dictionary<Enemy, float> _startWaights = new ();
 
     private IGameFactory _gameFactory;
 
@@ -38,7 +41,6 @@ public class EnemySpawner : MonoBehaviour
                 spawnPoint.Detected += AddSpawnPoint;
                 spawnPoint.Losted += RemoveSpawnPoint;
                 spawnPoint.Destroyed += OnDestroySpawnPoint;
-
             }
         }
 

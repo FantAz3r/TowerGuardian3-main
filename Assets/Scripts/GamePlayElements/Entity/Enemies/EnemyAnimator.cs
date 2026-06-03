@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyAnimator : MonoBehaviour
 {
-
     [Header("Настройки")]
     [SerializeField] private float _speedMultiplier = 1f;
     [SerializeField] private float _smoothTime = 0.05f;
@@ -28,7 +27,10 @@ public class EnemyAnimator : MonoBehaviour
 
     private List<AnimationClip> _attackClips;
 
-    public event Action Attacked, Grounded, Throwed, ThornAttacked;
+    public event Action Attacked;
+    public event Action Grounded;
+    public event Action Throwed;
+    public event Action ThornAttacked;
 
     public bool IsThrowing { get; private set; }
     public bool IsPicked { get; private set; }
@@ -107,7 +109,6 @@ public class EnemyAnimator : MonoBehaviour
     {
         _animator.SetTrigger(_hashUltimateAttack);
         _animator.ResetTrigger(_hashEndUltimate);
-
     }
 
     public void PlayEndUltimate()
@@ -164,7 +165,7 @@ public class EnemyAnimator : MonoBehaviour
                 clips.Add(clip);
             }
         }
+
         return clips;
     }
-
 }

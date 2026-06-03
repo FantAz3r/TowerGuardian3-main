@@ -7,16 +7,6 @@ public class InputService : IInputService, IAbilityInput
 {
     private PlayerInputActions _inputActions;
 
-    public event Action<Vector2> MovePerformed;
-    public event Action<Vector2> RotateDirectionSeted;
-
-    public event Action OnAbillity1Used;
-    public event Action OnAbillity2Used;
-    public event Action OnAbillity3Used;
-    public event Action OnAbillity4Used;
-
-    public Vector2 CursorOrigin { get; set; }
-
     public InputService()
     {
         _inputActions = new PlayerInputActions();
@@ -34,6 +24,16 @@ public class InputService : IInputService, IAbilityInput
         _inputActions.Player.Rotate.performed += OnRotatePerformed;
         _inputActions.Player.Rotate.canceled += OnRotateCanceled;
     }
+
+    public event Action<Vector2> MovePerformed;
+    public event Action<Vector2> RotateDirectionSeted;
+
+    public event Action OnAbillity1Used;
+    public event Action OnAbillity2Used;
+    public event Action OnAbillity3Used;
+    public event Action OnAbillity4Used;
+
+    public Vector2 CursorOrigin { get; set; }
 
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
@@ -68,7 +68,7 @@ public class InputService : IInputService, IAbilityInput
 
     private void PauseGame(InputAction.CallbackContext context)
     {
-        if(Time.timeScale != 0)
+        if (Time.timeScale != 0)
         {
             ServiceLocator.Get<IWindowService>().Open(WindowType.Pause);
         }

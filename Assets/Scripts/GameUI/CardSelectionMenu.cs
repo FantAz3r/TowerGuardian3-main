@@ -43,7 +43,7 @@ public class CardSelectionMenu : PauseWindow
 
     public void OpenMenu()
     {
-        _levelText.text = (_player.Experience.CurrentLevel +1).ToString();
+        _levelText.text = (_player.Experience.CurrentLevel + 1).ToString();
 
         if (_currentCards == null)
         {
@@ -69,7 +69,7 @@ public class CardSelectionMenu : PauseWindow
         }
         else
         {
-            base.Close();
+            Close();
             _timeService.SmoothEditTimeScalse(0, 0);
             _windowService.Open(WindowType.HUD);
             _timeService.SmoothEditTimeScalse(1, 1);
@@ -79,7 +79,7 @@ public class CardSelectionMenu : PauseWindow
     public void PostponeChoise()
     {
         _selector.SaveCurrentCards(_currentCards);
-        base.Close();
+        Close();
         _timeService.SmoothEditTimeScalse(0, 0);
         _windowService.Open(WindowType.HUD);
         _timeService.SmoothEditTimeScalse(1, 1);

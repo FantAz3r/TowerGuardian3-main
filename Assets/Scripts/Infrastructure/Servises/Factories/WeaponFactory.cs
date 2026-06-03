@@ -14,9 +14,9 @@ public class WeaponFactory : ICardFactory
     {
         List<Weapon> weapons = _player.Fist.transform.GetComponentsInChildren<Weapon>().ToList();
 
-        foreach(var weapon in weapons)
+        foreach (var weapon in weapons)
         {
-            if(config.ID == weapon.Config.ID)
+            if (config.ID == weapon.Config.ID)
             {
                 return;
             }
@@ -31,4 +31,3 @@ public class WeaponFactory : ICardFactory
         }
     }
 }
-

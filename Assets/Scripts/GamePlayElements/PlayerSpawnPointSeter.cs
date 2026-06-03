@@ -24,7 +24,6 @@ public class PlayerSpawnPointSeter
             return _sceneContainer.PlayerSpawnPoints.First().transform.position;
         }
 
-
         if (currentLevel == LevelID.Tower)
         {
             return GetPortalPoint(previousLevel);

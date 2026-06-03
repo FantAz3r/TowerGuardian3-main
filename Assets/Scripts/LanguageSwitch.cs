@@ -4,7 +4,9 @@ using YG;
 
 public class LanguageSwitch : MonoBehaviour
 {
-    [SerializeField] private string _ru, _en, _tr;
+    [SerializeField] private string _ru;
+    [SerializeField] private string _en;
+    [SerializeField] private string _tr;
 
     private TMP_Text textComponent;
 

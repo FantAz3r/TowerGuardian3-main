@@ -9,14 +9,14 @@ public class ExitLevelQuest : Quest
     private ICoroutineRunner _coroutineRunner;
     private Coroutine _timeRoutine;
 
-    public override QuestType GetQuestType() => QuestType.GetOut;
-    public override Vector3 TryGetTarget() => _portal.transform.position;
-
     public ExitLevelQuest(List<Portal> portals)
     {
         _portal = portals.First();
         _coroutineRunner = ServiceLocator.Get<ICoroutineRunner>();
     }
+
+    public override QuestType GetQuestType() => QuestType.GetOut;
+    public override Vector3 TryGetTarget() => _portal.transform.position;
 
     public override void Run()
     {
@@ -35,14 +35,13 @@ public class ExitLevelQuest : Quest
         while (CurrentTime >= 0)
         {
             CurrentTime -= Time.deltaTime;
-            base.UpdateTime();
+            UpdateTime();
             yield return null;
         }
 
         QuestViewer.Highlighter.DeactivateWarning();
-        base.Fail();
+        Fail();
     }
-
 
     public override void Stop()
     {
@@ -51,7 +50,6 @@ public class ExitLevelQuest : Quest
         QuestViewer.Highlighter.DeactivateWarning();
         base.Stop();
     }
-    
 
     public override void Complete()
     {

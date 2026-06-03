@@ -6,21 +6,25 @@ using YG;
 public abstract class BaseShop : PauseWindow
 {
     [SerializeField] private ResourceViewer _resourceView;
-    [SerializeField] private RectTransform _weaponContentParent, _abilitiesContentParent, _buffContentParent;
-    [SerializeField] private Button _weaponButton, _abilityButton, _buffButton;
+    [SerializeField] private RectTransform _weaponContentParent;
+    [SerializeField] private RectTransform _abilitiesContentParent;
+    [SerializeField] private RectTransform _buffContentParent;
+    [SerializeField] private Button _weaponButton;
+    [SerializeField] private Button _abilityButton;
+    [SerializeField] private Button _buffButton;
     [SerializeField] private ProductViewer _productButtonPrefab;
 
-    private List<ICardConfig> _configs = new();
-    private List<ProductViewer> _productButtons = new();
-    private int _weaponCardCount = 0, _abilityCardCount = 0, _buffCardCount = 0;
-    private RectTransform _currentContentPanel;
+    private List<ICardConfig> _configs = new ();
+    private List<ProductViewer> _productButtons = new ();
+    private int _weaponCardCount = 0;
+    private int _abilityCardCount = 0;
+    private int _buffCardCount = 0;
 
-    public Player Player { get; private set; }
+    public Player Player { get; private set;}
+    public CardData CardData { get; private set;}
     public List<ProductViewer> ProductButtons => _productButtons;
     public RectTransform WeaponContentParent => _weaponContentParent;
-    public CardData CardData { get; private set; }
     public List<ICardConfig> Configs => _configs;
-
 
     protected override void Awake()
     {
@@ -116,24 +120,22 @@ public abstract class BaseShop : PauseWindow
             if (config is WeaponConfig)
             {
                 parent = _weaponContentParent;
-
                 _weaponCardCount++;
-
             }
             else if (config is AbilityConfig)
             {
                 parent = _abilitiesContentParent;
-
                 _abilityCardCount++;
             }
             else if (config is BuffConfig)
             {
                 parent = _buffContentParent;
-
                 _buffCardCount++;
             }
             else
+            {
                 return;
+            }
 
             OnParentFounded(parent, config);
         }

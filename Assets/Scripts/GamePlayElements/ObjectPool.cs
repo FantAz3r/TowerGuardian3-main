@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T> where T : MonoBehaviour
+public class ObjectPool<T> 
+    where T : MonoBehaviour
 {
     private T _prefab;
     private List<T> _objects;
@@ -80,6 +81,7 @@ public class ObjectPool<T> where T : MonoBehaviour
     public int GetActiveObjectsCount()
     {
         int count = 0;
+
         foreach (var obj in _objects)
         {
             if (obj != null && obj.gameObject.activeInHierarchy)
@@ -87,6 +89,7 @@ public class ObjectPool<T> where T : MonoBehaviour
                 count++;
             }
         }
+
         return count;
     }
 
@@ -94,7 +97,7 @@ public class ObjectPool<T> where T : MonoBehaviour
     {
         foreach (var mono in _objects)
         {
-            if(mono != null)
+            if (mono != null)
             {
                 if (mono.gameObject.activeInHierarchy)
                 {

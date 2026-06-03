@@ -19,7 +19,6 @@ public class BootstrapState : IState
 
     public void Exit()
     {
-
     }
 
     private void RegisterServices()
@@ -42,7 +41,6 @@ public class BootstrapState : IState
         SoundService soundService = new SoundService();
         ServiceLocator.Register<ISoundService>(soundService);
         ServiceLocator.Register<IADVServise>(new ADVService(soundService));
-
 
         if (YG2.envir.isDesktop)
         {

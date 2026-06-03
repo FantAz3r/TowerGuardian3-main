@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-public interface ICoroutineRunner: IService
+public interface ICoroutineRunner : IService
 {
     Coroutine StartCoroutine(IEnumerator routine);
     void StopCoroutine(Coroutine routine);

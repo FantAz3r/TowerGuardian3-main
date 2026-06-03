@@ -7,4 +7,3 @@ public abstract class AbilityConfig : CardConfig
 
     public override CardType GetCardType() => CardType.Ability;
 }
-

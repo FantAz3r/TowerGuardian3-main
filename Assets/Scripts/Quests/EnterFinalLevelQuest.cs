@@ -4,12 +4,12 @@ using YG;
 public class EnterFinalLevelQuest : Quest
 {
     private Portal _portalLevel5;
-    public override QuestType GetQuestType() => QuestType.EnterLevel5;
 
     public EnterFinalLevelQuest(Portal portal)
     {
         _portalLevel5 = portal;
     }
+    public override QuestType GetQuestType() => QuestType.EnterLevel5;
 
     public override Vector3 TryGetTarget()
     {

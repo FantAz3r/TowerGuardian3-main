@@ -1,18 +1,20 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 public static class ServiceLocator
 {
     private static Dictionary<System.Type, IService> _services = new Dictionary<System.Type, IService>();
 
-    public static void Register<TService>(TService service) where TService : IService
+    public static void Register<TService>(TService service)
+        where TService : IService
     {
         var type = typeof(TService);
         if (_services.ContainsKey(type) == false)
             _services[type] = service;
     }
 
-    public static TService Get<TService>() where TService : IService
+    public static TService Get<TService>() 
+        where TService : IService
     {
         var type = typeof(TService);
 
@@ -22,7 +24,8 @@ public static class ServiceLocator
         throw new InvalidOperationException($"Сервис {type} не зарегистрирован");
     }
 
-    public static bool Remove<TService>() where TService : IService
+    public static bool Remove<TService>()
+        where TService : IService
     {
         var type = typeof(TService);
         return _services.Remove(type);

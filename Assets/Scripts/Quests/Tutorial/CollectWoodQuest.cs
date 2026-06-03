@@ -1,12 +1,12 @@
 public class CollectWoodQuest : Quest
 {
     private readonly Inventory _inventory;
-    public override QuestType GetQuestType() => QuestType.Collect;
 
     public CollectWoodQuest(Inventory inventory)
     {
         _inventory = inventory;
     }
+    public override QuestType GetQuestType() => QuestType.Collect;
 
     public override void Run()
     {
@@ -32,7 +32,7 @@ public class CollectWoodQuest : Quest
         CurrentValue++;
         base.UpdateProgress();
 
-        if(CurrentValue >= Config.TargetValue)
+        if (CurrentValue >= Config.TargetValue)
         {
             Complete();
         }

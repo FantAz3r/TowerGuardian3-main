@@ -33,7 +33,7 @@ public class AxeThrowingConfig : AbilityConfig
         return new List<CardStats>
         {
             new CardStats(UIText.FlightDistance, GetFlightDistance(level), GetFlightDistance(nextLevel)),
-            new CardStats(UIText.Cooldown, GetCooldown(level), GetCooldown(nextLevel))
+            new CardStats(UIText.Cooldown, GetCooldown(level), GetCooldown(nextLevel)),
         };
     }
 }

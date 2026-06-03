@@ -39,11 +39,11 @@ public class NewGameButton : MonoBehaviour
 
         ResetLevels();
 
-        YG2.saves.Coins =0;
+        YG2.saves.Coins = 0;
         YG2.saves.Wood = 0;
         YG2.saves.Stones = 0;
 
-        YG2.saves.CurrentWeapon = new CardSaveData();
+        YG2.saves.CurrentWeapon = new CardSaveData(0, string.Empty);
         YG2.saves.Level = 0;
         YG2.saves.UpgradePoints = 0;
         YG2.saves.CurrentEXP = 0f;

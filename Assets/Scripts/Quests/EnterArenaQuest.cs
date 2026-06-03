@@ -5,7 +5,7 @@ public class EnterArenaQuest : Quest
 {
     private ISceneContainer _container;
     private ArenaTrigger _arena;
-    private List<Bridge> _bridges = new();
+    private List<Bridge> _bridges = new ();
 
     public EnterArenaQuest()
     {
@@ -25,7 +25,6 @@ public class EnterArenaQuest : Quest
             }
         }
 
-        Debug.Log(_arena);
         if (_arena != null)
         {
             return _arena.transform.position;

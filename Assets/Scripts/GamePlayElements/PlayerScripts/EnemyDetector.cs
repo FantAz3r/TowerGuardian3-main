@@ -5,18 +5,19 @@ using UnityEngine;
 public class EnemyDetector : MonoBehaviour
 {
     private IScoreService _service;
-
-    private List<Health> _targets = new();
-    public IReadOnlyList<Health> Targets => _targets;
+    private List<Health> _targets = new ();
 
     public event Action<float> OnGetExperience;
     public event Action OnEnemyKilled;
     public event Action OnBossKilled;
 
+    public IReadOnlyList<Health> Targets => _targets;
+
     private void Awake()
     {
         _service = ServiceLocator.Get<IScoreService>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Health enemy) && enemy != null)
@@ -37,11 +38,9 @@ public class EnemyDetector : MonoBehaviour
 
     private void OnEnemyDied(Health target)
     {
-
         target.Killed -= OnEnemyDied;
         _targets.Remove(target);
         _service.AddScore(ScoreType.Kill, target.Config.ScorePoints);
-
 
         if (target.GetHealthType() == EntityType.Enemy)
         {

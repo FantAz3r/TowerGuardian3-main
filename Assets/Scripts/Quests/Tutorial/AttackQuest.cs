@@ -1,12 +1,13 @@
 public class AttackQuest : Quest
 {
-    PlayerAttacker _attacker;
-    public override QuestType GetQuestType() => QuestType.Attack;
+    private PlayerAttacker _attacker;
 
     public AttackQuest(PlayerAttacker attacker)
     {
         _attacker = attacker;
     }
+
+    public override QuestType GetQuestType() => QuestType.Attack;
 
     public override void Run()
     {

@@ -41,18 +41,13 @@ public class OutpostCaptureQuest : Quest
     private void OnOutpostCaptured()
     {
         CurrentValue++;
-        UpdateProgress();
+        UpdateProgress(CurrentValue, Config.TargetValue);
 
         if (CurrentValue >= Config.TargetValue)
         {
             Complete();
             UnsubscribeAll();
         }
-    }
-
-    public override void UpdateProgress()
-    {
-        base.UpdateProgress(CurrentValue, Config.TargetValue);
     }
 
     public override void Stop()

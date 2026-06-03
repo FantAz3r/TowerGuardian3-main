@@ -1,12 +1,12 @@
 public class CollectStonesQuest : Quest
 {
     private readonly Inventory _inventory;
-    public override QuestType GetQuestType() => QuestType.CollectStones;
 
     public CollectStonesQuest(Inventory inventory)
     {
         _inventory = inventory;
     }
+    public override QuestType GetQuestType() => QuestType.CollectStones;
 
     public override void Run()
     {

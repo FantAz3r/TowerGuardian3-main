@@ -53,7 +53,6 @@ public class EnemyMover : MonoBehaviour, IBuffble
 
     public void EnableBuff()
     {
-        
     }
 
     public void ApplyBuff(IEffect effect)

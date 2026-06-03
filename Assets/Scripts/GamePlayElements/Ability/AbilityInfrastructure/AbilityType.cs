@@ -5,5 +5,5 @@ public enum AbilityType
     BouncingPickaxe,
     Burst,
     RotatingShuriken,
-    FireBall
+    FireBall,
 }

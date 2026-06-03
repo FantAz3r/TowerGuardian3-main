@@ -18,7 +18,7 @@ public class PatrolState : State
             origin.position,
             origin.position + origin.right * edgeSize,
             origin.position + origin.right * edgeSize + origin.forward * edgeSize,
-            origin.position + origin.forward * edgeSize
+            origin.position + origin.forward * edgeSize,
         };
 
         _currentPointIndex = 0;

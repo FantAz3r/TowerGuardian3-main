@@ -7,10 +7,11 @@ public class ResourcePiece : MonoBehaviour
     [SerializeField] private AudioClip _collectSound;
     [SerializeField] private int _amount = 1;
     [SerializeField] private Renderer _outlineRenderer;
-    [field: SerializeField] public int ScorePoints { get; private set; } = 1;
 
     private ResourcePieceAnimator _animator;
     private ISpawnerService _spawnerService;
+
+    [field: SerializeField] public int ScorePoints { get; private set; } = 1;
 
     public AudioClip CollectSound => _collectSound;
     public ResourceType PeiceType => _pieceType;
@@ -40,7 +41,7 @@ public class ResourcePiece : MonoBehaviour
             color = Color.green;
         else if (_amount >= 8 && _amount <= 11)
             color = Color.blue;
-        else if (_amount >= 12 && _amount <=16)
+        else if (_amount >= 12 && _amount <= 16)
             color = Color.red;
         else if (_amount > 16)
             color = Color.yellow;

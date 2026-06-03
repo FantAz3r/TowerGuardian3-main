@@ -6,10 +6,10 @@ public abstract class AllItems<TItem, TConfig, TType> : MonoBehaviour
     where TItem : class, IItem<TType, TConfig>
     where TConfig : class
 {
-    public Player Player { get; private set; }
-    public List<TItem> Items { get; private set; } = new();
-
     public event Action<TItem> Enabled, Removed;
+
+    public Player Player { get; private set; }
+    public List<TItem> Items { get; private set; } = new ();
 
     protected virtual void Awake()
     {

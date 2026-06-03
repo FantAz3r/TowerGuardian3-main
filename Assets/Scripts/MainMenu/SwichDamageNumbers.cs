@@ -51,4 +51,3 @@ public class SwichDamageNumbers : MonoBehaviour
         YG2.SaveProgress();
     }
 }
-

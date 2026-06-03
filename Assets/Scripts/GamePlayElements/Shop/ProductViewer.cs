@@ -30,7 +30,6 @@ public class ProductViewer : MonoBehaviour
         _description.text = config.Description ?? string.Empty;
 
 
-
         if (_config is CardConfig card && _config.Level < _config.MaxCardLevel)
         {
             _level.text = $"{UIText.LVL} {card.Level.ToString()}";
@@ -40,12 +39,11 @@ public class ProductViewer : MonoBehaviour
             _level.text = $"{UIText.MaxLevel}";
         }
 
-
         for (int i = 0; i < _costs.Count; i++)
         {
             if (isBuy)
             {
-                if(_config.Level < _config.MaxCardLevel)
+                if (_config.Level < _config.MaxCardLevel)
                 {
                     if (i < _config.GetCosts().Count)
                     {
@@ -61,7 +59,6 @@ public class ProductViewer : MonoBehaviour
                 {
                     _costs[i].gameObject.SetActive(false);
                 }
-               
             }
             else
             {

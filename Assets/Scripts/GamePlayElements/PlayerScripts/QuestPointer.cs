@@ -116,9 +116,10 @@ public class QuestPointer : MonoBehaviour
         _jumpTween?.Pause();
     }
 
-    void MoveArrow()
+    private void MoveArrow()
     {
-        if (_isMoving) return;
+        if (_isMoving) 
+            return;
 
         Vector3 targetPos = _target + _jumpOffset;
 

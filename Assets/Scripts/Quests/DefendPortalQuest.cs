@@ -8,19 +8,19 @@ public class DefendPortalQuest : Quest
     private ICoroutineRunner _coroutineRunner;
     private Coroutine _timeRoutine;
 
-    public override QuestType GetQuestType() => QuestType.DefendPortal;
-    public override Vector3 TryGetTarget() => _portalFrame.transform.position;
-
     public DefendPortalQuest()
     {
         _coroutineRunner = ServiceLocator.Get<ICoroutineRunner>();
     }
 
+    public override QuestType GetQuestType() => QuestType.DefendPortal;
+    public override Vector3 TryGetTarget() => _portalFrame.transform.position;
+
     public override void Run()
     {
         ServiceLocator.Get<IGameFactory>().SceneContainer.QuestObjects.First().TryGetComponent(out PortalFrame portalFrame);
 
-        if(portalFrame == null)
+        if (portalFrame == null)
         {
             Complete();
             return;
@@ -42,7 +42,7 @@ public class DefendPortalQuest : Quest
 
     public override void UpdateProgress(float currentHealth, float maxHealth)
     {
-        base.UpdateProgress(currentHealth, maxHealth);
+        UpdateProgress(currentHealth, maxHealth);
     }
 
     private IEnumerator TimeRoutine()
@@ -52,7 +52,7 @@ public class DefendPortalQuest : Quest
         while (CurrentTime >= 0)
         {
             CurrentTime -= Time.deltaTime;
-            base.UpdateTime();
+            UpdateTime();
             yield return null;
         }
 
@@ -91,4 +91,3 @@ public class DefendPortalQuest : Quest
         CanStop = true;
     }
 }
-

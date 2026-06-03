@@ -64,7 +64,7 @@ public class LouseLevelMenu : LevelMenu
 
     private void Resurrection()
     {
-        base.Close();
+        Close();
         WindowService.Open(WindowType.HUD);
 
         _advService.TryShowRewardADV(_rewardId, () =>

@@ -5,15 +5,13 @@ using UnityEngine.Audio;
 
 public class SoundSpawner : BaseSpawner
 {
-    private Dictionary<AudioMixerGroup, ObjectPool<SoundObject>> _pools = new();
+    private Dictionary<AudioMixerGroup, ObjectPool<SoundObject>> _pools = new ();
     private SoundData _soundData;
     private WaitForSecondsRealtime _delay;
     private ICoroutineRunner _coroutineRunner;
     private ISoundService _soundService;
-    private HashSet<AudioClip> _blockedClips = new();
+    private HashSet<AudioClip> _blockedClips = new ();
     private float _minDelayBetweenSameClip = 0.15f;
-
-    public override SpawnerType GetSpawnerType() => SpawnerType.Sounds;
 
     public SoundSpawner(SoundData data, SoundObject prefab)
     {
@@ -30,6 +28,8 @@ public class SoundSpawner : BaseSpawner
 
         _delay = new WaitForSecondsRealtime(_minDelayBetweenSameClip);
     }
+
+    public override SpawnerType GetSpawnerType() => SpawnerType.Sounds;
 
     public override void DestroyPool()
     {

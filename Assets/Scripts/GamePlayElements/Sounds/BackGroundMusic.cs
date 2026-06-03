@@ -8,7 +8,7 @@ public class BackgroundMusic : MonoBehaviour
     [SerializeField] private List<AudioClip> _battleSounds;
     [SerializeField] private float _delayAfterTrack = 1f;
 
-    private List<AudioClip> _currentSounds = new();
+    private List<AudioClip> _currentSounds = new ();
     private ISpawnerService _spawnerService;
     private ICoroutineRunner _coroutineRunner;
     private Coroutine _audioRoutine;

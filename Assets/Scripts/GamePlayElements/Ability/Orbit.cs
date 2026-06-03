@@ -10,7 +10,7 @@ public class Orbit : MonoBehaviour
     private Vector3 _direction;
     private float _baseRotationSpeed = 150f;
     private float _rotationSpeed;
-    private List<LavaRock> _rocks = new();
+    private List<LavaRock> _rocks = new ();
     private bool _isInited = false;
     private int _orbitIndex = 0;
 

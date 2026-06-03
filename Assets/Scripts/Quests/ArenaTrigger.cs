@@ -9,7 +9,7 @@ public class ArenaTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<Player>(out _))
+        if (other.TryGetComponent<Player>(out _))
         {
             Entered?.Invoke();
         }

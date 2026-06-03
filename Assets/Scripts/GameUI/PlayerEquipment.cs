@@ -47,7 +47,6 @@ public class PlayerEquipment : MonoBehaviour
             }
 
             slot.CurrentImage.enabled = true;
-
         }
     }
 }

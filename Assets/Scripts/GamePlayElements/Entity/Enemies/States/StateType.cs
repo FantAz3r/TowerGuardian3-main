@@ -8,5 +8,5 @@ public enum StateType
     FindObject,
     Escape,
     EnterPortal,
-    ThornAttack
+    ThornAttack,
 }

@@ -1,10 +1,10 @@
-
 public class UpgradeQuest : Quest
 {
     private Player _player;
-    public override QuestType GetQuestType() => QuestType.Upgrade;
 
     public UpgradeQuest(Player player) => _player = player;
+
+    public override QuestType GetQuestType() => QuestType.Upgrade;
 
     public override void Run()
     {

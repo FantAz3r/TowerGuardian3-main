@@ -8,13 +8,14 @@ public class UIFactory : IUIFactory
     private IGameFactory _gameFactory;
     private Transform _uiRoot;
     private Transform _backgroundContainer;
-    public HUD HUD { get; private set; }
 
     public UIFactory()
     {
         _gameFactory = ServiceLocator.Get<IGameFactory>();
         _windowData = Resources.Load<WindowData>(GameConstants.WindowData);
     }
+
+    public HUD HUD { get; private set; }
 
     public void CreateUIRoot()
     {
@@ -97,22 +98,22 @@ public class UIFactory : IUIFactory
 
     public CardInventory CreateInventory()
     {
-        return CreateWindow(WindowType.Inventory) as CardInventory; ;
+        return CreateWindow(WindowType.Inventory) as CardInventory;
     }
 
     public PauseWindow CreateLeaderboard()
     {
-        return CreateWindow(WindowType.LeaderBoard) as PauseWindow; ;
+        return CreateWindow(WindowType.LeaderBoard) as PauseWindow;
     }
 
     public PauseWindow CreateMenuLeaderboard()
     {
-        return CreateWindow(WindowType.MenuLeaderboard) as PauseWindow; ;
+        return CreateWindow(WindowType.MenuLeaderboard) as PauseWindow;
     }
 
     public ShowCardsButton CreateShowCardsButton()
     {
-        return CreateWindow(WindowType.ShowCardsButton, HUD.transform) as ShowCardsButton; ;
+        return CreateWindow(WindowType.ShowCardsButton, HUD.transform) as ShowCardsButton;
     }
 
     public Shop CreateShop()
@@ -208,4 +209,3 @@ public class UIFactory : IUIFactory
         return window;
     }
 }
-

@@ -1,6 +1,6 @@
-using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -13,6 +13,11 @@ public class GameFactory : IGameFactory
     private PortalSwitcher _portalSwitcher;
     private ISpawnerService _spawnerService;
 
+    public GameFactory()
+    {
+        _spawnerService = ServiceLocator.Get<ISpawnerService>();
+    }
+
     public EnemySpawner EnemySpawner { get; private set; }
     public BackgroundMusic BackGroundMusic { get; private set; }
     public CardSelector CardSelector { get; private set; }
@@ -24,11 +29,6 @@ public class GameFactory : IGameFactory
     public QuestStateMachine QuestRunner { get; private set; }
 
     public ISceneContainer SceneContainer { get; private set; }
-
-    public GameFactory()
-    {
-        _spawnerService = ServiceLocator.Get<ISpawnerService>();
-    }
 
     public void SetCurrentLevel(LevelID level)
     {
@@ -178,36 +178,4 @@ public class GameFactory : IGameFactory
             EnemySpawner?.StartSpawn();
         }
     }
-}
-
-public interface IGameFactory : IService
-{
-    LevelID CurrentLevel { get; }
-    LevelConfig LevelConfig { get; }
-    DayCycle Cycle { get; }
-    Player Player { get; }
-    ScoreCounter ScoreCounter { get; }
-    QuestStateMachine QuestRunner { get; }
-    ISceneContainer SceneContainer { get; }
-    CardSelector CardSelector { get; }
-    EnemySpawner EnemySpawner { get; }
-    BackgroundMusic BackGroundMusic { get; }
-
-    void SetCurrentLevel(LevelID level);
-    void SetLevelConfig(LevelID level);
-    void SetSceneContainer();
-    void CreatePlayer(LevelID previousLevel);
-    void CreateSpawners();
-    void CreateCamera();
-    void CreateEventSystem();
-    void CreateCardSelector();
-    void CreateScoreCounter();
-    void CreateLight();
-    void CreateEnemies();
-    void CreatePortalsFactory();
-    void CreateQuests();
-    void CreateQuestRuner();
-    void CreateTower();
-    void CreateBackgroundSounds();
-    void RunLevel();
 }

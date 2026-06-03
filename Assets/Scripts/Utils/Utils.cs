@@ -30,7 +30,8 @@ public static class Utils
         return result;
     }
 
-    public static List<T> GetObjectsSortedByDistance<T>(List<T> objects, Vector3 referencePoint) where T : Component
+    public static List<T> GetObjectsSortedByDistance<T>(List<T> objects, Vector3 referencePoint) 
+        where T : Component
     {
         if (objects == null || objects.Count == 0)
             return new List<T>();
@@ -93,7 +94,6 @@ public static class Utils
         return chosen;
     }
 
-
     public static T SelectByWeights<T>(Dictionary<T, float> targetWeights)
     {
         float totalWeight = 0f;
@@ -127,12 +127,3 @@ public static class Utils
     }
 }
 
-public static class EffectIdGenerator
-{
-    private static int _nextId = 0;
-
-    public static int GetNextId()
-    {
-        return System.Threading.Interlocked.Increment(ref _nextId);
-    }
-}

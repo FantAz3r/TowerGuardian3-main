@@ -21,7 +21,7 @@ public class CardViewer : MonoBehaviour
 
     private void InitStats(ICardConfig config)
     {
-        _stats.text = "";
+        _stats.text = string.Empty;
 
         if (config.Level == 0)
         {
@@ -55,6 +55,6 @@ public class CardViewer : MonoBehaviour
         else if (difference < 0)
             return $"<color=red>{difference:0.#}</color>";
 
-        return "";
+        return string.Empty;
     }
 }

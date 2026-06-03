@@ -21,13 +21,14 @@ public class DayCycle : MonoBehaviour
     private Color _nightLightColor;
     private DayPhase _currentPhase;
     private IGameConditionService _gameConditionService;
-    public float DayDuration => _dayDuration;
-    public float NightDuration => _nightDuration;
-    public float TransitionDuration => _transitionDuration;
 
     public event Action<DayPhase> OnPhaseChanged;
     public event Action<float> TimePassedFromTransition;
     public event Action<float> TimePassedFromStart;
+
+    public float DayDuration => _dayDuration;
+    public float NightDuration => _nightDuration;
+    public float TransitionDuration => _transitionDuration;
 
     public DayPhase CurrentPhase => _currentPhase;
 
@@ -42,7 +43,6 @@ public class DayCycle : MonoBehaviour
 
     private float GetIntensity(DayPhase phase)
         => phase == DayPhase.Day ? _dayLightIntensity : _nightLightIntensity;
-
 
     private void Awake()
     {
@@ -65,7 +65,6 @@ public class DayCycle : MonoBehaviour
         _gameConditionService.SetLevelEnded(false);
     }
 
-
     public void StartDayCycle()
     {
         _phaseCoroutine = StartCoroutine(CheckForInfinite());
@@ -73,7 +72,7 @@ public class DayCycle : MonoBehaviour
 
     public void StopDayCycle()
     {
-        if(_phaseCoroutine != null)
+        if (_phaseCoroutine != null)
         {
             StopCoroutine(_phaseCoroutine);
         }
@@ -83,7 +82,7 @@ public class DayCycle : MonoBehaviour
     {
         _totalTimeOnLevel = 0f;
 
-        while (_gameConditionService.IsLevelEnded ==false)
+        while (_gameConditionService.IsLevelEnded == false)
         {
             OnPhaseChanged?.Invoke(_currentPhase);
             _timeRemaining = GetPhaseDuration(_currentPhase) + _transitionDuration;

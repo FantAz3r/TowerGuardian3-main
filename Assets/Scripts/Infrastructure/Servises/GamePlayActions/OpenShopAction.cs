@@ -3,7 +3,7 @@
 public class OpenShopAction : MonoBehaviour, IAction
 {
     [SerializeField] private Shop _shop;
-    public InteractionType GetInteractionType()  => InteractionType.OpenShop;
+    public InteractionType GetInteractionType() => InteractionType.OpenShop;
 
     public void Execute()
     {

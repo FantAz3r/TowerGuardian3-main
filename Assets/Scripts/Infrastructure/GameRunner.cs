@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class GameRunner : MonoBehaviour
 {
-    [SerializeField] private EntryPoint _entyPoint;
+    [SerializeField] private EntryPoint _entryPoint;
 
     private void Awake()
     {
-        EntryPoint _entyPoint = FindObjectOfType<EntryPoint>();
+        _entryPoint = FindObjectOfType<EntryPoint>();
 
-        if (_entyPoint == null )
-            Instantiate(_entyPoint);
+        if (_entryPoint == null)
+            Instantiate(_entryPoint);
     }
 }

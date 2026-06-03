@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class WinLevelMenu : LevelMenu
 {
-
     [SerializeField] private Button _nextLevelButton;
     [SerializeField] private AudioClip _winSound;
     [SerializeField] private TMP_Text _levelNumberText;
@@ -29,7 +28,7 @@ public class WinLevelMenu : LevelMenu
     private void OnNextLevelClicked()
     {
         StateSwitchService.Switch(LevelID.Tower);
-        base.Close();
+        Close();
     }
 
     public override void Open()

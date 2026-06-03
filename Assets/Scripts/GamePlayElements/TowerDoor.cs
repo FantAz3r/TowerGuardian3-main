@@ -1,6 +1,6 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
-using System;
 
 public class TowerDoor : MonoBehaviour
 {

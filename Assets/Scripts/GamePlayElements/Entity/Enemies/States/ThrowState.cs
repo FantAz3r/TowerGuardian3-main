@@ -50,6 +50,5 @@ public class ThrowState : State
         thrownObject.StartFly(Enemy.Config.ThrowDamage, Enemy.Target.position);
         
         _spawnerService.SendEffectReqest(EffectType.AimPoint, Enemy.Target.position);
-        
     }
 }

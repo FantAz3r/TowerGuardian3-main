@@ -7,7 +7,7 @@ public class Lava : MonoBehaviour
     [SerializeField] private float damageInterval = 0.5f;
     private float _lastDamageTime = 0;
 
-    private List<Health> _entities = new();
+    private List<Health> _entities = new ();
 
     private void OnTriggerEnter(Collider other)
     {

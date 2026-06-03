@@ -3,11 +3,12 @@ using UnityEngine;
 public class WindowService : IWindowService
 {
     private readonly UIFactory _uiFactory;
+
     private WindowBase _currentWindow = null;
     private WindowType _currentWindowType = WindowType.None;
     private WindowType _previousWindowType = WindowType.None;
-    public WindowService(UIFactory uiFactory) =>
-        _uiFactory = uiFactory;
+
+    public WindowService(UIFactory uiFactory) => _uiFactory = uiFactory;
 
     public WindowBase Open(WindowType type, GameObject payload = null)
     {
@@ -103,7 +104,7 @@ public class WindowService : IWindowService
             case WindowType.MenuLeaderboard:
                 _currentWindow = _uiFactory.CreateMenuLeaderboard();
                 break;
-                case WindowType.BossHealth:
+            case WindowType.BossHealth:
                 _currentWindow = _uiFactory.CreateBossHealthView();
                 break;
         }

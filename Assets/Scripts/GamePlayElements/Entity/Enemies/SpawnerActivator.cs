@@ -4,7 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class SpawnerActivator : MonoBehaviour
 {
-    public event Action<SpawnerActivator> Detected, Losted, Destroyed;
+    public event Action<SpawnerActivator> Detected;
+    public event Action<SpawnerActivator> Losted;
+    public event Action<SpawnerActivator> Destroyed;
 
     private void OnTriggerEnter(Collider other)
     {

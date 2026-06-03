@@ -30,7 +30,7 @@ public class KillQuest : Quest
         CurrentValue++;
         base.UpdateProgress();
 
-        if(CurrentValue >= Config.TargetValue)
+        if (CurrentValue >= Config.TargetValue)
         {
             Complete();
         }

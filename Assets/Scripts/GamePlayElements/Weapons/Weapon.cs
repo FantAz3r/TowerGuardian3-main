@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour, IWeapon
             if (target == null)
                 continue;
 
-            if(target.IsImmunity)
+            if (target.IsImmunity)
                 continue;
 
             float damageToDeal = _damage;

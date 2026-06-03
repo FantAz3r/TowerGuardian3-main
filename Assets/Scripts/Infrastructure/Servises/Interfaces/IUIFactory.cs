@@ -1,4 +1,4 @@
 public interface IUIFactory : IService
 {
-   HUD HUD { get;}
+   HUD HUD { get; }
 }

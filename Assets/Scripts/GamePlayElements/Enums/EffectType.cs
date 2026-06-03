@@ -8,5 +8,5 @@ public enum EffectType
     Expload,
     AimPoint,
     PortalChrge,
-    Bounce
+    Bounce,
 }

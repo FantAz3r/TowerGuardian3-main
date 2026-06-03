@@ -8,14 +8,13 @@ public class SellResources : MonoBehaviour
     [SerializeField] private CounterSlider _slider;
     [SerializeField] private CostResourceData _costResourceData;
 
-    private List<SellResourceView> _productButtons = new();
+    private List<SellResourceView> _productButtons = new ();
     private Inventory _inventory;
 
     private void Awake()
     {
         _inventory = ServiceLocator.Get<IGameFactory>().Player.Inventory;
         _slider.gameObject.SetActive(false);
-        
     }
 
     public void RenderSellItems()
@@ -24,7 +23,7 @@ public class SellResources : MonoBehaviour
 
         foreach (var config in _costResourceData.PieceConfigs)
         {
-            bool interactble = (_inventory.ShowCount(config.Type) > 0);
+            bool interactble = _inventory.ShowCount(config.Type) > 0;
             SellResourceView button = Instantiate(_buttonPrefab, parentPanel);
             button.Init(_slider);
             button.Render(config, interactble, _inventory.ShowCount(config.Type));
@@ -53,7 +52,7 @@ public class SellResources : MonoBehaviour
 
         List<CostInfo> addedResources = new List<CostInfo>
         {
-            new CostInfo(config.Type, 1, config.Icon)
+            new CostInfo(config.Type, 1, config.Icon),
         };
 
         _inventory.AddResousres(MultiplyCost(sellPrice, count));
@@ -71,7 +70,7 @@ public class SellResources : MonoBehaviour
             CostInfo multiplied = new CostInfo
             {
                 ResourceType = cost.ResourceType,
-                Value = cost.Value * count
+                Value = cost.Value * count,
             };
 
             multipliedCost.Add(multiplied);
@@ -79,7 +78,6 @@ public class SellResources : MonoBehaviour
 
         return multipliedCost;
     }
-
 
     private void OnDestroy()
     {

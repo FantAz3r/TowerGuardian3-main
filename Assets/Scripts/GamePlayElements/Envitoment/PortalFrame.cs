@@ -1,17 +1,17 @@
-using DG.Tweening;
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PortalFrame : MonoBehaviour
 {
+    public event Action Disabled;
+
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public HealthViewer HealthViewre { get; private set; }
     [field: SerializeField] public Slider HealthViewSlider { get; private set; }
     [field: SerializeField] public Collider Collider { get; private set; }
     public bool IsActive { get; private set; } = false;
-
-    public event Action Disabled;
 
     private void Awake()
     {

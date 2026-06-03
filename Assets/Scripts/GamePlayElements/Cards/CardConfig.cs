@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class CardConfig : ShopConfig, ICardConfig
 {
-    [field: SerializeField, Range(0f, 1f)] public float ChanceToView { get; private set; }
+    public event Action<ICardConfig> Upgraded;
+
+    [field: SerializeField] [field: Range(0f, 1f)] public float ChanceToView { get; private set; }
     [field: SerializeField] public int Level { get; private set; } = 0;
     [field: SerializeField] public bool HasPlayer { get; private set; }
     [field: SerializeField] public bool IsBought { get; private set; }
     [field: SerializeField] public int MaxCardLevel { get; private set; } = 100;
-
-    public event Action<ICardConfig> Upgraded;
 
     public abstract CardType GetCardType();
     public abstract List<CardStats> GetStats();
@@ -44,7 +44,7 @@ public abstract class CardConfig : ShopConfig, ICardConfig
 
     public override List<CostInfo> GetCosts()
     {
-        List<CostInfo> increasedCosts = new();
+        List<CostInfo> increasedCosts = new ();
         float exponent = 1.5f;
 
         foreach (var info in Costs)
@@ -85,4 +85,3 @@ public abstract class CardConfig : ShopConfig, ICardConfig
         ChanceToView = Mathf.Clamp01(chance);
     }
 }
-

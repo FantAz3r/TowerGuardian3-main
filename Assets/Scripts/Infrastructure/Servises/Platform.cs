@@ -9,4 +9,3 @@ public class Platform : InteractionMethod
         ServiceLocator.Get<IWindowService>().Open(WindowType);
     }
 }
-

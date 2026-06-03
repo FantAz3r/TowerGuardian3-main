@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
-    public float shakeDuration = 1.0f; 
-    public float shakeStrength = 0.5f; 
-    public int vibrato = 10; 
-    public float randomness = 90f;
+    [SerializeField] private float _shakeDuration = 1.0f; 
+    [SerializeField] private float _shakeStrength = 0.5f; 
+    [SerializeField] private int _vibrato = 10; 
+    [SerializeField] private float _randomness = 90f;
 
     private Vector3 initialPosition;
 
-    void Start()
+    private void Start()
     {
         initialPosition = transform.localPosition;
     }
@@ -19,21 +19,12 @@ public class CameraShaker : MonoBehaviour
     {
         transform.localPosition = initialPosition;
 
-        transform.DOShakePosition(shakeDuration, shakeStrength, vibrato, randomness)
+        transform.DOShakePosition(_shakeDuration, _shakeStrength, _vibrato, _randomness)
             .OnComplete(OnShakeComplete); 
     }
 
-    void OnShakeComplete()
+    private void OnShakeComplete()
     {
-       
         transform.localPosition = initialPosition;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) // Нажмите Пробел для запуска тряски
-        {
-            TriggerShake();
-        }
     }
 }

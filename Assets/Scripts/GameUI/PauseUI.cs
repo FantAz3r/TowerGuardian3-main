@@ -33,7 +33,7 @@ public class PauseUI : PauseWindow
 
     private void OnHomeClicked()
     {
-        base.Close();
+        Close();
         _windowService.Open(WindowType.HUD);
         string levelName = SceneManager.GetActiveScene().name;
 

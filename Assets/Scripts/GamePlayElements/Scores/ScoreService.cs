@@ -6,7 +6,6 @@ public class ScoreService : IScoreService
 
     public void AddScore(ScoreType type, int count = 0)
     {
-
         if (_scoreBySource.ContainsKey(type) == false)
         {
             _scoreBySource[type] = 0;

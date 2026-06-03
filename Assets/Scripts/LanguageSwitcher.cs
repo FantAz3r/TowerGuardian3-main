@@ -24,7 +24,6 @@ public class LanguageSwitcher : MonoBehaviour
         }
 
         SetLanguage(_currentLanguage);
-
     }
 
     private void OnEnable()
@@ -58,9 +57,9 @@ public class LanguageSwitcher : MonoBehaviour
 
     private void EnableCurrentToggle()
     {
-        _toggleRu.isOn = (_currentLanguage == "ru");
-        _toggleEn.isOn = (_currentLanguage == "en");
-        _toggleTr.isOn = (_currentLanguage == "tr");
+        _toggleRu.isOn = _currentLanguage == "ru";
+        _toggleEn.isOn = _currentLanguage == "en";
+        _toggleTr.isOn = _currentLanguage == "tr";
     }
 
     private void SetLanguage(string lang)

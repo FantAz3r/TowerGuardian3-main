@@ -48,7 +48,6 @@ public class Sell : BaseShop
         LoadContent();
     }
 
-
     protected override void LoadCards()
     {
         if (YG2.saves.AllCards == null)
@@ -72,4 +71,3 @@ public class Sell : BaseShop
         button.Render(config, false);
     }
 }
-

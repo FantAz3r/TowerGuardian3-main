@@ -30,7 +30,7 @@ public class JumpState : State
 
         foreach (var hit in hits)
         {
-            if( hit.TryGetComponent(out Health demadeable))
+            if (hit.TryGetComponent(out Health demadeable))
             {
                 if (demadeable == Enemy.Health)
                 {

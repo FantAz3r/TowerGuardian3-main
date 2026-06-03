@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
-    [field: SerializeField] public bool IsActiveSlot { get; private set; }
 
     [SerializeField] private Image _weaponImage;
     [SerializeField] private Image _abilityImage;
-    
     [SerializeField] private CardType _slotType;
+
     private PlayerCardConfigContainer _cardHolrer;
 
+    [field: SerializeField] public bool IsActiveSlot { get; private set; }
     public Image CurrentImage { get; private set; }
     public UIItem CurrentItem { get; private set; }
 
@@ -69,7 +69,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         {
             _cardHolrer.AddCard(item.SlotConfig);
         }
-
     }
 
     public void RemoveItem(UIItem item)
