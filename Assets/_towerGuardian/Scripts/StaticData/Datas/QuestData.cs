@@ -1,0 +1,12 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace TowerGuardian.StaticData
+{
+    [CreateAssetMenu(fileName = "Datas", menuName = "Datas/QuestData")]
+
+    public class QuestData : ScriptableObject
+    {
+        public List<QuestInfo> QuestInfos = new List<QuestInfo>();
+    }
+}

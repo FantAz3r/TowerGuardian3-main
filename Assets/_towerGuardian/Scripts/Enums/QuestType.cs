@@ -1,0 +1,30 @@
+namespace TowerGuardian.Enums
+{
+    public enum QuestType
+    {
+        None,
+        Move,
+        Attack,
+        Collect,
+        Upgrade,
+        KillEnemy,
+        GetOut,
+        EnterTower,
+        UpStairs,
+        EnterLevel1,
+        EnterLevel2,
+        EnterLevel3,
+        DefendPortal,
+        CollectStones,
+        EnterLevel4,
+        SwapWeapon,
+        SelectWeaponCard,
+        OutpostCapture,
+        DestroyBuildings,
+        StayAlive,
+        KillBoss,
+        EnterArena,
+        GameComplete,
+        EnterLevel5,
+    }
+}

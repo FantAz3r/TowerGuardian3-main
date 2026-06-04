@@ -34,7 +34,7 @@ namespace YG.LanguageLegacy
 
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("AddEXP selected", GUILayout.Height(22)))
+            if (GUILayout.Button("Add selected", GUILayout.Height(22)))
             {
                 foreach (GameObject obj in Selection.gameObjects)
                 {

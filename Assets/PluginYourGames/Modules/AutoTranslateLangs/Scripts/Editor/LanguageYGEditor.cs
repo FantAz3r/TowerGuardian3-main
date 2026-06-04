@@ -48,13 +48,13 @@ namespace YG.LanguageLegacy
 
             if (isNullTextComponent)
             {
-                if (GUILayout.Button("AddEXP component - Text Legasy", GUILayout.Height(23)))
+                if (GUILayout.Button("Add component - Text Legasy", GUILayout.Height(23)))
                 {
                     scr.textLComponent = scr.gameObject.AddComponent<Text>();
                     Undo.RecordObject(scr.textLComponent, "Undo textUIComponent");
                 }
 #if TMP_YG2
-                if (GUILayout.Button("AddEXP component - Text Mesh Pro UGUI", GUILayout.Height(23)))
+                if (GUILayout.Button("Add component - Text Mesh Pro UGUI", GUILayout.Height(23)))
                 {
                     scr.textMPComponent = scr.gameObject.AddComponent<TextMeshProUGUI>();
                 }

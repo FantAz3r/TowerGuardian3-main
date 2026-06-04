@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TowerGuardian.Enums;
+using TowerGuardian.Infrastructure;
 using UnityEngine;
 
 public class ThornAttackState : State

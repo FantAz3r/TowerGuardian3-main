@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using TowerGuardian.Factories;
+using TowerGuardian.Infrastructure;
 using UnityEngine;
 
 public class FinalBossUltimate : State

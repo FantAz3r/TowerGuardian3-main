@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 7218062820368347708}
   - component: {fileID: 5550769647143844441}
   - component: {fileID: 124548455054765489}
-  - component: {fileID: 8901158352475733191}
   - component: {fileID: 3087310767791965510}
   m_Layer: 5
   m_Name: Sell
@@ -217,19 +216,6 @@ MonoBehaviour:
   _buffButton: {fileID: 7947862330411197345}
   _productButtonPrefab: {fileID: 7587889323222580540, guid: 9658abc7b4e18854dadc7f71105786c2, type: 3}
   _resourcesPanel: {fileID: 3087310767791965510}
---- !u!114 &8901158352475733191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 386525308383823933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a362a76a2a001b24c9a6fd9388b0de81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sell: {fileID: 124548455054765489}
 --- !u!114 &3087310767791965510
 MonoBehaviour:
   m_ObjectHideFlags: 0
