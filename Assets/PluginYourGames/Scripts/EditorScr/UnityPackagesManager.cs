@@ -51,8 +51,7 @@ namespace YG.EditorScr
 
             if (option == 0)
                 return true;
-            else
-                return false;
+            return false;
         }
 
         private static bool DialogDeletePackage(string packageName)
@@ -61,8 +60,7 @@ namespace YG.EditorScr
 
             if (option == 0)
                 return true;
-            else
-                return false;
+            return false;
         }
     }
 }

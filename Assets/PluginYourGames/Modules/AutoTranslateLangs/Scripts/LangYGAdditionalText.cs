@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 #if TMP_YG2
-using TMPro;
 #endif
 
 namespace YG.LanguageLegacy
 {
     public class LangYGAdditionalText : MonoBehaviour
     {
-        public enum Side { Left, Right };
+        public enum Side { Left, Right }
         public Side side;
 
         public string additionalText

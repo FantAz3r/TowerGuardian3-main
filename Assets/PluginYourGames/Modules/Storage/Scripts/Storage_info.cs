@@ -8,7 +8,7 @@ namespace YG
         public StorageSettings Storage = new StorageSettings();
 
         [Serializable]
-        public partial class StorageSettings
+        public class StorageSettings
         {
 #if RU_YG2
             [Tooltip("Локальные сохранения. При включённых облачных сохранениях, локальные и облачные синхронизируются! Для платформы Yandex Games лучше выключить локальные сохранения и использовать только облачные! Для других платформ, локальные сохранения могут хорошо подойти. В WebGL сохранение будет производиться в локальное хранилище браузера. Для остальных устройств в PlayerPrefs.")]

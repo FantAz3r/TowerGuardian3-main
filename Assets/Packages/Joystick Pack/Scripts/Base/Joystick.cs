@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
+
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
-    public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
+    public float Horizontal { get { return snapX ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
+    public float Vertical { get { return snapY ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
 
     public float HandleRange
@@ -24,14 +25,14 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public bool SnapY { get { return snapY; } set { snapY = value; } }
 
     [SerializeField] private float handleRange = 1;
-    [SerializeField] private float deadZone = 0;
+    [SerializeField] private float deadZone;
     [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;
-    [SerializeField] private bool snapX = false;
-    [SerializeField] private bool snapY = false;
+    [SerializeField] private bool snapX;
+    [SerializeField] private bool snapY;
 
-    [SerializeField] protected RectTransform background = null;
-    [SerializeField] private RectTransform handle = null;
-    private RectTransform baseRect = null;
+    [SerializeField] protected RectTransform background;
+    [SerializeField] private RectTransform handle;
+    private RectTransform baseRect;
 
     private Canvas canvas;
     private Camera cam;
@@ -109,25 +110,22 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             {
                 if (angle < 22.5f || angle > 157.5f)
                     return 0;
-                else
-                    return (value > 0) ? 1 : -1;
+                return (value > 0) ? 1 : -1;
             }
-            else if (snapAxis == AxisOptions.Vertical)
+
+            if (snapAxis == AxisOptions.Vertical)
             {
                 if (angle > 67.5f && angle < 112.5f)
                     return 0;
-                else
-                    return (value > 0) ? 1 : -1;
+                return (value > 0) ? 1 : -1;
             }
             return value;
         }
-        else
-        {
-            if (value > 0)
-                return 1;
-            if (value < 0)
-                return -1;
-        }
+
+        if (value > 0)
+            return 1;
+        if (value < 0)
+            return -1;
         return 0;
     }
 

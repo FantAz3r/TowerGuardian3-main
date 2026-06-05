@@ -1,24 +1,24 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestDemo : MonoBehaviour {
+public class ChestDemo : MonoBehaviour
+{
 
     //This script goes on the ChestComplete prefab;
 
     public Animator chestAnim; //Animator for the chest;
 
-	// Use this for initialization
-	void Awake ()
+    // Use this for initialization
+    private void Awake()
     {
         //get the Animator component from the chest;
         chestAnim = GetComponent<Animator>();
         //start opening and closing the chest for demo purposes;
         StartCoroutine(OpenCloseChest());
-	}
+    }
 
 
-    IEnumerator OpenCloseChest()
+    private IEnumerator OpenCloseChest()
     {
         //play open animation;
         chestAnim.SetTrigger("open");

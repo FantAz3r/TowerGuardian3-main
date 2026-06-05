@@ -11,7 +11,7 @@ namespace YG.EditorScr
 
         public static bool Stringy(string label)
         {
-            int width = label.Length * 8 + 30;
+            int width = (label.Length * 8) + 30;
             return GUILayout.Button(label, YGEditorStyles.button, GUILayout.Width(width));
         }
 

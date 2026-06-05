@@ -11,7 +11,7 @@ namespace YG
         public SimulationSettings Simulation = new SimulationSettings();
 
         [Serializable]
-        public partial class SimulationSettings
+        public class SimulationSettings
         {
 #if RU_YG2
             [HeaderYG("Данные окружения", 5)]
@@ -28,7 +28,7 @@ namespace YG
             [Tooltip("Simulation of an interstitial advertising campaign in Unity Editor.")]
 #endif
             public bool enableInterAdv = true;
-            
+
             [Tooltip(Langs.t_advIntervalSimulation), Min(0)]
             public int advIntervalSimulation = 60;
 
@@ -36,7 +36,7 @@ namespace YG
             public float durationAdv = 0.5f;
 
             [Tooltip(Langs.t_loadAdv), Min(0)]
-            public float loadAdv = 0.0f;
+            public float loadAdv;
 #if UNITY_EDITOR
 #if RU_YG2
             [Tooltip("Симулирование вызова ошибки при просмотре рекламы.")]

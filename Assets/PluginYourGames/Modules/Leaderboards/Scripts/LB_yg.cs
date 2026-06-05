@@ -1,8 +1,9 @@
 using System;
-using UnityEngine;
-using YG.Utils.LB;
+using System.Globalization;
 using System.Linq;
+using UnityEngine;
 using YG.Insides;
+using YG.Utils.LB;
 #if UNITY_EDITOR
 using YG.EditorScr;
 #endif
@@ -25,14 +26,14 @@ namespace YG
         {
             if (infoYG.Leaderboards.enable && player.auth)
             {
-                if (infoYG.Leaderboards.saveScoreAnonymousPlayers == false && player.name == InfoYG.ANONYMOUS)
+                if (!infoYG.Leaderboards.saveScoreAnonymousPlayers && player.name == InfoYG.ANONYMOUS)
                     return;
 
 #if !UNITY_EDITOR
                 Message("Set Leaderboard: " + score);
                 iPlatform.SetLeaderboard(nameLB, score, extraData);
 #else
-                Message($"Set Leaderboard «{nameLB}»: {score}");
+                Message($"Set Leaderboard ï¿½{nameLB}ï¿½: {score}");
 #endif
             }
         }
@@ -46,7 +47,7 @@ namespace YG
         {
             if (infoYG.Leaderboards.enable && player.auth)
             {
-                if (infoYG.Leaderboards.saveScoreAnonymousPlayers == false && player.name == InfoYG.ANONYMOUS)
+                if (!infoYG.Leaderboards.saveScoreAnonymousPlayers && player.name == InfoYG.ANONYMOUS)
                     return;
 
                 if (secondsScore <= 0)
@@ -55,7 +56,7 @@ namespace YG
                     return;
                 }
 
-                string rec = secondsScore.ToString("F3", System.Globalization.CultureInfo.InvariantCulture);
+                string rec = secondsScore.ToString("F3", CultureInfo.InvariantCulture);
                 string[] parts = rec.Split('.', ',');
 
                 int result;
@@ -88,7 +89,7 @@ namespace YG
 #else
             if (infoYG.Leaderboards.enable)
             {
-                Message($"Get Leaderboard «{nameLB}»");
+                Message($"Get Leaderboard ï¿½{nameLB}ï¿½");
 
                 LBData lb = null;
                 LBData[] LBs = new LBData[infoYG.Leaderboards.listLBSim.Length];
@@ -159,13 +160,13 @@ namespace YG.Insides
     {
         public static LBData NoLBData(string nameLB)
         {
-            LBData lb = new LBData()
+            LBData lb = new LBData
             {
                 technoName = nameLB,
                 entries = InfoYG.NO_DATA,
                 players = new LBPlayerData[1]
                 {
-                    new LBPlayerData()
+                    new LBPlayerData
                     {
                         name = InfoYG.NO_DATA,
                         photo = null

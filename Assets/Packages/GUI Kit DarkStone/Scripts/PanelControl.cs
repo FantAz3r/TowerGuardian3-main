@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 namespace LayerLab
 {
     public class PanelControl : MonoBehaviour
     {
-        private int page = 0;
-        private bool isReady = false;
+        private int page;
+        private bool isReady;
         [SerializeField] private List<GameObject> panels = new List<GameObject>();
         private TextMeshProUGUI textTitle;
         [SerializeField] private Transform panelTransform;
@@ -36,7 +33,7 @@ namespace LayerLab
             CheckControl();
         }
 
-        void Update()
+        private void Update()
         {
             if (panels.Count <= 0 || !isReady) return;
 
@@ -68,7 +65,7 @@ namespace LayerLab
             CheckControl();
         }
 
-        void SetArrowActive()
+        private void SetArrowActive()
         {
             buttonPrev.gameObject.SetActive(page > 0);
             buttonNext.gameObject.SetActive(page < panels.Count - 1);

@@ -112,10 +112,8 @@ namespace YG
                 {
                     return File.ReadAllText(file).Replace("v", string.Empty);
                 }
-                else
-                {
-                    return "0";
-                }
+
+                return "0";
             }
         }
 

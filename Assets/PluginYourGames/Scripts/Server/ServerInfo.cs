@@ -1,17 +1,15 @@
 #if UNITY_EDITOR
 using System;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 namespace YG.EditorScr
 {
-    [InitializeOnLoad]
     public static class ServerInfo
     {
         public static event Action onLoadServerInfo;
 
-        private static ServerJson _saveInfo = null;
+        private static ServerJson _saveInfo;
         public static ServerJson saveInfo
         {
             get

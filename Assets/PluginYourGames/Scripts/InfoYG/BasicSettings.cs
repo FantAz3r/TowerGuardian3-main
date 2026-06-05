@@ -9,7 +9,7 @@ namespace YG
         public BasicSettings Basic = new BasicSettings();
 
         [Serializable]
-        public partial class BasicSettings
+        public class BasicSettings
         {
 #if UNITY_EDITOR
             [HeaderYG(Langs.platform, 10)]

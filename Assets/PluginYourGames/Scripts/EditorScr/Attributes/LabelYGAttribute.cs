@@ -43,8 +43,6 @@ namespace YG
                 labelStyle = TextStyles.Green();
 
             EditorGUI.LabelField(position, attr.label, labelStyle);
-
-            return;
         }
     }
 #endif

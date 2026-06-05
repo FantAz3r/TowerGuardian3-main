@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections.KeysGenerators
@@ -19,7 +18,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         {
             for (int i = 0; i <= _stepCount; i++)
             {
-                yield return _startIndex + i * _stepDistance;
+                yield return _startIndex + (i * _stepDistance);
             }
         }
     }

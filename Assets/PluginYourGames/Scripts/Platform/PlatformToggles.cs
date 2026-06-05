@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using YG.Insides;
 
@@ -12,11 +13,11 @@ namespace YG
 
 namespace YG.Insides
 {
-    [System.Serializable]
+    [Serializable]
     public partial class PlatformToggles
     {
 #if UNITY_EDITOR
-        public bool autoPauseGame = false;
+        public bool autoPauseGame;
         public bool selectWebGLTemplate = true;
         public bool runInBackground = true;
         public bool enableExceptions = true;

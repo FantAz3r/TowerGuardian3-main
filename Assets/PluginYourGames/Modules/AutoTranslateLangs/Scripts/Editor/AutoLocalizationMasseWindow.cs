@@ -17,8 +17,8 @@ namespace YG.LanguageLegacy
             GetWindow<AutoLocalizationMasse>("Auto Localization Masse");
         }
 
-        Vector2 scrollPosition = Vector2.zero;
-        List<GameObject> objectsTranlate = new List<GameObject>();
+        private Vector2 scrollPosition = Vector2.zero;
+        private List<GameObject> objectsTranlate = new List<GameObject>();
 
         private void OnGUI()
         {
@@ -144,7 +144,7 @@ namespace YG.LanguageLegacy
             var style = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter };
             GUILayout.Label($"({objectsTranlate.Count} objects in the list)", style, GUILayout.ExpandWidth(true));
 
-            if (objectsTranlate.Count > 10 && position.height < objectsTranlate.Count * 20.6f + 190)
+            if (objectsTranlate.Count > 10 && position.height < (objectsTranlate.Count * 20.6f) + 190)
                 scrollPosition = GUILayout.BeginScrollView(scrollPosition, false, true, GUILayout.Height(position.height - 190));
 
             for (int i = 0; i < objectsTranlate.Count; i++)
@@ -152,7 +152,7 @@ namespace YG.LanguageLegacy
                 objectsTranlate[i] = (GameObject)EditorGUILayout.ObjectField($"{i + 1}. {objectsTranlate[i].name}", objectsTranlate[i], typeof(GameObject), false);
             }
 
-            if (objectsTranlate.Count > 10 && position.height < objectsTranlate.Count * 20.6f + 190)
+            if (objectsTranlate.Count > 10 && position.height < (objectsTranlate.Count * 20.6f) + 190)
                 GUILayout.EndScrollView();
 
             if (GUI.changed && objectsTranlate.Count > 0)

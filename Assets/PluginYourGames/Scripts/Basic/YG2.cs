@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG.Insides;
 using YG.Utils;
+using Debug = UnityEngine.Debug;
 
 namespace YG
 {
@@ -31,8 +34,7 @@ namespace YG
             {
                 if (nowInterAdv || nowRewardAdv)
                     return true;
-                else
-                    return false;
+                return false;
             }
         }
         public static bool nowInterAdv;
@@ -63,7 +65,7 @@ namespace YG
             iPlatform = new PlatformYG2();
             iPlatformNoRealization = new PlatformYG2NoRealization();
 
-            GameObject YGObj = new GameObject() { name = "YG2Instance" };
+            GameObject YGObj = new GameObject { name = "YG2Instance" };
             MonoBehaviour.DontDestroyOnLoad(YGObj);
             sendMessage = YGObj.AddComponent<YGSendMessage>();
 
@@ -103,7 +105,7 @@ namespace YG
         public static async void SyncInitialization()
         {
             if (infoYG.Basic.initDelaySimulation)
-                await System.Threading.Tasks.Task.Delay(1000);
+                await Task.Delay(1000);
 #else
         public static void SyncInitialization()
         {
@@ -168,8 +170,8 @@ namespace YG
 #if UNITY_EDITOR
             if (infoYG.Basic.logInEditor)
             {
-                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(1, true);
-                System.Diagnostics.StackFrame frame = stackTrace.GetFrame(0);
+                StackTrace stackTrace = new StackTrace(1, true);
+                StackFrame frame = stackTrace.GetFrame(0);
 
                 string fileName = frame.GetFileName();
                 int lineNumber = frame.GetFileLineNumber();

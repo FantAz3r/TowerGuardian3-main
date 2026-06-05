@@ -1,0 +1,36 @@
+using TowerGuardian.Scripts.Enums;
+using TowerGuardian.Scripts.GamePlayElements.PlayerScripts;
+using TowerGuardian.Scripts.Quests.QuestInfrastructure;
+
+namespace TowerGuardian.Scripts.Quests
+{
+    public class AttackQuest : Quest
+    {
+        private PlayerAttacker _attacker;
+
+        public AttackQuest(PlayerAttacker attacker)
+        {
+            _attacker = attacker;
+        }
+
+        public override QuestType GetQuestType() => QuestType.Attack;
+
+        public override void Run()
+        {
+            base.Run();
+            _attacker.Hited += Complete;
+        }
+
+        public override void Stop()
+        {
+            base.Stop();
+            _attacker.Hited -= Complete;
+        }
+
+        public override void Complete()
+        {
+            _attacker.Hited -= Complete;
+            base.Complete();
+        }
+    }
+}

@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
+using UnityEngine;
+
 #if UNITY_EDITOR
 namespace YG.EditorScr
 {
-    using UnityEngine;
-    using System;
-    using System.IO;
-    using System.Collections.Generic;
-
     [Serializable]
     public class StringPair { public string key; public string value; }
     [Serializable]
@@ -171,7 +172,7 @@ namespace YG.EditorScr
             if (File.Exists(savePath))
             {
                 File.Delete(savePath);
-                UnityEditor.AssetDatabase.Refresh();
+                AssetDatabase.Refresh();
             }
         }
 

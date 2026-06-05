@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -51,7 +52,7 @@ namespace YG
         [SerializeField]
         private List<Entry> m_Delegates;
 
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Please use triggers instead (UnityUpgradable) -> triggers", true)]
         public List<Entry> delegates { get { return triggers; } set { triggers = value; } }
 

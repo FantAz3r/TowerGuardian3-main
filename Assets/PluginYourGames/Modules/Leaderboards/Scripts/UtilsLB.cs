@@ -74,12 +74,7 @@ namespace YG.Utils.LB
         {
             if (origName != "anonymous")
                 return origName;
-            else
-#if Localization_yg
-                return UtilsLang.IsHiddenTextTranslate();
-#else
-                return "---";
-#endif
+            return UtilsLang.IsHiddenTextTranslate();
         }
 
         public static void CopyLBData(out LBData copy, LBData original)
@@ -91,7 +86,7 @@ namespace YG.Utils.LB
                 return;
             }
 
-            copy = new LBData()
+            copy = new LBData
             {
                 type = original.type,
                 technoName = original.technoName,
@@ -183,14 +178,14 @@ namespace YG.Utils.LB
                             beforeCountResult = beforePlayers.Count;
 
                             afterCountResult = around.Count - 1 - beforeCountResult;
-                            afterCountResult = Mathf.Clamp(afterCountResult, 0, quantityAround * 2 - beforeCountResult);
+                            afterCountResult = Mathf.Clamp(afterCountResult, 0, (quantityAround * 2) - beforeCountResult);
                         }
                         else
                         {
                             afterCountResult = afterPlayers.Count;
 
                             beforeCountResult = around.Count - 1 - afterCountResult;
-                            beforeCountResult = Mathf.Clamp(beforeCountResult, 0, quantityAround * 2 - afterCountResult);
+                            beforeCountResult = Mathf.Clamp(beforeCountResult, 0, (quantityAround * 2) - afterCountResult);
                         }
                     }
 

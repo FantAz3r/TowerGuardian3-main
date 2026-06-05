@@ -1,12 +1,12 @@
+using System;
+using UnityEngine;
+using YG.Insides;
+#if UNITY_WEBGL
+using System.Runtime.InteropServices;
+#endif
+
 namespace YG
 {
-    using System;
-    using UnityEngine;
-#if UNITY_WEBGL
-    using System.Runtime.InteropServices;
-#endif
-    using YG.Insides;
-
     public partial interface IPlatformsYG2
     {
 #if PLATFORM_WEBGL

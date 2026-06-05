@@ -5,11 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ScreenshotMaker : MonoBehaviour
 {
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("Submit"))
         {
-            var dir = Directory.GetParent((Application.dataPath)).ToString();
+            var dir = Directory.GetParent(Application.dataPath).ToString();
             int counter = 0;
             while (true)
             {

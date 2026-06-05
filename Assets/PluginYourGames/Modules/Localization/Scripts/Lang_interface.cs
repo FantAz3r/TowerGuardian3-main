@@ -1,9 +1,10 @@
+#if UNITY_WEBGL
+using System;
+using System.Runtime.InteropServices;
+using YG.Insides;
+
 namespace YG
 {
-#if UNITY_WEBGL
-    using System;
-    using System.Runtime.InteropServices;
-    using YG.Insides;
 #endif
 
     public partial interface IPlatformsYG2

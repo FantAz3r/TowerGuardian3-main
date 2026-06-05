@@ -2,7 +2,6 @@ using AYellowpaper.SerializedCollections.Editor.Data;
 using AYellowpaper.SerializedCollections.Editor.States;
 using AYellowpaper.SerializedCollections.KeysGenerators;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +15,7 @@ namespace AYellowpaper.SerializedCollections.Editor
     public class SerializedDictionaryInstanceDrawer
     {
         private const float MinKeyValueLabelWidth = 40f;
-        
+
         private FieldInfo _fieldInfo;
         private ReorderableList _unexpandedList;
         private SingleEditingData _singleEditingData;
@@ -51,7 +50,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
             public void Invalidate()
             {
-                LookupTable = null;
+                LookupTable = null; 
             }
         }
 
@@ -203,7 +202,8 @@ namespace AYellowpaper.SerializedCollections.Editor
             while (toCheck != null && toCheck != typeof(object))
             {
                 var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
-                if (generic == cur) {
+                if (generic == cur)
+                {
                     return toCheck;
                 }
                 toCheck = toCheck.BaseType;
@@ -241,7 +241,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         private IKeyable GetLookupTable(object dictionary)
         {
             var propInfo = dictionary.GetType().GetProperty(SerializedDictionaryDrawer.LookupTableName, BindingFlags.Instance | BindingFlags.NonPublic);
-            return (IKeyable)propInfo.GetValue(dictionary);
+            return (IKeyable)propInfo.GetValue(dictionary); 
         }
 
         private void UpdatePaging()
@@ -257,7 +257,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             for (int i = startIndex; i < endIndex; i++)
                 _pagedIndices.Add(i);
 
-            string shortDetailsString = (_activeState.ListSize + " " + (_pagedIndices.Count == 1 ? "Element" : "Elements"));
+            string shortDetailsString = _activeState.ListSize + " " + (_pagedIndices.Count == 1 ? "Element" : "Elements");
             string detailsString = _pagingElement.PageCount > 1
                 ? $"{_pagedIndices[0] + 1}..{_pagedIndices.Last() + 1} / {_activeState.ListSize} Elements"
                 : shortDetailsString;
@@ -342,7 +342,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
             UpdateAfterInput();
         }
-        
+
         private void OnDrawUnexpandedHeader(Rect rect)
         {
             EditorGUI.BeginProperty(rect, _label, ListProperty);
@@ -353,7 +353,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             GUI.Label(detailsRect, _shortDetailsContent, detailsStyle);
 
             EditorGUI.EndProperty();
-            
+
             UpdateAfterInput();
         }
 

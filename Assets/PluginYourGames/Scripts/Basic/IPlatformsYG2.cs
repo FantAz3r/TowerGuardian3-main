@@ -15,5 +15,5 @@ namespace YG
     }
 
     public partial class PlatformYG2 : IPlatformsYG2 { }
-    public partial class PlatformYG2NoRealization : IPlatformsYG2 { }
+    public class PlatformYG2NoRealization : IPlatformsYG2 { }
 }

@@ -17,10 +17,9 @@ namespace YG
             {
                 if (!timersList.ContainsKey(rewardID))
                     return true;
-                else if (Time.realtimeSinceStartup >= timersList[rewardID] + timerDurationLock)
+                if (Time.realtimeSinceStartup >= timersList[rewardID] + timerDurationLock)
                     return true;
-                else
-                    return false;
+                return false;
             }
         }
 
@@ -74,7 +73,7 @@ namespace YG
             }
         }
 
-        IEnumerator ShowTimer()
+        private IEnumerator ShowTimer()
         {
             timerObject.SetActive(true);
 

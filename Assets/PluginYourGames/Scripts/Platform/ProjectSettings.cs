@@ -1,8 +1,8 @@
 ﻿#if UNITY_EDITOR
 using System;
 using UnityEditor;
-using UnityEngine;
 using UnityEditor.Build;
+using UnityEngine;
 
 namespace YG.Insides
 {
@@ -11,7 +11,7 @@ namespace YG.Insides
     {
         public bool autoPauseGame = true;
         public bool selectWebGLTemplate = true;
-        public bool runInBackground = false;
+        public bool runInBackground;
         public WebGLExceptionSupport enableExceptions = WebGLExceptionSupport.FullWithoutStacktrace;
         public WebGLCompressionFormat compressionFormat = WebGLCompressionFormat.Brotli;
         public bool decompressionFallback;

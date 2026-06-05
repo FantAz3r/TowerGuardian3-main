@@ -51,12 +51,12 @@ namespace YG
         {
             if (textLegasy.rank && data.rank != default) textLegasy.rank.text = data.rank.ToString();
             if (textLegasy.name && data.name != null) textLegasy.name.text = data.name;
-            if (textLegasy.score && data.score != null) textLegasy.score.text = data.score.ToString();
+            if (textLegasy.score && data.score != null) textLegasy.score.text = data.score;
 
 #if TMP_YG2
             if (textMP.rank && data.rank != default) textMP.rank.text = data.rank.ToString();
             if (textMP.name && data.name != null) textMP.name.text = data.name;
-            if (textMP.score && data.score != null) textMP.score.text = data.score.ToString();
+            if (textMP.score && data.score != null) textMP.score.text = data.score;
 #endif
             if (imageLoad)
             {

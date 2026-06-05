@@ -1,7 +1,8 @@
+using System;
+
+#if PLATFORM_WEBGL
 namespace YG.Insides
 {
-#if PLATFORM_WEBGL
-    using System.Runtime.InteropServices;
 #endif
 
     public static partial class YGInsides
@@ -16,7 +17,7 @@ namespace YG.Insides
         [DllImport("__Internal")]
         public static extern void FreeBuffer_js(System.IntPtr ptr);
 #endif
-        public static void FreeBuffer(System.IntPtr ptr)
+        public static void FreeBuffer(IntPtr ptr)
         {
 #if PLATFORM_WEBGL && !UNITY_EDITOR
             FreeBuffer_js(ptr);

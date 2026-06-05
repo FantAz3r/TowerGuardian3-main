@@ -12,7 +12,7 @@ namespace YG.LanguageLegacy
 
         public static void OnСhangeLang(string lang)
         {
-            if (UtilsLang.LangCheckExist(lang) == false)
+            if (!UtilsLang.LangCheckExist(lang))
             {
                 if (YG2.infoYG.AutoTranslateLangs.languages.en)
                     YG2.lang = "en";

@@ -1,15 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+using YG.EditorScr.BuildModify;
+using YG.Insides;
+
 namespace YG.EditorScr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using UnityEditor;
-    using UnityEngine;
-    using YG.Insides;
-    using YG.EditorScr.BuildModify;
-
     public class InfoYGEditorWindow : EditorWindow
     {
         private InfoYG scr;
@@ -243,7 +242,7 @@ namespace YG.EditorScr
             GUIStyle styleHeader2 = TextStyles.Gray();
             styleHeader2.fontSize = 11;
             styleHeader2.fontStyle = FontStyle.Bold;
-            
+
             if (iconPluginYG2)
             {
                 GUILayout.Space(20);
@@ -255,7 +254,7 @@ namespace YG.EditorScr
                 if (scr.Basic.platform != null)
                 {
                     Rect textureMiddleRect = GUILayoutUtility.GetRect(20, 20, GUILayout.ExpandWidth(false));
-                    Vector2 pivot = new Vector2(textureMiddleRect.x + textureMiddleRect.width / 2, textureMiddleRect.y + textureMiddleRect.height / 2);
+                    Vector2 pivot = new Vector2(textureMiddleRect.x + (textureMiddleRect.width / 2), textureMiddleRect.y + (textureMiddleRect.height / 2));
                     Matrix4x4 originalMatrix = GUI.matrix;
                     GUIUtility.RotateAroundPivot(45f, pivot);
                     Rect rotatedRect = new Rect(textureMiddleRect.x + 7, textureMiddleRect.y + 7, textureMiddleRect.width, textureMiddleRect.height);
@@ -538,7 +537,7 @@ namespace YG.EditorScr
         }
 
         [Serializable]
-        class AsmdefJson
+        private class AsmdefJson
         {
             public string name;
             public string rootNamespace;

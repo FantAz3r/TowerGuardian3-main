@@ -9,7 +9,7 @@ namespace YG
         public TemplatesSettings Templates = new TemplatesSettings();
 
         [Serializable]
-        public partial class TemplatesSettings
+        public class TemplatesSettings
         {
 #if UNITY_EDITOR
             public enum LogoImgFormat

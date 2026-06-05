@@ -11,7 +11,7 @@ namespace YG
         public AutoTranslateLangsSettings AutoTranslateLangs = new AutoTranslateLangsSettings();
 
         [Serializable]
-        public partial class AutoTranslateLangsSettings
+        public class AutoTranslateLangsSettings
         {
             [Tooltip("Домен с которого будет скачиваться перевод. Если у вас возникли проблемы с авто-переводом, попробуйте поменять домен.")]
             public string domainAutoLocalization = "com";

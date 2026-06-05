@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 using YG.Insides;
 
 namespace YG.EditorScr
@@ -72,7 +72,7 @@ namespace YG.EditorScr
 
             Rect btPosition = GUILayoutUtility.GetRect(m_AddButonContent, GUI.skin.button);
             const float addButonWidth = 200f;
-            btPosition.x = btPosition.x + (btPosition.width - addButonWidth) / 2;
+            btPosition.x = btPosition.x + ((btPosition.width - addButonWidth) / 2);
             btPosition.width = addButonWidth;
             if (GUI.Button(btPosition, m_AddButonContent, YGEditorStyles.button))
             {

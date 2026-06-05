@@ -1,6 +1,7 @@
 ﻿#if YandexGamesPlatform_yg
-using UnityEngine;
 using System.Runtime.InteropServices;
+using UnityEngine;
+using YG.Insides;
 
 namespace YG
 {
@@ -43,7 +44,7 @@ namespace YG
 
 #if UNITY_EDITOR
             YG2.player.auth = true;
-            Insides.YGInsides.LoggedIn();
+            YGInsides.LoggedIn();
 #else
             OpenAuthDialog_js();
 #endif
@@ -64,7 +65,7 @@ namespace YG.Insides
 {
     public partial class YGSendMessage
     {
-        PlatformYG2.JsonAuth jsonAuth = new PlatformYG2.JsonAuth();
+        private PlatformYG2.JsonAuth jsonAuth = new PlatformYG2.JsonAuth();
 
         public void SetAuth(string data)
         {
@@ -81,7 +82,7 @@ namespace YG.Insides
 
             jsonAuth = JsonUtility.FromJson<PlatformYG2.JsonAuth>(data);
 
-            YG2.player.auth = jsonAuth.playerAuth.ToString() switch
+            YG2.player.auth = jsonAuth.playerAuth switch
             {
                 "resolved" => true,
                 "rejected" => false,
@@ -90,22 +91,22 @@ namespace YG.Insides
 
             YG2.player.name = string.IsNullOrEmpty(YG2.player.name)
                 ? InfoYG.ANONYMOUS
-                : jsonAuth.playerName.ToString();
+                : jsonAuth.playerName;
 
             YG2.player.photo = YG2.player.photo == InfoYG.NO_DATA
                 ? null
-                : jsonAuth.playerPhoto.ToString();
+                : jsonAuth.playerPhoto;
 
-            YG2.player.id = jsonAuth.playerId.ToString();
+            YG2.player.id = jsonAuth.playerId;
 
-            YG2.player.payingStatus = jsonAuth.payingStatus.ToString() switch
+            YG2.player.payingStatus = jsonAuth.payingStatus switch
             {
                 "paying" => YG2.PayingStatus.Paying,
                 "partially_paying" => YG2.PayingStatus.PartiallyPaying,
                 "not_paying" => YG2.PayingStatus.NotPaying,
                 _ => YG2.PayingStatus.Unknown
             };
-            
+
 #if UNITY_EDITOR
             YG2.GetDataInvoke();
 #endif

@@ -12,7 +12,7 @@ namespace YG.Example.DemoScene
         public Transform spawnButtonsTransform;
 
         private string[] sceneNames = new string[0];
-        private string baseSceneName = null;
+        private string baseSceneName;
 
         private const string FILE_SCENES_LIST = "DemoSceneNames";
         public static AllDemoScenes inst;
@@ -115,7 +115,7 @@ namespace YG.Example.DemoScene
                     int index = i;
                     AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneNames[index], LoadSceneMode.Additive);
 
-                    asyncLoad.completed += (AsyncOperation operation) =>
+                    asyncLoad.completed += operation =>
                     {
                         Scene loadedScene = SceneManager.GetSceneByName(sceneNames[index]);
 

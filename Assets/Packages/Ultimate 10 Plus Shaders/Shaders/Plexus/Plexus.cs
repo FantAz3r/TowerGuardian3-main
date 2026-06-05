@@ -6,8 +6,8 @@
                           ██║░░░░░███████╗███████╗██╔╝╚██╗╚██████╔╝██████╔╝
                           ╚═╝░░░░░╚══════╝╚══════╝╚═╝░░╚═╝░╚═════╝░╚═════╝░
 
-                █▀▀▄ █──█ 　 ▀▀█▀▀ █──█ █▀▀ 　 ░█▀▀▄ █▀▀ ▀█─█▀ █▀▀ █── █▀▀█ █▀▀█ █▀▀ █▀▀█ 
-                █▀▀▄ █▄▄█ 　 ─░█── █▀▀█ █▀▀ 　 ░█─░█ █▀▀ ─█▄█─ █▀▀ █── █──█ █──█ █▀▀ █▄▄▀ 
+                █▀▀▄ █──█ 　 ▀▀█▀▀ █──█ █▀▀ 　 ░█▀▀▄ █▀▀ ▀█─█▀ █▀▀ █── █▀▀█ █▀▀█ █▀▀ █▀▀█
+                █▀▀▄ █▄▄█ 　 ─░█── █▀▀█ █▀▀ 　 ░█─░█ █▀▀ ─█▄█─ █▀▀ █── █──█ █──█ █▀▀ █▄▄▀
                 ▀▀▀─ ▄▄▄█ 　 ─░█── ▀──▀ ▀▀▀ 　 ░█▄▄▀ ▀▀▀ ──▀── ▀▀▀ ▀▀▀ ▀▀▀▀ █▀▀▀ ▀▀▀ ▀─▀▀
 ____________________________________________________________________________________________________________________________________________
 
@@ -70,7 +70,7 @@ public class Plexus : MonoBehaviour
 
             defaultPositions[i] = positions[i];
         }
-        
+
         lineMesh = new Mesh();
 
         int[] trigs = new int[6];
@@ -131,15 +131,15 @@ public class Plexus : MonoBehaviour
 
     private static float DistanceSqr(Vector3 p1, Vector3 p2)
     {
-        return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y) + (p1.z - p2.z) * (p1.z - p2.z);
+        return ((p1.x - p2.x) * (p1.x - p2.x)) + ((p1.y - p2.y) * (p1.y - p2.y)) + ((p1.z - p2.z) * (p1.z - p2.z));
     }
 
-    Vector3 normal, side, p1, p2;
-    int startingVerticesIndex = 0;
-    List<int> lineTrigs = new List<int>();
-    List<Vector3> lineVerts = new List<Vector3>();
-    Vector3[] verts = new Vector3[4];
-    int[] trigs = new int[6];
+    private Vector3 normal, side, p1, p2;
+    private int startingVerticesIndex;
+    private List<int> lineTrigs = new List<int>();
+    private List<Vector3> lineVerts = new List<Vector3>();
+    private Vector3[] verts = new Vector3[4];
+    private int[] trigs = new int[6];
     private void RenderLines()
     {
         lineMesh = new Mesh();
@@ -160,11 +160,11 @@ public class Plexus : MonoBehaviour
             startingVerticesIndex = lineVerts.Count;
 
 
-            verts[0] = p1 + side * (lineWidth / 2);
-            verts[1] = p1 + side * (lineWidth / -2);
-            verts[2] = p2 + side * (lineWidth / 2);
-            verts[3] = p2 + side * (lineWidth / -2);
-            
+            verts[0] = p1 + (side * (lineWidth / 2));
+            verts[1] = p1 + (side * (lineWidth / -2));
+            verts[2] = p2 + (side * (lineWidth / 2));
+            verts[3] = p2 + (side * (lineWidth / -2));
+
 
             trigs[0] = startingVerticesIndex;
             trigs[1] = trigs[5] = startingVerticesIndex + 1;
@@ -178,7 +178,7 @@ public class Plexus : MonoBehaviour
 
         lineMesh.vertices = lineVerts.ToArray();
         lineMesh.triangles = lineTrigs.ToArray();
-        
+
         // Drawing the mesh
         lineMesh.RecalculateBounds();
         Graphics.DrawMesh(lineMesh, transform.localToWorldMatrix, lineMaterial, 0);
@@ -189,9 +189,9 @@ public class Plexus : MonoBehaviour
     }
 
     [HideInInspector]
-    public bool isEnabled = false;
-    List<KeyValuePair<int, int>> connected = new List<KeyValuePair<int, int>>();
-    HashSet<KeyValuePair<int, int>> connectedHashSet = new HashSet<KeyValuePair<int, int>>();
+    public bool isEnabled;
+    private List<KeyValuePair<int, int>> connected = new List<KeyValuePair<int, int>>();
+    private HashSet<KeyValuePair<int, int>> connectedHashSet = new HashSet<KeyValuePair<int, int>>();
 
     private IEnumerator ConnectDots()
     {
@@ -219,11 +219,11 @@ public class Plexus : MonoBehaviour
                 {
                     if (i == indx)
                         continue;
-                    
+
                     if (DistanceSqr(currentPos, positions[i]) < maxConnDistanceSqr)
                     {
                         KeyValuePair<int, int> k = new KeyValuePair<int, int>(indx, i);
-                        if(connectedHashSet.Add(k))
+                        if (connectedHashSet.Add(k))
                             connected.Add(new KeyValuePair<int, int>(indx, i));
                     }
                 }

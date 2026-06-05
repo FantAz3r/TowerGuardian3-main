@@ -11,12 +11,12 @@ namespace YG.LanguageLegacy
     [CustomEditor(typeof(LanguageYG))]
     public class LanguageYGEditor : Editor
     {
-        LanguageYG scr;
+        private LanguageYG scr;
 
-        GUIStyle red;
-        GUIStyle green;
+        private GUIStyle red;
+        private GUIStyle green;
 
-        int processTranslateLabel;
+        private int processTranslateLabel;
 
         private void OnEnable()
         {
@@ -113,7 +113,7 @@ namespace YG.LanguageLegacy
             }
             else
             {
-                if (scr.componentTextField || (scr.text == null || scr.text.Length == 0))
+                if (scr.componentTextField || scr.text == null || scr.text.Length == 0)
                 {
                     GUILayout.Label("FILL IN THE FIELD", red);
                 }
@@ -236,9 +236,9 @@ namespace YG.LanguageLegacy
             }
         }
 
-        readonly string buttonText_ReplaseFont = "Replace the font with the standard one";
+        private readonly string buttonText_ReplaseFont = "Replace the font with the standard one";
 
-        void FontSettingsDraw()
+        private void FontSettingsDraw()
         {
             if (scr.info.fonts.defaultFont.Length == 0)
                 return;
@@ -258,7 +258,7 @@ namespace YG.LanguageLegacy
         }
 
 #if TMP_YG2
-        void FontTMPSettingsDraw()
+        private void FontTMPSettingsDraw()
         {
             if (scr.info.fontsTMP.defaultFont.Length == 0)
                 return;
@@ -277,13 +277,13 @@ namespace YG.LanguageLegacy
             }
         }
 #endif
-        void TranslateButton()
+        private void TranslateButton()
         {
             scr.processTranslateLabel = "";
             scr.Translate(processTranslateLabel);
         }
 
-        void UpdateLanguages(bool CSVFile)
+        private void UpdateLanguages(bool CSVFile)
         {
             processTranslateLabel = 0;
             bool[] langArr = UtilsLang.LangIsActive();

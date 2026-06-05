@@ -8,7 +8,7 @@ namespace YG
         public LocalizationSettings Localization = new LocalizationSettings();
 
         [Serializable]
-        public partial class LocalizationSettings
+        public class LocalizationSettings
         {
             public enum SetLangMod
             {
@@ -24,7 +24,7 @@ namespace YG
                 [InspectorName("Не менять язык при запуске")]
 #endif
                 DoNotChangeLanguageStartup
-            };
+            }
 #if RU_YG2
             [Tooltip("Менять язык игры в соответствии с языком платформы:\n\n •  First LaunchOnly - только при первом запуске игры.\n\n •  Every Game Launch - каждый раз при запуске игры.\n\n •  Do Not Change Language Startup - не менять язык при запуске игры.")]
 #else

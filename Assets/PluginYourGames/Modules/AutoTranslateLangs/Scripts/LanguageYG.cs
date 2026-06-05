@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Networking;
-using System;
+﻿using System;
 using System.Net;
+using System.Text;
+using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 #if NJSON_YG2
 using Newtonsoft.Json.Linq;
 #endif
@@ -27,7 +28,7 @@ namespace YG.LanguageLegacy
         public int fontNumber;
         public Font uniqueFont;
         public LangYGAdditionalText additionalText;
-        int baseFontSize;
+        private int baseFontSize;
 
         private void Awake()
         {
@@ -93,7 +94,7 @@ namespace YG.LanguageLegacy
             SwitchLanguage(YG2.lang);
         }
 
-        void AssignTranslate(string translation)
+        private void AssignTranslate(string translation)
         {
             if (textLComponent)
                 textLComponent.text = translation;
@@ -181,7 +182,7 @@ namespace YG.LanguageLegacy
         }
 #endif
 
-        void FontSizeCorrect(int[] fontSizeArray)
+        private void FontSizeCorrect(int[] fontSizeArray)
         {
             if (textLComponent)
                 textLComponent.fontSize = baseFontSize;
@@ -286,7 +287,7 @@ namespace YG.LanguageLegacy
             RunTranslateEmptyFields(countLangAvailable);
         }
 
-        string TranslateGoogle(string translationTo = "en")
+        private string TranslateGoogle(string translationTo = "en")
         {
             string text;
 
@@ -340,11 +341,11 @@ namespace YG.LanguageLegacy
             {
                 JArray jsonArray = JArray.Parse(response);
 
-                var sb = new System.Text.StringBuilder();
+                var sb = new StringBuilder();
                 foreach (var segment in jsonArray[0])
                 {
                     if (segment[0] != null)
-                        sb.Append(segment[0].ToString());
+                        sb.Append(segment[0]);
                 }
 
                 response = sb.ToString().Replace(placeholder, "\n");
@@ -362,12 +363,12 @@ namespace YG.LanguageLegacy
             Debug.LogError($"Для авто локализации требуется импортировать пакет Newtonsoft JSON. Сделать это можно в настройках {InfoYG.NAME_PLUGIN}.");
 #else
             Debug.LogError($"For auto localization, you need to import the Newtonsoft JSON package. You can do this in the settings {InfoYG.NAME_PLUGIN}.");
- #endif
+#endif
             return text;
 #endif
         }
 
-        [HideInInspector] public int countLang = 0;
+        [HideInInspector] public int countLang;
 
         private void RunTranslateEmptyFields(int countLangAvailable)
         {

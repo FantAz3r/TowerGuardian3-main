@@ -9,7 +9,7 @@ namespace YG
         public InterstitialAdvSettings InterstitialAdv = new InterstitialAdvSettings();
 
         [Serializable]
-        public partial class InterstitialAdvSettings
+        public class InterstitialAdvSettings
         {
 #if RU_YG2
             [Tooltip("Показывать рекламу при загрузке игры? (Первая реклама при открытии игры). В Unity Editor первая реклама симулироваться не будет - чтобы не мешала. В Яндекс Играх первый показ рекламы регулируется платформой, по этому значение данной опции для ЯИ не имеет значения.")]

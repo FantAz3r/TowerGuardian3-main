@@ -1,9 +1,9 @@
-﻿namespace YG.EditorScr.BuildModify
-{
-    using UnityEditor.Build.Reporting;
-    using UnityEditor.Build;
-    using System.IO;
+﻿using System.IO;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 
+namespace YG.EditorScr.BuildModify
+{
     public class ProcessBuild : IPreprocessBuildWithReport, IPostprocessBuildWithReport
     {
         public static string BuildPath { get; private set; } = string.Empty;

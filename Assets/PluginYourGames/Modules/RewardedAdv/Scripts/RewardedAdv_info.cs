@@ -9,7 +9,7 @@ namespace YG
         public RewardedAdvSettings RewardedAdv = new RewardedAdvSettings();
 
         [Serializable]
-        public partial class RewardedAdvSettings
+        public class RewardedAdvSettings
         {
 #if RU_YG2
             [Tooltip("Пропустить следующий вызов обычной рекламы после получения вознаграждения. Такое требуют некоторые площадки, потому что показывать рекламу в одной сцене после того, как игрок уже посмотрел рекламу за вознаграждение - может быть нечестно.")]

@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -487,7 +488,7 @@ namespace YG.EditorScr
                 return true;
             }
 
-            return define.EndsWith("_yg", System.StringComparison.Ordinal);
+            return define.EndsWith("_yg", StringComparison.Ordinal);
         }
 
         public static List<BuildTargetGroup> GetSupportedBuildTargetGroups()

@@ -46,7 +46,7 @@ namespace YG.LanguageLegacy
 
         public static Action onQualityChange;
 
-        void Awake()
+        private void Awake()
         {
             info = YG2.infoYG.AutoTranslateLangs;
             labelBaseFontSize = labelText.fontSize;

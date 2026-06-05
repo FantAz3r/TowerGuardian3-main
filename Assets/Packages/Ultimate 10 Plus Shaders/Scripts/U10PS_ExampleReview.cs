@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +27,7 @@ public class U10PS_ExampleReview : MonoBehaviour
         if (currentIndex + 1 >= examples.Length)
             return;
 
-        if(currentIndex != -1)
+        if (currentIndex != -1)
             for (int i = 0; i < examples[currentIndex].objects.Length; ++i)
                 examples[currentIndex].objects[i].gameObject.SetActive(false);
         ++currentIndex;
@@ -54,7 +52,7 @@ public class U10PS_ExampleReview : MonoBehaviour
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class Example
 {
     public GameObject[] objects;

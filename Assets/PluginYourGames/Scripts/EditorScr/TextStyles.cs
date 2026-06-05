@@ -14,8 +14,7 @@ namespace YG.EditorScr
             {
                 if (EditorGUIUtility.isProSkin)
                     return new Color(1.0f, 0.5f, 0.0f);
-                else
-                    return new Color(0.85f, 0.45f, 0.0f);
+                return new Color(0.85f, 0.45f, 0.0f);
             }
         }
 
@@ -25,8 +24,7 @@ namespace YG.EditorScr
             {
                 if (EditorGUIUtility.isProSkin)
                     return new Color(1.5f, 0.5f, 0.0f);
-                else
-                    return new Color(0.9f, 0.4f, 0.0f);
+                return new Color(0.9f, 0.4f, 0.0f);
             }
         }
 
@@ -36,8 +34,7 @@ namespace YG.EditorScr
             {
                 if (EditorGUIUtility.isProSkin)
                     return new Color(0.3f, 1.0f, 0.2f);
-                else
-                    return new Color(0.1f, 0.6f, 0.3f);
+                return new Color(0.1f, 0.6f, 0.3f);
             }
         }
 
@@ -84,8 +81,7 @@ namespace YG.EditorScr
         {
             if (EditorGUIUtility.isProSkin)
                 return LabelStyleColor(Color.white);
-            else
-                return LabelStyleColor(Color.black);
+            return LabelStyleColor(Color.black);
         }
 
         public static GUIStyle LabelStyleColor(Color color)

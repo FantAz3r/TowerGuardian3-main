@@ -9,9 +9,9 @@ namespace YG
         public AuthorizationSettings Authorization;
 
         [Serializable]
-        public partial class AuthorizationSettings
+        public class AuthorizationSettings
         {
-            public enum PlayerPhotoSize : byte { small = 0, medium, large };
+            public enum PlayerPhotoSize : byte { small = 0, medium, large }
             public PlayerPhotoSize playerPhotoSize = PlayerPhotoSize.medium;
 
 #if UNITY_EDITOR

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.IO;
-using System.Text;
 using System.Diagnostics;
-using Debug = UnityEngine.Debug;
+using System.IO;
+using System.Reflection;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 using YG.Insides;
+using Debug = UnityEngine.Debug;
 
 namespace YG.EditorScr.BuildModify
 {

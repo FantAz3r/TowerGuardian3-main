@@ -52,8 +52,7 @@ namespace Crystal
         ///  LandscapeR x=132, y=63, w=2172, h=1062 on full extents w=2436, h=1125.
         ///  Aspect Ratio: ~19.5:9.
         /// </summary>
-        Rect[] NSA_iPhoneX = new Rect[]
-        {
+        private Rect[] NSA_iPhoneX = {
             new Rect (0f, 102f / 2436f, 1f, 2202f / 2436f),  // Portrait
             new Rect (132f / 2436f, 63f / 1125f, 2172f / 2436f, 1062f / 1125f)  // Landscape
         };
@@ -66,8 +65,7 @@ namespace Crystal
         ///  LandscapeR x=132, y=63, w=2424, h=1179 on full extents w=2688, h=1242.
         ///  Aspect Ratio: ~19.5:9.
         /// </summary>
-        Rect[] NSA_iPhoneXsMax = new Rect[]
-        {
+        private Rect[] NSA_iPhoneXsMax = {
             new Rect (0f, 102f / 2688f, 1f, 2454f / 2688f),  // Portrait
             new Rect (132f / 2688f, 63f / 1242f, 2424f / 2688f, 1179f / 1242f)  // Landscape
         };
@@ -80,8 +78,7 @@ namespace Crystal
         ///  LandscapeR x=0, y=0, w=2789, h=1440 on full extents w=2960, h=1440.
         ///  Aspect Ratio: 18.5:9.
         /// </summary>
-        Rect[] NSA_Pixel3XL_LSL = new Rect[]
-        {
+        private Rect[] NSA_Pixel3XL_LSL = {
             new Rect (0f, 0f, 1f, 2789f / 2960f),  // Portrait
             new Rect (0f, 0f, 2789f / 2960f, 1f)  // Landscape
         };
@@ -89,42 +86,41 @@ namespace Crystal
         /// <summary>
         /// Normalised safe areas for Pixel 3 XL using landscape right. Absolute values and aspect ratio same as above.
         /// </summary>
-        Rect[] NSA_Pixel3XL_LSR = new Rect[]
-        {
+        private Rect[] NSA_Pixel3XL_LSR = {
             new Rect (0f, 0f, 1f, 2789f / 2960f),  // Portrait
             new Rect (171f / 2960f, 0f, 2789f / 2960f, 1f)  // Landscape
         };
         #endregion
 
-        RectTransform Panel;
-        Rect LastSafeArea = new Rect (0, 0, 0, 0);
-        Vector2Int LastScreenSize = new Vector2Int (0, 0);
-        ScreenOrientation LastOrientation = ScreenOrientation.AutoRotation;
-        [SerializeField] bool ConformX = true;  // Conform to screen safe area on X-axis (default true, disable to ignore)
-        [SerializeField] bool ConformY = true;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
-        [SerializeField] bool Logging = false;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
+        private RectTransform Panel;
+        private Rect LastSafeArea = new Rect(0, 0, 0, 0);
+        private Vector2Int LastScreenSize = new Vector2Int(0, 0);
+        private ScreenOrientation LastOrientation = ScreenOrientation.AutoRotation;
+        [SerializeField] private bool ConformX = true;  // Conform to screen safe area on X-axis (default true, disable to ignore)
+        [SerializeField] private bool ConformY = true;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
+        [SerializeField] private bool Logging;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
 
-        void Awake ()
+        private void Awake()
         {
-            Panel = GetComponent<RectTransform> ();
+            Panel = GetComponent<RectTransform>();
 
             if (Panel == null)
             {
-                Debug.LogError ("Cannot apply safe area - no RectTransform found on " + name);
-                Destroy (gameObject);
+                Debug.LogError("Cannot apply safe area - no RectTransform found on " + name);
+                Destroy(gameObject);
             }
 
-            Refresh ();
+            Refresh();
         }
 
-        void Update ()
+        private void Update()
         {
-            Refresh ();
+            Refresh();
         }
 
-        void Refresh ()
+        private void Refresh()
         {
-            Rect safeArea = GetSafeArea ();
+            Rect safeArea = GetSafeArea();
 
             if (safeArea != LastSafeArea
                 || Screen.width != LastScreenSize.x
@@ -137,17 +133,17 @@ namespace Crystal
                 LastScreenSize.y = Screen.height;
                 LastOrientation = Screen.orientation;
 
-                ApplySafeArea (safeArea);
+                ApplySafeArea(safeArea);
             }
         }
 
-        Rect GetSafeArea ()
+        private Rect GetSafeArea()
         {
             Rect safeArea = Screen.safeArea;
 
             if (Application.isEditor && Sim != SimDevice.None)
             {
-                Rect nsa = new Rect (0, 0, Screen.width, Screen.height);
+                Rect nsa = new Rect(0, 0, Screen.width, Screen.height);
 
                 switch (Sim)
                 {
@@ -175,17 +171,15 @@ namespace Crystal
                         else  // Landscape
                             nsa = NSA_Pixel3XL_LSR[1];
                         break;
-                    default:
-                        break;
                 }
 
-                safeArea = new Rect (Screen.width * nsa.x, Screen.height * nsa.y, Screen.width * nsa.width, Screen.height * nsa.height);
+                safeArea = new Rect(Screen.width * nsa.x, Screen.height * nsa.y, Screen.width * nsa.width, Screen.height * nsa.height);
             }
 
             return safeArea;
         }
 
-        void ApplySafeArea (Rect r)
+        private void ApplySafeArea(Rect r)
         {
             LastSafeArea = r;
 
@@ -225,7 +219,7 @@ namespace Crystal
 
             if (Logging)
             {
-                Debug.LogFormat ("New safe area applied to {0}: x={1}, y={2}, w={3}, h={4} on full extents w={5}, h={6}",
+                Debug.LogFormat("New safe area applied to {0}: x={1}, y={2}, w={3}, h={4} on full extents w={5}, h={6}",
                 name, r.x, r.y, r.width, r.height, Screen.width, Screen.height);
             }
         }

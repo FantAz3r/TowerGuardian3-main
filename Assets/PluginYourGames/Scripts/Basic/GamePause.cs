@@ -1,8 +1,9 @@
+using System;
+using UnityEditor;
+using UnityEngine;
+
 namespace YG
 {
-    using System;
-    using UnityEngine;
-
     public static partial class YG2
     {
         public static Action<bool> onPauseGame;
@@ -59,11 +60,11 @@ namespace YG
                 if (pause)
                 {
 #if UNITY_EDITOR
-                    if (!UnityEditor.EditorApplication.isPlaying ||
-                        UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode == false)
+                    if (!EditorApplication.isPlaying ||
+                        !EditorApplication.isPlayingOrWillChangePlaymode)
                         return;
 #endif
-                    GameObject pauseObj = new GameObject() { name = "PauseGameYG" };
+                    GameObject pauseObj = new GameObject { name = "PauseGameYG" };
                     MonoBehaviour.DontDestroyOnLoad(pauseObj);
                     PauseGameYG pauseScr = pauseObj.AddComponent<PauseGameYG>();
                     pauseScr.Setup(editTimeScale, editAudioPause, editCursor, editEventSystem);

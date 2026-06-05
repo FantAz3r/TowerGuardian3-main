@@ -580,7 +580,7 @@ namespace YG.EditorScr
                                     }
                                 }
 
-                                rect = GUILayoutUtility.GetRect(new GUIContent("Doc"), GUIStyle.none, GUILayout.Width(columnWidth_Control / 3 - 10), GUILayout.Height(rowHeight));
+                                rect = GUILayoutUtility.GetRect(new GUIContent("Doc"), GUIStyle.none, GUILayout.Width((columnWidth_Control / 3) - 10), GUILayout.Height(rowHeight));
 
                                 if (isSelectPanel)
                                 { }

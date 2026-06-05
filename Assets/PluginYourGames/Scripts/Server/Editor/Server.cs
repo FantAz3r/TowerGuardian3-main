@@ -155,24 +155,22 @@ namespace YG.EditorScr
 
         private static async Task<string> ReadFileFromURL(string url)
         {
-            using (HttpClient client = new HttpClient())
+            using HttpClient client = new HttpClient();
+            try
             {
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-                    return await response.Content.ReadAsStringAsync();
-                }
-                catch (HttpRequestException ex)
-                {
-                    Debug.LogError($"Server info request failed: {ex.Message}");
-                    return null;
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"Server info request error: {ex.Message}");
-                    return null;
-                }
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException ex)
+            {
+                Debug.LogError($"Server info request failed: {ex.Message}");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Server info request error: {ex.Message}");
+                return null;
             }
         }
 

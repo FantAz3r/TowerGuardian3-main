@@ -57,14 +57,12 @@ namespace YG.EditorScr
             {
                 try
                 {
-                    using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using (var reader = new StreamReader(fs))
-                    {
-                        var list = new List<string>();
-                        while (!reader.EndOfStream)
-                            list.Add(reader.ReadLine());
-                        return list.ToArray();
-                    }
+                    using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    using var reader = new StreamReader(fs);
+                    var list = new List<string>();
+                    while (!reader.EndOfStream)
+                        list.Add(reader.ReadLine());
+                    return list.ToArray();
                 }
                 catch (IOException)
                 {
@@ -88,9 +86,9 @@ namespace YG.EditorScr
             {
                 try
                 {
-                    using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using (var reader = new StreamReader(fs))
-                        return reader.ReadToEnd();
+                    using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    using var reader = new StreamReader(fs);
+                    return reader.ReadToEnd();
                 }
                 catch (IOException)
                 {
@@ -115,11 +113,9 @@ namespace YG.EditorScr
             {
                 try
                 {
-                    using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read))
-                    using (var writer = new StreamWriter(fs))
-                    {
-                        writer.Write(content);
-                    }
+                    using var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read);
+                    using var writer = new StreamWriter(fs);
+                    writer.Write(content);
                     return;
                 }
                 catch (IOException)
@@ -131,13 +127,13 @@ namespace YG.EditorScr
         }
     }
 
-    public sealed class ReloadScope : System.IDisposable
+    public sealed class ReloadScope : IDisposable
     {
         public ReloadScope() { EditorApplication.LockReloadAssemblies(); }
         public void Dispose() { EditorApplication.UnlockReloadAssemblies(); }
     }
 
-    public sealed class AssetEditScope : System.IDisposable
+    public sealed class AssetEditScope : IDisposable
     {
         public AssetEditScope() { AssetDatabase.StartAssetEditing(); }
         public void Dispose() { AssetDatabase.StopAssetEditing(); }

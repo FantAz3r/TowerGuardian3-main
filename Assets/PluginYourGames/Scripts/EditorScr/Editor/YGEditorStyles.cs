@@ -1,12 +1,12 @@
 // YGEditorStyles.cs
 // Безопасная работа со стилями во время перекомпиляции/без активного GUI skin
 
+using UnityEditor;
+using UnityEngine;
+using YG.EditorScr.BuildModify;
+
 namespace YG.EditorScr
 {
-    using UnityEngine;
-    using UnityEditor;
-    using YG.EditorScr.BuildModify;
-
     [InitializeOnLoad]
     public static class YGEditorStyles
     {
@@ -21,7 +21,7 @@ namespace YG.EditorScr
         private static GUIStyle _warning;
 
         // безопасная проверка, можно ли строить стили на базе EditorStyles/GUIskin
-        static bool CanBuildGUI =>
+        private static bool CanBuildGUI =>
             GUI.skin != null &&
             Event.current != null &&
             !EditorApplication.isCompiling &&
@@ -34,7 +34,7 @@ namespace YG.EditorScr
         }
 
         [InitializeOnLoadMethod]
-        static void AfterReload() => ReinitializeStyles();
+        private static void AfterReload() => ReinitializeStyles();
 
         private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
@@ -54,7 +54,7 @@ namespace YG.EditorScr
         }
 
         // универсальный безопасный геттер
-        static GUIStyle GetOrMake(ref GUIStyle cache, System.Func<GUIStyle> factory)
+        private static GUIStyle GetOrMake(ref GUIStyle cache, System.Func<GUIStyle> factory)
         {
             if (cache != null) return cache;
             cache = CanBuildGUI ? factory() : new GUIStyle();
@@ -72,9 +72,9 @@ namespace YG.EditorScr
         public static GUIStyle debutton => GetOrMake(ref _debutton, Debutton);
 
         // фабрика безопасного базового helpBox
-        static GUIStyle BaseHelpBox()
+        private static GUIStyle BaseHelpBox()
         {
-            return (GUI.skin != null ? new GUIStyle(EditorStyles.helpBox) : new GUIStyle());
+            return GUI.skin != null ? new GUIStyle(EditorStyles.helpBox) : new GUIStyle();
         }
 
         // фабрики стилей

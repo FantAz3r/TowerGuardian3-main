@@ -1,4 +1,4 @@
-﻿﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -126,7 +126,7 @@ namespace YG
         {
             if (editEventSystem && !eventSystem)
             {
-                eventSystem = GameObject.FindAnyObjectByType<EventSystem>();
+                eventSystem = FindAnyObjectByType<EventSystem>();
                 if (eventSystem)
                 {
                     eventSystem_save = eventSystem.enabled;

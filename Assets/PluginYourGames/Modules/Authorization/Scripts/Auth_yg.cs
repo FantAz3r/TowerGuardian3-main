@@ -7,11 +7,11 @@ namespace YG
     public partial class YG2
     {
         public static PlayerData player = new PlayerData();
-        public enum PayingStatus : byte { Paying = 0, PartiallyPaying, NotPaying, Unknown };
+        public enum PayingStatus : byte { Paying = 0, PartiallyPaying, NotPaying, Unknown }
 
         public class PlayerData
         {
-            public bool auth = false;
+            public bool auth;
             public string name = "unauthorized";
             public string id = string.Empty;
             public string photo = string.Empty;

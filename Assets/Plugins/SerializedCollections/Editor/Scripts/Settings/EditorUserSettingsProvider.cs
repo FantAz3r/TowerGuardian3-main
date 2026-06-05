@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
-using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
@@ -18,7 +15,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         private SerializedProperty _elementsPerPage;
         private AnimBool _searchAnimBool;
 
-        class Styles
+        private class Styles
         {
         }
 
@@ -72,7 +69,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             }
             EditorGUILayout.PropertyField(_elementsPerPage);
 
-            bool changed =_serializedObject.ApplyModifiedProperties();
+            bool changed = _serializedObject.ApplyModifiedProperties();
             if (changed)
             {
                 EditorUserSettings.Save();

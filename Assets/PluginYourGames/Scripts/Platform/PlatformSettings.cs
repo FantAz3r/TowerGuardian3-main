@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YG.Insides
 {
     [CreateAssetMenu(fileName = "NewPlatformYG", menuName = "YG2/New Platform")]
-    public partial class PlatformSettings : ScriptableObject
+    public class PlatformSettings : ScriptableObject
     {
         public string nameFull = "Error";
         public static string currentPlatformFullName

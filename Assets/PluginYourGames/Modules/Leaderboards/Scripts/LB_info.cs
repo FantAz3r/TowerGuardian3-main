@@ -10,7 +10,7 @@ namespace YG
         public LeaderboardsSettings Leaderboards = new LeaderboardsSettings();
 
         [Serializable]
-        public partial class LeaderboardsSettings
+        public class LeaderboardsSettings
         {
 #if RU_YG2
             [Tooltip("Вкл/Выкл лидерборды")]
@@ -27,8 +27,7 @@ namespace YG
             // Simulation
 #if UNITY_EDITOR
             [HeaderYG(Langs.simulation, 5)]
-            public LBData[] listLBSim = new LBData[]
-            {
+            public LBData[] listLBSim = {
                 new LBData
                 {
                     technoName = "test",

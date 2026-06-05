@@ -52,7 +52,7 @@ namespace YG.Insides
     public static partial class YGInsides
     {
         public static string currentRewardID;
-        public static Action rewardCallback = null;
+        public static Action rewardCallback;
 
         public static void OpenRewardedAdv()
         {

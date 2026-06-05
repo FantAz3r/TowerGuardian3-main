@@ -1,4 +1,6 @@
 using System;
+using UnityEditor;
+using UnityEngine;
 
 namespace YG
 {
@@ -19,17 +21,17 @@ namespace YG
         private static void InitWindowGame()
         {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
-            UnityEditor.EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
 #endif
-            UnityEngine.Application.focusChanged -= SetFocusWindowGame;
-            UnityEngine.Application.focusChanged += SetFocusWindowGame;
+            Application.focusChanged -= SetFocusWindowGame;
+            Application.focusChanged += SetFocusWindowGame;
         }
 #endif
         public static void SetFocusWindowGame(bool visible)
         {
 #if UNITY_EDITOR
-            if (!UnityEditor.EditorApplication.isPlaying || exitingPlayMode)
+            if (!EditorApplication.isPlaying || exitingPlayMode)
                 return;
 #endif
             if (visible)
@@ -60,7 +62,7 @@ namespace YG
 
                 onFocusWindowGame?.Invoke(false);
                 onHideWindowGame?.Invoke();
-                
+
                 void SetPause()
                 {
                     if (!nowAdsShow)
@@ -70,12 +72,12 @@ namespace YG
         }
 
 #if UNITY_EDITOR
-        private static void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange state)
+        private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
-            if (state == UnityEditor.PlayModeStateChange.ExitingPlayMode)
+            if (state == PlayModeStateChange.ExitingPlayMode)
                 exitingPlayMode = true;
-            else if (state == UnityEditor.PlayModeStateChange.EnteredPlayMode ||
-                     state == UnityEditor.PlayModeStateChange.EnteredEditMode)
+            else if (state == PlayModeStateChange.EnteredPlayMode ||
+                     state == PlayModeStateChange.EnteredEditMode)
                 exitingPlayMode = false;
         }
 #endif

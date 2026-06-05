@@ -1,10 +1,8 @@
 #if YandexGamesPlatform_yg
-using System;
-using System.Text;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using YG.Utils.LB;
 using YG.Insides;
+using YG.Utils.LB;
 
 namespace YG
 {
@@ -60,7 +58,7 @@ namespace YG.Insides
         {
             PlatformYG2.JsonLB jsonLB = JsonUtility.FromJson<PlatformYG2.JsonLB>(data);
 
-            LBData lbData = new LBData()
+            LBData lbData = new LBData
             {
                 technoName = jsonLB.technoName,
                 isDefault = jsonLB.isDefault,

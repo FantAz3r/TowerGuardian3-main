@@ -60,22 +60,21 @@ namespace YG
         {
             if (str == "white")
                 return Color.white;
-            else if (str == "black")
+            if (str == "black")
                 return Color.black;
-            else if (str == "gray")
+            if (str == "gray")
                 return Color.gray;
-            else if (str == "red")
+            if (str == "red")
                 return Color.red;
-            else if (str == "blue")
+            if (str == "blue")
                 return Color.blue;
-            else if (str == "yellow")
+            if (str == "yellow")
                 return Color.yellow;
-            else if (str == "green")
+            if (str == "green")
                 return Color.green;
-            else if (str == "cyan")
+            if (str == "cyan")
                 return Color.cyan;
-            else
-                return color;
+            return color;
         }
     }
 

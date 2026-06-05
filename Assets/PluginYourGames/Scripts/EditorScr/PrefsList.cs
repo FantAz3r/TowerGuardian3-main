@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -21,7 +22,7 @@ namespace YG.EditorScr
             if (string.IsNullOrEmpty(str))
                 return new List<string>();
 
-            return str.Split(new[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries)
+            return str.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
                       .Select(s => s.Trim())
                       .ToList();
         }

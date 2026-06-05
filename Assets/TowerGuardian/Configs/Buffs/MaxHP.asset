@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44744d01fec7ec648a88c2fb89067b1c, type: 3}
+  m_Name: MaxHP
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: e3dcd29e2be18d6459eca101d0492e2e, type: 3}
+  _nameRu: "\u041C\u0430\u043A\u0441. \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+  _nameEn: Max HP
+  _nameTr: "maksimum sa\u011Fl\u0131k"
+  _descriptionRU: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+    \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0435 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+  _descriptionEN: Increases maximum health
+  _descriptionTR: "Maksimum sa\u011Fl\u0131\u011F\u0131 art\u0131r\u0131r"
+  _costs:
+  - ResourceType: 2
+    Value: 10
+    Image: {fileID: 21300000, guid: 20d21a867b3174de9aa1b81823b2b7ef, type: 3}
+  _id: f16b46a5-a46e-42d8-afc5-54d237d09e9e
+  <ChanceToView>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <HasPlayer>k__BackingField: 0
+  <IsBought>k__BackingField: 0
+  <MaxCardLevel>k__BackingField: 100
+  _baseIncreaseValue: 1.2
+  _upgradeValuePerLevel: 0.1
+  <BuffType>k__BackingField: 2
+  <EffectType>k__BackingField: 2

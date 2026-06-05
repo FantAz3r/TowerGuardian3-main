@@ -149,15 +149,13 @@ namespace YG.EditorScr
         {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync(packageUrl);
-                    if (!response.IsSuccessStatusCode)
-                        return false;
+                using HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(packageUrl);
+                if (!response.IsSuccessStatusCode)
+                    return false;
 
-                    byte[] packageBytes = await response.Content.ReadAsByteArrayAsync();
-                    File.WriteAllBytes(savePath, packageBytes);
-                }
+                byte[] packageBytes = await response.Content.ReadAsByteArrayAsync();
+                File.WriteAllBytes(savePath, packageBytes);
 
                 return true;
             }

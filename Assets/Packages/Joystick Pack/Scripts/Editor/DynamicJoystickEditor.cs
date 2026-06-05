@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEditor;
 
 [CustomEditor(typeof(DynamicJoystick))]
 public class DynamicJoystickEditor : JoystickEditor
@@ -18,13 +16,13 @@ public class DynamicJoystickEditor : JoystickEditor
     {
         base.OnInspectorGUI();
 
-      //if (background != null)
-      //{
-      //    RectTransform backgroundRect = (RectTransform)background.objectReferenceValue;
-      //    backgroundRect.anchorMax = new Vector2(0.5f, 0.5f);
-      //    backgroundRect.anchorMin = new Vector2(0.5f, 0.5f);
-      //    backgroundRect.pivot = center;
-      //}
+        //if (background != null)
+        //{
+        //    RectTransform backgroundRect = (RectTransform)background.objectReferenceValue;
+        //    backgroundRect.anchorMax = new Vector2(0.5f, 0.5f);
+        //    backgroundRect.anchorMin = new Vector2(0.5f, 0.5f);
+        //    backgroundRect.pivot = center;
+        //}
     }
 
     protected override void DrawValues()

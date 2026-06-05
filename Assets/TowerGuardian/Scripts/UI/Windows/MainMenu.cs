@@ -1,0 +1,11 @@
+namespace TowerGuardian.Scripts.UI.Windows
+{
+    public class MainMenu : WindowBase
+    {
+        public override void Close()
+        {
+            base.Close();
+            Destroy(gameObject);
+        }
+    }
+}

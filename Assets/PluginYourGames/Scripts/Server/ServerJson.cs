@@ -1,7 +1,9 @@
+using System;
+
 #if UNITY_EDITOR
 namespace YG.EditorScr
 {
-    [System.Serializable]
+    [Serializable]
     public class ServerJson
     {
         public string redirection = string.Empty;

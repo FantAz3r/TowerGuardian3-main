@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,14 +8,14 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 3f;
     public float sprintSpeed = 5f;
 
-    float speedBoost = 1f;
-    Vector3 velocity;
-    void Start()
+    private float speedBoost = 1f;
+    private Vector3 velocity;
+    private void Start()
     {
 
     }
 
-    void Update()
+    private void Update()
     {
         if (controller.isGrounded && velocity.y < 0)
         {
@@ -33,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
             speedBoost = 1f;
 
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = (transform.right * x) + (transform.forward * z);
 
         controller.Move(move * (baseSpeed + speedBoost) * Time.deltaTime);
 

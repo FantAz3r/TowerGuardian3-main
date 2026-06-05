@@ -1,3 +1,4 @@
+using System;
 using YG.Insides;
 
 namespace YG
@@ -10,7 +11,7 @@ namespace YG
 
 namespace YG.Insides
 {
-    [System.Serializable]
+    [Serializable]
     public partial class PlatformInfo
     {
         /// [ApplySettings] [SelectPlatform] [DeletePlatform]

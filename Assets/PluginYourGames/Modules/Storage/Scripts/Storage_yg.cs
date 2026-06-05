@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using TowerGuardian.Scripts.SaveSystem;
+using UnityEditor;
 using UnityEngine;
-using YG.Utils;
 using YG.Insides;
+using YG.Utils;
 #if NJSON_STORAGE_YG2
 using Newtonsoft.Json;
 #endif
@@ -96,7 +98,7 @@ namespace YG.Insides
 {
     public static partial class YGInsides
     {
-        private enum DataState { Exist, NotExist, Broken };
+        private enum DataState { Exist, NotExist, Broken }
         private const string STORAGE_KEY = "YG2_SavesData";
 
         public static void LoadProgress()
@@ -136,7 +138,7 @@ namespace YG.Insides
             File.WriteAllText(PATH_SAVES_EDITOR, json);
 
             if (!fileExits && File.Exists(PATH_SAVES_EDITOR))
-                UnityEditor.AssetDatabase.Refresh();
+                AssetDatabase.Refresh();
         }
 
         public static void LoadEditor()
@@ -234,7 +236,7 @@ namespace YG.Insides
             }
             else cloudDataState = DataState.NotExist;
 
-            if (infoYG.Storage.saveLocal == false)
+            if (!infoYG.Storage.saveLocal)
             {
                 if (cloudDataState == DataState.NotExist)
                 {

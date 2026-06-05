@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
+using YG.EditorScr;
 using YG.Insides;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -24,7 +22,7 @@ namespace YG
 #if UNITY_EDITOR
                 if (infoRes == null)
                 {
-                    InfoYG infoYG = ScriptableObject.CreateInstance<InfoYG>();
+                    InfoYG infoYG = CreateInstance<InfoYG>();
                     string path = $"{PATCH_ASSETS_YG2}/Resources/{NAME_INFOYG_FILE}.asset";
                     string directory = $"{PATCH_ASSETS_YG2}/Resources";
 
@@ -38,7 +36,7 @@ namespace YG
 
                     instance = infoRes != null ? infoRes : infoYG;
 
-                    if (EditorUtility.DisplayDialog($"Optimal settings",
+                    if (EditorUtility.DisplayDialog("Optimal settings",
                         "Установить оптимальные настройки проекта и плагина для платформы по умолчанию «Яндекс Игры»? (Рекомендуется)\n\nSet the optimal project and plugin settings for the default platform «Yandex Games» platform? (Recommended)",
                         "Yes",
                         "No"))
@@ -84,7 +82,7 @@ namespace YG
                 if (instance.Basic.autoApplySettings)
                     instance.Basic.platform.ApplyProjectSettings();
 
-                EditorScr.DefineSymbols.PlatformDefineSymbols();
+                DefineSymbols.PlatformDefineSymbols();
             }
         }
 

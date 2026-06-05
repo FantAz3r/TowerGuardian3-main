@@ -1,11 +1,8 @@
-﻿using System;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine;
 using UnityEngine.UI;
 using YG.Insides;
 using YG.Utils.LB;
-using System.Collections.Generic;
-
 #if Localization_yg
 using YG.Utils.Lang;
 #endif
@@ -31,7 +28,7 @@ namespace YG
 #endif
         public int quantityAround = 6;
 
-        public enum UpdateLBMethod { Start, OnEnable, DoNotUpdate };
+        public enum UpdateLBMethod { Start, OnEnable, DoNotUpdate }
 #if UNITY_EDITOR
         [Tooltip(Langs.t_updateLBMethod)]
 #endif
@@ -53,7 +50,7 @@ namespace YG
 #endif
         public GameObject playerDataPrefab;
 
-        public enum PlayerPhoto { NonePhoto, Small, Medium, Large };
+        public enum PlayerPhoto { NonePhoto, Small, Medium, Large }
 #if UNITY_EDITOR
         [NestedYG(nameof(advanced)), Tooltip(Langs.t_playerPhoto)]
 #endif
