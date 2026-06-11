@@ -10,14 +10,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.Effects
     {
         [SerializeField] private float _lifetime = 0.35f;
 
-        private Image image;
+        private Image _image;
 
         public override void Open()
         {
-            image = GetComponent<Image>();
-            Color color = image.color;
+            _image = GetComponent<Image>();
+            Color color = _image.color;
             color.a = 0f;
-            image.color = color;
+            _image.color = color;
 
             float fadeInTime = _lifetime * 0.1f;
             float fadeOutTime = _lifetime * 0.9f;
@@ -25,8 +25,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Effects
 
             Sequence seq = DOTween.Sequence();
 
-            seq.Append(image.DOFade(1f, fadeInTime));
-            seq.Append(image.DOFade(0f, fadeOutTime));
+            seq.Append(_image.DOFade(1f, fadeInTime));
+            seq.Append(_image.DOFade(0f, fadeOutTime));
             seq.SetUpdate(true);
 
             seq.OnComplete(() =>

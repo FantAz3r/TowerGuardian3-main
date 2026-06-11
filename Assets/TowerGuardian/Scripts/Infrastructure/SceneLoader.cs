@@ -26,7 +26,7 @@ namespace TowerGuardian.Scripts.Infrastructure
 
         private IEnumerator LoadScene(string nextScene, Action onLoaded, bool hasLoading)
         {
-            AsyncOperation asyncLoad = null;
+            AsyncOperation asyncLoad;
 
             Scene currentActiveScene = SceneManager.GetActiveScene();
             Scene loadingScene = default;

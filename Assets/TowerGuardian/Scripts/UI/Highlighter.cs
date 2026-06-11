@@ -8,7 +8,7 @@ namespace TowerGuardian.Scripts.UI
     {
         [SerializeField] private Image _warningFrame;
         private Tween _warningTween;
-
+       
         private void OnDestroy()
         {
             _warningTween?.Kill();
@@ -23,7 +23,7 @@ namespace TowerGuardian.Scripts.UI
 
             _warningTween?.Kill();
 
-            _warningTween = _warningFrame.DOFade(0f, 0.3f)
+            _warningTween = _warningFrame.material.DOFade(0f, 0.3f)
                 .SetLoops(-1, LoopType.Yoyo);
         }
 

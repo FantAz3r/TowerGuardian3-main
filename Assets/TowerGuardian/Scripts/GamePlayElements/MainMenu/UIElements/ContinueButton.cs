@@ -41,13 +41,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu.UIElements
 
         private void LoadLevel()
         {
-            if (YG2.saves.CurrentLevel == LevelID.None || YG2.saves.CurrentLevel == LevelID.MainMenu)
+            if (YG2.saves.CurrentLevel == (int) LevelID.None || YG2.saves.CurrentLevel == (int) LevelID.MainMenu)
             {
                 _levelToLoad = LevelID.Tower;
                 return;
             }
 
-            _levelToLoad = YG2.saves.CurrentLevel;
+            _levelToLoad = (LevelID) YG2.saves.CurrentLevel;
         }
     }
 }

@@ -9,7 +9,6 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class QuestViewer : WindowBase
     {
-
         [SerializeField] private Image _image;
         [SerializeField] private TMP_Text _description;
         [SerializeField] private TMP_Text _progress;

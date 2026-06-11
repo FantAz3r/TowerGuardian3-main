@@ -49,7 +49,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
 
                 if (prevLevelData.IsComplite)
                 {
-                    Portal portal = _portals.Find(portal => portal.NextLevel == YG2.saves.LevelsProgress[i - 1].Level + 1);
+                    Portal portal = _portals.Find(portal => portal.NextLevel == (LevelID) YG2.saves.LevelsProgress[i - 1].Level + 1);
 
                     if (portal != null)
                     {

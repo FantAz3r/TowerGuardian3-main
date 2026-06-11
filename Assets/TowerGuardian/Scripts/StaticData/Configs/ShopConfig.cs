@@ -53,7 +53,7 @@ namespace TowerGuardian.Scripts.StaticData.Configs
         public virtual List<CostInfo> GetCosts() => _costs;
         public virtual List<CostInfo> GetSellCosts() => _costs;
 
-        public string OnCorrectLanguage(string ru, string en, string tr)
+        private string OnCorrectLanguage(string ru, string en, string tr)
         {
             string lang = YG2.lang;
 

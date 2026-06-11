@@ -29,7 +29,7 @@ namespace TowerGuardian.Scripts.Quests
 
             foreach (var levelData in YG2.saves.LevelsProgress)
             {
-                if (levelData.Level == LevelID.Level5 && levelData.IsComplite)
+                if (levelData.Level == (int) LevelID.Level5 && levelData.IsComplite)
                 {
                     Complete();
                     break;

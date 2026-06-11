@@ -20,9 +20,9 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         {
             if (previousLevel == LevelID.None || previousLevel == LevelID.MainMenu)
             {
-                if (currentLevel == LevelID.Tower && YG2.saves.PreviousLevel != LevelID.None)
+                if (currentLevel == LevelID.Tower && YG2.saves.PreviousLevel != (int) LevelID.None)
                 {
-                    return GetPortalPoint(YG2.saves.PreviousLevel);
+                    return GetPortalPoint((LevelID) YG2.saves.PreviousLevel);
                 }
 
                 return _sceneContainer.PlayerSpawnPoints.First().transform.position;

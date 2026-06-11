@@ -29,7 +29,7 @@ namespace TowerGuardian.Scripts.Infrastructure.FSM.States
 
             if (level != LevelID.MainMenu)
             {
-                YG2.saves.CurrentLevel = level;
+                YG2.saves.CurrentLevel = (int) level;
                 YG2.SaveProgress();
             }
         }
@@ -48,7 +48,7 @@ namespace TowerGuardian.Scripts.Infrastructure.FSM.States
 
         private void InitCurrentLevel(LevelID level)
         {
-            YG2.saves.PreviousLevel = _currentLevel;
+            YG2.saves.PreviousLevel = (int) _currentLevel;
             YG2.SaveProgress();
 
             _previousLevel = _currentLevel;

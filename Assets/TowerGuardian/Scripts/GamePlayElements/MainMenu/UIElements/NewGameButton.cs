@@ -53,7 +53,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu.UIElements
             YG2.saves.Level = 0;
             YG2.saves.UpgradePoints = 0;
             YG2.saves.CurrentEXP = 0f;
-            YG2.saves.CurrentLevel = LevelID.None;
+            YG2.saves.CurrentLevel = (int) LevelID.None;
             YG2.saves.CurrentFloor = 0;
             YG2.saves.PlayerPosition = Vector3.zero;
             YG2.SaveProgress();

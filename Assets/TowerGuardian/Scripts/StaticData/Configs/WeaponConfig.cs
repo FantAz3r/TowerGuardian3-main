@@ -41,7 +41,7 @@ namespace TowerGuardian.Scripts.StaticData.Configs
             return BaseDamage * Mathf.Pow(1 + _damageUpgradePercent, level - 1);
         }
 
-        public float GetAttackDelay(int level)
+        private float GetAttackDelay(int level)
         {
             return Mathf.Max(0.1f, BaseAttackDelay * Mathf.Pow(1 + _attackDelayUpgradeFactor, level - 1));
         }
