@@ -25,7 +25,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (Enemy == null || Enemy.Target == null) return;
+            if (Enemy == null || Enemy.Target == null)
+            {
+                return;
+            }
 
             if (_isThrowing)
             {
@@ -50,7 +53,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
         {
             _isThrowing = false;
             Enemy.StateMachine.OnThrowEnded();
-            if (Enemy.ThrownObject == null) return;
+            if (Enemy.ThrownObject == null)
+            {
+                return;
+            }
 
             ThrownObject thrownObject = Enemy.ThrownObject.gameObject.AddComponent<ThrownObject>();
             thrownObject.StartFly(Enemy.Config.ThrowDamage, Enemy.Target.position);

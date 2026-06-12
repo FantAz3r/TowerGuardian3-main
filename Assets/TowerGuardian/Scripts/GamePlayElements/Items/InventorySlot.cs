@@ -11,15 +11,20 @@ namespace TowerGuardian.Scripts.GamePlayElements.Items
 {
     public class InventorySlot : MonoBehaviour, IDropHandler
     {
-
-        [SerializeField] private Image _weaponImage;
-        [SerializeField] private Image _abilityImage;
-        [SerializeField] private CardType _slotType;
+        [SerializeField]
+        private Image _weaponImage;
+        [SerializeField]
+        private Image _abilityImage;
+        [SerializeField]
+        private CardType _slotType;
 
         private PlayerCardConfigContainer _cardHolrer;
 
-        [field: SerializeField] public bool IsActiveSlot { get; private set; }
+        [field: SerializeField]
+        public bool IsActiveSlot { get; private set; }
+
         public Image CurrentImage { get; private set; }
+
         public UIItem CurrentItem { get; private set; }
 
         private void Awake()
@@ -45,22 +50,30 @@ namespace TowerGuardian.Scripts.GamePlayElements.Items
         public void OnDrop(PointerEventData eventData)
         {
             if (CurrentItem != null)
+            {
                 return;
+            }
 
             if (_slotType == CardType.None)
+            {
                 return;
+            }
 
             var itemTransform = eventData.pointerDrag.transform;
             var draggedItem = itemTransform.GetComponent<UIItem>();
 
             if (_slotType != CardType.Any && draggedItem.SlotConfig.GetCardType() != _slotType)
+            {
                 return;
+            }
 
             itemTransform.SetParent(transform);
             itemTransform.localPosition = Vector3.zero;
 
             if (CurrentImage != null)
+            {
                 CurrentImage.enabled = false;
+            }
         }
 
         public void SetItem(UIItem item)

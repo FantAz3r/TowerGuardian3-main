@@ -5,13 +5,18 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.Buildings
     [RequireComponent(typeof(Outpost))]
     public class OutpostFlag : MonoBehaviour
     {
-        [SerializeField] private GameObject _flag;
-        [SerializeField] private Renderer _flagRenderer;
+        [SerializeField]
+        private GameObject _flag;
+        [SerializeField]
+        private Renderer _flagRenderer;
 
-        [SerializeField] private Vector3 _flagUpPosition = new Vector3(0, 1, 0);
-        [SerializeField] private Vector3 _flagDownPosition = new Vector3(0, 0, 0);
+        [SerializeField]
+        private Vector3 _flagUpPosition = new Vector3(0, 1, 0);
+        [SerializeField]
+        private Vector3 _flagDownPosition = new Vector3(0, 0, 0);
 
-        [SerializeField] private Outpost _outpost;
+        [SerializeField]
+        private Outpost _outpost;
 
         private void Awake()
         {

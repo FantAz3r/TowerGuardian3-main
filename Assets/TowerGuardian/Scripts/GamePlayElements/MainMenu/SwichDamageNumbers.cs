@@ -9,7 +9,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu
 {
     public class SwichDamageNumbers : MonoBehaviour
     {
-        [SerializeField] private Toggle _toggle;
+        [SerializeField]
+        private Toggle _toggle;
         private ISpawnerService _spawnerService;
 
         private void Awake()

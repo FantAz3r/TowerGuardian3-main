@@ -6,7 +6,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
 {
     public class ArenaTrigger : MonoBehaviour
     {
-        [SerializeField] private BoxCollider _boxCollider;
+        [SerializeField]
+        private BoxCollider _boxCollider;
 
         public event Action Entered;
 

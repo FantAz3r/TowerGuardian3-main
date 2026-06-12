@@ -37,14 +37,18 @@ namespace TowerGuardian.Scripts.Spawners
         public override void Spawn(HealthConfig config, Vector3 position, int count = 0)
         {
             if (!CanSpawn)
+            {
                 return;
+            }
 
             if (!_pools.TryGetValue(config.SpawnResource, out var pool))
+            {
                 return;
+            }
 
             float rootDegree = 2.5f;
             int spawnCount = Mathf.CeilToInt(Mathf.Pow(count, 1f / rootDegree));
-            int pointsPerObject = Mathf.CeilToInt((float)count / spawnCount);
+            int pointsPerObject = Mathf.CeilToInt((float) count / spawnCount);
 
             for (int i = 0; i < spawnCount; i++)
             {

@@ -29,7 +29,7 @@ namespace YG
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            ColorYGAttribute colorAttribute = (ColorYGAttribute)attribute;
+            ColorYGAttribute colorAttribute = (ColorYGAttribute) attribute;
             Color previousColor = GUI.color;
             GUI.color = colorAttribute.color;
 

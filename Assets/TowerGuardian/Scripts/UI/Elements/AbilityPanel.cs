@@ -12,10 +12,11 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class AbilityPanel : MonoBehaviour
     {
-        [SerializeField] private List<AbilityViewer> _viewers;
+        [SerializeField]
+        private List<AbilityViewer> _viewers;
 
-        private Dictionary<AbilityViewer, bool> _viewersSlots = new();
-        private Dictionary<AbilityKeyCode, bool> _keyCodes = new()
+        private Dictionary<AbilityViewer, bool> _viewersSlots = new ();
+        private Dictionary<AbilityKeyCode, bool> _keyCodes = new ()
     {
         { AbilityKeyCode.First, false },
         { AbilityKeyCode.Second, false },
@@ -25,9 +26,13 @@ namespace TowerGuardian.Scripts.UI.Elements
 
         private Player _player;
         private IAbilityInput _inputService;
+
         private void OnAbility1Used() => ActivateAbilityByKey(AbilityKeyCode.First);
+
         private void OnAbility2Used() => ActivateAbilityByKey(AbilityKeyCode.Second);
+
         private void OnAbility3Used() => ActivateAbilityByKey(AbilityKeyCode.Third);
+
         private void OnAbility4Used() => ActivateAbilityByKey(AbilityKeyCode.Fourth);
 
         private void Awake()
@@ -67,7 +72,9 @@ namespace TowerGuardian.Scripts.UI.Elements
             if (YG2.envir.isDesktop)
             {
                 if (_inputService == null)
+                {
                     return;
+                }
 
                 _inputService.OnAbillity1Used -= OnAbility1Used;
                 _inputService.OnAbillity2Used -= OnAbility2Used;
@@ -126,16 +133,22 @@ namespace TowerGuardian.Scripts.UI.Elements
         private void SetFreeKey(AbilityViewer viewer)
         {
             if (viewer.AbilityKey == AbilityKeyCode.None)
+            {
                 return;
+            }
 
             if (_keyCodes.ContainsKey(viewer.AbilityKey))
+            {
                 _keyCodes[viewer.AbilityKey] = false;
+            }
         }
 
         private AbilityKeyCode GetFreeKey(IAbility ability)
         {
             if (!(ability is UsebleAbility))
+            {
                 return AbilityKeyCode.None;
+            }
 
             foreach (var keyCode in _keyCodes)
             {
@@ -154,7 +167,10 @@ namespace TowerGuardian.Scripts.UI.Elements
             foreach (var viewer in _viewers)
             {
                 if (!viewer.HasAbility)
+                {
                     continue;
+                }
+
                 return;
             }
 

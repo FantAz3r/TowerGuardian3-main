@@ -10,12 +10,18 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class SellResourceView : MonoBehaviour
     {
-        [SerializeField] private Image _sellImage;
-        [SerializeField] private TMP_Text _name;
-        [SerializeField] private TMP_Text _description;
-        [SerializeField] private TMP_Text _count;
-        [SerializeField] private List<CostView> _costs;
-        [SerializeField] private Button _button;
+        [SerializeField]
+        private Image _sellImage;
+        [SerializeField]
+        private TMP_Text _name;
+        [SerializeField]
+        private TMP_Text _description;
+        [SerializeField]
+        private TMP_Text _count;
+        [SerializeField]
+        private List<CostView> _costs;
+        [SerializeField]
+        private Button _button;
 
         private CounterSlider _slider;
         private PieceConfig _config;
@@ -62,7 +68,9 @@ namespace TowerGuardian.Scripts.UI.Elements
         private void OnClick()
         {
             if (_config == null)
+            {
                 return;
+            }
 
             _slider.Init(_maxValue, _config);
             _slider.Open();

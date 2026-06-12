@@ -9,16 +9,25 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class UIItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
-        [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField]
+        private CanvasGroup _canvasGroup;
+        [SerializeField]
+        private RectTransform _rectTransform;
 
         private Transform _inventory;
         private Canvas _mainCanvas;
         private Transform _previousParent;
         private InventorySlot _previousSlot;
-        [field: SerializeField] public Image SlotImag { get; private set; }
-        [field: SerializeField] public TMP_Text ItemLevelText { get; private set; }
-        [field: SerializeField] public StatsButton StatsButton { get; private set; }
+
+        [field: SerializeField]
+        public Image SlotImag { get; private set; }
+
+        [field: SerializeField]
+        public TMP_Text ItemLevelText { get; private set; }
+
+        [field: SerializeField]
+        public StatsButton StatsButton { get; private set; }
+
         public ICardConfig SlotConfig { get; private set; }
 
         public void Init(Transform inventory, Canvas mainCanvas)
@@ -56,7 +65,9 @@ namespace TowerGuardian.Scripts.UI.Elements
             InventorySlot newSlot = null;
 
             if (transform.parent != null)
+            {
                 newSlot = transform.parent.GetComponent<InventorySlot>();
+            }
 
             if (newSlot == null || newSlot.CurrentItem != null)
             {

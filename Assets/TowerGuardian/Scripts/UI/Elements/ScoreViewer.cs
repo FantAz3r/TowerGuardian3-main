@@ -11,11 +11,15 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class ScoreViewer : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _rewardCount;
-        [SerializeField] private TMP_Text _scoreCount;
-        [SerializeField] private TMP_Text _time;
+        [SerializeField]
+        private TMP_Text _rewardCount;
+        [SerializeField]
+        private TMP_Text _scoreCount;
+        [SerializeField]
+        private TMP_Text _time;
 
-        [SerializeField] private List<Image> _stars;
+        [SerializeField]
+        private List<Image> _stars;
 
         private ScoreCounter _scoreCounter;
 
@@ -39,8 +43,8 @@ namespace TowerGuardian.Scripts.UI.Elements
 
             _scoreCount.text = score.ToString();
 
-            int minutes = (int)time / 60;
-            int seconds = (int)time % 60;
+            int minutes = (int) time / 60;
+            int seconds = (int) time % 60;
             _time.text = $"{minutes:D2}:{seconds:D2}";
 
             DrowStars(stars);
@@ -49,7 +53,9 @@ namespace TowerGuardian.Scripts.UI.Elements
         private void DrowStars(int count)
         {
             if (count == 0)
+            {
                 return;
+            }
 
             for (int i = 0; i < _stars.Count; i++)
             {

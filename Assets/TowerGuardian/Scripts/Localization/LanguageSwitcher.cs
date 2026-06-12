@@ -6,10 +6,14 @@ namespace TowerGuardian.Scripts.Localization
 {
     public class LanguageSwitcher : MonoBehaviour
     {
-        [SerializeField] private Toggle _toggleRu;
-        [SerializeField] private Toggle _toggleEn;
-        [SerializeField] private Toggle _toggleTr;
-        [SerializeField] private ToggleGroup _toggleGroup;
+        [SerializeField]
+        private Toggle _toggleRu;
+        [SerializeField]
+        private Toggle _toggleEn;
+        [SerializeField]
+        private Toggle _toggleTr;
+        [SerializeField]
+        private ToggleGroup _toggleGroup;
 
         private string _defaultLanguage;
         private string _currentLanguage;
@@ -48,10 +52,14 @@ namespace TowerGuardian.Scripts.Localization
         private void OnToggleChanged(string lang, bool isOn)
         {
             if (!isOn)
+            {
                 return;
+            }
 
             if (lang == _currentLanguage)
+            {
                 return;
+            }
 
             SetLanguage(lang);
         }
@@ -66,7 +74,9 @@ namespace TowerGuardian.Scripts.Localization
         private void SetLanguage(string lang)
         {
             if (string.IsNullOrEmpty(lang))
+            {
                 lang = _defaultLanguage;
+            }
 
             if (lang != _currentLanguage)
             {
@@ -80,7 +90,9 @@ namespace TowerGuardian.Scripts.Localization
         private void SaveLanguage()
         {
             if (YG2.saves == null)
+            {
                 return;
+            }
 
             YG2.saves.Language = _currentLanguage;
             YG2.SaveProgress();

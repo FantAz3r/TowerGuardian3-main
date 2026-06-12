@@ -9,7 +9,7 @@ namespace TowerGuardian.Scripts.Infrastructure.FSM.States
 
         private void Start()
         {
-            GameStateMachine stateMachine = new GameStateMachine(new SceneLoader(this), this);
+            GameStateMachine stateMachine = new GameStateMachine(this);
 
             _game = new Game(stateMachine);
             _game.StateMachine.EnterIn<BootstrapState>();

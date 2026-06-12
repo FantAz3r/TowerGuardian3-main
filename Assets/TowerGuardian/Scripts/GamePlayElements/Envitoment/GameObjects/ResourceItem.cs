@@ -29,7 +29,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
             yield return _onesecond;
             _currentLevel = ServiceLocator.Get<IGameFactory>().LevelConfig.Level;
 
-            _health.Config.SetLevel(Mathf.Max(0, (int)_currentLevel - NoGameLevelConstant));
+            _health.Config.SetLevel(Mathf.Max(0, (int) _currentLevel - NoGameLevelConstant));
             _health.Init(_health.Config.GetMaxHealth());
         }
     }

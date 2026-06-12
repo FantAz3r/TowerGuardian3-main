@@ -55,7 +55,7 @@ namespace YG
         {
             if (ShouldDisplay(property))
             {
-                NestedYGAttribute attr = (NestedYGAttribute)attribute;
+                NestedYGAttribute attr = (NestedYGAttribute) attribute;
 
                 float offset = attr.offset;
 
@@ -97,7 +97,7 @@ namespace YG
 
         private bool ShouldDisplay(SerializedProperty property)
         {
-            NestedYGAttribute attr = (NestedYGAttribute)attribute;
+            NestedYGAttribute attr = (NestedYGAttribute) attribute;
 
             if (attr.propertyNames == null || attr.propertyNames.Length == 0)
                 return true;

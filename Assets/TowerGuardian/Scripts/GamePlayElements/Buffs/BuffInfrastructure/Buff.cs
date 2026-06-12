@@ -35,14 +35,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.Buffs.BuffInfrastructure
         }
 
         public IBuffble BuffbleObject { get; private set; }
+
         public BuffConfig Config { get; private set; }
+
         public BuffType Type => Config.BuffType;
 
         public void SetConfig(BuffConfig config)
         {
             Config = config;
-
-            
         }
 
         public void Enable()

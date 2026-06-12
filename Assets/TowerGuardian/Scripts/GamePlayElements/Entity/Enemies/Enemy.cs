@@ -1,6 +1,5 @@
 using TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects;
 using TowerGuardian.Scripts.GamePlayElements.PlayerScripts;
-using TowerGuardian.Scripts.Spawners;
 using TowerGuardian.Scripts.StaticData.Configs.EntityConfigs;
 using UnityEngine;
 
@@ -8,24 +7,53 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
 {
     public class Enemy : MonoBehaviour
     {
-        [field: SerializeField] public EnemyConfig Config { get; private set; }
-        [field: SerializeField] public Health Health { get; private set; }
-        [field: SerializeField] public Rotator Rotator { get; private set; }
-        [field: SerializeField] public AttackZone AttackZone { get; private set; }
-        [field: SerializeField] public EnemyAnimator AnimationAnimator { get; private set; }
-        [field: SerializeField] public Animator BehaviorAnimator { get; private set; }
-        [field: SerializeField] public EnemyStateMachine StateMachine { get; private set; }
-        [field: SerializeField] public EnemyMover Agent { get; private set; }
-        [field: SerializeField] public TargetDetector TargetDetector { get; private set; }
-        [field: SerializeField] public ThrownObjectDetector ThrownObjectDetector { get; private set; }
-        [field: SerializeField] public PickUper PickUper { get; private set; }
-        [field: SerializeField] public ProjectileSpawner ProjectileSpawner { get; private set; }
-        [field: SerializeField] public Collider Collider { get; private set; }
-        [field: SerializeField] public SphereCollider TargetDetectorCollider { get; private set; }
-        [field: SerializeField] public Orbit Orbit { get; private set; }
-        [field: SerializeField] public ForceField ForceField { get; private set; }
+        [field: SerializeField]
+        public EnemyConfig Config { get; private set; }
+
+        [field: SerializeField]
+        public Health Health { get; private set; }
+
+        [field: SerializeField]
+        public Rotator Rotator { get; private set; }
+
+        [field: SerializeField]
+        public AttackZone AttackZone { get; private set; }
+
+        [field: SerializeField]
+        public EnemyAnimator AnimationAnimator { get; private set; }
+
+        [field: SerializeField]
+        public Animator BehaviorAnimator { get; private set; }
+
+        [field: SerializeField]
+        public EnemyStateMachine StateMachine { get; private set; }
+
+        [field: SerializeField]
+        public EnemyMover Agent { get; private set; }
+
+        [field: SerializeField]
+        public TargetDetector TargetDetector { get; private set; }
+
+        [field: SerializeField]
+        public ThrownObjectDetector ThrownObjectDetector { get; private set; }
+
+        [field: SerializeField]
+        public PickUper PickUper { get; private set; }
+
+        [field: SerializeField]
+        public Collider Collider { get; private set; }
+
+        [field: SerializeField]
+        public SphereCollider TargetDetectorCollider { get; private set; }
+
+        [field: SerializeField]
+        public Orbit Orbit { get; private set; }
+
+        [field: SerializeField]
+        public ForceField ForceField { get; private set; }
 
         public Transform Target { get; private set; }
+
         public Transform ThrownObject { get; private set; }
 
         public void Init(Transform player, int level = 0)

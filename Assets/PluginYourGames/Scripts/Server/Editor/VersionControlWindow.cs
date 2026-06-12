@@ -50,7 +50,7 @@ namespace YG.EditorScr
                 return;
 
             removeBeforeImport = EditorPrefs.GetBool(REMOVE_BEFORE_IMPORT_TOGGLE_KEY, true);
-            currentTab = (TabSection)EditorPrefs.GetInt(TAB_KEY, (int)TabSection.Modules);
+            currentTab = (TabSection) EditorPrefs.GetInt(TAB_KEY, (int) TabSection.Modules);
 
             ServerInfo.onLoadServerInfo += OnLoadServerInfo;
             EditorApplication.projectChanged += OnLoadServerInfo;
@@ -819,7 +819,7 @@ namespace YG.EditorScr
                 return;
 
             currentTab = tab;
-            EditorPrefs.SetInt(TAB_KEY, (int)currentTab);
+            EditorPrefs.SetInt(TAB_KEY, (int) currentTab);
 
             ApplyTabFilterAndBuildVisibleList();
             Repaint();

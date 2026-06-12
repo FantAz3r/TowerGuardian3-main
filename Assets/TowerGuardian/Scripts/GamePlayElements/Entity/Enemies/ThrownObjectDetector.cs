@@ -8,8 +8,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
 {
     public class ThrownObjectDetector : MonoBehaviour
     {
-        [SerializeField] private float _detectionRadius = 20f;
-        [SerializeField] private LayerMask _resourceItemLayer;
+        [SerializeField]
+        private float _detectionRadius = 20f;
+        [SerializeField]
+        private LayerMask _resourceItemLayer;
 
         public Transform GetNearestResource()
         {
@@ -25,7 +27,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
             }
 
             if (items.Count == 0)
+            {
                 return null;
+            }
 
             ResourceItem nearest = Utils.Utils.GetObjectsSortedByDistance(items, transform.position).First();
             NavMeshObstacle obstacle = nearest.GetComponent<NavMeshObstacle>();

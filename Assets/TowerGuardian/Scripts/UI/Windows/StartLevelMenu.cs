@@ -8,16 +8,19 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class StartLevelMenu : LevelMenu
     {
-        [SerializeField] private Button _startButton;
-        [SerializeField] private TMP_Text _levelNumberText;
-        [SerializeField] private TMP_Text _levelScoreInfo;
+        [SerializeField]
+        private Button _startButton;
+        [SerializeField]
+        private TMP_Text _levelNumberText;
+        [SerializeField]
+        private TMP_Text _levelScoreInfo;
 
         private LevelID _nextLevel;
 
         public void Init(LevelID nextLevel)
         {
             _nextLevel = nextLevel;
-            _levelNumberText.text = ((int)nextLevel - EnumGameLevelOffset).ToString();
+            _levelNumberText.text = ((int) nextLevel - EnumGameLevelOffset).ToString();
             ShowScoreInfo();
         }
 

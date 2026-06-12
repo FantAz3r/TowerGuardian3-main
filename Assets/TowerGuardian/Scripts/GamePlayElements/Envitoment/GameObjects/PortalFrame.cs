@@ -11,15 +11,35 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
     {
         public event Action Disabled;
 
-        [field: SerializeField] public Health Health { get; private set; }
-        [field: SerializeField] public HealthViewer HealthViewre { get; private set; }
-        [field: SerializeField] public Slider HealthViewSlider { get; private set; }
-        [field: SerializeField] public Collider Collider { get; private set; }
+        [field: SerializeField]
+        public Health Health { get; private set; }
+
+        [field: SerializeField]
+        public HealthViewer HealthViewre { get; private set; }
+
+        [field: SerializeField]
+        public Slider HealthViewSlider { get; private set; }
+
+        [field: SerializeField]
+        public Collider Collider { get; private set; }
+
         public bool IsActive { get; private set; }
 
         private void Awake()
         {
             Deactivate();
+        }
+
+        private void OnDisable()
+        {
+            Deactivate();
+            Disabled?.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            Health.IsValueChange -= OnTakeDamage;
+            Health.Died -= OnDied;
         }
 
         public void Activate()
@@ -60,18 +80,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
         {
             Deactivate();
             Destroy(this);
-        }
-
-        private void OnDisable()
-        {
-            Deactivate();
-            Disabled?.Invoke();
-        }
-
-        private void OnDestroy()
-        {
-            Health.IsValueChange -= OnTakeDamage;
-            Health.Died -= OnDied;
         }
     }
 }

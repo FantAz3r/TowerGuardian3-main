@@ -13,7 +13,9 @@ namespace TowerGuardian.Scripts.Infrastructure
         {
             var type = typeof(TService);
             if (!_services.ContainsKey(type))
+            {
                 _services[type] = service;
+            }
         }
 
         public static TService Get<TService>()
@@ -22,7 +24,9 @@ namespace TowerGuardian.Scripts.Infrastructure
             var type = typeof(TService);
 
             if (_services.TryGetValue(type, out IService service))
-                return (TService)service;
+            {
+                return (TService) service;
+            }
 
             throw new InvalidOperationException($"No {type} service");
         }

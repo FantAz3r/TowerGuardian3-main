@@ -20,7 +20,7 @@ public class VariableJoystickEditor : JoystickEditor
 
         if (background != null)
         {
-            RectTransform backgroundRect = (RectTransform)background.objectReferenceValue;
+            RectTransform backgroundRect = (RectTransform) background.objectReferenceValue;
             backgroundRect.pivot = center;
         }
     }

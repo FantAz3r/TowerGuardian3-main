@@ -29,7 +29,7 @@ namespace YG
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            LabelYGAttribute attr = (LabelYGAttribute)attribute;
+            LabelYGAttribute attr = (LabelYGAttribute) attribute;
 
             GUIStyle labelStyle = TextStyles.Orange();
 

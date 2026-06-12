@@ -11,14 +11,20 @@ namespace TowerGuardian.Scripts.UI
 
     public class ButtonEffector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        [SerializeField] private Sprite _highlightedSprite;
-        [SerializeField] private Sprite _normalSprite;
+        [SerializeField]
+        private Sprite _highlightedSprite;
+        [SerializeField]
+        private Sprite _normalSprite;
 
-        [SerializeField] private Color _highlightedColor = Color.white;
-        [SerializeField] private Color _normalColor = Color.white;
+        [SerializeField]
+        private Color _highlightedColor = Color.white;
+        [SerializeField]
+        private Color _normalColor = Color.white;
 
-        [SerializeField] private AudioClip _pressedSound;
-        [SerializeField] private AudioClip _highlightedSound;
+        [SerializeField]
+        private AudioClip _pressedSound;
+        [SerializeField]
+        private AudioClip _highlightedSound;
 
         private Image _buttonImage;
         private Animator _animator;

@@ -39,9 +39,20 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu.UIElements
 
         private void ResetProgress()
         {
-            if (YG2.saves.AllCards != null) YG2.saves.AllCards.Clear();
-            if (YG2.saves.PlayerWeapons != null) YG2.saves.PlayerWeapons.Clear();
-            if (YG2.saves.QuestProgress != null) YG2.saves.QuestProgress.Clear();
+            if (YG2.saves.AllCards != null)
+            {
+                YG2.saves.AllCards.Clear();
+            }
+
+            if (YG2.saves.PlayerWeapons != null)
+            {
+                YG2.saves.PlayerWeapons.Clear();
+            }
+
+            if (YG2.saves.QuestProgress != null)
+            {
+                YG2.saves.QuestProgress.Clear();
+            }
 
             ResetLevels();
 
@@ -53,7 +64,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu.UIElements
             YG2.saves.Level = 0;
             YG2.saves.UpgradePoints = 0;
             YG2.saves.CurrentEXP = 0f;
-            YG2.saves.CurrentLevel = (int) LevelID.None;
+            YG2.saves.CurrentLevel = (int)LevelID.None;
             YG2.saves.CurrentFloor = 0;
             YG2.saves.PlayerPosition = Vector3.zero;
             YG2.SaveProgress();

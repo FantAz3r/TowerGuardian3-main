@@ -155,7 +155,7 @@ namespace YG.EditorScr
 
         private void OnAddNewSelected(object index)
         {
-            int selected = (int)index;
+            int selected = (int) index;
 
             foreach (var t in targets)
             {

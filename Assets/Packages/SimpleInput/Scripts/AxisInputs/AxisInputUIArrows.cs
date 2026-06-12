@@ -24,7 +24,7 @@ namespace SimpleInputNamespace
 
         private void Awake()
         {
-            rectTransform = (RectTransform)transform;
+            rectTransform = (RectTransform) transform;
             gameObject.AddComponent<SimpleInputDragListener>().Listener = this;
 
             deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;

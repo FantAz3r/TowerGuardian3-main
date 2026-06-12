@@ -6,8 +6,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityInfrastructure
 {
     public abstract class Ability : MonoBehaviour, IAbility
     {
-        public bool IsAbilityActive;
+        public bool IsAbilityActive { get; private set; }
+
         public abstract AbilityType Type { get; }
+
         public abstract AbilityConfig Config { get; }
 
         public virtual void Enable()

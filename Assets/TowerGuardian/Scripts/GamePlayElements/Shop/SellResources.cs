@@ -12,12 +12,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
 {
     public class SellResources : MonoBehaviour
     {
-        [SerializeField] private RectTransform parentPanel;
-        [SerializeField] private SellResourceView _buttonPrefab;
-        [SerializeField] private CounterSlider _slider;
-        [SerializeField] private CostResourceData _costResourceData;
+        [SerializeField]
+        private RectTransform _parentPanel;
+        [SerializeField]
+        private SellResourceView _buttonPrefab;
+        [SerializeField]
+        private CounterSlider _slider;
+        [SerializeField]
+        private CostResourceData _costResourceData;
 
-        private List<SellResourceView> _productButtons = new();
+        private List<SellResourceView> _productButtons = new ();
         private Inventory _inventory;
 
         private void Awake()
@@ -33,7 +37,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
             foreach (var config in _costResourceData.PieceConfigs)
             {
                 bool interactble = _inventory.ShowCount(config.Type) > 0;
-                SellResourceView button = Instantiate(_buttonPrefab, parentPanel);
+                SellResourceView button = Instantiate(_buttonPrefab, _parentPanel);
                 button.Init(_slider);
                 button.Render(config, interactble, _inventory.ShowCount(config.Type));
                 button.SellRequested += OnSellRequested;
@@ -44,7 +48,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
         private void ClearOldButtons()
         {
             if (_productButtons.Count == 0)
+            {
                 return;
+            }
 
             foreach (SellResourceView button in _productButtons)
             {
@@ -91,7 +97,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
         private void OnDestroy()
         {
             if (_productButtons.Count == 0)
+            {
                 return;
+            }
 
             foreach (var button in _productButtons)
             {

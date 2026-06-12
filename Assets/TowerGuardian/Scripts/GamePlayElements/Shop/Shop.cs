@@ -15,35 +15,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
             WeaponContentParent.gameObject.SetActive(true);
         }
 
-        private void LoadContent()
-        {
-            foreach (var config in CardData.GetConfigs())
-            {
-                Configs.Add(config);
-            }
-
-            LoadCards();
-            SetParents();
-        }
-
-        private void RenderAll()
-        {
-            for (int i = 0; i < Configs.Count; i++)
-            {
-                bool canBuy = CanAfford(Configs[i]);
-                ProductButtons[i].gameObject.SetActive(true);
-                ProductButtons[i].Render(Configs[i], true, canBuy);
-            }
-        }
-
-        private bool CanAfford(IShopConfig config)
-        {
-            if (Player.Inventory == null)
-                return true;
-
-            return Player.Inventory.IsEnoughResource(config.GetCosts());
-        }
-
         protected override void OnTradeRequested(ProductViewer button, ICardConfig config)
         {
             if (config.Level >= config.MaxCardLevel)
@@ -83,6 +54,37 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
         protected override void OnParentFounded(RectTransform parent, ICardConfig config)
         {
             CreateButton(parent);
+        }
+
+        private void LoadContent()
+        {
+            foreach (var config in CardData.GetConfigs())
+            {
+                Configs.Add(config);
+            }
+
+            LoadCards();
+            SetParents();
+        }
+
+        private void RenderAll()
+        {
+            for (int i = 0; i < Configs.Count; i++)
+            {
+                bool canBuy = CanAfford(Configs[i]);
+                ProductButtons[i].gameObject.SetActive(true);
+                ProductButtons[i].Render(Configs[i], true, canBuy);
+            }
+        }
+
+        private bool CanAfford(IShopConfig config)
+        {
+            if (Player.Inventory == null)
+            {
+                return true;
+            }
+
+            return Player.Inventory.IsEnoughResource(config.GetCosts());
         }
     }
 }

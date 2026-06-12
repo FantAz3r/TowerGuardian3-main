@@ -41,7 +41,7 @@ namespace SimpleInputNamespace
                     return true;
             }
 
-            return Input.GetMouseButton((int)eventData.button);
+            return Input.GetMouseButton((int) eventData.button);
         }
     }
 }

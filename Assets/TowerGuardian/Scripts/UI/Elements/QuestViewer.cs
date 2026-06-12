@@ -9,18 +9,26 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class QuestViewer : WindowBase
     {
-        [SerializeField] private Image _image;
-        [SerializeField] private TMP_Text _description;
-        [SerializeField] private TMP_Text _progress;
-        [SerializeField] private TMP_Text _timer;
-        [SerializeField] private RectTransform _panelRectTransform;
-        [SerializeField] private float _animationDuration = 0.5f;
-        [SerializeField] private Vector2 _hiddenPosition = new Vector2(800, 0f);
+        [SerializeField]
+        private Image _image;
+        [SerializeField]
+        private TMP_Text _description;
+        [SerializeField]
+        private TMP_Text _progress;
+        [SerializeField]
+        private TMP_Text _timer;
+        [SerializeField]
+        private RectTransform _panelRectTransform;
+        [SerializeField]
+        private float _animationDuration = 0.5f;
+        [SerializeField]
+        private Vector2 _hiddenPosition = new Vector2(800, 0f);
 
         private Vector2 _visiblePosition = new Vector2(-50, -70f);
         private Tween _currentTween;
 
-        [field: SerializeField] public Highlighter Highlighter { get; private set; }
+        [field: SerializeField]
+        public Highlighter Highlighter { get; private set; }
 
         private void Awake()
         {
@@ -40,20 +48,30 @@ namespace TowerGuardian.Scripts.UI.Elements
             RenderDescription(quest);
 
             if (!quest.Config.IsProgressQuest)
+            {
                 _progress.gameObject.SetActive(false);
+            }
             else
+            {
                 _progress.gameObject.SetActive(true);
+            }
 
             if (!quest.Config.IsTimeQuest)
+            {
                 _timer.gameObject.SetActive(false);
+            }
             else
+            {
                 _timer.gameObject.SetActive(true);
+            }
         }
 
         public void UpdateProgress(float currentValue, float targetValue)
         {
             if (_progress != null && !_progress.gameObject.activeSelf)
+            {
                 return;
+            }
 
             _progress.text = $"{currentValue:0}/{targetValue:0}";
         }
@@ -61,7 +79,9 @@ namespace TowerGuardian.Scripts.UI.Elements
         public void UpdateTime(float time)
         {
             if (_timer != null && !_timer.gameObject.activeSelf)
+            {
                 return;
+            }
 
             int oneMinute = 60;
             int minutes = Mathf.FloorToInt(time / oneMinute);
@@ -92,9 +112,13 @@ namespace TowerGuardian.Scripts.UI.Elements
         private void RenderDescription(IQuest quest)
         {
             if (YG2.envir.isDesktop || string.IsNullOrEmpty(quest.Config.MobileDescription))
+            {
                 _description.text = quest.Config.Description;
+            }
             else
+            {
                 _description.text = quest.Config.MobileDescription;
+            }
         }
     }
 }

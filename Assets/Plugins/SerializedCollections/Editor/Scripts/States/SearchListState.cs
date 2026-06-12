@@ -1,6 +1,6 @@
-using AYellowpaper.SerializedCollections.Editor.Search;
 using System.Collections.Generic;
 using System.Linq;
+using AYellowpaper.SerializedCollections.Editor.Search;
 using UnityEditor;
 using UnityEngine;
 

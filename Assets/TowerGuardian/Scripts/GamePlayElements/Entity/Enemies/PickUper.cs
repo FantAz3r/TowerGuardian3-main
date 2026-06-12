@@ -4,7 +4,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
 {
     public class PickUper : MonoBehaviour
     {
-        [SerializeField] private Vector3 _offset;
+        [SerializeField]
+        private Vector3 _offset;
 
         public void Pickup(Transform pickObject)
         {

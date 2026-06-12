@@ -12,9 +12,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
     {
         private const float ThornAttackCooldown = 9;
         private const float AppearanceDelay = 0.1f;
-        private int numberOfThorns = 20;
-        private float angleOffset = 10f;
-        private float spacing = 1.5f;
+
+        private int _numberOfThorns = 20;
+        private float _angleOffset = 10f;
+        private float _spacing = 1.5f;
 
         private WaitForSeconds _delay = new WaitForSeconds(AppearanceDelay);
         private int _thornsSpawned;
@@ -56,7 +57,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
 
         private IEnumerator SpawnRoutine()
         {
-            while (_thornsSpawned < numberOfThorns)
+            while (_thornsSpawned < _numberOfThorns)
             {
                 SpawnThorn(CalculateThornPosition());
                 _thornsSpawned++;
@@ -72,8 +73,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
             Vector3 toTarget = (Enemy.Target.position - Enemy.transform.position).normalized;
 
             float baseAngle = Mathf.Atan2(toTarget.x, toTarget.z) * Mathf.Rad2Deg;
-            float baseAngleLeft = baseAngle + angleOffset;
-            float baseAngleRight = baseAngle - angleOffset;
+            float baseAngleLeft = baseAngle + _angleOffset;
+            float baseAngleRight = baseAngle - _angleOffset;
 
             float currentAngle;
             int indexInRay;
@@ -81,18 +82,18 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
             if (spawnFromLeftRay)
             {
                 indexInRay = _thornsSpawned / 2;
-                currentAngle = baseAngleLeft + (indexInRay * spacing);
+                currentAngle = baseAngleLeft + (indexInRay * _spacing);
             }
             else
             {
                 indexInRay = _thornsSpawned / 2;
-                currentAngle = baseAngleRight - (indexInRay * spacing);
+                currentAngle = baseAngleRight - (indexInRay * _spacing);
             }
 
             Vector3 direction = Quaternion.Euler(0, currentAngle, 0) * Vector3.forward;
 
             indexInRay = _thornsSpawned / 2;
-            Vector3 spawnPosition = Enemy.transform.position + (direction * (spacing * indexInRay));
+            Vector3 spawnPosition = Enemy.transform.position + (direction * (_spacing * indexInRay));
 
             return spawnPosition;
         }

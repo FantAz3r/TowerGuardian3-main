@@ -6,6 +6,5 @@ namespace TowerGuardian.Scripts.GamePlayElements.Buffs.BuffInfrastructure
 {
     public interface IBuff : IItem<BuffType, BuffConfig>
     {
-        void SetConfig(BuffConfig config);
     }
 }

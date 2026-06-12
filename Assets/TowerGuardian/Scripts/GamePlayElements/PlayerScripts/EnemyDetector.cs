@@ -11,10 +11,12 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
     public class EnemyDetector : MonoBehaviour
     {
         private IScoreService _service;
-        private List<Health> _targets = new();
+        private List<Health> _targets = new ();
 
         public event Action<float> OnGetExperience;
+
         public event Action OnEnemyKilled;
+
         public event Action OnBossKilled;
 
         public IReadOnlyList<Health> Targets => _targets;

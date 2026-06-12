@@ -125,7 +125,7 @@ namespace SimpleInputNamespace
         {
             for (int i = mousePointers.Count - 1; i >= 0; i--)
             {
-                if (!Input.GetMouseButton((int)mousePointers[i].button))
+                if (!Input.GetMouseButton((int) mousePointers[i].button))
                     mousePointers.RemoveAt(i);
             }
 

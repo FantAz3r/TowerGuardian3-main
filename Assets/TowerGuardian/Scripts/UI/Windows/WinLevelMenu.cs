@@ -9,9 +9,12 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class WinLevelMenu : LevelMenu
     {
-        [SerializeField] private Button _nextLevelButton;
-        [SerializeField] private AudioClip _winSound;
-        [SerializeField] private TMP_Text _levelNumberText;
+        [SerializeField]
+        private Button _nextLevelButton;
+        [SerializeField]
+        private AudioClip _winSound;
+        [SerializeField]
+        private TMP_Text _levelNumberText;
 
         protected override void OnEnable()
         {
@@ -34,7 +37,7 @@ namespace TowerGuardian.Scripts.UI.Windows
         public override void Open()
         {
             base.Open();
-            _levelNumberText.text = ((int)CurrentLevel - EnumGameLevelOffset).ToString();
+            _levelNumberText.text = ((int) CurrentLevel - EnumGameLevelOffset).ToString();
             ScoreCounter.OnEndLevel(this);
             ServiceLocator.Get<ISpawnerService>().SendSoundReqest(_winSound);
         }

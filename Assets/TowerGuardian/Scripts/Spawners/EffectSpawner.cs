@@ -28,10 +28,14 @@ namespace TowerGuardian.Scripts.Spawners
         public override void Spawn(EffectType type, Vector3 position, Transform parent = null)
         {
             if (!CanSpawn)
+            {
                 return;
+            }
 
             if (!_pools.TryGetValue(type, out var pool))
+            {
                 return;
+            }
 
             Effect effect = pool.Get();
 

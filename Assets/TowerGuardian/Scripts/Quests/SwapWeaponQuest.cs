@@ -9,6 +9,7 @@ namespace TowerGuardian.Scripts.Quests
     public class SwapWeaponQuest : Quest
     {
         private WeaponPanel _panel;
+
         public override QuestType GetQuestType() => QuestType.SwapWeapon;
 
         public override void Run()

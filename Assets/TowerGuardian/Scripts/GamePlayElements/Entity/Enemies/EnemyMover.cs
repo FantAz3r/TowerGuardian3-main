@@ -7,7 +7,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyMover : MonoBehaviour, IBuffble
     {
-        [SerializeField] private NavMeshAgent _agent;
+        [SerializeField]
+        private NavMeshAgent _agent;
         private StatsCalculator _statsCalculator;
         private float _startSpeed;
 

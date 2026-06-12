@@ -7,8 +7,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
 {
     public class EnemyAnimator : MonoBehaviour
     {
-        [SerializeField] private float _speedMultiplier = 1f;
-        [SerializeField] private float _smoothTime = 0.05f;
+        [SerializeField]
+        private float _speedMultiplier = 1f;
+        [SerializeField]
+        private float _smoothTime = 0.05f;
 
         private Animator _animator;
         private Health _health;
@@ -30,11 +32,15 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
         private List<AnimationClip> _attackClips;
 
         public event Action Attacked;
+
         public event Action Grounded;
+
         public event Action Throwed;
+
         public event Action ThornAttacked;
 
         public bool IsThrowing { get; private set; }
+
         public bool IsPicked { get; private set; }
 
         private void Awake()

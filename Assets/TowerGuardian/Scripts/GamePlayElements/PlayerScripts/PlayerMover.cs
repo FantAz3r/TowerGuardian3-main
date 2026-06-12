@@ -38,7 +38,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             _mover.SetDirection(direction);
 
             if (direction != Vector2.zero)
+            {
                 Moved?.Invoke();
+            }
         }
 
         private void OnRotate(Vector2 direction)

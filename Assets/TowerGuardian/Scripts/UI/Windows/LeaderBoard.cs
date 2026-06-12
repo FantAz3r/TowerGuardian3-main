@@ -6,7 +6,8 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class LeaderBoard : PauseWindow
     {
-        [SerializeField] private List<LeaderboardYG> _leaderboards;
+        [SerializeField]
+        private List<LeaderboardYG> _leaderboards;
 
         private void OnEnable()
         {

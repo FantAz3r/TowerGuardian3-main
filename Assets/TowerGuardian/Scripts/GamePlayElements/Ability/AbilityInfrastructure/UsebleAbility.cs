@@ -4,16 +4,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityInfrastructure
     {
         public bool IsLock { get; private set; }
 
-        public virtual void LockAbility()
+        public abstract void Use();
+
+        protected void LockAbility()
         {
             IsLock = true;
         }
 
-        public virtual void UnlockAbility()
+        protected void UnlockAbility()
         {
             IsLock = false;
         }
-
-        public abstract void Use();
     }
 }

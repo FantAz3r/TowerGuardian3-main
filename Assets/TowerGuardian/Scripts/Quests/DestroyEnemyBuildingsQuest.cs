@@ -13,8 +13,9 @@ namespace TowerGuardian.Scripts.Quests
     public class DestroyEnemyBuildingsQuest : Quest
     {
         private ICoroutineRunner _coroutineRunner;
-        private List<EnemyBuilding> _buildings = new();
+        private List<EnemyBuilding> _buildings = new ();
         private Coroutine _timeRoutine;
+
         public override QuestType GetQuestType() => QuestType.DestroyBuildings;
 
         public override void Run()

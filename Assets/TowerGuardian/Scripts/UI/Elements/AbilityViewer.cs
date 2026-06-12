@@ -11,17 +11,25 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class AbilityViewer : MonoBehaviour
     {
-        [SerializeField] private Image _iconImage;
-        [SerializeField] private Image _cooldownFillImage;
-        [SerializeField] private Image _lockImage;
-        [SerializeField] private TMP_Text _cooldownText;
-        [SerializeField] private TMP_Text _keyCode;
-        [SerializeField] private Button _button;
+        [SerializeField]
+        private Image _iconImage;
+        [SerializeField]
+        private Image _cooldownFillImage;
+        [SerializeField]
+        private Image _lockImage;
+        [SerializeField]
+        private TMP_Text _cooldownText;
+        [SerializeField]
+        private TMP_Text _keyCode;
+        [SerializeField]
+        private Button _button;
 
         private PlayerAttacker _attacker;
 
         public IAbility Ability { get; private set; }
+
         public AbilityKeyCode AbilityKey { get; private set; }
+
         public bool HasAbility { get; private set; }
 
         private void Awake()
@@ -140,7 +148,7 @@ namespace TowerGuardian.Scripts.UI.Elements
                 if (YG2.envir.isDesktop)
                 {
                     _keyCode.gameObject.SetActive(true);
-                    _keyCode.text = ((int)AbilityKey).ToString();
+                    _keyCode.text = ((int) AbilityKey).ToString();
                 }
                 else
                 {

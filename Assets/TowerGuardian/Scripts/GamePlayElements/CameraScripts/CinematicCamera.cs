@@ -8,12 +8,17 @@ namespace TowerGuardian.Scripts.GamePlayElements.CameraScripts
 {
     public class CinematicCamera : MonoBehaviour
     {
-        [SerializeField] private float _rotationSpeed = 30f;
-        [SerializeField] private float _zoomSpeed = 5f;
-        [SerializeField] private float _minDistance = 5f;
-        [SerializeField] private float _maxDistance = 15f;
+        [SerializeField]
+        private float _rotationSpeed = 30f;
+        [SerializeField]
+        private float _zoomSpeed = 5f;
+        [SerializeField]
+        private float _minDistance = 5f;
+        [SerializeField]
+        private float _maxDistance = 15f;
 
-        [SerializeField] private Transform _player;
+        [SerializeField]
+        private Transform _player;
         private float _currentDistance;
         private bool _isZooming;
 
@@ -117,4 +122,3 @@ namespace TowerGuardian.Scripts.GamePlayElements.CameraScripts
         }
     }
 }
-

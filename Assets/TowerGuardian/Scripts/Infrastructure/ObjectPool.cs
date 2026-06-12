@@ -54,7 +54,9 @@ namespace TowerGuardian.Scripts.Infrastructure
             foreach (var item in _objects)
             {
                 if (item == null)
+                {
                     continue;
+                }
 
                 if (!item.gameObject.activeInHierarchy)
                 {
@@ -76,7 +78,9 @@ namespace TowerGuardian.Scripts.Infrastructure
             }
 
             if (_autoExpand)
+            {
                 return CreateObject(true);
+            }
 
             throw new Exception($"No free elenent of type {typeof(T)}");
         }

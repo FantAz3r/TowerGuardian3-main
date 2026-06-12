@@ -15,15 +15,20 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class CardInventory : PauseWindow
     {
-        [SerializeField] private InventorySlot _itemSlotPrefab;
-        [SerializeField] private UIItem _itemPrefab;
-        [SerializeField] private GridLayoutGroup _parent;
-        [SerializeField] private InventoryStats _inventoryStats;
-        [SerializeField] private TMP_Text _tipText;
+        [SerializeField]
+        private InventorySlot _itemSlotPrefab;
+        [SerializeField]
+        private UIItem _itemPrefab;
+        [SerializeField]
+        private GridLayoutGroup _parent;
+        [SerializeField]
+        private InventoryStats _inventoryStats;
+        [SerializeField]
+        private TMP_Text _tipText;
 
         private Canvas _canvas;
         private CardData _cardData;
-        private List<InventorySlot> _slots = new();
+        private List<InventorySlot> _slots = new ();
 
         protected override void Awake()
         {

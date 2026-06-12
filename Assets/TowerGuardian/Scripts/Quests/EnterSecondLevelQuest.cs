@@ -14,6 +14,7 @@ namespace TowerGuardian.Scripts.Quests
         {
             _portalLevel2 = portal;
         }
+
         public override QuestType GetQuestType() => QuestType.EnterLevel2;
 
         public override Vector3 TryGetTarget()
@@ -25,11 +26,14 @@ namespace TowerGuardian.Scripts.Quests
         {
             base.Run();
 
-            if (YG2.saves.LevelsProgress == null) return;
+            if (YG2.saves.LevelsProgress == null)
+            {
+                return;
+            }
 
             foreach (var levelData in YG2.saves.LevelsProgress)
             {
-                if (levelData.Level == (int) LevelID.Level2 && levelData.IsComplite)
+                if (levelData.Level == (int)LevelID.Level2 && levelData.IsComplite)
                 {
                     Complete();
                     break;

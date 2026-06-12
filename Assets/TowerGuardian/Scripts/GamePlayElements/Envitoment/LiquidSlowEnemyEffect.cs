@@ -6,7 +6,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
 {
     public class LiquidSlowEnemyEffect : MonoBehaviour
     {
-        [SerializeField] private float _slowValue = 0.5f;
+        [SerializeField]
+        private float _slowValue = 0.5f;
         private MultiplyEffect _effect;
 
         private void Awake()

@@ -20,7 +20,9 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         public void StopGame()
         {
             if (_slowMotionCoroutine != null)
+            {
                 _coroutineRunner.StopCoroutine(_slowMotionCoroutine);
+            }
 
             Time.timeScale = 0;
         }
@@ -33,7 +35,9 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         public void SmoothEditTimeScalse(float targetTimeScale, float duration)
         {
             if (_slowMotionCoroutine != null)
+            {
                 _coroutineRunner.StopCoroutine(_slowMotionCoroutine);
+            }
 
             _slowMotionCoroutine = _coroutineRunner.StartCoroutine(EditRoutine(targetTimeScale, duration));
         }

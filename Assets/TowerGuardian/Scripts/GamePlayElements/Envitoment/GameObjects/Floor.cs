@@ -5,32 +5,46 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 {
     public class Floor : MonoBehaviour
     {
-        [SerializeField] private StairsTrigger _upTrigger;
-        [SerializeField] private StairsTrigger _downTrigger;
-        [SerializeField] private int _floorNumber;
+        [SerializeField]
+        private StairsTrigger _upTrigger;
+        [SerializeField]
+        private StairsTrigger _downTrigger;
+        [SerializeField]
+        private int _floorNumber;
 
         public event Action<int> GoingDown;
+
         public event Action<int> GoingUp;
 
-        [field: SerializeField] public GameObject Decor { get; private set; }
+        [field: SerializeField]
+        public GameObject Decor { get; private set; }
+
         public int FloorNumber => _floorNumber;
 
         private void OnEnable()
         {
             if (_upTrigger != null)
+            {
                 _upTrigger.Entered += Up;
+            }
 
             if (_downTrigger != null)
+            {
                 _downTrigger.Entered += Down;
+            }
         }
 
         private void OnDisable()
         {
             if (_upTrigger != null)
+            {
                 _upTrigger.Entered -= Up;
+            }
 
             if (_downTrigger != null)
+            {
                 _downTrigger.Entered -= Down;
+            }
         }
 
         private void Up()

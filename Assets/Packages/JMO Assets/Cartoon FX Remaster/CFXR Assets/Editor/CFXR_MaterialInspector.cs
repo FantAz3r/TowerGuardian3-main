@@ -148,7 +148,7 @@ namespace CartoonFX
                                     {
                                         try
                                         {
-                                            var msgType = (MessageType)System.Enum.Parse(typeof(MessageType), cmd[0], true);
+                                            var msgType = (MessageType) System.Enum.Parse(typeof(MessageType), cmd[0], true);
                                             message = cmd[1].Replace("  ", "\n");
                                             messageType = msgType;
                                         }
@@ -384,7 +384,7 @@ namespace CartoonFX
             EditorGUI.BeginChangeCheck();
 
             EditorGUI.showMixedValue = prop.hasMixedValue;
-            var value = (int)prop.floatValue;
+            var value = (int) prop.floatValue;
             value = EditorGUI.Popup(position, label, value, labels);
             EditorGUI.showMixedValue = false;
             if (EditorGUI.EndChangeCheck())
@@ -403,7 +403,7 @@ namespace CartoonFX
             if (prop.hasMixedValue)
                 return;
 
-            SetKeyword(prop, (int)prop.floatValue);
+            SetKeyword(prop, (int) prop.floatValue);
         }
 
         // Final keyword name: property name + "_" + display name. Uppercased,
@@ -525,14 +525,14 @@ namespace CartoonFX
             int overflow = 0;
             while (true)
             {
-                char c = (char)reader.Read();
+                char c = (char) reader.Read();
 
                 //operator
                 if (c == '=' || c == '>' || c == '<' || c == '!')
                 {
                     op += c;
                     //second operator character, if any
-                    char c2 = (char)reader.Peek();
+                    char c2 = (char) reader.Peek();
                     if (c2 == '=' || c2 == '>')
                     {
                         reader.Read();

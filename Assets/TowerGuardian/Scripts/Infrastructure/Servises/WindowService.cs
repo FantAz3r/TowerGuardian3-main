@@ -19,7 +19,9 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         public WindowBase Open(WindowType type, GameObject payload = null)
         {
             if (type == WindowType.None)
+            {
                 return null;
+            }
 
             if (type != _currentWindowType)
             {

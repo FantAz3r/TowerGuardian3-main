@@ -107,13 +107,13 @@ namespace YG.EditorScr
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField(descript, TextStyles.Header(Color.white));
 
-            int listenerCount = ((PlatformEventsYG2)target).platformAction.GetPersistentEventCount();
-            if (listenerCount == 1 && ((PlatformEventsYG2)target).platformAction.GetPersistentTarget(0) != null)
+            int listenerCount = ((PlatformEventsYG2) target).platformAction.GetPersistentEventCount();
+            if (listenerCount == 1 && ((PlatformEventsYG2) target).platformAction.GetPersistentTarget(0) != null)
             {
-                string methodName = ((PlatformEventsYG2)target).platformAction.GetPersistentMethodName(0);
-                Object targetObject = ((PlatformEventsYG2)target).platformAction.GetPersistentTarget(0);
+                string methodName = ((PlatformEventsYG2) target).platformAction.GetPersistentMethodName(0);
+                Object targetObject = ((PlatformEventsYG2) target).platformAction.GetPersistentTarget(0);
 
-                if (targetObject.name == ((PlatformEventsYG2)target).gameObject.name && methodName == "DeactivateGameObject")
+                if (targetObject.name == ((PlatformEventsYG2) target).gameObject.name && methodName == "DeactivateGameObject")
                 {
 #if RU_YG2
                     descript = "По умолчанию привязан метод деактивации объекта";
@@ -142,7 +142,7 @@ namespace YG.EditorScr
                 bool active = false;
                 foreach (var t in targets)
                 {
-                    PlatformEventsYG2 scr = (PlatformEventsYG2)t;
+                    PlatformEventsYG2 scr = (PlatformEventsYG2) t;
                     if (scr.platforms.Contains(options[i].text))
                     {
                         active = true;
@@ -157,11 +157,11 @@ namespace YG.EditorScr
 
         private void OnAddNewSelected(object index)
         {
-            int selected = (int)index;
+            int selected = (int) index;
 
             foreach (var t in targets)
             {
-                PlatformEventsYG2 scr = (PlatformEventsYG2)t;
+                PlatformEventsYG2 scr = (PlatformEventsYG2) t;
 
                 if (scr.platforms.Contains(options[selected].text))
                 {

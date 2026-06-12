@@ -14,7 +14,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
 {
     public class AxeThrowingAbility : UsebleAbility, ICooldownAbility
     {
-        [SerializeField] private AxeThrowingConfig _config;
+        [SerializeField]
+        private AxeThrowingConfig _config;
         private Player _player;
         private Weapon _axe;
         private ThrownAxe _thrownAxe;
@@ -22,8 +23,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         public event Action<float, float> Cooldowning;
 
         public float Cooldown => _config.Cooldown;
+
         public override AbilityType Type => AbilityType.ThrowingAxes;
+
         public override AbilityConfig Config => _config;
+
         public bool IsCooldowning { get; private set; }
 
         private void Awake()
@@ -41,10 +45,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         public override void Use()
         {
             if (IsLock)
+            {
                 return;
+            }
 
             if (IsCooldowning)
+            {
                 return;
+            }
 
             if (_player.Attacker.CurrentWeapon.Config.WeaponType == WeaponType.Axe && _player.Attacker.CurrentWeapon.gameObject.activeSelf)
             {
@@ -74,7 +82,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         private void CheckWeapon(IWeapon weapon)
         {
             if (weapon == null)
+            {
                 return;
+            }
 
             if (weapon.Config.WeaponType == WeaponType.Axe)
             {

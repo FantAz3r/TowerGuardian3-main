@@ -9,12 +9,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class PlayerAnimator : MonoBehaviour
     {
-        [SerializeField] private Player _player;
+        [SerializeField]
+        private Player _player;
 
-        [SerializeField] private float _speedMultiplier = 1f;
-        [SerializeField] private float _smoothTime = 0.05f;
+        [SerializeField]
+        private float _speedMultiplier = 1f;
+        [SerializeField]
+        private float _smoothTime = 0.05f;
 
-        [SerializeField] private string attackClipName = "Attack";
+        [SerializeField]
+        private string _attackClipName = "Attack";
 
         private int _hashX;
         private int _hashY;
@@ -51,13 +55,17 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             _hashRevive = Animator.StringToHash("Revive");
 
             if (_player.Animator != null)
+            {
                 _defaultAnimatorSpeed = _player.Animator.speed;
+            }
         }
 
         private void OnEnable()
         {
             if (_player.Attacker == null)
+            {
                 return;
+            }
 
             _player.Attacker.WeaponSeted += OnWeaponSeted;
             _player.Attacker.WeaponRemoved += OnWeaponRemoved;
@@ -70,7 +78,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void OnDisable()
         {
             if (_player.Attacker == null)
+            {
                 return;
+            }
 
             _player.Attacker.WeaponSeted -= OnWeaponSeted;
             _player.Attacker.WeaponRemoved -= OnWeaponRemoved;
@@ -166,7 +176,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         public void PlayAttack(IWeapon weapon, float attackDelay)
         {
             if (_player.Animator == null)
+            {
                 return;
+            }
 
             if (weapon.Config.WeaponType == WeaponType.None)
             {
@@ -179,7 +191,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             float requiredSpeed = clipLength / desiredDuration;
 
             if (_resetSpeedCoroutine != null)
+            {
                 StopCoroutine(_resetSpeedCoroutine);
+            }
 
             _player.Animator.speed = requiredSpeed;
             _player.Animator.SetBool(_hashAttack, true);
@@ -206,30 +220,40 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private float GetAttackClipLength()
         {
             if (_player.Animator == null)
+            {
                 return _defaultAnimatorSpeed;
+            }
 
             var controller = _player.Animator.runtimeAnimatorController;
             if (controller == null)
+            {
                 return _defaultAnimatorSpeed;
+            }
 
             AnimationClip[] clips = controller.animationClips;
 
             if (clips == null || clips.Length == 0)
+            {
                 return _defaultAnimatorSpeed;
+            }
 
-            if (!string.IsNullOrEmpty(attackClipName))
+            if (!string.IsNullOrEmpty(_attackClipName))
             {
                 foreach (var clip in clips)
                 {
-                    if (clip != null && clip.name == attackClipName)
+                    if (clip != null && clip.name == _attackClipName)
+                    {
                         return clip.length;
+                    }
                 }
             }
 
             foreach (var clip in clips)
             {
                 if (clip != null && clip.name.ToLower().Contains("Attack"))
+                {
                     return clip.length;
+                }
             }
 
             return _defaultAnimatorSpeed;

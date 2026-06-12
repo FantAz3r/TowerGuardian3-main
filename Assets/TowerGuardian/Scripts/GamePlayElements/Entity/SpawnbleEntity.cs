@@ -48,7 +48,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
             _spawnerService.SendEffectReqest(_health.Config.SpawnEffect, transform.position);
 
             if (_health.Config.DamageToErn <= 0)
+            {
                 return;
+            }
 
             int spawnCount = 0;
             float damageToErn = _health.Config.DamageToErn * _health.Config.GetMaxHealth() / _health.Config.MaxHealth;
@@ -66,7 +68,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
         private void OnDie()
         {
             if (_health.Config.DamageToErn > 0)
+            {
                 return;
+            }
 
             _spawnerService.SendItemReqest(_health.Config, transform.position, CalculateRewardToKill());
         }

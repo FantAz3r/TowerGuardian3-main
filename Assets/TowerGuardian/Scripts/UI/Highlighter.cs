@@ -6,9 +6,10 @@ namespace TowerGuardian.Scripts.UI
 {
     public class Highlighter : MonoBehaviour
     {
-        [SerializeField] private Image _warningFrame;
+        [SerializeField]
+        private Image _warningFrame;
         private Tween _warningTween;
-       
+
         private void OnDestroy()
         {
             _warningTween?.Kill();
@@ -17,7 +18,9 @@ namespace TowerGuardian.Scripts.UI
         public void ActivateWarning()
         {
             if (_warningFrame == null)
+            {
                 return;
+            }
 
             _warningFrame.enabled = true;
 
@@ -30,7 +33,9 @@ namespace TowerGuardian.Scripts.UI
         public void DeactivateWarning()
         {
             if (_warningFrame == null)
+            {
                 return;
+            }
 
             _warningTween?.Kill();
             _warningFrame.enabled = false;

@@ -55,7 +55,7 @@ namespace SimpleInputNamespace
 
         private void Awake()
         {
-            joystickTR = (RectTransform)transform;
+            joystickTR = (RectTransform) transform;
             thumbTR = thumb.rectTransform;
             background = GetComponent<Graphic>();
 
@@ -174,7 +174,7 @@ namespace SimpleInputNamespace
                 {
                     Vector2 directionNormalized = direction.normalized * movementAreaRadius;
                     if (canFollowPointer)
-                        joystickTR.localPosition += (Vector3)(direction - directionNormalized);
+                        joystickTR.localPosition += (Vector3) (direction - directionNormalized);
 
                     direction = directionNormalized;
                 }

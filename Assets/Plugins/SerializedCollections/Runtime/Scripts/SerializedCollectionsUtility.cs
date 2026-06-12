@@ -19,7 +19,7 @@ namespace AYellowpaper.SerializedCollections
 
         public static bool KeysAreEqual<T>(T key, object otherKey)
         {
-            return (object)key == otherKey || key.Equals(otherKey);
+            return (object) key == otherKey || key.Equals(otherKey);
         }
     }
 }

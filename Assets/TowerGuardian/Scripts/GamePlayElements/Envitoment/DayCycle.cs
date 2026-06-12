@@ -12,7 +12,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
 {
     public class DayCycle : MonoBehaviour
     {
-        [SerializeField] private LevelData _levelData;
+        [SerializeField]
+        private LevelData _levelData;
 
         private float _dayDuration;
         private float _nightDuration;
@@ -31,11 +32,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
         private IGameConditionService _gameConditionService;
 
         public event Action<DayPhase> OnPhaseChanged;
+
         public event Action<float> TimePassedFromTransition;
-        public event Action<float> TimePassedFromStart;
 
         public float DayDuration => _dayDuration;
+
         public float NightDuration => _nightDuration;
+
         public float TransitionDuration => _transitionDuration;
 
         public DayPhase CurrentPhase => _currentPhase;
@@ -125,7 +128,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
                 time += deltaTime;
                 float t = time / _transitionDuration;
 
-                TimePassedFromStart?.Invoke(_totalTimeOnLevel);
                 TimePassedFromTransition?.Invoke(_timeSincePhaseChange);
 
                 _directionalLight.color = Color.Lerp(startColor, endColor, t);
@@ -148,7 +150,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
             _timeSincePhaseChange += deltaTime;
             _totalTimeOnLevel += deltaTime;
 
-            TimePassedFromStart?.Invoke(_totalTimeOnLevel);
             TimePassedFromTransition?.Invoke(_timeSincePhaseChange);
         }
 

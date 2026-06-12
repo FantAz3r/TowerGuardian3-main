@@ -4,11 +4,11 @@ namespace TowerGuardian.Scripts.UI.EnviromentUI
 {
     public class UIFaceCamera : MonoBehaviour
     {
-        private Camera mainCamera;
+        private Camera _mainCamera;
 
         private void OnEnable()
         {
-            mainCamera = Camera.main;
+            _mainCamera = Camera.main;
         }
 
         private void LateUpdate()

@@ -7,18 +7,18 @@ namespace TowerGuardian.Scripts.GamePlayElements.Effects
     public class ScaleEffect : MonoBehaviour
     {
         private ParticleSystem _particles;
-        private Vector3 initialScale;
+        private Vector3 _initialScale;
 
         private void Start()
         {
             _particles = GetComponent<ParticleSystem>();
             float lifetime = _particles.main.duration;
 
-            initialScale = transform.localScale;
-            transform.localScale = initialScale * 0.5f;
+            _initialScale = transform.localScale;
+            transform.localScale = _initialScale * 0.5f;
 
             Sequence seq = DOTween.Sequence();
-            seq.Append(transform.DOScale(initialScale, lifetime * 0.5f).SetEase(Ease.OutQuad));
+            seq.Append(transform.DOScale(_initialScale, lifetime * 0.5f).SetEase(Ease.OutQuad));
             seq.Append(transform.DOScale(Vector3.zero, lifetime * 0.5f).SetEase(Ease.InQuad));
 
             seq.OnComplete(() =>

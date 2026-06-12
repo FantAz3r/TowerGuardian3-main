@@ -7,10 +7,12 @@ using UnityEngine;
 
 namespace TowerGuardian.Scripts.GamePlayElements.Entity
 {
-    public class Health : MonoBehaviour, IDemageable, IHealable, ITransfomable, IBuffble
+    public class Health : MonoBehaviour, IDemageable, IBuffble
     {
-        [SerializeField] private HealthConfig _config;
-        [SerializeField] private EntityType _type;
+        [SerializeField]
+        private HealthConfig _config;
+        [SerializeField]
+        private EntityType _type;
 
         private StatsCalculator _statsCalculator;
         private float _currentValue;
@@ -18,25 +20,39 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
         private float _maxHealth;
 
         public event Action<float, float> IsValueChange;
+
         public event Action<float, float> MaxHealthChanged;
+
         public event Action<float> DamageTaken;
+
         public event Action<float> Healed;
+
         public event Action<Health> Killed;
 
         public event Action Died;
+
         public event Action Destroyed;
+
         public event Action Resurected;
+
         public event Action ImmunityObjectHited;
+
         public event Action ImmunityActivated;
+
         public event Action ImmunityDisabled;
 
         public HealthConfig Config => _config;
+
         public float CurrentHealth => _currentValue;
+
         public float MaxHealth => _maxHealth;
+
         public bool IsAlive { get; private set; } = true;
+
         public bool IsImmunity { get; private set; }
 
         public Transform GetTransform() => transform;
+
         public EntityType GetHealthType() => _type;
 
         protected virtual void Awake()
@@ -44,6 +60,17 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
             _statsCalculator = new StatsCalculator();
             _maxHealth = _config.MaxHealth;
             _startMaxHealth = _config.MaxHealth;
+        }
+
+        private void OnEnable()
+        {
+            IsAlive = true;
+            _currentValue = _maxHealth;
+        }
+
+        private void OnDestroy()
+        {
+            Destroyed?.Invoke();
         }
 
         public void Init(float maxHealth)
@@ -55,21 +82,12 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
             MaxHealthChanged?.Invoke(_currentValue, _maxHealth);
         }
 
-        public void OnEnable()
-        {
-            IsAlive = true;
-            _currentValue = _maxHealth;
-        }
-
-        private void OnDestroy()
-        {
-            Destroyed?.Invoke();
-        }
-
         public void Heal(float healAmount)
         {
-            if (!IsAlive)
+            if (IsAlive == false)
+            {
                 return;
+            }
 
             if (_currentValue >= 0 && healAmount > 0)
             {
@@ -91,7 +109,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
         public virtual void TakeDamage(float damage)
         {
             if (!IsAlive)
+            {
                 return;
+            }
 
             if (IsImmunity)
             {
@@ -100,7 +120,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
             }
 
             if (_currentValue <= 0)
+            {
                 return;
+            }
 
             float damageTaken = Mathf.Min(damage, _currentValue);
             _currentValue -= damageTaken;
@@ -128,13 +150,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
         public void ImmunityPerTime(float time)
         {
             StartCoroutine(ImmunityRourine(time));
-        }
-
-        private IEnumerator ImmunityRourine(float time)
-        {
-            ImmunityEnable();
-            yield return new WaitForSeconds(time);
-            ImmunityDisable();
         }
 
         public void ApplyBuff(IEffect effect)
@@ -183,6 +198,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity
             _maxHealth = _statsCalculator.Calculate(_startMaxHealth);
             _currentValue = _maxHealth * scaleRatio;
             IsValueChange?.Invoke(_currentValue, _maxHealth);
+        }
+
+        private IEnumerator ImmunityRourine(float time)
+        {
+            ImmunityEnable();
+            yield return new WaitForSeconds(time);
+            ImmunityDisable();
         }
     }
 }

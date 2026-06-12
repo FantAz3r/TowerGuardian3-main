@@ -7,7 +7,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
         private const int MaxRandomValue = 4;
         private const int MinRandomValue = 0;
 
-        [SerializeField] private Enemy _enemy;
+        [SerializeField]
+        private Enemy _enemy;
         private float _attackRangeTreshold = 1.1f;
         private float _abilityCooldown;
         private float _ultimateCooldown;
@@ -39,18 +40,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
             _hashCooldown = Animator.StringToHash("Cooldown");
         }
 
-        public void Init()
-        {
-            _enemy.Agent.EnableAgent(true);
-            _enemy.Collider.enabled = true;
-            _enemy.Rotator.CanRotate(true);
-
-            _enemy.TargetDetector.TargetDetected += OnSeeTarget;
-            _enemy.TargetDetector.TargetLost += OnLostTarget;
-
-            _enemy.Health.Died += OnDie;
-        }
-
         private void Update()
         {
             if (HasParameter(_hashRandom))
@@ -66,7 +55,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
             UpdateTimer();
 
             if (_enemy.Target == null)
+            {
                 return;
+            }
 
             float sqrDistance = (transform.position - _enemy.Target.transform.position).sqrMagnitude;
 
@@ -87,6 +78,18 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
             {
                 _enemy.BehaviorAnimator.SetBool(_hashIsSeeTarget, false);
             }
+        }
+
+        public void Init()
+        {
+            _enemy.Agent.EnableAgent(true);
+            _enemy.Collider.enabled = true;
+            _enemy.Rotator.CanRotate(true);
+
+            _enemy.TargetDetector.TargetDetected += OnSeeTarget;
+            _enemy.TargetDetector.TargetLost += OnLostTarget;
+
+            _enemy.Health.Died += OnDie;
         }
 
         public void SetCooldown(float cooldown)
@@ -190,7 +193,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
         {
             foreach (AnimatorControllerParameter param in _enemy.BehaviorAnimator.parameters)
             {
-                if (Animator.StringToHash(param.name) == hash) return true;
+                if (Animator.StringToHash(param.name) == hash)
+                {
+                    return true;
+                }
             }
 
             return false;

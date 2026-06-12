@@ -13,7 +13,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
 {
     public class Weapon : MonoBehaviour, IWeapon
     {
-        [SerializeField] private WeaponConfig _config;
+        [SerializeField]
+        private WeaponConfig _config;
 
         private AttackZone _attackZone;
         private ISpawnerService _spawnerService;
@@ -23,6 +24,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
         private float _multiply;
 
         public event Action<int, Vector3, EntityType> HitedTarget;
+
         public WeaponConfig Config => _config;
 
         public void Init(AttackZone attackZone)
@@ -61,10 +63,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
             foreach (var target in orderedByDistanceTargets)
             {
                 if (target == null)
+                {
                     continue;
+                }
 
                 if (target.IsImmunity)
+                {
                     continue;
+                }
 
                 float damageToDeal = _damage;
 
@@ -88,7 +94,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
             IEnumerable<Health> targets = _attackZone.GetTargets(_range);
 
             if (targets.Count() == 0)
+            {
                 return false;
+            }
 
             return targets.Count() > 0;
         }

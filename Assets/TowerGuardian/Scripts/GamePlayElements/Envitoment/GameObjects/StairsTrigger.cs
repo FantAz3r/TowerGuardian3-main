@@ -10,6 +10,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
         private Collider _collider;
 
         public event Action Entered;
+
         public Vector3 Center => _collider.bounds.center;
 
         private void Awake()

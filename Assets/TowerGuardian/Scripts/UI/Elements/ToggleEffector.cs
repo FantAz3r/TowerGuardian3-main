@@ -12,8 +12,10 @@ namespace TowerGuardian.Scripts.UI.Elements
         private readonly int _normal = Animator.StringToHash("Normal");
         private readonly int _highlighted = Animator.StringToHash("Highlighted");
         private readonly int _pressed = Animator.StringToHash("Pressed");
-        [SerializeField] private AudioClip _pressedSound;
-        [SerializeField] private AudioClip _highlightedSound;
+        [SerializeField]
+        private AudioClip _pressedSound;
+        [SerializeField]
+        private AudioClip _highlightedSound;
 
         private Animator _animator;
         private ISpawnerService _spawnerService;

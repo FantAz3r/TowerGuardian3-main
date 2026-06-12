@@ -376,7 +376,7 @@ namespace CartoonFX
     {
         private CFXR_ParticleText CastTarget
         {
-            get { return (CFXR_ParticleText)this.target; }
+            get { return (CFXR_ParticleText) this.target; }
         }
 
         private GUIContent GUIContent_AutoUpdateToggle = new GUIContent("Auto-update", "Automatically regenerate the text when a property is changed.");

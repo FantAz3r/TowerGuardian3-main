@@ -11,7 +11,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class PlayerAttacker : MonoBehaviour
     {
-        private List<Weapon> _weaponsInInventory = new();
+        private List<Weapon> _weaponsInInventory = new ();
         private Weapon _currentWeapon;
         private Weapon _previousWeapon;
         private Coroutine _attackCoroutine;
@@ -21,16 +21,25 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private float _emptyTargetAttackDelay = 0.1f;
 
         public event Action<IWeapon, float> Attacked;
+
         public event Action<IWeapon> WeaponSeted;
+
         public event Action<IWeapon> WeaponRemoved;
+
         public event Action<ICardConfig> SavedWeaponAdded;
+
         public event Action WeaponDeactivated;
+
         public event Action WeaponActivated;
+
         public event Action Hited;
+
         public event Action Suspended;
 
         public IReadOnlyList<Weapon> WeaponsInInventory => _weaponsInInventory;
+
         public Weapon CurrentWeapon => _currentWeapon;
+
         public Weapon PreviousWeapon => _previousWeapon;
 
         private void Awake()
@@ -154,7 +163,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void StartAttacking()
         {
             if (_currentWeapon == null)
+            {
                 return;
+            }
 
             _attackCoroutine = StartCoroutine(AttackRoutine());
         }
@@ -162,7 +173,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void StopAttacking()
         {
             if (_attackCoroutine == null)
+            {
                 return;
+            }
 
             StopCoroutine(_attackCoroutine);
             _attackCoroutine = null;

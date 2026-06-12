@@ -12,15 +12,23 @@ namespace TowerGuardian.Scripts.UI
     {
         public const int EnumGameLevelOffset = 3;
 
-        [SerializeField] private Button _restartButton;
-        [SerializeField] private Button _homeButton;
+        [SerializeField]
+        private Button _restartButton;
+        [SerializeField]
+        private Button _homeButton;
 
         public IADVServise ADVServise { get; private set; }
+
         public IGameConditionService ConditionService { get; private set; }
+
         public LevelID CurrentLevel { get; private set; }
+
         public ScoreCounter ScoreCounter { get; private set; }
+
         public IStateSwitchService StateSwitchService { get; private set; }
+
         public IGameFactory GameFactory { get; private set; }
+
         public IWindowService WindowService { get; private set; }
 
         protected override void Awake()

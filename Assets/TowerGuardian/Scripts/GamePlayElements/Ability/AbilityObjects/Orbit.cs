@@ -16,7 +16,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
         private Vector3 _direction;
         private float _baseRotationSpeed = 150f;
         private float _rotationSpeed;
-        private List<LavaRock> _rocks = new();
+        private List<LavaRock> _rocks = new ();
         private bool _isInited;
         private int _orbitIndex;
 
@@ -38,8 +38,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
 
         private void Update()
         {
-            if (!_isInited)
+            if (_isInited == false)
+            {
                 return;
+            }
 
             if (Mathf.Abs(_radius - _targetRadius) > 0.01f)
             {
@@ -48,18 +50,32 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
                 UpdateProjectilesPositions();
             }
 
-            transform.Rotate(_direction * _rotationSpeed * Time.deltaTime);
-        }
-
-        private void UpdateRotationSpeed()
-        {
-            _rotationSpeed = _baseRotationSpeed * (_radius == 0 ? 1f : 5f / _radius);
+            transform.Rotate(_rotationSpeed * Time.deltaTime * _direction);
         }
 
         public void IncreaseOrbitRange()
         {
             _orbitIndex++;
             _targetRadius = _firstOrbitRadius + (_orbitIndex * _increaseRadiusValue);
+        }
+
+        public void RemoveOrbit()
+        {
+            foreach (var rock in _rocks)
+            {
+                if (rock != null)
+                {
+                    rock.gameObject.SetActive(false);
+                    rock.transform.SetParent(null);
+                }
+            }
+
+            _rocks.Clear();
+        }
+
+        private void UpdateRotationSpeed()
+        {
+            _rotationSpeed = _baseRotationSpeed * (_radius == 0 ? 1f : 5f / _radius);
         }
 
         private void SpawnProjectiles(int count, int damage)
@@ -96,20 +112,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
             float x = Mathf.Cos(rad) * radius;
             float z = Mathf.Sin(rad) * radius;
             return new Vector3(x, 0f, z);
-        }
-
-        public void RemoveOrbit()
-        {
-            foreach (var rock in _rocks)
-            {
-                if (rock != null)
-                {
-                    rock.gameObject.SetActive(false);
-                    rock.transform.SetParent(null);
-                }
-            }
-
-            _rocks.Clear();
         }
     }
 }

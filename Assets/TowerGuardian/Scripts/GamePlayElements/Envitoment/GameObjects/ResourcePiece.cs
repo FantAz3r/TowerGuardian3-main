@@ -7,19 +7,27 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 {
     public class ResourcePiece : MonoBehaviour
     {
-        [SerializeField] private ResourceType _pieceType;
-        [SerializeField] private AudioClip _pickSound;
-        [SerializeField] private AudioClip _collectSound;
-        [SerializeField] private int _amount = 1;
-        [SerializeField] private Renderer _outlineRenderer;
+        [SerializeField]
+        private ResourceType _pieceType;
+        [SerializeField]
+        private AudioClip _pickSound;
+        [SerializeField]
+        private AudioClip _collectSound;
+        [SerializeField]
+        private int _amount = 1;
+        [SerializeField]
+        private Renderer _outlineRenderer;
 
         private ResourcePieceAnimator _animator;
         private ISpawnerService _spawnerService;
 
-        [field: SerializeField] public int ScorePoints { get; private set; } = 1;
+        [field: SerializeField]
+        public int ScorePoints { get; private set; } = 1;
 
         public AudioClip CollectSound => _collectSound;
+
         public ResourceType PeiceType => _pieceType;
+
         public int Amount => _amount;
 
         private void Awake()
@@ -36,22 +44,37 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 
         private void UpdateOutlineColor()
         {
-            if (_outlineRenderer == null) return;
+            if (_outlineRenderer == null)
+            {
+                return;
+            }
 
             Color color;
 
             if (_amount >= 1 && _amount <= 4)
+            {
                 color = Color.white;
+            }
             else if (_amount >= 5 && _amount <= 7)
+            {
                 color = Color.green;
+            }
             else if (_amount >= 8 && _amount <= 11)
+            {
                 color = Color.blue;
+            }
             else if (_amount >= 12 && _amount <= 16)
+            {
                 color = Color.red;
+            }
             else if (_amount > 16)
+            {
                 color = Color.yellow;
+            }
             else
+            {
                 color = Color.white;
+            }
 
             _outlineRenderer.material.SetColor("_OutlineColor", color);
         }

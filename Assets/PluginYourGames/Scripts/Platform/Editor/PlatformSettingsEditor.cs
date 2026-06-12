@@ -24,7 +24,7 @@ namespace YG.EditorScr
             if (EditorApplication.isCompiling || EditorApplication.isUpdating)
                 return;
 
-            scr = (PlatformSettings)target;
+            scr = (PlatformSettings) target;
             if (scr == null) return;
 
             serializedInfoYG = new SerializedObject(YG2.infoYG);
@@ -234,7 +234,7 @@ namespace YG.EditorScr
 
                         Undo.RecordObject(YG2.infoYG, "Change PlatformToggles");
 
-                        bool toggleValue = (bool)toggle.GetValue(toggleScrObject);
+                        bool toggleValue = (bool) toggle.GetValue(toggleScrObject);
                         bool newToggleValue = EditorGUILayout.Toggle(toggleValue, GUILayout.Width(20));
 
                         if (newToggleValue != toggleValue)
@@ -287,23 +287,23 @@ namespace YG.EditorScr
 
             if (field.FieldType == typeof(bool))
             {
-                field.SetValue(target, EditorGUILayout.Toggle((bool)value, options));
+                field.SetValue(target, EditorGUILayout.Toggle((bool) value, options));
             }
             else if (field.FieldType == typeof(string))
             {
-                field.SetValue(target, EditorGUILayout.TextField((string)value, options));
+                field.SetValue(target, EditorGUILayout.TextField((string) value, options));
             }
             else if (field.FieldType == typeof(int))
             {
-                field.SetValue(target, EditorGUILayout.IntField((int)value, options));
+                field.SetValue(target, EditorGUILayout.IntField((int) value, options));
             }
             else if (field.FieldType == typeof(float))
             {
-                field.SetValue(target, EditorGUILayout.FloatField((float)value, options));
+                field.SetValue(target, EditorGUILayout.FloatField((float) value, options));
             }
             else if (field.FieldType.IsEnum)
             {
-                field.SetValue(target, EditorGUILayout.EnumPopup((Enum)value, options));
+                field.SetValue(target, EditorGUILayout.EnumPopup((Enum) value, options));
             }
             else
             {

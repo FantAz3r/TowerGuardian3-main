@@ -12,7 +12,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
 {
     public class JumpingPickaxeAbility : UsebleAbility, ICooldownAbility
     {
-        [SerializeField] private JumpingPickaxeConfig _config;
+        [SerializeField]
+        private JumpingPickaxeConfig _config;
 
         private float _cooldown;
         private Weapon _pickaxe;
@@ -23,8 +24,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         public event Action<float, float> Cooldowning;
 
         public bool IsCooldowning { get; private set; }
+
         public float Cooldown => _cooldown;
+
         public override AbilityType Type => AbilityType.BouncingPickaxe;
+
         public override AbilityConfig Config => _config;
 
         private void Awake()
@@ -42,9 +46,15 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
 
         public override void Use()
         {
-            if (IsLock) return;
+            if (IsLock)
+            {
+                return;
+            }
 
-            if (IsCooldowning) return;
+            if (IsCooldowning)
+            {
+                return;
+            }
 
             if (_attacker.CurrentWeapon.Config.WeaponType == WeaponType.Pickaxe)
             {

@@ -15,25 +15,37 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public abstract class BaseShop : PauseWindow
     {
-        [SerializeField] private ResourceViewer _resourceView;
-        [SerializeField] private RectTransform _weaponContentParent;
-        [SerializeField] private RectTransform _abilitiesContentParent;
-        [SerializeField] private RectTransform _buffContentParent;
-        [SerializeField] private Button _weaponButton;
-        [SerializeField] private Button _abilityButton;
-        [SerializeField] private Button _buffButton;
-        [SerializeField] private ProductViewer _productButtonPrefab;
+        [SerializeField]
+        private ResourceViewer _resourceView;
+        [SerializeField]
+        private RectTransform _weaponContentParent;
+        [SerializeField]
+        private RectTransform _abilitiesContentParent;
+        [SerializeField]
+        private RectTransform _buffContentParent;
+        [SerializeField]
+        private Button _weaponButton;
+        [SerializeField]
+        private Button _abilityButton;
+        [SerializeField]
+        private Button _buffButton;
+        [SerializeField]
+        private ProductViewer _productButtonPrefab;
 
-        private List<ICardConfig> _configs = new();
-        private List<ProductViewer> _productButtons = new();
+        private List<ICardConfig> _configs = new ();
+        private List<ProductViewer> _productButtons = new ();
         private int _weaponCardCount;
         private int _abilityCardCount;
         private int _buffCardCount;
 
         public Player Player { get; private set; }
+
         public CardData CardData { get; private set; }
+
         public List<ProductViewer> ProductButtons => _productButtons;
+
         public RectTransform WeaponContentParent => _weaponContentParent;
+
         public List<ICardConfig> Configs => _configs;
 
         protected override void Awake()
@@ -105,8 +117,7 @@ namespace TowerGuardian.Scripts.UI.Elements
 
         protected void UpdateCardSave(ICardConfig card)
         {
-            if (YG2.saves.AllCards == null)
-                YG2.saves.AllCards = new List<CardSaveData>();
+            YG2.saves.AllCards ??= new List<CardSaveData>();
 
             YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
             YG2.saves.AllCards.Add(CreateSaveData(card));
@@ -125,7 +136,7 @@ namespace TowerGuardian.Scripts.UI.Elements
 
             foreach (var config in Configs)
             {
-                RectTransform parent = null;
+                RectTransform parent;
 
                 if (config is WeaponConfig)
                 {
@@ -151,17 +162,23 @@ namespace TowerGuardian.Scripts.UI.Elements
             }
 
             if (_weaponCardCount == 0)
+            {
                 _weaponButton.gameObject.SetActive(false);
+            }
 
             if (_buffCardCount == 0)
+            {
                 _buffButton.gameObject.SetActive(false);
+            }
 
             if (_abilityCardCount == 0)
+            {
                 _abilityButton.gameObject.SetActive(false);
+            }
         }
 
         protected abstract void OnTradeRequested(ProductViewer button, ICardConfig config);
 
-        protected abstract void OnParentFounded(RectTransform Parent, ICardConfig config);
+        protected abstract void OnParentFounded(RectTransform parent, ICardConfig config);
     }
 }

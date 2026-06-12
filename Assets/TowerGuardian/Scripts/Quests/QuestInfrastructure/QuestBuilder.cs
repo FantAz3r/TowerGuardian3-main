@@ -11,7 +11,7 @@ namespace TowerGuardian.Scripts.Quests.QuestInfrastructure
 {
     public class QuestBuilder
     {
-        private List<IQuest> _quests = new();
+        private List<IQuest> _quests = new ();
         private Player _player;
         private List<Portal> _portals;
         private TowerDoor _door;

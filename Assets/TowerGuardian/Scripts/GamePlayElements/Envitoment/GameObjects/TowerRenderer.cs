@@ -6,8 +6,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 {
     public class TowerRenderer : MonoBehaviour
     {
-        [SerializeField] private List<Floor> _floors;
+        [SerializeField]
+        private List<Floor> _floors;
         private int _currentFloor;
+
         public IReadOnlyList<Floor> Floors => _floors;
 
         private void Start()
@@ -67,7 +69,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
         private void LoadTower()
         {
             if (YG2.saves.CurrentFloor == 0)
+            {
                 return;
+            }
 
             _currentFloor = YG2.saves.CurrentFloor;
         }

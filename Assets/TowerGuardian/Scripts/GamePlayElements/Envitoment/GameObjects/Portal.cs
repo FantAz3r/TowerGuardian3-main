@@ -9,13 +9,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 {
     public class Portal : MonoBehaviour
     {
-        [SerializeField] private LevelID _nextLevel;
-        [SerializeField] private LevelID _currentLevel;
+        [SerializeField]
+        private LevelID _nextLevel;
+        [SerializeField]
+        private LevelID _currentLevel;
 
         private bool _canExit = true;
         private IGameConditionService _conditionService;
 
         public event Action Entered;
+
         public LevelID NextLevel => _nextLevel;
 
         private void Awake()
@@ -26,7 +29,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
         private void OnTriggerEnter(Collider other)
         {
             if (!_canExit)
+            {
                 return;
+            }
 
             if (other.TryGetComponent<Player>(out _))
             {

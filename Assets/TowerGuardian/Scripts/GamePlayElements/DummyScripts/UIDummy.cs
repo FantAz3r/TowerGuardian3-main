@@ -5,8 +5,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.DummyScripts
 {
     public class UIDummy : MonoBehaviour, IUIWindow
     {
-        public bool IsActive => gameObject.activeSelf;
-
         public void Open()
         {
             gameObject.SetActive(true);

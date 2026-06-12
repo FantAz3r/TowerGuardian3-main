@@ -8,8 +8,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class Mover : MonoBehaviour, IBuffble
     {
-        [SerializeField] private MoveConfig _configObject;
-        [SerializeField] private LayerMask _obstacleLayerMask;
+        [SerializeField]
+        private MoveConfig _configObject;
+        [SerializeField]
+        private LayerMask _obstacleLayerMask;
 
         private float _rayDistance = 1f;
         private float _currentMoveSpeed;
@@ -25,7 +27,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             _statsCalculator = new StatsCalculator();
 
             if (_configObject == null)
+            {
                 throw new ArgumentNullException();
+            }
+
             _startSpeed = _configObject.MoveSpeed;
             _currentMoveSpeed = _startSpeed;
         }
@@ -56,10 +61,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 
             float moveStep = _currentMoveSpeed * Time.deltaTime;
             transform.Translate(moveDir * moveStep, Space.World);
-        }
-
-        public void Push(Vector3 direction, float force)
-        {
         }
 
         public void ApplyBuff(IEffect effect)

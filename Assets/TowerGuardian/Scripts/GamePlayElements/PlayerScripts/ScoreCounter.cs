@@ -18,7 +18,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
     {
         private const string MainLeaderbord = "MainLiderboard";
 
-        private Dictionary<LevelID, string> LevelLeaderboards = new Dictionary<LevelID, string>
+        private Dictionary<LevelID, string> _levelLeaderboards = new Dictionary<LevelID, string>
         {
             { LevelID.Level1, "FirstLevelScore" },
             { LevelID.Level2, "SecondLevelScore" },
@@ -66,11 +66,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         public bool HasScoreInfo(LevelID level)
         {
             if (YG2.saves.LevelsProgress == null)
+            {
                 return false;
+            }
 
-            var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == (int) level);
+            var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == (int)level);
 
-            return savedData.Score != 0 && savedData.Level != (int) LevelID.None;
+            return savedData.Score != 0 && savedData.Level != (int)LevelID.None;
         }
 
         private void CalculateReward()
@@ -91,13 +93,25 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             float scorePerSecond = _scoreService.GetScore() / _time;
 
             if (scorePerSecond < scoreForOneStar)
+            {
                 return 0;
+            }
+
             if (scorePerSecond >= scoreForOneStar && scorePerSecond < scoreForTwoStars)
+            {
                 return 1;
+            }
+
             if (scorePerSecond >= scoreForTwoStars && scorePerSecond < scoreForTreeStars)
+            {
                 return 2;
+            }
+
             if (scorePerSecond >= scoreForTreeStars)
+            {
                 return 3;
+            }
+
             return 0;
         }
 
@@ -114,7 +128,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             {
                 var levelSave = YG2.saves.LevelsProgress[i];
 
-                if ((int) _currentLevel == levelSave.Level)
+                if ((int)_currentLevel == levelSave.Level)
                 {
                     levelFound = true;
 
@@ -123,7 +137,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
                     int updatedStars = Mathf.Max(newStars, levelSave.Stars);
                     float updatedTime = Mathf.Min(newTime, levelSave.Time);
 
-                    YG2.saves.LevelsProgress[i] = new LevelSaveData((int) _currentLevel, updatedScore, updatedStars, updatedTime);
+                    YG2.saves.LevelsProgress[i] = new LevelSaveData((int)_currentLevel, updatedScore, updatedStars, updatedTime);
 
                     UpdateLevelLeaderboards(_currentLevel);
 
@@ -133,7 +147,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 
             if (!levelFound)
             {
-                YG2.saves.LevelsProgress.Add(new LevelSaveData((int) _currentLevel, newScore, newStars, newTime));
+                YG2.saves.LevelsProgress.Add(new LevelSaveData((int)_currentLevel, newScore, newStars, newTime));
                 UpdateLevelLeaderboards(_currentLevel);
             }
 
@@ -148,9 +162,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
                 return;
             }
 
-            var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == (int) level);
+            var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == (int)level);
 
-            if (savedData.Level == (int) LevelID.None)
+            if (savedData.Level == (int)LevelID.None)
             {
                 LevelEnded?.Invoke(0, 0, 0, 0);
             }
@@ -162,11 +176,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 
         private void UpdateLevelLeaderboards(LevelID levelID)
         {
-            foreach (var pair in LevelLeaderboards)
+            foreach (var pair in _levelLeaderboards)
             {
                 if (levelID == pair.Key)
                 {
-                    var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == (int) levelID);
+                    var savedData = YG2.saves.LevelsProgress.Find(levelSave => levelSave.Level == (int)levelID);
                     YG2.SetLeaderboard(pair.Value, savedData.Score);
                 }
             }
@@ -174,7 +188,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 
         private void UpdateMainLeaderbord()
         {
-            if (YG2.saves.LevelsProgress == null) return;
+            if (YG2.saves.LevelsProgress == null)
+            {
+                return;
+            }
 
             int scoreFromAllLevels = 0;
 

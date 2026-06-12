@@ -1,9 +1,9 @@
-﻿using AYellowpaper.SerializedCollections.Editor.Data;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AYellowpaper.SerializedCollections.Editor.Data;
 using UnityEditor;
 using UnityEngine;
 
@@ -105,7 +105,7 @@ namespace AYellowpaper.SerializedCollections.Editor
                 var methodInfo = classType.GetMethod("GetFieldInfoFromProperty", BindingFlags.Static | BindingFlags.NonPublic);
                 var parameters = new object[] { property, null };
                 methodInfo.Invoke(null, parameters);
-                type = (Type)parameters[1];
+                type = (Type) parameters[1];
                 return true;
             }
             catch

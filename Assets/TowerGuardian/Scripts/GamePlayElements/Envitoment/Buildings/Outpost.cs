@@ -7,7 +7,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.Buildings
     [RequireComponent(typeof(Collider))]
     public class Outpost : InteractionMethod
     {
-        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField]
+        private ParticleSystem _particleSystem;
 
         public event Action Complited;
 

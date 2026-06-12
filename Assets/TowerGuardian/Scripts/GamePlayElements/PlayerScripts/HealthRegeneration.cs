@@ -8,7 +8,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
     [RequireComponent(typeof(Health))]
     public class HealthRegeneration : MonoBehaviour, IBuffble
     {
-        [SerializeField] private PlayerConfig _config;
+        [SerializeField]
+        private PlayerConfig _config;
 
         private StatsCalculator _statsCalculator;
         private Health _health;
@@ -42,7 +43,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void Update()
         {
             if (!_isRegeneration)
+            {
                 return;
+            }
 
             if (_health.CurrentHealth >= _health.MaxHealth)
             {
@@ -59,7 +62,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 
                 if (_regenAccumulated >= 1f)
                 {
-                    int healAmount = (int)_regenAccumulated;
+                    int healAmount = (int) _regenAccumulated;
                     _health.Heal(healAmount);
                     _regenAccumulated -= healAmount;
                 }

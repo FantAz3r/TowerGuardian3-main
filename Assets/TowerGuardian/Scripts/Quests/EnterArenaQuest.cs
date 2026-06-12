@@ -14,7 +14,7 @@ namespace TowerGuardian.Scripts.Quests
     {
         private ISceneContainer _container;
         private ArenaTrigger _arena;
-        private List<Bridge> _bridges = new();
+        private List<Bridge> _bridges = new ();
 
         public EnterArenaQuest()
         {

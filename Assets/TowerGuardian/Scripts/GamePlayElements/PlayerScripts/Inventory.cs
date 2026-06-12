@@ -13,19 +13,25 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField] private PlayerConfig _config;
+        [SerializeField]
+        private PlayerConfig _config;
 
         private ResourceCollector _collector;
-        private Dictionary<ResourceType, int> _resources = new();
+        private Dictionary<ResourceType, int> _resources = new ();
         private int _currentAmount;
         private int _startAmount = 0;
         private IScoreService _scoreService;
 
         public event Action<Dictionary<ResourceType, int>> ResourceChanged;
+
         public event Action ResourceAdded;
+
         public event Action<int> TotalAmountChanged;
+
         public event Action WoodCollected;
+
         public event Action StoneCollected;
+
         public event Action CoinCollected;
 
         public Dictionary<ResourceType, int> Resources => _resources;
@@ -56,11 +62,17 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             _scoreService.AddScore(ScoreType.Resource, resource.ScorePoints);
 
             if (resource.PeiceType == ResourceType.Stone)
+            {
                 StoneCollected?.Invoke();
+            }
             else if (resource.PeiceType == ResourceType.Wood)
+            {
                 WoodCollected?.Invoke();
+            }
             else if (resource.PeiceType == ResourceType.Coin)
+            {
                 CoinCollected?.Invoke();
+            }
 
             if (_resources.ContainsKey(resource.PeiceType))
             {
@@ -145,15 +157,19 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void LoadResources()
         {
             if (YG2.saves == null)
+            {
                 return;
+            }
 
             _resources[ResourceType.Coin] = Mathf.Max(0, YG2.saves.Coins);
             _resources[ResourceType.Wood] = Mathf.Max(0, YG2.saves.Wood);
             _resources[ResourceType.Stone] = Mathf.Max(0, YG2.saves.Stones);
-
             _currentAmount = 0;
+
             foreach (var value in _resources.Values)
+            {
                 _currentAmount += Mathf.Max(0, value);
+            }
         }
     }
 }

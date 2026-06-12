@@ -8,7 +8,8 @@ namespace TowerGuardian.Scripts.UI
     {
         private static readonly int FresnelPowerID = Shader.PropertyToID("_FresnelPower");
 
-        [SerializeField] private Health _health;
+        [SerializeField]
+        private Health _health;
         private Renderer _targetRenderer;
         private float _defoultRenderAlfa = 0.3f;
         private float _maxRenderAlfa = 1f;

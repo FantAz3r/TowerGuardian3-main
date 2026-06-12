@@ -45,15 +45,5 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
             _playerCards.Add(_card);
             Selected?.Invoke();
         }
-
-        private void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        private void Hide()
-        {
-            gameObject.SetActive(false);
-        }
     }
 }

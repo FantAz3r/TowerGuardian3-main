@@ -8,7 +8,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
     public class SpawnerActivator : MonoBehaviour
     {
         public event Action<SpawnerActivator> Detected;
+
         public event Action<SpawnerActivator> Losted;
+
         public event Action<SpawnerActivator> Destroyed;
 
         private void OnTriggerEnter(Collider other)

@@ -87,7 +87,7 @@ namespace CartoonFX
                     return;
                 }
 
-                char ch = (char)c;
+                char ch = (char) c;
 
                 //Special case: solve bug where !COND_FALSE_1 && COND_FALSE_2 would return True
                 bool embeddedNot = ch == '!' && s.Peek() != '(';
@@ -101,9 +101,9 @@ namespace CartoonFX
                 {
                     string str = "";
                     str += ch;
-                    while (s.Peek() != -1 && !typesDict.ContainsKey((char)s.Peek()))
+                    while (s.Peek() != -1 && !typesDict.ContainsKey((char) s.Peek()))
                     {
-                        str += (char)s.Read();
+                        str += (char) s.Read();
                     }
                     type = TokenType.LITERAL;
                     value = str;

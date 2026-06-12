@@ -14,6 +14,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
         private List<Transform> _targets = new List<Transform>();
 
         public event Action<Transform> TargetDetected;
+
         public event Action<Transform> TargetLost;
 
         private void OnTriggerEnter(Collider other)

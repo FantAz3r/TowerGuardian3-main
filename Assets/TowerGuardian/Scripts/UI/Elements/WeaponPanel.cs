@@ -12,14 +12,17 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class WeaponPanel : MonoBehaviour
     {
-        [SerializeField] private TMP_Dropdown _dropdown;
+        [SerializeField]
+        private TMP_Dropdown _dropdown;
         private Player _player;
         private List<WeaponConfig> _configs = new List<WeaponConfig>();
 
         public event Action WeaponSwaped;
+
         public event Action WeaponAdded;
 
-        [field: SerializeField] public Highlighter Highlighter { get; private set; }
+        [field: SerializeField]
+        public Highlighter Highlighter { get; private set; }
 
         private void Awake()
         {
@@ -59,7 +62,9 @@ namespace TowerGuardian.Scripts.UI.Elements
             if (card is WeaponConfig weapon)
             {
                 if (_configs.Contains(weapon))
+                {
                     return;
+                }
 
                 _configs.Add(weapon);
 
@@ -117,7 +122,9 @@ namespace TowerGuardian.Scripts.UI.Elements
         {
             int index = _configs.IndexOf(config as WeaponConfig);
             if (index < 0)
+            {
                 return;
+            }
 
             _dropdown.options[index].text = config.Level.ToString();
             _dropdown.RefreshShownValue();

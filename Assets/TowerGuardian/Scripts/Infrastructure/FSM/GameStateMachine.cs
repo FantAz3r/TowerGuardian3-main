@@ -11,7 +11,7 @@ namespace TowerGuardian.Scripts.Infrastructure.FSM
         private Dictionary<Type, IExitableState> _states;
         private IExitableState _currentState;
 
-        public GameStateMachine(SceneLoader sceneLoader, ICoroutineRunner coroutineRunner)
+        public GameStateMachine(ICoroutineRunner coroutineRunner)
         {
             _states = new Dictionary<Type, IExitableState>();
             _states[typeof(BootstrapState)] = new BootstrapState(this, coroutineRunner);
@@ -37,7 +37,9 @@ namespace TowerGuardian.Scripts.Infrastructure.FSM
             where TState : class, IExitableState
         {
             if (_currentState is IExitableState exitableState)
+            {
                 exitableState.Exit();
+            }
 
             TState state = GetState<TState>();
             _currentState = state;

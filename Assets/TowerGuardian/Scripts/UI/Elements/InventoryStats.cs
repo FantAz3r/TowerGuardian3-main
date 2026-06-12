@@ -10,11 +10,16 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class InventoryStats : MonoBehaviour
     {
-        [SerializeField] private Image _image;
-        [SerializeField] private TMP_Text _nameText;
-        [SerializeField] private TMP_Text _descriptionText;
-        [SerializeField] private TMP_Text _stats;
-        [SerializeField] private TMP_Text _level;
+        [SerializeField]
+        private Image _image;
+        [SerializeField]
+        private TMP_Text _nameText;
+        [SerializeField]
+        private TMP_Text _descriptionText;
+        [SerializeField]
+        private TMP_Text _stats;
+        [SerializeField]
+        private TMP_Text _level;
 
         private void Start()
         {

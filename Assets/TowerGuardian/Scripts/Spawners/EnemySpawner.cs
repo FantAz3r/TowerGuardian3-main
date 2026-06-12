@@ -18,7 +18,7 @@ namespace TowerGuardian.Scripts.Spawners
         private const int NoGameLevelCount = 4;
 
         private List<SpawnerActivator> _spawnPoints;
-        private List<SpawnerActivator> _activeSpawnPoints = new();
+        private List<SpawnerActivator> _activeSpawnPoints = new ();
         private DayCycle _dayCycle;
         private Player _player;
         private Coroutine _spawnRoutine;
@@ -31,7 +31,7 @@ namespace TowerGuardian.Scripts.Spawners
         private int _currentWaveIndex;
 
         private Dictionary<Enemy, ObjectPool<Enemy>> _pools = new Dictionary<Enemy, ObjectPool<Enemy>>();
-        private Dictionary<Enemy, float> _startWaights = new();
+        private Dictionary<Enemy, float> _startWaights = new ();
 
         private IGameFactory _gameFactory;
 
@@ -75,13 +75,15 @@ namespace TowerGuardian.Scripts.Spawners
             _nightSpawnDelay = new WaitForSeconds(wave.NightSpawnDelay);
             _daySpawnDelay = new WaitForSeconds(wave.DaySpawnDelay);
 
-            _startWaights = wave.Weight.ToDictionary(kv => kv.Key, kv => (float)kv.Value);
+            _startWaights = wave.Weight.ToDictionary(kv => kv.Key, kv => (float) kv.Value);
             _waveDuration = new WaitForSeconds(_waves[_currentWaveIndex].Duration);
 
             foreach (var enemy in wave.Weight.Keys)
             {
                 if (!_pools.ContainsKey(enemy))
+                {
                     _pools[enemy] = new ObjectPool<Enemy>(enemy, 0, true);
+                }
             }
         }
 
@@ -97,7 +99,9 @@ namespace TowerGuardian.Scripts.Spawners
         private void Spawn()
         {
             if (_activeSpawnPoints == null || _activeSpawnPoints.Count == 0)
+            {
                 return;
+            }
 
             int totalActiveEnemies = 0;
 
@@ -107,7 +111,9 @@ namespace TowerGuardian.Scripts.Spawners
             }
 
             if (totalActiveEnemies >= _waves[_currentWaveIndex].MaxEnemyCount)
+            {
                 return;
+            }
 
             Enemy chosenEnemy = GetRandomEnemy();
 
@@ -123,7 +129,7 @@ namespace TowerGuardian.Scripts.Spawners
             enemyInstance.transform.position = spawnPoint.transform.position;
             enemyInstance.transform.LookAt(_player.transform);
 
-            enemyInstance.Init(_player.transform, (int)_levelConfig.Level - NoGameLevelCount);
+            enemyInstance.Init(_player.transform, (int) _levelConfig.Level - NoGameLevelCount);
         }
 
         public Enemy SpawnBoss(Enemy boss, Vector3 spawnPosition)
@@ -148,10 +154,14 @@ namespace TowerGuardian.Scripts.Spawners
         public void StartSpawn()
         {
             if (_spawnRoutine == null)
+            {
                 _spawnRoutine = StartCoroutine(SpawnRoutine());
+            }
 
             if (_waveRoutine == null)
+            {
                 _waveRoutine = StartCoroutine(WaveRoutine());
+            }
         }
 
         public void StopSpawn()

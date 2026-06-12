@@ -1,10 +1,10 @@
-using AYellowpaper.SerializedCollections.Editor.Data;
-using AYellowpaper.SerializedCollections.Editor.States;
-using AYellowpaper.SerializedCollections.KeysGenerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AYellowpaper.SerializedCollections.Editor.Data;
+using AYellowpaper.SerializedCollections.Editor.States;
+using AYellowpaper.SerializedCollections.KeysGenerators;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEditorInternal;
@@ -50,7 +50,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
             public void Invalidate()
             {
-                LookupTable = null; 
+                LookupTable = null;
             }
         }
 
@@ -160,7 +160,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             CheckIfNewDictionary();
             CheckPaging();
             var elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
-            int pageCount = Mathf.Max(1, Mathf.CeilToInt((float)DefaultState.ListSize / elementsPerPage));
+            int pageCount = Mathf.Max(1, Mathf.CeilToInt((float) DefaultState.ListSize / elementsPerPage));
             ToggleSearchBar(_propertyData.AlwaysShowSearch ? true : SCEditorUtility.ShouldShowSearch(pageCount));
         }
 
@@ -241,13 +241,13 @@ namespace AYellowpaper.SerializedCollections.Editor
         private IKeyable GetLookupTable(object dictionary)
         {
             var propInfo = dictionary.GetType().GetProperty(SerializedDictionaryDrawer.LookupTableName, BindingFlags.Instance | BindingFlags.NonPublic);
-            return (IKeyable)propInfo.GetValue(dictionary); 
+            return (IKeyable) propInfo.GetValue(dictionary);
         }
 
         private void UpdatePaging()
         {
             var elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
-            _pagingElement.PageCount = Mathf.Max(1, Mathf.CeilToInt((float)_activeState.ListSize / elementsPerPage));
+            _pagingElement.PageCount = Mathf.Max(1, Mathf.CeilToInt((float) _activeState.ListSize / elementsPerPage));
 
             _pagedIndices.Clear();
             _pagedIndices.Capacity = Mathf.Max(elementsPerPage, _pagedIndices.Capacity);
@@ -413,8 +413,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void OnPopulatorDataSelected(object userData)
         {
-            var data = (KeyListGeneratorData)userData;
-            var so = (KeyListGenerator)ScriptableObject.CreateInstance(data.GeneratorType);
+            var data = (KeyListGeneratorData) userData;
+            var so = (KeyListGenerator) ScriptableObject.CreateInstance(data.GeneratorType);
             so.hideFlags = HideFlags.DontSave;
             ApplyPopulatorQueued(so, ModificationType.Add);
         }

@@ -21,8 +21,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private float _jumpDuration = 0.5f;
         private float _jumpStartDistance = 7f;
 
-        [SerializeField] private Vector3 _jumpOffset = new Vector3(0, 6f, 0);
-        [SerializeField] private Vector3 _playerOffset = new Vector3(0, 3f, 0);
+        [SerializeField]
+        private Vector3 _jumpOffset = new Vector3(0, 6f, 0);
+        [SerializeField]
+        private Vector3 _playerOffset = new Vector3(0, 3f, 0);
 
         private bool _isOverTarget;
         private bool _isMoving;
@@ -51,7 +53,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void Update()
         {
             if (!enabled || _target == Vector3.zero || _player.transform == null)
+            {
                 return;
+            }
 
             float distanceToTarget = Vector3.SqrMagnitude(_player.transform.position - _target);
 
@@ -125,7 +129,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void MoveArrow()
         {
             if (_isMoving)
+            {
                 return;
+            }
 
             Vector3 targetPos = _target + _jumpOffset;
 
@@ -140,7 +146,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 
         private void StartJump()
         {
-            if (_jumpTween != null && _jumpTween.IsActive()) return;
+            if (_jumpTween != null && _jumpTween.IsActive())
+            {
+                return;
+            }
 
             _jumpTween = transform.DOLocalMoveY(transform.localPosition.y + _jumpHeight, _jumpDuration)
                 .SetLoops(-1, LoopType.Yoyo)

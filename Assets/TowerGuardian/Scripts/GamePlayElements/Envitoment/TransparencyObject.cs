@@ -11,9 +11,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
     {
         private readonly WaitForSeconds _wait = new WaitForSeconds(0.5f);
 
-        [SerializeField] private Material _transparentMaterial;
+        [SerializeField]
+        private Material _transparentMaterial;
 
-        private List<MeshRenderer> _meshRenderers = new();
+        private List<MeshRenderer> _meshRenderers = new ();
         private Coroutine _changeMaterialCoroutine;
         private List<Material[]> _originalMaterials;
         private ICoroutineRunner _coroutineRunner;
@@ -39,7 +40,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
         public void MakeInvisible()
         {
             if (_changeMaterialCoroutine != null)
+            {
                 _coroutineRunner.StopCoroutine(_changeMaterialCoroutine);
+            }
 
             _changeMaterialCoroutine = _coroutineRunner.StartCoroutine(ChangeMaterialRoutine());
         }
@@ -53,7 +56,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
                 var newMaterials = new Material[mr.materials.Length];
 
                 for (int j = 0; j < newMaterials.Length; j++)
+                {
                     newMaterials[j] = _transparentMaterial;
+                }
 
                 mr.materials = newMaterials;
             }

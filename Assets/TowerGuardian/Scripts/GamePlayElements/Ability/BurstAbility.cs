@@ -12,7 +12,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
 {
     public class BurstAbility : UsebleAbility, ICooldownAbility
     {
-        [SerializeField] private BurstConfig _config;
+        [SerializeField]
+        private BurstConfig _config;
 
         private Player _player;
         private PlayerAttacker _attacker;
@@ -21,8 +22,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         public event Action<float, float> Cooldowning;
 
         public bool IsCooldowning { get; private set; }
+
         public override AbilityConfig Config => _config;
+
         public override AbilityType Type => AbilityType.Burst;
+
         public float Cooldown => _config.Cooldown;
 
         private void Awake()
@@ -46,10 +50,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         public override void Use()
         {
             if (IsCooldowning)
+            {
                 return;
+            }
 
             if (IsLock)
+            {
                 return;
+            }
 
             StartCoroutine(CooldownRoutine());
             StartCoroutine(AttackRoutine());

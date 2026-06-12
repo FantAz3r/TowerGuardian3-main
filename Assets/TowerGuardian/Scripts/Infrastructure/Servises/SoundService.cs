@@ -7,7 +7,7 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
 {
     public class SoundService : ISoundService
     {
-        private HashSet<SoundObject> _soundObjects = new();
+        private HashSet<SoundObject> _soundObjects = new ();
 
         public void Add(SoundObject soundObject)
         {

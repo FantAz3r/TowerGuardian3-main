@@ -15,6 +15,7 @@ namespace TowerGuardian.Scripts.Quests
         }
 
         public override QuestType GetQuestType() => QuestType.EnterTower;
+
         public override Vector3 TryGetTarget() => _door.transform.position;
 
         public override void Run()

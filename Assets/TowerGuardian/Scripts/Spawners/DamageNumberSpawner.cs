@@ -23,7 +23,9 @@ namespace TowerGuardian.Scripts.Spawners
         public override void Spawn(Vector3 position, int damage, Color? textColor = null)
         {
             if (!CanSpawn)
+            {
                 return;
+            }
 
             DamageText damageText = _pool.Get();
             damageText.transform.position = position + _offset;

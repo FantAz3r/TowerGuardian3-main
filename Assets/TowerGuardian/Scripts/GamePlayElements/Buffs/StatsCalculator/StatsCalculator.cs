@@ -16,7 +16,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Buffs.StatsCalculator
         {
             var effectToRemove = _effects.FirstOrDefault(e => e.ID == effect.ID);
             if (effectToRemove != null)
+            {
                 _effects.Remove(effectToRemove);
+            }
         }
 
         public float Calculate(float @base)
@@ -24,7 +26,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Buffs.StatsCalculator
             StatsVisitor visitor = new StatsVisitor(@base);
 
             foreach (IEffect effect in _effects)
+            {
                 effect.Calculate(visitor);
+            }
 
             return visitor.Result;
         }

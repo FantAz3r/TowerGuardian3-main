@@ -1,4 +1,3 @@
-using System;
 using TowerGuardian.Scripts.GamePlayElements.Entity;
 using UnityEngine;
 
@@ -9,10 +8,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
         private int _damage;
         private float _speenSpeed;
         private bool _isRotate = true;
-
-        public event Action<int> DialedDamage;
-
-        public bool IsActive => gameObject.activeSelf;
 
         private void OnDisable()
         {
@@ -32,7 +27,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
             {
                 int damage = (int)Mathf.Min(_damage, demageable.CurrentHealth);
                 demageable.TakeDamage(damage);
-                DialedDamage?.Invoke(damage);
             }
         }
 

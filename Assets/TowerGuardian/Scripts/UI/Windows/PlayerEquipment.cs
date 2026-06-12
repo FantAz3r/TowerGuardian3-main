@@ -14,11 +14,16 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class PlayerEquipment : MonoBehaviour
     {
-        [SerializeField] private InventorySlot _slotPrefab;
-        [SerializeField] private UIItem _itemPrefab;
-        [SerializeField] private VerticalLayoutGroup _abilitySlotsParent;
-        [SerializeField] private VerticalLayoutGroup _weaponSlotsParent;
-        [SerializeField] private InventoryStats _inventoryStats;
+        [SerializeField]
+        private InventorySlot _slotPrefab;
+        [SerializeField]
+        private UIItem _itemPrefab;
+        [SerializeField]
+        private VerticalLayoutGroup _abilitySlotsParent;
+        [SerializeField]
+        private VerticalLayoutGroup _weaponSlotsParent;
+        [SerializeField]
+        private InventoryStats _inventoryStats;
 
         private Canvas _mainCanvas;
         private PlayerCardConfigContainer _cardHolder;

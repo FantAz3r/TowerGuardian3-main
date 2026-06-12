@@ -6,8 +6,10 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class ResourcePieceView : MonoBehaviour
     {
-        [SerializeField] private ResourceType _textType;
-        [SerializeField] private TMP_Text _text;
+        [SerializeField]
+        private ResourceType _textType;
+        [SerializeField]
+        private TMP_Text _text;
 
         public ResourceType TextType => _textType;
 

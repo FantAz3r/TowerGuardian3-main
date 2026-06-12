@@ -10,7 +10,7 @@ namespace TowerGuardian.Scripts.Localization
         private const string English = "en";
         private const string Turkish = "tr";
 
-        private static readonly Dictionary<EntityType, Dictionary<string, string>> _entityTypeDict =
+        private static readonly Dictionary<EntityType, Dictionary<string, string>> EntityTypeDict =
             new Dictionary<EntityType, Dictionary<string, string>>
             {
                 {
@@ -52,10 +52,10 @@ namespace TowerGuardian.Scripts.Localization
                         { English, "generic" },
                         { Turkish, "genel" },
                     }
-                }
+                },
             };
 
-        private static readonly Dictionary<WindowType, Dictionary<string, string>> _windowTypeDict =
+        private static readonly Dictionary<WindowType, Dictionary<string, string>> WindowTypeDict =
             new Dictionary<WindowType, Dictionary<string, string>>
             {
                 {
@@ -202,14 +202,12 @@ namespace TowerGuardian.Scripts.Localization
                         { Turkish, "joystick" },
                     }
                 },
-
                 {
                     WindowType.Inventory, new Dictionary<string, string>
                     {
                         { Russian, "Инвентарь" },
                         { English, "Inventory" },
                         { Turkish, "Envanter" },
-
                     }
                 },
                 {
@@ -218,9 +216,8 @@ namespace TowerGuardian.Scripts.Localization
                         { Russian, "Таблица Лидеров" },
                         { English, "Leaderboard" },
                         { Turkish, "Liderlik Tablosu" },
-
                     }
-                }
+                },
             };
 
         private static readonly Dictionary<string, string> DamageDict = new Dictionary<string, string>
@@ -311,87 +308,104 @@ namespace TowerGuardian.Scripts.Localization
         {
             { Russian, "количество" },
             { English, "count" },
-            { Turkish, "saymak" } ,
+            { Turkish, "saymak" },
         };
 
         private static readonly Dictionary<string, string> MultiplierDict = new Dictionary<string, string>
         {
             { Russian, "Множитель к" },
             { English, "Multiplier to" },
-            { Turkish, "Çarpan" } ,
+            { Turkish, "Çarpan" },
         };
 
         private static readonly Dictionary<string, string> MaxLevelDict = new Dictionary<string, string>
         {
             { Russian, "Макс. уровень" },
             { English, "Max Level" },
-            { Turkish, "Maks Seviye" } ,
+            { Turkish, "Maks Seviye" },
         };
 
         private static readonly Dictionary<string, string> ShopDict = new Dictionary<string, string>
         {
             { Russian, "Maгазин" },
             { English, "Shop" },
-            { Turkish, "Mağaza" } ,
+            { Turkish, "Mağaza" },
         };
 
         private static readonly Dictionary<string, string> LVLDict = new Dictionary<string, string>
         {
             { Russian, "Ур" },
             { English, "LVL" },
-            { Turkish, "LVL" } ,
+            { Turkish, "LVL" },
         };
 
         private static readonly Dictionary<string, string> YourBestScoreDict = new Dictionary<string, string>
         {
             { Russian, "ВАШ ЛУЧШИЙ СЧЕТ" },
             { English, "YOUR BEST SCORE" },
-            { Turkish, "EN İYİ SKORUN" } ,
+            { Turkish, "EN İYİ SKORUN" },
         };
 
         private static readonly Dictionary<string, string> NoBestScoreDict = new Dictionary<string, string>
         {
             { Russian, "НЕТ СЧЕТА" },
             { English, "NO SCORE" },
-            { Turkish, "PUAN YOK" } ,
+            { Turkish, "PUAN YOK" },
         };
 
-        private static string CurrentLanguage => YG2.lang;
         public static string YourBestScore => GetText(YourBestScoreDict);
+
         public static string NoBestScore => GetText(NoBestScoreDict);
+
         public static string Damage => GetText(DamageDict);
+
         public static string AttackDelay => GetText(AttackDelayDict);
+
         public static string AttackRange => GetText(AttackRangeDict);
+
         public static string FlightDistance => GetText(FlightDistanceDict);
+
         public static string Cooldown => GetText(CooldownDict);
+
         public static string HitCount => GetText(HitCountDict);
+
         public static string BouncesCount => GetText(BouncesCountDict);
+
         public static string CooldownPerHit => GetText(CooldownPerHitDict);
+
         public static string BounceRange => GetText(BounceRangeDict);
+
         public static string Radius => GetText(RadiusDict);
+
         public static string RotationSpeed => GetText(RotationSpeedDict);
+
         public static string IncreaseValue => GetText(IncreaseValueDict);
+
         public static string Count => GetText(CountDict);
+
         public static string Multiplier => GetText(MultiplierDict);
+
         public static string Shop => GetText(ShopDict);
+
         public static string LVL => GetText(LVLDict);
+
         public static string MaxLevel => GetText(MaxLevelDict);
 
-        private static string GetText(Dictionary<string, string> dict)
-        {
-            if (dict.TryGetValue(CurrentLanguage, out string value))
-                return value;
-            return dict[English];
-        }
+        private static string CurrentLanguage => YG2.lang;
 
         public static string GetEntityTypeText(EntityType type)
         {
-            if (_entityTypeDict.TryGetValue(type, out var translations))
+            if (EntityTypeDict.TryGetValue(type, out var translations))
             {
                 if (!string.IsNullOrEmpty(CurrentLanguage) && translations.TryGetValue(CurrentLanguage, out var localized))
+                {
                     return localized;
+                }
 
-                if (translations.TryGetValue(English, out var en)) return en;
+                if (translations.TryGetValue(English, out var en))
+                {
+                    return en;
+                }
             }
 
             return type.ToString();
@@ -399,15 +413,30 @@ namespace TowerGuardian.Scripts.Localization
 
         public static string GetWindowTypeText(WindowType type)
         {
-            if (_windowTypeDict.TryGetValue(type, out var translations))
+            if (WindowTypeDict.TryGetValue(type, out var translations))
             {
                 if (!string.IsNullOrEmpty(CurrentLanguage) && translations.TryGetValue(CurrentLanguage, out var localized))
+                {
                     return localized;
+                }
 
-                if (translations.TryGetValue(English, out var en)) return en;
+                if (translations.TryGetValue(English, out var en))
+                {
+                    return en;
+                }
             }
 
             return type.ToString();
+        }
+
+        private static string GetText(Dictionary<string, string> dict)
+        {
+            if (dict.TryGetValue(CurrentLanguage, out string value))
+            {
+                return value;
+            }
+
+            return dict[English];
         }
     }
 }

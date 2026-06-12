@@ -13,9 +13,12 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class WaveViewer : WindowBase
     {
-        [SerializeField] private Slider _waveSlider;
-        [SerializeField] private RectTransform _flagsContainer;
-        [SerializeField] private GameObject _flagPrefab;
+        [SerializeField]
+        private Slider _waveSlider;
+        [SerializeField]
+        private RectTransform _flagsContainer;
+        [SerializeField]
+        private GameObject _flagPrefab;
 
         private float _elapsedTime;
         private List<Wave> _waves;
@@ -35,7 +38,9 @@ namespace TowerGuardian.Scripts.UI.Elements
             _questRunner = _gameFactory.QuestRunner;
 
             if (_waves == null || _waves.Count == 0)
+            {
                 return;
+            }
 
             _totalDuration = 0f;
             _waveDurationsAccumulated.Clear();
@@ -56,13 +61,17 @@ namespace TowerGuardian.Scripts.UI.Elements
         private void OnDestroy()
         {
             if (_waveRoutine != null && _coroutineRunner != null)
+            {
                 _coroutineRunner.StopCoroutine(_waveRoutine);
+            }
         }
 
         public void StopWaves()
         {
             if (_waveRoutine != null && _coroutineRunner != null)
+            {
                 _coroutineRunner.StopCoroutine(_waveRoutine);
+            }
         }
 
         private void DrawFlags()
@@ -92,7 +101,10 @@ namespace TowerGuardian.Scripts.UI.Elements
 
         private IEnumerator WaitForSliderToMax()
         {
-            if (_waveSlider == null) yield break;
+            if (_waveSlider == null)
+            {
+                yield break;
+            }
 
             while (_waveSlider.value < _totalDuration)
             {

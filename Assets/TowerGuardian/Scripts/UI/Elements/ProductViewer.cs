@@ -11,12 +11,18 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class ProductViewer : MonoBehaviour
     {
-        [SerializeField] private Image _image;
-        [SerializeField] private TMP_Text _name;
-        [SerializeField] private TMP_Text _description;
-        [SerializeField] private TMP_Text _level;
-        [SerializeField] private List<CostView> _costs;
-        [SerializeField] private Button _button;
+        [SerializeField]
+        private Image _image;
+        [SerializeField]
+        private TMP_Text _name;
+        [SerializeField]
+        private TMP_Text _description;
+        [SerializeField]
+        private TMP_Text _level;
+        [SerializeField]
+        private List<CostView> _costs;
+        [SerializeField]
+        private Button _button;
 
         private ICardConfig _config;
 
@@ -33,7 +39,6 @@ namespace TowerGuardian.Scripts.UI.Elements
             _image.sprite = config.Icon;
             _name.text = config.Name ?? string.Empty;
             _description.text = config.Description ?? string.Empty;
-
 
             if (_config is CardConfig card && _config.Level < _config.MaxCardLevel)
             {
@@ -84,7 +89,10 @@ namespace TowerGuardian.Scripts.UI.Elements
 
         private void OnClick()
         {
-            if (_config == null) return;
+            if (_config == null)
+            {
+                return;
+            }
 
             BuyRequested?.Invoke(this, _config);
         }

@@ -4,9 +4,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.Items
         where TConfig : class
     {
         TConfig Config { get; }
+
         T Type { get; }
 
         void Enable();
+
         void Disable();
     }
 }

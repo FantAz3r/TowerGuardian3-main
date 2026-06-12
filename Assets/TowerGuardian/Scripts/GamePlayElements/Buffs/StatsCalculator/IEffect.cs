@@ -5,6 +5,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Buffs.StatsCalculator
         int ID { get; }
 
         void Calculate(StatsVisitor visitor);
+
         void UpdateValue(float value);
     }
 }

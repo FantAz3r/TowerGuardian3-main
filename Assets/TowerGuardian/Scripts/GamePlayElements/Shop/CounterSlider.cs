@@ -9,13 +9,20 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
 {
     public class CounterSlider : MonoBehaviour
     {
-        [SerializeField] private Slider _slider;
-        [SerializeField] private TMP_Text _quantityText;
-        [SerializeField] private TMP_Text _resourceRemoved;
-        [SerializeField] private TMP_Text _resourceAdded;
-        [SerializeField] private Image _resourceSellSprite;
-        [SerializeField] private Image _resourceGetSprite;
-        [SerializeField] private Button _confirmButton;
+        [SerializeField]
+        private Slider _slider;
+        [SerializeField]
+        private TMP_Text _quantityText;
+        [SerializeField]
+        private TMP_Text _resourceRemoved;
+        [SerializeField]
+        private TMP_Text _resourceAdded;
+        [SerializeField]
+        private Image _resourceSellSprite;
+        [SerializeField]
+        private Image _resourceGetSprite;
+        [SerializeField]
+        private Button _confirmButton;
 
         private PieceConfig _config;
         private int _count;

@@ -5,13 +5,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.CameraScripts
 {
     public class CameraFollower : MonoBehaviour
     {
-        [SerializeField] private Vector3 _offsetPosition = new Vector3(0, 10, -10);
-        [SerializeField] private Vector3 _rotation = new Vector3(40, 0, 0);
+        [SerializeField]
+        private Vector3 _offsetPosition = new Vector3(0, 10, -10);
 
         private Transform _target;
-        private Vector3 _currentPosition;
         private Health _playerHealth;
-
 
         public void Init(Transform target)
         {
@@ -27,10 +25,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.CameraScripts
         private void LateUpdate()
         {
             if (_target == null)
+            {
                 return;
+            }
 
             transform.position = _target.position + _offsetPosition;
-            _currentPosition = _target.position;
         }
 
         public void StopFollow()

@@ -23,6 +23,7 @@ namespace TowerGuardian.Scripts.Quests
         }
 
         public override QuestType GetQuestType() => QuestType.GetOut;
+
         public override Vector3 TryGetTarget() => _portal.transform.position;
 
         public override void Run()

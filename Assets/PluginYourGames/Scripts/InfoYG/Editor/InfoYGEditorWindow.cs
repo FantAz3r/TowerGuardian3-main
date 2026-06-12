@@ -27,8 +27,8 @@ namespace YG.EditorScr
         [MenuItem("Tools/YG2/" + Langs.settings, false, 0)]
         public static void ShowWindow()
         {
-            InfoYGEditorWindow window = (InfoYGEditorWindow)GetWindow(typeof(InfoYGEditorWindow));
-            window.titleContent = new GUIContent("  Settings YG2", (Texture2D)AssetDatabase.LoadAssetAtPath(InfoYG.PACH_ASSETS_ICON_YG2, typeof(Texture2D)));
+            InfoYGEditorWindow window = (InfoYGEditorWindow) GetWindow(typeof(InfoYGEditorWindow));
+            window.titleContent = new GUIContent("  Settings YG2", (Texture2D) AssetDatabase.LoadAssetAtPath(InfoYG.PACH_ASSETS_ICON_YG2, typeof(Texture2D)));
             window.minSize = new Vector2(400, 700);
             window.Show();
         }

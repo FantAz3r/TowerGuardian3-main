@@ -84,7 +84,7 @@ namespace YG
     {
         public override void OnGUI(Rect position)
         {
-            HeaderYGAttribute attr = (HeaderYGAttribute)attribute;
+            HeaderYGAttribute attr = (HeaderYGAttribute) attribute;
 
             GUIStyle headerStyle = TextStyles.Header();
             headerStyle.normal.textColor = attr.color;
@@ -95,7 +95,7 @@ namespace YG
 
         public override float GetHeight()
         {
-            HeaderYGAttribute attr = (HeaderYGAttribute)attribute;
+            HeaderYGAttribute attr = (HeaderYGAttribute) attribute;
             return base.GetHeight() + attr.indent;
         }
     }

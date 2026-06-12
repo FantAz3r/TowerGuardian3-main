@@ -17,7 +17,9 @@ namespace TowerGuardian.Scripts.StaticData.Datas
             foreach (var item in ProjectileInfos)
             {
                 if (item.Type == type)
+                {
                     return item.Prefab;
+                }
             }
 
             return default;

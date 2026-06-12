@@ -8,7 +8,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
 {
     public class SaleWindow : BaseShop
     {
-        [SerializeField] private SellResources _resourcesPanel;
+        [SerializeField]
+        private SellResources _resourcesPanel;
 
         public override void Open()
         {
@@ -17,13 +18,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
             LoadContent();
             _resourcesPanel.gameObject.SetActive(true);
             _resourcesPanel.RenderSellItems();
-        }
-
-        private void LoadContent()
-        {
-            ClearOldButtons();
-            LoadCards();
-            SetParents();
         }
 
         protected override void OnTradeRequested(ProductViewer button, ICardConfig config)
@@ -56,7 +50,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
         protected override void LoadCards()
         {
             if (YG2.saves.AllCards == null)
+            {
                 return;
+            }
 
             foreach (var card in CardData.GetConfigs())
             {
@@ -74,6 +70,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Shop
         {
             var button = CreateButton(parent);
             button.Render(config, false);
+        }
+
+        private void LoadContent()
+        {
+            ClearOldButtons();
+            LoadCards();
+            SetParents();
         }
     }
 }

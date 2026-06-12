@@ -10,11 +10,16 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class CardViewer : MonoBehaviour
     {
-        [SerializeField] private Image _icon;
-        [SerializeField] private TMP_Text _nameText;
-        [SerializeField] private TMP_Text _descriptionText;
-        [SerializeField] private TMP_Text _stats;
-        [SerializeField] private TMP_Text _level;
+        [SerializeField]
+        private Image _icon;
+        [SerializeField]
+        private TMP_Text _nameText;
+        [SerializeField]
+        private TMP_Text _descriptionText;
+        [SerializeField]
+        private TMP_Text _stats;
+        [SerializeField]
+        private TMP_Text _level;
 
         public void Render(ICardConfig config)
         {
@@ -40,7 +45,7 @@ namespace TowerGuardian.Scripts.UI.Elements
             {
                 foreach (var item in config.GetStats())
                 {
-                    string upgradeText = ShowUpgrade(config, item.Value, item.NextValue);
+                    string upgradeText = ShowUpgrade(item.Value, item.NextValue);
                     _stats.text += $"{item.Name}: {item.Value:0.#} {upgradeText}\n";
                 }
             }
@@ -52,14 +57,19 @@ namespace TowerGuardian.Scripts.UI.Elements
             }
         }
 
-        private string ShowUpgrade(ICardConfig config, float value, float nextValue)
+        private string ShowUpgrade(float value, float nextValue)
         {
             float difference = nextValue - value;
 
             if (difference > 0)
+            {
                 return $"<color=green>+{difference:0.#}</color>";
+            }
+
             if (difference < 0)
+            {
                 return $"<color=red>{difference:0.#}</color>";
+            }
 
             return string.Empty;
         }

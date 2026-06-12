@@ -142,9 +142,11 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises.Factories
         public PauseUI CreatePauseUI()
         {
             if (_gameFactory.LevelConfig == null)
+            {
                 return null;
+            }
 
-            if ((int)_gameFactory.LevelConfig.Level >= 3)
+            if ((int) _gameFactory.LevelConfig.Level >= 3)
             {
                 PauseUI pause = CreateWindow(WindowType.Pause) as PauseUI;
                 return pause;
@@ -215,9 +217,13 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises.Factories
             WindowBase window;
 
             if (parent == null)
+            {
                 window = Object.Instantiate(prefab, _uiRoot);
+            }
             else
+            {
                 window = Object.Instantiate(prefab, parent);
+            }
 
             return window;
         }

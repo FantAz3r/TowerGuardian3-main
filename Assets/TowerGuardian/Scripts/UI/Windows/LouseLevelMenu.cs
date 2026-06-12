@@ -10,10 +10,12 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class LouseLevelMenu : LevelMenu
     {
-        private float ImmunityTime = 5f;
+        private const float ImmunityTime = 5f;
 
-        [SerializeField] private Button _resurrectionButton;
-        [SerializeField] private AudioClip _louseSound;
+        [SerializeField]
+        private Button _resurrectionButton;
+        [SerializeField]
+        private AudioClip _louseSound;
 
         private string _rewardId = "HealPlayer";
         private Player _player;

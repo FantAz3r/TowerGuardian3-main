@@ -88,7 +88,7 @@ namespace TowerGuardian.Scripts.Quests
             while (CurrentTime >= 0)
             {
                 CurrentTime -= Time.deltaTime;
-                base.UpdateTime();
+                this.UpdateTime();
                 yield return null;
             }
 

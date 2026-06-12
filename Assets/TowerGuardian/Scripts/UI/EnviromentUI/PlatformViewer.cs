@@ -11,10 +11,14 @@ namespace TowerGuardian.Scripts.UI.EnviromentUI
 
     public class PlatformViewer : MonoBehaviour
     {
-        [SerializeField] private Transform _button;
-        [SerializeField] private float _moveSpeed = 2f;
-        [SerializeField] private Image _timerViewer;
-        [SerializeField] private TMP_Text _text;
+        [SerializeField]
+        private Transform _button;
+        [SerializeField]
+        private float _moveSpeed = 2f;
+        [SerializeField]
+        private Image _timerViewer;
+        [SerializeField]
+        private TMP_Text _text;
 
         private Vector3 _downPosition;
         private Vector3 _upPosition;

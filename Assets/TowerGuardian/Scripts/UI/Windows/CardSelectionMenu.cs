@@ -16,8 +16,10 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class CardSelectionMenu : PauseWindow
     {
-        [SerializeField] private RectTransform _buttonsParent;
-        [SerializeField] private TMP_Text _levelText;
+        [SerializeField]
+        private RectTransform _buttonsParent;
+        [SerializeField]
+        private TMP_Text _levelText;
 
         private List<CardButton> _cardsButtons;
         private CardSelector _selector;
@@ -62,7 +64,9 @@ namespace TowerGuardian.Scripts.UI.Windows
             }
 
             if (_currentCards.Count == 0)
+            {
                 return;
+            }
 
             _cardsButtons = CreateCards();
             ShowCards(_currentCards);

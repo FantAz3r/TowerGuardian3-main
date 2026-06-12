@@ -14,19 +14,29 @@ namespace TowerGuardian.Scripts.StaticData.Configs
         private const string EnLanguage = "en";
         private const string TRLanguage = "tr";
 
-        [SerializeField] protected Sprite _icon;
+        [SerializeField]
+        private Sprite _icon;
 
-        [SerializeField] private string _nameRu;
-        [SerializeField] private string _nameEn;
-        [SerializeField] private string _nameTr;
+        [SerializeField]
+        private string _nameRu;
+        [SerializeField]
+        private string _nameEn;
+        [SerializeField]
+        private string _nameTr;
 
-        [SerializeField] private string _descriptionRU;
-        [SerializeField] private string _descriptionEN;
-        [SerializeField] private string _descriptionTR;
+        [SerializeField]
+        private string _descriptionRU;
+        [SerializeField]
+        private string _descriptionEN;
+        [SerializeField]
+        private string _descriptionTR;
 
-        [SerializeField] protected List<CostInfo> _costs = new List<CostInfo>();
+        [SerializeField]
+        private List<CostInfo> _costs = new List<CostInfo>();
 
-        [SerializeField][HideInInspector] private string _id;
+        [SerializeField]
+        [HideInInspector]
+        private string _id;
 
         public string ID
         {
@@ -47,10 +57,13 @@ namespace TowerGuardian.Scripts.StaticData.Configs
         public Sprite Icon => _icon;
 
         public string Name => OnCorrectLanguage(_nameRu, _nameEn, _nameTr);
+
         public string Description => OnCorrectLanguage(_descriptionRU, _descriptionEN, _descriptionTR);
 
         public IReadOnlyList<CostInfo> Costs => _costs;
+
         public virtual List<CostInfo> GetCosts() => _costs;
+
         public virtual List<CostInfo> GetSellCosts() => _costs;
 
         private string OnCorrectLanguage(string ru, string en, string tr)

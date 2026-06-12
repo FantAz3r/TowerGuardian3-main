@@ -6,6 +6,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Scores
     public interface IScoreService : IService
     {
         void AddScore(ScoreType type, int count = 0);
+
         int GetScore();
     }
 }

@@ -7,8 +7,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Interaction
 {
     public abstract class InteractionMethod : MonoBehaviour
     {
-        [SerializeField] private Collider _collider;
-        [SerializeField] private bool _canUpdate;
+        [SerializeField]
+        private Collider _collider;
+        [SerializeField]
+        private bool _canUpdate;
 
         private float _currentTime;
         private bool _playerInZone;
@@ -16,10 +18,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Interaction
         private Coroutine _timerCoroutine;
 
         public event Action PlayerEnteredZone;
+
         public event Action PlayerExitedZone;
+
         public event Action<float, float> TimerUpdated;
 
-        [field: SerializeField] public float InteractionTime { get; private set; } = 1.5f;
+        [field: SerializeField]
+        public float InteractionTime { get; private set; } = 1.5f;
 
         protected virtual void Awake()
         {
@@ -65,7 +70,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Interaction
         private void StartTimerCoroutine()
         {
             if (_timerCoroutine != null)
+            {
                 StopCoroutine(_timerCoroutine);
+            }
 
             _timerCoroutine = StartCoroutine(TimerRoutine());
         }

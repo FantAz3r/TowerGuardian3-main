@@ -5,6 +5,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
 {
     public class PlayerSpawnPoint : MonoBehaviour
     {
-        [field: SerializeField] public LevelID PreviousLevel { get; private set; }
+        [field: SerializeField]
+        public LevelID PreviousLevel { get; private set; }
     }
 }

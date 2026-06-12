@@ -16,7 +16,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
         private int _cardsPerSelect;
         private int _maxLevel = 100;
 
-        private List<ICardConfig> _currentCards = new();
+        private List<ICardConfig> _currentCards = new ();
 
         public CardSelector(int cardsCount = 3)
         {
@@ -34,7 +34,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
             List<ICardConfig> startFiltered = FilterCards(_cardData.GetConfigs());
 
             if (startFiltered.Count == 0)
+            {
                 return new List<ICardConfig>();
+            }
 
             List<ICardConfig> baseFiltered = Utils.Utils.Shuffle(startFiltered);
 
@@ -47,7 +49,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
             {
                 var chosen = SelectCardByChance(available);
                 if (chosen == null)
+                {
                     break;
+                }
 
                 if (!selectedCards.Contains(chosen))
                 {
@@ -73,7 +77,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
         private ICardConfig SelectCardByChance(IList<ICardConfig> list)
         {
             if (list == null || list.Count == 0)
+            {
                 return null;
+            }
 
             float totalChance = 0f;
 
@@ -81,7 +87,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
             {
                 var c = list[i];
                 float w = c.ChanceToView;
-                if (w < 0f) w = 0f;
+                if (w < 0f)
+                {
+                    w = 0f;
+                }
+
                 totalChance += w;
             }
 
@@ -98,7 +108,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
             {
                 cumulative += Mathf.Max(0f, list[i].ChanceToView);
                 if (rand < cumulative)
+                {
                     return list[i];
+                }
             }
 
             return list[list.Count - 1];
@@ -112,10 +124,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
             foreach (var card in allCards)
             {
                 if (card is WeaponConfig && card.HasPlayer)
+                {
                     weaponCount++;
+                }
 
                 if (card is AbilityConfig && card.HasPlayer)
+                {
                     abilityCount++;
+                }
             }
 
             var filteredCards = new List<ICardConfig>();
@@ -123,19 +139,25 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
             foreach (var card in allCards)
             {
                 if (card.Level >= _maxLevel)
+                {
                     continue;
+                }
 
                 if (card is WeaponConfig)
                 {
                     if (weaponCount < MaxWeaponCards)
                     {
                         if (card.IsBought)
+                        {
                             filteredCards.Add(card);
+                        }
                     }
                     else
                     {
                         if (card.HasPlayer)
+                        {
                             filteredCards.Add(card);
+                        }
                     }
                 }
                 else if (card is AbilityConfig)
@@ -143,12 +165,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.CardsInfrastructure
                     if (abilityCount < MaxAbilityCards)
                     {
                         if (card.IsBought)
+                        {
                             filteredCards.Add(card);
+                        }
                     }
                     else
                     {
                         if (card.HasPlayer)
+                        {
                             filteredCards.Add(card);
+                        }
                     }
                 }
                 else

@@ -10,9 +10,12 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class PlayerHealthViewer : MonoBehaviour
     {
-        [SerializeField] private Slider _healthImage;
-        [SerializeField] private TMP_Text _healthText;
-        [SerializeField] private float _smoothSpeed = 10f;
+        [SerializeField]
+        private Slider _healthImage;
+        [SerializeField]
+        private TMP_Text _healthText;
+        [SerializeField]
+        private float _smoothSpeed = 10f;
 
         private Tween _healthTween;
         private Health _health;

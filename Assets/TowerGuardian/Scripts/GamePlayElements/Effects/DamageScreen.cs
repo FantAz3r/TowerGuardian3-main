@@ -8,7 +8,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Effects
     [RequireComponent(typeof(Image))]
     public class DamageScreen : WindowBase
     {
-        [SerializeField] private float _lifetime = 0.35f;
+        [SerializeField]
+        private float _lifetime = 0.35f;
 
         private Image _image;
 

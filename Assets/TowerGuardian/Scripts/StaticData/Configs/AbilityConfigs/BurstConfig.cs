@@ -9,24 +9,34 @@ namespace TowerGuardian.Scripts.StaticData.Configs.AbilityConfigs
 
     public class BurstConfig : AbilityConfig
     {
-        [SerializeField] private int _baseHitCount = 3;
-        [SerializeField] private float _baseAttackDelay = 0.3f;
-        [SerializeField] private float _baseCooldown = 15f;
+        [SerializeField]
+        private int _baseHitCount = 3;
+        [SerializeField]
+        private float _baseAttackDelay = 0.3f;
+        [SerializeField]
+        private float _baseCooldown = 15f;
 
-        [SerializeField] private float _hitCountPerLevel = 0.2f;
-        [SerializeField] private float _attackDelayReductionPerLevel = 0.01f;
-        [SerializeField] private float _cooldownReductionPerLevel = 0.25f;
+        [SerializeField]
+        private float _hitCountPerLevel = 0.2f;
+        [SerializeField]
+        private float _attackDelayReductionPerLevel = 0.01f;
+        [SerializeField]
+        private float _cooldownReductionPerLevel = 0.25f;
 
-        [SerializeField] private float _minCooldown = 6f;
-        [SerializeField] private float _minAttackDelay = 0.1f;
+        [SerializeField]
+        private float _minCooldown = 6f;
+        [SerializeField]
+        private float _minAttackDelay = 0.1f;
 
         public int HitCount => GetHitCount(Level);
+
         public float AttackDelay => GetAttackDelay(Level);
+
         public float Cooldown => GetCooldown(Level);
 
         public int GetHitCount(int level)
         {
-            return (int)(_baseHitCount + ((level - 1) * _hitCountPerLevel));
+            return (int) (_baseHitCount + ((level - 1) * _hitCountPerLevel));
         }
 
         public float GetAttackDelay(int level)

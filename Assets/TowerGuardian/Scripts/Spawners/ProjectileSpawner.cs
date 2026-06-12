@@ -10,7 +10,7 @@ namespace TowerGuardian.Scripts.Spawners
 {
     public class ProjectileSpawner : BaseSpawner
     {
-        private Dictionary<ProjectileType, ObjectPool<Projectile>> _pools = new();
+        private Dictionary<ProjectileType, ObjectPool<Projectile>> _pools = new ();
         private ProjectileData _projectileData;
 
         public ProjectileSpawner()

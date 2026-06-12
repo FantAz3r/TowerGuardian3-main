@@ -24,7 +24,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (_target == null && !_target.IsAlive) return;
+            if (_target == null && !_target.IsAlive)
+            {
+                return;
+            }
 
             RotateTo(_target.transform.position);
             _timeSinceLastAttack += Time.deltaTime;

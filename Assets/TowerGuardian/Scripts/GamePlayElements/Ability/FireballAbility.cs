@@ -16,7 +16,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
 {
     public class FireballAbility : AbilityInfrastructure.Ability, ICooldownAbility
     {
-        [SerializeField] private FireballConfig _config;
+        [SerializeField]
+        private FireballConfig _config;
 
         private Vector3 _offset = new Vector3(0, 1, 0);
         private Player _player;
@@ -26,8 +27,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         public event Action<float, float> Cooldowning;
 
         public override AbilityType Type => AbilityType.FireBall;
+
         public override AbilityConfig Config => _config;
+
         public bool IsCooldowning { get; private set; }
+
         public float Cooldown => _config.Cooldown;
 
         private void Awake()
@@ -46,7 +50,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
             IsCooldowning = false;
 
             if (_cooldownRoutine != null)
+            {
                 StopCoroutine(_cooldownRoutine);
+            }
+
             base.Disable();
         }
 

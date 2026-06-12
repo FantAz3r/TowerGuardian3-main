@@ -9,8 +9,10 @@ namespace TowerGuardian.Scripts.UI.Windows
 {
     public class PauseUI : PauseWindow
     {
-        [SerializeField] private Button _homeButton;
-        [SerializeField] private Button _continueButton;
+        [SerializeField]
+        private Button _homeButton;
+        [SerializeField]
+        private Button _continueButton;
 
         private IStateSwitchService _stateMachine;
         private IWindowService _windowService;

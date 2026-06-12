@@ -6,15 +6,18 @@ namespace TowerGuardian.Scripts.Localization
 {
     public class LanguageSwitch : MonoBehaviour
     {
-        [SerializeField] private string _ru;
-        [SerializeField] private string _en;
-        [SerializeField] private string _tr;
+        [SerializeField]
+        private string _ru;
+        [SerializeField]
+        private string _en;
+        [SerializeField]
+        private string _tr;
 
-        private TMP_Text textComponent;
+        private TMP_Text _textComponent;
 
         private void Awake()
         {
-            textComponent = GetComponent<TMP_Text>();
+            _textComponent = GetComponent<TMP_Text>();
         }
 
         private void OnEnable()
@@ -33,13 +36,13 @@ namespace TowerGuardian.Scripts.Localization
             switch (lang)
             {
                 case "ru":
-                    textComponent.text = _ru;
+                    _textComponent.text = _ru;
                     break;
                 case "tr":
-                    textComponent.text = _tr;
+                    _textComponent.text = _tr;
                     break;
                 default:
-                    textComponent.text = _en;
+                    _textComponent.text = _en;
                     break;
             }
         }

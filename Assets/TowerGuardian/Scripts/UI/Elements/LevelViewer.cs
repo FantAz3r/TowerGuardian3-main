@@ -9,9 +9,12 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class LevelViewer : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _levelText;
-        [SerializeField] private Slider _experienceFillImage;
-        [SerializeField] private TMP_Text _experienceText;
+        [SerializeField]
+        private TMP_Text _levelText;
+        [SerializeField]
+        private Slider _experienceFillImage;
+        [SerializeField]
+        private TMP_Text _experienceText;
 
         private PlayerExperience _playerExperience;
 

@@ -280,9 +280,9 @@ namespace YG.EditorScr.BuildModify
 
         private static string ConvertToRGBA(Color color)
         {
-            int red = (int)(color.r * 255f);
-            int green = (int)(color.g * 255f);
-            int blue = (int)(color.b * 255f);
+            int red = (int) (color.r * 255f);
+            int green = (int) (color.g * 255f);
+            int blue = (int) (color.b * 255f);
             float alpha = color.a;
 
             return $"rgba({red}, {green}, {blue}, {alpha.ToString().Replace(",", ".")})";

@@ -9,7 +9,8 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class ResourceViewer : MonoBehaviour
     {
-        [SerializeField] private List<ResourcePieceView> _resourceAmount;
+        [SerializeField]
+        private List<ResourcePieceView> _resourceAmount;
         private Inventory _inventory;
 
         private void Awake()

@@ -9,15 +9,22 @@ namespace TowerGuardian.Scripts.StaticData.Configs.AbilityConfigs
 
     public class AxeThrowingConfig : AbilityConfig
     {
-        [SerializeField] private float _baseCooldown = 10f;
-        [SerializeField] private float _flightDuration = 2f;
-        [SerializeField] private float _baseFlightDistance = 10f;
+        [SerializeField]
+        private float _baseCooldown = 10f;
+        [SerializeField]
+        private float _flightDuration = 2f;
+        [SerializeField]
+        private float _baseFlightDistance = 10f;
 
-        [SerializeField] private float _cooldownPerLevel = -1f;
-        [SerializeField] private float _flightDistancePerLevel = 0.5f;
+        [SerializeField]
+        private float _cooldownPerLevel = -1f;
+        [SerializeField]
+        private float _flightDistancePerLevel = 0.5f;
 
         public float Cooldown => GetCooldown(Level);
+
         public float FlightDistance => GetFlightDistance(Level);
+
         public float FlightDuration => _flightDuration;
 
         public float GetCooldown(int level)

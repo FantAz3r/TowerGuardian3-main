@@ -22,9 +22,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
         private ISceneContainer _sceneContainer;
         private ISpawnerService _spawnerService;
         private Vector3 _arenaCenter;
-        private List<Orbit> _orbits = new();
+        private List<Orbit> _orbits = new ();
         private float _spawnTimer;
-
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -48,7 +47,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             float sqrDistance = (_arenaCenter - Enemy.transform.position).sqrMagnitude;
-
 
             if (sqrDistance > Treshold * Treshold)
             {

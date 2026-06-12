@@ -5,7 +5,8 @@ namespace TowerGuardian.Scripts.UI.EnviromentUI
 {
     public class ResourceCollectorViewer : MonoBehaviour
     {
-        [SerializeField] private ResourceCollector _resourceCollector;
+        [SerializeField]
+        private ResourceCollector _resourceCollector;
         private RectTransform _circle;
 
         private void Awake()

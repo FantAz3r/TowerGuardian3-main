@@ -10,13 +10,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
 {
     public class RotateShurikens : AbilityInfrastructure.Ability
     {
-        [SerializeField] private RotatingShurikenConfig _config;
+        [SerializeField]
+        private RotatingShurikenConfig _config;
 
         private List<Shuriken> _shurikens = new List<Shuriken>();
         private int _activeCount;
         private int _maxCount = 6;
         private float _angle;
+
         public override AbilityType Type => AbilityType.RotatingShuriken;
+
         public override AbilityConfig Config => _config;
 
         private void Awake()
@@ -36,7 +39,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
             _activeCount = 0;
 
             foreach (var shuriken in _shurikens)
+            {
                 shuriken.gameObject.SetActive(false);
+            }
 
             _config.Upgraded -= Upgrade;
         }
@@ -49,7 +54,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
 
         private void Update()
         {
-            if (_activeCount == 0) return;
+            if (_activeCount == 0)
+            {
+                return;
+            }
 
             _angle += _config.RotationSpeed * Time.deltaTime;
             _angle %= 360f;
@@ -80,9 +88,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
             for (int i = 0; i < _maxCount; i++)
             {
                 if (i < _activeCount)
+                {
                     ActivateShuriken(i);
+                }
                 else
+                {
                     _shurikens[i].gameObject.SetActive(false);
+                }
             }
         }
 
@@ -96,7 +108,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability
         public override void Disable()
         {
             foreach (var item in _shurikens)
+            {
                 item.gameObject.SetActive(false);
+            }
 
             _activeCount = 0;
             _angle = 0f;

@@ -8,7 +8,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
     public class JumpState : State
     {
         private const float JumpAttackCooldown = 9;
-        private const float _rangeMultipier = 0.8f;
+        private const float RangeMultipier = 0.8f;
+
         private ISpawnerService _spawnerService;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -31,7 +32,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Entity.Enemies.States
             Enemy.Agent.SetMoveSpeed(Enemy.Config.MoveConfig.MoveSpeed);
             Enemy.AnimationAnimator.Grounded -= OnGrounded;
 
-            Collider[] hits = Physics.OverlapSphere(Enemy.transform.position, Enemy.Config.AttackRange * _rangeMultipier);
+            Collider[] hits = Physics.OverlapSphere(Enemy.transform.position, Enemy.Config.AttackRange * RangeMultipier);
 
             foreach (var hit in hits)
             {

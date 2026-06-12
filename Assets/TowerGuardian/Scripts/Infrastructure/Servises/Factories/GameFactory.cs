@@ -36,13 +36,21 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises.Factories
         }
 
         public EnemySpawner EnemySpawner { get; private set; }
+
         public BackgroundMusic BackGroundMusic { get; private set; }
+
         public CardSelector CardSelector { get; private set; }
+
         public LevelID CurrentLevel { get; private set; }
+
         public LevelConfig LevelConfig { get; private set; }
+
         public DayCycle Cycle { get; private set; }
+
         public Player Player { get; private set; }
+
         public ScoreCounter ScoreCounter { get; private set; }
+
         public QuestStateMachine QuestRunner { get; private set; }
 
         public ISceneContainer SceneContainer { get; private set; }
@@ -194,6 +202,11 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises.Factories
             {
                 EnemySpawner?.StartSpawn();
             }
+        }
+
+        public void ExitLevel()
+        {
+            Cycle?.StopDayCycle();
         }
     }
 }

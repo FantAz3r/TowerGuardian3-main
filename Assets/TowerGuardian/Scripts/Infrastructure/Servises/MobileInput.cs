@@ -9,6 +9,7 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         private Joystick _joystick;
 
         public event Action<Vector2> MovePerformed;
+
         public event Action<Vector2> RotateDirectionSeted;
 
         public void Init(Joystick joystick)
@@ -16,6 +17,34 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
             _joystick = joystick;
             _joystick.MovePerformed += OnMovePerformed;
             _joystick.MovePerformed += OnRotatePerformed;
+        }
+
+        public void DisableInput()
+        {
+            _joystick.MovePerformed -= OnMovePerformed;
+            _joystick.MovePerformed -= OnRotatePerformed;
+        }
+
+        public void EnableInput()
+        {
+            _joystick.MovePerformed += OnMovePerformed;
+            _joystick.MovePerformed += OnRotatePerformed;
+        }
+
+        public void Dispose()
+        {
+            if (_joystick == null)
+            {
+                return;
+            }
+
+            _joystick.MovePerformed -= OnMovePerformed;
+            _joystick.MovePerformed -= OnRotatePerformed;
+        }
+
+        public IInputService GetSelf()
+        {
+            return this;
         }
 
         private void OnMovePerformed(Vector2 direction)
@@ -26,28 +55,6 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         private void OnRotatePerformed(Vector2 direction)
         {
             RotateDirectionSeted?.Invoke(direction);
-        }
-
-        public void DisableInput()
-        {
-        }
-
-        public void EnableInput()
-        {
-        }
-
-        public void Dispose()
-        {
-            if (_joystick == null)
-                return;
-
-            _joystick.MovePerformed -= OnMovePerformed;
-            _joystick.MovePerformed -= OnRotatePerformed;
-        }
-
-        public IInputService GetSelf()
-        {
-            return this;
         }
     }
 }

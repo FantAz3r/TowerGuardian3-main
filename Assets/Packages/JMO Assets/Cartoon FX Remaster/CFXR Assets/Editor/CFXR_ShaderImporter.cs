@@ -238,9 +238,9 @@ namespace CartoonFX
                     try
                     {
                         object result = getVariantCountReflection.Invoke(null, new object[] { shader, false });
-                        variantCount = (ulong)result;
+                        variantCount = (ulong) result;
                         result = getVariantCountReflection.Invoke(null, new object[] { shader, true });
-                        variantCountUsed = (ulong)result;
+                        variantCountUsed = (ulong) result;
                     }
                     catch
                     {
@@ -255,7 +255,7 @@ namespace CartoonFX
             [CustomEditor(typeof(CFXR_ShaderImporter)), CanEditMultipleObjects]
             public class TCP2ShaderImporter_Editor : Editor
             {
-                private CFXR_ShaderImporter Importer => (CFXR_ShaderImporter)this.target;
+                private CFXR_ShaderImporter Importer => (CFXR_ShaderImporter) this.target;
 
                 // From: UnityEditor.ShaderInspectorPlatformsPopup
                 private static string FormatCount(ulong count)
@@ -309,7 +309,7 @@ namespace CartoonFX
                 {
                     bool multipleValues = serializedObject.isEditingMultipleObjects;
 
-                    CFXR_ShaderImporter.RenderPipeline detection = ((CFXR_ShaderImporter)target).renderPipelineDetection;
+                    CFXR_ShaderImporter.RenderPipeline detection = ((CFXR_ShaderImporter) target).renderPipelineDetection;
                     bool isUsingURP = Utils.IsUsingURP();
                     serializedObject.Update();
 

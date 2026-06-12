@@ -5,8 +5,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class Rotator : MonoBehaviour
     {
-        [SerializeField] private MoveConfig _config;
+        [SerializeField]
+        private MoveConfig _config;
         private bool _canRotate = true;
+
         public Vector2 CurrentDirection { get; private set; }
 
         public void SetDirection(Vector2 direction) => CurrentDirection = direction;
@@ -24,7 +26,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             Vector3 direction = new Vector3(CurrentDirection.x, 0f, CurrentDirection.y);
 
             if (direction.sqrMagnitude < 0.0001f)
+            {
                 return;
+            }
 
             direction.Normalize();
 

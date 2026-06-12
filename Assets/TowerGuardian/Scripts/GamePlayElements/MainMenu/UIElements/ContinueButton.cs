@@ -9,7 +9,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu.UIElements
 {
     public class ContinueButton : MonoBehaviour
     {
-        [SerializeField] private LevelID _levelToLoad;
+        [SerializeField]
+        private LevelID _levelToLoad;
         private Button _button;
         private IStateSwitchService _switchService;
 
@@ -20,7 +21,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu.UIElements
             LoadLevel();
 
             if (YG2.isFirstGameSession)
+            {
                 gameObject.SetActive(false);
+            }
         }
 
         private void OnEnable()
@@ -41,13 +44,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.MainMenu.UIElements
 
         private void LoadLevel()
         {
-            if (YG2.saves.CurrentLevel == (int) LevelID.None || YG2.saves.CurrentLevel == (int) LevelID.MainMenu)
+            if (YG2.saves.CurrentLevel == (int)LevelID.None || YG2.saves.CurrentLevel == (int)LevelID.MainMenu)
             {
                 _levelToLoad = LevelID.Tower;
                 return;
             }
 
-            _levelToLoad = (LevelID) YG2.saves.CurrentLevel;
+            _levelToLoad = (LevelID)YG2.saves.CurrentLevel;
         }
     }
 }

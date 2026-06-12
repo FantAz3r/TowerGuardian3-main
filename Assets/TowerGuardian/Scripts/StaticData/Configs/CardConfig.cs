@@ -13,13 +13,24 @@ namespace TowerGuardian.Scripts.StaticData.Configs
     {
         public event Action<ICardConfig> Upgraded;
 
-        [field: SerializeField][field: Range(0f, 1f)] public float ChanceToView { get; private set; }
-        [field: SerializeField] public int Level { get; private set; }
-        [field: SerializeField] public bool HasPlayer { get; private set; }
-        [field: SerializeField] public bool IsBought { get; private set; }
-        [field: SerializeField] public int MaxCardLevel { get; private set; } = 100;
+        [field: SerializeField]
+        [field: Range(0f, 1f)]
+        public float ChanceToView { get; private set; }
+
+        [field: SerializeField]
+        public int Level { get; private set; }
+
+        [field: SerializeField]
+        public bool HasPlayer { get; private set; }
+
+        [field: SerializeField]
+        public bool IsBought { get; private set; }
+
+        [field: SerializeField]
+        public int MaxCardLevel { get; private set; } = 100;
 
         public abstract CardType GetCardType();
+
         public abstract List<CardStats> GetStats();
 
         public CardSaveData CreateSaveData(bool isBought = false) => new CardSaveData(Level, ID, isBought, HasPlayer);
@@ -34,7 +45,9 @@ namespace TowerGuardian.Scripts.StaticData.Configs
         public void Upgrade()
         {
             if (Level >= MaxCardLevel)
+            {
                 return;
+            }
 
             Level++;
             Upgraded?.Invoke(this);
@@ -43,7 +56,9 @@ namespace TowerGuardian.Scripts.StaticData.Configs
         public void Regrade()
         {
             if (Level <= 0)
+            {
                 return;
+            }
 
             Level--;
             Upgraded?.Invoke(this);
@@ -51,7 +66,7 @@ namespace TowerGuardian.Scripts.StaticData.Configs
 
         public override List<CostInfo> GetCosts()
         {
-            List<CostInfo> increasedCosts = new();
+            List<CostInfo> increasedCosts = new ();
             float exponent = 1.5f;
 
             foreach (var info in Costs)

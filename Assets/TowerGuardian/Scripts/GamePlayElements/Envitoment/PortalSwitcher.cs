@@ -9,7 +9,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
 {
     public class PortalSwitcher
     {
-        private List<Portal> _portals = new();
+        private List<Portal> _portals = new ();
 
         public void Init(List<Portal> portals)
         {
@@ -41,7 +41,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
             firstPortal.gameObject.SetActive(true);
 
             if (YG2.saves.LevelsProgress == null || YG2.saves.LevelsProgress.Count == 0)
+            {
                 return;
+            }
 
             for (int i = 1; i <= YG2.saves.LevelsProgress.Count; i++)
             {
@@ -49,7 +51,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment
 
                 if (prevLevelData.IsComplite)
                 {
-                    Portal portal = _portals.Find(portal => portal.NextLevel == (LevelID) YG2.saves.LevelsProgress[i - 1].Level + 1);
+                    Portal portal = _portals.Find(portal => portal.NextLevel == (LevelID)YG2.saves.LevelsProgress[i - 1].Level + 1);
 
                     if (portal != null)
                     {

@@ -13,15 +13,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class PlayerExperience : MonoBehaviour
     {
-        private const float _slowDuration = 0.1f;
+        private const float SlowDuration = 0.1f;
 
-        [SerializeField] private PlayerConfig _config;
+        [SerializeField]
+        private PlayerConfig _config;
 
         private EnemyDetector _enemyDetector;
         private int _currentLevel = 1;
         private int _upgradePoints;
         private float _currentExp;
-        private WaitForSecondsRealtime _slowDurationForCards = new WaitForSecondsRealtime(_slowDuration);
+        private WaitForSecondsRealtime _slowDurationForCards = new WaitForSecondsRealtime(SlowDuration);
         private WaitForSeconds _animationDelay = new WaitForSeconds(0.1f);
 
         private ISpawnerService _spawnerService;
@@ -32,13 +33,19 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private bool _isUpdating;
 
         public event Action OnLevelUp;
+
         public event Action OnUpgradePointAdded;
+
         public event Action OnUpgradePointRemoved;
+
         public event Action<float, float> OnExperienceAdded;
 
         public float CurrentExp => _currentExp;
+
         public int CurrentLevel => _currentLevel;
+
         public int UpgradePoints => _upgradePoints;
+
         public float ExpToNextLevel => _config.BaseLvlCost * Mathf.Pow(_config.LevelCostMultiplier, _currentLevel - 1);
 
         private void Awake()
@@ -50,7 +57,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             _enemyDetector = GetComponentInChildren<EnemyDetector>();
 
             if (_enemyDetector != null)
+            {
                 _enemyDetector.OnGetExperience += AddEXP;
+            }
 
             LoadLevel();
         }
@@ -58,7 +67,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void OnDestroy()
         {
             if (_enemyDetector != null)
+            {
                 _enemyDetector.OnGetExperience -= AddEXP;
+            }
         }
 
         public void AddEXP(float amount)
@@ -66,7 +77,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             _expQueue.Enqueue(amount);
 
             if (!_isUpdating)
+            {
                 StartCoroutine(ProcessExpQueue());
+            }
         }
 
         public void AddUpgradePoints(int pointsCount)
@@ -103,7 +116,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
                 if (!ServiceLocator.Get<IGameConditionService>().IsEndLevelWindowOpen)
                 {
                     AddUpgradePoints(1);
-                    _timeService.SmoothEditTimeScalse(0, _slowDuration);
+                    _timeService.SmoothEditTimeScalse(0, SlowDuration);
                     yield return _slowDurationForCards;
                     _windowService.Open(WindowType.CardMenu);
                 }
@@ -165,7 +178,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void LoadLevel()
         {
             if (YG2.saves == null)
+            {
                 return;
+            }
 
             _upgradePoints = YG2.saves.UpgradePoints;
             _currentLevel = YG2.saves.Level;

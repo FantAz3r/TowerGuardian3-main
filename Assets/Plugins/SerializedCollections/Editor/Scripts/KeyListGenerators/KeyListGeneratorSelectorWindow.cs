@@ -92,7 +92,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
 
         private void InitializeModificationToggle(RadioButton obj)
         {
-            if ((ModificationType)obj.userData == _modificationType)
+            if ((ModificationType) obj.userData == _modificationType)
                 obj.value = true;
             obj.RegisterValueChangedCallback(OnModificationToggleClicked);
         }
@@ -102,7 +102,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             if (!evt.newValue)
                 return;
 
-            var modificationType = (ModificationType)((VisualElement)evt.target).userData;
+            var modificationType = (ModificationType) ((VisualElement) evt.target).userData;
             _modificationType = modificationType;
         }
 
@@ -138,7 +138,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             if (!evt.newValue)
                 return;
 
-            SetGeneratorIndex((int)(evt.target as VisualElement).userData);
+            SetGeneratorIndex((int) (evt.target as VisualElement).userData);
         }
 
         private void HandleUndoCallback()
@@ -172,7 +172,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         {
             if (!_keysGenerators.ContainsKey(type))
             {
-                var so = (KeyListGenerator)CreateInstance(type);
+                var so = (KeyListGenerator) CreateInstance(type);
                 so.hideFlags = HideFlags.DontSave;
                 _keysGenerators.Add(type, so);
             }

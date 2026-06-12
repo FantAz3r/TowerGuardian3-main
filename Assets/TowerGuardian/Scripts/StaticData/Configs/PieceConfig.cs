@@ -9,7 +9,8 @@ namespace TowerGuardian.Scripts.StaticData.Configs
 
     public class PieceConfig : ShopConfig
     {
-        [SerializeField] private ResourceType _type;
+        [SerializeField]
+        private ResourceType _type;
 
         public ResourceType Type => _type;
 

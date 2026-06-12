@@ -13,27 +13,36 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class PlayerCardConfigContainer : MonoBehaviour
     {
-        [SerializeField] private CardData _cardData;
-        [SerializeField] private List<CardConfig> _startCards;
-        [SerializeField] private Player _player;
+        [SerializeField]
+        private CardData _cardData;
+        [SerializeField]
+        private List<CardConfig> _startCards;
+        [SerializeField]
+        private Player _player;
 
         private Dictionary<CardType, ICardFactory> _factories;
-        private List<ICardConfig> _selectedConfigs = new();
+        private List<ICardConfig> _selectedConfigs = new ();
 
         public event Action<ICardConfig> CardAdded;
+
         public event Action<ICardConfig> CardRemoved;
+
         public event Action Upgraded;
 
-        [field: SerializeField] public int MaxWeaponCards { get; private set; } = 4;
-        [field: SerializeField] public int MaxAbilityCards { get; private set; } = 4;
+        [field: SerializeField]
+        public int MaxWeaponCards { get; private set; } = 4;
+
+        [field: SerializeField]
+        public int MaxAbilityCards { get; private set; } = 4;
+
         public IReadOnlyList<ICardConfig> SelectedCardConfigs => _selectedConfigs;
 
         private void Awake()
         {
             _factories = new Dictionary<CardType, ICardFactory>
             {
-                {CardType.Weapon, new WeaponFactory (_player) },
-                {CardType.Ability, new AbilityFactory (_player) },
+                { CardType.Weapon, new WeaponFactory(_player) },
+                { CardType.Ability, new AbilityFactory(_player) },
             };
         }
 
@@ -92,7 +101,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void UpdateCardSave(ICardConfig card)
         {
             if (YG2.saves.AllCards == null)
-                YG2.saves.AllCards = new();
+            {
+                YG2.saves.AllCards = new ();
+            }
 
             YG2.saves.AllCards.RemoveAll(savedCard => savedCard.ID == card.ID);
             YG2.saves.AllCards.Add(new CardSaveData(card.Level, card.ID, card.IsBought, card.HasPlayer));
@@ -102,7 +113,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void LoadPlayerCards()
         {
             if (YG2.saves.AllCards == null)
+            {
                 return;
+            }
 
             foreach (var card in _cardData.GetConfigs())
             {
@@ -119,7 +132,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private void LoadCard(ICardConfig card)
         {
             if (YG2.saves.AllCards == null)
+            {
                 return;
+            }
 
             CardSaveData cardData = YG2.saves.AllCards.Find(cardSave => cardSave.ID == card.ID);
 
@@ -139,10 +154,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
             foreach (var item in _selectedConfigs)
             {
                 if (item is WeaponConfig && item.HasPlayer)
+                {
                     weaponCount++;
+                }
 
                 if (item is AbilityConfig && item.HasPlayer)
+                {
                     abilityCount++;
+                }
             }
 
             _selectedConfigs.Add(card);

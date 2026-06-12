@@ -10,7 +10,7 @@ namespace TowerGuardian.Scripts.Quests
 {
     public class QuestStateMachine : MonoBehaviour
     {
-        private readonly List<IQuest> _quests = new();
+        private readonly List<IQuest> _quests = new ();
         private readonly int _startQuestIndex = -1;
         private QuestBuilder _builder;
         private int _currentQuestIndex = -1;
@@ -19,7 +19,9 @@ namespace TowerGuardian.Scripts.Quests
         private bool _isAllQuestsComplete;
 
         public event Action AllQuestsCompleted;
+
         public event Action QuestCompleted;
+
         public event Action<IQuest> QuestStarted;
 
         public void Init(QuestBuilder builder, LevelID level, IReadOnlyList<QuestType> questsForThisLevel)
@@ -102,19 +104,21 @@ namespace TowerGuardian.Scripts.Quests
             YG2.saves.QuestProgress ??= new List<QuestSaveData>();
 
             if (_level != LevelID.Tower)
+            {
                 return;
+            }
 
-            int index = YG2.saves.QuestProgress.FindIndex(quest => quest.Level == (int) _level);
+            int index = YG2.saves.QuestProgress.FindIndex(quest => quest.Level == (int)_level);
 
             QuestSaveData saveData;
 
             if (_isAllQuestsComplete == false)
             {
-                saveData = new QuestSaveData((int) _level, 0, 0, _currentQuestIndex);
+                saveData = new QuestSaveData((int)_level, 0, 0, _currentQuestIndex);
             }
             else
             {
-                saveData = new QuestSaveData((int) _level, 0, 0, _startQuestIndex);
+                saveData = new QuestSaveData((int)_level, 0, 0, _startQuestIndex);
             }
 
             if (index == -1)
@@ -137,9 +141,9 @@ namespace TowerGuardian.Scripts.Quests
                 return;
             }
 
-            var saveData = YG2.saves.QuestProgress.Find(quest => quest.Level == (int) _level);
+            var saveData = YG2.saves.QuestProgress.Find(quest => quest.Level == (int)_level);
 
-            if (saveData.Level == (int) LevelID.None)
+            if (saveData.Level == (int)LevelID.None)
             {
                 _currentQuestIndex = -1;
             }

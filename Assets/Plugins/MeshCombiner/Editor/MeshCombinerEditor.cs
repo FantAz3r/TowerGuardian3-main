@@ -8,12 +8,12 @@ public class MeshCombinerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        MeshCombiner meshCombiner = (MeshCombiner)target;
+        MeshCombiner meshCombiner = (MeshCombiner) target;
         Mesh mesh = meshCombiner.GetComponent<MeshFilter>().sharedMesh;
 
         #region Script:
         GUI.enabled = false;
-        EditorGUILayout.ObjectField("Script", MonoScript.FromMonoBehaviour((MeshCombiner)target), typeof(MeshCombiner), false);
+        EditorGUILayout.ObjectField("Script", MonoScript.FromMonoBehaviour((MeshCombiner) target), typeof(MeshCombiner), false);
         GUI.enabled = true;
         #endregion Script.
 

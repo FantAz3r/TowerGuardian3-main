@@ -4,9 +4,12 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class GroundDetector : MonoBehaviour
     {
-        [SerializeField] private float _gravityMultiplier = 3f;
-        [SerializeField] private float _rayDistance = 1.1f;
-        [SerializeField] private LayerMask _groundLayer;
+        [SerializeField]
+        private float _gravityMultiplier = 3f;
+        [SerializeField]
+        private float _rayDistance = 1.1f;
+        [SerializeField]
+        private LayerMask _groundLayer;
 
         private Rigidbody _playerRigidbody;
 

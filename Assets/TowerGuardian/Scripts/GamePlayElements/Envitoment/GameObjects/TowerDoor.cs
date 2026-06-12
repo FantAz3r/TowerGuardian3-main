@@ -7,8 +7,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 {
     public class TowerDoor : MonoBehaviour
     {
-        [SerializeField] private float openHeight = 3f;
-        [SerializeField] private float duration = 1f;
+        [SerializeField]
+        private float _openHeight = 3f;
+        [SerializeField]
+        private float _duration = 1f;
 
         private bool _isOpen;
         private Vector3 _closedPosition;
@@ -23,7 +25,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
         private void OnTriggerEnter(Collider other)
         {
             if (_isOpen)
+            {
                 return;
+            }
 
             if (other.TryGetComponent<Player>(out _))
             {
@@ -45,12 +49,12 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 
         private void OpenDoor()
         {
-            transform.DOMoveY(_closedPosition.y - openHeight, duration).SetEase(Ease.OutQuad);
+            transform.DOMoveY(_closedPosition.y - _openHeight, _duration).SetEase(Ease.OutQuad);
         }
 
         private void CloseDoor()
         {
-            transform.DOMoveY(_closedPosition.y, duration).SetEase(Ease.InQuad);
+            transform.DOMoveY(_closedPosition.y, _duration).SetEase(Ease.InQuad);
         }
     }
 }

@@ -7,16 +7,21 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 {
     public class EnemyBuilding : MonoBehaviour
     {
-        [SerializeField] private float _shakeDuration = 0.3f;
-        [SerializeField] private float _shakeStrength = 0.2f;
-        [SerializeField] private int _vibrato = 10;
-        [SerializeField] private float _randomness = 90f;
+        [SerializeField]
+        private float _shakeDuration = 0.3f;
+        [SerializeField]
+        private float _shakeStrength = 0.2f;
+        [SerializeField]
+        private int _vibrato = 10;
+        [SerializeField]
+        private float _randomness = 90f;
 
         private Tween _shakeTween;
 
         public event Action Destroyed;
 
-        [field: SerializeField] public Health Health { get; private set; }
+        [field: SerializeField]
+        public Health Health { get; private set; }
 
         private void Start()
         {

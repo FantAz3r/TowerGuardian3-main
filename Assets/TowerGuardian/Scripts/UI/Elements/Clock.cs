@@ -10,9 +10,12 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class Clock : MonoBehaviour
     {
-        [SerializeField] private RectTransform _clockImage;
-        [SerializeField] private TMP_Text _remainingTime;
-        [SerializeField] private Image _infiniteImage;
+        [SerializeField]
+        private RectTransform _clockImage;
+        [SerializeField]
+        private TMP_Text _remainingTime;
+        [SerializeField]
+        private Image _infiniteImage;
 
         private DayCycle _dayCycle;
         private DayPhase _currentPhase;
@@ -37,15 +40,21 @@ namespace TowerGuardian.Scripts.UI.Elements
             _currentPhase = phase;
 
             if (phase == DayPhase.Day)
+            {
                 _currentPhaseDuration = _dayCycle.DayDuration + _dayCycle.TransitionDuration;
+            }
             else
+            {
                 _currentPhaseDuration = _dayCycle.NightDuration + _dayCycle.TransitionDuration;
+            }
         }
 
         private void OnTimePassedFromTransition(float timePassed)
         {
             if (_currentPhaseDuration <= 0)
+            {
                 return;
+            }
 
             float oneMinute = 60f;
             float timeRemaining = _currentPhaseDuration - timePassed;

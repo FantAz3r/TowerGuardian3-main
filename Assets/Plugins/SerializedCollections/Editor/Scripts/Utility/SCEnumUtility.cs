@@ -21,8 +21,8 @@ namespace AYellowpaper.SerializedCollections.Editor
                 var methodInfo = classType.GetMethod("GetCachedEnumData", BindingFlags.Static | BindingFlags.NonPublic);
                 var parameters = new object[] { enumType, true };
                 var result = methodInfo.Invoke(null, parameters);
-                var flagValues = (int[])result.GetType().GetField("flagValues").GetValue(result);
-                var names = (string[])result.GetType().GetField("names").GetValue(result);
+                var flagValues = (int[]) result.GetType().GetField("flagValues").GetValue(result);
+                var names = (string[]) result.GetType().GetField("names").GetValue(result);
                 var cache = new EnumCache(enumType, flagValues, names);
                 _cache.Add(enumType, cache);
                 return cache;

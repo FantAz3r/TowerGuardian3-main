@@ -8,8 +8,10 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class OpenWindowButton : MonoBehaviour
     {
-        [SerializeField] private WindowBase _closeWindow;
-        [SerializeField] private WindowType _openWindow;
+        [SerializeField]
+        private WindowBase _closeWindow;
+        [SerializeField]
+        private WindowType _openWindow;
 
         private IWindowService _windowService;
         private Button _button;

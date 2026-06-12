@@ -8,7 +8,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
 {
     public class ThrownAxe : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField]
+        private ParticleSystem _particleSystem;
         private Vector3 _positionInHand = new Vector3(0.123f, 0.054f, 0.155f);
         private Vector3 _rotationInHand = new Vector3(124, 132, -8.35f);
 
@@ -21,6 +22,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
         private Vector3 _start;
         private Vector3 _end;
         private float _returnSpeed = 10f;
+
         public event Action Returned;
 
         private void Awake()
@@ -100,7 +102,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
             if (other.TryGetComponent(out Health health))
             {
                 if (health == _playerHealth)
+                {
                     return;
+                }
 
                 health.TakeDamage(_damage);
             }

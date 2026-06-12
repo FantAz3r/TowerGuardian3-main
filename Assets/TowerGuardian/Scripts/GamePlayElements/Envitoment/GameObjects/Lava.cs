@@ -6,11 +6,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 {
     public class Lava : MonoBehaviour
     {
-        [SerializeField] private int damagePerTick = 2;
-        [SerializeField] private float damageInterval = 0.5f;
+        [SerializeField]
+        private int _damagePerTick = 2;
+        [SerializeField]
+        private float _damageInterval = 0.5f;
         private float _lastDamageTime;
 
-        private List<Health> _entities = new();
+        private List<Health> _entities = new ();
 
         private void OnTriggerEnter(Collider other)
         {
@@ -34,15 +36,18 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.GameObjects
 
         private void Update()
         {
-            if (_entities.Count == 0) return;
+            if (_entities.Count == 0)
+            {
+                return;
+            }
 
-            if (Time.time >= _lastDamageTime + damageInterval)
+            if (Time.time >= _lastDamageTime + _damageInterval)
             {
                 _lastDamageTime = Time.time;
 
                 foreach (Health health in _entities)
                 {
-                    health.TakeDamage(damagePerTick);
+                    health.TakeDamage(_damagePerTick);
                 }
             }
         }

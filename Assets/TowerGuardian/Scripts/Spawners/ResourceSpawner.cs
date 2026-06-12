@@ -4,15 +4,22 @@ namespace TowerGuardian.Scripts.Spawners
 {
     public class ResourceSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject[] _resourcePrefabs;
-        [SerializeField] private int _itemAmount = 50;
+        [SerializeField]
+        private GameObject[] _resourcePrefabs;
+        [SerializeField]
+        private int _itemAmount = 50;
 
-        [SerializeField] private float _spawnZoneWidth = 20f;
-        [SerializeField] private float _spawnZoneLength = 20f;
-        [SerializeField] private float _minDistanceBetweenResources = 1.5f;
+        [SerializeField]
+        private float _spawnZoneWidth = 20f;
+        [SerializeField]
+        private float _spawnZoneLength = 20f;
+        [SerializeField]
+        private float _minDistanceBetweenResources = 1.5f;
 
-        [SerializeField] private LayerMask _groundLayer;
-        [SerializeField] private LayerMask _resourceLayer;
+        [SerializeField]
+        private LayerMask _groundLayer;
+        [SerializeField]
+        private LayerMask _resourceLayer;
 
         private void Start()
         {

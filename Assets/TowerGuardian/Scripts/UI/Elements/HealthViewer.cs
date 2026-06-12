@@ -9,8 +9,10 @@ namespace TowerGuardian.Scripts.UI.Elements
 
     public class HealthViewer : MonoBehaviour
     {
-        [SerializeField] private Slider _healthSlider;
-        [SerializeField] private float _smoothSpeed = 0.5f;
+        [SerializeField]
+        private Slider _healthSlider;
+        [SerializeField]
+        private float _smoothSpeed = 0.5f;
 
         private Health _health;
         private Coroutine _smoothChangeCoroutine;
@@ -42,10 +44,14 @@ namespace TowerGuardian.Scripts.UI.Elements
         private void OnHealthChanged(float currentHealth, float maxHealth)
         {
             if (!_iaActive)
+            {
                 _healthSlider.gameObject.SetActive(true);
+            }
 
             if (_smoothChangeCoroutine != null)
+            {
                 StopCoroutine(_smoothChangeCoroutine);
+            }
 
             _smoothChangeCoroutine = StartCoroutine(SmoothHealthChange(currentHealth));
         }

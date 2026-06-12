@@ -18,7 +18,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         public override void TakeDamage(float damage)
         {
             if (damage < 0)
+            {
                 return;
+            }
 
             base.TakeDamage(damage);
             _windowService.Open(WindowType.DamageScreen);

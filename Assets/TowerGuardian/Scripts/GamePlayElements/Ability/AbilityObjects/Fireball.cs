@@ -10,8 +10,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
 {
     public class Fireball : MonoBehaviour
     {
-        [SerializeField] private LayerMask _collisionLayers;
-        [SerializeField] private LayerMask _damageableLayers;
+        [SerializeField]
+        private LayerMask _collisionLayers;
+        [SerializeField]
+        private LayerMask _damageableLayers;
 
         private FireballConfig _config;
         private Vector3 _endPoint;
@@ -24,6 +26,16 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
             _collider = GetComponent<Collider>();
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (((1 << collision.gameObject.layer) & _collisionLayers) == 0)
+            {
+                return;
+            }
+
+            Explode();
+        }
+
         public void Init(Vector3 endPoint, FireballConfig config)
         {
             _config = config;
@@ -31,18 +43,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
             Fly();
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (((1 << collision.gameObject.layer) & _collisionLayers) == 0) return;
-
-            Explode();
-        }
-
         private void Fly()
         {
             transform.parent = null;
 
-            if (_collider != null) _collider.enabled = true;
+            if (_collider != null)
+            {
+                _collider.enabled = true;
+            }
 
             float distance = Vector3.Distance(transform.position, _endPoint);
             float duration = distance / _config.FlySpeed;
@@ -59,7 +67,11 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityObjects
         {
             _spawnerService.SendEffectReqest(EffectType.Expload, transform.position);
             ApplyDamage();
-            if (_collider != null) _collider.enabled = false;
+            if (_collider != null)
+            {
+                _collider.enabled = false;
+            }
+
             gameObject.SetActive(false);
         }
 

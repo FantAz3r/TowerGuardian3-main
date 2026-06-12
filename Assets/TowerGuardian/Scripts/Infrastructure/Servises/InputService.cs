@@ -30,11 +30,15 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         }
 
         public event Action<Vector2> MovePerformed;
+
         public event Action<Vector2> RotateDirectionSeted;
 
         public event Action OnAbillity1Used;
+
         public event Action OnAbillity2Used;
+
         public event Action OnAbillity3Used;
+
         public event Action OnAbillity4Used;
 
         public Vector2 CursorOrigin { get; set; }
@@ -90,9 +94,13 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
             }
 
             if (direction.sqrMagnitude > 0f)
+            {
                 direction.Normalize();
+            }
             else
+            {
                 direction = Vector2.zero;
+            }
 
             RotateDirectionSeted?.Invoke(direction);
         }
@@ -115,7 +123,9 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         public void Dispose()
         {
             if (_inputActions == null)
+            {
                 return;
+            }
 
             _inputActions.Player.Move.performed -= OnMovePerformed;
             _inputActions.Player.Move.canceled -= OnMoveCanceled;

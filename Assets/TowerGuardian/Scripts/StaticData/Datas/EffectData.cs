@@ -16,7 +16,9 @@ namespace TowerGuardian.Scripts.StaticData.Datas
             foreach (var info in EffectInfos)
             {
                 if (info.EffectType == type)
+                {
                     return info;
+                }
             }
 
             return default;

@@ -11,8 +11,10 @@ namespace TowerGuardian.Scripts.UI.Elements
 {
     public class ShowCardsButton : WindowBase
     {
-        [SerializeField] private TMP_Text _text;
-        [SerializeField] private Button _showButton;
+        [SerializeField]
+        private TMP_Text _text;
+        [SerializeField]
+        private Button _showButton;
 
         private Player _player;
         private IWindowService _windowService;

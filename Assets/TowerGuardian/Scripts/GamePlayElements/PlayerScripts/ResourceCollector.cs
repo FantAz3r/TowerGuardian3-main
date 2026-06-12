@@ -12,9 +12,12 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
 {
     public class ResourceCollector : MonoBehaviour, IBuffble
     {
-        [SerializeField] private float _resourceFlySpeed = 10f;
-        [SerializeField] private float _flyDelay = 1f;
-        [SerializeField] private float _treshold = 0.5f;
+        [SerializeField]
+        private float _resourceFlySpeed = 10f;
+        [SerializeField]
+        private float _flyDelay = 1f;
+        [SerializeField]
+        private float _treshold = 0.5f;
 
         private StatsCalculator _statsCalculator;
         private HashSet<ResourcePiece> _activeResources = new HashSet<ResourcePiece>();
@@ -24,6 +27,7 @@ namespace TowerGuardian.Scripts.GamePlayElements.PlayerScripts
         private ISpawnerService _spawnerService;
 
         public event Action<float> RangeSeted;
+
         public event Action<ResourcePiece> Collected;
 
         private void Awake()

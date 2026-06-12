@@ -10,11 +10,17 @@ namespace TowerGuardian.Scripts.StaticData.Configs
 
     public class BuffConfig : CardConfig
     {
-        [SerializeField] private float _baseIncreaseValue = 0.2f;
-        [SerializeField] private float _upgradeValuePerLevel = 0.1f;
+        [SerializeField]
+        private float _baseIncreaseValue = 0.2f;
+        [SerializeField]
+        private float _upgradeValuePerLevel = 0.1f;
 
-        [field: SerializeField] public BuffType BuffType { get; private set; }
-        [field: SerializeField] public BuffEffectType EffectType { get; private set; }
+        [field: SerializeField]
+        public BuffType BuffType { get; private set; }
+
+        [field: SerializeField]
+        public BuffEffectType EffectType { get; private set; }
+
         public float IncreaseValue => GetIncreaseValue(Level);
 
         public float GetIncreaseValue(int level)

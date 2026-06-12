@@ -9,11 +9,14 @@ namespace TowerGuardian.Scripts.GamePlayElements.Sounds
 {
     public class BackgroundMusic : MonoBehaviour
     {
-        [SerializeField] private List<AudioClip> _musics;
-        [SerializeField] private List<AudioClip> _battleSounds;
-        [SerializeField] private float _delayAfterTrack = 1f;
+        [SerializeField]
+        private List<AudioClip> _musics;
+        [SerializeField]
+        private List<AudioClip> _battleSounds;
+        [SerializeField]
+        private float _delayAfterTrack = 1f;
 
-        private List<AudioClip> _currentSounds = new();
+        private List<AudioClip> _currentSounds = new ();
         private ISpawnerService _spawnerService;
         private ICoroutineRunner _coroutineRunner;
         private Coroutine _audioRoutine;
@@ -27,7 +30,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Sounds
 
         private void Start()
         {
-            if (_musics == null || _musics.Count == 0) return;
+            if (_musics == null || _musics.Count == 0)
+            {
+                return;
+            }
 
             _currentSounds = _musics;
             StartNextTrack(ref _previousMusicIndex);

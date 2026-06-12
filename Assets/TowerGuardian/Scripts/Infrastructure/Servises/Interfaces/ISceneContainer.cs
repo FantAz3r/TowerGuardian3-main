@@ -9,8 +9,11 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises.Interfaces
     public interface ISceneContainer
     {
         List<Portal> Portals { get; }
+
         List<SpawnerActivator> SpawnPoints { get; }
+
         List<PlayerSpawnPoint> PlayerSpawnPoints { get; }
+
         List<GameObject> QuestObjects { get; }
     }
 }

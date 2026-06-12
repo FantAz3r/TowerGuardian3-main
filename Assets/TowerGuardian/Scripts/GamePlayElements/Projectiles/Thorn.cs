@@ -8,8 +8,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Projectiles
 {
     public class Thorn : Projectile
     {
-        [SerializeField] private float _appearanceDuration = 1.0f;
-        [SerializeField] private AudioClip _clip;
+        [SerializeField]
+        private float _appearanceDuration = 1.0f;
+        [SerializeField]
+        private AudioClip _clip;
 
         private ISpawnerService _spawnerService;
         private float _damage = 10f;

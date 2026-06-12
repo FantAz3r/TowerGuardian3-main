@@ -24,6 +24,6 @@ namespace TowerGuardian.Scripts.Enums
         Previous,
         Inventory,
         MenuLeaderboard,
-        BossHealth
+        BossHealth,
     }
 }

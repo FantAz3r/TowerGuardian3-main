@@ -12,6 +12,7 @@ namespace TowerGuardian.Scripts.Quests
         {
             _inventory = inventory;
         }
+
         public override QuestType GetQuestType() => QuestType.Collect;
 
         public override void Run()

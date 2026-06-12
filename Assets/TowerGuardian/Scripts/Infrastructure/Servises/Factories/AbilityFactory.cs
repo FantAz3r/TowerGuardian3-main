@@ -12,6 +12,7 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises.Factories
     public class AbilityFactory : ICardFactory
     {
         private Player _player;
+
         public AbilityFactory(Player player) => _player = player;
 
         public CardType Type => CardType.Ability;

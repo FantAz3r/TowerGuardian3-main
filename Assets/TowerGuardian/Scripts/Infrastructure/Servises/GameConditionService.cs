@@ -12,6 +12,7 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
         public GameConditionService(IWindowService windowService) => _windowService = windowService;
 
         public bool IsLevelEnded { get; private set; }
+
         public bool IsEndLevelWindowOpen { get; private set; }
 
         public void OnLouse(GameObject louseReason = null)

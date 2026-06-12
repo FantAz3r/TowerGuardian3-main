@@ -10,7 +10,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
 {
     public class JumpingPickaxe : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField]
+        private ParticleSystem _particleSystem;
         private Vector3 _positionInHand = new Vector3(0.123f, 0.054f, 0.155f);
         private Vector3 _rotationInHand = new Vector3(0, 38, -100);
 
@@ -128,13 +129,17 @@ namespace TowerGuardian.Scripts.GamePlayElements.Weapons
             foreach (var item in healthObjects)
             {
                 if (item.GetHealthType() == EntityType.Enemy)
+                {
                     return item;
+                }
             }
 
             foreach (var item in healthObjects)
             {
                 if (item.GetHealthType() == EntityType.Stone)
+                {
                     return item;
+                }
             }
 
             return null;

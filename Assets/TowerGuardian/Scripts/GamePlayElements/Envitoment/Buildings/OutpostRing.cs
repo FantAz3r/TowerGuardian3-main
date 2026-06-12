@@ -6,7 +6,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Envitoment.Buildings
     [RequireComponent(typeof(Outpost))]
     public class OutpostRing : MonoBehaviour
     {
-        [SerializeField] private Image _ringImage;
+        [SerializeField]
+        private Image _ringImage;
         private Outpost _outpost;
 
         private void Awake()

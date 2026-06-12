@@ -10,10 +10,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Items
         where TItem : class, IItem<TType, TConfig>
         where TConfig : class
     {
-        public event Action<TItem> Enabled, Removed;
+        public event Action<TItem> Enabled;
+
+        public event Action<TItem> Removed;
 
         public Player Player { get; private set; }
-        public List<TItem> Items { get; private set; } = new();
+
+        public List<TItem> Items { get; private set; } = new ();
 
         protected virtual void Awake()
         {
@@ -36,6 +39,8 @@ namespace TowerGuardian.Scripts.GamePlayElements.Items
         {
             Items.Add(item);
         }
+
+        protected abstract TType GetTypeFromConfig(TConfig config);
 
         private void OnActivate(ICardConfig card)
         {
@@ -66,7 +71,5 @@ namespace TowerGuardian.Scripts.GamePlayElements.Items
                 }
             }
         }
-
-        protected abstract TType GetTypeFromConfig(TConfig config);
     }
 }

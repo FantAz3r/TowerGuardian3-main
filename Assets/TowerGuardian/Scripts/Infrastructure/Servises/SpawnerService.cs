@@ -17,7 +17,9 @@ namespace TowerGuardian.Scripts.Infrastructure.Servises
             SpawnerType type = spawner.GetSpawnerType();
 
             if (!_spawners.ContainsKey(type))
+            {
                 _spawners[type] = spawner;
+            }
         }
 
         public void SendItemReqest(HealthConfig config, Vector3 position, int count = 1)

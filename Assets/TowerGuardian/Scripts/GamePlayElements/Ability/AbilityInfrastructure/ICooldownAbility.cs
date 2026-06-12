@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityInfrastructure
 {
@@ -7,9 +6,6 @@ namespace TowerGuardian.Scripts.GamePlayElements.Ability.AbilityInfrastructure
     {
         event Action<float, float> Cooldowning;
 
-        bool IsCooldowning { get; }
         float Cooldown { get; }
-
-        IEnumerator CooldownRoutine();
     }
 }

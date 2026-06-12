@@ -1,7 +1,7 @@
 ﻿//#define GET_AXIS_USE_MOVE_TOWARDS
 
-using SimpleInputNamespace;
 using System.Collections.Generic;
+using SimpleInputNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

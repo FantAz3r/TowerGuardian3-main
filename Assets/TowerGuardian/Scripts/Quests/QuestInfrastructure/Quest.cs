@@ -21,9 +21,13 @@ namespace TowerGuardian.Scripts.Quests.QuestInfrastructure
         public event Action OnCompleted;
 
         public bool CanStop { get; protected set; } = true;
+
         public QuestConfig Config { get; private set; }
+
         protected QuestViewer QuestViewer { get; private set; }
+
         protected float CurrentTime { get; set; } = 0;
+
         protected int CurrentValue { get; set; } = 0;
 
         public void SetConfig(QuestConfig config)
@@ -58,13 +62,17 @@ namespace TowerGuardian.Scripts.Quests.QuestInfrastructure
         public virtual void UpdateProgress(float currentValue, float targetValue)
         {
             if (_isProgressQuest)
+            {
                 QuestViewer.UpdateProgress(currentValue, targetValue);
+            }
         }
 
         public virtual void UpdateTime()
         {
             if (_isTimeQuest)
+            {
                 QuestViewer.UpdateTime(CurrentTime);
+            }
         }
 
         public virtual void Stop()

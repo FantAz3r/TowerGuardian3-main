@@ -14,8 +14,10 @@ namespace TowerGuardian.Scripts.GamePlayElements.Sounds
         private const int VolumeForce = 10;
         private const float VolumeCurrentValueMultiplier = 0.05f;
 
-        [SerializeField] private AudioMixer _audioMixer;
-        [SerializeField] private List<string> _volumeParameters;
+        [SerializeField]
+        private AudioMixer _audioMixer;
+        [SerializeField]
+        private List<string> _volumeParameters;
 
         private float _minVolume = 0.0001f;
         private float _minDecibels = -80f;
@@ -44,7 +46,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Sounds
         private void OnDestroy()
         {
             if (_volumeSlider != null)
+            {
                 _volumeSlider.onValueChanged.RemoveListener(SetVolume);
+            }
         }
 
         public void SetVolume(float sliderValue)
@@ -52,9 +56,13 @@ namespace TowerGuardian.Scripts.GamePlayElements.Sounds
             float dB;
 
             if (sliderValue > _minVolume)
+            {
                 dB = 20f * Mathf.Log10(sliderValue);
+            }
             else
+            {
                 dB = _minDecibels;
+            }
 
             dB = Mathf.Clamp(dB, _minDecibels, _maxDecibels);
 
@@ -70,7 +78,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Sounds
         private void SaveVolume()
         {
             if (YG2.saves.Volumes == null)
+            {
                 YG2.saves.Volumes = new List<SoundSaveData>();
+            }
 
             foreach (var volumeParam in _volumeParameters)
             {
@@ -92,7 +102,9 @@ namespace TowerGuardian.Scripts.GamePlayElements.Sounds
         private void LoadVolume()
         {
             if (YG2.saves.Volumes == null || _volumeParameters.Count == 0)
+            {
                 return;
+            }
 
             SoundSaveData soundData = YG2.saves.Volumes.Find(v => v.Name == _volumeParameters[0]);
 

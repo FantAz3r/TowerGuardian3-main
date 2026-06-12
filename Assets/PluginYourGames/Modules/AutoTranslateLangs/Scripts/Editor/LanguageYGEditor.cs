@@ -20,7 +20,7 @@ namespace YG.LanguageLegacy
 
         private void OnEnable()
         {
-            scr = (LanguageYG)target;
+            scr = (LanguageYG) target;
             scr.Serialize();
         }
 
@@ -28,7 +28,7 @@ namespace YG.LanguageLegacy
         {
             serializedObject.Update();
 
-            scr = (LanguageYG)target;
+            scr = (LanguageYG) target;
             Undo.RecordObject(scr, "Undo LanguageYG");
 
             red = new GUIStyle(EditorStyles.label);
@@ -212,13 +212,13 @@ namespace YG.LanguageLegacy
 
                 if (scr.textLComponent)
                 {
-                    scr.uniqueFont = (Font)EditorGUILayout.ObjectField("Unique Font", scr.uniqueFont, typeof(Font), false);
+                    scr.uniqueFont = (Font) EditorGUILayout.ObjectField("Unique Font", scr.uniqueFont, typeof(Font), false);
                     FontSettingsDraw();
                 }
 #if TMP_YG2
                 else if (scr.textMPComponent)
                 {
-                    scr.uniqueFontTMP = (TMP_FontAsset)EditorGUILayout.ObjectField("Unique Font", scr.uniqueFontTMP, typeof(TMP_FontAsset), false);
+                    scr.uniqueFontTMP = (TMP_FontAsset) EditorGUILayout.ObjectField("Unique Font", scr.uniqueFontTMP, typeof(TMP_FontAsset), false);
                     FontTMPSettingsDraw();
                 }
 #endif
@@ -226,7 +226,7 @@ namespace YG.LanguageLegacy
             }
 
             if (scr.additionalText != null)
-                scr.additionalText = (LangYGAdditionalText)EditorGUILayout.ObjectField("Additional Text", scr.additionalText, typeof(LangYGAdditionalText), false);
+                scr.additionalText = (LangYGAdditionalText) EditorGUILayout.ObjectField("Additional Text", scr.additionalText, typeof(LangYGAdditionalText), false);
 
 
             if (GUI.changed)
